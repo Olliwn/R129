@@ -53,6 +53,37 @@
 * Procured Raspberry Pi 5, temporary display, and NVMe hardware from Verkkokauppa.  
 * Procured 4mm banana plugs for X11 diagnostic port tapping and Tesa cloth tape for period-correct wiring looms.  
 * Prepared for Sunday transit to Oulu via E8.
+* **Note:** Noticed a headlight warning light on the dashboard. It was likely triggered when trying the fog lights (pulling out the main headlight switch). Did not recur the following day.
+
+### **March 15, 2026 \- Helsinki to Oulu Transit**
+
+**Location:** Helsinki \-\> Oulu
+
+**Event:** 600km transit, last 200km in rain.
+
+* **Observations:** 
+  * Wiper fluid is currently only spraying from 2 out of 4 nozzles (one functioning nozzle per side).
+  * Windshield wipers do not always return to the correct park position. Added to Todo list for further investigation.
+  * Noticed narrow cracks on the rear fender paint (on the upward-facing area just below the trunk lid) when the car was wet and dirty.
+* **Admin:** Car is now safely parked in a warm garage to dry out, wait for Finnish registration, and wait for better weather.
+
+## **📝 Task / Todo List & Quick Studies**
+
+### **1. Windshield Wiper Parking Issue**
+* **Symptom:** Wipers do not consistently park in the correct resting position when turned off.
+* **Quick Study on Likely Causes:**
+  * **Relay/Module Failure:** The N10 combination relay module (or K26 relay) frequently fails or gets dirty contacts, causing incorrect park detection. The internal park sensor contacts inside the wiper motor assembly could also be faulty.
+  * **Mechanical Misalignment:** Loose or slipped nuts on the wiper mechanism linkage. The mechanism may need physical realignment to correct the resting blade position.
+  * **Motor/Mechanism Binding:** The complex eccentric 'jumping' mono-wiper mechanism is notorious for needing periodic lubrication (under the plastic turtle-shell cover). A binding mechanism can stress the motor, slow it down, and cause erratic parking.
+* **Action Item:** Lubricate the mechanism first (easiest fix), check linkage nuts, and if the issue persists, investigate the N10 relay and motor park contacts.
+
+### **2. Washer Fluid Nozzles**
+* **Symptom:** Fluid only spraying from 2 of 4 nozzles.
+* **Action Item:** Clean and unclog the windshield washer nozzles. Inspect the fluid lines for cracks or leaks.
+
+### **3. Paint Inspection (Rear Fender)**
+* **Symptom:** Narrow cracks visible in the paint on the rear fender (upward-facing area just below the trunk lid) when wet and dirty.
+* **Action Item:** Thoroughly wash and inspect the area once the weather improves to determine the depth/severity of the cracking and plan for potential paint correction or preservation.
 
 ## **🛠️ Tool Acquisition & Inventory**
 
