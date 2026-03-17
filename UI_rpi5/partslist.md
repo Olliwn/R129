@@ -8,15 +8,27 @@ This document tracks the hardware required for the primary user interface and te
 ### Option A: The "Holy Grail" (Full Color AMOLED)
 *This completely solves the RGB OLED problem. By using a repurposed 5.5" smartphone-style AMOLED panel, we achieve the ultimate automotive UI: high-definition full color AND absolute infinite blacks.*
 
-*   **Waveshare 5.5" HDMI AMOLED (1080x1920):** **[Top Pick]** Once configured to display horizontally (landscape) in the RPi5 software, this becomes a stunning bar display. Because it is true AMOLED, the black UI backgrounds will completely turn off, blending flawlessly into the R129's dark center console without *any* grey backlight bleed.
-    *   *Dimensions & Mounting:* The module is roughly 141mm wide x 74.5mm tall. Because it is 24.5mm taller than the standard 50mm 1-DIN slot, you have two choices: Build a custom bezel that mounts the screen slightly *proud* (forward) of the slot, OR use the **"Secret Cubby" Mount** hidden behind the sliding wooden tambor door in the lower console. *(Note: ALWAYS build a physical cardboard mock-up for the cubby to verify hinge mechanism clearance!)*
+*   **Waveshare 5.5" HDMI AMOLED (1080x1920):** **[Top Pick - 99% Stock Look]** Once configured to display horizontally in the RPi5 software, this becomes a stunning bar display. Because it is true AMOLED, the black UI backgrounds will completely turn off without *any* grey backlight bleed.
+    *   *Dimensions & Mounting:* The module is roughly 141mm wide x 74.5mm tall. The mounting strategy is a **Full Cubby Replacement** with a bespoke "99% Stock" fascia.
+    *   *The "Black Glass" Aesthetic:* To achieve the goal where "only a trained eye could see the wood panel has been replaced," the screen will be mounted entirely flush behind a custom piece of heavily tinted (semi-transparent mirror or deep smoke) acrylic/glass. Crucially, the edges and corners of this new black glass panel must be machined to **exactly match the corner radiuses and edge chamfers of the original factory Zebrano/Burl wood trim**. When the RPi5 is off, the lower console should simply look like a polished black styling element of the dashboard.
+    *   *Rotary Integration:* The custom black glass/acrylic fascia will ideally be machined with a 6mm hole on the left or right side to allow the Kilo International aluminum knob to protrude directly through the same panel as the screen, creating a complete, self-contained, high-end UI module.
+
+### Audio System Restoration (The 1-DIN Slot)
+To maintain the 99% stock appearance for the upper dashboard, the aftermarket CD player will be removed. The goal is to find a period-correct, matte black OEM unit with an actual functioning cassette player, but without spending 800€ on the rare two-piece BE1432 system.
+
+*   **Target Head Unit Option 1: Becker Europa 2000 (Model BE 1100)**
+    *   *Why this is the best value:* This was the standard 1-DIN radio/cassette deck for the early 90s Mercedes W201, W124, and sometimes the R129. Crucially, it is a **true 1-DIN all-in-one unit**. It has its own built-in amplifier (usually 2x20w) and standard speaker outputs right on the back. It looks identical to the ultra-expensive models (matte black, amber screen, same buttons) but is vastly cheaper and easier to wire up to an aftermarket Class-D amp because all the audio signals are physically right there in the dashboard.
+*   **Target Head Unit Option 2: Becker Grand Prix 2000 (Model BE 1319)**
+    *   Similar to the Europa, this is an excellent, slightly higher-end true 1-DIN unit from the same exact era. It has the correct look and a fantastic cassette player.
+*   **Target Head Unit Option 3: The OEM Becker BE1432 (The "Two-Piece" System)**
+    *   This is the factory-original unit for the 1991 500SL, but it often costs 800€+. *Warning:* The BE1432 in the dash is just a controller; the actual radio tuner and audio amplifier were originally mounted in the trunk. If you buy this, you must intercept the audio signals and build a custom wiring harness to funnel its cassette audio down into your RPi5 or Class-D amp.
 
 ### Option B: Premium "Bar" Type IPS LCDs (If AMOLED is unavailable)
 *These screens connect easily via HDMI or DSI, but because they have backlights, they require software dimming and dark UI design to mitigate grey glow at night.*
 
 *   **Waveshare 7.9" IPS (400x1280):** 205mm wide (Too wide for a flush DIN fit, sits proud).
 *   **Waveshare 6.8" IPS (320x1280):** Fits much better within the physical width of the center console.
-*   **Waveshare 6.25" IPS (1520x722 DSI):** 159mm x 74mm. Excellent for the "secret cubby" mount.
+*   **Waveshare 6.25" IPS (1520x722 DSI):** 159mm x 74.70mm. Excellent for a Full Cubby Replacement. Its ~159mm width fits exactly edge-to-edge against the trim of the lower cubby once the wooden lid and hinge mechanism are removed.
 
 ### Option C: Small Monochrome OLEDs (Retro OEM Look)
 *   **3.12" 256x64 OLED (Driver: SSD1322):** Excellent minimalist automotive OLED, ultra-wide aspect ratio, but monochrome only. Interface via SPI.

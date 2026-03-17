@@ -277,19 +277,17 @@ Good candidates for the switched group:
 
 1. **Power and protection**
    - [x] 1x automotive-rated `12V -> 5V` buck converter for always-on Nordic power (12V DCDC 50W grade)
-   - [ ] **Automotive DCDC Buck Converter (DigiKey Sourcing - for nRF5430 & signal logic):**
-     - *Murata OKI-78SR-5/1.5-W36-C* (A fantastic, easy-to-use drop-in replacement for the old 7805 linear regulators. Takes up to 36V in, 5V out, 1.5A. Very efficient, no heatsink needed).
-     - *Texas Instruments LM2596S-5.0* or *LMR14030* (If you are spinning your own PCB design, these are the industry standards for simple switcher buck converters).
-     - *Note: Ensure the maximum input voltage (Vin max) is at least 36V-40V to hande load dumps along with the TVS diode.*
-   - [ ] **Low Dropout (LDO) Linear Regulators (DigiKey Sourcing - Clean logic/ADC power alternates):**
-     - *5.0V LDO:* **L78M05CDT-TR** or **LM2940-5.0** (The LM2940 is specifically designed for automotive 12V inputs and load dumps).
-     - *3.3V LDO:* **LD1117V33** or **AMS1117-3.3** (Perfect for deriving ultra-clean 3.3V power for the Nordic/ADC from a 5V buck converter).
+   - [x] **Automotive DCDC Buck Converter (DigiKey Sourced - for nRF5430 & signal logic):**
+     - *Murata OKI-78SR-5/1.5-W36-C* (5V / 8W output for 5V logic/analog).
+     - *Murata OKI-78SR-3.3/1.5-W36-C* (3.3V / 5W output for Nordic logic).
+   - [x] **Low Dropout (LDO) Linear Regulators (DigiKey Sourced - Clean logic/ADC power alternates):**
+     - *5.0V LDO:* **LM2940T-5.0/NOPB** (Automotive 12V input rated, TO-220).
+     - *3.3V LDO:* **LD1117V33** (Clean 3.3V derived power, TO-220).
    - [x] PFET / High-Side switching devices
    - [x] 1x inline fuse holder and appropriate blade fuses
    - [ ] 1x protected `12V -> 5V` high-current converter or UPS HAT path for the Pi
-   - [ ] **1x Automotive TVS Diode (for Load-Dump / Input Protection)**:
-     - *SMDJ24A* or *SMCJ24A* (Unidirectional, 24V breakdown - ideal for a 12V system where alternators can spike. Will clamp dangerous load-dump transients before they hit regulators).
-     - *1.5KE18A* or *1.5KE20A* (Through-hole axial lead versions if you are building on a breadboard/perfboard, heavily used in 12V automotive).
+   - [x] **Automotive TVS Diode & Protection (DigiKey Sourced)**:
+     - *1.5KE18A* (Through-hole axial lead 15.3VWM TVS diode for load-dump transient clamping).
 
 2. **Wake switch hardware**
    - [x] 2x logic-level small N-channel MOSFETs (2N7000)
@@ -298,51 +296,44 @@ Good candidates for the switched group:
 3. **Core ICs & Galvanic Isolation (Diagnostics)**
    - [x] 6x **Optocoupler Arrays**: TLP521-4 (DIP-16 package).
    - [x] Resistors: 5% assortment (including 1kΩ, 330Ω, 10kΩ).
-   - [ ] **DigiKey Resistor & Capacitor Assortments (For signal conditioning):**
-     - *Basic Resistors (1/4W Through-Hole or 0805 SMD):* Get a full E12 series assortment kit if possible. Otherwise, explicitly grab packs of: 
-       - **330Ω** (Opto TX protection)
-       - **1kΩ** (Opto RX step-down & Mosfet Gates)
-       - **4.7kΩ**, **10kΩ** (Pull-ups, basic dividers)
-       - **100kΩ** (High impedance inputs)
-     - *Ceramic Capacitors (For decoupling & RC filters, 50V rated):* 
-       - **100nF (0.1µF)** - Essential. You need one of these placed physically as close as possible to the power pin of *every single IC* on your board (Nordic, ADC, Op-Amps, etc).
-       - **10nF** - Good for aggressive RC low-pass filtering.
-       - **1nF** - Good for subtle RF noise filtering on analog lines.
-     - *Electrolytic / Tantalum Capacitors (Bulk power storage):*
-       - **10µF** and **100µF** (25V or 35V rated) to place on the input and output lines of your LDOs/Buck converters to stabilize power drops.
+   - [x] **DigiKey Resistor & Capacitor Assortments (For signal conditioning):**
+     - *SparkFun Resistor Kit (1/4W, 500 Total) - 10969*
+     - *SparkFun Capacitor Kit - 13698*
+     - *100nF (0.1µF) 50V X7R Ceramic Capacitors* (x60 total, K104K10X7RF5UH5)
+     - *10nF (10000pF) 50V X7R Ceramic Capacitors* (x10 total, C315C103K5R5TA)
    - [x] LEDs (Standard for diagnostics)
-   - [ ] **Standard Protection Diodes (DigiKey Search: "Diodes - Rectifiers - Single")**
-     - *1N4148* (Fast switching, great for small logic signal protection/clamping).
-     - *1N4007* (The classic 1A rectifier, essential for reverse-polarity protection or flyback diodes across relays/solenoids).
-     - *1N5819* (Schottky diode, lower forward voltage drop, often used to OR power supplies together).
-   - [ ] **Logic Level Shifters (DigiKey Search: "Logic - Translators, Level Shifters" or "Logic - Buffers, Drivers")**
-     - *CD4050BE* or *74HC4050* (DIP-16 package. Very popular through-hole unidirectional 6-channel level down-shifter. Perfect for converting 5V signals safely down to the 3.3V Nordic).
-     - *74AHCT125N* (DIP-14 package. Excellent through-hole unidirectional up-shifter. If powered by 5V, its "AHCT" logic thresholds will accept the Nordic's 3.3V output and perfectly translate it to a strong 5V signal).
-     - *Adafruit or Sparkfun Breakouts (DigiKey Search: "Evaluation and Demonstration Boards and Kits" or just "TXB0108 breakout").* Because modern bidirectional chips like the TXB0108 and BSS138 arrays only exist in tiny SMD packages, the easiest way to get them on a breadboard is to buy a pre-soldered breakout board (e.g. Adafruit PID: 395 or 757, or SparkFun BOB-12009).
+   - [x] **Standard Protection Diodes (DigiKey Sourced)**
+     - *1N4148* (x50, DO-35 Small logic signal switching/clamping).
+     - *1N4007* (x20, DO-204AC 1A rectifier, reverse-polarity protection).
+     - *1N5819* (x3, DO-204AC Schottky, lower forward voltage drop).
+   - [x] **Logic Level Shifters (DigiKey Sourced)**
+     - *TXB0108 Breakout Board - AK-LVLSHF-TXB-BB* (Bidirectional 8-channel shifter for 3.3V to 5V conversions).
    - [x] Switches (Push buttons, toggles)
    - [ ] 6x **IC Sockets**: 16-pin "Holkkikanta" (machined/turned pin sockets).
-   - [ ] **Op-Amps for Signal Conditioning / Differential Measurement**:
-     - *LM358* or *LM324* (Basic, very common, good for slow automotive signals, handles inputs near ground).
-     - *MCP6002* or *MCP6004* (Rail-to-rail, excellent if running the op-amp from the 3.3V/5V clean side).
-     - *INA169* or *INA219* (If specifically measuring EHA current / high-side current shunts later).
-   - [ ] 1x `ADS1115` breakout (For future analog additions)
-   - [ ] 1x `74HC4051` / `CD4051`-class analog multiplexer breakout
-   - [ ] Small capacitors for RC filtering
+   - [x] **Op-Amps & Current Monitors (DigiKey Sourced)**:
+     - *LM358P* (x10, General purpose op-amp, DIP-8).
+     - *INA169NA/3K* (x2, High-side current monitor for EHA tracking, SOT23-5).
+   - [x] `ADS1115` 16-bit 4-channel ADC breakout (DigiKey Sourced)
+   - [x] `CD74HC4051E` 8-channel analog multiplexer (DigiKey Sourced)
+   - [x] Small capacitors for RC filtering (Covered by Ceramic orders)
 
 4. **Harness and prototyping**
    - [x] Wire: Signal (small) and Power wires.
    - [x] Alligator clips (Hauenleuat)
    - [x] 4 mm banana plug set for the early `X11` socket.
    - [x] Heat shrink tubing (Kutistesukka)
-   - [ ] 1x **Veroboard (Stripboard)**
-   - [ ] **Header Pins (DigiKey Search: "Rectangular Connectors - Headers, Male Pins")**
-     - *Standard 2.54mm (0.1") pitch. Look for single row, break-away styles (e.g., from Samtec, Sullins, or Wurth).*
-   - [ ] **Female Jumper Pigtails (For 1-pin headers) (DigiKey Search: "Jumper Wires, Pre-Crimped Leads" and "Rectangular Connectors - Housings")**
-     - *If you want pre-made: Search for "Jumper Wires" with connector type "Socket to Cable (Round)" or "Socket to Socket", 0.1" (2.54mm) pitch.*
-     - *If you want to make your own (Highly recommended for custom lengths): You need "Crimp Terminals" (Search: "Rectangular Connectors - Contacts", female socket, 0.1" pitch) and single-position "Housings" (Search: "Rectangular Connectors - Housings", 1 position, 0.1" pitch). Harwin M20 series or Amphenol FCI Mini-PV series are excellent.*
-   - [ ] **Pluggable Screw Terminals (DigiKey Search: "Terminal Blocks - Headers, Plugs and Sockets")**
-     - *Look for 3.5mm, 3.81mm, or 5.08mm pitch (e.g., Phoenix Contact "MC" series or Amphenol Anytek).*
-     - *You need two parts: the "Header" (solders to the board) and the "Plug" (the screw terminal part that plugs into the header).*
+   - [x] **Discrete Semiconductors Kit** (SparkFun 13682 - DigiKey Sourced)
+   - [x] **Breadboards (DigiKey Sourced)**
+     - *DKS-SOLDERBREAD-02* (x1, Plated Through Hole).
+     - *08808* (x3, SparkFun General Purpose).
+     - *ST1* & *5588* & *PTS-00079-201* (x8 total, mixed PTH sizes).
+   - [x] **Header Pins (DigiKey Sourced)**
+     - *61300411121* (x10, 4-pos Vertical 2.54mm pitch).
+   - [x] **Female Jumper Pigtails (DigiKey Sourced)**
+     - *ASPHSPH24K102* (x10, Socket-to-Socket 24AWG, 4-inch).
+   - [x] **Pluggable Screw Terminals (DigiKey Sourced - 5.08mm Pitch)**
+     - *1757019* (x2, 2-pos Plug) & *1786404* (x2, 2-pos Header)
+     - *1757035* (x1, 4-pos Plug) & *1786420* (x1, 4-pos Header)
 
-5. **Test Equipment Needs (Sourcing pending)**
-   - [ ] **Multimeter + Oscilloscope Combo (Owon 1)** (Was out of stock at SP)
+5. **Test Equipment Needs (Purchased)**
+   - [x] **Owon HDS242 Handheld Oscilloscope + Multimeter Combo**

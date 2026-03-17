@@ -67,6 +67,23 @@
   * Noticed narrow cracks on the rear fender paint (on the upward-facing area just below the trunk lid) when the car was wet and dirty.
 * **Admin:** Car is now safely parked in a warm garage to dry out, wait for Finnish registration, and wait for better weather.
 
+### **March 17, 2026 \- UI Architecture & Component Sourcing**
+
+**Location:** Oulu, Finland
+
+**Event:** Finalizing Phase 2 Telematics hardware and placing electronics orders.
+
+*   **UI Hardware Settled:** After reviewing the physical constraints of the R129's 1-DIN slot, I have finalized the core architecture for the custom UI. The system will be based around the Raspberry Pi 5.
+    *   **Display:** The goal is to use a 5.5" AMOELD (from a repurposed smartphone panel) or a high-quality "bar type" IPS LCD (like the Waveshare 6.25" DSI). The display will be mounted as a "Full Cubby Replacement" behind custom machined dark glass/acrylic to maintain a 99% stock, hidden look when turned off. *(See project: [UI_rpi5/partslist.md](../UI_rpi5/partslist.md) for full specs)*.
+*   **Electronics & Prototyping Haul (DigiKey):** Placed a comprehensive order for the UI controls, interface circuits, and project prototyping.
+    *   **Controls & Haptics:** ALPS Directional Switch/Encoder (RKJXT1F42001) paired with the Kilo International (OEDNI-90-4-7) matte black machined-aluminum knob for that solid, premium OEM "iDrive" feel.
+    *   **Interface ICs & Signal Processing:** CD74HC4051E (8-channel Analog Multiplexer), ADS1115 (16-bit 4-channel ADC for precision analog reading), TXB0108 (Level Shifter Breakout) for logic conversion between 3.3V and 5V.
+    *   **Power Supply Design:** Sourced a mix of efficient Murata switching converters (5V/8W and 3.3V/5W OKI-78SR series) alongside traditional LDO regulators (LM2940T 5V, LD1117 3.3V) for clean power rails.
+    *   **Op-Amps & Sensing:** LM358P (General Purpose Op-Amps) and INA169 (Current Monitors) to interpret analog automotive signals.
+    *   **Protection Circuitry:** 1.5KE18A TVS Diodes (critical for surviving 12V automotive load dumps) and assorted Schottky/Standard Diodes (1N5819, 1N4148, 1N4007) for reverse-polarity protection.
+    *   **Prototyping Essentials:** Multiple breadboards, pluggable terminal blocks, jumper wires, pin headers, and SparkFun capacitor & resistor kits.
+*   **Diagnostic Tools:** Ordered an **Owon HDS242 Handheld Oscilloscope**. An absolutely essential tool for analyzing CAN/LIN signals, noisy automotive sensors, and verifying the Phase 2 PCB logic timings while in the garage.
+
 ## **📝 Task / Todo List & Quick Studies**
 
 ### **1. Windshield Wiper Parking Issue**
@@ -123,6 +140,28 @@
 * **Symptom:** Central locking system does not work. There is no sign of life from the vacuum pump; locks only operate manually.
 * **Initial Assessment:** The PSE (Pneumatic System Equipment) pump is located under the right rear storage compartment. Since it is completely silent, it's likely an electrical issue (blown fuse, dead pump motor, or bad connection) rather than just a vacuum leak.
 * **Action Item:** Investigate PSE pump and system. *(See project: [PSE Central Locking](../work/pse_central_locking/README.md))*
+
+### **6. Engine Bay Maintenance (Intake, Filters & Fluids)**
+* **Observation (March 17, 2026):** Checked engine bay during garage storage (cold engine, 10-15°C).
+  * **Intake Hoses:** Passenger side intake hose is worn with holes in the flexible/thin section.
+  * **Metal Cylinder (Front of engine):** Fluid level is just below the minimum line and very dark.
+  * **Plastic Reservoir (Next to washer fluid):** Fluid level is just below the minimum line and clearer in color. 
+* **Diagnosis:**
+  * **Intake Hoses:** Brittle plastic/rubber hoses are a known M119 wear item. Vacuum leaks here bypass the MAF and allow unfiltered air.
+  * **Metal Cylinder = Power Steering/SLS Pump Reservoir:** Sits directly behind the distributor on the front left (driver side) of the engine. Dark fluid means the old ATF/hydraulic fluid is oxidized and needs changing. Inside this canister, under the spring, is a replaceable paper filter. 
+  * **Plastic Reservoir = Engine Coolant Expansion Tank:** Situated on the front right (passenger) side. Since it's cold, the coolant has contracted, but being below the minimum line requires a top-up to prevent air induction.
+* **Action Items:**
+  * **Air Intake & Filters:** Replace both left and right intake hoses entirely. Perform an engine air filter replacement (Left/Right) while the airbox is open.
+  * **Power Steering Flush:** Syringe out old fluid, replace the internal reservoir filter (Part No. `A 000 466 21 04`), and refill/flush with MB 236.3 spec fluid (or equivalent approved ATF). 
+  * **Coolant Top-up:** Top up the expansion tank to the cold fill line using a 50/50 mix of distilled water and MB 325.0 spec coolant (e.g., Glysantin G48/Blue-Green). Monitor for slow leaks.
+* **Parts Needed:**
+  * Right Intake Hose (Passenger Side): A 119 094 01 82
+  * Left Intake Hose (Driver Side): A 119 094 00 82
+  * Engine Air Filter Set (Left & Right)
+  * Power Steering Filter: A 000 466 21 04
+  * MB 236.3 Power Steering Fluid (1-2 Liters)
+  * MB 325.0 Spec Coolant (Glysantin G48)
+* **Sourcing:** MB-osat (primary source), Autodoc.fi, or local Kärkkäinen/Motonet for fluids.
 
 ## **🛠️ Tool Acquisition & Inventory**
 
