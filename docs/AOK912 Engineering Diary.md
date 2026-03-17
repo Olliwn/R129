@@ -85,6 +85,45 @@
 * **Symptom:** Narrow cracks visible in the paint on the rear fender (upward-facing area just below the trunk lid) when wet and dirty.
 * **Action Item:** Thoroughly wash and inspect the area once the weather improves to determine the depth/severity of the cracking and plan for potential paint correction or preservation.
 
+### **4. Suspension Refresh (ADS & Mechanical)**
+* **Engineering Record: 1991 Mercedes-Benz R129 500 SL**
+* **1. Vehicle Baseline & Current Status**
+  * **Model:** 1991 500 SL (R129) with ADS I (Adaptive Damping System).
+  * **Observed Symptoms:** 
+    * Rear ride height is low (1-2 finger gap) vs. Front (3 finger gap).
+    * ADS Lift Switch is non-functional.
+    * ADS Warning Lamp likely disabled/removed by previous owner.
+    * System likely in "Limp/Safe Mode" (Defaulted to maximum stiffness).
+  * **Mechanical Condition:** Nitrogen Accumulators (Spheres) passed the "Bounce Test" (system is firm but not "rock hard" or bouncing/oscillating), suggesting diaphragms are currently intact.
+* **2. Planned DIY Scope (Mechanical)**
+  * **Front Axle:** Replace Lower Control Arms (LCA) as complete units (includes bushings and ball joints).
+  * **Rear Axle:** Replace 5-link suspension set (8 links total) and outer "Squeak Bushings" (Carrier Support Joints).
+  * **Steering:** Replace Steering Damper and Idler Arm Bushing to eliminate "slop."
+  * **ADS Components:** Inspect/Replace Strut Mounts and Dust Boots. Replace Nitrogen Accumulators (Spheres) if ride becomes "pogo-like" after clearing codes.
+* **3. Essential Tooling & Safety**
+  * **Spring Compressor:** Must use Internal Telescopic Coil Spring Compressor (Mercedes-specific). Standard external clamps are prohibited due to safety risk.
+  * **Torque Protocol:** All bushing bolts must be torqued at static ride height (wheels on ground/ramps) to prevent premature rubber shear.
+  * **ADS Protection:** Disconnect Level Sensor Linkage Rods before lowering control arms to prevent breakage of brittle plastic sensors.
+* **4. Ride Height Checkpoints**
+  * Factory ride height for a 500 SL varies slightly by VIN and spring pad choice, but the standard benchmark for a level car is:
+    
+    | Location | Measurement Point | Target Value (approx.) |
+    | :--- | :--- | :--- |
+    | **Front** | Wheel Arch to Center of Hub | ~380mm - 390mm |
+    | **Rear** | Wheel Arch to Center of Hub | ~375mm - 385mm |
+    | **Visual** | Tire to Arch Gap | roughly equal (approx. 2-2.5 fingers) |
+
+  * *Note:* If the rear is significantly lower, check the Rear Level Control Valve linkage for adjustment or the Spring Pads (nubs 1 through 4) for incorrect thickness.
+* **5. Next Diagnostic Steps**
+  * **ADS Code Extraction:** Use a blink-code reader on Pin 9 of the 16-pin Diagnostic Connector. *(See project: [ADS Blink-Code Reader](../work/ads_blink_reader/README.md))*
+  * **Warning Lamp Restoration:** Reinstall the ADS bulb in the instrument cluster to confirm system communication.
+  * **Hydraulic Flush:** Plan for a full system flush with Pentosin/ZH-M fluid and a 10-micron filter replacement following mechanical work.
+
+### **5. Central Locking (PSE) Inoperative**
+* **Symptom:** Central locking system does not work. There is no sign of life from the vacuum pump; locks only operate manually.
+* **Initial Assessment:** The PSE (Pneumatic System Equipment) pump is located under the right rear storage compartment. Since it is completely silent, it's likely an electrical issue (blown fuse, dead pump motor, or bad connection) rather than just a vacuum leak.
+* **Action Item:** Investigate PSE pump and system. *(See project: [PSE Central Locking](../work/pse_central_locking/README.md))*
+
 ## **🛠️ Tool Acquisition & Inventory**
 
 *Transitioning from basic 1970s VW Beetle tools to a metric, precision toolset required for the M119 V8 and complex R129 chassis mechanics. Focus on high-quality, B2B-grade European brands to prevent rounding off 34-year-old fasteners.*

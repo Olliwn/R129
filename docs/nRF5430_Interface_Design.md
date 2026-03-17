@@ -187,6 +187,23 @@ That single rule is the difference between a useful prototype and a damaged boar
 - star-ground or carefully managed analog ground return
 - connectorized so it can be disconnected independently of the wake function
 
+#### The Core Principle: Galvanic Isolation
+Because the car's diagnostic pins (like Pin 9 for ADS) are bidirectional (they both send and receive data on a single wire), the board splits this single wire into two separate, one-way optical lanes: a Read (RX) lane and a Write (TX) lane. By using dedicated chips exclusively for Reading and Writing, the board creates a literal "no man's land". The car's 12V power and dirty ground never physically touch the microcontroller's 3.3V logic and clean ground.
+
+#### The Logic Architecture (Per Channel)
+**The "Read" Path (Car ➔ MCU):**
+- **Input:** The Car's 12V signal pin connects through a 1kΩ resistor to the optocoupler's LED.
+- **Output:** The optocoupler's transistor connects to your MCU's Input pin, which is pulled high to 3.3V.
+- **Behavior:** Inverted. When the car line is resting at 12V, your MCU reads LOW. When the car pulses to Ground (flashing a code), your MCU reads HIGH.
+
+**The "Write" Path (MCU ➔ Car):**
+- **Input:** Your MCU's Output pin connects through a 330Ω resistor to the optocoupler's LED.
+- **Output:** The optocoupler's transistor connects directly to the Car's signal pin and Car Ground.
+- **Behavior:** Standard. When your MCU pin goes HIGH, the optocoupler bridges the car's diagnostic line to Car Ground, initiating the 3-second code read or 8-second code clear command.
+
+#### Critical Build Reminder
+When assembling on Veroboard, follow the **Strip Cut Rule**: physically sever the copper tracks directly underneath the center of every single IC socket. Failing to do this will bridge the 12V car side to the 3.3V MCU side, instantly destroying the microcontroller.
+
 ## Circuit Design: High-Side 12V Switch
 Since the Nordic node operates at `3.3V` logic, it cannot directly drive a `12V` P-channel MOSFET gate over the full range. The gate should be pulled by a small transistor or N-channel stage, or the switching function can be delegated to a relay or automotive high-side switch.
 
@@ -259,26 +276,73 @@ Good candidates for the switched group:
 ## SP Elektroniikka Shopping List (Updated)
 
 1. **Power and protection**
-   - [ ] 1x automotive-rated `12V -> 5V` buck converter for always-on Nordic power
+   - [x] 1x automotive-rated `12V -> 5V` buck converter for always-on Nordic power (12V DCDC 50W grade)
+   - [ ] **Automotive DCDC Buck Converter (DigiKey Sourcing - for nRF5430 & signal logic):**
+     - *Murata OKI-78SR-5/1.5-W36-C* (A fantastic, easy-to-use drop-in replacement for the old 7805 linear regulators. Takes up to 36V in, 5V out, 1.5A. Very efficient, no heatsink needed).
+     - *Texas Instruments LM2596S-5.0* or *LMR14030* (If you are spinning your own PCB design, these are the industry standards for simple switcher buck converters).
+     - *Note: Ensure the maximum input voltage (Vin max) is at least 36V-40V to hande load dumps along with the TVS diode.*
+   - [ ] **Low Dropout (LDO) Linear Regulators (DigiKey Sourcing - Clean logic/ADC power alternates):**
+     - *5.0V LDO:* **L78M05CDT-TR** or **LM2940-5.0** (The LM2940 is specifically designed for automotive 12V inputs and load dumps).
+     - *3.3V LDO:* **LD1117V33** or **AMS1117-3.3** (Perfect for deriving ultra-clean 3.3V power for the Nordic/ADC from a 5V buck converter).
+   - [x] PFET / High-Side switching devices
+   - [x] 1x inline fuse holder and appropriate blade fuses
    - [ ] 1x protected `12V -> 5V` high-current converter or UPS HAT path for the Pi
-   - [ ] 1x inline fuse holder and appropriate blade fuses
-   - [ ] 1x automotive TVS diode for the vehicle input
+   - [ ] **1x Automotive TVS Diode (for Load-Dump / Input Protection)**:
+     - *SMDJ24A* or *SMCJ24A* (Unidirectional, 24V breakdown - ideal for a 12V system where alternators can spike. Will clamp dangerous load-dump transients before they hit regulators).
+     - *1.5KE18A* or *1.5KE20A* (Through-hole axial lead versions if you are building on a breadboard/perfboard, heavily used in 12V automotive).
 
 2. **Wake switch hardware**
+   - [x] 2x logic-level small N-channel MOSFETs (2N7000)
    - [ ] 1x relay option for quick prototype
-   - [ ] 2x logic-level small N-channel MOSFETs / NPN transistors
-   - [ ] 2x suitable high-side switching devices
 
-3. **Signal acquisition**
-   - [ ] 1x `ADS1115` breakout
-   - [ ] 1x `74HC4051` / `CD4051`-class analog multiplexer breakout for experiments
-   - [ ] comparator or optocoupler parts for digital diagnostic inputs
-   - [ ] precision resistors for dividers and shunts
-   - [ ] small capacitors for RC filtering
+3. **Core ICs & Galvanic Isolation (Diagnostics)**
+   - [x] 6x **Optocoupler Arrays**: TLP521-4 (DIP-16 package).
+   - [x] Resistors: 5% assortment (including 1kΩ, 330Ω, 10kΩ).
+   - [ ] **DigiKey Resistor & Capacitor Assortments (For signal conditioning):**
+     - *Basic Resistors (1/4W Through-Hole or 0805 SMD):* Get a full E12 series assortment kit if possible. Otherwise, explicitly grab packs of: 
+       - **330Ω** (Opto TX protection)
+       - **1kΩ** (Opto RX step-down & Mosfet Gates)
+       - **4.7kΩ**, **10kΩ** (Pull-ups, basic dividers)
+       - **100kΩ** (High impedance inputs)
+     - *Ceramic Capacitors (For decoupling & RC filters, 50V rated):* 
+       - **100nF (0.1µF)** - Essential. You need one of these placed physically as close as possible to the power pin of *every single IC* on your board (Nordic, ADC, Op-Amps, etc).
+       - **10nF** - Good for aggressive RC low-pass filtering.
+       - **1nF** - Good for subtle RF noise filtering on analog lines.
+     - *Electrolytic / Tantalum Capacitors (Bulk power storage):*
+       - **10µF** and **100µF** (25V or 35V rated) to place on the input and output lines of your LDOs/Buck converters to stabilize power drops.
+   - [x] LEDs (Standard for diagnostics)
+   - [ ] **Standard Protection Diodes (DigiKey Search: "Diodes - Rectifiers - Single")**
+     - *1N4148* (Fast switching, great for small logic signal protection/clamping).
+     - *1N4007* (The classic 1A rectifier, essential for reverse-polarity protection or flyback diodes across relays/solenoids).
+     - *1N5819* (Schottky diode, lower forward voltage drop, often used to OR power supplies together).
+   - [ ] **Logic Level Shifters (DigiKey Search: "Logic - Translators, Level Shifters" or "Logic - Buffers, Drivers")**
+     - *CD4050BE* or *74HC4050* (DIP-16 package. Very popular through-hole unidirectional 6-channel level down-shifter. Perfect for converting 5V signals safely down to the 3.3V Nordic).
+     - *74AHCT125N* (DIP-14 package. Excellent through-hole unidirectional up-shifter. If powered by 5V, its "AHCT" logic thresholds will accept the Nordic's 3.3V output and perfectly translate it to a strong 5V signal).
+     - *Adafruit or Sparkfun Breakouts (DigiKey Search: "Evaluation and Demonstration Boards and Kits" or just "TXB0108 breakout").* Because modern bidirectional chips like the TXB0108 and BSS138 arrays only exist in tiny SMD packages, the easiest way to get them on a breadboard is to buy a pre-soldered breakout board (e.g. Adafruit PID: 395 or 757, or SparkFun BOB-12009).
+   - [x] Switches (Push buttons, toggles)
+   - [ ] 6x **IC Sockets**: 16-pin "Holkkikanta" (machined/turned pin sockets).
+   - [ ] **Op-Amps for Signal Conditioning / Differential Measurement**:
+     - *LM358* or *LM324* (Basic, very common, good for slow automotive signals, handles inputs near ground).
+     - *MCP6002* or *MCP6004* (Rail-to-rail, excellent if running the op-amp from the 3.3V/5V clean side).
+     - *INA169* or *INA219* (If specifically measuring EHA current / high-side current shunts later).
+   - [ ] 1x `ADS1115` breakout (For future analog additions)
+   - [ ] 1x `74HC4051` / `CD4051`-class analog multiplexer breakout
+   - [ ] Small capacitors for RC filtering
 
 4. **Harness and prototyping**
-   - [ ] 4 mm banana plug set for the early `X11` socket
-   - [ ] perfboard or a small custom PCB
-   - [ ] pluggable terminal blocks
-   - [ ] thin automotive TXL wire for signal paths
-   - [ ] heat shrink and loom tape
+   - [x] Wire: Signal (small) and Power wires.
+   - [x] Alligator clips (Hauenleuat)
+   - [x] 4 mm banana plug set for the early `X11` socket.
+   - [x] Heat shrink tubing (Kutistesukka)
+   - [ ] 1x **Veroboard (Stripboard)**
+   - [ ] **Header Pins (DigiKey Search: "Rectangular Connectors - Headers, Male Pins")**
+     - *Standard 2.54mm (0.1") pitch. Look for single row, break-away styles (e.g., from Samtec, Sullins, or Wurth).*
+   - [ ] **Female Jumper Pigtails (For 1-pin headers) (DigiKey Search: "Jumper Wires, Pre-Crimped Leads" and "Rectangular Connectors - Housings")**
+     - *If you want pre-made: Search for "Jumper Wires" with connector type "Socket to Cable (Round)" or "Socket to Socket", 0.1" (2.54mm) pitch.*
+     - *If you want to make your own (Highly recommended for custom lengths): You need "Crimp Terminals" (Search: "Rectangular Connectors - Contacts", female socket, 0.1" pitch) and single-position "Housings" (Search: "Rectangular Connectors - Housings", 1 position, 0.1" pitch). Harwin M20 series or Amphenol FCI Mini-PV series are excellent.*
+   - [ ] **Pluggable Screw Terminals (DigiKey Search: "Terminal Blocks - Headers, Plugs and Sockets")**
+     - *Look for 3.5mm, 3.81mm, or 5.08mm pitch (e.g., Phoenix Contact "MC" series or Amphenol Anytek).*
+     - *You need two parts: the "Header" (solders to the board) and the "Plug" (the screw terminal part that plugs into the header).*
+
+5. **Test Equipment Needs (Sourcing pending)**
+   - [ ] **Multimeter + Oscilloscope Combo (Owon 1)** (Was out of stock at SP)
