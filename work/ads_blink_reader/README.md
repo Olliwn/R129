@@ -48,3 +48,14 @@ The 16-pin diagnostic connector (X11/4) in the engine bay requires the following
 
 ## Log / Notes
 *TODO: Document fault codes extracted from vehicle and the results of the reset here.*
+
+5/ ASD - no connector
+6/ SRS -  3/8/9 pulses - after reset 1 blink (2 blink state that needed to be reset)
+7/ RB - 2/3/4/5/6/7 pulses - after reset i blink
+8 /DI/EZL - 17 pulses -after reset 1 blink
+9 / ADS - weak static glow
+10/ RST - 11/20/28/29 pulses - bo blinks after single reset, happened twice
+11/ ATA - static glow (medium)
+12 / IRCL - static glow (medium)
+13 / ETC - no connector
+14/ ESMC - 11/12 pulses - after reset 1 blink (2 blink state that needed to be reset)
