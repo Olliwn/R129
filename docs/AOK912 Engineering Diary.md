@@ -75,7 +75,7 @@
 
 *   **UI Hardware Settled:** After reviewing the physical constraints of the R129's 1-DIN slot, I have finalized the core architecture for the custom UI. The system will be based around the Raspberry Pi 5.
     *   **Display:** The goal is to use a 5.5" AMOELD (from a repurposed smartphone panel) or a high-quality "bar type" IPS LCD (like the Waveshare 6.25" DSI). The display will be mounted as a "Full Cubby Replacement" behind custom machined dark glass/acrylic to maintain a 99% stock, hidden look when turned off. *(See project: [UI_rpi5/partslist.md](../UI_rpi5/partslist.md) for full specs)*.
-    *   **radio:** The radio will be a Becker BE2210, which is a factory-installed radio in the R129. It is a DIN-sized radio that fits in the center console. radio was ordered from [original-autoradio.de](https://original-autoradio.de/) on 2026-03-18. Customer number: 168451, Payment method: PayPal, Order number: 187019, Date: Wednesday, March 18, 2026.
+    *   **Radio:** Ordered a Becker BE2210 ("Mercedes Special"), retrofitted with an internal AUX input for RPi5 audio routing, from [original-autoradio.de](https://original-autoradio.de/) on 2026-03-18. Order #187019, Customer #168451 (PayPal).
 *   **Electronics & Prototyping Haul (DigiKey):** Placed a comprehensive order for the UI controls, interface circuits, and project prototyping.
     *   **Controls & Haptics:** ALPS Directional Switch/Encoder (RKJXT1F42001) paired with the Kilo International (OEDNI-90-4-7) matte black machined-aluminum knob for that solid, premium OEM "iDrive" feel.
     *   **Interface ICs & Signal Processing:** CD74HC4051E (8-channel Analog Multiplexer), ADS1115 (16-bit 4-channel ADC for precision analog reading), TXB0108 (Level Shifter Breakout) for logic conversion between 3.3V and 5V.
@@ -84,6 +84,23 @@
     *   **Protection Circuitry:** 1.5KE18A TVS Diodes (critical for surviving 12V automotive load dumps) and assorted Schottky/Standard Diodes (1N5819, 1N4148, 1N4007) for reverse-polarity protection.
     *   **Prototyping Essentials:** Multiple breadboards, pluggable terminal blocks, jumper wires, pin headers, and SparkFun capacitor & resistor kits.
 *   **Diagnostic Tools:** Ordered an **Owon HDS242 Handheld Oscilloscope**. An absolutely essential tool for analyzing CAN/LIN signals, noisy automotive sensors, and verifying the Phase 2 PCB logic timings while in the garage.
+
+### **March 18, 2026 \- Blink-Code Diagnostics & Infotainment Architecture**
+
+**Location:** Oulu, Finland
+
+**Event:** First full diagnostic code extraction via X11/4 connector and documentation of the infotainment hardware architecture.
+
+*   **Blink-Code Diagnostics (X11/4):** Performed a full sweep of the 16-pin diagnostic connector using the blink-code reader. Extracted fault codes from all accessible modules and performed resets where possible. Key findings:
+    *   **ADS (Pin 9):** Weak static glow only — no blink codes returned. Confirms the ADS control module is not communicating properly, consistent with the earlier failsafe/limp-mode diagnosis.
+    *   **SRS (Pin 6):** 3/8/9 pulses before reset; cleared to 1 blink after reset (was in a 2-blink fault state).
+    *   **DI/EZL (Pin 8):** 17 pulses before reset; cleared to 1 blink.
+    *   **RST (Pin 10):** 11/20/28/29 pulses; did **not** clear after a single reset (required two attempts). Must power cycle car btweeen resets.
+    *   **ESMC (Pin 14):** 11/12 pulses; cleared to 1 blink after reset.
+    *   **ATA (Pin 11) & IRCL (Pin 12):** Static glow (medium) — no valid blink response.
+    *   Full results logged in: [work/ads_blink_reader/README.md](../work/ads_blink_reader/README.md)
+*   **Display Ordered:** Ordered the 5.5" OLED display (1920×1080) for the cubby-mounted RPi5 interface. Expected delivery within one week.
+*   **Infotainment Architecture Documented:** Wrote up the full three-zone infotainment system design — Audio Hub (Becker BE2210), Compute & Display (RPi5 + 5.5" OLED in the cubby), and HMI Controller (Alps RKJXT1F42001 joystick/encoder hidden in the ashtray). Includes GPIO pinout, debouncing strategy, and CAT6 wiring plan. *(See: [UI_rpi5/radio_uiknob.md](../UI_rpi5/radio_uiknob.md))*
 
 ## **📝 Task / Todo List & Quick Studies**
 
