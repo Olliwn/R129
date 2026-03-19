@@ -101,6 +101,10 @@
     *   Full results logged in: [work/ads_blink_reader/README.md](../work/ads_blink_reader/README.md)
 *   **Display Ordered:** Ordered the 5.5" OLED display (1920×1080) for the cubby-mounted RPi5 interface. Expected delivery within one week.
 *   **Infotainment Architecture Documented:** Wrote up the full three-zone infotainment system design — Audio Hub (Becker BE2210), Compute & Display (RPi5 + 5.5" OLED in the cubby), and HMI Controller (Alps RKJXT1F42001 joystick/encoder hidden in the ashtray). Includes GPIO pinout, debouncing strategy, and CAT6 wiring plan. *(See: [UI_rpi5/radio_uiknob.md](../UI_rpi5/radio_uiknob.md))*
+*   **Summer Tire Selection:** Researched replacement summer tires for the 17" RH wheels (current tires are from 2015). Selected the **Nexen N'Fera SU1** as the best mid-range option available in Finland:
+    *   **Front:** 245/45 ZR17
+    *   **Rear:** 275/40 ZR17 98W (~200–230 €/piece; fronts cheaper)
+    *   Nexen is a South Korean OEM supplier (VW, Hyundai/Kia, Porsche). The N'Fera SU1 is their UHP summer tire — comfortable, quiet ride with strong wet-weather grip. Squared-off shoulder profile suits the deep-dish RH wheels. Trade-off vs. Michelin is slightly less sharp dry steering response, negligible for summer cruising use.
 
 ## **📝 Task / Todo List & Quick Studies**
 
