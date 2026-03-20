@@ -101,10 +101,10 @@
     *   Full results logged in: [work/ads_blink_reader/README.md](../work/ads_blink_reader/README.md)
 *   **Display Ordered:** Ordered the 5.5" OLED display (1920×1080) for the cubby-mounted RPi5 interface. Expected delivery within one week.
 *   **Infotainment Architecture Documented:** Wrote up the full three-zone infotainment system design — Audio Hub (Becker BE2210), Compute & Display (RPi5 + 5.5" OLED in the cubby), and HMI Controller (Alps RKJXT1F42001 joystick/encoder hidden in the ashtray). Includes GPIO pinout, debouncing strategy, and CAT6 wiring plan. *(See: [UI_rpi5/radio_uiknob.md](../UI_rpi5/radio_uiknob.md))*
-*   **Summer Tire Selection:** Researched replacement summer tires for the 17" RH wheels (current tires are from 2015). Selected the **Nexen N'Fera SU1** as the best mid-range option available in Finland:
-    *   **Front:** 245/45 ZR17
-    *   **Rear:** 275/40 ZR17 98W (~200–230 €/piece; fronts cheaper)
-    *   Nexen is a South Korean OEM supplier (VW, Hyundai/Kia, Porsche). The N'Fera SU1 is their UHP summer tire — comfortable, quiet ride with strong wet-weather grip. Squared-off shoulder profile suits the deep-dish RH wheels. Trade-off vs. Michelin is slightly less sharp dry steering response, negligible for summer cruising use.
+*   **Summer Tire Selection & Order:** Researched replacement summer tires for the 17" RH wheels (current tires are from 2015). Initial pick was the Nexen N'Fera SU1 (best mid-range), but availability in Finland was zero. Ordered Michelin instead on 2026-03-20:
+    *   **Rear:** 2× Michelin Pilot Sport PS2 275/40 ZR17 98Y FSL — 981,99 € (Order #FI-0326-04083)
+    *   **Front:** 2× Michelin Pilot Sport 5 245/45 ZR17 99Y XL — 368,37 € (Order #FI-0326-04084)
+    *   Total: ~1 350 €. Mixed-generation Michelin set (PS2 rear / PS5 front) due to the 275/40 ZR17 rear size being hard to source in PS5.
 
 ## **📝 Task / Todo List & Quick Studies**
 
@@ -184,6 +184,75 @@
   * MB 236.3 Power Steering Fluid (1-2 Liters)
   * MB 325.0 Spec Coolant (Glysantin G48)
 * **Sourcing:** MB-osat (primary source), Autodoc.fi, or local Kärkkäinen/Motonet for fluids.
+
+### **7. Baseline Service — Unknown History (Spring 2026)**
+
+*No written service history exists for this vehicle. Assume all consumables and wear items are overdue. This checklist establishes a known-good baseline for reliability and longevity. Items already tracked in detail elsewhere are cross-referenced, not duplicated.*
+
+#### **A. Engine Oil & Filtration**
+- [ ] **Engine Oil & Filter Change** — Drain and refill with MB 229.5 spec fully-synthetic (e.g., Mobil 1 0W-40 or Liqui Moly 5W-40). Replace oil filter (use OEM Mann/Mahle). Capacity: ~8L.
+- [ ] **Oil Filter Housing Cap** — Inspect the plastic cap for cracks when removing (requires 36mm socket). Replace if cracked.
+
+#### **B. Ignition System (M119 Twin-Distributor)**
+- [ ] **Spark Plugs** — Replace all 8 (Bosch W5DTC or equivalent copper-core, OEM spec for KE-Jetronic M119). Gap to 0.8mm.
+- [ ] **Distributor Caps & Rotors (×2)** — Replace both left and right distributor caps and rotors. Inspect for carbon tracking and corrosion.
+- [ ] **Spark Plug Wires** — Inspect resistance (should be <10 kΩ per wire). Replace full set if any are out of spec or brittle.
+
+#### **C. Fuel System**
+- [ ] **Fuel Filter** — Replace the inline fuel filter (located under the car, passenger side). Part: A 002 477 30 01 or equivalent.
+- [ ] **Fuel Accumulator** — Inspect (holds residual pressure for hot restart). If hard-start when hot, replace.
+
+#### **D. Drive Belts**
+- [ ] **Serpentine / V-Belts** — Inspect all belts for cracking, glazing, and tension. The M119 uses multiple V-belts (not a single serpentine). Replace the full set if age/condition is unknown.
+- [ ] **Belt Tensioners & Idler Pulleys** — Check for bearing play/noise. Replace any that are rough.
+
+#### **E. Cooling System**
+- [ ] **Full Coolant Flush** — Drain, flush, and refill with MB 325.0 spec (Glysantin G48, 50/50 mix). *(Top-up already noted in Task #6; this upgrades it to a full flush.)*
+- [ ] **Thermostat** — Replace (known M119 failure point, causes overcooling or overheating). OEM temp: 80°C.
+- [ ] **Coolant Hoses** — Inspect all rubber hoses for swelling, cracking, and softness. Replace any suspect hoses (prioritize the lower radiator hose and heater hoses).
+- [ ] **Radiator Cap** — Replace (cheap insurance; a weak cap lowers boiling point).
+
+#### **F. Transmission (722.3)**
+- [ ] **ATF Drain & Fill** — Drain and refill with MB 236.1 spec ATF. The 722.3 does not have a serviceable filter; fluid change is the maintenance item. Capacity: ~5L per drain cycle (do 2–3 drain-and-fill cycles for a near-complete exchange).
+- [ ] **Transmission Mount** — Inspect for sagging/cracking. Replace if collapsed (causes drivetrain vibration).
+
+#### **G. Brakes**
+- [ ] **Brake Fluid Flush** — Complete flush with DOT 4+ (MB 331.0 spec). Brake fluid is hygroscopic; assume it hasn't been changed in years. Bleed all four corners (RR → LR → FR → FL).
+- [ ] **Brake Pad Inspection** — Measure remaining pad thickness (front & rear). Replace if <3mm.
+- [ ] **Brake Disc Inspection** — Check for scoring, lip, and minimum thickness markings. Measure with a micrometer.
+- [ ] **Brake Hoses (×4)** — Inspect all four rubber flex hoses for cracking, swelling, or sponginess. Replace if any doubt (35-year-old rubber).
+
+#### **H. Engine Mounts & Drivetrain Mounts**
+- [ ] **Engine Mounts (×2)** — Replace both fluid-filled mounts. Collapsed mounts cause idle vibration and allow excess engine movement. *(Already noted in Master Plan Phase 4.)*
+- [ ] **Transmission Mount** — See section F above.
+
+#### **I. Electrical Baseline**
+- [ ] **Battery** — Test CCA and internal resistance. Replace if marginal (Nordic winters are brutal on old batteries).
+- [ ] **Alternator Output** — Verify 13.8–14.4V at idle with loads on. Check for AC ripple (indicates failing diodes).
+- [ ] **All Exterior Lights** — Walk-around test: headlights (low/high), fog lights, turn signals, brake lights, reverse lights, license plate lights, side markers.
+- [ ] **Fuse Box Inspection** — Open both fuse boxes (underhood + interior). Inspect for corrosion, melted terminals, and incorrect fuse ratings.
+
+#### **J. Vacuum System**
+- [ ] **Vacuum Lines** — The M119 KE-Jetronic relies heavily on vacuum. Inspect all rubber vacuum lines for cracks and hardening. Replace any brittle lines with silicone vacuum hose.
+- [ ] **Idle Speed Check** — After addressing vacuum leaks (including intake hoses from Task #6), verify idle speed settles at ~650–700 RPM in Drive with A/C off.
+
+#### **K. Rubber, Seals & Weatherstripping**
+- [ ] **Door Seals** — Inspect and treat with rubber conditioner (Gummi Pflege). Check for tears or compression set.
+- [ ] **Soft Top Seals** — Inspect the roof seals and rear window seal for leaks and hardening. Treat with conditioner.
+- [ ] **Trunk Seal** — Inspect (water ingress to the trunk is common on R129s and can damage the PSE pump area).
+
+#### **L. Under-Car Visual Inspection**
+- [ ] **Exhaust System** — Inspect for rust-through, loose hangers, and leaks. Pay attention to the flex joints and catalyst connections.
+- [ ] **Fluid Leaks** — Put clean cardboard under the car overnight. Map any drips (oil, ATF, PS fluid, coolant).
+- [ ] **Underbody Rust** — Inspect floor pans, subframe, and rear wheel arches for corrosion.
+
+#### **Cross-References (Already Tracked)**
+* Air Intake Hoses & Engine Air Filters → Task #6
+* Power Steering Flush & Filter → Task #6
+* Coolant Top-up → Task #6 (upgraded to full flush above)
+* Engine Mounts & Steering Damper → Master Plan Phase 4
+* Suspension Refresh (LCA, Links, Bushings) → Task #4
+* ADS Diagnostics → Task #4 / [ADS Blink-Code Reader](../work/ads_blink_reader/README.md)
 
 ## **🛠️ Tool Acquisition & Inventory**
 
