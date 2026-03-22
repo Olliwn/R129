@@ -18,10 +18,20 @@ The R129 has specific points designed to bear the weight of the vehicle:
 
 ## Step-by-Step Lifting Procedure (Front Axle)
 
-1. **Prep the Car:** Park on a hard, perfectly flat surface (concrete or smooth asphalt). Put the transmission in Park and firmly apply the parking brake.
+### Method A: Lifting the entire front at once (Preferred if you have a large jack)
+If your floor jack has a high enough lifting arc and reaches far enough under the car:
+1. **Prep the Car:** Park on a hard, perfectly flat surface. Put the transmission in Park and firmly apply the parking brake.
 2. **Chock the Wheels:** Place wheel chocks firmly behind and in front of the **rear** tires.
-3. **Position the Jack:** Slide your floor jack under the front-left rubber lift point. Place a rubber puck on the jack saddle.
-4. **Lift:** Pump the jack until the front wheel is off the ground and there is enough room to slide a jack stand under the car.
+3. **Position the Jack:** Roll the floor jack straight under the front bumper. Locate the **heavy structural crossmember** that runs under the engine. (Do NOT lift by the ribbed oil pan!). Place a rubber puck on the jack saddle.
+4. **Lift:** Pump the jack to lift the entire front end of the car until both front wheels are off the ground.
+5. **Place Jack Stands:** Slide your jack stands under the left and right factory rubber lifting pads (under the side skirts).
+6. **Lower Safely:** Slowly release the jack, letting the car settle onto both stands simultaneously.
+
+### Method B: Lifting one side at a time
+1. **Prep the Car:** Park on a hard, perfectly flat surface. Put the transmission in Park and firmly apply the parking brake.
+2. **Chock the Wheels:** Place wheel chocks firmly behind and in front of the **rear** tires.
+3. **Position the Jack:** Slide your floor jack under the front-left rubber lift point on the side skirt. Place a rubber puck on the jack saddle.
+4. **Lift:** Pump the jack until the front-left wheel is off the ground.
 5. **Place the Jack Stand:** Because the jack is occupying the factory rubber pad, place the jack stand under a solid, structural part of the front subframe or the heavy pivot point of the lower control arm (where it mounts to the chassis). **Do not place stands under floor pans or hollow sheet metal.**
 6. **Lower Safely:** Slowly and gently release the jack pressure, letting the car settle onto the jack stand.
 7. **Repeat:** Move to the front-right side and repeat the process. 
