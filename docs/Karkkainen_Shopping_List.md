@@ -5,7 +5,7 @@
 ## Automotive Mechanics Tools
 - [x] **Socket / Wrench Set / Hylsysarja** (Bahco S910 purchased)
 - [x] **Torx Socket Set / Torx-hylsysarja** (Bondhus torx set purchased)
-- [ ] **1/4" Hex & Torx Bit Socket Set / 1/4" Kärkihylsysarja** (Upgrade from MTX. Look for Wera Zyklop 1/4" set or Bahco SL25L. The M119 engine has many delicate, seized aluminum hex bolts (like the distributor caps) where cheap MTX bits will round out the bolt head. You need high-precision bits.)
+- [ ] **1/4" Hex & Torx Bit Socket Set / 1/4" Kärkihylsysarja** (Upgrade from MTX. **Bahco SL25 or SL25L is the smart buy (~50€)**. It provides excellent tolerances and will safely remove seized M119 hex bolts. Wera is fantastic but at 119€ it's double the price for diminishing returns on occasional use.)
 - [x] **Pliers / Pihdit** (3x Knipex: 87, 70, 26 purchased)
 - [x] **Floor Jack / Hallitunkki** (Minimum 2-ton capacity, low-profile recommended for the R129) - Acquired (>2.5t low-profile)
 - [ ] **Jack Stands / Autopukit** (2x or 4x, minimum 3000kg/3-ton capacity for safety margin, pin-style or heavy ratchet)
