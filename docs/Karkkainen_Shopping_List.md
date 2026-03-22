@@ -26,7 +26,7 @@
 - [x] **Wire Strippers / Kuorintapihdit**
 - [x] **Crimping Tool / Puristuspihdit** (For insulated/non-insulated automotive terminals)
 - [x] **Soldering Iron & Solder / Kolvi ja tina**
-- [ ] **Automotive Test Light / Virtakynä** (12V)
+- [x] **Automotive Test Light / Virtakynä** (12V)
 - [ ] **Trim Removal Tools / Verhoilun irrotustyökalut** (Plastic pry set for interior/cluster)
 
 ## Workshop Organization & Storage
