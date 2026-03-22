@@ -126,6 +126,18 @@
 *   **Belt Noise:**
     *   A belt squeals/chirps immediately after cold start. Needs diagnosis: spray water on the belt while running — if the noise stops momentarily, the belt is slipping (replace belt or adjust tension); if the noise persists or changes character, suspect a worn tensioner or idler pulley bearing. *(See baseline service section D: [work/baseline_service/README.md](../work/baseline_service/README.md))*
 
+### **March 22, 2026 \- Tool & Equipment Procurement Run**
+
+**Location:** Motonet & Puuilo Oulu (Vasaraperä)
+
+**Event:** Acquired the core mechanical tooling, lifting equipment, and fluids required to execute the baseline service and ADS diagnostics. 
+
+*   **Lifting Gear:** Secured 2 pairs of Bahco 3T Jack Stands and rubber lift pads for safe underbody access. (Using existing >2.5T low-profile floor jack).
+*   **Specialty Tools:** Procured high-quality Bahco 1/4" Bit Socket Set (to safely remove delicate, seized aluminum M119 bolts), Bahco Pry Bar Set, 74mm/14-flute M119 oil filter wrench, and plastic trim removal tools.
+*   **Workshop Organization:** Upgraded garage hygiene with a Kärcher WD3 wet/dry shop vacuum. Repurposing an existing 2-layer plastic toolbox to serve as the "Dedicated R129 Metric Tool Kit."
+*   **Fluids & Chemicals:** Stocked up on MB 325.0 Blue Coolant, MB 236.3 Power Steering Fluid, and notably, **Febi 02615 (MB 343.0 / ZH-M) Hydraulic Fluid**. *Note:* Confirmed that the early R129 ADS I system shares this clear/yellow ZH-M fluid specification with the soft top mechanism, avoiding the later green Pentosin CHF 11S.
+*   **Total Investment:** 548.52 € across Motonet and Puuilo. *(See full inventory in [docs/Karkkainen_Shopping_List.md](../docs/Karkkainen_Shopping_List.md))*
+
 ## **📝 Task / Todo List & Quick Studies**
 
 ### **1. Windshield Wiper Parking Issue**
