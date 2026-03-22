@@ -1,0 +1,204 @@
+* 06_full_board.cir
+* nRF5430 Interface Board - Complete Board-Level Netlist
+*
+* Instantiates:
+*   - Power supply chain (12V -> 5V -> 3.3V) with diagnostics enable switch
+*   - V_DIAG: P-FET switched 12V bus for all car-side diagnostics circuits
+*   - 8 bidirectional diagnostic channels (pins 6-12, 14)
+*     RX: TLP521 common-emitter, MCU pull-up 13k
+*     TX: TLP521 emitter-follower + 2N2222 driver, 10k base pull-down
+*   - 1 KE duty-cycle channel (pin 3) with RX only
+*   - 2 analog conditioning paths (battery voltage + airflow pot)
+
+.title nRF5430 Interface Board - Full System
+
+.include ../lib/tlp521_opto.lib
+.include ../lib/tvs_1_5ke18a.lib
+.include ../lib/power_supply.lib
+.include ../lib/car_diag_channel.lib
+
+* Common models
+.model Q_DRV NPN(Is=1e-14 Bf=200 Vaf=100 Rb=10 Rc=1
++  Cjc=8p Cje=25p Tf=0.3n Tr=6n Ikf=0.3)
+.model D_1N4007 D(Is=7.02e-9 N=1.45 Rs=0.033 Bv=1000 Ibv=5u
++  Cjo=26p Vj=0.7 M=0.333 Tt=5u)
+.model D_1N4148 D(Is=2.52e-9 N=1.752 Rs=0.568 Bv=100 Ibv=100u
++  Cjo=4p Vj=0.7 M=0.4 Tt=6n)
+
+* ================================================================
+* SECTION 1: POWER SUPPLY (always-on path)
+* ================================================================
+V_bat vin_raw 0 DC 12.0
+R_fuse vin_raw vin_fused 50m
+D_rpol vin_fused vin_prot D_1N4007
+X_tvs vin_prot 0 TVS_1_5KE18A
+C_in vin_prot 0 100u IC=12
+X_buck vin_prot v5_bus 0 OKI78SR_5V
+C_5v v5_bus 0 100n
+X_ldo v5_bus v3_bus 0 LD1117V33
+C_3v3 v3_bus 0 100n
+
+* ================================================================
+* SECTION 1b: DIAGNOSTICS ENABLE SWITCH (V_PROT -> V_DIAG)
+* ================================================================
+* P-FET high-side switch controlled by MCU DIAG_EN via NPN level shifter
+.model PFET_SI2301 PMOS(Vto=-1.2 Kp=30 Rd=0.11 Rs=0.05)
+M_en v_diag gate_node vin_prot vin_prot PFET_SI2301
+R_gp vin_prot gate_node 100k
+R_gate gate_node gate_drv 10k
+Q_lvl gate_drv en_base 0 Q_LVL_NPN
+.model Q_LVL_NPN NPN(Is=1e-14 Bf=200 Vaf=100)
+R_en en_base diag_en_gpio 10k
+V_diag_en diag_en_gpio 0 DC 3.3
+C_diag v_diag 0 100u IC=0
+
+* ================================================================
+* SECTION 2: DIAGNOSTIC CHANNELS
+* Per channel:
+*   RX: dpin -> 1k -> opto(CE) -> mcu_rx (13k pull-up to 3.3V)
+*   TX: gpio -> 330 -> opto(EF, coll to 12V via 1k) -> emitter drives Q_DRV base
+*       Q_DRV: C=dpin, E=GND, base 10k pull-down
+* ================================================================
+
+* --- Ch6: SRS ---
+V_b6 bc6 0 PULSE(0 5 0.5 1m 1m 0.4 0.8)
+X_c6 dp6 0 bc6 CAR_DIAG_CHANNEL VBAT=12.0 R_PULL=680
+R_rx6 dp6 oa6 1k
+X_or6 oa6 0 mr6 0 TLP521 CTR=1.0
+R_pu6 v3_bus mr6 13k
+V_t6 tc6 0 DC 0
+R_tr6 tc6 ta6 330
+X_ot6 ta6 0 tc6c te6 TLP521 CTR=1.0
+R_oc6 v_diag tc6c 1k
+Q_d6 dp6 te6 0 Q_DRV
+R_bp6 te6 0 10k
+
+* --- Ch7: RB ---
+V_b7 bc7 0 PULSE(0 5 0.5 1m 1m 0.4 0.8)
+X_c7 dp7 0 bc7 CAR_DIAG_CHANNEL VBAT=12.0 R_PULL=680
+R_rx7 dp7 oa7 1k
+X_or7 oa7 0 mr7 0 TLP521 CTR=1.0
+R_pu7 v3_bus mr7 13k
+V_t7 tc7 0 DC 0
+R_tr7 tc7 ta7 330
+X_ot7 ta7 0 tc7c te7 TLP521 CTR=1.0
+R_oc7 v_diag tc7c 1k
+Q_d7 dp7 te7 0 Q_DRV
+R_bp7 te7 0 10k
+
+* --- Ch8: DI/EZL ---
+V_b8 bc8 0 PULSE(0 5 0.5 1m 1m 0.4 0.8)
+X_c8 dp8 0 bc8 CAR_DIAG_CHANNEL VBAT=12.0 R_PULL=680
+R_rx8 dp8 oa8 1k
+X_or8 oa8 0 mr8 0 TLP521 CTR=1.0
+R_pu8 v3_bus mr8 13k
+V_t8 tc8 0 DC 0
+R_tr8 tc8 ta8 330
+X_ot8 ta8 0 tc8c te8 TLP521 CTR=1.0
+R_oc8 v_diag tc8c 1k
+Q_d8 dp8 te8 0 Q_DRV
+R_bp8 te8 0 10k
+
+* --- Ch9: ADS (static glow) ---
+V_b9 vb9 0 DC 12.0
+R_p9 vb9 dp9 680
+R_g9 dp9 0 220
+R_rx9 dp9 oa9 1k
+X_or9 oa9 0 mr9 0 TLP521 CTR=1.0
+R_pu9 v3_bus mr9 13k
+V_t9 tc9 0 DC 0
+R_tr9 tc9 ta9 330
+X_ot9 ta9 0 tc9c te9 TLP521 CTR=1.0
+R_oc9 v_diag tc9c 1k
+Q_d9 dp9 te9 0 Q_DRV
+R_bp9 te9 0 10k
+
+* --- Ch10: RST ---
+V_b10 bc10 0 PULSE(0 5 0.5 1m 1m 0.4 0.8)
+X_c10 dp10 0 bc10 CAR_DIAG_CHANNEL VBAT=12.0 R_PULL=680
+R_rx10 dp10 oa10 1k
+X_or10 oa10 0 mr10 0 TLP521 CTR=1.0
+R_pu10 v3_bus mr10 13k
+V_t10 tc10 0 DC 0
+R_tr10 tc10 ta10 330
+X_ot10 ta10 0 tc10c te10 TLP521 CTR=1.0
+R_oc10 v_diag tc10c 1k
+Q_d10 dp10 te10 0 Q_DRV
+R_bp10 te10 0 10k
+
+* --- Ch11: ATA (static glow) ---
+V_b11 vb11 0 DC 12.0
+R_p11 vb11 dp11 680
+R_g11 dp11 0 680
+R_rx11 dp11 oa11 1k
+X_or11 oa11 0 mr11 0 TLP521 CTR=1.0
+R_pu11 v3_bus mr11 13k
+V_t11 tc11 0 DC 0
+R_tr11 tc11 ta11 330
+X_ot11 ta11 0 tc11c te11 TLP521 CTR=1.0
+R_oc11 v_diag tc11c 1k
+Q_d11 dp11 te11 0 Q_DRV
+R_bp11 te11 0 10k
+
+* --- Ch12: IRCL (static glow) ---
+V_b12 vb12 0 DC 12.0
+R_p12 vb12 dp12 680
+R_g12 dp12 0 680
+R_rx12 dp12 oa12 1k
+X_or12 oa12 0 mr12 0 TLP521 CTR=1.0
+R_pu12 v3_bus mr12 13k
+V_t12 tc12 0 DC 0
+R_tr12 tc12 ta12 330
+X_ot12 ta12 0 tc12c te12 TLP521 CTR=1.0
+R_oc12 v_diag tc12c 1k
+Q_d12 dp12 te12 0 Q_DRV
+R_bp12 te12 0 10k
+
+* --- Ch14: ESMC ---
+V_b14 bc14 0 PULSE(0 5 0.5 1m 1m 0.4 0.8)
+X_c14 dp14 0 bc14 CAR_DIAG_CHANNEL VBAT=12.0 R_PULL=680
+R_rx14 dp14 oa14 1k
+X_or14 oa14 0 mr14 0 TLP521 CTR=1.0
+R_pu14 v3_bus mr14 13k
+V_t14 tc14 0 DC 0
+R_tr14 tc14 ta14 330
+X_ot14 ta14 0 tc14c te14 TLP521 CTR=1.0
+R_oc14 v_diag tc14c 1k
+Q_d14 dp14 te14 0 Q_DRV
+R_bp14 te14 0 10k
+
+* --- Ch3: KE Duty-Cycle (RX only) ---
+V_ke ke_raw 0 PULSE(0 12 0 0.1m 0.1m 5m 10m)
+R_kp ke_raw dp3 680
+R_rx3 dp3 oa3 1k
+X_or3 oa3 0 mr3 0 TLP521 CTR=1.0
+R_pu3 v3_bus mr3 13k
+
+* ================================================================
+* SECTION 3: ANALOG CONDITIONING (powered from V_DIAG)
+* ================================================================
+R_bdh v_diag bat_div 10k
+R_bdl bat_div 0 2.2k
+D_bch bat_div v3_bus D_1N4148
+D_bcl 0 bat_div D_1N4148
+B_bb adc_bat_raw 0 V = { V(bat_div) }
+R_bbo adc_bat_raw adc_bat 1k
+C_bf adc_bat 0 100n
+R_ba adc_bat 0 10Meg
+
+V_af air_raw 0 DC 2.5
+R_adh air_raw air_div 10k
+R_adl air_div 0 10k
+D_ach air_div v3_bus D_1N4148
+D_acl 0 air_div D_1N4148
+B_ab adc_air_raw 0 V = { V(air_div) }
+R_abo adc_air_raw adc_air 1k
+C_af adc_air 0 100n
+R_aa adc_air 0 10Meg
+
+* ================================================================
+* SECTION 4: MCU LOAD
+* ================================================================
+R_mcu v3_bus 0 330
+
+.end

@@ -1,0 +1,80 @@
+* 04_analog_conditioning.cir
+* nRF5430 Interface Board - Analog Signal Conditioning
+* Two paths: Battery voltage monitor and Airflow potentiometer
+*
+* Architecture per path: Voltage Divider -> Clamping Diodes -> LM358 Buffer -> RC Filter -> ADC Input
+
+.title Analog Signal Conditioning Subsystem
+
+* === Power Rails ===
+V_5v v5_bus 0 DC 5.0
+V_3v3 v3_bus 0 DC 3.3
+
+* ================================================================
+* PATH 1: Battery Voltage Monitor (0-14.4V -> 0-2.6V at ADC)
+* Divider: 10k / 2.2k -> gain = 2.2/(10+2.2) = 0.1803
+* At 14.4V: output = 2.60V (safely below 3.3V)
+* At 12.0V: output = 2.16V
+* At 9.0V:  output = 1.62V
+* ================================================================
+
+V_bat_in bat_raw 0 DC 12.0
+
+* Resistive voltage divider
+R_div_high bat_raw bat_div 10k
+R_div_low bat_div 0 2.2k
+
+* Clamping diodes (1N4148): protect against overvoltage
+D_clamp_hi bat_div v3_bus D_1N4148
+D_clamp_lo 0 bat_div D_1N4148
+.model D_1N4148 D(Is=2.52e-9 N=1.752 Rs=0.568 Bv=100 Ibv=100u
++  Cjo=4p Vj=0.7 M=0.4 Tt=6n)
+
+* LM358 unity-gain buffer (modeled as ideal buffer with output resistance)
+* In a full sim, use the ON Semi LM358 .subckt model.
+* Here: behavioral voltage follower with bandwidth limit.
+B_buf_bat adc_bat_raw 0 V = { V(bat_div) }
+R_buf_out adc_bat_raw adc_bat_filt 1k
+
+* RC anti-aliasing filter: f_c = 1/(2*pi*1k*100n) = 1.59kHz
+C_filt_bat adc_bat_filt 0 100n
+
+* ADC input impedance model (ADS1115: ~10MOhm || 5pF)
+R_adc_bat adc_bat_filt 0 10Meg
+C_adc_bat adc_bat_filt 0 5p
+
+* ================================================================
+* PATH 2: Airflow Potentiometer (0-5V -> 0-2.5V at ADC)
+* Divider: 10k / 10k -> gain = 0.5
+* At 5.0V: output = 2.50V
+* At 2.5V: output = 1.25V
+* ================================================================
+
+V_airflow air_raw 0 DC 2.5
+
+* Series protection resistor + voltage divider
+R_air_high air_raw air_div 10k
+R_air_low air_div 0 10k
+
+* Clamping diodes
+D_clamp_air_hi air_div v3_bus D_1N4148
+D_clamp_air_lo 0 air_div D_1N4148
+
+* LM358 unity-gain buffer
+B_buf_air adc_air_raw 0 V = { V(air_div) }
+R_buf_air_out adc_air_raw adc_air_filt 1k
+
+* RC anti-aliasing filter: f_c = 1/(2*pi*1k*100n) = 1.59kHz
+C_filt_air adc_air_filt 0 100n
+
+* ADC input impedance
+R_adc_air adc_air_filt 0 10Meg
+C_adc_air adc_air_filt 0 5p
+
+* === Measurement Points ===
+* V(bat_div): divided battery voltage before buffer
+* V(adc_bat_filt): conditioned battery voltage at ADC input
+* V(air_div): divided airflow voltage before buffer
+* V(adc_air_filt): conditioned airflow voltage at ADC input
+
+.end

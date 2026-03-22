@@ -1,0 +1,181 @@
+* 06_full_board - cleaned for netlist_viewer
+* Subcircuits inlined as simplified stubs (viewer only, not simulatable)
+
+* === SUBCIRCUIT DEFINITIONS ===
+
+.subckt TLP521 A K C E
+D_led A K
+R_opto C E 1k
+.ends TLP521
+
+.subckt TVS_1_5KE18A PLUS MINUS
+D_tvs MINUS PLUS
+.ends TVS_1_5KE18A
+
+.subckt OKI78SR_5V VIN VOUT GND
+R_out VIN VOUT 33m
+R_q VIN GND 4k
+C_out VOUT GND 22u
+.ends OKI78SR_5V
+
+.subckt LD1117V33 VIN VOUT GND
+R_out VIN VOUT 20m
+R_q VIN GND 1k
+C_out VOUT GND 10u
+.ends LD1117V33
+
+.subckt CAR_DIAG_CHANNEL DIAG_PIN CAR_GND BLINK_CTL
+V_bat bat_node CAR_GND DC 12
+R_pullup bat_node ecu_out 680
+R_base BLINK_CTL base_node 1k
+Q_ecu ecu_out base_node CAR_GND NPN
+R_wire ecu_out wire_mid 1
+C_cable wire_mid CAR_GND 500p
+R_contact wire_mid DIAG_PIN 0.1
+.ends CAR_DIAG_CHANNEL
+
+* === POWER SUPPLY ===
+V_bat vin_raw 0 DC 12.0
+R_fuse vin_raw vin_fused 50m
+D_rpol vin_fused vin_prot
+X_tvs vin_prot 0 TVS_1_5KE18A
+C_in vin_prot 0 100u
+X_buck vin_prot v5_bus 0 OKI78SR_5V
+C_5v v5_bus 0 100n
+X_ldo v5_bus v3_bus 0 LD1117V33
+C_3v3 v3_bus 0 100n
+
+* === Ch6: SRS ===
+V_b6 bc6 0 DC 5
+X_c6 dp6 0 bc6 CAR_DIAG_CHANNEL
+R_rx6 dp6 oa6 1k
+X_or6 oa6 0 mr6 0 TLP521
+R_pu6 v3_bus mr6 13k
+V_t6 tc6 0 DC 0
+R_tr6 tc6 ta6 330
+X_ot6 ta6 0 tc6c te6 TLP521
+R_oc6 dp6 tc6c 1k
+Q_d6 dp6 te6 0 NPN
+R_bp6 te6 0 10k
+
+* === Ch7: RB ===
+V_b7 bc7 0 DC 5
+X_c7 dp7 0 bc7 CAR_DIAG_CHANNEL
+R_rx7 dp7 oa7 1k
+X_or7 oa7 0 mr7 0 TLP521
+R_pu7 v3_bus mr7 13k
+V_t7 tc7 0 DC 0
+R_tr7 tc7 ta7 330
+X_ot7 ta7 0 tc7c te7 TLP521
+R_oc7 dp7 tc7c 1k
+Q_d7 dp7 te7 0 NPN
+R_bp7 te7 0 10k
+
+* === Ch8: DI/EZL ===
+V_b8 bc8 0 DC 5
+X_c8 dp8 0 bc8 CAR_DIAG_CHANNEL
+R_rx8 dp8 oa8 1k
+X_or8 oa8 0 mr8 0 TLP521
+R_pu8 v3_bus mr8 13k
+V_t8 tc8 0 DC 0
+R_tr8 tc8 ta8 330
+X_ot8 ta8 0 tc8c te8 TLP521
+R_oc8 dp8 tc8c 1k
+Q_d8 dp8 te8 0 NPN
+R_bp8 te8 0 10k
+
+* === Ch9: ADS (static glow) ===
+V_b9 vb9 0 DC 12.0
+R_p9 vb9 dp9 680
+R_g9 dp9 0 220
+R_rx9 dp9 oa9 1k
+X_or9 oa9 0 mr9 0 TLP521
+R_pu9 v3_bus mr9 13k
+V_t9 tc9 0 DC 0
+R_tr9 tc9 ta9 330
+X_ot9 ta9 0 tc9c te9 TLP521
+R_oc9 dp9 tc9c 1k
+Q_d9 dp9 te9 0 NPN
+R_bp9 te9 0 10k
+
+* === Ch10: RST ===
+V_b10 bc10 0 DC 5
+X_c10 dp10 0 bc10 CAR_DIAG_CHANNEL
+R_rx10 dp10 oa10 1k
+X_or10 oa10 0 mr10 0 TLP521
+R_pu10 v3_bus mr10 13k
+V_t10 tc10 0 DC 0
+R_tr10 tc10 ta10 330
+X_ot10 ta10 0 tc10c te10 TLP521
+R_oc10 dp10 tc10c 1k
+Q_d10 dp10 te10 0 NPN
+R_bp10 te10 0 10k
+
+* === Ch11: ATA (static glow) ===
+V_b11 vb11 0 DC 12.0
+R_p11 vb11 dp11 680
+R_g11 dp11 0 680
+R_rx11 dp11 oa11 1k
+X_or11 oa11 0 mr11 0 TLP521
+R_pu11 v3_bus mr11 13k
+V_t11 tc11 0 DC 0
+R_tr11 tc11 ta11 330
+X_ot11 ta11 0 tc11c te11 TLP521
+R_oc11 dp11 tc11c 1k
+Q_d11 dp11 te11 0 NPN
+R_bp11 te11 0 10k
+
+* === Ch12: IRCL (static glow) ===
+V_b12 vb12 0 DC 12.0
+R_p12 vb12 dp12 680
+R_g12 dp12 0 680
+R_rx12 dp12 oa12 1k
+X_or12 oa12 0 mr12 0 TLP521
+R_pu12 v3_bus mr12 13k
+V_t12 tc12 0 DC 0
+R_tr12 tc12 ta12 330
+X_ot12 ta12 0 tc12c te12 TLP521
+R_oc12 dp12 tc12c 1k
+Q_d12 dp12 te12 0 NPN
+R_bp12 te12 0 10k
+
+* === Ch14: ESMC ===
+V_b14 bc14 0 DC 5
+X_c14 dp14 0 bc14 CAR_DIAG_CHANNEL
+R_rx14 dp14 oa14 1k
+X_or14 oa14 0 mr14 0 TLP521
+R_pu14 v3_bus mr14 13k
+V_t14 tc14 0 DC 0
+R_tr14 tc14 ta14 330
+X_ot14 ta14 0 tc14c te14 TLP521
+R_oc14 dp14 tc14c 1k
+Q_d14 dp14 te14 0 NPN
+R_bp14 te14 0 10k
+
+* === Ch3: KE Duty-Cycle (RX only) ===
+V_ke ke_raw 0 DC 12
+R_kp ke_raw dp3 680
+R_rx3 dp3 oa3 1k
+X_or3 oa3 0 mr3 0 TLP521
+R_pu3 v3_bus mr3 13k
+
+* === ANALOG CONDITIONING ===
+R_bdh vin_prot bat_div 10k
+R_bdl bat_div 0 2.2k
+D_bch bat_div v3_bus
+D_bcl 0 bat_div
+R_bbo adc_bat_raw adc_bat 1k
+C_bf adc_bat 0 100n
+R_ba adc_bat 0 10Meg
+
+V_af air_raw 0 DC 2.5
+R_adh air_raw air_div 10k
+R_adl air_div 0 10k
+D_ach air_div v3_bus
+D_acl 0 air_div
+R_abo adc_air_raw adc_air 1k
+C_af adc_air 0 100n
+R_aa adc_air 0 10Meg
+
+* === MCU LOAD ===
+R_mcu v3_bus 0 330

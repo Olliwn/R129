@@ -1,0 +1,57 @@
+* tb_analog_airflow.cir
+* TESTBENCH 6: Airflow Potentiometer Analog Path
+* Verifies the voltage divider + clamp + buffer + RC filter chain
+* for the airflow potentiometer ADC input (0-5V sensor range).
+*
+* Pass criteria:
+*   - ADC input stays within 0-2.5V across 0-5V sensor range
+*   - Divider ratio = 0.5 (10k/10k)
+*   - Clamping activates above ~7V (fault condition)
+*   - Linearity error < 1% across operating range
+
+.title TB6: Airflow Pot Analog Path Verification
+
+* === Power Rails ===
+V_3v3 v3_bus 0 DC 3.3
+
+.model D_1N4148 D(Is=2.52e-9 N=1.752 Rs=0.568 Bv=100 Ibv=100u
++  Cjo=4p Vj=0.7 M=0.4 Tt=6n)
+
+* === Airflow Pot Input ===
+V_air air_raw 0 DC 2.5
+
+* Voltage divider
+R_air_high air_raw air_div 10k
+R_air_low air_div 0 10k
+
+* Clamping
+D_clamp_hi air_div v3_bus D_1N4148
+D_clamp_lo 0 air_div D_1N4148
+
+* Buffer
+B_buf adc_raw 0 V = { V(air_div) }
+R_buf_out adc_raw adc_filt 1k
+
+* RC filter
+C_filt adc_filt 0 100n
+
+* ADC input
+R_adc adc_filt 0 10Meg
+C_adc adc_filt 0 5p
+
+* === DC Analysis: Sweep airflow pot 0 to 7V (includes overvoltage) ===
+.dc V_air 0 7 0.05
+
+.save V(air_raw) V(air_div) V(adc_filt)
+
+.meas dc v_adc_at_0v FIND V(adc_filt) AT=0
+.meas dc v_adc_at_2v5 FIND V(adc_filt) AT=2.5
+.meas dc v_adc_at_5v FIND V(adc_filt) AT=5
+.meas dc v_adc_at_7v FIND V(adc_filt) AT=7
+
+.control
+run
+wrdata results/tb6_analog_airflow_dc.csv V(air_raw) V(air_div) V(adc_filt)
+.endc
+
+.end

@@ -1,0 +1,30 @@
+* 1.5KE18A TVS Diode SPICE Model
+* Unidirectional Transient Voltage Suppressor
+* Datasheet parameters:
+*   Vrwm (standoff) = 15.3V
+*   Vbr (min/max) = 17.1V / 18.9V (test current 1mA)
+*   Vc (clamping) = 29.2V at Ipp = 76.5A (8/20us pulse)
+*   Vc = 24.4V at Ipp = 1A
+*   Ppk = 1500W
+*
+* Pin convention:
+*   PLUS  = protected positive rail (cathode band side of the physical part)
+*   MINUS = ground reference (anode side of the physical part)
+*
+* Usage: X_tvs rail_node gnd_node TVS_1_5KE18A
+*   In normal operation both internal diodes are reverse biased.
+*   During overvoltage, D_tvs reverse-breaks down at Bv=18V to clamp.
+
+.subckt TVS_1_5KE18A PLUS MINUS
+
+* Both diodes oriented anode=MINUS, cathode=PLUS (reverse biased when PLUS > MINUS).
+* D_fwd: a conventional diode; blocks in normal polarity, conducts if rail goes negative.
+D_fwd MINUS PLUS D_FWD_MDL
+.model D_FWD_MDL D(Is=1e-12 N=1.05 Rs=0.01 Bv=100 Ibv=1m)
+
+* D_tvs: the clamping element; reverse-breaks down at Bv = 18V.
+D_tvs MINUS PLUS D_TVS_MDL
+.model D_TVS_MDL D(Is=1e-14 N=1.05 Rs=0.15 Bv=18.0 Ibv=1m
++  Cjo=2000p M=0.33 Vj=0.7)
+
+.ends TVS_1_5KE18A

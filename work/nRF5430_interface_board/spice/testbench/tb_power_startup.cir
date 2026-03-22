@@ -1,0 +1,77 @@
+* tb_power_startup.cir
+* TESTBENCH 3: Power Supply Startup
+* Verifies that the 5V, 3.3V, and V_DIAG rails settle correctly when
+* the 12V input ramps up (simulating ignition ON).
+*
+* DIAG_EN is asserted 50ms after power ramp begins, so V_DIAG
+* comes up after the always-on rails are stable.
+*
+* Pass criteria:
+*   - 5V rail settles to 5.0V +/- 0.1V within 50ms
+*   - 3.3V rail settles to 3.3V +/- 0.05V within 50ms
+*   - V_DIAG settles to ~12V within 20ms of DIAG_EN going HIGH
+*   - No overshoot above 3.6V on the 3.3V rail
+*   - No overshoot above 5.5V on the 5V rail
+
+.title TB3: Power Supply Startup Verification (with V_DIAG enable)
+
+.include ../lib/tvs_1_5ke18a.lib
+.include ../lib/power_supply.lib
+
+* === Input: 12V ramp over 10ms (simulates ignition switch ON) ===
+V_bat vin_raw 0 PULSE(0 12.0 1m 10m 1m 1 2)
+
+* === Protection Stage ===
+R_fuse vin_raw vin_fused 50m
+D_rpol vin_fused vin_prot D_1N4007
+.model D_1N4007 D(Is=7.02e-9 N=1.45 Rs=0.033 Bv=1000 Ibv=5u
++  Cjo=26p Vj=0.7 M=0.333 Tt=5u)
+X_tvs vin_prot 0 TVS_1_5KE18A
+C_in vin_prot 0 100u IC=0
+
+* === Regulation Stages (always-on) ===
+X_buck vin_prot v5_bus 0 OKI78SR_5V
+C_5v v5_bus 0 100n
+X_ldo v5_bus v3_bus 0 LD1117V33
+C_3v3 v3_bus 0 100n
+
+* === Diagnostics Enable Switch ===
+.model PFET_SI2301 PMOS(Vto=-1.2 Kp=30 Rd=0.11 Rs=0.05)
+M_en v_diag gate_node vin_prot vin_prot PFET_SI2301
+R_gp vin_prot gate_node 100k
+R_gate gate_node gate_drv 10k
+Q_lvl gate_drv en_base 0 Q_LVL_NPN
+.model Q_LVL_NPN NPN(Is=1e-14 Bf=200 Vaf=100)
+R_en en_base diag_en_gpio 10k
+* DIAG_EN asserted 50ms after battery ramp starts (at t=51ms)
+V_diag_en diag_en_gpio 0 PULSE(0 3.3 51m 1m 1m 1 2)
+C_diag v_diag 0 100u IC=0
+
+* === Loads ===
+R_load_3v3 v3_bus 0 55
+R_load_5v v5_bus 0 100
+R_load_diag v_diag 0 60
+
+* === Analysis ===
+.tran 10u 300m UIC
+
+.save V(vin_raw) V(vin_prot) V(v5_bus) V(v3_bus) V(v_diag) V(diag_en_gpio)
+
+* Always-on rail measurements
+.meas tran v5_settled AVG V(v5_bus) FROM=100m TO=190m
+.meas tran v3_settled AVG V(v3_bus) FROM=100m TO=190m
+.meas tran v5_overshoot MAX V(v5_bus) FROM=0 TO=200m
+.meas tran v3_overshoot MAX V(v3_bus) FROM=0 TO=200m
+.meas tran t_5v_settle TRIG V(vin_raw) VAL=6.0 RISE=1 TARG V(v5_bus) VAL=4.75 RISE=1
+.meas tran t_3v3_settle TRIG V(vin_raw) VAL=6.0 RISE=1 TARG V(v3_bus) VAL=3.135 RISE=1
+
+* V_DIAG rail measurements
+.meas tran vdiag_settled AVG V(v_diag) FROM=150m TO=250m
+.meas tran t_vdiag_settle TRIG V(diag_en_gpio) VAL=1.65 RISE=1 TARG V(v_diag) VAL=10.0 RISE=1
+
+.control
+run
+wrdata results/tb3_power_startup.csv V(vin_prot) V(v5_bus) V(v3_bus) V(v_diag)
+.endc
+
+.end

@@ -1,0 +1,42 @@
+* 03_tx_single_channel.cir
+* nRF5430 Interface Board - Single TX (Write/Clear) Optocoupler Path
+* MCU GPIO (3.3V) -> 330 Ohm -> TLP521 (emitter-follower) -> 2N2222 driver -> car pin to GND
+*
+* The optocoupler operates in emitter-follower mode for non-inverting drive:
+*   Collector -> 12V through 1k (car-side supply)
+*   Emitter -> Q_driver base (with 10k pull-down)
+*
+* GPIO HIGH -> opto ON -> emitter rises -> driver ON -> car pin pulled LOW
+* GPIO LOW -> opto OFF -> emitter at 0V -> driver OFF -> car pin at 12V
+
+.title Single TX Channel - Code Clear Write Path
+
+.include ../lib/tlp521_opto.lib
+
+* === Power Rails ===
+V_logic vcc 0 DC 3.3
+
+* === Car Side: Passive Load (ECU pull-up only) ===
+V_bat v_bat 0 DC 12.0
+R_pullup_car v_bat diag_pin 680
+C_cable diag_pin 0 500p
+
+* === Switched 12V bus (V_DIAG) for TX opto collector supply ===
+* In full board this comes from P-FET switch; here modeled as direct supply
+V_diag v_diag 0 DC 12.0
+
+* === MCU Side: GPIO Output ===
+V_gpio gpio_out 0 PULSE(0 3.3 0.5 1m 1m 8.0 20)
+
+* === TX Optocoupler (emitter-follower, non-inverting) ===
+R_tx gpio_out opto_a_tx 330
+X_opto_tx opto_a_tx 0 opto_coll opto_emit TLP521 CTR=1.0
+R_opto_coll v_diag opto_coll 1k
+
+* === Car-Side Driver Stage ===
+Q_driver diag_pin opto_emit 0 Q_2N2222
+.model Q_2N2222 NPN(Is=1e-14 Bf=200 Vaf=100 Rb=10 Rc=1
++  Cjc=8p Cje=25p Tf=0.3n Tr=6n Ikf=0.3)
+R_base_pd opto_emit 0 10k
+
+.end

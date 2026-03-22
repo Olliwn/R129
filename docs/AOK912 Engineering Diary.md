@@ -106,6 +106,26 @@
     *   **Front:** 2× Michelin Pilot Sport 5 245/45 ZR17 99Y XL — 368,37 € (Order #FI-0326-04084)
     *   Total: ~1 350 €. Mixed-generation Michelin set (PS2 rear / PS5 front) due to the 275/40 ZR17 rear size being hard to source in PS5.
 
+### **March 21, 2026 \- First Wash, Battery Fix & Belt Noise**
+
+**Location:** Oulu, Finland
+
+**Event:** First proper wash and exterior inspection. Resolved a no-start condition.
+
+*   **Exterior Wash & Inspection:**
+    *   **Body behind front wheels:** Bare steel may be exposed — looks like a previous owner ground down some rust. Needs protective treatment (primer/paint) before corrosion returns.
+    *   **Rear bumper:** Confirmed the small paint cracks underneath (noted previously). No additional paint damage found elsewhere.
+    *   **Aluminium roof (driver side):** Minor paint "bulging" at the very bottom edge, <1 mm² area. Not urgent — monitor.
+    *   **Driver side mirror:** Stone chip damage (>10 hits) on the plastic mirror housing. Not urgent. Check if a replacement mirror is cheaper than repainting.
+*   **No-Start Issue (Resolved):**
+    *   Car would not start in the morning — appeared completely dead. Initially suspected a dead battery and charged it, but the car still struggled to start. Purchased a maintenance/trickle charger ("ylläpitolaturi") to keep the battery topped up during periods of inactivity.
+    *   **Root cause:** Loose connection on the battery positive (+) terminal. Tightened the terminal bolt and the car now starts normally.
+    *   **Action:** Added trickle charger to the garage routine for storage periods.
+*   **Wiper Blade Replaced:** Installed a new Bosch Twin 600 wiper blade.
+*   **Current Radio Noted:** The installed radio is a Sony CDX-410 (aftermarket, not original to the car). No collector value — to be removed and discarded/sold once the Becker BE2210 arrives.
+*   **Belt Noise:**
+    *   A belt squeals/chirps immediately after cold start. Needs diagnosis: spray water on the belt while running — if the noise stops momentarily, the belt is slipping (replace belt or adjust tension); if the noise persists or changes character, suspect a worn tensioner or idler pulley bearing. *(See baseline service section D: [work/baseline_service/README.md](../work/baseline_service/README.md))*
+
 ## **📝 Task / Todo List & Quick Studies**
 
 ### **1. Windshield Wiper Parking Issue**
@@ -114,11 +134,11 @@
   * **Relay/Module Failure:** The N10 combination relay module (or K26 relay) frequently fails or gets dirty contacts, causing incorrect park detection. The internal park sensor contacts inside the wiper motor assembly could also be faulty.
   * **Mechanical Misalignment:** Loose or slipped nuts on the wiper mechanism linkage. The mechanism may need physical realignment to correct the resting blade position.
   * **Motor/Mechanism Binding:** The complex eccentric 'jumping' mono-wiper mechanism is notorious for needing periodic lubrication (under the plastic turtle-shell cover). A binding mechanism can stress the motor, slow it down, and cause erratic parking.
-* **Action Item:** Lubricate the mechanism first (easiest fix), check linkage nuts, and if the issue persists, investigate the N10 relay and motor park contacts.
+* **Action Item:** Lubricate the mechanism first (easiest fix), check linkage nuts, and if the issue persists, investigate the N10 relay and motor park contacts. *(See project: [Wiper & Washer System](../work/wiper_system/README.md))*
 
 ### **2. Washer Fluid Nozzles**
 * **Symptom:** Fluid only spraying from 2 of 4 nozzles.
-* **Action Item:** Clean and unclog the windshield washer nozzles. Inspect the fluid lines for cracks or leaks.
+* **Action Item:** Clean and unclog the windshield washer nozzles. Inspect the fluid lines for cracks or leaks. *(See project: [Wiper & Washer System](../work/wiper_system/README.md))*
 
 ### **3. Paint Inspection (Rear Fender)**
 * **Symptom:** Narrow cracks visible in the paint on the rear fender (upward-facing area just below the trunk lid) when wet and dirty.
@@ -187,7 +207,7 @@
 
 ### **7. Baseline Service — Unknown History (Spring 2026)**
 
-*No written service history exists for this vehicle. Assume all consumables and wear items are overdue. This checklist establishes a known-good baseline for reliability and longevity. Items already tracked in detail elsewhere are cross-referenced, not duplicated.*
+*No written service history exists for this vehicle. Assume all consumables and wear items are overdue. This checklist establishes a known-good baseline for reliability and longevity. Items already tracked in detail elsewhere are cross-referenced, not duplicated. Full working document with detailed instructions: [work/baseline_service/README.md](../work/baseline_service/README.md)*
 
 #### **A. Engine Oil & Filtration**
 - [ ] **Engine Oil & Filter Change** — Drain and refill with MB 229.5 spec fully-synthetic (e.g., Mobil 1 0W-40 or Liqui Moly 5W-40). Replace oil filter (use OEM Mann/Mahle). Capacity: ~8L.

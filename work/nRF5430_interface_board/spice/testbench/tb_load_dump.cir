@@ -1,0 +1,74 @@
+* tb_load_dump.cir
+* TESTBENCH 4: Load Dump Survival
+* Injects a 40V/100us transient spike on the 12V input
+* per ISO 7637-2 Pulse 5a profile, and verifies the TVS
+* clamps it and all regulated rails remain stable.
+*
+* Now also verifies V_DIAG (switched diagnostics bus) survives.
+*
+* Pass criteria:
+*   - TVS clamps input to < 30V
+*   - 5V rail deviation < 200mV
+*   - 3.3V rail deviation < 100mV
+*   - V_DIAG tracks V_PROT through the P-FET (clamped by TVS)
+
+.title TB4: Load Dump Transient Survival (with V_DIAG)
+
+.include ../lib/tvs_1_5ke18a.lib
+.include ../lib/power_supply.lib
+
+* === Input: 12V DC with superimposed 40V spike at t=1ms ===
+V_bat vin_raw 0 DC 12
+V_spike spike_node 0 PULSE(0 28 1m 5u 5u 100u 50m)
+R_spike_source spike_node vin_raw 1
+
+* === Protection Stage ===
+R_fuse vin_raw vin_fused 50m
+D_rpol vin_fused vin_prot D_1N4007
+.model D_1N4007 D(Is=7.02e-9 N=1.45 Rs=0.033 Bv=1000 Ibv=5u
++  Cjo=26p Vj=0.7 M=0.333 Tt=5u)
+X_tvs vin_prot 0 TVS_1_5KE18A
+C_in vin_prot 0 100u IC=12
+
+* === Regulation (always-on) ===
+X_buck vin_prot v5_bus 0 OKI78SR_5V
+C_5v v5_bus 0 100n
+X_ldo v5_bus v3_bus 0 LD1117V33
+C_3v3 v3_bus 0 100n
+
+* === Diagnostics Enable Switch (enabled during test) ===
+.model PFET_SI2301 PMOS(Vto=-1.2 Kp=30 Rd=0.11 Rs=0.05)
+M_en v_diag gate_node vin_prot vin_prot PFET_SI2301
+R_gp vin_prot gate_node 100k
+R_gate gate_node gate_drv 10k
+Q_lvl gate_drv en_base 0 Q_LVL_NPN
+.model Q_LVL_NPN NPN(Is=1e-14 Bf=200 Vaf=100)
+R_en en_base diag_en_gpio 10k
+V_diag_en diag_en_gpio 0 DC 3.3
+C_diag v_diag 0 100u IC=12
+
+* === Loads ===
+R_load_3v3 v3_bus 0 55
+R_load_5v v5_bus 0 100
+R_load_diag v_diag 0 60
+
+* === Analysis ===
+.tran 1u 10m UIC
+
+.save V(vin_raw) V(vin_prot) V(v5_bus) V(v3_bus) V(v_diag)
+
+* Measurements
+.meas tran v_input_peak MAX V(vin_prot) FROM=0 TO=10m
+.meas tran v5_deviation MAX V(v5_bus) FROM=0 TO=10m
+.meas tran v5_min MIN V(v5_bus) FROM=0 TO=10m
+.meas tran v3_deviation MAX V(v3_bus) FROM=0 TO=10m
+.meas tran v3_min MIN V(v3_bus) FROM=0 TO=10m
+.meas tran vdiag_peak MAX V(v_diag) FROM=0 TO=10m
+.meas tran vdiag_min MIN V(v_diag) FROM=0 TO=10m
+
+.control
+run
+wrdata results/tb4_load_dump.csv V(vin_raw) V(vin_prot) V(v5_bus) V(v3_bus) V(v_diag)
+.endc
+
+.end

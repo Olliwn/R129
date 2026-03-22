@@ -1,0 +1,49 @@
+* 05_full_diag_channel.cir
+* nRF5430 Interface Board - Complete Bidirectional Diagnostic Channel
+* Combines car-side model + RX optocoupler + TX optocoupler + MCU interface
+*
+* RX: Car (12V blinks) -> 1k -> TLP521 (common-emitter) -> MCU GPIO (inverted 3.3V)
+* TX: MCU GPIO -> 330 Ohm -> TLP521 (emitter-follower) -> 2N2222 driver -> car pin to GND
+
+.title Complete Bidirectional Diagnostic Channel
+
+.include ../lib/tlp521_opto.lib
+.include ../lib/car_diag_channel.lib
+
+* === Power Rails ===
+V_logic vcc 0 DC 3.3
+
+* === Switched 12V bus (V_DIAG) for TX opto collector supply ===
+* In full board this comes from P-FET switch; here modeled as direct supply
+V_diag v_diag 0 DC 12.0
+
+* === Car Side: Diagnostic Channel ===
+V_blink blink_ctl 0 PULSE(0 5 0.5 1m 1m 0.4 0.8)
+X_car diag_pin car_gnd blink_ctl CAR_DIAG_CHANNEL VBAT=12.0 R_PULL=680
+V_car_gnd car_gnd 0 DC 0
+
+* === RX Path: Car -> MCU (Read blink codes) ===
+R_rx_limit diag_pin opto_rx_anode 1k
+X_opto_rx opto_rx_anode car_gnd mcu_rx_pin 0 TLP521 CTR=1.0
+R_pullup_rx vcc mcu_rx_pin 13k
+
+* === TX Path: MCU -> Car (Clear codes, emitter-follower topology) ===
+V_tx_gpio tx_gpio_out 0 DC 0
+R_tx_limit tx_gpio_out opto_tx_anode 330
+X_opto_tx opto_tx_anode 0 opto_tx_coll opto_tx_emit TLP521 CTR=1.0
+
+* Opto collector to V_DIAG through 1k (switched car-side supply)
+R_opto_tx_coll v_diag opto_tx_coll 1k
+
+* 2N2222 driver, base driven by opto emitter
+Q_tx_driver diag_pin opto_tx_emit car_gnd Q_2N2222_TX
+.model Q_2N2222_TX NPN(Is=1e-14 Bf=200 Vaf=100 Rb=10 Rc=1
++  Cjc=8p Cje=25p Tf=0.3n Tr=6n Ikf=0.3)
+R_tx_base_pd opto_tx_emit car_gnd 10k
+
+* === Measurement Points ===
+* V(diag_pin):    Car-side diagnostic voltage
+* V(mcu_rx_pin):  MCU RX input (inverted blink-code signal)
+* V(tx_gpio_out): MCU TX output (code-clear command)
+
+.end

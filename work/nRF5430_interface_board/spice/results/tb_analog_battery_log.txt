@@ -1,0 +1,40 @@
+
+Note: No compatibility mode selected!
+
+
+Circuit: TB5: Battery Voltage Analog Path Verification
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 201
+
+  Measurements for DC Analysis
+
+v_adc_at_9v         =  1.622789e+00
+v_adc_at_12v        =  2.163718e+00
+v_adc_at_14v4       =  2.596462e+00
+
+Doing analysis at TEMP = 27.000000 and TNOM = 27.000000
+
+Using SPARSE 1.3 as Direct Linear Solver
+
+No. of Data Rows : 201
+
+  Measurements for DC Analysis
+
+v_adc_at_9v         =  1.622789e+00
+v_adc_at_12v        =  2.163718e+00
+v_adc_at_14v4       =  2.596462e+00
+
+
+Total analysis time (seconds) = 0.001169
+
+Total elapsed time (seconds) = 0.005 
+
+Total DRAM available = 24576.000 MB.
+DRAM currently available =  123.141 MB.
+Maximum ngspice program size =   10.016 MB.
+Current ngspice program size =   10.016 MB.
+

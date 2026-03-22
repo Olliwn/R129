@@ -1,0 +1,69 @@
+* tb_static_glow.cir
+* TESTBENCH 8: Static Glow Diagnosis
+* Models the "static glow" condition observed on diagnostic pins 9 (ADS),
+* 11 (ATA), and 12 (IRCL) where the module holds the line at an
+* intermediate voltage instead of producing blink pulses.
+*
+* This testbench sweeps the car-side pin voltage from 0V to 12V and
+* checks what the MCU GPIO reads through the RX optocoupler.
+*
+* Purpose:
+*   - Determine the optocoupler's switching threshold
+*   - Identify whether "static glow" produces a defined logic state
+*   - Help decide if firmware needs analog threshold detection
+
+.title TB8: Static Glow Condition Characterization
+
+.include ../lib/tlp521_opto.lib
+.include ../lib/car_diag_channel.lib
+
+* === Power Rails ===
+V_logic vcc 0 DC 3.3
+
+* === Car Side: Static Glow Models ===
+* Three scenarios corresponding to observed field behavior:
+
+* Scenario A: Pin 9 (ADS) - "weak static glow" -> ~3-4V on the pin
+* Model as ECU output with high leakage / partial pull-down
+V_bat_a v_bat_a 0 DC 12.0
+R_pull_a v_bat_a diag_a 680
+R_leak_a diag_a 0 220
+
+* Scenario B: Pin 11 (ATA) - "medium static glow" -> ~6V on the pin
+V_bat_b v_bat_b 0 DC 12.0
+R_pull_b v_bat_b diag_b 680
+R_leak_b diag_b 0 680
+
+* Scenario C: Sweep test - variable voltage source for threshold detection
+V_sweep diag_c 0 DC 6.0
+
+* === RX Optocouplers (one per scenario) ===
+* Scenario A
+R_rx_a diag_a opto_a_a 1k
+X_opto_a opto_a_a 0 mcu_a 0 TLP521 CTR=1.0
+R_pull_mcu_a vcc mcu_a 13k
+
+* Scenario B
+R_rx_b diag_b opto_a_b 1k
+X_opto_b opto_a_b 0 mcu_b 0 TLP521 CTR=1.0
+R_pull_mcu_b vcc mcu_b 13k
+
+* Scenario C: Sweep
+R_rx_c diag_c opto_a_c 1k
+X_opto_c opto_a_c 0 mcu_c 0 TLP521 CTR=1.0
+R_pull_mcu_c vcc mcu_c 13k
+
+* === DC Sweep on Scenario C to find threshold ===
+.dc V_sweep 0 12 0.1
+
+.save V(diag_a) V(mcu_a) V(diag_b) V(mcu_b) V(diag_c) V(mcu_c)
+
+* Find the input voltage where MCU transitions (1.65V = logic threshold)
+.meas dc v_threshold WHEN V(mcu_c)=1.65
+
+.control
+run
+wrdata results/tb8_static_glow.csv V(diag_c) V(mcu_c)
+.endc
+
+.end

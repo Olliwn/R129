@@ -19,11 +19,12 @@
 - [x] **Digital Multimeter / Yleismittari** (MS8233B to keep in the car at all times)
 - [x] **Work Light / Työvalo**
 - [x] **Heat Shrink Tubing / Kutistesukkalajitelma** (Purchased from SP Elektroniikka)
-- [ ] **Multimeter + Oscilloscope Combo (Owon)** (Needs sourcing)
+- [x] **Multimeter + Oscilloscope Combo (Owon)** (Acquired ✓)
 - [ ] **Wire Strippers / Kuorintapihdit**
 - [ ] **Crimping Tool / Puristuspihdit** (For insulated/non-insulated automotive terminals)
 - [ ] **Soldering Iron & Solder / Kolvi ja tina**
 - [ ] **Automotive Test Light / Virtakynä** (12V)
+- [ ] **Trim Removal Tools / Verhoilun irrotustyökalut** (Plastic pry set for interior/cluster)
 
 ## Consumables & Workshop Supplies
 - [x] **Brake Cleaner / Jarrukliineri** (6x cans purchased)
@@ -34,5 +35,17 @@
 - [ ] **Nitrile Gloves / Nitriilikäsineet** (Heavy duty)
 - [ ] **Dielectric Grease / Sähkövaseliini** (For electrical connectors)
 - [ ] **Threadlocker / Kierrelukite** (Medium strength / Blue)
+- [ ] **Lithium Grease / Litiumrasva (Valkovaseliini)** (For wiper eccentric mechanism)
+- [ ] **Silicone Grease / Silikonirasva** (For rubber seals / Gummi Pflege alternative)
+
+## Fluids & Filters (Baseline Service & Diagnostics)
+- [ ] **Engine Oil / Moottoriöljy** (~8L of MB 229.5 spec, e.g., Mobil 1 0W-40 or Liqui Moly 5W-40)
+- [ ] **Oil Filter / Öljynsuodatin** (Mann/Mahle for M119)
+- [ ] **Coolant / Jäähdytinneste** (MB 325.0 spec, Glysantin G48 Blue-Green)
+- [ ] **Power Steering Fluid / Ohjaustehostinöljy** (MB 236.3 spec ATF)
+- [ ] **Hydraulic Fluid / Hydrauliikkaöljy** (1L Pentosin CHF 11S or equivalent MB 344.0 for ADS/SLS system)
+- [ ] **Windshield Washer Fluid / Lasinpesuneste** (Summer/Bug-removing mix)
+- [ ] **Assorted Fuses / Sulakelajitelma** (Standard automotive blade fuses + European ceramic/torpedo fuses if applicable)
+- [ ] **Instrument Cluster Bulbs / Mittariston polttimot** (W1.2W and W2W wedge base bulbs for ADS warning lamp)
 
 *Note: Update this list based on specific fastener discoveries during the first inspection.*

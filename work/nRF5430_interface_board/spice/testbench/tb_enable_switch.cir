@@ -1,0 +1,95 @@
+* tb_enable_switch.cir
+* TESTBENCH 9: Diagnostics Enable Switch
+* Verifies the P-FET high-side switch behavior:
+*   - V_DIAG OFF when DIAG_EN is LOW (idle mode)
+*   - V_DIAG ON (~12V) when DIAG_EN is HIGH
+*   - Turn-on and turn-off timing through the level shifter
+*   - Idle current draw is near zero on V_DIAG bus
+*
+* Sequence:
+*   0-50ms:    DIAG_EN LOW  (V_DIAG should be OFF)
+*   50-250ms:  DIAG_EN HIGH (V_DIAG should track V_PROT)
+*   250-400ms: DIAG_EN LOW  (V_DIAG should turn OFF)
+*
+* Pass criteria:
+*   - V_DIAG < 0.5V when DIAG_EN is LOW (after settling)
+*   - V_DIAG > 11V when DIAG_EN is HIGH (after settling)
+*   - Turn-on time (10% to 90% of 12V) < 10ms
+*   - Turn-off time (90% to 10% of 12V) < 50ms (RC discharge via load)
+*   - Idle load current < 1mA when DIAG_EN is LOW
+
+.title TB9: Diagnostics Enable Switch Verification
+
+.include ../lib/tvs_1_5ke18a.lib
+.include ../lib/power_supply.lib
+
+* === Input: Steady 12V (battery already present) ===
+V_bat vin_raw 0 DC 12.0
+
+* === Protection Stage ===
+R_fuse vin_raw vin_fused 50m
+D_rpol vin_fused vin_prot D_1N4007
+.model D_1N4007 D(Is=7.02e-9 N=1.45 Rs=0.033 Bv=1000 Ibv=5u
++  Cjo=26p Vj=0.7 M=0.333 Tt=5u)
+X_tvs vin_prot 0 TVS_1_5KE18A
+C_in vin_prot 0 100u IC=12
+
+* === Always-on regulation (MCU supply) ===
+X_buck vin_prot v5_bus 0 OKI78SR_5V
+C_5v v5_bus 0 100n
+X_ldo v5_bus v3_bus 0 LD1117V33
+C_3v3 v3_bus 0 100n
+R_load_3v3 v3_bus 0 55
+R_load_5v v5_bus 0 100
+
+* === Diagnostics Enable Switch (Device Under Test) ===
+.model PFET_SI2301 PMOS(Vto=-1.2 Kp=30 Rd=0.11 Rs=0.05)
+M_en v_diag gate_node vin_prot vin_prot PFET_SI2301
+R_gp vin_prot gate_node 100k
+R_gate gate_node gate_drv 10k
+Q_lvl gate_drv en_base 0 Q_LVL_NPN
+.model Q_LVL_NPN NPN(Is=1e-14 Bf=200 Vaf=100)
+R_en en_base diag_en_gpio 10k
+
+* Enable control: ON from 50ms to 250ms, then OFF
+V_diag_en diag_en_gpio 0 PULSE(0 3.3 50m 1m 1m 200m 400m)
+
+* Diagnostics bus capacitor + load
+C_diag v_diag 0 100u IC=0
+R_load_diag v_diag 0 60
+
+* Sense resistor for current measurement on V_DIAG supply path
+* (current through M_en drain is V_DIAG load current)
+
+* === Analysis ===
+.tran 10u 400m UIC
+
+.save V(vin_prot) V(v_diag) V(gate_node) V(diag_en_gpio)
++ V(v5_bus) V(v3_bus)
++ @M_en[id]
+
+* V_DIAG OFF-state (before enable)
+.meas tran vdiag_off AVG V(v_diag) FROM=20m TO=45m
+
+* V_DIAG ON-state (fully enabled)
+.meas tran vdiag_on AVG V(v_diag) FROM=150m TO=240m
+
+* V_DIAG after disable
+.meas tran vdiag_disabled AVG V(v_diag) FROM=350m TO=395m
+
+* Turn-on time: 10% to 90% of final V_DIAG
+.meas tran t_turnon TRIG V(v_diag) VAL=1.2 RISE=1 TARG V(v_diag) VAL=10.8 RISE=1
+
+* Turn-off time: 90% to 10% of V_DIAG
+.meas tran t_turnoff TRIG V(v_diag) VAL=10.8 FALL=1 TARG V(v_diag) VAL=1.2 FALL=1
+
+* Always-on rails should remain stable throughout
+.meas tran v5_stable AVG V(v5_bus) FROM=20m TO=395m
+.meas tran v3_stable AVG V(v3_bus) FROM=20m TO=395m
+
+.control
+run
+wrdata results/tb9_enable_switch.csv V(vin_prot) V(v_diag) V(gate_node) V(diag_en_gpio) V(v5_bus) V(v3_bus)
+.endc
+
+.end

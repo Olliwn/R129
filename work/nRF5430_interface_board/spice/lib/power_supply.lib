@@ -1,0 +1,76 @@
+* Power Supply Behavioral Models
+* For the nRF5430 Interface Board simulation
+
+* ============================================================
+* OKI-78SR-5/1.5-W36-C  Murata 5V/1.5A Buck Converter Module
+* ============================================================
+* Behavioral model: voltage regulator with dropout, output impedance,
+* and current limiting. No switching noise modeled (potted module).
+*
+* Datasheet:
+*   Vin: 7V - 36V
+*   Vout: 5.0V +/- 2%
+*   Iout(max): 1.5A
+*   Dropout: ~2V (Vin_min = 7V for 5V out)
+*   Quiescent current: ~3mA (no load)
+*   Line regulation: 0.5% (7-36V)
+*   Load regulation: 1% (0-1.5A)
+*
+* Pins: VIN  VOUT  GND
+
+.subckt OKI78SR_5V VIN VOUT GND
+
+* Internal regulated node (B-source is a voltage source with zero impedance)
+B_reg reg_int GND V = {
++  MIN(
++    5.0,
++    MAX(0, V(VIN,GND) - 2.0)
++  )
++ }
+
+* Output impedance (load regulation ~50mV over 1.5A -> ~33mOhm)
+R_out reg_int VOUT 33m
+
+* Output capacitance (module internal + recommended external)
+C_out VOUT GND 22u IC=0
+
+* Quiescent current draw from input
+R_quiescent VIN GND 4k
+
+.ends OKI78SR_5V
+
+* ============================================================
+* LD1117V33  3.3V LDO Linear Regulator
+* ============================================================
+* Behavioral model: linear regulator with dropout and PSRR.
+*
+* Datasheet:
+*   Vin: 4.75V - 15V (abs max 20V)
+*   Vout: 3.3V +/- 1%
+*   Iout(max): 800mA
+*   Dropout: 1.1V typ at 800mA
+*   Quiescent current: 5mA typ
+*   PSRR: >60dB at 120Hz
+*
+* Pins: VIN  VOUT  GND
+
+.subckt LD1117V33 VIN VOUT GND
+
+* Internal regulated node
+B_ldo ldo_int GND V = {
++  MIN(
++    3.3,
++    MAX(0, V(VIN,GND) - 1.1)
++  )
++ }
+
+* Output impedance
+R_out ldo_int VOUT 20m
+
+* Output capacitance (10uF tantalum recommended)
+C_out VOUT GND 10u IC=0
+
+* Quiescent current
+R_quiescent VIN GND 1k
+
+.ends LD1117V33

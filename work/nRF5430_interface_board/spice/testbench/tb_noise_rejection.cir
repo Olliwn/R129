@@ -1,0 +1,78 @@
+* tb_noise_rejection.cir
+* TESTBENCH 7: Alternator Noise Rejection
+* Verifies that alternator ripple on the 12V supply is adequately
+* attenuated through both the power supply and analog signal paths.
+*
+* Battery monitor divider now sources from V_DIAG (switched bus).
+*
+* Pass criteria:
+*   - 3.3V rail ripple < 20mVpp with 200mVpp input ripple
+*   - Analog path (battery monitor) output ripple < 5mVpp
+*   - V_DIAG ripple similar to V_PROT (P-FET passthrough)
+*   - No resonance or amplification at any frequency
+
+.title TB7: Alternator Noise Rejection Verification (with V_DIAG)
+
+.include ../lib/tvs_1_5ke18a.lib
+.include ../lib/power_supply.lib
+
+* === Input: 12V + alternator ripple ===
+* 200mVpp ripple at ~2kHz (typical alternator at ~2000 RPM)
+V_bat vin_raw 0 DC 12 AC 0.1 SIN(12 0.1 2k)
+
+* === Power Supply Chain ===
+R_fuse vin_raw vin_fused 50m
+D_rpol vin_fused vin_prot D_1N4007
+.model D_1N4007 D(Is=7.02e-9 N=1.45 Rs=0.033 Bv=1000 Ibv=5u
++  Cjo=26p Vj=0.7 M=0.333 Tt=5u)
+X_tvs vin_prot 0 TVS_1_5KE18A
+C_in vin_prot 0 100u IC=12
+X_buck vin_prot v5_bus 0 OKI78SR_5V
+C_5v v5_bus 0 100n
+X_ldo v5_bus v3_bus 0 LD1117V33
+C_3v3 v3_bus 0 100n
+R_load_3v3 v3_bus 0 55
+R_load_5v v5_bus 0 100
+
+* === Diagnostics Enable Switch (enabled during test) ===
+.model PFET_SI2301 PMOS(Vto=-1.2 Kp=30 Rd=0.11 Rs=0.05)
+M_en v_diag gate_node vin_prot vin_prot PFET_SI2301
+R_gp vin_prot gate_node 100k
+R_gate gate_node gate_drv 10k
+Q_lvl gate_drv en_base 0 Q_LVL_NPN
+.model Q_LVL_NPN NPN(Is=1e-14 Bf=200 Vaf=100)
+R_en en_base diag_en_gpio 10k
+V_diag_en diag_en_gpio 0 DC 3.3
+C_diag v_diag 0 100u IC=12
+R_load_diag v_diag 0 60
+
+* === Analog Path: Battery Monitor (divider from V_DIAG) ===
+.model D_1N4148 D(Is=2.52e-9 N=1.752 Rs=0.568 Bv=100 Ibv=100u
++  Cjo=4p Vj=0.7 M=0.4 Tt=6n)
+
+R_div_high v_diag bat_div 10k
+R_div_low bat_div 0 2.2k
+D_clamp_hi bat_div v3_bus D_1N4148
+D_clamp_lo 0 bat_div D_1N4148
+B_buf adc_raw 0 V = { V(bat_div) }
+R_buf_out adc_raw adc_filt 1k
+C_filt adc_filt 0 100n
+R_adc adc_filt 0 10Meg
+
+* === Transient Analysis ===
+.tran 1u 20m UIC
+
+.save V(vin_prot) V(v5_bus) V(v3_bus) V(v_diag) V(adc_filt)
+
+* Measure peak-to-peak ripple on each rail (after settling)
+.meas tran v3_ripple_pp PP V(v3_bus) FROM=10m TO=20m
+.meas tran v5_ripple_pp PP V(v5_bus) FROM=10m TO=20m
+.meas tran vdiag_ripple_pp PP V(v_diag) FROM=10m TO=20m
+.meas tran v_adc_ripple_pp PP V(adc_filt) FROM=10m TO=20m
+
+.control
+run
+wrdata results/tb7_noise_rejection.csv V(vin_prot) V(v5_bus) V(v3_bus) V(v_diag) V(adc_filt)
+.endc
+
+.end

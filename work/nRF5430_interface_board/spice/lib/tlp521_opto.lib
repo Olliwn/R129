@@ -1,0 +1,38 @@
+* TLP521 Generic Optocoupler SPICE Model
+* Based on Toshiba TLP521-4 datasheet parameters:
+*   Vf(typ) = 1.15V, If(max) = 50mA
+*   CTR = 50-600% at If=5mA, Vce=5V (typ ~100%)
+*   tr = 4us, tf = 3us (typ)
+*   Vceo = 55V, Ic(max) = 50mA
+*
+* Architecture: IR LED -> current sense -> RC delay -> base drive -> NPN phototransistor
+* The base current is scaled so that Ic = CTR * If when the NPN is in active region.
+* In saturation the NPN naturally limits Vce to ~0.2V.
+*
+* Pins: A_anode  K_cathode  C_collector  E_emitter
+
+.subckt TLP521 A K C E params: CTR=1.0
+
+* --- Input Stage: IR LED ---
+D_led A K_sense D_IR_LED
+.model D_IR_LED D(Is=1e-14 N=1.8 Rs=5 Bv=5 Ibv=100u Cjo=15p)
+
+* Zero-volt source in series with LED cathode to measure forward current
+V_sense K_sense K 0
+
+* --- Coupling Stage: Optical transfer with finite delay ---
+* Convert LED current to a proportional voltage for the delay network
+B_iled ctrl_raw 0 V = { I(V_sense) }
+* RC delay: tau = 10k * 200p = 2us (models tr=4us, tf=3us)
+R_delay ctrl_raw ctrl_filt 10k
+C_delay ctrl_filt 0 200p IC=0
+
+* --- Output Stage: NPN Phototransistor ---
+* Base current = CTR * If / Bf so that Ic = Bf * Ib = CTR * If
+* V(ctrl_filt) carries the LED current value (in amps)
+G_base 0 B_int VALUE = { V(ctrl_filt) * CTR / 200 }
+Q_photo C B_int E Q_PHOTO_NPN
+.model Q_PHOTO_NPN NPN(Is=1e-12 Bf=200 Rb=100 Rc=10
++  Cjc=5p Cje=10p Tf=3n Tr=50n Vaf=100 Ikf=50m)
+
+.ends TLP521

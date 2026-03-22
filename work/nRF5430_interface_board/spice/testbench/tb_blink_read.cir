@@ -1,0 +1,61 @@
+* tb_blink_read.cir
+* TESTBENCH 1: Blink Code Read
+* Verifies that 3 blink pulses from the car side are correctly received
+* as 3 inverted 3.3V pulses at the MCU GPIO input.
+*
+* Pass criteria:
+*   - MCU sees 3 distinct HIGH pulses (>2.5V) during blink events
+*   - MCU reads LOW (<0.5V) when car line is idle at 12V
+*   - Rise/fall time through optocoupler < 100us
+*   - Pulse timing preserved within 5% of source
+
+.title TB1: Blink Code Read Verification
+
+.include ../lib/tlp521_opto.lib
+.include ../lib/car_diag_channel.lib
+
+* === Power Rails ===
+V_logic vcc 0 DC 3.3
+
+* === Car Side ===
+* 3 blinks: each 0.4s ON / 0.4s OFF, starting at t=0.5s
+* Total blink sequence: 0.5s to 2.9s, then idle
+V_blink blink_ctl 0 PULSE(0 5 0.5 1m 1m 0.4 0.8)
+
+X_car diag_pin car_gnd blink_ctl CAR_DIAG_CHANNEL VBAT=12.0 R_PULL=680
+V_car_gnd car_gnd 0 DC 0
+
+* === RX Optocoupler ===
+R_rx diag_pin opto_a 1k
+X_opto opto_a car_gnd mcu_gpio 0 TLP521 CTR=1.0
+R_pullup vcc mcu_gpio 13k
+
+* === Analysis ===
+.tran 100u 5s UIC
+
+* Save key waveforms
+.save V(diag_pin) V(mcu_gpio) V(blink_ctl)
+
+* Measurements
+.meas tran v_mcu_idle AVG V(mcu_gpio) FROM=0 TO=0.4
+.meas tran v_mcu_blink1_peak MAX V(mcu_gpio) FROM=0.5 TO=0.9
+.meas tran v_mcu_blink2_peak MAX V(mcu_gpio) FROM=1.3 TO=1.7
+.meas tran v_mcu_blink3_peak MAX V(mcu_gpio) FROM=2.1 TO=2.5
+
+* Rise time of first blink (10% to 90% of 3.3V)
+.meas tran t_rise TRIG V(mcu_gpio) VAL=0.33 RISE=1 TARG V(mcu_gpio) VAL=2.97 RISE=1
+* Fall time after first blink
+.meas tran t_fall TRIG V(mcu_gpio) VAL=2.97 FALL=1 TARG V(mcu_gpio) VAL=0.33 FALL=1
+
+* Write output
+.control
+run
+set hcopypscolor = 1
+set color0 = white
+set color1 = black
+hardcopy results/tb1_blink_read.ps V(diag_pin) V(mcu_gpio)+3.5
+wrdata results/tb1_blink_read.csv V(diag_pin) V(mcu_gpio)
+print V(diag_pin) V(mcu_gpio)
+.endc
+
+.end

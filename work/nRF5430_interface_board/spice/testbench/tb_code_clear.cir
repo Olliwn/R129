@@ -1,0 +1,69 @@
+* tb_code_clear.cir
+* TESTBENCH 2: Code Clear / Write Path
+* Verifies that the MCU can pull the car's diagnostic pin to GND
+* for 8 seconds to execute a fault-code clear command.
+*
+* TX opto collector pull-up now sources from V_DIAG (switched 12V bus).
+* V_DIAG is modeled as an ideal 12V source (enable switch verified in TB3/TB9).
+*
+* The TX optocoupler operates in emitter-follower mode:
+*   - Collector pulled to V_DIAG through 1k
+*   - Emitter drives the base of a 2N2222 NPN through R_base_pd to GND
+*   - This gives non-inverting behavior: GPIO HIGH -> driver ON -> pin LOW
+*
+* Pass criteria:
+*   - Car diagnostic pin drops to <0.5V within 1ms of GPIO going HIGH
+*   - Pin stays low for full 8s duration
+*   - Pin returns to 12V within 10ms after GPIO goes LOW
+
+.title TB2: Code Clear Write Path Verification
+
+.include ../lib/tlp521_opto.lib
+
+* === Power Rails ===
+V_logic vcc 0 DC 3.3
+
+* === Car Side: ECU pull-up only (no blinking) ===
+V_bat v_bat 0 DC 12.0
+R_pullup_car v_bat diag_pin 680
+C_cable diag_pin 0 500p
+
+* === Switched 12V bus for TX opto collector ===
+V_diag v_diag 0 DC 12.0
+
+* === MCU GPIO: 8-second clear pulse starting at t=0.5s ===
+V_gpio gpio_out 0 PULSE(0 3.3 0.5 1m 1m 8.0 20)
+
+* === TX Optocoupler (emitter-follower mode for non-inverting drive) ===
+R_tx gpio_out opto_a_tx 330
+X_opto_tx opto_a_tx 0 opto_coll opto_emit TLP521 CTR=1.0
+
+* Collector pulled to V_DIAG through 1k (switched car-side supply)
+R_opto_coll v_diag opto_coll 1k
+
+* Emitter drives Q_driver base directly
+* R_base_pd ensures driver is OFF when opto is OFF
+Q_driver diag_pin opto_emit 0 Q_2N2222
+.model Q_2N2222 NPN(Is=1e-14 Bf=200 Vaf=100 Rb=10 Rc=1
++  Cjc=8p Cje=25p Tf=0.3n Tr=6n Ikf=0.3)
+R_base_pd opto_emit 0 10k
+
+* === Analysis ===
+.tran 100u 12s UIC
+
+.save V(diag_pin) V(gpio_out) V(opto_emit) V(opto_coll)
+
+* Measurements
+.meas tran v_diag_idle AVG V(diag_pin) FROM=0.1 TO=0.4
+.meas tran v_diag_pulled MIN V(diag_pin) FROM=1.0 TO=8.0
+.meas tran v_diag_released AVG V(diag_pin) FROM=9.5 TO=10.0
+
+* Time for diagnostic pin to fall below 0.5V
+.meas tran t_pull_down TRIG V(gpio_out) VAL=1.65 RISE=1 TARG V(diag_pin) VAL=6.0 FALL=1
+
+.control
+run
+wrdata results/tb2_code_clear.csv V(diag_pin) V(gpio_out) V(opto_emit)
+.endc
+
+.end

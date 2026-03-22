@@ -1,0 +1,83 @@
+* 01_power_supply.cir
+* nRF5430 Interface Board - Power Supply Chain
+* 12V automotive input -> protection -> 5V buck -> 3.3V LDO
+* V_PROT splits into:
+*   - Always-on: buck -> LDO -> MCU (3.3V)
+*   - Switched V_DIAG: P-FET gated 12V bus for diagnostics circuits
+*
+* Protection: 1N4007 reverse-polarity + 1.5KE18A TVS
+* Regulation: OKI-78SR-5 (12V->5V) + LD1117V33 (5V->3.3V)
+* Enable: Si2301 P-FET + NPN level shifter controlled by MCU DIAG_EN GPIO
+
+.title Power Supply Subsystem
+
+.include ../lib/tvs_1_5ke18a.lib
+.include ../lib/power_supply.lib
+
+* === Input: Automotive 12V ===
+V_bat vin_raw 0 DC 12.0
+
+* === Stage 1: Input Protection ===
+
+* Inline fuse (2A): modeled as small resistance
+R_fuse vin_raw vin_fused 50m
+
+* Reverse polarity protection: 1N4007 in series
+D_rpol vin_fused vin_prot D_1N4007
+.model D_1N4007 D(Is=7.02e-9 N=1.45 Rs=0.033 Bv=1000 Ibv=5u
++  Cjo=26p Vj=0.7 M=0.333 Tt=5u)
+
+* TVS clamping diode: 1.5KE18A across the rail after reverse-polarity diode
+X_tvs vin_prot 0 TVS_1_5KE18A
+
+* Bulk input capacitor
+C_in vin_prot 0 100u IC=12
+
+* === Stage 2: 5V Buck Converter (OKI-78SR) — always on ===
+X_buck vin_prot v5_bus 0 OKI78SR_5V
+
+* Decoupling on 5V bus
+C_5v_decouple v5_bus 0 100n
+
+* === Stage 3: 3.3V LDO (LD1117V33) — always on ===
+X_ldo v5_bus v3_bus 0 LD1117V33
+
+* Decoupling on 3.3V bus
+C_3v3_decouple v3_bus 0 100n
+
+* === Stage 4: Diagnostics Enable Switch ===
+* P-channel MOSFET high-side switch: V_PROT -> V_DIAG (switched 12V bus)
+* Gate driven by NPN level shifter from MCU GPIO DIAG_EN (3.3V logic)
+*
+* DIAG_EN HIGH -> Q_lvl ON -> gate pulled to GND -> P-FET ON -> V_DIAG = V_PROT
+* DIAG_EN LOW  -> Q_lvl OFF -> gate pulled to V_PROT via R_gp -> P-FET OFF -> V_DIAG = 0V
+
+* Si2301 P-FET (Vgs_th ~ -1.2V, Rds_on ~ 110mOhm)
+.model PFET_SI2301 PMOS(Vto=-1.2 Kp=30 Rd=0.11 Rs=0.05)
+M_en v_diag gate_node vin_prot vin_prot PFET_SI2301
+
+* Gate pull-up to V_PROT (P-FET OFF when gate = V_PROT)
+R_gp vin_prot gate_node 100k
+
+* Gate resistor for switching speed control
+R_gate gate_node gate_drv 10k
+
+* NPN level shifter: pulls gate toward GND when DIAG_EN is HIGH
+Q_lvl gate_drv en_base 0 Q_LVL_NPN
+.model Q_LVL_NPN NPN(Is=1e-14 Bf=200 Vaf=100)
+
+* Base drive resistor from MCU GPIO
+R_en en_base diag_en_gpio 10k
+
+* MCU DIAG_EN control signal (pulse to simulate enable at t=0.1s)
+V_diag_en diag_en_gpio 0 PULSE(0 3.3 0.1 1m 1m 10 20)
+
+* Bulk capacitor on V_DIAG bus
+C_diag v_diag 0 100u IC=0
+
+* === Load Models (simulation only) ===
+R_load_3v3 v3_bus 0 55
+R_load_5v v5_bus 0 100
+R_load_diag v_diag 0 60
+
+.end
