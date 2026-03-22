@@ -368,7 +368,9 @@
 | 2026-03-18 | Audio | Mercedes Special BE2210 Radio (w/ AUX) | Online Retailer | 434.97 | Purchased |
 | 2026-03-20 | Wheels/Tires | Michelin PS2 275/40R17 (Rear x2) | Online Retailer | 981.99 | Purchased |
 | 2026-03-20 | Wheels/Tires | Michelin PS5 245/45R17 (Front x2) | Online Retailer | 368.37 | Purchased |
-| **Total** | | **Year-to-Date Spend** | | **~€1,986.33** | |
+| 2026-03-22 | Drivetrain | Corteco Engine Mounts x2 (80001913) | Autodoc | 90.98 | Purchased |
+| 2026-03-22 | Drivetrain | Corteco Trans Mount (21652116) | Autodoc | TBD | Purchased |
+| **Total** | | **Year-to-Date Spend** | | **~€2,077.31 + TBD** | |
 
 *(Note: Estimated prices used for Motonet local purchases; will update with exact receipts. Electronics/hobby add-ons like Raspberry Pi, Owon oscilloscope, or custom displays are excluded from this vehicle maintenance budget.)*
 

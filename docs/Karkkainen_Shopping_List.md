@@ -77,6 +77,10 @@
 ## Specific Body / Trim Parts
 - [ ] **Antenna Grommet / Antennin kumitiiviste** (OEM Part: `A 129 827 02 98` [Upper] and `A 129 827 03 98` [Lower]. *Crucial to prevent water leaking onto PSE pump in the trunk!*)
 
+## Engine & Drivetrain Mounts
+- [x] **Engine Mounts (x2) / Moottorin tuki (Hydrolaakeri)** (Corteco 80001913 / OE: `A 124 240 26 17` purchased from Autodoc)
+- [x] **Transmission Mount / Vaihteiston tuki** (Corteco 21652116 / OE: `A 124 240 06 18` purchased from Autodoc)
+
 ## Suspension / ADS Parts (Pending Diagnostic)
 - [ ] **Front Accumulator Spheres (x2) / Kaasupallot** (OEM Part: `A 129 320 01 15`. Buy Corteco brand. *Note: Replace in pairs. Front Right is confirmed blown/hydro-locked based on manual test.*)
 
