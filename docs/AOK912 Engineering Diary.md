@@ -352,9 +352,11 @@
 | 2026-03-22 | Fluids | Febi ATF MB 236.3 Power Steering (1L) | Motonet | ~15.00 | Purchased |
 | 2026-03-22 | Fluids | Coolant (Motox G11) + Distilled Water | Motonet | ~35.00 | Purchased |
 | 2026-03 | Body | Ceramic Torpedo Fuses | Motonet | ~10.00 | Purchased |
-| **Total** | | **Year-to-Date Spend** | | **~€201.00** | |
+| 2026-03 | Audio | New Radio Head Unit | TBD | TBD | Purchased |
+| 2026-03 | Wheels/Tires | New Summer Tires | TBD | TBD | Purchased |
+| **Total** | | **Year-to-Date Spend** | | **~€201.00 + TBD** | |
 
-*(Note: Estimated prices used for Motonet local purchases; will update with exact receipts if provided.)*
+*(Note: Estimated prices used for Motonet local purchases; will update with exact receipts. Electronics/hobby add-ons like Raspberry Pi, Owon oscilloscope, or custom displays are excluded from this vehicle maintenance budget.)*
 
 ## **🛠️ Tool Acquisition & Inventory**
 
