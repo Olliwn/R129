@@ -335,6 +335,27 @@
 * Suspension Refresh (LCA, Links, Bushings) → Task #4
 * ADS Diagnostics → Task #4 / [ADS Blink-Code Reader](../work/ads_blink_reader/README.md)
 
+## **💰 Budget & Parts Cost Tracking (2026)**
+
+*Target: Keep total parts and service costs (excluding tools/equipment) near €5,000 for the 2026 restoration phase.*
+
+| Date | Category | Item | Supplier | Cost (€) | Status |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| 2026-03-22 | Filters | MANN Engine Air Filters (C 3388) x2 | Autodoc | 34.00 | Purchased |
+| 2026-03-22 | Filters | MANN Cabin Filter (CU 5041) | Autodoc | 14.00 | Purchased |
+| 2026-03-22 | Filters | MANN Oil Filter (H 829/1 x) | Autodoc | 11.00 | Purchased |
+| 2026-03-22 | Filters | MANN Power Steering Filter (H 85) | Autodoc | 6.00 | Purchased |
+| 2026-03-22 | Filters | MANN Fuel Filter (WK 830/3) | Autodoc | 22.00 | Purchased |
+| 2026-03-22 | Ignition | NGK Spark Plugs BP5ES x8 | Autodoc | 24.00 | Purchased |
+| 2026-03-22 | Fluids | ATE TYP200 DOT4 Brake Fluid (1L) | Autodoc | 15.00 | Purchased |
+| 2026-03-22 | Fluids | Febi ZH-M Hydraulic Fluid (1L) | Motonet | ~15.00 | Purchased |
+| 2026-03-22 | Fluids | Febi ATF MB 236.3 Power Steering (1L) | Motonet | ~15.00 | Purchased |
+| 2026-03-22 | Fluids | Coolant (Motox G11) + Distilled Water | Motonet | ~35.00 | Purchased |
+| 2026-03 | Body | Ceramic Torpedo Fuses | Motonet | ~10.00 | Purchased |
+| **Total** | | **Year-to-Date Spend** | | **~€201.00** | |
+
+*(Note: Estimated prices used for Motonet local purchases; will update with exact receipts if provided.)*
+
 ## **🛠️ Tool Acquisition & Inventory**
 
 *Transitioning from basic 1970s VW Beetle tools to a metric, precision toolset required for the M119 V8 and complex R129 chassis mechanics. Focus on high-quality, B2B-grade European brands to prevent rounding off 34-year-old fasteners.*
