@@ -221,7 +221,11 @@
   * MB 325.0 Spec Coolant (Glysantin G48)
 * **Sourcing:** MB-osat (primary source), Autodoc.fi, or local Kärkkäinen/Motonet for fluids.
 
-### **7. Baseline Service — Unknown History (Spring 2026)**
+### **8. Hood Insulation Pad Replacement**
+* **Symptom:** The original hood pad has been completely removed by a previous owner, leaving behind a mess of hardened, baked-on factory adhesive. This risks heat damage to the exterior aluminum hood paint and increases engine noise.
+* **Action Item:** Safely dissolve and remove the old adhesive without scratching the aluminum, then install the new OE pad. *(See project: [Hood Pad Replacement](../work/hood_pad_replacement/README.md))*
+
+### **9. Baseline Service — Unknown History (Spring 2026)**
 
 *No written service history exists for this vehicle. Assume all consumables and wear items are overdue. This checklist establishes a known-good baseline for reliability and longevity. Items already tracked in detail elsewhere are cross-referenced, not duplicated. Full working document with detailed instructions: [work/baseline_service/README.md](../work/baseline_service/README.md)*
 

@@ -39,6 +39,9 @@
 - [x] **Brake Cleaner / Jarrukliineri** (6x cans purchased)
 - [x] **Penetrating Oil / Irrotusöljy** (WD-40 purchased)
 - [x] **Wet/Dry Shop Vacuum / Märkä-kuivaimuri** (Kärcher WD3 purchased)
+- [ ] **Adhesive Remover / Liimanpoistoaine** (e.g. 3M, Goo Gone, or citrus-solvent for removing old hood pad glue)
+- [ ] **Plastic Scrapers / Muoviset raapat** (Do not use metal on the aluminum hood)
+- [ ] **Large Plastic Drop Cloths / Suojamuovit** (To cover the entire M119 engine during hood glue removal)
 - [ ] **Touch-up Paint Pen / Paikkamaalikynä** (Check color code from the radiator support plate, typically a 3-digit number like 199 for Blauschwarz, need base coat + clear coat)
 - [ ] **Iron Remover / Raudanpoisto**
 - [x] **Microfiber Cloths / Mikroliinat** (8 pcs purchased)
