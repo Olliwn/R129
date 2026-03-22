@@ -9,8 +9,8 @@
 - [x] **Floor Jack / Hallitunkki** (Minimum 2-ton capacity, low-profile recommended for the R129) - Acquired (>2.5t low-profile)
 - [ ] **Jack Stands / Autopukit** (2x or 4x, minimum 3000kg/3-ton capacity for safety margin, pin-style or heavy ratchet)
 - [ ] **Rubber Jack Pads / Nostotyynyt** (To protect the R129's plastic underbody jack points)
-- [ ] **Breaker Bar / Vääntövarsi** (1/2" drive, long handle for tough suspension/subframe bolts)
-- [ ] **Torque Wrench / Momenttiavain** (e.g., 20-110Nm and 40-210Nm ranges for engine and wheel lugs)
+- [ ] **Breaker Bar / Nivelväännin** (1/2" drive. **Buy high quality (e.g., Bahco or Wera)**. Do not buy cheap/no-name brands, as the 1/2" square drive will shear off when fighting 35-year-old seized R129 suspension bolts.)
+- [x] **Torque Wrench / Momenttiavain** (e.g., 20-110Nm and 40-210Nm ranges for engine and wheel lugs)
 - [ ] **Oil Filter Wrench / Öljynsuodatinavain** (Sized for M119 filter housing cap)
 - [ ] **Fluid Syringe / Nesteimuri** (For extracting ZH-M hydraulic fluid or power steering fluid)
 - [ ] **Pry Bar Set / Sorkkarauta / Vääntörauta** (For testing control arms and engine mounts)
@@ -22,9 +22,9 @@
 - [x] **Work Light / Työvalo**
 - [x] **Heat Shrink Tubing / Kutistesukkalajitelma** (Purchased from SP Elektroniikka)
 - [x] **Multimeter + Oscilloscope Combo (Owon)** (Acquired ✓)
-- [ ] **Wire Strippers / Kuorintapihdit**
-- [ ] **Crimping Tool / Puristuspihdit** (For insulated/non-insulated automotive terminals)
-- [ ] **Soldering Iron & Solder / Kolvi ja tina**
+- [x] **Wire Strippers / Kuorintapihdit**
+- [x] **Crimping Tool / Puristuspihdit** (For insulated/non-insulated automotive terminals)
+- [x] **Soldering Iron & Solder / Kolvi ja tina**
 - [ ] **Automotive Test Light / Virtakynä** (12V)
 - [ ] **Trim Removal Tools / Verhoilun irrotustyökalut** (Plastic pry set for interior/cluster)
 
@@ -35,7 +35,7 @@
 - [ ] **Touch-up Paint Pen / Paikkamaalikynä** (Check color code from the radiator support plate, typically a 3-digit number like 199 for Blauschwarz, need base coat + clear coat)
 - [ ] **Iron Remover / Raudanpoisto**
 - [ ] **Microfiber Cloths / Mikroliinat**
-- [ ] **Shop Towels / Teollisuuspyyhe** (Heavy-duty paper rolls)
+- [x] **Shop Towels / Teollisuuspyyhe** (Heavy-duty paper rolls)
 - [ ] **Nitrile Gloves / Nitriilikäsineet** (Heavy duty)
 - [ ] **Dielectric Grease / Sähkövaseliini** (For electrical connectors)
 - [ ] **Threadlocker / Kierrelukite** (Medium strength / Blue)
