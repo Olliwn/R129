@@ -11,6 +11,7 @@
 - [x] **Jack Stands / Autopukit** (Bahco BH33000 3T x4 purchased)
 - [x] **Rubber Jack Pads / Nostotyynyt** (100mm x4 purchased)
 - [x] **Breaker Bar / Nivelväännin** (MTX Tools Basic 1/2" 600mm purchased)
+- [ ] **Wheel Chocks / Pyöräkiilat** (Essential safety item to prevent rolling, 2x needed)
 - [x] **Torque Wrench / Momenttiavain** (e.g., 20-110Nm and 40-210Nm ranges for engine and wheel lugs)
 - [x] **Oil Filter Wrench / Öljynsuodatinavain** (Bahco BE6307614F 74mm/14-flute purchased)
 - [x] **Fluid Syringe / Nesteimuri** (MTX 500ml extractor pump purchased)
