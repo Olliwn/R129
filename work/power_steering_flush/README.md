@@ -8,7 +8,7 @@ This project covers the "Turkey Baster" / syringe method of flushing the power s
 *Note for ADS cars:* The M119 in an ADS-equipped car uses a "Tandem Pump." The front half of the pump is for the power steering (uses MB 236.3 ATF, stored in the metal canister on the pump). The rear half of the pump is for the ADS/SLS suspension (uses ZH-M fluid, stored in a separate reservoir). **This guide is ONLY for the front Power Steering circuit.**
 
 ## Parts & Tools Needed
-* **Fluid:** 1-2 Liters of MB 236.3 Spec Fluid (Febi 08972 purchased).
+* **Fluid:** 2 Liters of MB 236.3 Spec Fluid (Febi 08972). *(Note: You currently have 1L. You will need a second liter to perform a complete dilution flush).*
 * **Filter:** Power Steering Filter Element (OE Part No. `A 000 466 21 04` or equivalent Mann/Mahle).
 * **Tools:**
   * MTX 500ml Fluid Syringe / Extractor (purchased).

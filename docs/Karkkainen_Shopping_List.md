@@ -59,7 +59,7 @@
 - [ ] **Oil Filter / Öljynsuodatin** (Mann/Mahle for M119)
 - [ ] **Power Steering Filter** (Internal paper filter, OE `A 000 466 21 04` or equivalent)
 - [x] **Coolant / Jäähdytinneste** (Motox Classic G11 Blue 10L + 10L Distilled Water purchased)
-- [x] **Power Steering Fluid / Ohjaustehostinöljy** (Febi 08972 MB 236.3 spec ATF purchased)
+- [ ] **Power Steering Fluid / Ohjaustehostinöljy (Additional)** (Need 1 more liter of Febi 08972 MB 236.3 spec ATF for the dilution flush. 1L already purchased)
 - [x] **Hydraulic Fluid / Hydrauliikkaöljy (ADS & Soft Top)** (Febi 02615 MB 343.0 / ZH-M purchased - *Confirmed: ZH-M is the correct fluid for both the R129 soft top AND the early ADS/SLS suspension system!*)
 - [ ] **Windshield Washer Fluid / Lasinpesuneste** (Summer/Bug-removing mix)
 - [x] **Assorted Fuses / Sulakelajitelma** (Dunlop blades + torpedo set purchased)
