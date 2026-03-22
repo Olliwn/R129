@@ -6,7 +6,7 @@
 - [x] **Socket / Wrench Set / Hylsysarja** (Bahco S910 purchased)
 - [x] **Torx Socket Set / Torx-hylsysarja** (Bondhus torx set purchased)
 - [x] **Pliers / Pihdit** (3x Knipex: 87, 70, 26 purchased)
-- [ ] **Floor Jack / Hallitunkki** (Minimum 2-ton capacity, low-profile recommended for the R129)
+- [x] **Floor Jack / Hallitunkki** (Minimum 2-ton capacity, low-profile recommended for the R129) - Acquired (>2.5t low-profile)
 - [ ] **Jack Stands / Autopukit** (2x or 4x, minimum 3000kg/3-ton capacity for safety margin, pin-style or heavy ratchet)
 - [ ] **Rubber Jack Pads / Nostotyynyt** (To protect the R129's plastic underbody jack points)
 - [ ] **Breaker Bar / Vääntövarsi** (1/2" drive, long handle for tough suspension/subframe bolts)
@@ -31,6 +31,7 @@
 ## Consumables & Workshop Supplies
 - [x] **Brake Cleaner / Jarrukliineri** (6x cans purchased)
 - [x] **Penetrating Oil / Irrotusöljy** (WD-40 purchased)
+- [ ] **Wet/Dry Shop Vacuum / Märkä-kuivaimuri** (e.g., Kärcher WD3 or similar for garage/car use)
 - [ ] **Iron Remover / Raudanpoisto**
 - [ ] **Microfiber Cloths / Mikroliinat**
 - [ ] **Shop Towels / Teollisuuspyyhe** (Heavy-duty paper rolls)
@@ -41,6 +42,7 @@
 - [ ] **Silicone Grease / Silikonirasva** (For rubber seals / Gummi Pflege alternative)
 
 ## Fluids & Filters (Baseline Service & Diagnostics)
+- [ ] **Engine Air Filters / Moottorin ilmansuodattimet** (Left & Right for M119, Mann/Mahle)
 - [ ] **Engine Oil / Moottoriöljy** (~8L of MB 229.5 spec, e.g., Mobil 1 0W-40 or Liqui Moly 5W-40)
 - [ ] **Oil Filter / Öljynsuodatin** (Mann/Mahle for M119)
 - [ ] **Coolant / Jäähdytinneste** (MB 325.0 spec, Glysantin G48 Blue-Green)
