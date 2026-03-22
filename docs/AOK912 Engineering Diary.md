@@ -28,6 +28,18 @@
   * **740:** Black soft top fabric 9001
   * **873:** Seat heater for left and right front seats
 
+## **🚨 Known Issues (Health Status)**
+
+*A high-level summary of confirmed defects and mechanical faults requiring attention, separated from the general to-do list.*
+
+*   **ADS System (Suspension):** System is in mechanical limp/failsafe mode. The ADS module is unresponsive (weak static glow on Pin 9, no blink codes). **Front Right** accumulator sphere is ruptured/hydro-locked (rock hard, zero travel).
+*   **Central Locking (PSE):** Completely inoperative. The pneumatic pump in the trunk is silent when actuated.
+*   **Windshield Wiper / Washer:** Wiper does not consistently stop in the correct park position. Washer fluid is only spraying from 2 out of 4 nozzles.
+*   **Engine Mounts:** Slight vibration felt in the cabin at 700-800 RPM idle, indicating the fluid-filled engine mounts have collapsed.
+*   **Hardtop Fitment:** The front latches bind when locking the hardtop down. Caused by excess thickness from a newly installed headliner; requires manual pull-down assist.
+*   **Paint & Body:** Minor paint cracking on the rear fender (below trunk lid). Small deep scratch on the aluminum hood. Bare steel exposed behind the front wheels (requires rust-prevention touch-up).
+*   **Engine Belt:** Squeals/chirps immediately after cold start. Needs diagnosis (slipping belt vs. bad tensioner pulley bearing).
+
 ## **📅 Log Entries**
 
 ### **March 13, 2026 \- Initial Inspection & Purchase**
