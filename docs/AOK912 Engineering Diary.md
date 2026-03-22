@@ -210,7 +210,7 @@
   * **Plastic Reservoir = Engine Coolant Expansion Tank:** Situated on the front right (passenger) side. Since it's cold, the coolant has contracted, but being below the minimum line requires a top-up to prevent air induction.
 * **Action Items:**
   * **Air Intake & Filters:** Replace both left and right intake hoses entirely. Perform an engine air filter replacement (Left/Right) while the airbox is open.
-  * **Power Steering Flush:** Syringe out old fluid, replace the internal reservoir filter (Part No. `A 000 466 21 04`), and refill/flush with MB 236.3 spec fluid (or equivalent approved ATF). 
+  * **Power Steering Flush:** Syringe out old fluid, replace the internal reservoir filter (Part No. `A 000 466 21 04`), and refill/flush with MB 236.3 spec fluid (or equivalent approved ATF). *(See project: [Power Steering Flush](../work/power_steering_flush/README.md))*
   * **Coolant Top-up:** Top up the expansion tank to the cold fill line using a 50/50 mix of distilled water and MB 325.0 spec coolant (e.g., Glysantin G48/Blue-Green). Monitor for slow leaks.
 * **Parts Needed:**
   * Right Intake Hose (Passenger Side): A 119 094 01 82
