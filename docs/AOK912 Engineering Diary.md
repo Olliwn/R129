@@ -352,9 +352,10 @@
 | 2026-03-22 | Fluids | Febi ATF MB 236.3 Power Steering (1L) | Motonet | ~15.00 | Purchased |
 | 2026-03-22 | Fluids | Coolant (Motox G11) + Distilled Water | Motonet | ~35.00 | Purchased |
 | 2026-03 | Body | Ceramic Torpedo Fuses | Motonet | ~10.00 | Purchased |
-| 2026-03 | Audio | New Radio Head Unit | TBD | TBD | Purchased |
-| 2026-03 | Wheels/Tires | New Summer Tires | TBD | TBD | Purchased |
-| **Total** | | **Year-to-Date Spend** | | **~€201.00 + TBD** | |
+| 2026-03-18 | Audio | Mercedes Special BE2210 Radio (w/ AUX) | Online Retailer | 434.97 | Purchased |
+| 2026-03-20 | Wheels/Tires | Michelin PS2 275/40R17 (Rear x2) | Online Retailer | 981.99 | Purchased |
+| 2026-03-20 | Wheels/Tires | Michelin PS5 245/45R17 (Front x2) | Online Retailer | 368.37 | Purchased |
+| **Total** | | **Year-to-Date Spend** | | **~€1,986.33** | |
 
 *(Note: Estimated prices used for Motonet local purchases; will update with exact receipts. Electronics/hobby add-ons like Raspberry Pi, Owon oscilloscope, or custom displays are excluded from this vehicle maintenance budget.)*
 
