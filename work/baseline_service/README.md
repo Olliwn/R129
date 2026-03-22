@@ -8,7 +8,7 @@ No written service history exists for this vehicle. Assume all consumables and w
 
 ## A. Engine Oil & Filtration
 
-- [ ] **Engine Oil & Filter Change** — Drain and refill with MB 229.5 spec fully-synthetic (e.g., Mobil 1 0W-40 or Liqui Moly 5W-40). Replace oil filter (use OEM Mann/Mahle). Capacity: ~8L.
+- [ ] **Engine Oil & Filter Change** — Drain and refill with MB 229.5 spec fully-synthetic (e.g., Mobil 1 0W-40 or Liqui Moly 5W-40). Replace oil filter with **MANN H 829/1 x**. Capacity: ~8L.
 - [ ] **Oil Filter Housing Cap** — Inspect the plastic cap for cracks when removing (requires 36mm socket). Replace if cracked.
 
 ### Instructions
@@ -18,18 +18,19 @@ No written service history exists for this vehicle. Assume all consumables and w
 
 ## B. Ignition System (M119 Twin-Distributor)
 
-- [ ] **Spark Plugs** — Replace all 8 (Bosch W5DTC or equivalent copper-core, OEM spec for KE-Jetronic M119). Gap to 0.8mm.
-- [ ] **Distributor Caps & Rotors (×2)** — Replace both left and right distributor caps and rotors. Inspect for carbon tracking and corrosion.
+- [ ] **Spark Plugs** — Replace all 8 with **NGK BP5ES** non-resistor copper plugs. Gap to 0.8mm.
+- [ ] **Distributor Caps & Rotors (×2)** — Inspect both left and right distributor caps and rotors for carbon tracking and corrosion. Clean or replace as needed.
 - [ ] **Spark Plug Wires** — Inspect resistance (should be <10 kΩ per wire). Replace full set if any are out of spec or brittle.
 
 ### Instructions
+*Note: The M119 KE-Jetronic requires non-resistor plugs because the factory plug wire boots already contain resistors. Using resistor plugs (like Bosch FR8DC+) will cause a weak spark and rough idle.*
 *TODO: Add firing order, distributor cap orientation marks, and torque specs for spark plugs.*
 
 ---
 
 ## C. Fuel System
 
-- [ ] **Fuel Filter** — Replace the inline fuel filter (located under the car, passenger side). Part: A 002 477 30 01 or equivalent.
+- [ ] **Fuel Filter** — Replace the inline fuel filter (located under the car, passenger side) with **MANN WK 830/3**.
 - [ ] **Fuel Accumulator** — Inspect (holds residual pressure for hot restart). If hard-start when hot, replace.
 
 ### Instructions

@@ -25,15 +25,19 @@ The windshield wiper and washer system on the 1991 Mercedes-Benz 500 SL (R129) i
   - *Note:* If the lines are extremely hard/brittle, order silicone replacement tubing.
 
 ### Phase 2: Wiper Mechanism Lubrication (Crucial Maintenance)
-- [ ] **2.1 — Access the Eccentric Mechanism**
-  - Park the wiper arm in the straight-up (vertical) position (turn on, then turn ignition off when it reaches the top).
-  - Lift the plastic flap at the base of the wiper arm.
-  - Use an Allen key to loosen the retaining bolt and slide off the plastic "turtle shell" cover covering the mechanism.
-- [ ] **2.2 — Clean and Lubricate**
-  - Inspect the large exposed gear and sliding piston rod.
-  - Clean out any old, hardened grease using a rag and mild solvent (e.g., WD-40 or brake cleaner — be very careful around the plastics).
-  - Liberally apply fresh lithium grease or specific mechanism grease (like MB multi-purpose grease) to the gear track and the sliding rod.
-  - Reassemble and cycle the wiper several times to distribute the grease.
+- [ ] **2.1 — Remove the Wiper Assembly**
+  - *Note:* Unlike the W124 which has a plastic "turtle shell" that clips off from the top, the R129 wiper mechanism is housed in a solid metal casing. The Allen bolt at the base only removes the wiper arm itself. To fully access the internal eccentric gears, the **entire wiper assembly must be removed from the car**.
+  - Raise the hood to the full vertical/perpendicular service position using the latches on the hood hinges.
+  - Pull off the rubber weatherstripping/seal that runs across the cowl (separating the engine bay from the windshield area).
+  - Carefully lift and remove the plastic water deflector panels covering the cowl.
+  - Unplug the electrical connector for the wiper motor.
+  - Unbolt the main wiper mounting bracket from the firewall/bulkhead (usually held by nuts/bolts requiring a socket set and a 5mm Allen).
+  - Carefully maneuver the entire wiper motor and linkage assembly out of the vehicle.
+- [ ] **2.2 — Clean and Lubricate (On the Bench)**
+  - With the assembly removed, turn it over and unscrew the metal cover plate on the back (typically held by Phillips screws).
+  - Clean out all old, hardened grease from the large main gear, transmission, and sliding track using brake cleaner.
+  - Liberally apply fresh lithium grease or MB multi-purpose grease to the gear teeth and sliding rod.
+  - Reassemble the plate and cycle the mechanism by hand to ensure smooth operation before reinstalling.
   - *Why this matters:* A binding dry mechanism creates huge resistance, which can confuse the motor's parking circuitry or cause the N10 relay to drop out early due to high current draw.
 
 ### Phase 3: Parking Circuit Diagnostics

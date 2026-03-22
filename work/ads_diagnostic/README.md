@@ -19,9 +19,15 @@ This project is a structured, step-by-step diagnostic plan to determine the exac
 | Bounce test passed — firm but not rock-hard or oscillating           | Manual suspension test                     | 2026-03-14 |
 | ADS confirmed in mechanical failsafe / limp mode                     | Aggregate diagnosis                        | 2026-03-14 |
 | X11 Pin 9 (ADS): weak static glow, no blink pulses, cannot clear     | Blink-code sweep (ignition ON, engine OFF) | 2026-03-18 |
+| Front Right suspension significantly stiffer than Front Left         | Manual suspension test (>24h idle)         | 2026-03-22 |
+| Rear suspension compresses more than front, but does not oscillate   | Manual suspension test (>24h idle)         | 2026-03-22 |
 
 
-**Working hypothesis:** The ADS control module (N51) is either unpowered, internally faulted, or has been deliberately disconnected by a previous owner. The mechanical and hydraulic suspension components appear serviceable.
+**Working hypothesis:**
+1.  **The Electronic Fault:** Sometime in the past, an electrical component (e.g., OVP relay, sensor linkage, or shock solenoid) failed. This caused the ADS module to enter "Limp/Sport" mode and triggered the dashboard warning light.
+2.  **The Cover-up:** A previous owner physically removed the instrument cluster warning bulb to hide the fault.
+3.  **The Mechanical Consequence:** Because the system was permanently stuck in the stiff failsafe mode, the shock absorbers could no longer actively soften impacts. Over time, the constant high-pressure hydraulic hammering caused the Front Right nitrogen accumulator (sphere) diaphragm to rupture.
+4.  **Current State:** The ADS control module (N51) is currently offline/not communicating (weak Pin 9 glow). The Front Right sphere is mechanically blown (hydro-locked). The Front Left sphere is intact but defaulting to failsafe-firm. The rear spheres are intact but lack hydraulic pressure due to the system being offline.
 
 ## ADS I System Architecture (Reference)
 
@@ -42,9 +48,10 @@ The ADS I system on the early R129 (1990–1995) consists of:
 ### Phase 1: No-Tools Visual Checks (5 minutes)
 
 - **1.1 — ADS Console Switch Inspection**
-  - Locate the ADS rocker switch on the center console (between the seats, near the seat heater / roof switches).
+  - Locate the ADS rocker switch on the center console (left side of gear lever, with shock absorber icon).
+  - Note: The middle button is for snow chains/ASR (Anti-Slip Regulation), and the right button is for the central locking interior switch.
   - Press it: does it click mechanically? Does it feel broken or jammed?
-  - Is there any illumination on the switch (some have a backlight)?
+  - Note: The red LED indicator on this switch will be inactive if the ADS module is in limp/failsafe mode.
   - *Pass criteria:* Switch clicks and returns normally.
 - **1.2 — Instrument Cluster Warning Lamp Check**
   - Turn ignition to position II (ON, engine off).
@@ -52,7 +59,12 @@ The ADS I system on the early R129 (1990–1995) consists of:
   - Look for an ADS warning indicator (typically a shock absorber symbol or "ADS" text, located in the lower cluster area).
   - *Expected result:* If the bulb has been removed, there will be no illumination at all — not even during bulb check.
   - *Action if missing:* Pull the cluster and inspect the bulb socket (Phase 3).
-- **1.3 — Under-Hood Visual for ADS Components**
+- **1.3 — ADS Blink-Code with Engine Running (Crucial 1st Step)**
+  - Before pulling any modules or fuses, simply repeat the X11 Pin 9 blink-code read, but this time **with the engine running at idle**.
+  - Some early ADS I control modules require the alternator charging voltage (engine running) to fully wake up from sleep/failsafe mode.
+  - *Pass criteria:* Blink pulses appear instead of a static glow.
+  - *Note on Codes:* If the module wakes up, it will provide distinct blink codes. Yes, **each shock absorber has its own unique fault code** for its internal solenoid valve (e.g., Left Front Solenoid Open Circuit, Right Front Solenoid Short Circuit).
+- **1.4 — Under-Hood Visual for ADS Components**
   - With the hood open, visually confirm the ADS shock absorber solenoid connectors on the front strut towers (2-pin connectors on top of each front strut).
   - Check if the connectors are plugged in or deliberately disconnected/zip-tied away.
   - *Pass criteria:* Connectors are physically mated to the shock absorber solenoids.
@@ -65,10 +77,12 @@ The ADS I system on the early R129 (1990–1995) consists of:
     - **Fuse box in the trunk** (left side behind the trim panel): secondary fuse allocation for body electronics.
   - Pull the ADS fuse(s) and visually inspect. Test continuity with a multimeter.
   - *Pass criteria:* Fuse intact with continuity. If blown, note the rating and replace — but investigate WHY it blew before powering the system.
-- **2.2 — Overvoltage Protection (OVP) Relay Check (CRITICAL)**
-  - On the 1991 M119, the ADS module receives its main power via the **OVP Relay** (silver relay with 1 or 2 fuses on top, located in the right-rear engine bay module box).
-  - A blown OVP fuse or cracked internal solder joints will kill power to the ADS, causing a failure to communicate (weak static glow on Pin 9) while the car still runs perfectly.
-  - Check the fuses on top of the OVP relay. If intact, pull the relay, open its casing, and inspect for cracked solder joints (a notorious early R129 failure point).
+- **2.2 — MAS Module / Overvoltage Protection Check (CRITICAL)**
+  - On the early 1991 M119 (unlike later cars with an N16 Base Module), the right-most unit in the module box is the **MAS Module** (part number `011 545 82 32` or similar, marked "MAS").
+  - The MAS module handles fuel pump relay duties, A/C compressor cut-out, and O2 sensor heating, but **does not have fuses on top of it**.
+  - *Update:* Reviewing the engine bay photos again, the silver **OVP Relay** is actually visible mounted right next to the diagnostic connector/module box area. It has a red plastic top with a clear flip-cover containing a 10A blade fuse.
+  - A blown OVP fuse or cracked internal solder joints will kill power to the ADS (and ABS), causing a failure to communicate (weak static glow on Pin 9) while the car still runs perfectly.
+  - Check the 10A fuse on top of the OVP relay. If intact, pull the relay and inspect for cracked solder joints.
   - *Pass criteria:* Fuses intact, relay clicks with ignition, and provides ~12V output.
 - **2.3 — ADS Control Module Power & Ground (at the module connector)**
   - Locate the ADS control module N51 (in the right-side engine bay module box, near the OVP relay).
@@ -164,9 +178,9 @@ The ADS I system on the early R129 (1990–1995) consists of:
   - Compile all findings from Phases 1–6.
   - The most likely failure modes, ranked by probability:
     1. **OVP Relay Failure / Blown Fuse + Bulb Removed** — extremely common. The OVP relay drops power to N51, causing it to go offline (Pin 9 weak glow). Previous owner removed the warning bulb to hide it. (Easy/cheap fix.)
-    2. **Broken level sensor linkage** — causes permanent limp mode. Module may still be healthy but stuck in safe mode. (Cheap plastic part.)
-    3. **ADS module (N51) internal failure** — if power/ground are good but the module produces no output, the module itself is dead. (Requires used replacement from eBay/R129 breaker.)
-    4. **Solenoid coil failure** — one or more burned-out shock absorber solenoids cause the module to fault and enter limp mode. (Requires ADS-specific shock absorber replacement — expensive.)
+    2. **Ruptured Sphere (Accumulator)** — the computer *cannot* detect this. A blown sphere is a purely mechanical failure. It will cause a rock-hard ride on that corner, but will NOT trigger an ADS warning light on its own. **Note:** If one sphere is blown, it is standard practice to replace them in axle-pairs (i.e., both fronts).
+    3. **Broken level sensor linkage** — causes permanent limp mode. Module may still be healthy but stuck in safe mode. (Cheap plastic part.)
+    4. **Solenoid coil failure** — one or more burned-out shock absorber solenoids cause the module to fault and enter limp mode. The computer *can* detect this via resistance checking. (Requires ADS-specific shock absorber replacement — expensive.)
     5. **Hydraulic system failure** — low fluid, failed pump, stuck valve. (Repair depends on specific component.)
 - **7.2 — Decision: Repair, Replace Module, or Intentional Bypass**
   - Based on findings, decide:
@@ -199,13 +213,13 @@ The ADS I system on the early R129 (1990–1995) consists of:
 
 *Record findings from each phase here as work progresses.*
 
-
 | Date       | Phase | Step                | Finding                               | Action                   |
 | ---------- | ----- | ------------------- | ------------------------------------- | ------------------------ |
 | 2026-03-13 | —     | Initial inspection  | ADS switch identified, non-functional | —                        |
 | 2026-03-13 | —     | Highway observation | Warning lamp missing from cluster     | Suspect bulb removed     |
 | 2026-03-14 | —     | Sag test            | Rear low, no self-leveling on start   | Confirmed limp mode      |
 | 2026-03-18 | 4     | Pin 9 blink-code    | Weak static glow, no pulses           | Module not communicating |
-|            |       |                     |                                       |                          |
+| 2026-03-22 | 2     | 2.2 OVP Fuse Check  | 10A fuse inside OVP relay is intact   | Need to test relay power |
+| 2026-03-22 | —     | Manual Suspension Test | Front Right is rock hard (almost zero travel under body weight). Front Left compresses. Rear compresses. | Confirms Front Right nitrogen accumulator (sphere) is ruptured/hydro-locked. Front Left sphere is intact and likely defaulting to failsafe firm. |
 
 

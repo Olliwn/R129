@@ -8,6 +8,26 @@
 
 **Chassis:** Adaptive Damping System (ADS) Equipped
 
+## **📋 Vehicle Data Card (Datakarte) / Manufacturing Plate**
+*(Decoded from vehicle body plate)*
+* **VIN:** WDB 129066 1F 046399
+* **Model:** 500 SL (Typ 500 SL)
+* **Paint Code:** 199 M (Blauschwarz Metallic / Blue-Black Metallic)
+* **Interior Code:** 271 A (Black/Anthracite Leather)
+* **Weights:** GVWR: 2190 kg | Front Axle: 1010 kg | Rear Axle: 1180 kg
+* **Option Codes:**
+  * **211:** Adaptive Damping System (ADS)
+  * **241:** Front seat LH electric adjustable with memory
+  * **242:** Front seat RH electric adjustable with memory
+  * **246:** Mirror with memory circuit
+  * **283:** Draft deflector / wind deflector
+  * **440:** Tempomat (Cruise control)
+  * **581:** Automatic climate control
+  * **592:** Heat-insulating glass, all-around, heated rear window pane
+  * **600:** Headlamp wiper/washer
+  * **740:** Black soft top fabric 9001
+  * **873:** Seat heater for left and right front seats
+
 ## **📅 Log Entries**
 
 ### **March 13, 2026 \- Initial Inspection & Purchase**
@@ -138,6 +158,26 @@
 *   **Fluids & Chemicals:** Stocked up on MB 325.0 Blue Coolant, MB 236.3 Power Steering Fluid, and notably, **Febi 02615 (MB 343.0 / ZH-M) Hydraulic Fluid**. *Note:* Confirmed that the early R129 ADS I system shares this clear/yellow ZH-M fluid specification with the soft top mechanism, avoiding the later green Pentosin CHF 11S.
 *   **Total Investment:** 548.52 € across Motonet and Puuilo. *(See full inventory in [docs/Karkkainen_Shopping_List.md](../docs/Karkkainen_Shopping_List.md))*
 
+### **March 22, 2026 \- Autodoc Maintenance Parts Order & Datakarte Decode**
+
+**Location:** Oulu, Finland
+
+**Event:** Placed a comprehensive Autodoc order for the M119/722.3 baseline service and decoded the factory manufacturing plate.
+
+*   **Manufacturing Plate Decoded:** Confirmed original specifications and options. Added full Datakarte to the top of the engineering diary. Crucial confirmation that the car was factory-equipped with ADS (Option 211) and Heated Seats (Option 873).
+*   **Computer Box Inspection:** Opened the module "coffin" under the hood. All modules are dry and seated correctly. Located the ADS Control Module (012 545 26 32) and the KE-Jetronic ECU (011 545 97 32).
+*   **Rear Fuses Inspected:** The 8-fuse auxiliary block in the trunk is physically intact, but still utilizes old aluminum torpedo fuses. Will be replacing all of them with new copper/ceramic fuses as a preventative measure.
+*   **Autodoc Parts Order Placed:** Successfully navigated the "early M119 vs late M119" parts catalog issues. Ordered the following OEM-spec baseline maintenance parts:
+    *   **Air Filters:** 2x MANN C 3388 (Specifically verified the 35mm thin filters required for the KE-Jetronic M119.960. Standard 44mm filters from Motonet were returned).
+    *   **Cabin Filter:** 1x MANN CU 5041
+    *   **Oil Filter:** 1x MANN H 829/1 x
+    *   **Power Steering Filter:** 1x MANN H 85
+    *   **Fuel Filter:** 1x MANN WK 830/3
+    *   **Spark Plugs:** 8x NGK BP5ES (Crucial: Verified these are non-resistor copper plugs. Resistor plugs like the Bosch FR8DC+ will cause misfires with OEM wires).
+    *   **Brake Fluid:** 1L ATE TYP200 (DOT 4)
+    *   **Shop Supplies:** 50x Neo Tools heavy-duty diamond texture nitrile gloves.
+*   **Next Steps:** Awaiting parts delivery to begin the baseline fluid/filter flush.
+
 ## **📝 Task / Todo List & Quick Studies**
 
 ### **1. Windshield Wiper Parking Issue**
@@ -169,7 +209,7 @@
     * ADS Lift Switch is non-functional.
     * ADS Warning Lamp likely disabled/removed by previous owner.
     * System likely in "Limp/Safe Mode" (Defaulted to maximum stiffness).
-  * **Mechanical Condition:** Nitrogen Accumulators (Spheres) passed the "Bounce Test" (system is firm but not "rock hard" or bouncing/oscillating), suggesting diaphragms are currently intact.
+  * **Mechanical Condition:** Rear Nitrogen Accumulators (Spheres) passed the "Bounce Test" (system is firm but not "rock hard" or bouncing/oscillating), suggesting rear diaphragms are currently intact. However, after sitting >24h, the rear compresses significantly more than the front due to hydraulic pressure bleed-off. **CRITICAL FINDING (2026-03-22):** The Front Right shock is "rock hard" with almost zero travel under full body weight, confirming the Front Right nitrogen accumulator is ruptured and hydro-locked. Front Left compresses normally under body weight (feels stiffer than a standard car, consistent with the expected unpowered ADS "failsafe" firm mode), confirming the Front Left sphere is intact and the solenoid is likely defaulting correctly to the firm position.
 * **2. Planned DIY Scope (Mechanical)**
   * **Front Axle:** Replace Lower Control Arms (LCA) as complete units (includes bushings and ball joints).
   * **Rear Axle:** Replace 5-link suspension set (8 links total) and outer "Squeak Bushings" (Carrier Support Joints).
@@ -239,7 +279,7 @@
 - [ ] **Spark Plug Wires** — Inspect resistance (should be <10 kΩ per wire). Replace full set if any are out of spec or brittle.
 
 #### **C. Fuel System**
-- [ ] **Fuel Filter** — Replace the inline fuel filter (located under the car, passenger side). Part: A 002 477 30 01 or equivalent.
+- [ ] **Fuel Filter / Polttoainesuodatin** (MANN **WK 830/3** or Bosch `0 450 905 273`. OEM Part: `A 002 477 30 01`)
 - [ ] **Fuel Accumulator** — Inspect (holds residual pressure for hot restart). If hard-start when hot, replace.
 
 #### **D. Drive Belts**
@@ -280,6 +320,7 @@
 - [ ] **Door Seals** — Inspect and treat with rubber conditioner (Gummi Pflege). Check for tears or compression set.
 - [ ] **Soft Top Seals** — Inspect the roof seals and rear window seal for leaks and hardening. Treat with conditioner.
 - [ ] **Trunk Seal** — Inspect (water ingress to the trunk is common on R129s and can damage the PSE pump area).
+- [ ] **Antenna Grommet / Antennin kumitiiviste** — Replace the rubber seal where the power antenna meets the rear fender. A cracked seal allows water to drip directly down onto the PSE (central locking) pump in the trunk! (OEM Parts: Upper `A 129 827 02 98`, Lower `A 129 827 03 98`).
 
 #### **L. Under-Car Visual Inspection**
 - [ ] **Exhaust System** — Inspect for rust-through, loose hangers, and leaks. Pay attention to the flex joints and catalyst connections.
