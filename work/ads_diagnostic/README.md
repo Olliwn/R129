@@ -143,7 +143,7 @@ The ADS I system on the early R129 (1990–1995) consists of:
 - **6.1 — Hydraulic Fluid Level**
   - Locate the ADS/SLS hydraulic reservoir (typically near the power steering reservoir on the M119, or integrated into the rear leveling pump assembly).
   - Check fluid level against min/max marks.
-  - Inspect fluid color: should be clear green (Pentosin CHF 11S or equivalent MB 344.0 spec). *Note: Do not confuse with the soft top hydraulic fluid (ZH-M / MB 343.0) which is typically clear/yellow.* Dark brown = severely oxidized; milky = water contamination.
+  - Inspect fluid color: should be clear/yellow (ZH-M / MB 343.0 spec). *Note: The earlier R129 ADS/SLS system shares the same ZH-M fluid type as the soft top hydraulics. Newer MB systems use green CHF 11S, but the early R129 uses ZH-M.* Dark brown = severely oxidized; milky = water contamination.
   - *Action:* Top up if low; note for future full flush.
 - **6.2 — Rear Leveling Pump Operation**
   - With the engine running, listen near the rear axle area for the leveling pump activating (a faint electric motor whine, typically runs for a few seconds after start-up or after load changes).
@@ -184,7 +184,7 @@ The ADS I system on the early R129 (1990–1995) consists of:
 | Trim removal tools (plastic pry set) | Cluster removal, kick panel     | Needed                 |
 | W1.2W / W2W wedge bulb               | ADS warning lamp replacement    | Needed                 |
 | Oscilloscope (Owon HDS242)           | Signal waveform analysis        | Acquired ✓             |
-| Pentosin CHF 11S (1L)                | Hydraulic fluid top-up          | Needed (if applicable) |
+| ZH-M Hydraulic Fluid (1L)            | Hydraulic fluid top-up          | Needed (if applicable) |
 
 
 ## Related Work Items
