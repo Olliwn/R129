@@ -137,6 +137,7 @@ No written service history exists for this vehicle. Assume all consumables and w
 
 ## Related Work Items
 
+* **[How to Safely Lift the R129 (Jacking Instructions)](Jacking_Instructions.md)**
 * Air Intake Hoses & Engine Air Filters → [Engineering Diary Task #6](../../docs/AOK912%20Engineering%20Diary.md)
 * Power Steering Flush & Filter → [Engineering Diary Task #6](../../docs/AOK912%20Engineering%20Diary.md)
 * Engine Mounts & Steering Damper → [Master Plan Phase 4](../../docs/R129%20Master%20Plan.md)
