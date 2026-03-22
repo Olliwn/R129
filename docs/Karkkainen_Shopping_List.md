@@ -32,6 +32,7 @@
 - [x] **Brake Cleaner / Jarrukliineri** (6x cans purchased)
 - [x] **Penetrating Oil / Irrotusöljy** (WD-40 purchased)
 - [ ] **Wet/Dry Shop Vacuum / Märkä-kuivaimuri** (e.g., Kärcher WD3 or similar for garage/car use)
+- [ ] **Touch-up Paint Pen / Paikkamaalikynä** (Check color code from the radiator support plate, typically a 3-digit number like 199 for Blauschwarz, need base coat + clear coat)
 - [ ] **Iron Remover / Raudanpoisto**
 - [ ] **Microfiber Cloths / Mikroliinat**
 - [ ] **Shop Towels / Teollisuuspyyhe** (Heavy-duty paper rolls)

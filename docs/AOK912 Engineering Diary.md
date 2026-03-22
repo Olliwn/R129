@@ -140,9 +140,13 @@
 * **Symptom:** Fluid only spraying from 2 of 4 nozzles.
 * **Action Item:** Clean and unclog the windshield washer nozzles. Inspect the fluid lines for cracks or leaks. *(See project: [Wiper & Washer System](../work/wiper_system/README.md))*
 
-### **3. Paint Inspection (Rear Fender)**
-* **Symptom:** Narrow cracks visible in the paint on the rear fender (upward-facing area just below the trunk lid) when wet and dirty.
-* **Action Item:** Thoroughly wash and inspect the area once the weather improves to determine the depth/severity of the cracking and plan for potential paint correction or preservation.
+### **3. Paint Inspection (Rear Fender & Hood)**
+* **Symptom:** 
+  * Narrow cracks visible in the paint on the rear fender (upward-facing area just below the trunk lid) when wet and dirty.
+  * Discovered a small but deep scratch on the hood (approx. 1cm long, fraction of a mm wide) during wash.
+* **Action Item:** 
+  * Test the hood with a magnet to confirm if it is aluminum (early R129s have aluminum hoods) or steel. If aluminum, it won't rust but should still be sealed. If steel, it needs immediate sealing.
+  * Source an OEM-matched touch-up paint pen (base coat + clear coat) matching the car's color code (e.g. 199 Blauschwarz). Thoroughly wash and inspect the areas once the weather improves to determine the depth/severity of the cracking and plan for potential paint correction or preservation.
 
 ### **4. Suspension Refresh (ADS & Mechanical)**
 * **Engineering Record: 1991 Mercedes-Benz R129 500 SL**
