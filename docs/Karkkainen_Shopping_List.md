@@ -29,6 +29,10 @@
 - [ ] **Automotive Test Light / Virtakynä** (12V)
 - [ ] **Trim Removal Tools / Verhoilun irrotustyökalut** (Plastic pry set for interior/cluster)
 
+## Workshop Organization & Storage
+- [ ] **Dedicated R129 Tool Box / Työkalupakki** (Clean out existing 2-layer plastic box. Fill strictly with metric Bahco/Wera sets, Knipex pliers, and R129 specialty tools. *No woodworking or household tools allowed.*)
+- [ ] **Magnetic Parts Tray / Magneettikulho** (Essential for keeping track of small Torx/Hex bolts from the engine bay)
+
 ## Consumables & Workshop Supplies
 - [x] **Brake Cleaner / Jarrukliineri** (6x cans purchased)
 - [x] **Penetrating Oil / Irrotusöljy** (WD-40 purchased)
