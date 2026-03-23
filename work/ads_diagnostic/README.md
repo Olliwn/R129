@@ -2,143 +2,252 @@
 
 ## Overview
 
-The 1991 Mercedes-Benz 500 SL (R129) — AOK912 is equipped with ADS I (Adaptive Damping System, first generation). The car drives well and the ride is comfortable ("floating"), confirming the base mechanical springs and nitrogen accumulators are functional. However, there is currently **zero sign of life** from the electronic ADS system: the console button is inoperative, the instrument cluster warning lamp appears to have been removed by a previous owner, and the ADS control module does not respond to blink-code diagnostics (weak static glow on X11 Pin 9, no pulse communication).
+The 1991 Mercedes-Benz 500 SL (R129) — AOK912 (manufactured 09/1991, possibly MY1992 spec) is equipped with ADS I (Adaptive Damping System, first generation). The car drives well and the ride is comfortable ("floating"), confirming the base mechanical springs and nitrogen accumulators are functional. The ADS control module (N51) is **alive and communicating** — returns 1 blink (no stored fault codes) with battery >13V. Both switches work: ADS console switch LED illuminates and turns RED in Sport mode; Fahrzeugniveau (level) switch LED illuminates. ABS warning lamp is confirmed functional. **The primary issue is the inoperative hydraulic level control** — the ADS section of the tandem pump is not circulating fluid (clear/stagnant). Next step: hydraulic flush + filter replacement (Phase 1).
 
-This project is a structured, step-by-step diagnostic plan to determine the exact state of the ADS I system — from a quick fuse check all the way to component-level testing — before deciding on repair, replacement, or intentional bypass.
+**IMPORTANT — Manual Discovery (2026-03-23):** We had been referencing the **1990** owner's manual, but the car is a **1991** model. The 1991 manual (now downloaded) reveals major differences: ADS, ASR, ASD, and the snow chain switch were all added for 1991. Critically, **the 1991 manual confirms ADS has a dedicated instrument cluster warning lamp** (page 92: "The indicator lamp comes on with the key in steering lock position 2 and goes out when the engine is running"). Our earlier conclusion that "ADS was never in the standard R129 indicator set" was wrong — it was based on the 1990 manual which predates ADS. **The original "missing lamp" observation may have been the ADS warning lamp.** Needs verification during ignition-ON bulb check.
+
+**CAVEAT — US Manual vs European Car:** The English manuals (1990/1991/1992) are **US-market** editions. AOK912 is European-spec. Key differences: the US cluster shows "BRAKE" text (Euro uses symbol), "CHECK ENGINE" far right (California-only — correctly absent from Euro), and mph speedometer. The German Betriebsanleitung 1991–1993 (`r129-betriebsanleitung-1991-1993-DE.pdf`) covers all three model years in one document (image-only, no extractable text) and its cluster diagram is a **perfect match** to the actual cluster — confirming the European reference.
+
+**Model Year Note:** AOK912 was manufactured 09/1991 and may be MY1992 spec. The 1992 US manual has been downloaded and compared — the ADS section (page 94) is **word-for-word identical** to the 1991 manual (page 92). Same indicator lamp list, same dashboard layout, same ADS cluster lamp description. The German manual covers 1991–1993 in one document. **Conclusion: whether the car is MY1991 or MY1992, the ADS cluster warning lamp should be present.**
+
+The electronic diagnostic is complete — N51 is healthy, no fault codes, both switches work. The remaining work is mechanical/hydraulic: restore the level control system (Phase 1: flush + filter), replace the blown Front Right accumulator sphere, and investigate the missing cluster warning lamp.
 
 ## Current Known Status
 
 
 | Observation                                                          | Source                                     | Date       |
 | -------------------------------------------------------------------- | ------------------------------------------ | ---------- |
-| ADS switch on center console identified; non-functional              | Pre-purchase inspection                    | 2026-03-13 |
-| ADS warning lamp dead — no dead-fronting outline visible in cluster  | Ferry transit observation                  | 2026-03-13 |
+| ADS switch on center console identified; ~~non-functional~~ **CORRECTION: switch works — LED illuminates with ignition, turns RED in Sport/up position (tested 2026-03-23 with adequate voltage)** | Pre-purchase inspection / re-test 2026-03-23 | 2026-03-13 |
+| ~~ADS warning lamp dead~~ ~~False alarm~~ **RE-OPENED: 1991 manual confirms ADS has a cluster lamp — original observation may be correct** | Ferry transit / 1991 manual discovery 2026-03-23 | 2026-03-13 |
 | Comfortable "floating" ride at highway speed; accumulators not blown | 700 km shakedown (Vellinge → Kapellskär)   | 2026-03-13 |
 | Rear sits lower than front (1–2 finger gap rear vs. 3 finger front)  | "Sag test" on ferry deck                   | 2026-03-14 |
-| Rear did NOT rise when engine started — no self-leveling action      | Ferry deck observation                     | 2026-03-14 |
+| Rear did NOT rise when engine started (~~expected — car has no SLS~~ **now understood: car HAS level control, but reservoir nearly empty = system cannot raise**) | Ferry deck observation                     | 2026-03-14 |
 | Bounce test passed — firm but not rock-hard or oscillating           | Manual suspension test                     | 2026-03-14 |
 | ADS confirmed in mechanical failsafe / limp mode                     | Aggregate diagnosis                        | 2026-03-14 |
 | X11 Pin 9 (ADS): weak static glow, no blink pulses, cannot clear     | Blink-code sweep (ignition ON, engine OFF) | 2026-03-18 |
+| X11 Pin 9 (ADS): **1 blink (no faults)** — module communicating      | Blink-code re-test (battery >13V)          | 2026-03-23 |
+| ~~ADS console switch LED stays off (engine on and off); no mode change~~ **CORRECTED: both night illumination AND red Sport indicator work with adequate voltage. Switch turns RED in Sport/up position.** | Console switch re-test (battery >13V) | 2026-03-23 |
+| **Fahrzeugniveau switch (position 2, left panel):** CONFIRMED PRESENT. LED illuminates with ignition. Pressing UP (Raised Level) has **NO EFFECT on ride height** with engine running. | Level switch test 2026-03-23 | 2026-03-23 |
+| **ADS hydraulic reservoir below MIN** — level dropped only ~0.5cm since 2026-03-17. MAX/MIN markings deep inside canister (hard to read). No active leak found anywhere. Fluid loss is gradual/historical. Confirms this IS the ADS/Niveauregulierung reservoir (not coolant). | Visual inspection 2026-03-23 | 2026-03-23 |
+| Pin 11 or 12 re-tested with >13V — still static glow (not alive)    | Blink-code sanity check                    | 2026-03-23 |
 | Front Right suspension significantly stiffer than Front Left         | Manual suspension test (>24h idle)         | 2026-03-22 |
 | Rear suspension compresses more than front, but does not oscillate   | Manual suspension test (>24h idle)         | 2026-03-22 |
 
 
-**Working hypothesis:**
-1.  **The Electronic Fault:** Sometime in the past, an electrical component (e.g., OVP relay, sensor linkage, or shock solenoid) failed. This caused the ADS module to enter "Limp/Sport" mode and triggered the dashboard warning light.
-2.  **The Cover-up:** A previous owner physically removed the instrument cluster warning bulb to hide the fault.
-3.  **The Mechanical Consequence:** Because the system was permanently stuck in the stiff failsafe mode, the shock absorbers could no longer actively soften impacts. Over time, the constant high-pressure hydraulic hammering caused the Front Right nitrogen accumulator (sphere) diaphragm to rupture.
-4.  **Current State:** The ADS control module (N51) is currently offline/not communicating (weak Pin 9 glow). The Front Right sphere is mechanically blown (hydro-locked). The Front Left sphere is intact but defaulting to failsafe-firm. The rear spheres are intact but lack hydraulic pressure due to the system being offline.
+**Working hypothesis (revised 2026-03-23):**
+
+The **entire ADS electronic system is functional** — module (N51), console switch, and Fahrzeugniveau switch all work with adequate voltage (>13V). The problem is purely mechanical/hydraulic.
+
+**Three confirmed issues:**
+
+1.  **Level control inoperative — ADS pump section not circulating fluid.** The tandem pump's power steering section works (brown/aged fluid, steering assisted), but the ADS/Niveauregulierung section has NOT been circulating fluid for years (clear/stagnant fluid). Reservoir is below MIN but no active leak. Most likely cause: **clogged suction filter (A 129 327 00 91, ~€7)** blocking the pump intake. Alternative: air-locked circuit (lost prime from running low), or worn internal vanes/seals. **→ Phase 1: flush + filter + pump test.**
+2.  **Front Right accumulator sphere hydro-locked.** Confirmed 2026-03-22 — rock-hard, zero travel. N51 cannot detect this (purely mechanical). **→ Phase 2: replace front pair (A 129 320 01 15).**
+3.  **ADS cluster warning lamp missing.** The German manual cluster diagram matches the actual cluster except the ADS lamp position is absent. Likely a dead bulb behind dead-fronted film. The oil-level float warning is therefore invisible. **→ Phase 3: pull cluster, inspect.**
 
 ## ADS I System Architecture (Reference)
 
-The ADS I system on the early R129 (1990–1995) consists of:
+**CRITICAL DISTINCTION — ADS I Has TWO Independent Subsystems:**
 
-- **ADS Control Module (N51)** — located in the right-side engine bay module box (E-box) near the firewall, under the black plastic cover. Receives inputs from sensors and driver switch; commands the shock absorber solenoids.
-- **ADS Console Switch** — center console rocker/button: Sport / Comfort mode selection. Sends a ground signal to N51.
-- **ADS Warning Lamp** — instrument cluster. Illuminates on ignition-ON (bulb check), then extinguishes if system is healthy. Stays on or flashes to indicate faults.
+The European "Niveauregulierung mit adaptivem Dämpfungs-System (ADS)" on the early R129 (1990–1995) is actually **two largely independent subsystems** sharing the "ADS" name. They have different control methods, different diagnostics, and different failure modes:
+
+### Subsystem A: Adaptive Damping (Electronic — monitored by N51)
+
+Controls shock absorber stiffness via electronic solenoid valves. This subsystem IS monitored by the ADS control module (N51) and DOES report faults via X11 Pin 9 blink codes.
+
+- **ADS Control Module (N51)** — located in the right-side engine bay module box (E-box) near the firewall. Receives inputs from sensors and driver switch; commands the shock absorber solenoids.
+- **ADS Console Switch** — center console rocker/button: Sport / Comfort mode selection. Sends a ground signal to N51. **Status: WORKING** — LED illuminates, turns RED in Sport/up position (confirmed 2026-03-23).
 - **Speed Sensor Input** — N51 receives vehicle speed from the speedometer or ABS controller.
 - **Steering Angle Sensor** — input for dynamic damping adjustment.
-- **4× ADS Shock Absorbers** — each contains a proportional solenoid valve that adjusts damping force. Solenoid coil resistance is typically 4–8 Ω.
-- **Rear Self-Leveling** — hydraulic pump, accumulator spheres, and rear level control valve maintain rear ride height. Shares fluid circuit with the ADS struts on some configurations.
-- **Level Sensors (front & rear)** — plastic linkage rods connected to suspension arms. Brittle with age; breakage is common and causes immediate limp-mode.
-- **Diagnostic Output** — X11 Pin 9 blink-code interface (pre-OBD).
+- **4× ADS Shock Absorbers** — each contains a proportional solenoid valve that adjusts damping force. Solenoid coil resistance is typically 4–8 Ω. Each shock also contains a nitrogen-charged gas cushion (accumulator sphere). **Front Right sphere is ruptured/hydro-locked** — invisible to N51.
+- **ADS Warning Lamp** — cluster warning lamp for damping faults (page 92: *"The indicator lamp comes on with the key in steering lock position 2 and goes out when the engine is running"*). **Status: MISSING from indicator strip** — either dead bulb behind dead-fronting, or cluster variant issue.
+- **Diagnostic Output** — X11 Pin 9 blink-code interface (pre-OBD). Requires >13V supply. **Returns 1 blink = no stored damping faults.**
 
-## Diagnostic Plan — Simple to Complex
+### Subsystem B: Niveauregulierung / Level Control (Mechanical/Hydraulic — NOT monitored by N51)
 
-### Phase 1: No-Tools Visual Checks (5 minutes)
+Controls ride height via a hydraulic system. On ADS I, height sensing is **MECHANICAL** (not electronic) — there are no electronic ride height sensors. This subsystem is **NOT monitored by the ADS module (N51)** and produces **NO fault codes on Pin 9.** The entire level control system can be completely dead and Pin 9 will still report "1 blink = all good" because N51 only monitors damping.
 
-- **1.1 — ADS Console Switch Inspection**
-  - Locate the ADS rocker switch on the center console (left side of gear lever, with shock absorber icon).
-  - Note: The middle button is for snow chains/ASR (Anti-Slip Regulation), and the right button is for the central locking interior switch.
-  - Press it: does it click mechanically? Does it feel broken or jammed?
-  - Note: The red LED indicator on this switch will be inactive if the ADS module is in limp/failsafe mode.
-  - *Pass criteria:* Switch clicks and returns normally.
-- **1.2 — Instrument Cluster Warning Lamp Check**
-  - Turn ignition to position II (ON, engine off).
-  - Observe the instrument cluster during the bulb-check phase (all warning lamps should illuminate for 2–3 seconds).
-  - Look for an ADS warning indicator (typically a shock absorber symbol or "ADS" text, located in the lower cluster area).
-  - *Expected result:* If the bulb has been removed, there will be no illumination at all — not even during bulb check.
-  - *Action if missing:* Pull the cluster and inspect the bulb socket (Phase 3).
-- **1.3 — ADS Blink-Code with Engine Running (Crucial 1st Step)**
-  - Before pulling any modules or fuses, simply repeat the X11 Pin 9 blink-code read, but this time **with the engine running at idle**.
-  - Some early ADS I control modules require the alternator charging voltage (engine running) to fully wake up from sleep/failsafe mode.
-  - *Pass criteria:* Blink pulses appear instead of a static glow.
-  - *Note on Codes:* If the module wakes up, it will provide distinct blink codes. Yes, **each shock absorber has its own unique fault code** for its internal solenoid valve (e.g., Left Front Solenoid Open Circuit, Right Front Solenoid Short Circuit).
-- **1.4 — Under-Hood Visual for ADS Components**
-  - With the hood open, visually confirm the ADS shock absorber solenoid connectors on the front strut towers (2-pin connectors on top of each front strut).
-  - Check if the connectors are plugged in or deliberately disconnected/zip-tied away.
-  - *Pass criteria:* Connectors are physically mated to the shock absorber solenoids.
+*(Note: ADS II (1996+ R129) upgraded to electronic ride height sensors and integrated level control monitoring into the module. ADS I does not have this.)*
 
-### Phase 2: Fuse & Power Verification (15 minutes, multimeter required)
+- **Fahrzeugniveau-Einstellung (Vehicle Level Switch)** — position 2 on left instrument panel (next to headlight switch, replaces headlight range adjuster on ADS cars). Controls ride height set point with its own indicator LED. **Status: PRESENT and LED illuminates (confirmed 2026-03-23). No effect on ride height when activated.**
+  - **Down = Normales Niveau (Normal Level):** Default. Above ~120 km/h, auto-lowers ~15mm.
+  - **Up = Erhöhtes Niveau (Raised Level):** For poor roads. LED illuminates. Below ~50 km/h, raises ~30mm. Auto-reverts to Normal at 120 km/h.
+- **Hydraulic Tandem Pump (A 129 460 07 80)** — engine-driven (belt), mounted on the M119. ONE pump with TWO internal sections sharing one drive shaft:
+  - Section 1 = Power Steering (draws from metal canister) — **WORKING** (brown/aged fluid, steering assisted)
+  - Section 2 = Niveauregulierung (draws from plastic reservoir next to washer fluid) — **NOT WORKING** (clear/un-aged fluid = no circulation for years)
+  - Rebuilt pumps: ABCspecialist (NL), ~€850 + old core return
+- **ADS/Niveauregulierung Reservoir** — translucent plastic, next to washer fluid bottle. Fluid: MB 343.0 / ZH-M (part number 000 989 91 03). **Level is below MIN. No active leak. Fluid is clear (stagnant).**
+- **Rear Level Control Valve (A 129 320 00 58 / A 129 320 08 58)** — hydraulic proportioning valve, mounted mid-rear-axle. Height sensing is MECHANICAL: a **linkage from the rear anti-roll bar** mechanically operates the valve's lever arm. As load changes rotate the ARB, the valve directs fluid to raise or lower the car. **No electronic sensors involved.**
+- **Anti-Roll Bar Linkage** — the "sensor" of ADS I level control. A plastic/metal rod connecting the ARB to the proportioning valve lever. Known failure point: shears at lower mounting. If broken, the valve stays in one position and cannot adjust height. **This failure produces NO electronic fault codes.**
+- **Hydraulic Lines** — from the pump to the valve block, and from the valve to the rear hydraulic struts.
+- **Oil Level Warning** — the reservoir likely has a float sensor wired directly to the cluster warning lamp (the same missing ADS lamp). This warning is independent of N51 — it does not generate a blink code.
 
-- **2.1 — ADS Fuse Check**
-  - Locate the ADS fuse(s). On the 1991 R129, check:
-    - **Fuse box in the engine bay** (left side): fuse F15 or nearby — consult the fuse chart on the lid.
-    - **Fuse box in the trunk** (left side behind the trim panel): secondary fuse allocation for body electronics.
-  - Pull the ADS fuse(s) and visually inspect. Test continuity with a multimeter.
-  - *Pass criteria:* Fuse intact with continuity. If blown, note the rating and replace — but investigate WHY it blew before powering the system.
-- **2.2 — MAS Module / Overvoltage Protection Check (CRITICAL)**
-  - On the early 1991 M119 (unlike later cars with an N16 Base Module), the right-most unit in the module box is the **MAS Module** (part number `011 545 82 32` or similar, marked "MAS").
-  - The MAS module handles fuel pump relay duties, A/C compressor cut-out, and O2 sensor heating, but **does not have fuses on top of it**.
-  - *Update:* Reviewing the engine bay photos again, the silver **OVP Relay** is actually visible mounted right next to the diagnostic connector/module box area. It has a red plastic top with a clear flip-cover containing a 10A blade fuse.
-  - A blown OVP fuse or cracked internal solder joints will kill power to the ADS (and ABS), causing a failure to communicate (weak static glow on Pin 9) while the car still runs perfectly.
-  - Check the 10A fuse on top of the OVP relay. If intact, pull the relay and inspect for cracked solder joints.
-  - *Pass criteria:* Fuses intact, relay clicks with ignition, and provides ~12V output.
-- **2.3 — ADS Control Module Power & Ground (at the module connector)**
-  - Locate the ADS control module N51 (in the right-side engine bay module box, near the OVP relay).
-  - With the module connector plugged in and ignition ON, back-probe or use the connector pins:
-    - **Permanent +12V (Terminal 30):** should read battery voltage (~12.4V+) at all times.
-    - **Ignition +12V (Terminal 15):** should read battery voltage with ignition ON.
-    - **Ground (Terminal 31):** should read <0.1V to chassis ground.
-  - *Pass criteria:* Module has clean power and ground. If any supply is missing, trace the wire back to the fuse/relay.
-  - *Fail action:* If no power at all — the module has been deliberately disconnected or there's a wiring break. Trace the harness.
+### Why Pin 9 = "1 Blink" Despite a Dead Level Control
 
-### Phase 3: Warning Lamp & Cluster Inspection (30 minutes, trim tools required)
+The ADS module (N51) monitors ONLY Subsystem A (damping solenoids, speed sensor, steering sensor, console switch). The level control (Subsystem B) is a separate mechanical/hydraulic loop with no electronic feedback to N51. A failure in any of these level control components produces **zero fault codes**:
+- Empty reservoir → no code
+- Air-locked pump section → no code
+- Failed pump ADS section → no code
+- Broken ARB linkage → no code
+- Seized proportioning valve → no code
+- Broken hydraulic line → no code
 
-- **3.1 — Instrument Cluster Removal & Bulb Socket Inspection**
-  - Remove the instrument cluster surround (trim screws and clips).
-  - Pull the cluster forward enough to access the rear bulb sockets.
-  - Locate the ADS warning lamp socket (consult the cluster bulb assignment diagram — typically a 1.2W or 2W wedge bulb).
-  - Determine: is the bulb missing? Burned out? Or has the socket been taped over / filled?
-  - *Action:* Install a new bulb (W1.2W or W2W as appropriate). Reassemble and test with ignition ON.
-  - *Expected result:* If the ADS module is in fault mode, the warning lamp should now illuminate continuously (good — it means the module is alive and reporting a fault). If it still doesn't light, the module is not driving the lamp circuit.
+The ONLY electronic indicator for level control problems is the **cluster warning lamp** (oil level float sensor) — which is **missing from this cluster.**
 
-### Phase 4: Module Communication & Signal Testing (1 hour, multimeter + oscilloscope)
+## Diagnostic Plan
 
-- **4.1 — Re-Test Blink-Code with Engine Running**
-  - Previous blink-code test (2026-03-18) was performed with engine OFF (ignition ON only).
-  - Some ADS I modules require the engine running (alternator charging) to fully power up.
-  - Repeat the Pin 9 blink-code read procedure with the engine running at idle.
-  - *Pass criteria:* Blink pulses appear instead of static glow.
-- **4.2 — ADS Console Switch Signal Verification**
-  - With the module connector accessible, back-probe the switch input pin on the N51 connector.
-  - Measure voltage with ignition ON: should toggle between ~0V and ~12V (or vice versa) when the console switch is pressed.
-  - If no voltage change: the switch wiring is open or the switch itself is faulty. Test continuity of the switch directly.
-  - *Pass criteria:* Measurable voltage change when switch is toggled.
-- **4.3 — ADS Module Diagnostic Output Pin (direct probe)**
-  - Instead of reading through the X11 connector, probe the diagnostic output pin directly at the N51 module connector.
-  - With ignition ON, measure DC voltage on the diagnostic pin:
-    - **~0V:** Module is actively pulling low (possible communication, grounding the blink-code line).
-    - **~12V:** Module is not driving the line (open-collector output inactive).
-    - **Floating / intermediate voltage (~2–6V):** Consistent with the "weak static glow" observation — the output transistor may be partially conducting (internal fault).
-  - *Pass criteria:* A definitive 0V or 12V indicates the module is alive and its output stage is functional.
-- **4.4 — Speed Sensor Signal to N51**
-  - The ADS module needs vehicle speed input to function. If the speed signal is missing, some modules enter permanent safe mode.
-  - Back-probe the speed input pin at the N51 connector. With the car on jack stands and a driven wheel spinning (or use the speedometer signal wire), verify a pulsed signal appears.
-  - *Alternative:* Simply verify the speedometer works while driving — if it does, the speed signal is likely reaching N51 as well (shared bus).
-  - *Pass criteria:* Speed signal present or speedometer confirmed functional.
+### Completed Phases (reference — no further action)
 
-### Phase 5: Shock Absorber Solenoid Testing (1–2 hours, multimeter + jack stands)
+<details>
+<summary><b>Phase 1: Visual Checks & Module Communication — COMPLETED 2026-03-23</b></summary>
 
-- **5.1 — Solenoid Coil Resistance (all 4 corners)**
-  - Disconnect the 2-pin connector from each ADS shock absorber solenoid (2 front on strut towers, 2 rear under the car).
-  - Measure resistance across each solenoid coil:
-    - **Expected:** 4–8 Ω (varies by manufacturer — Bilstein, Sachs).
-    - **Open circuit (∞):** Coil is broken — shock absorber must be replaced.
-    - **Short circuit (~0 Ω):** Coil is shorted — shock absorber must be replaced.
-  - Record all four readings.
-  - *Pass criteria:* All four solenoids within spec and roughly equal.
+All steps completed with battery >13V:
 
+- **1.1 — ADS Console Switch** — DONE. Switch clicks, LED illuminates, turns RED in Sport. Works correctly.
+- **1.1b — Fahrzeugniveau Switch** — DONE. Present at position 2 (left panel). LED illuminates in UP position. Switch is original ADS-spec.
+- **1.2 — Cluster Warning Lamp** — DONE (visual). ADS lamp is MISSING from indicator strip. ABS lamp works. Needs cluster pull to investigate further (see Phase 4 below).
+- **1.3 — Blink-Code (Pin 9)** — DONE. Module alive, returns 1 blink = no stored faults. Requires >13V to communicate.
+- **1.4 — Under-Hood Visual** — Not yet performed (solenoid connectors on front strut towers). Low priority since module reports no solenoid faults.
+
+</details>
+
+<details>
+<summary><b>Phase 2: Fuse & Power — PARTIALLY DONE, remainder deprioritized</b></summary>
+
+Module communicates and reports healthy, so power supply is confirmed adequate. Remaining steps are reference only if a regression occurs.
+
+- **2.1 — ADS Fuse** — Not checked individually. Moot point: module has power (it communicates).
+- **2.2 — OVP Relay Fuse** — DONE (2026-03-22). 10A fuse is intact. Full relay test deferred (module is alive, OVP is not the issue).
+- **2.3 — Module Power & Ground** — Skipped. Module communicates at >13V = power path is intact.
+
+</details>
+
+<details>
+<summary><b>Former Phase 4: Module Communication & Signal Testing — COMPLETED / SUPERSEDED</b></summary>
+
+These steps were written when the module was presumed dead. Now that N51 communicates and both switches work, they are resolved:
+
+- **4.1 — Blink-Code Engine Running** — DONE. 1 blink, no faults.
+- **4.2 — Console Switch Signal** — DONE. Switch LED responds to module (turns RED in Sport). N51 is driving the switch correctly.
+- **4.3 — Diagnostic Output Pin** — DONE. Pin 9 produces clean blink pulses (not the earlier "weak static glow" which was a voltage issue).
+- **4.4 — Speed Sensor** — Not measured directly, but speedometer works and module reports no faults. Low priority.
+
+</details>
+
+---
+
+### Active Phases (in priority order)
+
+### Phase 1: Hydraulic Flush, Filter Replacement & Pump Test (NEXT ACTION)
+
+*Added 2026-03-23. This is the cheapest and most likely fix for the inoperative level control. A clogged suction filter (A 129 327 00 91, ~€7–11) can completely starve the ADS pump section even though the pump physically spins. Combined with a full fluid flush, this test will definitively prove whether the tandem pump's ADS section is alive or dead — before spending €850 on a rebuilt pump.*
+
+**References:**
+- MBWorld R129 ADS Fluid Change thread (MB-Dude / Jeff's procedure): https://mbworld.org/forums/sl-class-r129/500408-ads-fluid-change.html
+- Rodionenkin.de Ölwechsel Zentralhydraulik (W124/W126/R129): https://www.rodionenkin.de/de/pages/mb-reparaturanleitungen/oelwechsel-zentralhydraulik-asd-niveauregulierung.php
+- Classic Jalopy SLS Flush (W126, same system): https://www.classicjalopy.com/2019/09/mercedes-self-leveling-rear-suspension-flush/
+- MercedesSource SLS Flush Video ($12.99 or free with kit): https://mercedessource.com/store/replacing-the-fluid-a-self-leveling-rear-suspension-sls-demand-video
+
+**Tools & materials:**
+- Brake cleaner (have)
+- Transparent PVC hose, 6–8mm inner diameter, ~1m
+- Waste oil container (e.g. empty milk jug / bottle)
+- Lint-free cloth (have)
+- 4L fresh ZH-M / MB 343.0 fluid (have 1L Febi 02615 — **need 3L more**)
+- New filter element: **A 129 327 00 91** (or clean old one with denatured alcohol / brake cleaner, outside→inside)
+- Old syringe or turkey baster (to extract remaining old fluid from reservoir)
+
+**Phase A — Open-Loop Flush (purge old fluid):**
+
+1. Warm up the engine, activate the Fahrzeugniveau switch up/down a couple of times, then turn off the engine.
+2. Clean the reservoir cap and return line fitting with brake cleaner.
+3. Remove the reservoir cap.
+4. Disconnect the return line at the top of the reservoir. Attach transparent PVC hose to the return line fitting, route into waste container.
+5. Remove the sieve/filter element from the reservoir (unscrew counterclockwise). Inspect — if clogged with dark debris, **this may be the root cause.**
+6. Using a syringe/turkey baster, withdraw as much old fluid from the reservoir as possible. Wipe the reservoir interior with a lint-free cloth, especially the bottom (sediment).
+7. Fill the reservoir with fresh ZH-M (OK to overfill slightly, but not to the brim).
+8. Have an assistant start the engine (or do it yourself — the flow rate at idle is slow enough for one person). The pump pushes old fluid out through the return hose into the waste container.
+9. **CRITICAL: Keep the reservoir topped up.** Never let it run dry — air ingestion will make things worse. Add fresh fluid continuously as the level drops.
+10. With engine idling, activate the Fahrzeugniveau switch UP at least twice — this forces fluid through the level control circuit specifically, not just the power steering loop.
+11. Continue until the fluid coming out of the return hose is **clear** (matching fresh ZH-M). Typically takes 3–4L.
+12. Turn off the engine.
+
+**Phase B — Close Loop & Pump Test (the critical diagnostic moment):**
+
+1. Clean the filter element with brake cleaner or denatured alcohol (spray/soak from outside to inside, let dry completely) — or install the new filter (A 129 327 00 91).
+2. Reinstall the filter in the reservoir.
+3. **Reconnect the return line.** The hydraulic loop is now closed.
+4. Top up the reservoir to MAX with fresh ZH-M. **Mark the level with a pen/tape on the outside of the reservoir.**
+5. Start the engine. Press the Fahrzeugniveau switch to UP (Raised Level).
+6. Let the engine idle for 5–10 minutes. **Watch the reservoir level:**
+   - **Level DROPS** = fluid is being drawn into the rear circuit = **ADS pump section is working!** The pump had simply lost prime or the filter was clogged. Keep topping up as air purges from the lines. The car should begin to rise at the rear.
+   - **Level STAYS STATIC** = the ADS pump section is NOT building pressure. Internal failure (worn vanes/seals). Tandem pump replacement needed (**A 129 460 07 80**, ~€850 rebuilt).
+7. Turn off engine. Final fluid level check — top up to MAX with level control in Normal position.
+8. If the car rose: drive slowly (<50 km/h) for a few minutes, return, and re-check level. Top up as needed. The system may self-bleed over several drive cycles.
+
+**Expected outcome for AOK912:** The fluid has been stagnant (clear) for years. Most likely scenario:
+- **(a) Clogged filter** blocked suction → flush + new filter restores flow → **cheapest fix (~€7)**
+- **(b) Air-locked circuit** from running low on fluid → flush + top-up restores prime → **cost of fluid only**
+- **(c) Internal pump failure** → level stays static after flush → pump replacement needed → **~€850**
+
+### Phase 2: Mechanical Inspection Under Car (after flush proves pump status)
+
+*Do this with the car on a lift or jack stands, regardless of Phase 1 outcome.*
+
+- **2.1 — Rear Level Control Valve & Linkage**
+  - Locate the **rear level control valve** (hydraulic proportioning valve) mounted approximately in the middle of the rear axle area.
+  - Trace the **linkage from the rear anti-roll bar** to the proportioning valve lever arm.
+  - **CHECK FOR SHEARED LINKAGE:** Known ADS I failure. The plastic linkage part can shear at the lower mounting, causing the system to lose rear ride height completely. A MBClub UK user with a 1992 500SL had this exact failure.
+  - Inspect hydraulic lines from the rear shocks to the valve for leaks, kinks, or disconnection.
+  - *Pass criteria:* Linkage intact and securely connected at both ends, no hydraulic leaks.
+- **2.2 — Accumulator Sphere Condition**
+  - Front Right is confirmed hydro-locked (2026-03-22). Assess the other three corners by manual compression test after >24h standing.
+  - *Pass criteria:* Shock compresses under body weight and returns without bouncing.
+  - *Known result:* Front Left OK, Rear Left/Right compress but sag more than front.
+- **2.3 — Shock Absorber External Inspection**
+  - Visually inspect all four ADS shocks for oil leaks, dented bodies, or damaged solenoid connectors.
+  - Check solenoid connector pins for corrosion.
+  - *Pass criteria:* No external oil weep, connectors clean and dry.
+- **2.4 — Spring Pad Assessment (only if hydraulic system is restored and rear still sits low)**
+  - Measure ride height at all four corners (wheel arch to center of hub).
+  - Compare to factory spec (~380–390mm front, ~375–385mm rear).
+  - If rear is still low with working level control AND intact linkage, inspect rubber spring pads (nubs 1–4).
+
+### Phase 3: Cluster Pull & ADS Warning Lamp (cosmetic / informational — not blocking)
+
+The ADS cluster warning lamp is missing from the indicator strip. This does not affect system function, but it means the oil-level float warning is invisible. Investigate when convenient.
+
+- **3.1 — Pull Cluster & Inspect for ADS Warning Lamp**
+  - Confirmed by 1991/1992 manuals + German manual: ADS has a dedicated cluster lamp. A MBClub UK 1991 500SL confirms it illuminates during bulb check.
+
+  **Cluster Removal Procedure:**
+  1. Turn ignition OFF and remove key.
+  2. Extend steering wheel fully away and to lowest position. No steering wheel removal needed.
+  3. Insert cluster removal hooks (tool **140 589 02 33 00**, or fabricate from a 90° pick with ~3mm toe) into both sides, about 7–8 cm deep.
+  4. Twist each hook 90° so toes point inward — they engage toothed plastic molding on the rear housing.
+  5. Pull firmly and evenly. If stuck, work a credit card with WD-40 around the 4 rubber bumper locations.
+  6. Tilt cluster out between steering wheel and upper dash pad.
+  7. Disconnect 4 connectors: 2 round (grab body and pull) + 2 square (pull by harness — normal).
+
+  **Cautions:**
+  - Do NOT use shallow hook placement (~1 cm) — this can **crack the lens**.
+  - Mechanical drum odometer — disconnecting will NOT affect mileage.
+
+  **Inspection Checklist:**
+  1. **Part number** on rear housing label — cross-reference for ADS variant.
+  2. **Bottom row bulbs** — count populated/empty sockets, check for ADS position.
+  3. **ADS bulb socket** — empty = previous owner removed bulb. Dead bulb = simple W1.2W replacement.
+  4. **Indicator strip** — does it have an ADS symbol position? If no symbol, strip is from non-ADS cluster.
+  5. **While it's out** — replace ALL indicator bulbs with fresh W1.2W wedge bulbs (34 years in service).
+
+  **Reinstallation:** Reverse of removal. After reconnecting, ADS lamp may stay on until engine started and steering wheel turned full left → full right → center (per 1991 manual page 92).
+
+### Phase 4: Solenoid Testing (only if N51 reports faults after Phases 1–2)
+
+N51 currently reports 0 faults on Pin 9. These tests are needed only if new fault codes appear after restoring the hydraulic system, or if ride quality does not improve.
+
+- **4.1 — Solenoid Coil Resistance (all 4 corners)**
+  - Disconnect 2-pin connector from each ADS shock solenoid.
+  - Measure resistance: expected 4–8 Ω. Open (∞) or short (~0 Ω) = shock replacement needed.
 
 | Corner      | Resistance (Ω) | Status |
 | ----------- | -------------- | ------ |
@@ -147,58 +256,58 @@ The ADS I system on the early R129 (1990–1995) consists of:
 | Rear Left   |                |        |
 | Rear Right  |                |        |
 
+- **4.2 — Solenoid Wiring Continuity (harness to module)**
+  - Measure continuity from each solenoid connector pin back to N51 module connector.
 
-- **5.2 — Solenoid Wiring Continuity (harness to module)**
-  - With solenoid connectors unplugged and N51 connector unplugged, measure continuity from each solenoid connector pin back to the corresponding pin on the N51 module connector.
-  - *Pass criteria:* Continuity on both wires for all four corners, no shorts to ground or to each other.
+### Phase 5: Final Assessment & Decision
 
-### Phase 6: Hydraulic System & Self-Leveling (2+ hours, car on lift or jack stands)
+- **5.1 — Compile Results**
+  - After Phases 1–4, the confirmed issues are:
 
-- **6.1 — Hydraulic Fluid Level**
-  - Locate the ADS/SLS hydraulic reservoir (typically near the power steering reservoir on the M119, or integrated into the rear leveling pump assembly).
-  - Check fluid level against min/max marks.
-  - Inspect fluid color: should be clear/yellow (ZH-M / MB 343.0 spec). *Note: The earlier R129 ADS/SLS system shares the same ZH-M fluid type as the soft top hydraulics. Newer MB systems use green CHF 11S, but the early R129 uses ZH-M.* Dark brown = severely oxidized; milky = water contamination.
-  - *Action:* Top up if low; note for future full flush.
-- **6.2 — Rear Leveling Pump Operation**
-  - With the engine running, listen near the rear axle area for the leveling pump activating (a faint electric motor whine, typically runs for a few seconds after start-up or after load changes).
-  - If the pump is NOT running: check its fuse, relay, and power supply independently.
-  - If the pump IS running but the rear doesn't rise: suspect a stuck level control valve, a broken level sensor linkage, or a hydraulic leak.
-- **6.3 — Level Sensor Linkage Inspection (front & rear)**
-  - Visually inspect the plastic level sensor linkage rods on both axles.
-  - These brittle plastic rods connect the suspension arm to a rotary potentiometer on the body. If snapped (extremely common after 35 years), the module sees a fixed "level" and cannot command corrections.
-  - *Pass criteria:* Linkage rods intact and moving freely with suspension travel.
-- **6.4 — Hydraulic Line Inspection**
-  - Trace the high-pressure hydraulic lines from the pump to each rear strut.
-  - Look for wet spots, cracked fittings, or disconnected lines.
-  - Check the accumulator spheres (pressurized nitrogen balls) — they should be firmly attached and dry at the fittings.
+  | Issue | Status | Fix |
+  | ----- | ------ | --- |
+  | ADS pump section not circulating | Phase 1 will determine: clogged filter / air lock / dead pump | €7 filter → €45 fluid → €850 pump |
+  | Front Right sphere hydro-locked | Confirmed 2026-03-22 | Replace front pair: A 129 320 01 15 (~€100–150 each) |
+  | ADS cluster warning lamp missing | Confirmed 2026-03-23 | Pull cluster, inspect socket, replace bulb (Phase 3) |
+  | Rear level control linkage | Unknown — inspect in Phase 2 | If sheared: cheap plastic/metal rod replacement |
 
-### Phase 7: Module-Level Decision (after all above)
-
-- **7.1 — Assess Results & Determine Root Cause**
-  - Compile all findings from Phases 1–6.
-  - The most likely failure modes, ranked by probability:
-    1. **OVP Relay Failure / Blown Fuse + Bulb Removed** — extremely common. The OVP relay drops power to N51, causing it to go offline (Pin 9 weak glow). Previous owner removed the warning bulb to hide it. (Easy/cheap fix.)
-    2. **Ruptured Sphere (Accumulator)** — the computer *cannot* detect this. A blown sphere is a purely mechanical failure. It will cause a rock-hard ride on that corner, but will NOT trigger an ADS warning light on its own. **Note:** If one sphere is blown, it is standard practice to replace them in axle-pairs (i.e., both fronts).
-    3. **Broken level sensor linkage** — causes permanent limp mode. Module may still be healthy but stuck in safe mode. (Cheap plastic part.)
-    4. **Solenoid coil failure** — one or more burned-out shock absorber solenoids cause the module to fault and enter limp mode. The computer *can* detect this via resistance checking. (Requires ADS-specific shock absorber replacement — expensive.)
-    5. **Hydraulic system failure** — low fluid, failed pump, stuck valve. (Repair depends on specific component.)
-- **7.2 — Decision: Repair, Replace Module, or Intentional Bypass**
-  - Based on findings, decide:
-    - **Repair:** If the cause is external to the module (fuse, relay, wiring, sensor linkage), repair and restore ADS function.
-    - **Replace module:** If N51 is dead, source a used unit (MB part number depends on exact variant — check the label on the existing module). Program/adapt if required.
-    - **Intentional bypass:** If ADS repair is uneconomical (e.g., multiple dead solenoid shocks at ~€500+ each), convert to conventional Bilstein B4/B6 shock absorbers and delete the ADS system cleanly. Document the conversion.
+- **5.2 — Decision: Repair or Bypass**
+  - **Repair** (recommended — electronics work, only mechanical issues remain):
+    - Phase 1 flush + filter may restore level control for ~€50.
+    - Front sphere pair replacement restores FR ride quality for ~€200–300.
+    - Cluster lamp is cosmetic.
+  - **Intentional bypass** (only if pump is dead AND rebuilt pump is uneconomical):
+    - Convert to conventional Bilstein B4/B6 shocks and delete ADS. Document the conversion.
+  - **Module replacement** — NOT NEEDED. N51 is alive and healthy.
 
 ## Parts & Tools Needed
 
+**Phase 1 — Hydraulic Flush (NEXT ACTION):**
 
-| Item                                 | Purpose                         | Status                 |
-| ------------------------------------ | ------------------------------- | ---------------------- |
-| Multimeter (Owon HDS242 or Fluke)    | Voltage, resistance, continuity | Acquired ✓             |
-| 12V LED blink-code reader            | X11 Pin 9 diagnostics           | Built ✓                |
-| Trim removal tools (plastic pry set) | Cluster removal, kick panel     | Needed                 |
-| W1.2W / W2W wedge bulb               | ADS warning lamp replacement    | Needed                 |
-| Oscilloscope (Owon HDS242)           | Signal waveform analysis        | Acquired ✓             |
-| ZH-M Hydraulic Fluid (1L)            | Hydraulic fluid top-up          | Needed (if applicable) |
+| Item | Purpose | Status |
+| ---- | ------- | ------ |
+| ZH-M / MB 343.0 Hydraulic Fluid (4L total) | Flush + top-up. Part no. 000 989 91 03. | **1L Acquired ✓ (Febi 02615) — need 3L more** |
+| Hydraulic Suspension Filter (A 129 327 00 91) | Suction filter — prime suspect for blocked pump. ~€7–11. | **Needed** |
+| Transparent PVC Hose (6–8mm ID, ~1m) | Open-loop flush — return line to waste container. | **Needed** |
+| Brake cleaner | Cleaning reservoir cap and return line fitting. | Acquired ✓ |
+| Syringe / turkey baster | Extract old fluid from reservoir. | Acquired ✓ (MTX 500ml) |
+| Lint-free cloth | Wipe reservoir interior (sediment). | Acquired ✓ |
+
+**On hand (diagnostic tools):**
+
+| Item | Purpose | Status |
+| ---- | ------- | ------ |
+| Multimeter (Owon HDS242) | Voltage, resistance, continuity | Acquired ✓ |
+| Oscilloscope (Owon HDS242) | Signal waveform analysis (Phase 4, if needed) | Acquired ✓ |
+| 12V LED blink-code reader | X11 Pin 9 diagnostics | Built ✓ |
+
+**Later phases (not blocking):**
+
+| Item | Purpose | Status |
+| ---- | ------- | ------ |
+| Cluster removal hooks (140 589 02 33 00) or DIY 90° pick | Pull instrument cluster (Phase 3) | Needed (can fabricate) |
+| W1.2W / W2W wedge bulbs | ADS cluster lamp + spares (Phase 3) | Needed |
+| Front Accumulator Spheres x2 (A 129 320 01 15) | Replace hydro-locked FR + pair FL (Phase 2) | Needed |
 
 
 ## Related Work Items
@@ -216,10 +325,23 @@ The ADS I system on the early R129 (1990–1995) consists of:
 | Date       | Phase | Step                | Finding                               | Action                   |
 | ---------- | ----- | ------------------- | ------------------------------------- | ------------------------ |
 | 2026-03-13 | —     | Initial inspection  | ADS switch identified, non-functional | —                        |
-| 2026-03-13 | —     | Highway observation | Warning lamp missing from cluster     | Suspect bulb removed     |
-| 2026-03-14 | —     | Sag test            | Rear low, no self-leveling on start   | Confirmed limp mode      |
+| 2026-03-13 | —     | Highway observation | Warning lamp missing from cluster     | ~~Suspect ADS bulb removed~~ ~~Revised 03-23: missing lamp is ABS, not ADS~~ **Re-revised: 1991 manual confirms ADS HAS a cluster lamp — original observation may be correct** |
+| 2026-03-14 | —     | Sag test            | Rear low, no height change on start   | ~~Confirmed limp mode~~ ~~Revised: car has no SLS — rear low is spring sag / pad wear~~ **Re-revised: German manual confirms Euro ADS I HAS level control (Niveauregulierung). Low rear likely hydraulic level control failure (sheared linkage / low fluid / failed pump).** |
 | 2026-03-18 | 4     | Pin 9 blink-code    | Weak static glow, no pulses           | Module not communicating |
 | 2026-03-22 | 2     | 2.2 OVP Fuse Check  | 10A fuse inside OVP relay is intact   | Need to test relay power |
 | 2026-03-22 | —     | Manual Suspension Test | Front Right is rock hard (almost zero travel under body weight). Front Left compresses. Rear compresses. | Confirms Front Right nitrogen accumulator (sphere) is ruptured/hydro-locked. Front Left sphere is intact and likely defaulting to failsafe firm. |
+| 2026-03-23 | 1/4   | 1.3 / 4.1 Pin 9 re-test | **ADS module alive!** Battery >13V (vs. <12V on 03-18). Pin 9 returns **1 blink = no stored faults.** | Module communicating and reports healthy. Previous "static glow" was insufficient supply voltage. Revised hypothesis: electronics OK; ride issue is mechanical (blown sphere). |
+| 2026-03-23 | 1     | 1.1 Console switch test | Switch LED stays off with engine on and off. No observable mode change. | Switch LED may be dead, or wiring between N51 and switch is broken. Module reports healthy via blink-code but does not drive the switch indicator. Needs back-probing (Phase 4.2). |
+| 2026-03-23 | —     | Pin 11/12 sanity check | Re-tested one of the two (unsure which) with >13V — still static glow, not communicating. | ATA/IRCL module non-communication is NOT a voltage issue (unlike ADS). Genuine module fault or different root cause. Defer to later investigation. |
+| 2026-03-23 | —     | Self-leveling analysis | ~~Confirmed via owner's manual + data card: ADS I (code 211) has NO self-leveling.~~ **OVERTURNED by German manual: European ADS I = "Niveauregulierung mit adaptivem Dämpfungs-System" — includes hydraulic level control.** US manual describes damping-only, but is wrong for Euro-spec cars. | ~~Rear low is spring sag / worn spring pads~~ **Hydraulic level control restored to Phase 6. Priority: check reservoir fluid level (engine bay, next to washer fluid), then inspect rear axle linkage.** |
+| 2026-03-23 | 3     | Cluster analysis | ABS symbol **confirmed present** and **bulb functional** (illuminates on bulb check, extinguishes with engine). ABS system healthy. | ABS closed — no issue. |
+| 2026-03-23 | —     | **1991 manual discovery** | Downloaded 1991 owner's manual (was using 1990 which predates ADS). **Major finding:** 1991 manual confirms ADS has a dedicated cluster warning lamp (page 13 + page 92). Also adds ASR, ASD indicators and snow chain switch not in 1990 manual. Dashboard item 22 changed from antenna switch to ADS switch. | **RE-OPENED warning lamp investigation.** The original "missing lamp" from the ferry may be the ADS indicator. Previous conclusion "ADS not in standard indicator set" was based on wrong-year manual. Check for ADS lamp on next ignition-ON bulb check. |
+| 2026-03-23 | —     | Pin 7 identification | **Pin 7 "RB" = Roll Bar (Überrollbügel)**, NOT ABS. Confirmed via WIS documentation, BenzWorld, MBClub UK, Motor-Talk. Codes 2–7 were soft top / roll bar limit switch faults (cleared to 1 blink). | Pin 7 correctly labeled "RB" = Roll Bar. Roll bar system functional (codes cleared). |
+| 2026-03-23 | —     | ABS diagnostic research | **ABS has NO blink-code diagnostic on the 16-pin X11 connector.** ABS output only available on 38-pin connector (1993+). Cluster warning lamp is the ONLY ABS diagnostic. ABS lamp confirmed working. | ABS diagnostic closed — lamp works, system healthy. |
+| 2026-03-23 | —     | Pin 7 re-test | Pin 7 re-tested with >13V — returns 1 blink (still clear). Roll bar system healthy. | No action needed for roll bar. |
+| 2026-03-23 | —     | US vs Euro manual analysis | **Both English manuals (1990/1991) are US-market editions.** AOK912 is European-spec. "CHECK ENGINE" indicator (visible in US manual diagram far right of strip) is California-only (page 93: "On-Board Diagnostic System — California models only"). Correctly absent from user's Euro cluster. "BRAKE" text in US diagram = brake symbol in Euro cluster. German Betriebsanleitung 1991–1993 downloaded but is image-only (no text extraction possible). | **CHECK ENGINE is NOT missing — never fitted to Euro cars.** Indicator strip layout differences are US vs Euro spec. ADS cluster lamp question remains open — needs ignition-ON bulb check. |
+| 2026-03-23 | —     | **German manual translation — MAJOR CORRECTION** | Translated German Betriebsanleitung page 97: **"Niveauregulierung mit adaptivem Dämpfungs-System (ADS)"** = Level Control WITH Adaptive Damping System. Page describes: automatic vehicle level adjustment, optimal damper firmness, oil level warning lamp behavior, and oil reservoir. Also found oil level warning: "Ölstand Niveauregulierung zu niedrig" = oil level too low. | **OVERTURNS previous "no self-leveling" conclusion.** European ADS I INCLUDES hydraulic ride height control. System has: pump+reservoir in engine bay (next to washer bottle, fluid MB 343.0/ZH-M), rear proportioning valve with ARB linkage. Low rear likely caused by failed level control linkage (known shear point) or low/empty fluid. **Phase 6 hydraulic steps RESTORED.** |
+| 2026-03-23 | —     | **Fahrzeugniveau switch discovery** | German manual page 98: **SEPARATE vehicle level switch** exists at position 2 on the left instrument panel (next to headlight switch). Replaces headlight range adjuster on ADS cars. Two modes: Normal (auto-lowers 15mm >120 km/h) and Raised (+30mm <50 km/h for poor roads). Has its own indicator LED. Speed-dependent: auto-reverts to Normal at 120 km/h. **CONFIRMED PRESENT on AOK912** — owner had mistaken it for an interior lighting switch (US manual ambiguity). | Switch present = car has full ADS/Niveauregulierung as built. Strengthens case that instrument panel is original (weakens cluster-swap theory). |
+| 2026-03-23 | 1/6   | **Switch & reservoir re-test (engine running)** | **FINDINGS:** (1) ADS console switch LED **WORKS** — illuminates at night, turns **RED in Sport/up position.** Previous "dead LED" was low voltage. (2) Fahrzeugniveau switch LED **illuminates** with ignition. (3) Level switch UP has **NO effect on ride height** with engine running. (4) Hydraulic reservoir is **below MIN** — level dropped only ~0.5cm since 2026-03-17. **No active leak found.** (5) **CRITICAL CLUE: ADS fluid is CLEAR** while power steering fluid is brown/aged — strongly suggests the ADS pump has NOT been running (fluid not circulated). | Console switch does NOT need replacement. **Level control inoperative likely due to dead/unpowered pump** (not just low fluid). Clear fluid = stagnant = no pumping for years. **NEXT: listen for pump when level switch activated. If silent, check pump fuse/relay/power. Top up to MAX before further testing.** |
 
 

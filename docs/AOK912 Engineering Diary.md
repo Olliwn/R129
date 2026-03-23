@@ -6,7 +6,7 @@
 
 **Transmission:** 722.3 (4-Speed Automatic)
 
-**Chassis:** Adaptive Damping System (ADS) Equipped
+**Chassis:** ADS — Niveauregulierung mit adaptivem Dämpfungs-System (Level Control with Adaptive Damping)
 
 ## **📋 Vehicle Data Card (Datakarte) / Manufacturing Plate**
 *(Decoded from vehicle body plate)*
@@ -32,7 +32,10 @@
 
 *A high-level summary of confirmed defects and mechanical faults requiring attention, separated from the general to-do list.*
 
-*   **ADS System (Suspension):** System is in mechanical limp/failsafe mode. The ADS module is unresponsive (weak static glow on Pin 9, no blink codes). **Front Right** accumulator sphere is ruptured/hydro-locked (rock hard, zero travel).
+*   **ADS System (Suspension) — TWO INDEPENDENT SUBSYSTEMS:**
+    * **Subsystem A: Adaptive Damping (electronic, monitored by N51):** Module is **alive, reports no faults** (1 blink on Pin 9, confirmed 2026-03-23 with >13V). Console switch LED works, turns RED in Sport mode. ABS lamp works. **Front Right** accumulator sphere is ruptured/hydro-locked (invisible to N51). ADS cluster warning lamp still missing from indicator strip.
+    * **Subsystem B: Niveauregulierung / Level Control (mechanical/hydraulic, NOT monitored by N51):** This subsystem is **completely independent** from the damping electronics. On ADS I, height sensing is MECHANICAL (anti-roll bar linkage to proportioning valve — no electronic sensors). N51 does NOT monitor level control — Pin 9 blink codes cover ONLY damping. **The entire level control system can be dead and Pin 9 still reports "1 blink = healthy."** The only electronic indicator for level control faults is the cluster warning lamp (oil level float sensor) — which is MISSING from this cluster.
+    * **Level Control Status: INOPERATIVE.** Fahrzeugniveau switch is present and LED works, but pressing UP has no effect on ride height. Tandem pump (A 129 460 07 80) ADS section is NOT circulating fluid (clear vs. brown PS fluid). Reservoir below MIN (no active leak). Most likely causes (in order): **clogged suction filter (A 129 327 00 91, ~€7)**, air lock/lost prime, collapsed suction hose, worn pump internals. **NEXT: Phase 6.0 — hydraulic flush + filter replacement + pump test (see `work/ads_diagnostic/README.md`).**
 *   **Central Locking (PSE):** Completely inoperative. The pneumatic pump in the trunk is silent when actuated.
 *   **Windshield Wiper / Washer:** Wiper does not consistently stop in the correct park position. Washer fluid is only spraying from 2 out of 4 nozzles.
 *   **Engine Mounts:** Slight vibration felt in the cabin at 700-800 RPM idle, indicating the fluid-filled engine mounts have collapsed.
@@ -64,7 +67,7 @@
 
 * **Performance:** Car performed flawlessly at highway speeds. Engine temps stable.  
 * **Ride Quality:** Extremely comfortable, "floating" ride, confirming ADS accumulators (spheres) are not completely blown out. However, the car felt slightly skittish, attributed to 9-year-old (2015) tires and likely a worn steering damper.  
-* **Diagnostics (Ferry Transit):** Noticed ADS dashboard warning light is completely dead (no dead-fronting outline visible). Suspect a previous owner removed the bulb to hide a system fault. Also noted the pneumatic central locking (PSE) is completely silent and inoperative.
+* **Diagnostics (Ferry Transit):** Noticed a missing indicator lamp in the cluster. ~~Originally thought ADS~~ ~~Then thought ABS~~ **Re-opened 2026-03-23:** Downloaded the correct 1991 owner's manual — it confirms ADS **does** have a cluster warning lamp (unlike the 1990 manual we were using). ABS lamp confirmed functional. **The original "missing lamp" may actually be the ADS indicator.** Needs verification. Also noted the pneumatic central locking (PSE) is completely silent and inoperative.
 
 ### **March 14, 2026 \- Arrival in Finland & Failsafe Confirmation**
 
@@ -191,6 +194,35 @@
 *   **Club Membership:** Paid the official Mercedes-Benz Club membership fee for the year.
 *   **Next Steps:** Awaiting parts delivery to begin the baseline fluid/filter flush.
 
+### **March 23, 2026 \- ADS Module Alive & System Architecture Corrections**
+
+**Location:** Oulu, Finland
+
+**Event:** Critical breakthrough on ADS diagnostics. Re-tested blink-code interface with adequate battery voltage and achieved module communication. Corrected several earlier assumptions.
+
+*   **ADS Module Communication (Pin 9):** Re-tested X11 Pin 9 with battery voltage >13V (vs. <12V during the 2026-03-18 test). The ADS control module (N51) is **alive and communicating** — returns **1 blink = no stored fault codes.** The earlier "weak static glow" was caused entirely by insufficient supply voltage. The module requires alternator-level voltage (>13V) to boot from sleep.
+*   **ADS Console Switch:** ~~Tested the ADS Sport/Comfort console switch with engine running and off. The switch LED stays off in both conditions.~~ **CORRECTED (later same day):** Re-tested with adequate battery voltage (>13V, engine running). The switch LED **illuminates** (night illumination works) AND **turns RED when pressed to Sport/up position.** The module IS driving the switch correctly. All earlier "dead" observations were caused by insufficient voltage. **ADS console switch does NOT need replacement.**
+*   **Pin 11/12 Sanity Check:** Re-tested one of Pin 11 (ATA) or Pin 12 (IRCL) with >13V as a sanity check. Still static glow — not communicating. Unlike ADS, the ATA/IRCL non-communication is NOT a voltage issue. Genuine module fault.
+*   **~~Self-Leveling Correction~~** → **Self-Leveling RESTORED (CRITICAL CORRECTION):** Earlier conclusion (based on US manual) that ADS I is damping-only was **WRONG for European-spec cars.** The German Betriebsanleitung 1991–1993 page 97 states: **"Niveauregulierung mit adaptivem Dämpfungs-System (ADS)"** — Level Control WITH Adaptive Damping System. The European ADS I system includes hydraulic ride height control. Components confirmed: hydraulic pump + translucent plastic reservoir (engine bay, next to washer fluid bottle; fluid MB 343.0 / ZH-M, part no. 000 989 91 03), rear level control proportioning valve (mounted mid-rear-axle), anti-roll bar linkage to proportioning valve, and hydraulic lines from shocks to valve. **The rear sitting low (1–2 finger gap) is now the primary suspect for a hydraulic level control failure** — most likely a sheared rear linkage (known ADS I failure: plastic part breaks at lower mounting) or empty/low reservoir fluid. A MBClub UK user with a 1992 500SL had the same symptom caused by a broken linkage — ride height was instantly restored when the pieces were held together. **The "Plastic Reservoir (Next to washer fluid)" noted on 2026-03-17 at "just below minimum and clearer in color" may be the ADS hydraulic reservoir, not the coolant tank.** Needs visual verification: trace hose connections.
+*   **Cluster Warning Lamp — RE-OPENED:** ABS indicator confirmed working (symbol present, bulb lights on bulb check). However, **downloading the correct 1991 owner's manual** revealed that ADS **does** have a dedicated cluster warning lamp (page 92: *"The indicator lamp comes on with the key in steering lock position 2 and goes out when the engine is running"*). The earlier conclusion "ADS was never in the standard indicator set" was based on the **1990** manual, which predates ADS entirely. The 1991 manual adds ADS, ASR, ASD, and snow chain indicators — none of which appear in the 1990 manual. **The original "missing lamp" observation from the ferry may have been the ADS indicator after all.** Needs verification during ignition-ON bulb check.
+*   **US vs European Manual + German Manual Confirmation:** Both English manuals (1990 and 1991) are **US-market** editions. The 1991 US diagram shows "CHECK ENGINE" (California-only, page 93) and "BRAKE" text — both correctly absent from the European cluster. Downloaded the German Betriebsanleitung 1991–1993 — its cluster diagram is a **perfect match** to the actual cluster, **except the ADS warning lamp is missing from the user's indicator strip.** This confirms the ADS indicator should be present on a Euro-spec ADS-equipped 1991 500SL but is not. Possible causes: (a) cluster swapped from non-ADS car (odometer accuracy concern!), (b) indicator strip swapped (unlikely — clean factory borders), (c) dead bulb behind dead-fronted symbol (most hopeful — would be invisible without backlighting). **Next step: pull cluster, check part number, inspect for ADS bulb socket.**
+*   **~~ADS Console Switch Replacement~~** ~~Part number 1298211951.~~ **CANCELLED — switch works fine.** LED illuminates and Sport indicator turns RED. Previous "dead" was low voltage.
+*   **Fahrzeugniveau-Einstellung Switch DISCOVERED (German manual page 98):** A **second, separate suspension switch** exists on the car — the **Vehicle Level Adjustment Switch** at position 2 on the left instrument panel (next to the headlight switch). On ADS-equipped cars, this switch **replaces the headlight range adjuster** (Leuchtweiterregler). It controls ride height independently of the ADS Sport/Comfort console switch:
+    - **Down = Normal Level:** Default for general driving. Above ~120 km/h, the car auto-lowers ~15mm.
+    - **Up = Raised Level:** For poor roads. LED in switch illuminates. Below ~50 km/h, car raises ~30mm. Between 50–120 km/h, reverts to normal. At 120 km/h, auto-switches to Normal and LED goes out.
+    This confirms the level control is a **speed-dependent, driver-selectable, fully active system** — not just passive load compensation. **CONFIRMED PRESENT on AOK912** — the owner confirms the switch is physically at position 2 but had mistaken it for an interior lighting dimmer based on the US manual. This strengthens the case that the instrument panel is original ADS-spec (weakens the cluster-swap theory for the missing ADS warning lamp). **Next test: engine running, press UP, observe if ride height changes and switch LED illuminates.**
+*   **Fahrzeugniveau Switch & Hydraulic Reservoir Test (later 2026-03-23, engine running):**
+    - **ADS console switch:** LED works, turns RED in Sport — electronics fully functional.
+    - **Fahrzeugniveau switch:** LED illuminates. Pressing UP (Raised Level) has **NO effect on ride height.** System commands the raise but cannot execute it.
+    - **Reservoir level:** The translucent reservoir next to the washer fluid is **below the MIN marking.** MAX/MIN markings are recessed deep inside the canister and hard to read — initial "almost empty" assessment was a misread. Level dropped only ~0.5 cm since 2026-03-17 (within temperature/measurement tolerance). **No active leak found** anywhere under the car. Fluid loss is gradual/historical over the car's 35-year life. Confirms this IS the ADS/Niveauregulierung fluid. **Next: top up to MAX with Febi 02615 ZH-M and retest level control.**
+*   **Revised Working Hypothesis (updated 2026-03-23, LATEST):** The ADS electronic system is **fully functional** — module, console switch, and level switch all work. Two mechanical issues remain: (1) **ADS section of the tandem pump is NOT circulating fluid** (clear stagnant fluid vs. brown aged power steering fluid = no pumping action for years). Most likely cause: **clogged suction filter (A 129 327 00 91, ~€7)** blocking the pump's ADS pickup. Alternative: air-locked circuit from low fluid, or worn internal vanes/seals. (2) **Front Right sphere ruptured/hydro-locked.**
+*   **NEXT SESSION ACTION PLAN — Phase 6.0 Hydraulic Flush & Pump Test:**
+    1. **Parts to acquire:** 3L more Febi 02615 ZH-M fluid (have 1L), new filter A 129 327 00 91, PVC hose 6–8mm ID ~1m.
+    2. **Phase A (open-loop flush):** Disconnect return line → remove/inspect filter → flush 3–4L fresh fluid through the system with engine running → clean reservoir interior.
+    3. **Phase B (closed-loop pump test):** Reconnect return line → install new filter → fill to MAX → mark level → start engine + press Fahrzeugniveau UP → watch reservoir for 5–10 min.
+    4. **Decision point:** If reservoir level drops = pump alive, was clogged/air-locked (cheap fix). If level stays static = pump ADS section internally failed → need rebuilt pump A 129 460 07 80 (~€850).
+    5. Full procedure documented in `work/ads_diagnostic/README.md` Phase 6.0.
+
 ## **📝 Task / Todo List & Quick Studies**
 
 ### **1. Windshield Wiper Parking Issue**
@@ -220,8 +252,9 @@
   * **Observed Symptoms:** 
     * Rear ride height is low (1-2 finger gap) vs. Front (3 finger gap).
     * ADS Lift Switch is non-functional.
-    * ADS Warning Lamp likely disabled/removed by previous owner.
+    * ~~ADS Warning Lamp likely disabled/removed~~ ~~Corrected: Missing lamp is ABS, not ADS~~ **Re-opened: 1991 manual confirms ADS DOES have a cluster lamp. Needs verification.**
     * System likely in "Limp/Safe Mode" (Defaulted to maximum stiffness).
+    * **NEW (2026-03-23):** European ADS I INCLUDES hydraulic level control (Niveauregulierung). Low rear ride height is now suspected to be a failed level control linkage or low hydraulic fluid — not spring sag.
   * **Mechanical Condition:** Rear Nitrogen Accumulators (Spheres) passed the "Bounce Test" (system is firm but not "rock hard" or bouncing/oscillating), suggesting rear diaphragms are currently intact. However, after sitting >24h, the rear compresses significantly more than the front due to hydraulic pressure bleed-off. **CRITICAL FINDING (2026-03-22):** The Front Right shock is "rock hard" with almost zero travel under full body weight, confirming the Front Right nitrogen accumulator is ruptured and hydro-locked. Front Left compresses normally under body weight (feels stiffer than a standard car, consistent with the expected unpowered ADS "failsafe" firm mode), confirming the Front Left sphere is intact and the solenoid is likely defaulting correctly to the firm position.
 * **2. Planned DIY Scope (Mechanical)**
   * **Front Axle:** Replace Lower Control Arms (LCA) as complete units (includes bushings and ball joints).
@@ -241,11 +274,11 @@
     | **Rear** | Wheel Arch to Center of Hub | ~375mm - 385mm |
     | **Visual** | Tire to Arch Gap | roughly equal (approx. 2-2.5 fingers) |
 
-  * *Note:* If the rear is significantly lower, check the Rear Level Control Valve linkage for adjustment or the Spring Pads (nubs 1 through 4) for incorrect thickness.
+  * *Note:* If the rear is significantly lower, **FIRST check the hydraulic level control:** (a) reservoir fluid level in engine bay, (b) rear level control linkage integrity (anti-roll bar to proportioning valve — known plastic shear point). Only if hydraulic system is confirmed intact, check the Spring Pads (nubs 1 through 4) for incorrect thickness.
 * **5. Next Diagnostic Steps**
   * **ADS Code Extraction:** Use a blink-code reader on Pin 9 of the 16-pin Diagnostic Connector. *(See project: [ADS Blink-Code Reader](../work/ads_blink_reader/README.md))*
   * **Warning Lamp Restoration:** Reinstall the ADS bulb in the instrument cluster to confirm system communication.
-  * **Hydraulic Flush:** Plan for a full system flush with Pentosin/ZH-M fluid and a 10-micron filter replacement following mechanical work.
+  * **Hydraulic Flush (Phase 6.0 — PRIORITY):** Full system flush with ZH-M fluid (4L), replace suction filter (A 129 327 00 91). This is the diagnostic test that determines if the tandem pump ADS section is alive. Procedure documented in `work/ads_diagnostic/README.md` Phase 6.0. **Do this BEFORE any mechanical suspension work.**
 
 ### **5. Central Locking (PSE) Inoperative**
 * **Symptom:** Central locking system does not work. There is no sign of life from the vacuum pump; locks only operate manually.
@@ -256,11 +289,11 @@
 * **Observation (March 17, 2026):** Checked engine bay during garage storage (cold engine, 10-15°C).
   * **Intake Hoses:** Passenger side intake hose is worn with holes in the flexible/thin section.
   * **Metal Cylinder (Front of engine):** Fluid level is just below the minimum line and very dark.
-  * **Plastic Reservoir (Next to washer fluid):** Fluid level is just below the minimum line and clearer in color. 
+  * **Plastic Reservoir (Next to washer fluid):** Fluid level was below MIN on 2026-03-17, and dropped only ~0.5cm by 2026-03-23. **CONFIRMED (2026-03-23): This IS the ADS/Niveauregulierung hydraulic fluid reservoir** (not coolant). MAX/MIN markings are deep inside canister (hard to read — led to initial "almost empty" misread). No active leak found. Fluid loss is gradual/historical. Fluid: MB 343.0 / ZH-M (clear/amber). Top up to MAX and monitor.
 * **Diagnosis:**
   * **Intake Hoses:** Brittle plastic/rubber hoses are a known M119 wear item. Vacuum leaks here bypass the MAF and allow unfiltered air.
-  * **Metal Cylinder = Power Steering/SLS Pump Reservoir:** Sits directly behind the distributor on the front left (driver side) of the engine. Dark fluid means the old ATF/hydraulic fluid is oxidized and needs changing. Inside this canister, under the spring, is a replaceable paper filter. 
-  * **Plastic Reservoir = Engine Coolant Expansion Tank:** Situated on the front right (passenger) side. Since it's cold, the coolant has contracted, but being below the minimum line requires a top-up to prevent air induction.
+  * **Metal Cylinder = Power Steering Pump Reservoir:** Sits directly behind the distributor on the front left (driver side) of the engine. Dark fluid means the old ATF/hydraulic fluid is oxidized and needs changing. Inside this canister, under the spring, is a replaceable paper filter. Note: on some R129s the ADS may share the power steering hydraulic circuit (Zentralhydraulik). If no separate ADS reservoir exists, this metal canister may serve both systems.
+  * **Plastic Reservoir = CONFIRMED ADS/Niveauregulierung Hydraulic Fluid Reservoir:** Situated on the front right (passenger) side, next to the washer fluid. ~~Originally identified as coolant expansion tank (2026-03-17).~~ **CONFIRMED 2026-03-23:** This is the ADS hydraulic reservoir. Level is below MIN but stable (only ~0.5cm drop over 6 days, no active leak). Fluid is MB 343.0 / ZH-M (clear/amber). The coolant expansion tank is a separate container. **Top up to MAX with Febi 02615 and monitor.**
 * **Action Items:**
   * **Air Intake & Filters:** Replace both left and right intake hoses entirely. Perform an engine air filter replacement (Left/Right) while the airbox is open.
   * **Power Steering Flush:** Syringe out old fluid, replace the internal reservoir filter (Part No. `A 000 466 21 04`), and refill/flush with MB 236.3 spec fluid (or equivalent approved ATF). *(See project: [Power Steering Flush](../work/power_steering_flush/README.md))*

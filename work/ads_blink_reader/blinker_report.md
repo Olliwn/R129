@@ -17,7 +17,7 @@
 | 6 | SRS (Airbag) | Blink-code | **Active** — returned valid codes |
 | 7 | RB | Blink-code | **Active** — returned valid codes |
 | 8 | DI/EZL (Ignition) | Blink-code | **Active** — returned valid codes |
-| 9 | ADS (Adaptive Damping) | Blink-code | **Static glow (weak)** — module present but not communicating |
+| 9 | ADS (Adaptive Damping) | Blink-code | ~~Static glow (weak)~~ → **Active** — returns 1 blink (no faults) when battery >13V |
 | 10 | RST | Blink-code | **Active** — returned valid codes (stubborn reset) |
 | 11 | ATA (Anti-Theft Alarm) | Blink-code | **Static glow (medium)** — module present but not communicating |
 | 12 | IRCL (Infrared Central Lock) | Blink-code | **Static glow (medium)** — module present but not communicating |
@@ -33,18 +33,33 @@
 - **After reset:** 1 blink (no faults — successfully cleared)
 - **Note:** Was in a 2-blink fault state that needed reset
 
-### Pin 7 — RB
+### Pin 7 — RB (Roll Bar / Überrollbügel)
 - **Before reset:** 2 / 3 / 4 / 5 / 6 / 7 pulses (six stored fault codes)
 - **After reset:** 1 blink (no faults — successfully cleared)
+- **2026-03-23 re-test (>13V):** 1 blink (still clear after garage-only driving)
+- **Pin identification confirmed:** Pin 7 on the R129 16-pin X11 = Roll Bar controller (N52). Confirmed via MBClub UK WIS reference, BenzWorld R129 threads, and Motor-Talk. "RB" = Roll Bar (Überrollbügel), not ABS.
+- **Approximate fault code mapping** (from WIS CST/RB documentation — W124 Cabriolet reference, R129 codes may differ slightly):
+
+| Blinks | Fault | AOK912 Status |
+|--------|-------|---------------|
+| 1 | No faults stored | Current (cleared 2026-03-18) |
+| 2 | Low voltage / Control module circuit | Was stored; cleared |
+| 3 | Normal operating time exceeded | Was stored; cleared |
+| 4 | Illogical limit switch signals | Was stored; cleared |
+| 5 | Soft top compartment cover locked switch (A25/1s2) | Was stored; cleared |
+| 6 | Soft top compartment cover closed switch (A25/1s1) | Was stored; cleared |
+| 7 | Soft top storage compartment open switch (S84/5) | Was stored; cleared |
+
+- **Roll bar confirmed operational:** Manual raise/lower via the console button works without problems. The 6 stored codes were stale faults accumulated over time (cleared successfully). A BenzWorld user with a 1992 300SL reported nearly identical codes (2–8) from Pin 7 that would NOT clear — AOK912's clearing to 1 blink confirms the system is healthy.
 
 ### Pin 8 — DI/EZL (Ignition System)
 - **Before reset:** 17 pulses (single fault code)
 - **After reset:** 1 blink (no faults — successfully cleared)
 
 ### Pin 9 — ADS (Adaptive Damping System)
-- **Before reset:** Weak static glow only — no blink pulses returned
-- **After reset:** N/A (cannot clear without valid communication)
-- **Diagnosis:** ADS control module is not communicating properly. Consistent with earlier failsafe/limp-mode diagnosis. Module may be powered but its internal diagnostic output stage is either faulted or held in an intermediate state.
+- **2026-03-18 (battery <12V):** Weak static glow only — no blink pulses returned
+- **2026-03-23 (battery >13V):** **1 blink — no stored fault codes**
+- **Diagnosis (revised):** Module is alive and communicating. The earlier static glow was caused by insufficient supply voltage (<12V, engine off / depleted battery). With adequate voltage (>13V), the module boots normally and reports a clean fault memory. The ADS electronic system may be fully functional — the ride stiffness issue appears to be mechanical (ruptured nitrogen accumulator sphere on Front Right).
 
 ### Pin 10 — RST
 - **Before reset:** 11 / 20 / 28 / 29 pulses (four stored fault codes)
@@ -54,24 +69,55 @@
 ### Pin 11 — ATA (Anti-Theft Alarm)
 - **Before reset:** Static glow (medium intensity) — no blink pulses
 - **After reset:** N/A
-- **Diagnosis:** Module present but not generating diagnostic output. May be disabled or in a permanent fault state.
+- **2026-03-23 re-test (>13V):** One of Pin 11 or 12 was re-tested as a sanity check with battery >13V — still static glow, not communicating. Unlike ADS (Pin 9), the ATA/IRCL non-communication is NOT a voltage issue.
+- **Diagnosis:** Module present but not generating diagnostic output. May be disabled or in a permanent fault state. Confirmed not a supply voltage issue (unlike ADS which woke up at >13V).
 
 ### Pin 12 — IRCL (Infrared Central Lock)
 - **Before reset:** Static glow (medium intensity) — no blink pulses
 - **After reset:** N/A
-- **Diagnosis:** Same as ATA — module present but not communicating. Possibly related to the inoperative PSE central locking system.
+- **2026-03-23 note:** See Pin 11 note — one of these two was re-tested at >13V and still showed static glow. The other remains untested at higher voltage.
+- **Diagnosis:** Same as ATA — module present but not communicating. Possibly related to the inoperative PSE central locking system. Not a voltage-related issue.
 
 ### Pin 14 — ESMC
 - **Before reset:** 11 / 12 pulses (two stored fault codes)
 - **After reset:** 1 blink (no faults — successfully cleared)
 - **Note:** Was in a 2-blink fault state that needed reset
 
+## ABS Diagnostic Availability — NONE on 16-pin X11
+
+**CRITICAL FINDING (2026-03-23):** The early R129 (1991) with M119.960 KE-Jetronic and the 16-pin X11 connector does **NOT** have ABS diagnostic blink codes on any pin. Pin 7 (initially suspected as ABS) is confirmed to be the Roll Bar. ABS diagnostic output was only introduced on the 38-pin X11/14 connector (1993+ models).
+
+The **only** ABS status indicator on this car is the **ABS warning lamp in the instrument cluster.** ABS lamp is **functional** — symbol present, bulb illuminates on ignition-ON bulb check, extinguishes with engine running (= ABS healthy). No action needed.
+
+**1991 Manual Discovery (2026-03-23):** The 1991 owner's manual (correct model year — we were previously referencing the 1990 manual which predates ADS) confirms that **ADS also has a dedicated cluster warning lamp** (page 13 + page 92). This means the original "missing lamp" observation may have been the ADS indicator, not ABS. The ADS cluster lamp should illuminate at ignition position 2 and extinguish with the engine running (page 92). **Needs verification on next ignition-ON bulb check.**
+
+**German Manual Translation — MAJOR SYSTEM CORRECTION (2026-03-23):** The German Betriebsanleitung 1991–1993 describes European ADS as **"Niveauregulierung mit adaptivem Dämpfungs-System (ADS)"** — Level Control WITH Adaptive Damping. Unlike the US manual (damping-only), the European system includes hydraulic ride height control with: tandem pump (A 129 460 07 80, engine-driven, shared with power steering), reservoir (engine bay, next to washer fluid; MB 343.0 / ZH-M fluid), rear proportioning valve with anti-roll bar linkage, and hydraulic lines to shocks.
+
+**CRITICAL: Pin 9 ONLY Monitors Damping, NOT Level Control (2026-03-23):** On ADS I, the system is actually TWO independent subsystems: (A) Adaptive Damping (electronic, monitored by N51 → Pin 9 blink codes) and (B) Niveauregulierung / Level Control (mechanical/hydraulic, NOT monitored by N51). Height sensing on ADS I is MECHANICAL (anti-roll bar linkage to proportioning valve — no electronic sensors). The ADS module has NO visibility into the level control system. **Pin 9 returning 1 blink = damping electronics are healthy. It tells us NOTHING about level control.** The entire hydraulic level control loop can be completely dead (empty reservoir, failed pump section, broken linkage, seized valve) and Pin 9 will still report "1 blink = all good." The only electronic warning for level control is the cluster oil-level float sensor → ADS warning lamp — which is MISSING from this cluster. *(ADS II, 1996+, upgraded to electronic ride height sensors integrated with the module.)*
+
+Confirmed R129 16-pin X11 pin map (1991 M119.960 KE-Jetronic):
+
+| Pin | System | Source |
+|-----|--------|--------|
+| 1 | Ground (Terminal 31) | Standard |
+| 3 | KE (Fuel Injection) | WIS via MBClub UK |
+| 6 | SRS (Airbag) | Tested + confirmed |
+| 7 | RB (Roll Bar) | WIS + BenzWorld + Motor-Talk confirmed |
+| 8 | EZL/AKR (Ignition) | WIS via MBClub UK |
+| 9 | ADS (Adaptive **Damping** only — does NOT cover Niveauregulierung/level control) | Tested + confirmed (option 211) |
+| 10 | RST (Soft Top) | BenzWorld R129 thread |
+| 11 | ATA (Anti-Theft Alarm) | Tested |
+| 12 | IRCL (Infrared Central Lock) | Tested |
+| 14 | ESMC | Tested + confirmed |
+| 16 | +12V (Terminal 15) | Standard |
+| — | **ABS: NOT AVAILABLE** | WIS + multiple forum sources |
+
 ## Channel Summary for Interface Board Design
 
 | Category | Pins | Count | Interface Requirement |
 |----------|------|-------|-----------------------|
-| Active blink-code (RX+TX) | 6, 7, 8, 10, 14 | 5 | TLP521 RX opto + TX opto (emitter-follower) + 2N2222 driver |
-| Static glow (RX+TX) | 9, 11, 12 | 3 | Same hardware as above; firmware detects static vs. pulsing |
+| Active blink-code (RX+TX) | 6, 7, 8, 9, 10, 14 | 6 | TLP521 RX opto + TX opto (emitter-follower) + 2N2222 driver |
+| Static glow (RX+TX) | 11, 12 | 2 | Same hardware as above; firmware detects static vs. pulsing |
 | KE duty-cycle (RX only) | 3 | 1 | TLP521 RX opto only, timer capture for duty-cycle measurement |
 | Not fitted | 5, 13 | 2 | No hardware needed |
 | Power/Ground | 1, 16 | 2 | Direct connection (fused) |

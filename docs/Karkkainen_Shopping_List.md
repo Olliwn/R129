@@ -69,7 +69,7 @@
 - [x] **Hydraulic Fluid / Hydrauliikkaöljy (ADS & Soft Top)** (Febi 02615 MB 343.0 / ZH-M purchased - *Confirmed: ZH-M is the correct fluid for both the R129 soft top AND the early ADS/SLS suspension system!*)
 - [ ] **Windshield Washer Fluid / Lasinpesuneste** (Summer/Bug-removing mix)
 - [x] **Assorted Fuses / Sulakelajitelma** (Ceramic/Copper Torpedo set + Dunlop blades purchased)
-- [ ] **Instrument Cluster Bulbs / Mittariston polttimot** (W1.2W and W2W wedge base bulbs for ADS warning lamp)
+- [ ] **Instrument Cluster Bulbs / Mittariston polttimot** (W1.2W and W2W wedge base bulbs — spares for any burned-out warning lamps. ABS symbol strip is confirmed present on the cluster; if ABS lamp doesn't illuminate during bulb check, it's just a burned-out bulb.)
 - [ ] **Distributor Caps (x2) / Virranjakajan kannet** (Bosch or Bremi, OEM Part: `A 119 158 01 02` - *Action: Inspect existing caps first before purchasing, only replace if carbon tracking, deep pitting, or cracking is present.*)
 - [ ] **Distributor Rotors (x2) / Pyörijät** (Bosch or Bremi - *Action: Inspect existing before purchasing.*)
 - [x] **Spark Plugs (x8) / Sytytystulpat** (NGK **BP5ES** / Item `6511` OR NGK **BP6ES** / Item `7811`. Must be NON-resistor copper plugs! Do not use Platinum/Iridium. Purchased)
@@ -83,5 +83,10 @@
 
 ## Suspension / ADS Parts (Pending Diagnostic)
 - [ ] **Front Accumulator Spheres (x2) / Kaasupallot** (OEM Part: `A 129 320 01 15`. Buy Corteco brand. *Note: Replace in pairs. Front Right is confirmed blown/hydro-locked based on manual test.*)
+- [ ] **Rear Level Control Linkage / Niveauregulierung-Gestänge** (*PRIORITY — inspect first before ordering. Known ADS I failure point: plastic linkage shears at lower mounting, causing rear to sit low. Check under car at rear axle area. Part connects anti-roll bar to hydraulic proportioning valve.*)
+- [ ] **ADS Hydraulic Fluid / ADS Hydrauliikkaneste (3L more)** (MB 343.0 / ZH-M spec. Part: `000 989 91 03`. 1L already purchased as Febi 02615. **Need 3L more for full system flush** — total 4L required. Same fluid used for soft top.)
+- [ ] **ADS Hydraulic Suspension Filter / ADS Hydrauliikkasuodatin** (OEM Part: `A 129 327 00 91`. ~€7–11. Suction filter inside the ADS reservoir. **PRIME SUSPECT for blocked pump section** — if clogged, pump spins but cannot draw fluid. Replace during flush.)
+- [ ] **Transparent PVC Hose / Läpinäkyvä PVC-letku** (6–8mm inner diameter, ~1m length. For open-loop flush — connects to return line, routes old fluid into waste container.)
+- [ ] **ADS Tandem Pump / ADS Tandempumppu** (OEM Part: `A 129 460 07 80`. Rebuilt available from ABCspecialist NL ~€850 + core deposit. **ONLY if Phase 6.0 flush proves pump section is dead** — level stays static after flush + filter replacement. Do NOT order before flush test.)
 
-*Note: Update this list based on specific fastener discoveries during the first inspection.*
+*Note: Update this list based on specific fastener discoveries during the first inspection. ADS console switch does NOT need replacement (confirmed working 2026-03-23).*
