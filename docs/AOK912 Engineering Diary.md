@@ -9,8 +9,8 @@
 **Chassis:** ADS — Niveauregulierung mit adaptivem Dämpfungs-System (Level Control with Adaptive Damping)
 
 ## **📋 Vehicle Data Card (Datakarte) / Manufacturing Plate**
-*(Decoded from vehicle body plate)*
-* **VIN:** WDB 129066 1F 046399
+*(Decoded from vehicle body plate and verified against Swedish registration papers)*
+* **VIN:** WDB 129066 1F 044414
 * **Model:** 500 SL (Typ 500 SL)
 * **Paint Code:** 199 M (Blauschwarz Metallic / Blue-Black Metallic)
 * **Interior Code:** 271 A (Black/Anthracite Leather)
@@ -33,9 +33,9 @@
 *A high-level summary of confirmed defects and mechanical faults requiring attention, separated from the general to-do list.*
 
 *   **ADS System (Suspension) — TWO INDEPENDENT SUBSYSTEMS:**
-    * **Subsystem A: Adaptive Damping (electronic, monitored by N51):** Module is **alive, reports no faults** (1 blink on Pin 9, confirmed 2026-03-23 with >13V). Console switch LED works, turns RED in Sport mode. ABS lamp works. **Front Right** accumulator sphere is ruptured/hydro-locked (invisible to N51). ADS cluster warning lamp still missing from indicator strip.
-    * **Subsystem B: Niveauregulierung / Level Control (mechanical/hydraulic, NOT monitored by N51):** This subsystem is **completely independent** from the damping electronics. On ADS I, height sensing is MECHANICAL (anti-roll bar linkage to proportioning valve — no electronic sensors). N51 does NOT monitor level control — Pin 9 blink codes cover ONLY damping. **The entire level control system can be dead and Pin 9 still reports "1 blink = healthy."** The only electronic indicator for level control faults is the cluster warning lamp (oil level float sensor) — which is MISSING from this cluster.
-    * **Level Control Status: INOPERATIVE.** Fahrzeugniveau switch is present and LED works, but pressing UP has no effect on ride height. Tandem pump (A 129 460 07 80) ADS section is NOT circulating fluid (clear vs. brown PS fluid). Reservoir below MIN (no active leak). Most likely causes (in order): **clogged suction filter (A 129 327 00 91, ~€7)**, air lock/lost prime, collapsed suction hose, worn pump internals. **NEXT: Phase 6.0 — hydraulic flush + filter replacement + pump test (see `work/ads_diagnostic/README.md`).**
+    * **Subsystem A: Adaptive Damping (electronic, monitored by N51):** Module is **alive, reports no faults** (1 blink on Pin 9, confirmed 2026-03-23 with >13V). Console switch LED works, turns RED in Sport mode. ABS lamp works. **Front Right** accumulator sphere is ruptured/hydro-locked (invisible to N51). **ADS cluster warning lamp: CONFIRMED MISSING — indicator strip has NO ADS symbol at all (2026-03-26 photo).** Not a dead bulb — the printed symbol is absent. Strongly indicates **cluster swap from a non-ADS R129.** Odometer accuracy now in question.
+    * **Subsystem B: Niveauregulierung / Level Control (mechanical/hydraulic, NOT monitored by N51):** This subsystem is **completely independent** from the damping electronics. On ADS I, height sensing is MECHANICAL (anti-roll bar linkage to proportioning valve — no electronic sensors). N51 does NOT monitor level control — Pin 9 blink codes cover ONLY damping. **The entire level control system can be dead and Pin 9 still reports "1 blink = healthy."** The only electronic indicator for level control faults is the cluster warning lamp (oil level float sensor) — which is MISSING because the cluster is a non-ADS variant (no symbol on the indicator strip).
+    * **Level Control Status: PUMP CONFIRMED ALIVE (2026-03-26).** Quick pump test: topped reservoir to MAX, started engine — fluid level dropped ~2/3 of MAX-to-MIN range. Pump IS circulating. System was starved/air-locked, not dead. **However:** running air-contaminated circuit triggered a fault code → N51 shut down (both switch LEDs dark, unresponsive even during ignition-ON bulb check). **2026-03-27: Pin 9 returned code 14 (steering angle sensor not initialized) — soft fault from the shutdown. NEXT: clear code, re-initialize steering sensor (full lock L→R→center), top up reservoir, then full Phase 1 flush to purge air and stagnant fluid.**
 *   **Central Locking (PSE):** Completely inoperative. The pneumatic pump in the trunk is silent when actuated.
 *   **Windshield Wiper / Washer:** Wiper does not consistently stop in the correct park position. Washer fluid is only spraying from 2 out of 4 nozzles.
 *   **Engine Mounts:** Slight vibration felt in the cabin at 700-800 RPM idle, indicating the fluid-filled engine mounts have collapsed.
@@ -204,24 +204,94 @@
 *   **ADS Console Switch:** ~~Tested the ADS Sport/Comfort console switch with engine running and off. The switch LED stays off in both conditions.~~ **CORRECTED (later same day):** Re-tested with adequate battery voltage (>13V, engine running). The switch LED **illuminates** (night illumination works) AND **turns RED when pressed to Sport/up position.** The module IS driving the switch correctly. All earlier "dead" observations were caused by insufficient voltage. **ADS console switch does NOT need replacement.**
 *   **Pin 11/12 Sanity Check:** Re-tested one of Pin 11 (ATA) or Pin 12 (IRCL) with >13V as a sanity check. Still static glow — not communicating. Unlike ADS, the ATA/IRCL non-communication is NOT a voltage issue. Genuine module fault.
 *   **~~Self-Leveling Correction~~** → **Self-Leveling RESTORED (CRITICAL CORRECTION):** Earlier conclusion (based on US manual) that ADS I is damping-only was **WRONG for European-spec cars.** The German Betriebsanleitung 1991–1993 page 97 states: **"Niveauregulierung mit adaptivem Dämpfungs-System (ADS)"** — Level Control WITH Adaptive Damping System. The European ADS I system includes hydraulic ride height control. Components confirmed: hydraulic pump + translucent plastic reservoir (engine bay, next to washer fluid bottle; fluid MB 343.0 / ZH-M, part no. 000 989 91 03), rear level control proportioning valve (mounted mid-rear-axle), anti-roll bar linkage to proportioning valve, and hydraulic lines from shocks to valve. **The rear sitting low (1–2 finger gap) is now the primary suspect for a hydraulic level control failure** — most likely a sheared rear linkage (known ADS I failure: plastic part breaks at lower mounting) or empty/low reservoir fluid. A MBClub UK user with a 1992 500SL had the same symptom caused by a broken linkage — ride height was instantly restored when the pieces were held together. **The "Plastic Reservoir (Next to washer fluid)" noted on 2026-03-17 at "just below minimum and clearer in color" may be the ADS hydraulic reservoir, not the coolant tank.** Needs visual verification: trace hose connections.
-*   **Cluster Warning Lamp — RE-OPENED:** ABS indicator confirmed working (symbol present, bulb lights on bulb check). However, **downloading the correct 1991 owner's manual** revealed that ADS **does** have a dedicated cluster warning lamp (page 92: *"The indicator lamp comes on with the key in steering lock position 2 and goes out when the engine is running"*). The earlier conclusion "ADS was never in the standard indicator set" was based on the **1990** manual, which predates ADS entirely. The 1991 manual adds ADS, ASR, ASD, and snow chain indicators — none of which appear in the 1990 manual. **The original "missing lamp" observation from the ferry may have been the ADS indicator after all.** Needs verification during ignition-ON bulb check.
-*   **US vs European Manual + German Manual Confirmation:** Both English manuals (1990 and 1991) are **US-market** editions. The 1991 US diagram shows "CHECK ENGINE" (California-only, page 93) and "BRAKE" text — both correctly absent from the European cluster. Downloaded the German Betriebsanleitung 1991–1993 — its cluster diagram is a **perfect match** to the actual cluster, **except the ADS warning lamp is missing from the user's indicator strip.** This confirms the ADS indicator should be present on a Euro-spec ADS-equipped 1991 500SL but is not. Possible causes: (a) cluster swapped from non-ADS car (odometer accuracy concern!), (b) indicator strip swapped (unlikely — clean factory borders), (c) dead bulb behind dead-fronted symbol (most hopeful — would be invisible without backlighting). **Next step: pull cluster, check part number, inspect for ADS bulb socket.**
+*   **Cluster Warning Lamp — RE-OPENED:** ABS indicator confirmed working (symbol present, bulb lights on bulb check). However, **downloading the correct 1991 owner's manual** revealed that ADS **does** have a dedicated cluster warning lamp (page 92: *"The indicator lamp comes on with the key in steering lock position 2 and goes out when the engine is running"*). The earlier conclusion "ADS was never in the standard indicator set" was based on the **1990** manual, which predates ADS entirely. The 1991 manual adds ADS, ASR, ASD, and snow chain indicators — none of which appear in the 1990 manual. **The original "missing lamp" observation from the ferry may have been the ADS indicator after all.**
+*   **US vs European Manual + German Manual Confirmation:** Both English manuals (1990 and 1991) are **US-market** editions. The 1991 US diagram shows "CHECK ENGINE" (California-only, page 93) and "BRAKE" text — both correctly absent from the European cluster. Downloaded the German Betriebsanleitung 1991–1993 — its cluster diagram is a **perfect match** to the actual cluster, **except the ADS warning lamp is missing from the user's indicator strip.** This confirms the ADS indicator should be present on a Euro-spec ADS-equipped 1991 500SL but is not.
+*   **CLUSTER SWAP CONFIRMED (2026-03-26 photo analysis):** Photo of the unlit indicator strip shows **NO ADS symbol at all** to the left of ASR. All other indicators (ASR, seatbelt, oil, etc.) have clearly visible printed symbols even when unlit. A dead or missing bulb would leave the printed symbol visible through the dead-fronted film. The **complete absence of the ADS symbol** means the indicator strip itself is a **non-ADS variant** — confirming a **cluster swap from a non-ADS R129**. This is NOT a cosmetic issue: (a) the oil-level float warning for the ADS/Niveauregulierung reservoir has been invisible since the swap, explaining why chronic low fluid went undetected for years; (b) the **odometer reading may be inaccurate** — need to compare against service records and Swedish public records when cluster is pulled. The Fahrzeugniveau switch and ADS console switch being original (confirmed working) prove the *car* is factory ADS-spec — only the cluster was swapped. Previous owner had the car for 16 years (Swedish public records); the swap likely predates the dealer who invested in cosmetic restoration but would not have known the ADS warning was missing.
+
+*   **Swedish Registration & Inspection Records (biluppgifter.se, pulled 2026-03-27):**
+    Source: [biluppgifter.se/fordon/AOK912](https://biluppgifter.se/fordon/AOK912)
+
+    **Vehicle data:** Fordonsår 1992, modellår 1992. First registered 1991-09-26 at 0 km. Color: Flerfärgad (two-tone). 14 total owners. Current status: påställd (in traffic) since 2026-03-12. Latest inspection: 2026-01-02 at 139,970 km (Besikta Vellinge). Next inspection due by 2028-01-31. Tires: 255/55R16 all round. Service weight 1,940 kg.
+
+    **Odometer history (from inspections):**
+
+    | Date | km | Delta km | km/year |
+    |------|---:|---:|---:|
+    | 1991-09-26 | 0 | — | — |
+    | *(no digital records 1991–2012)* | | | |
+    | 2013-04-26 | 135,960 | 135,960 | ~6,270 avg |
+    | 2014-04-28 | 136,860 | 900 | 900 |
+    | 2015-04-23 | 137,260 | 400 | 400 |
+    | 2015-05-11 | 137,330 | 70 | *(re-inspection)* |
+    | 2016-04-22 | 137,540 | 210 | 210 |
+    | 2017-04-21 | 138,020 | 480 | 480 |
+    | 2018-04-30 | 138,370 | 350 | 350 |
+    | 2019-05-06 | 138,660 | 290 | 290 |
+    | 2020-06-18 | 138,900 | 240 | 240 |
+    | 2021-06-30 | 139,270 | 370 | 370 |
+    | 2023-07-14 | 139,680 | 410 | ~200 |
+    | 2026-01-02 | 139,970 | 290 | ~116 |
+
+    **Why no records before 2013:** Sweden HAS recorded odometer readings at inspections since at least the early 1990s (an SCB/Trafikanalys quality report covers Bilprovningen mätarställningsdata for 1993–1999). The gap is a **biluppgifter.se data availability limitation** — the platform only surfaces records from ~2013 onward. Older inspection protocols (including odometer readings) likely still exist in Transportstyrelsen's archives or Bilprovningen's historical records, but are not publicly accessible through biluppgifter.se. The car was almost certainly inspected every 1–2 years during 1991–2013 — we just can't see those readings online.
+
+    **Owner history (visible entries):**
+
+    | Date | Event |
+    |------|-------|
+    | 1991-09-26 | First registered (0 km) |
+    | 2002-06-25 | Owner change |
+    | 2008-07-10 | Owner change |
+    | 2008-07-24 | Owner change (quick re-registration) |
+    | 2021-01-12 | Finance / leasing company |
+    | 2021-03-10 | Company |
+    | 2024-04-23 | Dealer (bilhandlare) |
+    | 2024-04-25 | Dealer (bilhandlare) |
+    | 2024-05-14 | Private person |
+    | 2024-08-04 | Current owner |
+
+    The "16-year previous owner" = 2008-07-24 → 2024-04-23. During their ownership (2013–2024 visible period): ~3,720 km over ~11 years = **~340 km/year**. Classic seasonal use — avställd (off road) every October, påställd every April. All inspections in Malmö/Vellinge/Trelleborg area (Skåne).
+
+    **Cluster swap & odometer analysis:** From 2013 onward, odometer readings are smooth and consistent — no jumps or drops suggesting a cluster swap in that period. If the swap happened (as the missing ADS symbol confirms), it was **before 2013** — most likely before 2008 (during the 2002–2008 ownership or earlier). The 22-year gap in publicly available records (1991–2013) means a cluster swap during that period would be invisible in the odometer history. Lifetime average of ~4,240 km/year is plausible for a well-kept convertible. **Pulling the cluster and reading its part number remains the only definitive way to confirm the swap and assess odometer accuracy.** Requesting historical inspection records from Transportstyrelsen directly could also reveal pre-2013 odometer readings and expose any step change.
 *   **~~ADS Console Switch Replacement~~** ~~Part number 1298211951.~~ **CANCELLED — switch works fine.** LED illuminates and Sport indicator turns RED. Previous "dead" was low voltage.
 *   **Fahrzeugniveau-Einstellung Switch DISCOVERED (German manual page 98):** A **second, separate suspension switch** exists on the car — the **Vehicle Level Adjustment Switch** at position 2 on the left instrument panel (next to the headlight switch). On ADS-equipped cars, this switch **replaces the headlight range adjuster** (Leuchtweiterregler). It controls ride height independently of the ADS Sport/Comfort console switch:
     - **Down = Normal Level:** Default for general driving. Above ~120 km/h, the car auto-lowers ~15mm.
     - **Up = Raised Level:** For poor roads. LED in switch illuminates. Below ~50 km/h, car raises ~30mm. Between 50–120 km/h, reverts to normal. At 120 km/h, auto-switches to Normal and LED goes out.
-    This confirms the level control is a **speed-dependent, driver-selectable, fully active system** — not just passive load compensation. **CONFIRMED PRESENT on AOK912** — the owner confirms the switch is physically at position 2 but had mistaken it for an interior lighting dimmer based on the US manual. This strengthens the case that the instrument panel is original ADS-spec (weakens the cluster-swap theory for the missing ADS warning lamp). **Next test: engine running, press UP, observe if ride height changes and switch LED illuminates.**
+    This confirms the level control is a **speed-dependent, driver-selectable, fully active system** — not just passive load compensation. **CONFIRMED PRESENT on AOK912** — the owner confirms the switch is physically at position 2 but had mistaken it for an interior lighting dimmer based on the US manual. This confirms the car IS factory ADS-spec. **The cluster, however, is now confirmed to be a non-ADS swap (2026-03-26 photo: ADS symbol absent from indicator strip).**
 *   **Fahrzeugniveau Switch & Hydraulic Reservoir Test (later 2026-03-23, engine running):**
     - **ADS console switch:** LED works, turns RED in Sport — electronics fully functional.
     - **Fahrzeugniveau switch:** LED illuminates. Pressing UP (Raised Level) has **NO effect on ride height.** System commands the raise but cannot execute it.
     - **Reservoir level:** The translucent reservoir next to the washer fluid is **below the MIN marking.** MAX/MIN markings are recessed deep inside the canister and hard to read — initial "almost empty" assessment was a misread. Level dropped only ~0.5 cm since 2026-03-17 (within temperature/measurement tolerance). **No active leak found** anywhere under the car. Fluid loss is gradual/historical over the car's 35-year life. Confirms this IS the ADS/Niveauregulierung fluid. **Next: top up to MAX with Febi 02615 ZH-M and retest level control.**
-*   **Revised Working Hypothesis (updated 2026-03-23, LATEST):** The ADS electronic system is **fully functional** — module, console switch, and level switch all work. Two mechanical issues remain: (1) **ADS section of the tandem pump is NOT circulating fluid** (clear stagnant fluid vs. brown aged power steering fluid = no pumping action for years). Most likely cause: **clogged suction filter (A 129 327 00 91, ~€7)** blocking the pump's ADS pickup. Alternative: air-locked circuit from low fluid, or worn internal vanes/seals. (2) **Front Right sphere ruptured/hydro-locked.**
-*   **NEXT SESSION ACTION PLAN — Phase 6.0 Hydraulic Flush & Pump Test:**
-    1. **Parts to acquire:** 3L more Febi 02615 ZH-M fluid (have 1L), new filter A 129 327 00 91, PVC hose 6–8mm ID ~1m.
-    2. **Phase A (open-loop flush):** Disconnect return line → remove/inspect filter → flush 3–4L fresh fluid through the system with engine running → clean reservoir interior.
-    3. **Phase B (closed-loop pump test):** Reconnect return line → install new filter → fill to MAX → mark level → start engine + press Fahrzeugniveau UP → watch reservoir for 5–10 min.
-    4. **Decision point:** If reservoir level drops = pump alive, was clogged/air-locked (cheap fix). If level stays static = pump ADS section internally failed → need rebuilt pump A 129 460 07 80 (~€850).
-    5. Full procedure documented in `work/ads_diagnostic/README.md` Phase 6.0.
+*   **Revised Working Hypothesis (updated 2026-03-26, LATEST):** **PUMP IS ALIVE.** Quick pump test (2026-03-26): topped reservoir to MAX, started engine — fluid level dropped ~2/3 of MAX-to-MIN range. The tandem pump ADS section IS circulating fluid. System was air-locked/starved from years of low fluid, not mechanically failed. **€850 rebuilt pump NOT needed.** However, running air-contaminated fluid through the circuit triggered a fault code — N51 entered full shutdown (both switch LEDs dark, system unresponsive). Left/right suspension stiffness difference felt smaller after the test run (subjective).
+*   **NEXT SESSION ACTION PLAN:**
+    1. **Read Pin 9 blink codes** — expect fault code(s) from air/pressure anomaly during the pump test. Record all codes.
+    2. **Clear fault codes** via X11 Pin 9 procedure.
+    3. **Top up reservoir** — level dropped significantly during pump test. Refill to MAX with Febi 02615 ZH-M.
+    4. **Proceed with full Phase 1 flush** — purge air and 35 years of stagnant fluid. Parts acquired: 4L ZH-M fluid, PVC hoses (6mm + 8mm), brake cleaner. ADS suction filter (A 129 327 00 91) to be ordered online or clean old one during flush.
+    5. **Re-test after flush + bleed** — clear codes again, start engine, verify switches illuminate, test Fahrzeugniveau UP.
+    6. Full procedure documented in `work/ads_diagnostic/README.md` Phase 1.
+
+### **March 27, 2026 \- Swedish Papers Received & Finnish Registration Preparation**
+
+**Location:** Oulu, Finland
+
+**Event:** Received original Swedish registration papers (both Part 1 & Part 2) by mail from the Swedish dealer. Finnish registration process now unblocked.
+
+*   **VIN Correction:** Confirmed VIN from the Swedish registration papers: **WDB 129066 1F 044414**. Earlier body-plate decode in this diary was incorrect (misread of stamped characters). Corrected at the top of this document.
+*   **Autovero Decision (Verotuspäätös) Received from OmaVero:**
+    - Verotusarvo (taxable value): **€3,011.00**
+    - Autoveroprosentti: **27.80%** (based on 238 g/km CO2)
+    - **Autoveron määrä: €837.05**
+    - Data used: Ensirekisteröintipäivä 28.10.1991, 141,000 km, 240 kW, 5,000 cm³
+    - Significantly lower than anticipated (~€6,000 based on comparable recent import decisions). The low verotusarvo likely reflects Vero's automated valuation model for 35-year-old vehicles rather than collector market pricing.
+*   **Liikennevakuutus:** Already active since 2026-03-16 (Pohjola, full kasko).
+*   **Autovero Paid:** €837.05 paid 2026-03-27. Waiting for payment to clear on Verohallinto's account (letter states "muutaman päivän viiveellä") before rekisteröintilupa is released. OmaVero message will confirm.
+*   **Finnish Registration — Remaining Steps:**
+    1. ~~**Pay autovero** (€837.05)~~ **PAID 2026-03-27.** Wait for rekisteröintilupa confirmation in OmaVero (expected ~March 30–April 1).
+    2. **Obtain siirtolupa** (transfer permit) with temporary plates to legally drive to the katsastus station (Swedish plates are cut, car currently has no plates).
+    3. **Book rekisteröintikatsastus** at a station in Oulu (K1 Limingantulli, A-Katsastus Oulunportti, or Avainasemat). Car must be physically present for VIN verification.
+    4. **Bring to rekisteröintikatsastus:** Both parts of Swedish registreringsbevis (surrendered permanently), Swedish besiktningsprotokoll from 2026-01-02 (to potentially exempt kunnon tarkastus per EU Directive 2014/45/EU), kauppakirja, ID, rekisteröintilupa printout, and liikennevakuutustodistus.
+    5. **Ensirekisteröinti** at the same station after passing inspection — receive Finnish plates.
+*   **ADS Blink-Code Read (Pin 9):** Read fault codes after the 2026-03-26 pump test shutdown. **Single fault: code 14 = steering angle sensor (N49) not initialized.** Soft calibration fault from the unexpected N51 shutdown — not hardware damage. Fix: clear code, start engine, turn steering full lock left → right → center. See `work/ads_diagnostic/README.md` and `work/ads_blink_reader/blinker_report.md` for full ADS fault code table.
 
 ## **📝 Task / Todo List & Quick Studies**
 
@@ -252,7 +322,7 @@
   * **Observed Symptoms:** 
     * Rear ride height is low (1-2 finger gap) vs. Front (3 finger gap).
     * ADS Lift Switch is non-functional.
-    * ~~ADS Warning Lamp likely disabled/removed~~ ~~Corrected: Missing lamp is ABS, not ADS~~ **Re-opened: 1991 manual confirms ADS DOES have a cluster lamp. Needs verification.**
+    * ~~ADS Warning Lamp likely disabled/removed~~ ~~Corrected: Missing lamp is ABS, not ADS~~ ~~Re-opened: 1991 manual confirms ADS DOES have a cluster lamp~~ **CONFIRMED (2026-03-26): Cluster is a non-ADS swap — indicator strip has no ADS symbol. Odometer accuracy in question.**
     * System likely in "Limp/Safe Mode" (Defaulted to maximum stiffness).
     * **NEW (2026-03-23):** European ADS I INCLUDES hydraulic level control (Niveauregulierung). Low rear ride height is now suspected to be a failed level control linkage or low hydraulic fluid — not spring sag.
   * **Mechanical Condition:** Rear Nitrogen Accumulators (Spheres) passed the "Bounce Test" (system is firm but not "rock hard" or bouncing/oscillating), suggesting rear diaphragms are currently intact. However, after sitting >24h, the rear compresses significantly more than the front due to hydraulic pressure bleed-off. **CRITICAL FINDING (2026-03-22):** The Front Right shock is "rock hard" with almost zero travel under full body weight, confirming the Front Right nitrogen accumulator is ruptured and hydro-locked. Front Left compresses normally under body weight (feels stiffer than a standard car, consistent with the expected unpowered ADS "failsafe" firm mode), confirming the Front Left sphere is intact and the solenoid is likely defaulting correctly to the firm position.
@@ -406,9 +476,11 @@
 | 2026-03-22 | Drivetrain | Corteco Trans Mount (21652116) | Autodoc | TBD | Purchased |
 | 2026-03-22 | Body | Hood Insulation Pad + Clips (IPG-87742-Set) | AMS Auto (DE) | 73.90 | Purchased |
 | 2026-03-22 | Body | Shipping (DHL EU Parcel) | AMS Auto (DE) | 19.90 | Purchased |
-| **Total** | | **Year-to-Date Spend** | | **~€2,171.11 + TBD** | |
+| 2026-03-16 | Insurance | Liikennevakuutus + Full Kasko | Pohjola | — | Active |
+| 2026-03-27 | Admin | Autovero (car import tax) | Verohallinto / OmaVero | 837.05 | Pending payment |
+| **Total** | | **Year-to-Date Spend (parts + tax)** | | **~€3,008.16 + TBD** | |
 
-*(Note: Estimated prices used for Motonet local purchases; will update with exact receipts. Electronics/hobby add-ons like Raspberry Pi, Owon oscilloscope, or custom displays are excluded from this vehicle maintenance budget.)*
+*(Note: Estimated prices used for Motonet local purchases; will update with exact receipts. Insurance premium excluded from total (recurring cost). Electronics/hobby add-ons like Raspberry Pi, Owon oscilloscope, or custom displays are excluded from this vehicle maintenance budget.)*
 
 ## **🛠️ Tool Acquisition & Inventory**
 

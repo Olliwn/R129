@@ -59,7 +59,34 @@
 ### Pin 9 — ADS (Adaptive Damping System)
 - **2026-03-18 (battery <12V):** Weak static glow only — no blink pulses returned
 - **2026-03-23 (battery >13V):** **1 blink — no stored fault codes**
-- **Diagnosis (revised):** Module is alive and communicating. The earlier static glow was caused by insufficient supply voltage (<12V, engine off / depleted battery). With adequate voltage (>13V), the module boots normally and reports a clean fault memory. The ADS electronic system may be fully functional — the ride stiffness issue appears to be mechanical (ruptured nitrogen accumulator sphere on Front Right).
+- **2026-03-27 (after pump test fault, battery >13V):** **14 blinks — steering angle sensor not initialized**
+- **Diagnosis (revised 2026-03-27):** Module is alive and communicating. Code 14 is a soft fault: N51 lost its steering angle sensor (N49) calibration when it shut down after the 2026-03-26 pump test triggered an air/pressure anomaly. The sensor hardware is fine — N51 just needs re-initialization. **Fix:** clear code via Pin 9 reset, start engine, turn steering full lock left → full lock right → center. N51 re-learns sensor endpoints. If Pin 9 then reads 1 blink, system is clean.
+
+**Known ADS I (N51) Blink Codes (partial — from WIS and r129-forum.de):**
+
+| Blinks | Fault | WIS Test Step |
+|--------|-------|---------------|
+| 1 | No faults stored | — |
+| 2 | ADS control module (N51) internal | Replace N51 |
+| 3 | Body acceleration sensor (B24) | 23 7.0 |
+| 4 | Wheel acceleration sensor (B24/1) | 23 6.0 |
+| 5 | Steering angle sensor (N49) | 23 9.0 |
+| 6 | Left/right front axle solenoid valve 1 (Y51y1, Y52y1) | 23 14.0, 16.0 |
+| 7 | Left/right front axle solenoid valve 2 (Y51y2, Y52y2) | 23 15.0, 17.0 |
+| 8 | Left/right rear axle solenoid valve 1 (Y53y1, Y54y1) | 23 12.0 |
+| 9 | Left/right rear axle solenoid valve 2 (Y53y2, Y54y2) | 23 13.0 |
+| 10–11 | Not for U.S.A. vehicles (Euro-only parameters) | — |
+| 12 | Vehicle speed signal (VSS) from ABS/ASR (R129: left front) | 23 4.0 |
+| 13 | Oil level switch (S44) — R129 only | 23 18.0 |
+| 14 | **Steering angle sensor (N49) not initialized** | 23 10.0 |
+| 15 | Comfort/sport switch (S45/1), short circuit | 23 11.0 |
+| 17 | Vehicle load sensor (N51/1) | 23 8.0 |
+| 18 | ADS MIL (A1e27) | 23 5.0 |
+| 19 | Voltage supply too low | 23 1.0 |
+| 20 | Steering angle sensor (N49) — continuous fault | 23 9.0 |
+| 21 | Voltage supply too high | 23 1.0 |
+
+*Source: WIS DTC reference (W140 M119 1992–95, applicable to R129 N51), confirmed code 13/14/20 via r129-forum.de thread #18606.*
 
 ### Pin 10 — RST
 - **Before reset:** 11 / 20 / 28 / 29 pulses (four stored fault codes)

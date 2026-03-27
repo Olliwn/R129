@@ -2,7 +2,7 @@
 
 **VIN:** WDB1290661F044414 | **Model Year:** 1991 (Pre-Eco Wiring) | **Engine:** M119 V8 | **Trans:** 722.3 (4-Speed)
 
-**Current Status:** In Oulu. `Autoveroilmoitus` filed. Swedish plates cut. Waiting for both original Swedish registration paper parts by mail to complete Finnish registration.
+**Current Status:** In Oulu. Swedish papers received. Autovero decision issued (€837.05). Liikennevakuutus active (Pohjola). **Next: pay autovero, get siirtolupa, book rekisteröintikatsastus.**
 
 ## **✅ PHASE 1, 2 & 3: Admin, Inspection & Transit**
 
@@ -10,13 +10,18 @@
 * \[x\] M119 Engine, 722.3 Transmission, Hydraulics, and Chassis tested and approved.  
 * \[x\] Ferry Transit: Kapellskär \-\> Naantali completed.  
 * \[x\] **Transit Complete:** Car brought home to Oulu.  
-* \[ \] **Swedish Deregistration:** Send photo of the cut Swedish plates to the Swedish dealer so they can remove the registration in Sweden.  
-* \[ \] **Swedish Original Papers:** Receive both parts of the original Swedish registration papers by mail in Oulu.
+* \[ \] **Swedish Deregistration:** Confirm with the Swedish dealer that the car has been avregistrerad in Sweden (photo of cut plates was sent). Avoid dual-country active registration.  
+* \[x\] **Swedish Original Papers:** Both parts of the original Swedish registration papers received by mail in Oulu (2026-03-27).
 
 ## **🏛️ PHASE 3.5: Post-Arrival Administration (CRITICAL)**
 
 * \[x\] **Tax Declaration (Autoveroilmoitus):** Filed in OmaVero within the required window.  
-* \[ \] **Finnish Registration (PRIORITY 1):** As soon as both Swedish registration paper parts arrive, complete the Finnish registration process without delay.  
+* \[x\] **Autovero Decision Received:** Verotusarvo €3,011 → Autovero **€837.05** (27.80%, CO2 238 g/km). Far below the ~€6,000 estimate.  
+* \[x\] **Liikennevakuutus:** Active since 2026-03-16 (Pohjola, full kasko).  
+* \[ \] **Pay Autovero & Get Rekisteröintilupa:** Pay €837.05 in OmaVero. Registration permit is issued after payment — required before ensirekisteröinti.  
+* \[ \] **Siirtolupa (Transfer Permit):** Obtain temporary plates to legally drive to the katsastus station (Swedish plates are cut).  
+* \[ \] **Rekisteröintikatsastus (Registration Inspection):** Book at a station in Oulu (K1 Limingantulli / A-Katsastus Oulunportti / Avainasemat). Car must be present for VIN verification. Bring: both parts of Swedish registreringsbevis (surrendered), besiktningsprotokoll 2026-01-02 (EU 2014/45 exemption for kunnon tarkastus), kauppakirja, ID, rekisteröintilupa, liikennevakuutustodistus.  
+* \[ \] **Ensirekisteröinti:** At the katsastus station after passing. Receive Finnish plates.  
 * \[ \] **Registration Timing Constraint:** Do not book tire installation until the car is registered, since it must be legal to drive.
 
 ## **🛠️ PHASE 4: Immediate Mechanical Priorities (Oulu \- Spring 2026\)**
