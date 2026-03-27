@@ -42,6 +42,7 @@
 *   **Hardtop Fitment:** The front latches bind when locking the hardtop down. Caused by excess thickness from a newly installed headliner; requires manual pull-down assist.
 *   **Paint & Body:** Minor paint cracking on the rear fender (below trunk lid). Small deep scratch on the aluminum hood. Bare steel exposed behind the front wheels (requires rust-prevention touch-up).
 *   **Engine Belt:** Squeals/chirps immediately after cold start. Needs diagnosis (slipping belt vs. bad tensioner pulley bearing).
+*   **Battery / Parasitic Drain (NEW 2026-03-27):** Battery voltage drops from ~13V to ~12V in approximately two days of idle sitting. Either the battery itself is failing (age unknown — could be original to the dealer's cosmetic restoration or older) or there is a parasitic current draw in the electrical system. Candidates: the dead PSE pump circuit, ATA/IRCL modules (both show static glow on X11 = powered but not communicating), aftermarket radio wiring, or a stuck relay. **Action:** (1) Test battery CCA and internal resistance. (2) If battery is healthy, perform parasitic draw test (ammeter in series on negative terminal, pull fuses one by one to isolate the circuit). Trickle charger is keeping it alive for now but this needs resolution before summer driving.
 
 ## **📅 Log Entries**
 
@@ -424,7 +425,8 @@
 - [ ] **Transmission Mount** — See section F above.
 
 #### **I. Electrical Baseline**
-- [ ] **Battery** — Test CCA and internal resistance. Replace if marginal (Nordic winters are brutal on old batteries).
+- [ ] **Battery (PRIORITY — observed drain)** — Test CCA and internal resistance. Battery age unknown. Observed ~1V drop (13V→12V) over ~2 days idle. Replace if CCA is marginal. Nordic winters are brutal on old batteries.
+- [ ] **Parasitic Draw Test** — If battery tests healthy, measure resting current draw with ammeter in series on negative terminal (engine off, all doors closed, wait 30min for modules to sleep). Normal: <50mA. If high, pull fuses one by one to isolate the draining circuit. Suspects: PSE pump circuit (dead but powered?), ATA/IRCL modules (static glow on X11 = powered), aftermarket Sony CDX-410 radio wiring, stuck relay.
 - [ ] **Alternator Output** — Verify 13.8–14.4V at idle with loads on. Check for AC ripple (indicates failing diodes).
 - [ ] **All Exterior Lights** — Walk-around test: headlights (low/high), fog lights, turn signals, brake lights, reverse lights, license plate lights, side markers.
 - [ ] **Fuse Box Inspection** — Open both fuse boxes (underhood + interior). Inspect for corrosion, melted terminals, and incorrect fuse ratings.
