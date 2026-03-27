@@ -46,6 +46,26 @@
 
 ## **📅 Log Entries**
 
+### **Pre-Purchase History \- Dealer Restoration (Vellinge Bilbolag, 2024–2026)**
+
+**Location:** Vellinge Bilbolag, Malmö/Vellinge area, Skåne, Sweden
+
+**Event:** Cosmetic and mechanical restoration performed by the selling dealer between acquisition (~April 2024) and sale (March 2026). The dealer invested significantly in making the car presentable. Known work performed:
+
+*   **Soft Top (Cabriolet Roof):** Replaced with a **new Mercedes-Benz OEM original cabriolet roof.** Dealer claimed the investment was approximately **40,000 SEK** (~€3,500) for the roof alone. The soft top cycles fast and quiet — the mechanism and hydraulics are in excellent condition.
+*   **Front Bumper:** **Freshly repainted** — paint quality is good. *(Note: rear bumper was NOT repainted; has minor paint cracks underneath.)*
+*   **Driver Seat Leather:** **New leather upholstery on the driver's seat** — specifically the outboard bolster (the side that wears from entry/exit). The repair is well done and matches the interior.
+*   **Interior Trim:** **Miscellaneous plastic interior pieces replaced** — exact items unknown, but the interior presents well overall. Likely door trim, console pieces, or sun visor components that had become brittle with age.
+*   **Detailing:** Thorough **exterior polish and interior deep cleaning.** The car was presented in very good cosmetic condition at the time of sale.
+*   **What the dealer did NOT address (discovered post-purchase):**
+    *   ADS hydraulic fluid level below MIN (invisible — cluster warning lamp missing due to non-ADS cluster swap)
+    *   ADS system in failsafe/limp mode (would not have been obvious on short test drives)
+    *   Inoperative PSE central locking
+    *   Wiper park position and washer nozzle issues
+    *   Engine mounts (requires driving to feel the idle vibration)
+    *   Battery condition / parasitic drain
+    *   The cluster swap itself — the dealer would not have known the ADS warning lamp was missing unless they were specifically familiar with ADS-equipped R129s
+
 ### **March 13, 2026 \- Initial Inspection & Purchase**
 
 **Location:** Vellinge Bilbolag, Sweden
