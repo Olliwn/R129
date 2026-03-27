@@ -29,6 +29,12 @@ The nRF5430 software will operate in two distinct modes driven by the physical s
 *   **Hardware:** TLP521 Optocoupler Output into a Timer/Counter peripheral.
 *   **Firmware Requirement:** The KE-Jetronic outputs a 100Hz square wave where the duty cycle (percentage of time spent LOW vs HIGH) represents the mixture correction. The nRF5430 must use a hardware timer with capture/compare features to constantly measure the ON time vs the period time to calculate a live 0-100% duty cycle value, averaged over 500ms intervals.
 
+### 2.4 Outside Temperature (DS18B20 via 1-Wire on RPi5)
+*   **Hardware:** DS18B20 digital temperature sensor (~€2), mounted in front airflow path (behind grille or near OEM sensor location).
+*   **Interface:** 1-Wire protocol on a single RPi5 GPIO pin (3.3V, GND, data + 4.7kΩ pull-up). Does NOT go through the nRF5430 — read directly by the RPi5.
+*   **Rationale:** The OEM outside temperature sensor is a simple NTC thermistor feeding the cluster's VDO LCD display (which is delaminated/failing). Rather than tapping the analog NTC signal through the ADS1115 and characterizing the unknown NTC curve, a modern DS18B20 provides ±0.5°C digital accuracy with trivial software (`w1thermsensor` Python library). This keeps the ADS1115 channels free for signals that only exist as analog (KE duty cycle, oil pressure, battery voltage). The OEM sensor and cluster LCD remain untouched — the RPi5 display supplements rather than replaces.
+*   **Future option:** A second DS18B20 can be added on the same 1-Wire bus for cabin temperature.
+
 ## 3. Communication Protocol (nRF5430 <-> PC / RPi5)
 The interface must establish a unified message format so the exact same test suite can be run from a PC/Mac over UART during initial bring-up, and later transported over Bluetooth Low Energy (BLE GATT) for the final RPi5 UI integration.
 
@@ -36,7 +42,7 @@ The interface must establish a unified message format so the exact same test sui
 All telemetry and commands will be packed into tight structures (e.g., **Header | Length | Type | Data | Checksum**) that can be safely transmitted either as a line-oriented string over a UART terminal, or as a byte array embedded within a BLE Characteristic.
 
 #### Example Payloads:
-*   *Type `0x02` (Analog Telemetry):* A packed struct of current Battery V, Airflow V, and KE Duty Cycle % (e.g., streamed at 10Hz).
+*   *Type `0x02` (Analog Telemetry):* A packed struct of current Battery V, Airflow V, KE Duty Cycle %, and Outside Temp °C (e.g., streamed at 10Hz). Note: temperature is read locally by RPi5 (DS18B20 1-Wire) and merged into the UI data model, not transmitted over BLE from the nRF5430.
 *   *Type `0x03` (Blink Code Read):* Sent when a full code sequence is successfully counted from the ADS module.
 *   *Type `0x10` (Target Command - CLEAR CODE):* PC/Pi tells the Nordic to pull the ADS line low for 8 seconds to clear codes.
 

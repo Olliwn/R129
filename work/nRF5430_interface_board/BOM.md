@@ -25,7 +25,11 @@ This document tracks the components required for the modular nRF5430 interface b
 ## 5. Logic Interface
 *   **Level Shifter (3.3V <-> 5V):** TXB0108 Breakout Board
 
-## 6. Prototyping Hardware
+## 6. Environmental Sensors (RPi5-Direct, not via nRF5430)
+*   **Outside Temperature:** DS18B20 1-Wire digital sensor (±0.5°C). Mount in front airflow path. Connects directly to RPi5 GPIO with 4.7kΩ pull-up resistor. **Needed.**
+*   **Cabin Temperature (future):** Second DS18B20 on the same 1-Wire bus. **Optional.**
+
+## 7. Prototyping Hardware
 *   **Breadboards:** 1x DKS-SOLDERBREAD-02 (PTH), 3x SparkFun 08808, 8x Mixed PTH Boards
 *   **Connectors:** 2.54mm Headers (61300411121), 5.08mm Pluggable Screw Terminals
 *   **Wiring:** 24AWG Socket-to-Socket jumpers, 22AWG solid core for breadboards
