@@ -4,6 +4,17 @@
 **Design source:** SPICE netlists in `spice/netlists/` (simulation-verified 2026-03-21)
 **Approach:** Incremental staged build — verify each stage before proceeding
 
+## Parts Availability
+
+All components for the full build are on hand from two orders:
+
+| Source | Order Date | Key Parts |
+|--------|-----------|-----------|
+| **DigiKey** #98080586 | 17-MAR-2026 | OKI-78SR-5V, LD1117V33, 1.5KE18A TVS, 1N4007, 1N4148, LM358P, resistor/cap/semiconductor kits, breadboards, ADS1115, TXB0108 |
+| **SP Elektroniikka** #3044737 | 16-MAR-2026 | IRF5305 P-FET, 6× TLP521-4 optocouplers, 6× 16-pin DIP sockets, 2N3904, 2A fuses + holders, banana plugs, wire, pushbuttons |
+
+**No additional parts need to be ordered. All 7 stages can be built with parts on hand.**
+
 ---
 
 ## Equipment Required
@@ -14,9 +25,17 @@
 | Multimeter (DMM) | DC voltage verification at each stage |
 | Oscilloscope | Timing verification, blink waveforms |
 | nRF5340 DK | MCU for GPIO control, ADC reading, **and** blink signal generation |
+| USB cable (micro-USB) | Programming/debugging DK on bench (temporary, not needed in car) |
 
 > **No signal generator needed.** The nRF5340 DK itself generates blink-code test
 > signals via a spare GPIO + one NPN transistor. See "Car-Side Blink Simulator" below.
+
+> **DK power:** The nRF5340 DK is powered from the interface board's **5V rail**
+> (OKI-78SR output), not from USB. In the car there is no USB host — the interface
+> board is the sole power source. For bench programming, temporarily connect USB
+> alongside the 5V feed (the DK handles dual sources safely via its onboard power
+> management). Set DK switch **SW6 = nRF ONLY** to disable the interface MCU and
+> save ~5mA when USB is not connected.
 
 ---
 
@@ -26,7 +45,7 @@
 
 | Ref | Component | Value/Part | Package | Qty | Notes |
 |-----|-----------|-----------|---------|-----|-------|
-| F1 | Blade fuse + holder | 2A | Inline | 1 | Automotive ATO/ATC fuse |
+| F1 | Blade fuse + holder | 2A, 32V | 19×20mm | 1 | SP Elektroniikka #108113 (fuse) + #100533 (holder) |
 | D_RPOL | Rectifier diode | 1N4007 | DO-41 (TH) | 1 | Reverse polarity protection |
 | D_TVS | TVS diode | 1.5KE18A | DO-201 (TH) | 1 | Load dump clamp, 15.3V standoff |
 | C_IN | Electrolytic cap | 100µF/25V | Radial TH | 1 | Bulk input after protection |
@@ -39,18 +58,18 @@
 
 | Ref | Component | Value/Part | Package | Qty | Notes |
 |-----|-----------|-----------|---------|-----|-------|
-| Q_EN | P-channel MOSFET | IRF9540N | TO-220 (TH) | 1 | Breadboard substitute for Si2301 (SOT-23). Vgs_th ≈ −3.5V, Rds_on ≈ 0.117Ω |
+| Q_EN | P-channel MOSFET | IRF5305 | TO-220 (TH) | 1 | SP Elektroniikka #111403. Vds=−55V, Vgs_th ≈ −3V, Rds_on = 0.06Ω |
 | R_GP | Resistor | 100kΩ | 1/4W TH | 1 | Gate pull-up to V_PROT (FET OFF default) |
 | R_GATE | Resistor | 10kΩ | 1/4W TH | 1 | Gate series resistor |
-| Q_LVL | NPN transistor | 2N2222 or 2N3904 | TO-92 (TH) | 1 | Level shifter for gate drive |
+| Q_LVL | NPN transistor | 2N3904 | TO-92 (TH) | 1 | SP Elektroniikka #108580. Level shifter for gate drive |
 | R_EN | Resistor | 10kΩ | 1/4W TH | 1 | Base drive from MCU DIAG_EN |
 | C_DIAG | Electrolytic cap | 100µF/25V | Radial TH | 1 | V_DIAG bulk capacitor |
 
-> **Note on P-FET substitution:** The Si2301 used in simulation is SOT-23 and won't fit
-> a breadboard. The IRF9540N is a TO-220 P-FET with similar function but higher Vgs threshold
-> (−3.5V vs −1.2V). This means the NPN level shifter must pull the gate to GND (which it does),
-> and the 100kΩ pull-up to V_PROT (~11.3V) keeps it firmly OFF. The higher Rds_on is
-> negligible at our current levels (~200mA). Verify Vgs_th on your specific part.
+> **P-FET note:** The Si2301 used in simulation is SOT-23 (not breadboard-friendly).
+> The IRF5305 from SP Elektroniikka is the breadboard substitute: TO-220 package,
+> Vds=−55V (plenty of margin for 11.3V), Rds_on=60mΩ (even lower than Si2301's 110mΩ),
+> Vgs_th=−2V to −4V. Our NPN level shifter pulls the gate to ~0.2V giving Vgs ≈ −11V,
+> well beyond threshold. The 100kΩ pull-up to V_PROT keeps it firmly OFF when DIAG_EN is LOW.
 
 ### Car-Side Blink Simulator (bench testing only)
 
@@ -68,13 +87,13 @@
 
 | Ref | Component | Value/Part | Package | Qty/ch | Notes |
 |-----|-----------|-----------|---------|--------|-------|
-| U_RX | Optocoupler | TLP521-1 (single) | DIP-4 | 1 | RX path. Use TLP521-4 (DIP-16) to pack 4 channels per IC |
+| U_RX | Optocoupler | TLP521-4 / PC847 | DIP-16 | 1/4 ch | SP Elektroniikka #110515 (6 pcs). Use DIP sockets #SCH29331 |
 | R_RX | Resistor | 1kΩ | 1/4W TH | 1 | RX current limiting |
 | R_PU | Resistor | 13kΩ | 1/4W TH | 1 | MCU-side pull-up to 3.3V |
-| U_TX | Optocoupler | TLP521-1 (single) | DIP-4 | 1 | TX path (emitter-follower) |
+| U_TX | Optocoupler | TLP521-4 / PC847 | DIP-16 | 1/4 ch | Same IC as RX (separate channel within the quad package) |
 | R_TX | Resistor | 330Ω | 1/4W TH | 1 | TX LED current limiting |
 | R_OC | Resistor | 1kΩ | 1/4W TH | 1 | TX opto collector pull-up to V_DIAG |
-| Q_DRV | NPN transistor | 2N2222 | TO-92 (TH) | 1 | TX car-side driver |
+| Q_DRV | NPN transistor | 2N3904 | TO-92 (TH) | 1 | TX car-side driver (200mA rating, 18mA needed — fine) |
 | R_BP | Resistor | 10kΩ | 1/4W TH | 1 | TX base pull-down |
 
 **Channel count:** 8 bidirectional (pins 6–12, 14) + 1 RX-only (pin 3 KE) = 9 total.
@@ -113,35 +132,195 @@ Using TLP521-4 quad optocouplers: need 3× for RX (9 channels), 2× for TX (8 ch
 
 #### 1.1 — Wiring
 
+The circuit has three sub-sections. Build them in order, testing each before continuing.
+
+**NET NAMES** used below (label these on the board with a marker):
+
+| Net | Description | Voltage |
+|-----|-------------|---------|
+| **V_IN** | Raw bench supply input | 12V |
+| **V_PROT** | Protected 12V bus (after fuse + diode + TVS) | ~11.3V |
+| **5V** | Regulated 5V rail | 5.0V |
+| **3V3** | Regulated 3.3V rail | 3.30V |
+| **V_DIAG** | Switched 12V diagnostics bus (controlled by Q_EN) | 0V or ~11.3V |
+| **gate_node** | P-FET gate, between R_GP and R_GATE | varies |
+| **gate_drv** | Junction between R_GATE and Q_LVL collector | varies |
+| **GND** | Ground / 0V reference | 0V |
+
+---
+
+**SUB-CIRCUIT A — Input Protection (4 components)**
+
 ```
-BENCH SUPPLY +12V ──── F1 (2A fuse) ──── D_RPOL (1N4007, anode←input, cathode→V_PROT)
-                                                     │
-                                                     ├── D_TVS (1.5KE18A, cathode=V_PROT, anode=GND)
-                                                     ├── C_IN (100µF, + to V_PROT, − to GND)
-                                                     │
-                                            ┌────────┴────────┐
-                                     ALWAYS-ON PATH     DIAGNOSTICS BUS
-                                            │                 │
-                                     OKI-78SR-5              Q_EN (P-FET)
-                                     pin1=Vin(V_PROT)        Source = V_PROT
-                                     pin2=GND                Gate   = gate_node
-                                     pin3=Vout(5V)           Drain  = V_DIAG
-                                            │                 │
-                                     C_5V (100nF)      C_DIAG (100µF)
-                                            │                 │
-                                     LD1117V33          ┌─────┘
-                                     Vin=5V             │
-                                     GND=GND     gate_node ── R_GP (100k) ── V_PROT
-                                     Vout=3.3V          │
-                                            │      R_GATE (10k)
-                                     C_3V3 (100nF)      │
-                                                   gate_drv
-                                                        │
-                                                   Q_LVL (NPN 2N2222)
-                                                   C = gate_drv
-                                                   E = GND
-                                                   B ── R_EN (10k) ── MCU DIAG_EN GPIO
+    V_IN                           V_PROT
+     │                               │
+     │    ┌──────┐    ┌─────────┐    │
+     ├────┤ F1   ├────┤ D_RPOL  ├────┤
+     │    │ 2A   │    │ 1N4007  │    │
+     │    └──────┘    │ A→ │ →K │    ├──── D_TVS (1.5KE18A)
+     │                └─────────┘    │    cathode = V_PROT
+     │                               │    anode   = GND
+     │                               │
+     │                          C_IN ┤ + (V_PROT)
+     │                       100µF/25V│
+     │                               ┤ − (GND)
+     │                               │
+    GND ──────────────────────────── GND
 ```
+
+> **Test A:** Apply 12V from bench supply. Measure V_PROT with DMM → expect ~11.3V (one diode drop below 12V).
+
+---
+
+**SUB-CIRCUIT B — Always-On Regulators + DK Power (4 components + DK connection)**
+
+```
+    V_PROT                          5V                           3V3
+      │                              │                            │
+      │   ┌──────────────┐           │   ┌──────────────┐        │
+      ├───┤ OKI-78SR-5   ├───────────┤───┤ LD1117V33    ├────────┤
+      │   │ pin1=Vin     │           │   │ pin3=Vin(5V) │        │
+      │   │ pin2=GND ────┤── GND     │   │ pin1=GND ────┤── GND  │
+      │   │ pin3=Vout(5V)│          C_5V │ pin2=Vout    │       C_3V3
+      │   └──────────────┘         100nF │ (3.3V)       │      100nF
+      │                              │   └──────────────┘        │
+      │                              │                           GND
+      │                              │
+      │                     ┌────────┴────────┐
+      │                     │  TO nRF5340 DK  │
+      │                     │                 │
+      │                     │  5V ──→ P1 "5V" │
+      │                     │  GND ─→ P1 "GND"│
+      │                     └─────────────────┘
+      │                              │
+     GND ─────────────────────────  GND (common with DK)
+```
+
+**5V rail current budget:**
+
+| Consumer | Current | Notes |
+|----------|---------|-------|
+| LD1117V33 → 3.3V rail | ~20mA | Opto pull-ups, LM358, gate driver |
+| LM358 op-amp (5V direct) | ~1mA | Quiescent |
+| nRF5340 DK (SW6 = nRF ONLY) | 30–80mA | Active with BLE; peaks ~100mA during TX |
+| **Total from OKI-78SR** | **~50–100mA** | OKI-78SR rated 1.5A — plenty of headroom |
+
+> **Test B:** Measure 5V rail → 5.00V (±0.1V). Measure 3V3 rail → 3.30V (±0.05V).
+> **Do NOT connect the DK yet** — verify rails are stable first, then proceed to DK power-up in Test D.
+
+---
+
+**SUB-CIRCUIT C — Diagnostics Enable Switch (6 components)**
+
+```
+    V_PROT ──────────────────────────────────── R_GP (100kΩ) ── gate_node
+      │                                                             │
+      │   IRF5305 (Q_EN)                                       R_GATE (10kΩ)
+      │   ┌───────────────┐                                         │
+      ├───┤ pin3 = Source  │                                     gate_drv
+      │   │               │                                         │
+      │   │ pin1 = Gate ──┤────────────────────────────────── gate_node
+      │   │               │                                         │
+      │   │ pin2 = Drain ─┤──── V_DIAG                     Q_LVL (2N3904)
+      │   └───────────────┘       │                         ┌───────────────┐
+      │                      C_DIAG ┤ + (V_DIAG)            │ pin3 = C ─────┤── gate_drv
+      │                    100µF/25V │                       │ pin1 = E ─────┤── GND
+      │                             ┤ − (GND)               │ pin2 = B ─────┤── R_EN (10kΩ)
+      │                             │                        └───────────────┘       │
+     GND ───────────────────────── GND                                          MCU DIAG_EN
+                                                                                (3.3V GPIO)
+```
+
+**How it works:**
+
+| MCU DIAG_EN | Q_LVL | gate_node | Q_EN (P-FET) | V_DIAG |
+|-------------|-------|-----------|--------------|--------|
+| LOW (0V) | OFF | Pulled to V_PROT by R_GP → Vgs ≈ 0V | **OFF** | ~0V |
+| HIGH (3.3V) | ON, pulls gate_drv to ~0.2V | ~0.2V → Vgs ≈ −11V | **ON** | ~11.3V |
+
+**Connection checklist for Sub-Circuit C:**
+
+| From | To | Wire / Component |
+|------|----|-----------------|
+| V_PROT rail | Q_EN pin 3 (Source) | Short wire |
+| V_PROT rail | R_GP (100kΩ) one end | Short wire |
+| R_GP other end | gate_node row | Resistor spans these two rows |
+| gate_node row | Q_EN pin 1 (Gate) | Short wire |
+| gate_node row | R_GATE (10kΩ) one end | Short wire |
+| R_GATE other end | gate_drv row | Resistor spans these two rows |
+| gate_drv row | Q_LVL pin 3 (Collector) | Short wire |
+| Q_LVL pin 1 (Emitter) | GND rail | Short wire |
+| Q_LVL pin 2 (Base) | R_EN (10kΩ) one end | Short wire |
+| R_EN other end | MCU DIAG_EN GPIO | Jumper wire to DK |
+| Q_EN pin 2 (Drain) | V_DIAG row | Short wire |
+| C_DIAG + leg | V_DIAG row | Observe polarity |
+| C_DIAG − leg | GND rail | Observe polarity |
+
+> **Test C:** Jumper DIAG_EN to 3.3V → V_DIAG ≈ 11.3V. Jumper DIAG_EN to GND → V_DIAG < 0.1V.
+
+---
+
+**SUB-CIRCUIT D — nRF5340 DK Power Connection (2 wires)**
+
+```
+    Interface Board                              nRF5340 DK
+    Proto-Half #1                                (PCA10095)
+                                                 ┌─────────────────────┐
+    5V rail ─── red wire ──────────────────────→ │ P1 header: "5V" pin │
+                                                 │                     │
+    GND rail ── black wire ────────────────────→ │ P1 header: "GND" pin│
+                                                 │                     │
+                                                 │ SW6 = nRF ONLY      │
+                                                 │ (push toward "nRF") │
+                                                 └─────────────────────┘
+```
+
+**nRF5340 DK P1 power header pinout:**
+
+The P1 header is in the Arduino-compatible position (bottom-left of the DK
+when the USB connectors face up). Pin assignments:
+
+| P1 Pin | Signal | Connection |
+|--------|--------|-----------|
+| 1 | NC / IOREF | — |
+| 2 | RESET | — |
+| 3 | 3V3 | DK output (do NOT connect to board 3.3V) |
+| 4 | **5V** | **← Connect interface board 5V rail here** |
+| 5 | GND | **← Connect interface board GND here** |
+| 6 | GND | Alternative GND (use both for lower resistance) |
+| 7 | VIN | — (unused) |
+| 8 | — | — |
+
+> **IMPORTANT:** Do NOT connect the interface board's 3.3V rail to P1 pin 3.
+> The DK generates its own VDD (3.0V) from the 5V input via its onboard
+> buck regulator. Connecting an external 3.3V would fight the DK's regulator.
+
+**DK switch settings for car deployment:**
+
+| Switch | Position | Effect |
+|--------|----------|--------|
+| **SW6** (nRF ONLY) | **nRF** (toward edge) | Disables interface MCU (J-Link). Saves ~5mA. Required when no USB. |
+| SW9 (Power source) | VDD (default) | DK uses onboard VDD regulators fed from 5V domain |
+
+**Connection checklist for Sub-Circuit D:**
+
+| From | To | Wire | Notes |
+|------|----|------|-------|
+| 5V rail on Proto-Half | DK P1 pin 4 (5V) | Red, 22AWG | Solder to board, DuPont/jumper to DK header |
+| GND rail on Proto-Half | DK P1 pin 5 (GND) | Black, 22AWG | Use both pin 5 and pin 6 for lower resistance |
+
+> **Test D (after Tests A, B, C pass):**
+>
+> 1. Set DK switch SW6 = nRF ONLY
+> 2. Disconnect any USB cables from the DK
+> 3. Connect 5V and GND wires from the interface board to DK P1
+> 4. Apply 12V from bench supply
+> 5. Verify: DK power LED (LD5, green) lights up
+> 6. Verify: DK current draw adds ~30–50mA to bench supply reading
+> 7. Verify: DK VDD (measure on P1 pin 3) ≈ 3.0V (±0.1V)
+> 8. If DK doesn't power up: check SW6 position, check SW9 = VDD, check 5V is present
+
+---
 
 **LD1117V33 pinout (TO-220, front view, text facing you):**
 - Pin 1 (left): GND
@@ -153,7 +332,7 @@ BENCH SUPPLY +12V ──── F1 (2A fuse) ──── D_RPOL (1N4007, anode�
 - Pin 2 (center): GND
 - Pin 3 (right): Vout (5V)
 
-**IRF9540N pinout (TO-220, front view):**
+**IRF5305 pinout (TO-220, front view, text facing you):**
 - Pin 1 (left): Gate
 - Pin 2 (center): Drain (V_DIAG output)
 - Pin 3 (right): Source (V_PROT input)
@@ -163,33 +342,67 @@ BENCH SUPPLY +12V ──── F1 (2A fuse) ──── D_RPOL (1N4007, anode�
 - Pin 2 (center): Base
 - Pin 3 (right): Collector
 
-#### 1.2 — Breadboard Layout Tips
+#### 1.2 — Board Selection & Layout
 
-- Use the breadboard **power rails** for GND (both rails) and 3.3V (one rail).
-- Place the OKI-78SR and LD1117V33 near the power input end.
-- Run a **thick 22AWG wire** for the V_PROT bus — it carries the full board current.
-- Keep the TVS diode close to C_IN (short loop for transient absorption).
-- The P-FET and its gate driver circuit can go adjacent to the buck converter.
-- Leave the right half of the breadboard empty for Stage 2+.
+**Board:** PTSolns Proto-Half (PTS-00079-201) — solderable perf breadboard.
+
+| Spec | Value |
+|------|-------|
+| Dimensions | 116.8 × 58.4 mm |
+| Tie-points | 450 (2.54mm / 0.1" pitch) |
+| Power input | On-board screw terminal **or** 2.1mm barrel jack |
+| Power rails | 2× positive, 2× negative, 1× central — all independently configurable |
+| Mounting | 4× M3 holes (101.6 × 43.2mm spacing), can be grounded individually |
+| Copper | Thick traces, lead-free HASL-RoHS |
+
+> **Why solderable?** The power supply stage carries 100–200mA continuous.
+> Soldered joints eliminate the 0.1–0.5Ω contact resistance of solderless
+> breadboard spring contacts, preventing ground bounce and voltage drops
+> under load. Once verified, the board becomes a permanent, reliable module.
+
+**Layout guidelines:**
+
+- **Power input:** Use the on-board screw terminal for bench supply +12V / GND.
+- **Left side** — protection stage: F1, D_RPOL, D_TVS, C_IN. Keep the TVS close to C_IN (short loop for transient absorption).
+- **Center** — regulators: OKI-78SR and LD1117V33 with their decoupling caps. Both are SIP-3 / TO-220 and fit standard 2.54mm rows.
+- **Right side** — P-FET enable circuit: IRF5305, R_GP, R_GATE, Q_LVL, R_EN, C_DIAG.
+- **Power rails:** Assign one positive rail to 5V, one to 3.3V. Use jumper caps (if Deluxe package) or solder bridges to connect/isolate rails as needed.
+- **Central rail:** Leave unconnected for now — can be tied to GND later if useful.
+- **V_PROT bus:** Run a short, thick solder bridge or wire between the protection output and the OKI-78SR input. This carries full board current.
+- **Datasheets:** [Proto-Half Datasheet](https://docs.ptsolns.com/Products/PTS-00079_Proto-Half/Datasheets/Datasheet_PTS-00079_Proto-Half.pdf) — has full pad layout, rail topology, and jumper positions.
 
 #### 1.3 — Verification Checklist
 
-| Test | Method | Expected | Tolerance |
-|------|--------|----------|-----------|
-| V_PROT | DMM across C_IN | 11.3V | ±0.5V (12V minus diode drop) |
-| 5V rail | DMM across C_5V | 5.00V | ±0.10V |
-| 3.3V rail | DMM across C_3V3 | 3.30V | ±0.05V |
-| V_DIAG (DIAG_EN = jumper to 3.3V) | DMM across C_DIAG | ~11.3V | ±0.5V |
-| V_DIAG (DIAG_EN = jumper to GND) | DMM across C_DIAG | <0.1V | — |
-| No smoke, no hot components | Touch test | Lukewarm | — |
-| Current draw (DIAG_EN=LOW) | Bench supply reading | ~15mA | <30mA |
-| Current draw (DIAG_EN=HIGH, no load) | Bench supply reading | ~20mA | <50mA |
+**Phase 1 — Board only (DK not connected):**
+
+| # | Test | Method | Expected | Tolerance |
+|---|------|--------|----------|-----------|
+| 1 | V_PROT | DMM across C_IN | 11.3V | ±0.5V |
+| 2 | 5V rail | DMM across C_5V | 5.00V | ±0.10V |
+| 3 | 3.3V rail | DMM across C_3V3 | 3.30V | ±0.05V |
+| 4 | V_DIAG ON | Jumper DIAG_EN to 3.3V, DMM across C_DIAG | ~11.3V | ±0.5V |
+| 5 | V_DIAG OFF | Jumper DIAG_EN to GND, DMM across C_DIAG | <0.1V | — |
+| 6 | Thermal | Touch test all components | Lukewarm | — |
+| 7 | Idle current (DIAG_EN=LOW) | Bench supply reading | ~15mA | <30mA |
+| 8 | Active current (DIAG_EN=HIGH, no load) | Bench supply reading | ~20mA | <50mA |
+
+**Phase 2 — Connect DK (only after Phase 1 passes):**
+
+| # | Test | Method | Expected | Tolerance |
+|---|------|--------|----------|-----------|
+| 9 | DK power LED | Set SW6=nRF ONLY, connect 5V+GND to P1, apply 12V | LD5 (green) lights up | — |
+| 10 | DK VDD | DMM on P1 pin 3 (3V3 output) | ~3.0V | ±0.1V |
+| 11 | Total current (DIAG_EN=LOW) | Bench supply reading | ~45–65mA | <100mA |
+| 12 | Total current (DIAG_EN=HIGH) | Bench supply reading | ~50–70mA | <120mA |
+| 13 | DK firmware | Flash a simple LED blink via USB, disconnect USB, power from board | LED blinks | — |
 
 **Troubleshooting:**
 - If 5V is 0V: check OKI-78SR pin order (Vin and Vout are NOT the same as LM7805).
 - If 3.3V > 5V: LD1117V33 pins are swapped (common mistake, GND is pin 1 not pin 2).
-- If V_DIAG doesn't turn off: P-FET drain/source are swapped. For IRF9540N: Source=V_PROT (higher voltage), Drain=V_DIAG (load side).
+- If V_DIAG doesn't turn off: P-FET drain/source are swapped. For IRF5305: Source=V_PROT (higher voltage, pin 3), Drain=V_DIAG (load side, pin 2).
 - If V_DIAG is always ~0.7V below V_PROT even with DIAG_EN=LOW: body diode is conducting — drain and source are definitely swapped.
+- If DK doesn't power up: verify SW6 = nRF ONLY, SW9 = VDD. Measure 5V at DK P1 pin 4. Check GND continuity between board GND and DK P1 pin 5.
+- If DK VDD reads 0V but 5V at P1 is correct: SW9 may be in wrong position (should be VDD, not USB or Li-Po).
 
 ---
 
@@ -534,34 +747,51 @@ Each TLP521-4 contains 4 independent optocouplers in a DIP-16 package.
 > actual car, it can be reassigned or left unconnected.
 
 > Assign specific pin numbers when the nRF5340 DK pin mapping is finalized. All digital
-> GPIOs are 3.3V-compatible. ADC inputs must be on pins that support SAADC.
+> GPIOs are 3.3V-compatible (DK VDD = 3.0V, pull-ups are 3.3V from LD1117V33 —
+> within the 3.6V absolute max for VDD-domain pins). ADC inputs must be on pins
+> that support SAADC (P0.04–P0.07, P0.25, P0.26 on nRF5340).
+>
+> **DK is powered from the interface board's 5V rail** — no USB required in deployment.
+> All signal wires + 5V + GND run between Proto-Half #1 and the DK via a wiring harness.
 
-#### 7.3 — Breadboard Layout Strategy
+#### 7.3 — Board Layout Strategy
 
-Use **3 breadboards** arranged side by side:
+**Board inventory for full build:**
+
+| Board | Type | Assignment |
+|-------|------|-----------|
+| PTS-00079-201 #1 | Solderable Proto-Half (450 pts) | Power Supply + Enable + Analog Conditioning |
+| PTS-00079-201 #2 | Solderable Proto-Half (450 pts) | RX Optos (3× TLP521-4) + TX Optos (2× TLP521-4) |
+| BusBoard ST1 ×1–3 | Solderable Stripboard (50×80mm) | Overflow / breakout boards for connectors, test points |
+
+> **Adafruit 5588 is NOT usable** — its 2mm pitch is incompatible with standard 2.54mm through-hole parts.
+> **SparkFun 08808** (1" square) — useful as small breakout boards for SOT-23 parts or test jigs.
+
+**Physical arrangement (2 Proto-Half boards + ST1 breakouts):**
 
 ```
-┌─────────────────┐  ┌─────────────────┐  ┌─────────────────┐
-│  BREADBOARD 1   │  │  BREADBOARD 2   │  │  BREADBOARD 3   │
-│                 │  │                 │  │                 │
-│  Power Supply   │  │  RX Optos       │  │  TX Optos       │
-│  + Enable       │  │  (3× TLP521-4)  │  │  (2× TLP521-4)  │
-│  + Analog Cond. │  │  + 9× R_RX      │  │  + 8× R_TX      │
-│                 │  │  + 9× R_PU      │  │  + 8× R_OC      │
-│  LM358 (DIP-8)  │  │                 │  │  + 8× 2N2222    │
-│  Dividers       │  │                 │  │  + 8× R_BP      │
-│  Clamp diodes   │  │                 │  │                 │
-│  RC filters     │  │                 │  │                 │
-└─────────────────┘  └─────────────────┘  └─────────────────┘
-         │                    │                    │
-    ─────┴────────────────────┴────────────────────┴─────
-    GND bus (common), 3.3V bus, V_DIAG bus (all interconnected)
+┌──────────────────────────┐  ┌──────────────────────────┐
+│  PROTO-HALF #1           │  │  PROTO-HALF #2           │
+│  (116.8 × 58.4 mm)      │  │  (116.8 × 58.4 mm)      │
+│                          │  │                          │
+│  Power Supply + Enable   │  │  RX Optos (3× TLP521-4) │
+│  (Stage 1)               │  │  + 9× R_RX, 9× R_PU    │
+│                          │  │                          │
+│  Analog Conditioning     │  │  TX Optos (2× TLP521-4) │
+│  (Stages 4–5)            │  │  + 8× R_TX, R_OC, R_BP  │
+│  LM358, dividers,        │  │  + 8× 2N3904 drivers    │
+│  clamp diodes, RC filter │  │                          │
+└──────────────────────────┘  └──────────────────────────┘
+         │                              │
+    ─────┴──────────────────────────────┴─────
+    GND bus, 3.3V bus, V_DIAG bus (soldered inter-board wires)
 ```
 
-**Bus wiring between breadboards:**
-- Use **22AWG solid core** for GND, 3.3V, and V_DIAG buses between boards.
+**Bus wiring between boards:**
+- Solder **22AWG solid core** jumper wires for GND, 3.3V, 5V, and V_DIAG buses between the two Proto-Half boards.
 - Color code: **Black** = GND, **Red** = V_DIAG (12V switched), **Orange** = 3.3V, **Yellow** = 5V.
-- Run the diagnostic pin wires (to car connector) from both BB2 (RX) and BB3 (TX) to a common terminal strip.
+- Run the diagnostic pin wires (to car connector) from Proto-Half #2 to a common terminal strip or banana plug breakout.
+- Use M3 standoffs on the mounting holes to stack or mount the boards to a base plate.
 
 ---
 
@@ -587,6 +817,13 @@ When breadboard testing is complete and you're ready to connect to the R129:
 > The TVS diode protects against transients. Never connect the board to the car
 > without the full protection stage (Stage 1) verified and working.
 > Test with the bench supply first, then the car with engine OFF, then engine ON.
+>
+> **Power architecture note:** The Raspberry Pi 5 (cabin display) is powered
+> separately from 12V via its own supply (MNK-190 buck module or cigarette
+> lighter USB adapter). It does NOT share the interface board's V_PROT bus.
+> D_RPOL (1N4007, 1A) only carries interface board + nRF5340 DK current
+> (~88mA worst case). Communication between the Pi and the nRF5340 is
+> wireless (BLE) — no power or signal wires between cabin and engine bay.
 
 ---
 
@@ -600,9 +837,11 @@ When breadboard testing is complete and you're ready to connect to the R129:
 
 4. **LM358 output swing.** The LM358 cannot swing to within 0V of GND on its output — it bottoms out at ~20mV. This is fine for our application (battery voltage is never 0V in operation).
 
-5. **IRF9540N vs Si2301.** The breadboard P-FET (IRF9540N) has a higher gate threshold (−3.5V) than the Si2301 (−1.2V). Our NPN pulls the gate to ~0.2V (Vce_sat), so Vgs ≈ −11V — well beyond either threshold. However, the IRF9540N has higher gate capacitance (~2nF vs ~50pF), so turn-on will be slightly slower (~1ms vs ~91µs). This is not an issue for diagnostics enable/disable.
+5. **IRF5305 vs Si2301.** The breadboard P-FET (IRF5305) has a higher gate threshold (−2V to −4V) than the Si2301 (−1.2V). Our NPN pulls the gate to ~0.2V (Vce_sat), so Vgs ≈ −11V — well beyond either threshold. The IRF5305 has higher gate capacitance (~3.6nF vs ~50pF), so turn-on will be slightly slower (~1–2ms vs ~91µs). This is not an issue for diagnostics enable/disable. The IRF5305 actually has lower Rds_on (60mΩ vs 110mΩ) — a bonus.
 
 6. **Decouple every IC.** Place 100nF ceramic caps directly at the power pins of every TLP521-4, the LM358, and the LD1117V33. Short leads, close to the pins.
+
+7. **DK power from 5V rail.** The nRF5340 DK is powered from the interface board's OKI-78SR 5V output via P1 header. Set SW6 = nRF ONLY when no USB is connected. Do NOT connect the board's 3.3V rail to the DK's 3V3 pin — the DK generates its own 3.0V internally. The DK's GPIO VDD is 3.0V; the board's 3.3V pull-ups are safe (below the 3.6V absolute max).
 
 ---
 
@@ -610,7 +849,8 @@ When breadboard testing is complete and you're ready to connect to the R129:
 
 | Stage | Components Added | Key Verification | Est. Time |
 |-------|-----------------|------------------|-----------|
-| 1 | Power + enable (14 components) | 5V, 3.3V, V_DIAG on/off | 1 hour |
+| 1a | Power + enable (14 components) | 5V, 3.3V, V_DIAG on/off (board only) | 1 hour |
+| 1b | DK power connection (2 wires) | DK boots from board 5V, LED blinks | 30 min |
 | 2 | Single RX channel (3 components) | MCU_RX inverts blink pulse | 30 min |
 | 3 | Single TX channel (5 components) | Car pin pulled to <0.5V | 30 min |
 | 4 | Battery analog path (8 components) | ADC reads 2.04V at 12V input | 30 min |
@@ -618,4 +858,4 @@ When breadboard testing is complete and you're ready to connect to the R129:
 | 6 | Combined bidir channel | RX+TX on same pin, both work | 20 min |
 | 7 | Full 9 channels + car wiring | All channels read blinks | 2–3 hours |
 
-**Total estimated build time: ~5–6 hours** (including testing at each stage)
+**Total estimated build time: ~6–7 hours** (including testing at each stage)

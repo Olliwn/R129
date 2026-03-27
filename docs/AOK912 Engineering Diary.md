@@ -309,7 +309,8 @@
 
 ### **8. Hood Insulation Pad Replacement**
 * **Symptom:** The original hood pad has been completely removed by a previous owner, leaving behind a mess of hardened, baked-on factory adhesive. This risks heat damage to the exterior aluminum hood paint and increases engine noise.
-* **Action Item:** Safely dissolve and remove the old adhesive without scratching the aluminum, then install the new OE pad. *(See project: [Hood Pad Replacement](../work/hood_pad_replacement/README.md))*
+* **Part Ordered (2026-03-22):** IPG-87742-Set — Insulation mat including test sticker & fastening clips for Mercedes R129 hood. Supplier: AMS Auto GmbH (Gevelsberg, DE) via oldtimer-Ersatzteile24.de. Invoice #566371, €93.80 incl. shipping. Paid via PayPal. ETA 2026-03-28 (DHL EU Parcel, tracking: CS743796387DE).
+* **Action Item:** Safely dissolve and remove the old adhesive without scratching the aluminum, then install the new pad. *(See project: [Hood Pad Replacement](../work/hood_pad_replacement/README.md))*
 
 ### **9. Baseline Service — Unknown History (Spring 2026)**
 
@@ -403,7 +404,9 @@
 | 2026-03-20 | Wheels/Tires | Michelin PS5 245/45R17 (Front x2) | Online Retailer | 368.37 | Purchased |
 | 2026-03-22 | Drivetrain | Corteco Engine Mounts x2 (80001913) | Autodoc | 90.98 | Purchased |
 | 2026-03-22 | Drivetrain | Corteco Trans Mount (21652116) | Autodoc | TBD | Purchased |
-| **Total** | | **Year-to-Date Spend** | | **~€2,077.31 + TBD** | |
+| 2026-03-22 | Body | Hood Insulation Pad + Clips (IPG-87742-Set) | AMS Auto (DE) | 73.90 | Purchased |
+| 2026-03-22 | Body | Shipping (DHL EU Parcel) | AMS Auto (DE) | 19.90 | Purchased |
+| **Total** | | **Year-to-Date Spend** | | **~€2,171.11 + TBD** | |
 
 *(Note: Estimated prices used for Motonet local purchases; will update with exact receipts. Electronics/hobby add-ons like Raspberry Pi, Owon oscilloscope, or custom displays are excluded from this vehicle maintenance budget.)*
 
