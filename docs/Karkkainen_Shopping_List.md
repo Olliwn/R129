@@ -85,7 +85,7 @@
 - [ ] **Front Accumulator Spheres (x2) / Kaasupallot** (OEM Part: `A 129 320 01 15`. Buy Corteco brand. *Note: Replace in pairs. Front Right is confirmed blown/hydro-locked based on manual test.*)
 - [ ] **Rear Level Control Linkage / Niveauregulierung-Gestänge** (*PRIORITY — inspect first before ordering. Known ADS I failure point: plastic linkage shears at lower mounting, causing rear to sit low. Check under car at rear axle area. Part connects anti-roll bar to hydraulic proportioning valve.*)
 - [x] **ADS Hydraulic Fluid / ADS Hydrauliikkaneste** (MB 343.0 / ZH-M spec. 4L total acquired: 1L earlier + 2L Motonet in-store + 1L Motonet online 2026-03-26. **Ready for full system flush.**)
-- [ ] **ADS Hydraulic Suspension Filter / ADS Hydrauliikkasuodatin** (OEM Part: `A 129 327 00 91`. ~€7–11. Suction filter inside the ADS reservoir. **PRIME SUSPECT for blocked pump section** — if clogged, pump spins but cannot draw fluid. Replace during flush.)
+- [ ] **ADS Hydraulic Suspension Filter / ADS Hydrauliikkasuodatin** (OEM Part: `A 129 327 00 91`. ~€7–11. **ACTION: Order new filter.** Old filter was cleaned ~99% on 2026-03-29 but needs replacement for long-term reliability.)
 - [x] **Transparent PVC Hose / Läpinäkyvä PVC-letku** (ToppBright 6mm + 8mm clear hose, 2m each — purchased from Motonet online 2026-03-26. Both sizes ordered to ensure fit on return line.)
 - [ ] **ADS Tandem Pump / ADS Tandempumppu** (OEM Part: `A 129 460 07 80`. Rebuilt available from ABCspecialist NL ~€850 + core deposit. **ONLY if Phase 6.0 flush proves pump section is dead** — level stays static after flush + filter replacement. Do NOT order before flush test.)
 

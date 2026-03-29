@@ -18,9 +18,20 @@ Aesthetic Alignment: Provides the exact 605nm amber illumination, matte black fi
 
 Sourcing: Procured from EU-based specialists (e.g., original-autoradio.de) to ensure it is fully refurbished (dried capacitors replaced, sticky volume potentiometers rebuilt) and includes the necessary anti-theft security code.
 
-Audio Routing: The RPi5 handles media playback. Audio is routed from the RPi5’s DAC into the BE2210 via a direct internal AUX-IN modification or a CD-changer emulator box via the 10-pin ISO connector on the rear.
+Audio Routing: The RPi5 handles media playback. Audio is routed from the RPi5 into the BE2210 via the retrofitted internal AUX-IN (3.5mm jack on the rear of the unit, confirmed present on the delivered unit 2026-03-28). OPEN ITEM: The RPi5 has no native analog audio output (unlike the RPi4's 3.5mm jack). A USB audio interface or I2S DAC HAT is required to generate the analog signal. Candidates: HiFiBerry DAC2 Pro, Pimoroni pHAT DAC, or a basic USB sound card. Part selection and order pending.
 
 Space Allocation: The BE2210 occupies the full depth of the DIN slot. Since compute hardware is relocated to the cubby, this depth is no longer a constraint.
+
+Installation Status (2026-03-28): BE2210 received, wired in, and code accepted. Required ISO wiring connector + Wago 221-412 lever connectors for clean, reversible splicing of the factory harness. Old Sony CDX-410 removed and discarded. Still needs ISO-to-DIN (Motorola) antenna adapter — static on speakers until the factory antenna cable is properly connected to the BE2210's DIN antenna input.
+
+Internet Connectivity: nRF93M1 Cat-1bis Module (NEW 2026-03-28)
+For always-on internet connectivity (audio streaming, OTA map updates, remote vehicle diagnostics), a Nordic Semiconductor nRF93M1 Cat-1bis cellular module will be integrated with the RPi5. Cat-1bis provides up to 10 Mbit/s downlink — more than sufficient for high-quality audio streaming (Spotify 320 kbps), real-time data, and even firmware OTA. Cat-1bis offers better power efficiency than Cat-4 and wider band coverage than Cat-M1/NB-IoT, making it ideal for automotive IoT. The nRF93M1 connects to the RPi5 via USB or UART. This replaces the earlier "Wi-Fi tethering from phone" plan with a dedicated, always-on cellular link independent of the driver's phone.
+
+Open items for nRF93M1 integration:
+- SIM card: Need a data-only M2M/IoT SIM (e.g., Elisa IoT, DNA M2M, or a pan-European IoT SIM for cross-border driving).
+- Antenna: External LTE antenna routed to an unobtrusive location (e.g., behind the rear window or inside the trunk lid). The R129's metal body is a Faraday cage — internal placement will not work.
+- Power: The nRF93M1 dev kit runs on USB 5V — can share the RPi5's 5V rail.
+- Software: AT command interface or native Nordic driver for Linux on the RPi5.
 
 2. Compute & Main Display: RPi5 + 5.5" OLED
 The factory storage cubby above the climate control unit is repurposed as the primary digital interface.

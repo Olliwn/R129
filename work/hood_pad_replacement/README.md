@@ -7,7 +7,7 @@ A new replacement kit (OE Number 1296802025, including pad, clips, test sticker,
 
 ## Parts & Materials
 * **Replacement Pad Kit:** IPG-87742-Set (OE 1296802025) - Includes pad, spray adhesive, fastening clips, and engine bay test sticker.
-* **Adhesive Remover:** 3M Adhesive Remover, Goo Gone Automotive, or general Citrus-based solvent (do not use harsh acetones that will strip the paint).
+* **Adhesive Remover:** ~~3M Adhesive Remover, Goo Gone Automotive, or general Citrus-based solvent~~ **AT tarranpoistaja** (purchased 2026-03-28 after generic spray proved ineffective against the baked-on 35-year-old factory adhesive). Do not use harsh acetones that will strip the paint.
 * **Plastic Scrapers:** Trim removal tools or dedicated plastic razor blades. (NEVER use metal scrapers on the aluminum hood).
 * **Protection:** Old blankets or drop cloths to cover the entire engine bay.
 * **Masking Tape:** Wide painter's tape to protect painted edges.
@@ -54,4 +54,4 @@ A new replacement kit (OE Number 1296802025, including pad, clips, test sticker,
 | Date | Status | Notes |
 | :--- | :--- | :--- |
 | 2026-03-22 | Ordered | Kit IPG-87742-Set ordered (93.80 € incl. shipping/VAT). Pending delivery. |
-| | | |
+| 2026-03-28 | In Progress | Started scraping old adhesive. Generic adhesive remover spray was ineffective — glue barely softened. Bought AT tarranpoistaja (stronger product) for next attempt. Cleaned fallen glue debris from the front of the car (VIN plate / Datakarte area). |

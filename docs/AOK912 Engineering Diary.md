@@ -35,17 +35,25 @@
 *   **ADS System (Suspension) — TWO INDEPENDENT SUBSYSTEMS:**
     * **Subsystem A: Adaptive Damping (electronic, monitored by N51):** Module is **alive, reports no faults** (1 blink on Pin 9, confirmed 2026-03-23 with >13V). Console switch LED works, turns RED in Sport mode. ABS lamp works. **Front Right** accumulator sphere is ruptured/hydro-locked (invisible to N51). **ADS cluster warning lamp: CONFIRMED MISSING — indicator strip has NO ADS symbol at all (2026-03-26 photo).** Not a dead bulb — the printed symbol is absent. Strongly indicates **cluster swap from a non-ADS R129.** Odometer accuracy now in question.
     * **Subsystem B: Niveauregulierung / Level Control (mechanical/hydraulic, NOT monitored by N51):** This subsystem is **completely independent** from the damping electronics. On ADS I, height sensing is MECHANICAL (anti-roll bar linkage to proportioning valve — no electronic sensors). N51 does NOT monitor level control — Pin 9 blink codes cover ONLY damping. **The entire level control system can be dead and Pin 9 still reports "1 blink = healthy."** The only electronic indicator for level control faults is the cluster warning lamp (oil level float sensor) — which is MISSING because the cluster is a non-ADS variant (no symbol on the indicator strip).
-    * **Level Control Status: PUMP CONFIRMED ALIVE (2026-03-26).** Quick pump test: topped reservoir to MAX, started engine — fluid level dropped ~2/3 of MAX-to-MIN range. Pump IS circulating. System was starved/air-locked, not dead. **However:** running air-contaminated circuit triggered a fault code → N51 shut down (both switch LEDs dark, unresponsive even during ignition-ON bulb check). **2026-03-27: Pin 9 returned code 14 (steering angle sensor not initialized) — soft fault from the shutdown. NEXT: clear code, re-initialize steering sensor (full lock L→R→center), top up reservoir, then full Phase 1 flush to purge air and stagnant fluid.**
+    * **Level Control Status: SYSTEM ONLINE AND STABLE (2026-03-28).** Pump IS circulating fluid (confirmed 2026-03-26). Code 14 (steering angle sensor) **cleared by lock-to-lock** — system has been stable across multiple engine starts on 03-28. Both switches active, Sport/Comfort reliable. **Fluid behavior:** reservoir returns to near-MAX with engine off (fluid enters circuit when running, returns when depressurized). No net fluid loss — confirms no external leak. **Front suspension may be responding** to level commands (visual impression, needs measurement). **Rear height remains static** — rear-specific issue (level control valve, ARB linkage, or air in rear lines). Fahrzeugniveau switch deactivation is slow (LED stays on a while after toggling — likely normal timed hold). **NEXT: Phase 1 flush to purge air and old fluid, then re-evaluate rear circuit specifically. Measure fender-to-ground at all four corners before/after.**
 *   **Central Locking (PSE):** Completely inoperative. The pneumatic pump in the trunk is silent when actuated.
 *   **Windshield Wiper / Washer:** Wiper does not consistently stop in the correct park position. Washer fluid is only spraying from 2 out of 4 nozzles.
 *   **Engine Mounts:** Slight vibration felt in the cabin at 700-800 RPM idle, indicating the fluid-filled engine mounts have collapsed.
 *   **Hardtop Fitment:** The front latches bind when locking the hardtop down. Caused by excess thickness from a newly installed headliner; requires manual pull-down assist.
 *   **Paint & Body:** Minor paint cracking on the rear fender (below trunk lid). Small deep scratch on the aluminum hood. Bare steel exposed behind the front wheels (requires rust-prevention touch-up).
 *   **Engine Belt:** Squeals/chirps immediately after cold start. Needs diagnosis (slipping belt vs. bad tensioner pulley bearing).
+*   **Power Antenna — Stuck Extended (NEW 2026-03-29):** The Hirschmann power antenna is stuck in the fully raised position and does not retract. Discovered after installing the Becker BE2210 and reconnecting the battery.
+    * **Investigation (first-order):**
+      1. **Check the antenna remote wire from BE2210:** The radio should send a +12V signal on the "antenna/remote" wire when powered on, and drop to 0V when off. If the BE2210's remote wire is not connected (or wired permanently hot), the antenna motor never gets a "retract" command. Verify with multimeter: measure the blue or blue/white wire at the ISO connector with the radio on vs. off.
+      2. **Listen for motor activity:** Turn the radio on and off. If the motor makes a whining/grinding noise but the mast doesn't move, the internal nylon mast cable (Zahnseele) is stripped — the teeth that mesh with the drive gear are worn away. This is the #1 Hirschmann failure mode on 30+ year old cars.
+      3. **Check for seized motor:** If the motor is completely silent on radio on/off, either the motor is dead, the relay is stuck, or there's no power reaching it. Check the antenna fuse (fuse box, ~15A).
+      4. **Manual retract test:** Disconnect the antenna motor connector (2-pin, at the base of the antenna in the right rear fender). Briefly apply 12V to the motor leads in reverse polarity — the motor should retract. If it does, the motor works and the problem is upstream (relay, wiring, or radio remote signal).
+    * **History:** Antenna was already stuck up with the previous Sony CDX-410 — not a BE2210 wiring issue. The selling dealer mentioned it "lacks lubrication," but no motor activity (no sound at all) has been observed on radio on/off with either radio. Complete silence points to a dead motor, stuck relay, blown fuse, or severed wiring — not just a dry mast cable.
+    * **Recommended first step:** Skip straight to **step 4 (manual reverse-polarity test at the motor connector)**. If the motor doesn't respond to direct 12V, it's dead or seized. If it does respond, the problem is upstream (relay/fuse/wiring).
 *   **Instrument Cluster — Additional Faults (further evidence of swap/age):**
     * **Clock adjustment stuck/locked:** The clock setting mechanism is stale — turning the adjustment knob does not change the time. Workaround: disconnect battery to reset to 12:00, then let it run from there. May be a seized adjustment shaft or corroded internal contacts. Will be inspected when cluster is pulled for the ADS lamp investigation (Phase 3).
     * **Temperature LCD delaminated/washed out:** The small LCD panel that displays outside temperature is fading — segments are losing contrast and becoming difficult to read. This is a known Mercedes age issue (shared with W124/W126/W140) caused by UV degradation of early LCD glass. Fix: replace the LCD panel itself (available as a separate part — 4 screws to open the VDO housing, swap the glass). Verify sensor and connector first before assuming the display is at fault. Both faults will be addressed during the Phase 3 cluster pull.
-*   **Battery / Parasitic Drain (NEW 2026-03-27):** Battery voltage drops from ~13V to ~12V in approximately two days of idle sitting. Either the battery itself is failing (age unknown — could be original to the dealer's cosmetic restoration or older) or there is a parasitic current draw in the electrical system. Candidates: the dead PSE pump circuit, ATA/IRCL modules (both show static glow on X11 = powered but not communicating), aftermarket radio wiring, or a stuck relay. **Action:** (1) Test battery CCA and internal resistance. (2) If battery is healthy, perform parasitic draw test (ammeter in series on negative terminal, pull fuses one by one to isolate the circuit). Trickle charger is keeping it alive for now but this needs resolution before summer driving.
+*   **Battery / Parasitic Drain (NEW 2026-03-27, updated 2026-03-28):** Battery voltage drops from ~13V to ~12V in approximately two days of idle sitting. Either the battery itself is failing (age unknown — could be original to the dealer's cosmetic restoration or older) or there is a parasitic current draw in the electrical system. Candidates: the dead PSE pump circuit, ATA/IRCL modules (both show static glow on X11 = powered but not communicating), aftermarket radio wiring (Sony CDX-410 now removed — eliminates one candidate), or a stuck relay. **Update (2026-03-28):** Battery measured at **14.7V** after overnight trickle charge (while connected to charger) — very close to the 14.8V absorption ceiling, confirming the charger is working correctly and the battery is accepting a full charge. The drain still occurs when disconnected from the charger. **Action:** (1) Test battery CCA and internal resistance. (2) If battery is healthy, perform parasitic draw test (ammeter in series on negative terminal, pull fuses one by one to isolate the circuit). (3) If CCA is marginal, replace battery. Trickle charger is keeping it alive for now but this needs resolution before summer driving.
 
 ## **📅 Log Entries**
 
@@ -181,7 +189,7 @@
     *   **Root cause:** Loose connection on the battery positive (+) terminal. Tightened the terminal bolt and the car now starts normally.
     *   **Action:** Added trickle charger to the garage routine for storage periods.
 *   **Wiper Blade Replaced:** Installed a new Bosch Twin 600 wiper blade.
-*   **Current Radio Noted:** The installed radio is a Sony CDX-410 (aftermarket, not original to the car). No collector value — to be removed and discarded/sold once the Becker BE2210 arrives.
+*   **Current Radio Noted:** The installed radio is a Sony CDX-410 (aftermarket, not original to the car). No collector value — ~~to be removed and discarded/sold once the Becker BE2210 arrives.~~ **REMOVED 2026-03-28.** Discarded. BE2210 installed in its place.
 *   **Belt Noise:**
     *   A belt squeals/chirps immediately after cold start. Needs diagnosis: spray water on the belt while running — if the noise stops momentarily, the belt is slipping (replace belt or adjust tension); if the noise persists or changes character, suspect a worn tensioner or idler pulley bearing. *(See baseline service section D: [work/baseline_service/README.md](../work/baseline_service/README.md))*
 
@@ -285,14 +293,13 @@
     - **ADS console switch:** LED works, turns RED in Sport — electronics fully functional.
     - **Fahrzeugniveau switch:** LED illuminates. Pressing UP (Raised Level) has **NO effect on ride height.** System commands the raise but cannot execute it.
     - **Reservoir level:** The translucent reservoir next to the washer fluid is **below the MIN marking.** MAX/MIN markings are recessed deep inside the canister and hard to read — initial "almost empty" assessment was a misread. Level dropped only ~0.5 cm since 2026-03-17 (within temperature/measurement tolerance). **No active leak found** anywhere under the car. Fluid loss is gradual/historical over the car's 35-year life. Confirms this IS the ADS/Niveauregulierung fluid. **Next: top up to MAX with Febi 02615 ZH-M and retest level control.**
-*   **Revised Working Hypothesis (updated 2026-03-26, LATEST):** **PUMP IS ALIVE.** Quick pump test (2026-03-26): topped reservoir to MAX, started engine — fluid level dropped ~2/3 of MAX-to-MIN range. The tandem pump ADS section IS circulating fluid. System was air-locked/starved from years of low fluid, not mechanically failed. **€850 rebuilt pump NOT needed.** However, running air-contaminated fluid through the circuit triggered a fault code — N51 entered full shutdown (both switch LEDs dark, system unresponsive). Left/right suspension stiffness difference felt smaller after the test run (subjective).
+*   **Revised Working Hypothesis (updated 2026-03-28, LATEST):** **SYSTEM ONLINE AND STABLE.** Fault code 14 (steering angle sensor) cleared by lock-to-lock steering on 2026-03-28. System has remained fully online across multiple engine starts — both switches active, Sport/Comfort switching reliable. **Fluid behavior insight:** reservoir returns to near-MAX with engine off, confirming fluid enters the circuit when the pump runs and drains back when depressurized. No net fluid loss (>100ml) — no external leaks. **Front suspension may be responding** to level commands (visual impression, needs objective measurement). **Rear height remains static** — points to a rear-specific issue: level control valve (A 129 320 00 58), rear anti-roll bar linkage, or air trapped in rear circuit. Fahrzeugniveau switch deactivation is slow (LED stays on for a while after toggling off — likely normal timed hold behavior).
 *   **NEXT SESSION ACTION PLAN:**
-    1. **Read Pin 9 blink codes** — expect fault code(s) from air/pressure anomaly during the pump test. Record all codes.
-    2. **Clear fault codes** via X11 Pin 9 procedure.
-    3. **Top up reservoir** — level dropped significantly during pump test. Refill to MAX with Febi 02615 ZH-M.
-    4. **Proceed with full Phase 1 flush** — purge air and 35 years of stagnant fluid. Parts acquired: 4L ZH-M fluid, PVC hoses (6mm + 8mm), brake cleaner. ADS suction filter (A 129 327 00 91) to be ordered online or clean old one during flush.
-    5. **Re-test after flush + bleed** — clear codes again, start engine, verify switches illuminate, test Fahrzeugniveau UP.
-    6. Full procedure documented in `work/ads_diagnostic/README.md` Phase 1.
+    1. **Measure fender-to-ground** at all four corners (front L/R, rear L/R) — baseline before flush.
+    2. **Proceed with full Phase 1 flush** — purge air and 35 years of stagnant fluid. Parts on hand: 4L ZH-M fluid, PVC hoses (6mm + 8mm), brake cleaner. ADS suction filter (A 129 327 00 91) to be ordered or clean old one during flush.
+    3. **Re-measure fender-to-ground** after flush + bleed — compare front and rear changes.
+    4. **If rear still static after flush:** inspect under car — rear level control valve, rear ARB linkage (known failure: plastic link shears at lower mount), and rear hydraulic lines.
+    5. Full procedure documented in `work/ads_diagnostic/README.md` Phase 1.
 
 ### **March 27, 2026 \- Swedish Papers Received & Finnish Registration Preparation**
 
@@ -316,6 +323,78 @@
     4. **Bring to rekisteröintikatsastus:** Both parts of Swedish registreringsbevis (surrendered permanently), Swedish besiktningsprotokoll from 2026-01-02 (to potentially exempt kunnon tarkastus per EU Directive 2014/45/EU), kauppakirja, ID, rekisteröintilupa printout, and liikennevakuutustodistus.
     5. **Ensirekisteröinti** at the same station after passing inspection — receive Finnish plates.
 *   **ADS Blink-Code Read (Pin 9):** Read fault codes after the 2026-03-26 pump test shutdown. **Single fault: code 14 = steering angle sensor (N49) not initialized.** Soft calibration fault from the unexpected N51 shutdown — not hardware damage. Fix: clear code, start engine, turn steering full lock left → right → center. See `work/ads_diagnostic/README.md` and `work/ads_blink_reader/blinker_report.md` for full ADS fault code table.
+
+### **March 28, 2026 \- ADS System Back Online & Fluid Behavior Analysis**
+
+**Location:** Oulu, Finland
+
+**Event:** Lock-to-lock steering cleared code 14. Extended observation across multiple engine starts throughout the day (car not driven — not yet registered).
+
+*   **ADS Fault Cleared:** Lock-to-lock steering maneuver re-initialized the N49 steering angle sensor. System has remained fully online since — no regression across multiple engine start/stop cycles.
+*   **Switch Behavior:** Both the ADS console switch and the Fahrzeugniveau switch illuminate correctly with ignition. Console Sport/Comfort switching is consistent and reliable (red LED toggles on/off). Fahrzeugniveau switch deactivation is slow — red LED remains on for a noticeable period after toggling off. This is likely normal timed-hold behavior (the system holds the raised-mode command before accepting the lower command, preventing abrupt level changes).
+*   **Fluid Behavior (significant finding):** Reservoir level has returned to **near-MAX** with the engine off. On 2026-03-26 the level dropped ~2/3 of MAX-to-MIN when the engine was running. The fluid is therefore circulating into the circuit under pump pressure, then **draining back to the reservoir** when the engine stops and the system depressurizes. No net fluid loss in the >100ml range — confirms there are no external leaks. This also suggests the accumulators may have lost nitrogen charge (unable to hold fluid against pressure) or the level control valve returns fluid to the reservoir path when depressurized (expected behavior).
+*   **Ride Height Observations:**
+    - **Front:** Possible height change observed (visual impression only). Needs objective fender-to-ground measurements.
+    - **Rear:** Height remains **static** — no observable change with Fahrzeugniveau switch in UP position. This increasingly points to a **rear-specific** issue: the rear level control valve (A 129 320 00 58), the rear anti-roll bar linkage (known failure — plastic link shears at lower mount), or air trapped specifically in the rear hydraulic lines.
+*   **ADS diagnostic status:** N51 healthy, no fault codes, both switches functional, pump working, no leaks. **System is ready for Phase 1 flush.** Post-flush diagnosis should focus on the rear circuit. Baseline fender-to-ground measurements to be taken before flush.
+
+### **March 29, 2026 \- Pre-Flush Baseline & Air-Lock Confirmation**
+
+**Location:** Oulu, Finland
+
+**Event:** Pulled the car out of the garage briefly to take baseline ride height measurements and observe fluid behavior during a final pre-flush cycle.
+
+*   **Baseline Ride Height (fender lip to ground through wheel center):**
+    - **Rear L:** 67.0 cm  |  **Rear R:** 66.0 cm
+    - **Front L:** 69.0 cm |  **Front R:** 68.5 cm
+    - **Result:** Measurements confirm the "sag test" visual impression — the rear is sitting 2–3 cm lower than the front. The right side is sitting slightly lower than the left overall.
+    - **Dynamic test:** Idled the car outside for a few minutes and cycled the Fahrzeugniveau switch up and down. **No measurable difference** in ride height occurred. The system is definitely still air-locked or mechanically blocked.
+*   **Fluid Behavior — Air-Lock CONFIRMED:**
+    - Started with reservoir at MAX.
+    - During level switch cycles, fluid level dropped marginally below MIN.
+    - **Crucial observation:** There was **visible bubbling** in the oil reservoir, and this bubbling **continued even for a while after stopping the engine**.
+    - **Analysis:** This is the textbook definition of severe air entrapment. While the pump runs, it compresses the air trapped in the high-pressure side (lines/accumulators). When the engine stops, the pump pressure drops to zero, and the highly compressed air expands, forcing its way backward up the return line and bubbling out through the reservoir fluid.
+    - **Conclusion:** The initial diagnosis of a "starved/air-locked" system is definitively proven. The system has simply ingested massive amounts of air over years of running with low fluid (due to the invisible cluster warning lamp). **The Phase 1 flush (with the trunk-bounce bleeding method) is exactly the right next step.**
+*   **Filter & Reservoir Cleaning (Flush Prep):**
+    - Removed the suction filter from the reservoir. Cleaned it to ~99% visually clean. A new filter (A 129 327 00 91) will be ordered for long-term peace of mind, but the cleaned original is sufficient for the flush.
+    - Used a fluid syringe to empty the reservoir. Found a tiny bit of sediment at the bottom. Decided not to completely disassemble the reservoir assembly to avoid breaking brittle 35-year-old plastic.
+    - Connected transparent PVC hose to the return line — ready for the engine-running purge.
+*   **Phase 1 Flush Execution & Post-Flush Analysis:**
+    - **Flush completed** using all 4L of fresh ZH-M fluid.
+    - **Fluid clear quickly:** The outgoing fluid became clear after less than 1L of flushing.
+    - **No air bubbles:** No bubbles were seen exiting the return line during the open-loop flush.
+    - **Switch shutdown:** Mid-flush, after cycling the level switch a few times, the switch LED went dark and became inoperable.
+    - **Diagnostic bus unresponsive (dim glow):** Attempted to read X11 Pins 7, 8, and 9. All three showed a "static/dim glow" on the LED tester, with no blink codes. **Re-tested with engine running (14V on multimeter) and new V2 blink reader:** still stuck in "dim glow" mode, not responding to button presses.
+    - **Analysis:**
+      1. **Static diagnostic ports:** We have seen this exact symptom before on 2026-03-18. It usually means the diagnostic bus / modules do not have adequate voltage. However, seeing it with the engine running at 14V is concerning. It's possible the battery has a bad cell and is pulling down the system despite the alternator, or the diagnostic bus itself is in a hung state.
+      2. **Switch shutdown:** N51 detected a fault (likely steering angle or pressure limit from the flush) and shut itself down. We can't clear it until the diagnostic port blinks again.
+      3. **Why the fluid cleared fast & no bubbles:** The open-loop flush (return line disconnected) creates a "path of least resistance." The pump simply drew fresh fluid from the reservoir, bypassed the main valve block, and dumped it straight out the return line. It did NOT push the fluid through the "dead ends" (the struts and accumulators) where the air is actually trapped.
+    - **NEXT STEPS:** (1) Let the battery charge fully overnight. (2) If Pin 9 still glows dim tomorrow even with a full battery, disconnect the battery negative terminal for 15 minutes to hard-reset the car's modules. (3) Re-test Pin 9 — clear the fault code. (4) Reconnect the return line and do the **closed-loop weighted bleed** (engine running, trunk bounce) to force the trapped air out of the dead-ends.
+
+*   **Becker BE2210 Installed:**
+    - The Becker BE2210 ("Mercedes Special") with retrofitted AUX-IN arrived and was wired into the 1-DIN slot. Required a standard **ISO wiring connector** from Motonet (€6) and a batch of **Wago 221-412 lever connectors** (×16, €10) for clean, reversible splicing of the factory harness. The dealer-provided anti-theft code was accepted — radio powers on and tunes correctly.
+    - **Static on speakers:** Noticeable background static/hiss present on all speakers. Likely an antenna grounding issue or the missing antenna adapter. **Still needs an ISO-to-DIN (Motorola) antenna adapter** — the R129 factory antenna cable terminates in ISO, the BE2210 expects DIN (Motorola). Without the adapter, the antenna is unconnected and the tuner is picking up noise.
+    - **Old Sony CDX-410:** Removed from the DIN slot. No collector or resale value — **decision: discard.** Wiring harness from the Sony was butchered by the previous installer; the Wago connectors were used to cleanly reconnect the factory speaker leads to the BE2210's ISO output harness.
+    - **AUX-IN wiring to RPi5 — OPEN QUESTION:** The BE2210 was ordered with a retrofitted internal AUX input (3.5mm jack accessible on the rear of the unit). The plan is to route a 3.5mm cable from this AUX jack up to the RPi5 in the cubby above. However, the RPi5 has **no native audio output** (no 3.5mm jack like the RPi4). **Need to source a USB audio interface or I2S DAC HAT for the RPi5** to generate the analog audio signal. Candidates: HiFiBerry DAC2 Pro, Pimoroni pHAT DAC, or a basic USB sound card. Part selection and order pending.
+    - **nRF93M1 Connectivity Module (NEW — architecture update):** For internet connectivity on the RPi5 (streaming audio, OTA map updates, remote diagnostics), the plan is to connect a **Nordic Semiconductor nRF93M1** — a recently introduced **Cat-1bis cellular module** supporting up to **10 Mbit/s** downlink. Cat-1bis is ideal for automotive IoT: lower power than Cat-4, wider coverage than Cat-M1, and 10 Mbit/s is more than sufficient for high-quality audio streaming (e.g., Spotify at 320 kbps) and real-time data. The nRF93M1 connects to the RPi5 via USB or UART. This replaces the earlier vague "Wi-Fi tethering" plan with a dedicated, always-on cellular link. **SIM card and antenna routing TBD.** *(Updated in RPi5 architecture: [UI_rpi5/radio_uiknob.md](../UI_rpi5/radio_uiknob.md))*
+*   **Hood Pad — Adhesive Removal Progress:**
+    - Started scraping the remaining hardened factory adhesive from the underside of the aluminum hood. The adhesive remover spray on hand (generic solvent) was **ineffective** — the 35-year-old baked glue barely softened. **Bought "AT tarranpoistaja"** (adhesive remover, stronger Finnish product) to try next session.
+    - **Cleaned the front engine bay area instead:** Some of the old adhesive/glue had dropped down onto the very front of the car — the area where the VIN number plate and factory configuration plate (Datakarte) are located. Cleaned thoroughly to keep the VIN plates legible and presentable for the upcoming rekisteröintikatsastus (Finnish registration inspection). *(See: [work/hood_pad_replacement/README.md](../work/hood_pad_replacement/README.md))*
+*   **Aluminium Front Grille — Polishing Plan:**
+    - Bought **Autosol Metal Polish** to restore the oxidized aluminium grille at the front of the car. **TODO: verify product is safe for aluminium** (Autosol's standard metal polish is generally aluminium-safe but the tube should be checked for any "not for aluminium" warnings).
+    - **Cleaning & polishing procedure (documented for reference):**
+      1. **Wash & Brush:** Spray the grille with cleaner and use a detailing brush to gently scrub road grime and insects out of the gaps. Rinse and dry completely.
+      2. **Polish:** Put a pea-sized dab of Autosol on a microfiber cloth and work it firmly back and forth along one metal slat at a time. The cloth will turn pitch black — that means it's working and pulling off the oxidation.
+      3. **Buff:** Take a clean microfiber and buff each slat until it shines.
+*   **Battery Status Update:**
+    - Battery measured at **14.7V** after overnight charge (while still connected to the trickle charger). This is very close to the **14.8V absorption voltage ceiling** for a standard lead-acid battery — the charger is working correctly and the battery is accepting a full charge.
+    - The parasitic drain issue (documented 2026-03-27) remains unresolved. **Decision needed:** either (1) perform the parasitic draw test to find the leak, or (2) replace the battery outright (age unknown, possibly original to the dealer restoration). Whichever is the culprit — a weak cell or a draining circuit — needs resolution before summer driving.
+*   **Passenger Seat Latch Repair & System Reset:**
+    - **Symptom:** Passenger seat backrest latch was not operational, making it impossible to fold the seat forward to access the rear storage compartment (where the PSE central locking pump is located).
+    - **Repair:** Disassembled the seat back. Cleaned out accumulated dust and trash, and treated the non-visible leather sections with leather cleaner. 
+    - **Mechanism fix:** The latch lever was intact, but the release wire lacked tension. Fixed by adding a zip tie ("nippuside") as a spacer/washer on the lower end of the wire to increase tension. (There are tensioning screws on the handle side, but lacked fine enough tools to access the tiny square nuts in the cramped space).
+    - **Reassembly:** Reassembly went smoothly apart from the last two screws at the bottom of the backrest. Could not get the screw holes on the seat and frame side to align as daylight ran out. The upper "pistons" were engaged, so it should just be a matter of finding the right grip to pull the bottom holes into alignment in the next session.
+    - **Battery Disconnect / Radio Verification:** Disconnected the battery negative terminal during the seat work. This provided a full system hard-reset. Upon reconnecting, verified that the new Becker BE2210 radio is now fully operational and starts up correctly after re-entering the security code.
 
 ## **📝 Task / Todo List & Quick Studies**
 
@@ -406,7 +485,17 @@
 * **Part Ordered (2026-03-22):** IPG-87742-Set — Insulation mat including test sticker & fastening clips for Mercedes R129 hood. Supplier: AMS Auto GmbH (Gevelsberg, DE) via oldtimer-Ersatzteile24.de. Invoice #566371, €93.80 incl. shipping. Paid via PayPal. ETA 2026-03-28 (DHL EU Parcel, tracking: CS743796387DE).
 * **Action Item:** Safely dissolve and remove the old adhesive without scratching the aluminum, then install the new pad. *(See project: [Hood Pad Replacement](../work/hood_pad_replacement/README.md))*
 
-### **9. Baseline Service — Unknown History (Spring 2026)**
+### **9. Center Console Refresh — Wood Polish, Switch Cleaning & Cable Routing (NEW 2026-03-28)**
+* **Scope:** Remove all center console Zebrano/Burl Walnut wood panels, clean and polish the wood on the bench, disassemble/clean/re-lubricate all console switches (ADS, hazard, defroster, seat heaters, etc.) to restore crisp tactile feel, and route all RPi5 infotainment cables (AUX, CAT6, power) through the void behind the trim before reassembly.
+* **Motivation:** The switches work but feel mushy/sticky from 35 years of accumulated grime. The wood could use a proper wax. And the console needs to come apart anyway to route cables between the DIN slot and the cubby for the RPi5 integration. Three jobs, one disassembly.
+* **Action Item:** Full procedure documented. *(See project: [Center Console Refresh](../work/center_console_refresh/README.md))*
+
+### **10. M119 Upper Timing Components & Oil Bridge Clip Upgrade (NEW 2026-03-28)**
+* **Scope:** Valve cover-off preventive inspection of the M119's two best-known weak points: (1) upper timing chain guides (plastic, become brittle with age — fragments circulate through oil system) and (2) camshaft oil bridge clips (plastic, loosen over time and starve cam lobes of oil, causing lobe pitting/scoring). Upgrade all oil bridge clips to billet aluminum. Replace valve cover gaskets, breather hose, and spark plugs while the top end is open.
+* **Priority:** HIGH — Both are age-related, non-symptomatic failure modes. By the time symptoms appear (chain rattle, cam tick), damage is done. This is the single most important M119 preventive maintenance task.
+* **Action Item:** Order gaskets, timing guides, and aluminum oil bridge clip kit. Full procedure documented. *(See project: [M119 Upper Timing](../work/m119_upper_timing/README.md))*
+
+### **11. Baseline Service — Unknown History (Spring 2026)**
 
 *No written service history exists for this vehicle. Assume all consumables and wear items are overdue. This checklist establishes a known-good baseline for reliability and longevity. Items already tracked in detail elsewhere are cross-referenced, not duplicated. Full working document with detailed instructions: [work/baseline_service/README.md](../work/baseline_service/README.md)*
 
@@ -449,7 +538,7 @@
 
 #### **I. Electrical Baseline**
 - [ ] **Battery (PRIORITY — observed drain)** — Test CCA and internal resistance. Battery age unknown. Observed ~1V drop (13V→12V) over ~2 days idle. Replace if CCA is marginal. Nordic winters are brutal on old batteries.
-- [ ] **Parasitic Draw Test** — If battery tests healthy, measure resting current draw with ammeter in series on negative terminal (engine off, all doors closed, wait 30min for modules to sleep). Normal: <50mA. If high, pull fuses one by one to isolate the draining circuit. Suspects: PSE pump circuit (dead but powered?), ATA/IRCL modules (static glow on X11 = powered), aftermarket Sony CDX-410 radio wiring, stuck relay.
+- [ ] **Parasitic Draw Test** — If battery tests healthy, measure resting current draw with ammeter in series on negative terminal (engine off, all doors closed, wait 30min for modules to sleep). Normal: <50mA. If high, pull fuses one by one to isolate the draining circuit. Suspects: PSE pump circuit (dead but powered?), ATA/IRCL modules (static glow on X11 = powered), ~~aftermarket Sony CDX-410 radio wiring~~ (removed 2026-03-28 — eliminated as candidate), stuck relay.
 - [ ] **Alternator Output** — Verify 13.8–14.4V at idle with loads on. Check for AC ripple (indicates failing diodes).
 - [ ] **All Exterior Lights** — Walk-around test: headlights (low/high), fog lights, turn signals, brake lights, reverse lights, license plate lights, side markers.
 - [ ] **Fuse Box Inspection** — Open both fuse boxes (underhood + interior). Inspect for corrosion, melted terminals, and incorrect fuse ratings.
@@ -476,6 +565,8 @@
 * Engine Mounts & Steering Damper → Master Plan Phase 4
 * Suspension Refresh (LCA, Links, Bushings) → Task #4
 * ADS Diagnostics → Task #4 / [ADS Blink-Code Reader](../work/ads_blink_reader/README.md)
+* Center Console Wood & Switch Refresh + RPi5 Cable Routing → Task #9 / [Center Console Refresh](../work/center_console_refresh/README.md)
+* M119 Upper Timing Guides & Oil Bridge Clip Upgrade → Task #10 / [M119 Upper Timing](../work/m119_upper_timing/README.md)
 
 ## **💰 Budget & Parts Cost Tracking (2026)**
 
@@ -503,7 +594,11 @@
 | 2026-03-22 | Body | Shipping (DHL EU Parcel) | AMS Auto (DE) | 19.90 | Purchased |
 | 2026-03-16 | Insurance | Liikennevakuutus + Full Kasko | Pohjola | — | Active |
 | 2026-03-27 | Admin | Autovero (car import tax) | Verohallinto / OmaVero | 837.05 | Pending payment |
-| **Total** | | **Year-to-Date Spend (parts + tax)** | | **~€3,008.16 + TBD** | |
+| 2026-03-28 | Audio | ISO wiring connector (for BE2210) | Motonet | 6.00 | Installed |
+| 2026-03-28 | Electrical | Wago 221-412 lever connectors (×16) | Motonet | 10.00 | Installed |
+| 2026-03-28 | Body | AT tarranpoistaja (adhesive remover) | Local | ~10.00 | Purchased |
+| 2026-03-28 | Body | Autosol Metal Polish (aluminium grille) | Local | ~8.00 | Purchased |
+| **Total** | | **Year-to-Date Spend (parts + tax)** | | **~€3,042 + TBD** | |
 
 *(Note: Estimated prices used for Motonet local purchases; will update with exact receipts. Insurance premium excluded from total (recurring cost). Electronics/hobby add-ons like Raspberry Pi, Owon oscilloscope, or custom displays are excluded from this vehicle maintenance budget.)*
 
@@ -522,6 +617,7 @@
 ### **2\. Specialty & Electrical Tools**
 * **36mm Socket:** Specifically for removing the M119 oil filter housing cap without cracking the plastic.
 * **Torque Wrenches:** Essential for the aluminum M119 block. Need a 3/8" drive (approx. 20-100 Nm) and a 1/2" drive (up to 200 Nm for wheel bolts). (Acquired)
+* **Hose Clamp Pliers:** MTX letkunsulkijapihtisarja (hose pinch-off plier set). Essential for clamping off coolant/hydraulic hoses during fluid work without disconnecting them — prevents spillage when swapping components mid-circuit. (Acquired 2026-03-28, Motonet)
 * **Multimeter & Oscilloscope:** Owon HDS242 required for troubleshooting the ADS system and developing the Phase 2/3 Raspberry Pi/Nordic PCB circuits. (Acquired)
 
 ## **📚 Digital Documentation & Manuals**
