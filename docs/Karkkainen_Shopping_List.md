@@ -82,7 +82,7 @@
 - [x] **Transmission Mount / Vaihteiston tuki** (Corteco 21652116 / OE: `A 124 240 06 18` purchased from Autodoc)
 
 ## Suspension / ADS Parts (Pending Diagnostic)
-- [ ] **Front Accumulator Spheres (x2) / Kaasupallot** (OEM Part: `A 129 320 01 15`. Buy Corteco brand. *Note: Replace in pairs. Front Right is confirmed blown/hydro-locked based on manual test.*)
+- [ ] **Front Accumulator Spheres (x2) / Kaasupallot** (OEM Part: `A 129 320 01 15`. Buy Corteco brand. *Note: Replace in pairs. Pending physical "straw test" to definitively confirm ruptured internal diaphragm before ordering.*)
 - [ ] **Rear Level Control Linkage / Niveauregulierung-Gestänge** (*PRIORITY — inspect first before ordering. Known ADS I failure point: plastic linkage shears at lower mounting, causing rear to sit low. Check under car at rear axle area. Part connects anti-roll bar to hydraulic proportioning valve.*)
 - [x] **ADS Hydraulic Fluid / ADS Hydrauliikkaneste** (MB 343.0 / ZH-M spec. 4L total acquired: 1L earlier + 2L Motonet in-store + 1L Motonet online 2026-03-26. **Ready for full system flush.**)
 - [ ] **ADS Hydraulic Suspension Filter / ADS Hydrauliikkasuodatin** (OEM Part: `A 129 327 00 91`. ~€7–11. **ACTION: Order new filter.** Old filter was cleaned ~99% on 2026-03-29 but needs replacement for long-term reliability.)
