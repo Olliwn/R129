@@ -22,18 +22,17 @@ A new replacement kit (OE Number 1296802025, including pad, clips, test sticker,
 - [ ] **1.2 — Mask Hood Edges**
   - Apply wide masking tape along the painted exterior edges of the hood to prevent adhesive remover from dripping onto the exterior clear coat.
 
-### Phase 2: Old Adhesive Removal
-*Note: The R129 hood is aluminum. It is soft and easily scratched or gouged. Use extreme patience.*
-- [ ] **2.1 — Chemical Soak**
-  - Work in small 30cm x 30cm sections. 
-  - Spray or dab the adhesive remover onto the old hardened glue. 
-  - Let it soak for 5-10 minutes. The old German adhesive is notoriously stubborn; the solvent must do the work, not your muscles.
-- [ ] **2.2 — Plastic Scraping**
-  - Using a wide plastic trim tool or plastic razor blade, gently scrape the softened adhesive away. 
-  - Wipe the scraper clean on a shop towel immediately so you don't smear glue back onto the hood.
-- [ ] **2.3 — Final Prep Wipe**
-  - Once the bulk of the adhesive is gone, use a microfiber cloth soaked in brake cleaner or rubbing alcohol (Isopropyl) to wipe the aluminum completely clean and strip any remaining oily residue from the adhesive remover. 
-  - *Pass criteria:* The underside of the hood must be 100% bare, clean, and dry, or the new spray adhesive will fail when the engine gets hot.
+### Phase 2: Old Adhesive Removal (Practical Minimum)
+*Note: The R129 hood is aluminum. It is soft and easily scratched or gouged. Do NOT pursue bare aluminum — the clips provide primary mechanical retention, and the spray adhesive only needs a reasonably flat, grease-free surface to bond.*
+
+- [ ] **2.1 — Remove Raised Lumps & Ridges**
+  - Focus on any thick glue ridges or lumps that would prevent the new pad from sitting flush against the hood.
+  - Use a wide plastic trim tool to knock down the high spots. Apply AT tarranpoistaja on the worst areas only and let it soak 5–10 minutes before scraping.
+  - Thin, flat residue that is firmly bonded to the aluminum can stay — it provides surface roughness that actually helps the new adhesive grip.
+- [ ] **2.2 — Degrease Wipe**
+  - Wipe the entire bonding area with a microfiber cloth soaked in brake cleaner. This strips any oily residue from the adhesive remover and road film.
+  - *Pass criteria:* Surface is flat enough for the pad to sit flush, and clean/dry to the touch. No grease, no loose flaking material. Thin bonded-on residue is acceptable.
+  - *Trade-off accepted:* Leaving thin old adhesive means the next pad replacement (in 10+ years) will face two adhesive layers. This is a cosmetic/future concern, not a structural one — the fastening clips carry the load.
 
 ### Phase 3: Pad Installation
 - [ ] **3.1 — Dry Fit**
@@ -55,3 +54,4 @@ A new replacement kit (OE Number 1296802025, including pad, clips, test sticker,
 | :--- | :--- | :--- |
 | 2026-03-22 | Ordered | Kit IPG-87742-Set ordered (93.80 € incl. shipping/VAT). Pending delivery. |
 | 2026-03-28 | In Progress | Started scraping old adhesive. Generic adhesive remover spray was ineffective — glue barely softened. Bought AT tarranpoistaja (stronger product) for next attempt. Cleaned fallen glue debris from the front of the car (VIN plate / Datakarte area). |
+| 2026-03-30 | Received | Pad kit (IPG-87742-Set) delivered. Revised approach: remove raised lumps only, skip pursuit of bare aluminum. Clips provide primary retention; spray adhesive only needs flat, degreased surface. |

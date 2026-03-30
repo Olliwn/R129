@@ -396,6 +396,23 @@
     - **Reassembly:** Reassembly went smoothly apart from the last two screws at the bottom of the backrest. Could not get the screw holes on the seat and frame side to align as daylight ran out. The upper "pistons" were engaged, so it should just be a matter of finding the right grip to pull the bottom holes into alignment in the next session.
     - **Battery Disconnect / Radio Verification:** Disconnected the battery negative terminal during the seat work. This provided a full system hard-reset. Upon reconnecting, verified that the new Becker BE2210 radio is now fully operational and starts up correctly after re-entering the security code.
 
+### **March 30, 2026 \- Deliveries Received & Detailing Products Order**
+
+**Location:** Oulu, Finland
+
+**Event:** Three shipments received. Detailing products ordered from Kärkkäinen. OLED display held in customs.
+
+*   **Shipments Received:**
+    *   **Hood Insulation Pad (AMS Auto, DE):** IPG-87742-Set including insulation mat, test sticker, and fastening clips — arrived via DHL. Ready for installation once the remaining adhesive removal on the aluminium hood is complete.
+    *   **Autodoc Shipment 1 — Filters & Ignition:** MANN engine air filters (C 3388 x2), cabin filter (CU 5041), oil filter (H 829/1 x), power steering filter (H 85), fuel filter (WK 830/3), NGK spark plugs (BP5ES x8), ATE brake fluid (1L), and nitrile gloves. All baseline service consumables now in hand.
+    *   **Autodoc Shipment 2 — Engine & Transmission Mounts:** Corteco engine mounts x2 (80001913) and Corteco transmission mount (21652116). Ready for installation during the baseline service.
+*   **5.5" OLED Display — In Transit (Customs):** The 1920×1080 OLED panel for the RPi5 cubby display is stuck at Tampere-Pirkkala. Customs status updated 2026-03-29 (tullausprosessi started); transport delay logged 2026-03-30 07:09 UTC+3. Tracking: JD014600012529706223. Awaiting customs clearance before forwarding to Oulu.
+*   **Kärkkäinen Detailing Order (online):**
+    *   **Leather Master Leather Vital 250ml** (HS3065) — Leather conditioner for the interior seats and door panels. €22.90.
+    *   **King Carthur Reshine Finish (3/3) 250ml** (HS4660) — Final-stage polishing compound for paint correction workflow. €19.90.
+    *   **Soft99 'UUSI FUSSO' Coat White 200g** (HS3492) — Synthetic wax/sealant for the 199 Blauschwarz Metallic paint. "White" version is for dark-colored cars. €39.90.
+    *   **Order total: €82.70.** Expected delivery ~2 days.
+
 ## **📝 Task / Todo List & Quick Studies**
 
 ### **1. Windshield Wiper Parking Issue**
@@ -482,7 +499,7 @@
 
 ### **8. Hood Insulation Pad Replacement**
 * **Symptom:** The original hood pad has been completely removed by a previous owner, leaving behind a mess of hardened, baked-on factory adhesive. This risks heat damage to the exterior aluminum hood paint and increases engine noise.
-* **Part Ordered (2026-03-22):** IPG-87742-Set — Insulation mat including test sticker & fastening clips for Mercedes R129 hood. Supplier: AMS Auto GmbH (Gevelsberg, DE) via oldtimer-Ersatzteile24.de. Invoice #566371, €93.80 incl. shipping. Paid via PayPal. ETA 2026-03-28 (DHL EU Parcel, tracking: CS743796387DE).
+* **Part Ordered (2026-03-22), RECEIVED (2026-03-30):** IPG-87742-Set — Insulation mat including test sticker & fastening clips for Mercedes R129 hood. Supplier: AMS Auto GmbH (Gevelsberg, DE) via oldtimer-Ersatzteile24.de. Invoice #566371, €93.80 incl. shipping. Paid via PayPal. Delivered via DHL EU Parcel (tracking: CS743796387DE).
 * **Action Item:** Safely dissolve and remove the old adhesive without scratching the aluminum, then install the new pad. *(See project: [Hood Pad Replacement](../work/hood_pad_replacement/README.md))*
 
 ### **9. Center Console Refresh — Wood Polish, Switch Cleaning & Cable Routing (NEW 2026-03-28)**
@@ -574,12 +591,12 @@
 
 | Date | Category | Item | Supplier | Cost (€) | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 2026-03-22 | Filters | MANN Engine Air Filters (C 3388) x2 | Autodoc | 34.00 | Purchased |
-| 2026-03-22 | Filters | MANN Cabin Filter (CU 5041) | Autodoc | 14.00 | Purchased |
-| 2026-03-22 | Filters | MANN Oil Filter (H 829/1 x) | Autodoc | 11.00 | Purchased |
-| 2026-03-22 | Filters | MANN Power Steering Filter (H 85) | Autodoc | 6.00 | Purchased |
-| 2026-03-22 | Filters | MANN Fuel Filter (WK 830/3) | Autodoc | 22.00 | Purchased |
-| 2026-03-22 | Ignition | NGK Spark Plugs BP5ES x8 | Autodoc | 24.00 | Purchased |
+| 2026-03-22 | Filters | MANN Engine Air Filters (C 3388) x2 | Autodoc | 34.00 | Received 03-30 |
+| 2026-03-22 | Filters | MANN Cabin Filter (CU 5041) | Autodoc | 14.00 | Received 03-30 |
+| 2026-03-22 | Filters | MANN Oil Filter (H 829/1 x) | Autodoc | 11.00 | Received 03-30 |
+| 2026-03-22 | Filters | MANN Power Steering Filter (H 85) | Autodoc | 6.00 | Received 03-30 |
+| 2026-03-22 | Filters | MANN Fuel Filter (WK 830/3) | Autodoc | 22.00 | Received 03-30 |
+| 2026-03-22 | Ignition | NGK Spark Plugs BP5ES x8 | Autodoc | 24.00 | Received 03-30 |
 | 2026-03-22 | Fluids | ATE TYP200 DOT4 Brake Fluid (1L) | Autodoc | 15.00 | Purchased |
 | 2026-03-22 | Fluids | Febi ZH-M Hydraulic Fluid (1L) | Motonet | ~15.00 | Purchased |
 | 2026-03-22 | Fluids | Febi ATF MB 236.3 Power Steering (1L) | Motonet | ~15.00 | Purchased |
@@ -588,17 +605,20 @@
 | 2026-03-18 | Audio | Mercedes Special BE2210 Radio (w/ AUX) | Online Retailer | 434.97 | Purchased |
 | 2026-03-20 | Wheels/Tires | Michelin PS2 275/40R17 (Rear x2) | Online Retailer | 981.99 | Purchased |
 | 2026-03-20 | Wheels/Tires | Michelin PS5 245/45R17 (Front x2) | Online Retailer | 368.37 | Purchased |
-| 2026-03-22 | Drivetrain | Corteco Engine Mounts x2 (80001913) | Autodoc | 90.98 | Purchased |
-| 2026-03-22 | Drivetrain | Corteco Trans Mount (21652116) | Autodoc | TBD | Purchased |
-| 2026-03-22 | Body | Hood Insulation Pad + Clips (IPG-87742-Set) | AMS Auto (DE) | 73.90 | Purchased |
-| 2026-03-22 | Body | Shipping (DHL EU Parcel) | AMS Auto (DE) | 19.90 | Purchased |
+| 2026-03-22 | Drivetrain | Corteco Engine Mounts x2 (80001913) | Autodoc | 90.98 | Received 03-30 |
+| 2026-03-22 | Drivetrain | Corteco Trans Mount (21652116) | Autodoc | TBD | Received 03-30 |
+| 2026-03-22 | Body | Hood Insulation Pad + Clips (IPG-87742-Set) | AMS Auto (DE) | 73.90 | Received 03-30 |
+| 2026-03-22 | Body | Shipping (DHL EU Parcel) | AMS Auto (DE) | 19.90 | Received 03-30 |
 | 2026-03-16 | Insurance | Liikennevakuutus + Full Kasko | Pohjola | — | Active |
 | 2026-03-27 | Admin | Autovero (car import tax) | Verohallinto / OmaVero | 837.05 | Pending payment |
 | 2026-03-28 | Audio | ISO wiring connector (for BE2210) | Motonet | 6.00 | Installed |
 | 2026-03-28 | Electrical | Wago 221-412 lever connectors (×16) | Motonet | 10.00 | Installed |
 | 2026-03-28 | Body | AT tarranpoistaja (adhesive remover) | Local | ~10.00 | Purchased |
 | 2026-03-28 | Body | Autosol Metal Polish (aluminium grille) | Local | ~8.00 | Purchased |
-| **Total** | | **Year-to-Date Spend (parts + tax)** | | **~€3,042 + TBD** | |
+| 2026-03-30 | Detailing | Leather Master Leather Vital 250ml (HS3065) | Kärkkäinen | 22.90 | Ordered |
+| 2026-03-30 | Detailing | King Carthur Reshine Finish 3/3 250ml (HS4660) | Kärkkäinen | 19.90 | Ordered |
+| 2026-03-30 | Detailing | Soft99 FUSSO Coat White 200g (HS3492) | Kärkkäinen | 39.90 | Ordered |
+| **Total** | | **Year-to-Date Spend (parts + tax)** | | **~€3,125 + TBD** | |
 
 *(Note: Estimated prices used for Motonet local purchases; will update with exact receipts. Insurance premium excluded from total (recurring cost). Electronics/hobby add-ons like Raspberry Pi, Owon oscilloscope, or custom displays are excluded from this vehicle maintenance budget.)*
 
