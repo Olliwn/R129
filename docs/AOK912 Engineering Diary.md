@@ -213,7 +213,7 @@
 
 *   **Manufacturing Plate Decoded:** Confirmed original specifications and options. Added full Datakarte to the top of the engineering diary. Crucial confirmation that the car was factory-equipped with ADS (Option 211) and Heated Seats (Option 873).
 *   **Computer Box Inspection:** Opened the module "coffin" under the hood. All modules are dry and seated correctly. Located the ADS Control Module (012 545 26 32) and the KE-Jetronic ECU (011 545 97 32).
-*   **Rear Fuses Inspected:** The 8-fuse auxiliary block in the trunk is physically intact, but still utilizes old aluminum torpedo fuses. Will be replacing all of them with new copper/ceramic fuses as a preventative measure.
+*   **Rear Fuses Inspected:** The 8-fuse auxiliary block in the trunk is physically intact, but still utilizes old aluminum torpedo fuses. Will be replacing all of them with new copper/ceramic fuses as a preventative measure. **UPDATE (2026-03-30): Fuse #6 found BLOWN — likely root cause of dead PSE central locking. All 8 fuses replaced with copper/ceramic units.**
 *   **Autodoc Parts Order Placed:** Successfully navigated the "early M119 vs late M119" parts catalog issues. Ordered the following OEM-spec baseline maintenance parts:
     *   **Air Filters:** 2x MANN C 3388 (Specifically verified the 35mm thin filters required for the KE-Jetronic M119.960. Standard 44mm filters from Motonet were returned).
     *   **Cabin Filter:** 1x MANN CU 5041
@@ -293,13 +293,15 @@
     - **ADS console switch:** LED works, turns RED in Sport — electronics fully functional.
     - **Fahrzeugniveau switch:** LED illuminates. Pressing UP (Raised Level) has **NO effect on ride height.** System commands the raise but cannot execute it.
     - **Reservoir level:** The translucent reservoir next to the washer fluid is **below the MIN marking.** MAX/MIN markings are recessed deep inside the canister and hard to read — initial "almost empty" assessment was a misread. Level dropped only ~0.5 cm since 2026-03-17 (within temperature/measurement tolerance). **No active leak found** anywhere under the car. Fluid loss is gradual/historical over the car's 35-year life. Confirms this IS the ADS/Niveauregulierung fluid. **Next: top up to MAX with Febi 02615 ZH-M and retest level control.**
-*   **Revised Working Hypothesis (updated 2026-03-28, LATEST):** **SYSTEM ONLINE AND STABLE.** Fault code 14 (steering angle sensor) cleared by lock-to-lock steering on 2026-03-28. System has remained fully online across multiple engine starts — both switches active, Sport/Comfort switching reliable. **Fluid behavior insight:** reservoir returns to near-MAX with engine off, confirming fluid enters the circuit when the pump runs and drains back when depressurized. No net fluid loss (>100ml) — no external leaks. **Front suspension may be responding** to level commands (visual impression, needs objective measurement). **Rear height remains static** — points to a rear-specific issue: level control valve (A 129 320 00 58), rear anti-roll bar linkage, or air trapped in rear circuit. Fahrzeugniveau switch deactivation is slow (LED stays on for a while after toggling off — likely normal timed hold behavior).
-*   **NEXT SESSION ACTION PLAN:**
-    1. **Measure fender-to-ground** at all four corners (front L/R, rear L/R) — baseline before flush.
-    2. **Proceed with full Phase 1 flush** — purge air and 35 years of stagnant fluid. Parts on hand: 4L ZH-M fluid, PVC hoses (6mm + 8mm), brake cleaner. ADS suction filter (A 129 327 00 91) to be ordered or clean old one during flush.
-    3. **Re-measure fender-to-ground** after flush + bleed — compare front and rear changes.
-    4. **If rear still static after flush:** inspect under car — rear level control valve, rear ARB linkage (known failure: plastic link shears at lower mount), and rear hydraulic lines.
-    5. Full procedure documented in `work/ads_diagnostic/README.md` Phase 1.
+*   **Revised Working Hypothesis (updated 2026-03-30, LATEST):** **OVP RELAY CRACKED SOLDER JOINTS — PROBABLE ROOT CAUSE.** Disassembly of the OVP relay revealed 3–4 ring-shaped thermal fatigue fractures on the PCB, worst on the **87L pin** (suspected ADS/N51 power feed). This single hardware failure explains the entire chain of intermittent symptoms: "dim glow" on diagnostics, occasional recovery after battery disconnect (thermal cycling briefly closes fracture), system death during the flush (sustained heat widens fracture), and inability to recover afterward.
+    - **Pre-OVP findings still valid:** Flush completed (4L ZH-M, fluid clear), air entrapment confirmed (bubbling), pump proven functional, no external leaks. System was online and stable on Mar 28 (Code 14 cleared, switches working, fluid circulating).
+    - **The air-lock / static rear height / level control questions are parked** until N51 has clean, reliable power. Without a functioning ADS computer, we cannot evaluate whether the level control side works.
+*   **NEXT SESSION ACTION PLAN (updated 2026-03-30):**
+    1. **Re-solder OVP relay** with Sn63/Pb37 leaded solder — all joints, especially 87L. Remove old solder with desoldering wick first.
+    2. **Reinstall OVP, reconnect battery, test Pin 9.** If N51 boots cleanly: read/clear any stored fault codes.
+    3. **If ADS is online:** verify both switches work (console Sport/Comfort + Fahrzeugniveau level). Re-measure fender-to-ground at all four corners.
+    4. **If ADS is NOT online after OVP fix:** inspect N51 connector pins for corrosion (water intrusion evidence found above electronics bay). Check ground point W10. Consider pulling N51 for internal capacitor inspection.
+    5. **Once ADS is confirmed online and stable:** proceed with closed-loop bleed (jack rear for full droop + trunk bounce) to clear remaining trapped air from rear circuit. Re-measure ride heights.
 
 ### **March 27, 2026 \- Swedish Papers Received & Finnish Registration Preparation**
 
@@ -369,7 +371,7 @@
       1. **Static diagnostic ports:** We have seen this exact symptom before on 2026-03-18. It usually means the diagnostic bus / modules do not have adequate voltage. However, seeing it with the engine running at 14V is concerning. It's possible the battery has a bad cell and is pulling down the system despite the alternator, or the diagnostic bus itself is in a hung state.
       2. **Switch shutdown:** N51 detected a fault (likely steering angle or pressure limit from the flush) and shut itself down. We can't clear it until the diagnostic port blinks again.
       3. **Why the fluid cleared fast & no bubbles:** The open-loop flush (return line disconnected) creates a "path of least resistance." The pump simply drew fresh fluid from the reservoir, bypassed the main valve block, and dumped it straight out the return line. It did NOT push the fluid through the "dead ends" (the struts and accumulators) where the air is actually trapped.
-    - **NEXT STEPS:** (1) Let the battery charge fully overnight. (2) If Pin 9 still glows dim tomorrow even with a full battery, disconnect the battery negative terminal for 15 minutes to hard-reset the car's modules. (3) Re-test Pin 9 — clear the fault code. (4) Reconnect the return line and do the **closed-loop weighted bleed** (engine running, trunk bounce) to force the trapped air out of the dead-ends.
+    - **NEXT STEPS:** ~~(1) Let the battery charge fully overnight.~~ **DONE — battery fully charged 2026-03-30. Pin 9 STILL shows dim glow.** Voltage is NOT the issue. (2) **Disconnect the battery negative terminal for 15 minutes** to hard-reset modules. **CRITICAL INSIGHT (2026-03-30):** Reviewed the full timeline — every time N51 recovered from "dim glow," a battery disconnect event preceded it (Mar 21: loose terminal tightened; Mar 28: battery disconnected for seat work). Charging the battery maintains continuous power and does NOT reset the module. N51 appears to have a non-volatile hard-fault latch that only clears with a full power interruption. (3) Re-test Pin 9 — clear the fault code. (4) Perform closed-loop weighted bleed (engine running, jack rear for full droop + trunk bounce) to force trapped air out of rear circuit.
 
 *   **Becker BE2210 Installed:**
     - The Becker BE2210 ("Mercedes Special") with retrofitted AUX-IN arrived and was wired into the 1-DIN slot. Required a standard **ISO wiring connector** from Motonet (€6) and a batch of **Wago 221-412 lever connectors** (×16, €10) for clean, reversible splicing of the factory harness. The dealer-provided anti-theft code was accepted — radio powers on and tunes correctly.
@@ -396,11 +398,31 @@
     - **Reassembly:** Reassembly went smoothly apart from the last two screws at the bottom of the backrest. Could not get the screw holes on the seat and frame side to align as daylight ran out. The upper "pistons" were engaged, so it should just be a matter of finding the right grip to pull the bottom holes into alignment in the next session.
     - **Battery Disconnect / Radio Verification:** Disconnected the battery negative terminal during the seat work. This provided a full system hard-reset. Upon reconnecting, verified that the new Becker BE2210 radio is now fully operational and starts up correctly after re-entering the security code.
 
-### **March 30, 2026 \- Deliveries Received & Detailing Products Order**
+### **March 30, 2026 \- OVP Relay Cracked Solder Joints Found (ADS Root Cause?)**
 
 **Location:** Oulu, Finland
 
-**Event:** Three shipments received. Detailing products ordered from Kärkkäinen. OLED display held in customs.
+**Event:** After the ADS system remained unresponsive (Pin 9 "dim glow") despite full battery charge and battery disconnect, focused investigation on the OVP relay and electronics bay. Mapped all modules in the bay (see Appendix). Removed and disassembled the OVP relay.
+
+*   **OVP Relay Inspection — CRACKED SOLDER JOINTS FOUND:**
+    - Removed the OVP relay (red box with lid, center of electronics bay) from its socket.
+    - Opened the relay housing and visually inspected the internal PCB.
+    - Found **3–4 obvious ring-shaped solder fractures** — classic thermal fatigue / cold solder joint failures. These are hairline cracks that form around the solder pad in a ring pattern as the joint thermally cycles over 35 years (heat → cool → expand → contract → crack).
+    - The worst fractures are concentrated around the **87L connector pin**, which is suspected to be the power feed to the ADS (N51) module.
+    - **This likely explains ALL intermittent ADS behavior observed since purchase:**
+      1. **"Dim glow" on Pin 9:** N51 receiving intermittent/insufficient power through the cracked joint — enough leakage current for a faint LED glow but not enough for the processor to boot and communicate on the diagnostic bus.
+      2. **Why the system sometimes worked after battery disconnect (Mar 21, Mar 28):** Thermal cycling from the disconnect/reconnect event briefly restored physical contact across the hairline fracture — a classic cold solder joint symptom.
+      3. **Why the system died mid-flush (Mar 29):** Extended engine idling during the flush caused sustained heat buildup and vibration in the OVP relay, widening the fracture gap on 87L and permanently breaking the ADS power feed.
+      4. **Why it never recovered after the flush:** The fracture is now wide enough that no amount of voltage, battery cycling, or fuse pulling can bridge the gap.
+      5. **Why the ADS switches went dark mid-flush:** N51 lost power entirely (not just a stored fault code) — it cannot illuminate the console switch or Fahrzeugniveau LEDs without a functioning processor, and the processor cannot run without clean power from 87L.
+    - **Moisture assessment (refined):** Earlier, dried residue was noted on the plastic cover attached to the fuse box. However, further inspection found **no water intrusion** on driver or passenger side dashboards, and no pooled water evidence in the electronics bay itself. The bay shows general surface oxidation from 35 years of unsealed exposure to engine bay temperature cycling — not water damage. **The OVP relay interior was clean and dry — no moisture ingress, just a light dust layer on top.** The solder fractures are attributed to **pure thermal fatigue** (decades of engine heat/cool cycles causing micro-expansion/contraction of the joints).
+*   **Repair Plan:** Re-solder all OVP relay joints with proper leaded solder (Sn63/Pb37) — the original lead-free solder is more prone to thermal fatigue cracking. Remove old solder with desoldering wick, clean pads, and re-flow with fresh solder. Then reinstall OVP, reconnect battery, and test Pin 9. If N51 gets clean 87L power, it should boot immediately and respond to the blink-code reader.
+
+### **March 30, 2026 \- Deliveries Received, Filter Replacement & Detailing Products Order**
+
+**Location:** Oulu, Finland
+
+**Event:** Three shipments received. Engine and cabin filters replaced. Detailing products ordered from Kärkkäinen. OLED display held in customs.
 
 *   **Shipments Received:**
     *   **Hood Insulation Pad (AMS Auto, DE):** IPG-87742-Set including insulation mat, test sticker, and fastening clips — arrived via DHL. Ready for installation once the remaining adhesive removal on the aluminium hood is complete.
@@ -412,6 +434,13 @@
     *   **King Carthur Reshine Finish (3/3) 250ml** (HS4660) — Final-stage polishing compound for paint correction workflow. €19.90.
     *   **Soft99 'UUSI FUSSO' Coat White 200g** (HS3492) — Synthetic wax/sealant for the 199 Blauschwarz Metallic paint. "White" version is for dark-colored cars. €39.90.
     *   **Order total: €82.70.** Expected delivery ~2 days.
+*   **Engine & Cabin Filter Replacement:**
+    *   Replaced both **engine intake air filters** (MANN C 3388 x2, from the Autodoc order received today) and the **cabin intake filter** (MANN CU 5041).
+    *   Performed a thorough cleanup of the plastic housings, surrounds, and ducting components around both filter locations. Removed accumulated dirt, leaves, and debris from the intake plenums and sealing surfaces before fitting the new filters.
+*   **Rear Fuse Box — Fuse #6 BLOWN (Central Locking Root Cause?):**
+    *   Inspected the 8-fuse auxiliary block in the trunk. **Fuse #6 is blown.** This is a strong candidate for the root cause of the completely dead PSE central locking system (Task #5) — no vacuum pump activity, no signs of life at all.
+    *   **Action:** Replace fuse #6 and test central locking. If the PSE pump activates, the blown fuse was the sole issue. If the new fuse blows again immediately, there is a short circuit downstream (wiring or pump motor).
+    *   **Full fuse replacement:** Replaced all 8 old aluminum torpedo fuses with new copper/ceramic fuses as a preventative measure. The original aluminum fuses had been in place for 35 years — oxidized contact surfaces on torpedo fuses are a known source of intermittent electrical faults and voltage drops on vintage Mercedes. Fresh copper fuses ensure clean, low-resistance connections across the entire auxiliary circuit block.
 
 ## **📝 Task / Todo List & Quick Studies**
 
@@ -473,6 +502,7 @@
 ### **5. Central Locking (PSE) Inoperative**
 * **Symptom:** Central locking system does not work. There is no sign of life from the vacuum pump; locks only operate manually.
 * **Initial Assessment:** The PSE (Pneumatic System Equipment) pump is located under the right rear storage compartment. Since it is completely silent, it's likely an electrical issue (blown fuse, dead pump motor, or bad connection) rather than just a vacuum leak.
+* **FINDING (2026-03-30):** Rear auxiliary fuse block **fuse #6 is blown.** This is the most likely root cause — the PSE pump receives power through the rear fuse block. Replaced fuse #6 (and all 8 torpedo fuses with new copper/ceramic units). **NEXT:** Test central locking with the new fuse. If the PSE pump comes alive, the issue is resolved. If the fuse blows again, investigate for a short in the PSE wiring or pump motor.
 * **Action Item:** Investigate PSE pump and system. *(See project: [PSE Central Locking](../work/pse_central_locking/README.md))*
 
 ### **6. Engine Bay Maintenance (Intake, Filters & Fluids)**
@@ -485,7 +515,7 @@
   * **Metal Cylinder = Power Steering Pump Reservoir:** Sits directly behind the distributor on the front left (driver side) of the engine. Dark fluid means the old ATF/hydraulic fluid is oxidized and needs changing. Inside this canister, under the spring, is a replaceable paper filter. Note: on some R129s the ADS may share the power steering hydraulic circuit (Zentralhydraulik). If no separate ADS reservoir exists, this metal canister may serve both systems.
   * **Plastic Reservoir = CONFIRMED ADS/Niveauregulierung Hydraulic Fluid Reservoir:** Situated on the front right (passenger) side, next to the washer fluid. ~~Originally identified as coolant expansion tank (2026-03-17).~~ **CONFIRMED 2026-03-23:** This is the ADS hydraulic reservoir. Level is below MIN but stable (only ~0.5cm drop over 6 days, no active leak). Fluid is MB 343.0 / ZH-M (clear/amber). The coolant expansion tank is a separate container. **Top up to MAX with Febi 02615 and monitor.**
 * **Action Items:**
-  * **Air Intake & Filters:** Replace both left and right intake hoses entirely. Perform an engine air filter replacement (Left/Right) while the airbox is open.
+  * **Air Intake & Filters:** Replace both left and right intake hoses entirely. ~~Perform an engine air filter replacement (Left/Right) while the airbox is open.~~ **DONE (2026-03-30):** Both engine air filters (MANN C 3388 x2) and cabin filter (MANN CU 5041) installed. Plastic housings and surrounding parts thoroughly cleaned during replacement. Intake hose replacement still pending.
   * **Power Steering Flush:** Syringe out old fluid, replace the internal reservoir filter (Part No. `A 000 466 21 04`), and refill/flush with MB 236.3 spec fluid (or equivalent approved ATF). *(See project: [Power Steering Flush](../work/power_steering_flush/README.md))*
   * **Coolant Top-up:** Top up the expansion tank to the cold fill line using a 50/50 mix of distilled water and MB 325.0 spec coolant (e.g., Glysantin G48/Blue-Green). Monitor for slow leaks.
 * **Parts Needed:**
@@ -511,6 +541,21 @@
 * **Scope:** Valve cover-off preventive inspection of the M119's two best-known weak points: (1) upper timing chain guides (plastic, become brittle with age — fragments circulate through oil system) and (2) camshaft oil bridge clips (plastic, loosen over time and starve cam lobes of oil, causing lobe pitting/scoring). Upgrade all oil bridge clips to billet aluminum. Replace valve cover gaskets, breather hose, and spark plugs while the top end is open.
 * **Priority:** HIGH — Both are age-related, non-symptomatic failure modes. By the time symptoms appear (chain rattle, cam tick), damage is done. This is the single most important M119 preventive maintenance task.
 * **Action Item:** Order gaskets, timing guides, and aluminum oil bridge clip kit. Full procedure documented. *(See project: [M119 Upper Timing](../work/m119_upper_timing/README.md))*
+
+### **12. OVP Relay Re-Solder (NEW 2026-03-30) — NEXT ACTION**
+* **Scope:** Re-solder all joints on the OVP relay PCB with Sn63/Pb37 leaded solder. 3–4 ring-shaped thermal fatigue fractures found (worst on 87L, suspected N51 power feed). OVP interior was clean and dry — pure thermal fatigue, no corrosion.
+* **Priority:** CRITICAL — This is the identified root cause of all intermittent ADS behavior. Blocks all further ADS work (closed-loop bleed, ride height assessment, solenoid testing).
+* **Tools:** Soldering iron (fine tip), desoldering wick, Sn63/Pb37 solder, isopropyl alcohol, loupe/magnifier. Source solder from office/electronics lab.
+* **Procedure:** Remove old solder (wick) → clean pads (IPA) → re-flow all joints → inspect under magnification → reassemble → reinstall → test Pin 9.
+* **Verification:** If N51 boots: read/clear codes, lock-to-lock steering, verify both switches. If still dim glow: inspect N51 connector pins, check ground W10, consider pulling N51.
+* **Action Item:** Full procedure in `work/ads_diagnostic/README.md` Phase 0.
+
+### **13. Battery Health Verification (NEW 2026-03-30)**
+* **Scope:** Measure battery internal resistance and cranking voltage drop to rule out deep-discharge damage. Battery is a Varta Silver Dynamic H3 (100Ah, 890A CCA), manufactured August 2025 — only 7 months old. However, it experienced at least one deep discharge event (March 2026, voltage low enough that starter could only turn <1s).
+* **Priority:** HIGH — Do before OVP re-solder to eliminate battery from variables.
+* **Method 1 — Internal resistance (Owon HDS242 multimeter mode):** Measure V_oc (resting, 1h+ after charge), turn on high beams, wait 30s, measure V_load. R_internal = (V_oc − V_load) / ~11A. Target: <25 mΩ (healthy new battery).
+* **Method 2 — Cranking voltage drop (Owon scope mode):** DC coupling, 2V/div, 1s/div timebase, single-shot trigger at ~11V falling edge. Record video of Owon display during cranking. Healthy: voltage holds above 10V. Damaged: sags below 9.5V.
+* **Decision:** If internal resistance >50 mΩ or cranking voltage <9.5V → replace battery at Motonet (Varta H3, €159.90, exact same unit, 20+ in stock).
 
 ### **11. Baseline Service — Unknown History (Spring 2026)**
 
@@ -591,8 +636,8 @@
 
 | Date | Category | Item | Supplier | Cost (€) | Status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 2026-03-22 | Filters | MANN Engine Air Filters (C 3388) x2 | Autodoc | 34.00 | Received 03-30 |
-| 2026-03-22 | Filters | MANN Cabin Filter (CU 5041) | Autodoc | 14.00 | Received 03-30 |
+| 2026-03-22 | Filters | MANN Engine Air Filters (C 3388) x2 | Autodoc | 34.00 | Installed 03-30 |
+| 2026-03-22 | Filters | MANN Cabin Filter (CU 5041) | Autodoc | 14.00 | Installed 03-30 |
 | 2026-03-22 | Filters | MANN Oil Filter (H 829/1 x) | Autodoc | 11.00 | Received 03-30 |
 | 2026-03-22 | Filters | MANN Power Steering Filter (H 85) | Autodoc | 6.00 | Received 03-30 |
 | 2026-03-22 | Filters | MANN Fuel Filter (WK 830/3) | Autodoc | 22.00 | Received 03-30 |
@@ -601,7 +646,7 @@
 | 2026-03-22 | Fluids | Febi ZH-M Hydraulic Fluid (1L) | Motonet | ~15.00 | Purchased |
 | 2026-03-22 | Fluids | Febi ATF MB 236.3 Power Steering (1L) | Motonet | ~15.00 | Purchased |
 | 2026-03-22 | Fluids | Coolant (Motox G11) + Distilled Water | Motonet | ~35.00 | Purchased |
-| 2026-03 | Body | Ceramic Torpedo Fuses | Motonet | ~10.00 | Purchased |
+| 2026-03 | Electrical | Ceramic Torpedo Fuses (×8 replacement set) | Motonet | ~10.00 | Installed 03-30 |
 | 2026-03-18 | Audio | Mercedes Special BE2210 Radio (w/ AUX) | Online Retailer | 434.97 | Purchased |
 | 2026-03-20 | Wheels/Tires | Michelin PS2 275/40R17 (Rear x2) | Online Retailer | 981.99 | Purchased |
 | 2026-03-20 | Wheels/Tires | Michelin PS5 245/45R17 (Front x2) | Online Retailer | 368.37 | Purchased |
@@ -667,3 +712,24 @@
   * https://www.benzworld.org/threads/all-of-the-r129-pdfs-i-have-collected-over-the-years.3099517/
 
 *(Note: The official 8,000-page "STAR Classic Service Manual Library" for the R129 is often required for deep electrical teardowns. Physical DVD copies or community-hosted files should be sourced for Phase 5 electrical integration).*
+
+---
+
+## **Appendix: Electronics Bay Module Layout (Firewall, Passenger Side)**
+
+*Documented 2026-03-30. Viewed from the front of the car, looking rearward at the firewall-mounted electronics bay.*
+
+The R129 electronics bay houses 6 control modules stacked side-by-side in a metal bracket on the passenger-side firewall. Module positions (left-to-right as viewed from the front of the car):
+
+| Position | Module | Description |
+|----------|--------|-------------|
+| **Far left** | **N4/1 EA/CC/ISC** | E-Gas / Cruise Control. Tall silver housing with wavy vertical ribs and metal lever lock. |
+| **Second from left** | **N3 KE-Jetronic (CIS-E) or N30 ABS/ASR** | Thick black plastic module with large lever lock, "BOSCH" printed on the side. KE-Jetronic engine control or ABS/ASR control unit. |
+| **Middle left** | **MAS** | Mixture Adjustment System. Smaller module with "MAS" label and barcode on the front face. |
+| **Middle center** | **OVP Relay** | Overvoltage Protection Relay. Small **red box with lid** — contains the internal fuse and relay contacts. Supplies power to ADS (N51), ABS, and other modules. **Key diagnostic component for ADS power supply issues.** |
+| **Second from right** | **N51 ADS** | Adaptive Damping System control module. Smaller plastic module. Controls damper stiffness (Sport/Comfort) and communicates via X11 Pin 9. |
+| **Far right** | **Unknown** | To be identified — part number label not yet read. |
+
+**Front of bay (closest to engine):** Heavily finned heat-sink module with a "Zeichnungsdatum" (drawing date) sticker from August 1990. Part number format `129 54...`. The deep cooling fins indicate a high-current/high-heat unit — likely an early **EZL (Ignition Control Module)** or a high-power driver module. Some early EU-spec M119 builds placed the ignition module in this front bay position rather than on the opposite inner fender.
+
+**Moisture assessment (updated 2026-03-30):** Dried residue/tide marks were observed on the plastic cover attached to the fuse box when the cabin air filter was removed (2026-03-29). However, a thorough inspection of the dashboard area (both driver and passenger side) found **no signs of water intrusion or pooling** beyond that single location. The electronics bay shows general surface oxidation consistent with 35 years of exposure to engine bay temperature cycling and humidity (the bay is not air-sealed) — but no evidence of standing water, directed water flow, or localized corrosion from leaks. The OVP solder joint fractures are therefore attributed to **thermal fatigue** (expansion/contraction cycles from engine heat over decades) rather than water damage.

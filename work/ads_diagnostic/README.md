@@ -2,7 +2,21 @@
 
 ## Overview
 
-The 1991 Mercedes-Benz 500 SL (R129) — AOK912 (manufactured 09/1991, possibly MY1992 spec) is equipped with ADS I (Adaptive Damping System, first generation). The car drives well and the ride is comfortable ("floating"), confirming the base mechanical springs and nitrogen accumulators are functional. The ADS control module (N51) is **alive and communicating** — returns 1 blink (no stored fault codes) with battery >13V. Both switches work: ADS console switch LED illuminates and turns RED in Sport mode; Fahrzeugniveau (level) switch LED illuminates. ABS warning lamp is confirmed functional. **The tandem pump ADS section IS working** (confirmed 2026-03-26 — reservoir level dropped ~2/3 after engine start). **2026-03-28 UPDATE: Fault code 14 (steering angle sensor) CLEARED by lock-to-lock steering. System fully online since — both switches active and stable across multiple engine starts throughout the day. Sport/Comfort switching reliable. Reservoir level returned to near-MAX with engine off (fluid is circulating but returning to reservoir when depressurized — no net loss, confirms no external leak). Possible front height change observed (needs measurement). Rear height remains static. Fahrzeugniveau switch deactivation is slow (LED stays on for some time after toggling off). → READY for Phase 1 flush.**
+The 1991 Mercedes-Benz 500 SL (R129) — AOK912 (manufactured 09/1991, possibly MY1992 spec) is equipped with ADS I (Adaptive Damping System, first generation). The car drives well and the ride is comfortable ("floating"), confirming the base mechanical springs and nitrogen accumulators are functional.
+
+**STATUS (2026-03-30): ADS SYSTEM CURRENTLY OFFLINE — OVP RELAY ROOT CAUSE IDENTIFIED.**
+
+The OVP (Overvoltage Protection) relay was removed and disassembled. Visual inspection revealed **3–4 ring-shaped cracked solder joints** from thermal fatigue, worst on the **87L connector pin** — suspected to be the N51 power feed. This single hardware failure explains the entire chain of intermittent symptoms since purchase.
+
+**What still holds from prior sessions:**
+- The ADS control module (N51) is healthy — when it had clean power (Mar 23–28), it communicated correctly (1 blink / no faults), both switches worked, Sport/Comfort switching was reliable.
+- The tandem pump ADS section is working (confirmed 2026-03-26 — reservoir level dropped ~2/3 after engine start).
+- Phase 1 flush completed (2026-03-29): 4L ZH-M pumped through, fluid ran clear quickly, no external leaks. Filter cleaned.
+- Air in system confirmed (bubbling in reservoir after engine off, 2026-03-29).
+- Rear height remains static. Front may respond. Cannot evaluate level control further until N51 has reliable power.
+- Baseline measurements (2026-03-29): Rear L: 67cm, R: 66cm / Front L: 69cm, R: 68.5cm.
+
+**NEXT ACTION: Re-solder OVP relay with Sn63/Pb37 leaded solder (especially 87L), reinstall, and test Pin 9.**
 
 **IMPORTANT — Manual Discovery (2026-03-23):** We had been referencing the **1990** owner's manual, but the car is a **1991** model. The 1991 manual (now downloaded) reveals major differences: ADS, ASR, ASD, and the snow chain switch were all added for 1991. Critically, **the 1991 manual confirms ADS has a dedicated instrument cluster warning lamp** (page 92: "The indicator lamp comes on with the key in steering lock position 2 and goes out when the engine is running"). Our earlier conclusion that "ADS was never in the standard R129 indicator set" was wrong — it was based on the 1990 manual which predates ADS. **The original "missing lamp" observation may have been the ADS warning lamp.** Needs verification during ignition-ON bulb check.
 
@@ -10,7 +24,7 @@ The 1991 Mercedes-Benz 500 SL (R129) — AOK912 (manufactured 09/1991, possibly 
 
 **Model Year Note:** AOK912 was manufactured 09/1991 and may be MY1992 spec. The 1992 US manual has been downloaded and compared — the ADS section (page 94) is **word-for-word identical** to the 1991 manual (page 92). Same indicator lamp list, same dashboard layout, same ADS cluster lamp description. The German manual covers 1991–1993 in one document. **Conclusion: whether the car is MY1991 or MY1992, the ADS cluster warning lamp should be present.**
 
-The electronic diagnostic is complete — N51 is healthy, no fault codes, both switches work. The remaining work is mechanical/hydraulic: restore the level control system (Phase 1: flush + filter), replace the blown Front Right accumulator sphere, and investigate the missing cluster warning lamp.
+**2026-03-30 UPDATE — OVP RELAY ROOT CAUSE IDENTIFIED:** The OVP relay was disassembled and found to have **3–4 ring-shaped cracked solder joints**, worst on the **87L pin** (suspected N51 power feed). This explains all intermittent ADS behavior since purchase. Repair: re-solder with Sn63/Pb37 leaded solder. Once N51 has reliable power, the remaining work is mechanical/hydraulic: closed-loop bleed, ride height assessment, and cluster investigation.
 
 ## Current Known Status
 
@@ -32,19 +46,25 @@ The electronic diagnostic is complete — N51 is healthy, no fault codes, both s
 | Pin 11 or 12 re-tested with >13V — still static glow (not alive)    | Blink-code sanity check                    | 2026-03-23 |
 | Front Right suspension significantly stiffer than Front Left         | Manual suspension test (>24h idle)         | 2026-03-22 |
 | Rear suspension compresses more than front, but does not oscillate   | Manual suspension test (>24h idle)         | 2026-03-22 |
+| Phase 1 open-loop flush completed (4L ZH-M). Fluid clear quickly. System shut down mid-flush. | Flush execution | 2026-03-29 |
+| Air in system confirmed — visible bubbling in reservoir after engine off | Pre-flush baseline test | 2026-03-29 |
+| **OVP relay: 3–4 cracked solder joints found (thermal fatigue).** Worst on 87L (N51 power feed). Interior clean/dry. | OVP disassembly & inspection | 2026-03-30 |
+| Electronics bay inspected — general surface oxidation but no water pooling. No moisture inside OVP. | Visual inspection | 2026-03-30 |
+| ADS system currently OFFLINE — Pin 9 shows "dim glow," no blink response | Blink-code reader test | 2026-03-30 |
 
 
-**Working hypothesis (revised 2026-03-23):**
+**Working hypothesis (revised 2026-03-30):**
 
-The **entire ADS electronic system is functional** — module (N51), console switch, and Fahrzeugniveau switch all work with adequate voltage (>13V). The problem is purely mechanical/hydraulic.
+The ADS electronic system (N51, switches, wiring) is proven healthy when it receives clean power. The **root cause of all intermittent ADS failures is the OVP relay** — cracked solder joints on 87L deprive N51 of stable power. The hydraulic side has been flushed and the pump is proven working; remaining hydraulic work (closed-loop bleed, rear height assessment) is blocked until N51 is back online.
 
-**Confirmed issues (updated 2026-03-26):**
+**Issue tracker (updated 2026-03-30):**
 
-1.  **~~Level control inoperative — ADS pump section not circulating fluid.~~** **PUMP IS ALIVE (confirmed 2026-03-26). System ONLINE and STABLE (2026-03-28).** Pump circulates fluid (reservoir drops ~2/3 of MAX-to-MIN on engine start). Fault code 14 from air/pressure anomaly was cleared by lock-to-lock steering re-initialization — system has remained online across multiple engine starts on 03-28. **Fluid behavior:** reservoir level recovers to near-MAX when engine is off = fluid is returning from the circuit to the reservoir when depressurized. No net fluid loss (>100ml) — confirms no external leak. **Air in system CONFIRMED (2026-03-29):** visible bubbling in the reservoir that continues even after stopping the engine (depressurizing air expanding). **Baseline measurements (2026-03-29):** Rear L: 67cm, Rear R: 66cm / Front L: 69cm, Front R: 68.5cm. No measurable difference after idling. **Rear height remains static** — points to rear-specific issue (level control valve, rear linkage, or air trapped in rear circuit). **→ Phase 1 flush still recommended to purge air and old fluid, then re-evaluate rear specifically.**
-2.  **Front accumulator spheres suspect.** Earlier (2026-03-22) Front Right felt significantly stiffer than Front Left. On 2026-03-26, the difference felt smaller after engine run. The stiffness could be due to air lock rather than ruptured spheres. **→ Phase 2: perform "straw test" to definitively check nitrogen diaphragm integrity before ordering replacements (A 129 320 01 15).**
-3.  **ADS cluster warning lamp missing — likely cluster swap (updated 2026-03-26).** Photo of the indicator strip shows **no ADS symbol at all** to the left of ASR — not even a dead-fronted print. All other indicators (ASR, seatbelt, oil, etc.) have clearly visible strip symbols even unlit. A pulled bulb would leave the printed symbol visible; the complete absence of the symbol means the **strip itself is a non-ADS variant**. Combined with the Fahrzeugniveau switch and option 211 confirming the car IS factory ADS-spec, this points to a **cluster swap from a non-ADS R129** — likely done during the 16-year previous ownership (cheapest fix for a failed speedometer/odometer/gauge). This means the oil-level float warning has NEVER worked since the swap — explaining why chronic low fluid went unnoticed. **Odometer accuracy is now in question.** **→ Phase 3: pull cluster, read part number, confirm ADS vs non-ADS variant.**
-4.  **~~ADS fault code identified and understood (2026-03-27).~~** **RESOLVED (2026-03-28).** Code 14 (steering angle sensor not initialized) cleared by lock-to-lock steering. System has been stable and online since — both switch LEDs illuminate correctly, Sport/Comfort switching works reliably, no new faults across multiple engine starts. N51 is healthy.
-5.  **Cluster swap — historical analysis (2026-03-26, updated 2026-03-27 with Swedish records).** The previous owner had the car for 16 years (2008-07-24 → 2024-04-23, confirmed via [biluppgifter.se](https://biluppgifter.se/fordon/AOK912)). Swedish inspection odometer readings from 2013–2026 are smooth and consistent (~200–900 km/year, classic seasonal summer car in Skåne). No jumps or drops in that period. The 1991–2012 readings are not available on biluppgifter.se (platform data limitation — Sweden recorded odometer at inspections since at least 1993, but older records are not surfaced publicly). If the cluster swap happened, it was **before 2013** — most likely before the 2008 owner acquired the car (2002–2008 ownership or earlier). The dealer (2024) invested heavily in cosmetics (new MB OEM soft top, interior trim, polish) and fluid levels, but the ADS cluster lamp was already missing — the non-ADS cluster has no oil-level warning position, so chronic low fluid was invisible. Full Swedish records analysis in Engineering Diary.
+1.  **~~Level control inoperative — pump not circulating.~~** **PUMP CONFIRMED ALIVE (2026-03-26). Phase 1 flush COMPLETED (2026-03-29).** 4L ZH-M pumped through, fluid ran clear quickly (<1L), no external leaks. Filter cleaned (~99%). Air in system confirmed (bubbling after engine off, 2026-03-29). Baseline: Rear L: 67cm, R: 66cm / Front L: 69cm, R: 68.5cm. Rear height remains static. **→ PARKED until N51 has reliable power (OVP fix). Then: closed-loop bleed (jack rear for full droop + trunk bounce) to clear trapped air from rear circuit. Re-measure ride heights.**
+2.  **Front accumulator spheres suspect.** Earlier (2026-03-22) Front Right felt significantly stiffer than Front Left. On 2026-03-26, the difference felt smaller after engine run. The stiffness could be due to air lock rather than ruptured spheres. **→ PARKED until after OVP fix + closed-loop bleed. Then perform "straw test" to check nitrogen diaphragm integrity before ordering replacements (A 129 320 01 15).**
+3.  **ADS cluster warning lamp missing — likely cluster swap (2026-03-26).** Photo of the indicator strip shows **no ADS symbol at all** to the left of ASR — not even a dead-fronted print. The strip itself is a non-ADS variant. Combined with option 211 confirming the car IS factory ADS-spec, this points to a **cluster swap from a non-ADS R129**. The oil-level float warning has NEVER worked since the swap — explaining why chronic low fluid went unnoticed. Odometer accuracy in question. **→ Pull cluster when tools available (Phase 3).**
+4.  **~~Fault code 14 (steering angle sensor).~~** **RESOLVED (2026-03-28).** Cleared by lock-to-lock steering. System was online and stable across multiple engine starts on Mar 28. **Then lost again (2026-03-29) when OVP joint failed during flush.** Will need to re-read/clear codes after OVP re-solder.
+5.  **Cluster swap — historical analysis (2026-03-27).** Swedish records show smooth odometer 2013–2024 (~340 km/yr). No pre-2013 records available publicly. Swap likely pre-2008. Full analysis in Engineering Diary.
+6.  **OVP RELAY CRACKED SOLDER JOINTS — ROOT CAUSE (2026-03-30).** Removed and disassembled OVP relay. Found **3–4 ring-shaped thermal fatigue fractures** on PCB, worst on **87L connector pin** (suspected N51 power feed). OVP interior was clean and dry (light dust only) — no moisture ingress. Electronics bay shows general surface oxidation from 35 years of unsealed engine bay exposure but no evidence of water pooling or directed leaks. Fractures attributed to **pure thermal fatigue**. This explains all intermittent symptoms: dim glow (leakage current, not clean power), recovery after battery disconnect (thermal cycling briefly closes fracture), mid-flush system death (sustained engine heat widened fracture permanently). **→ FIX: re-solder all joints with Sn63/Pb37 leaded solder. Test Pin 9. If N51 boots, read/clear codes and proceed with closed-loop bleed.**
 
 ## ADS I System Architecture (Reference)
 
@@ -56,11 +76,11 @@ The European "Niveauregulierung mit adaptivem Dämpfungs-System (ADS)" on the ea
 
 Controls shock absorber stiffness via electronic solenoid valves. This subsystem IS monitored by the ADS control module (N51) and DOES report faults via X11 Pin 9 blink codes.
 
-- **ADS Control Module (N51)** — located in the right-side engine bay module box (E-box) near the firewall. Receives inputs from sensors and driver switch; commands the shock absorber solenoids.
+- **ADS Control Module (N51)** — located in the firewall-mounted electronics bay (passenger side), second from the right. Smaller plastic module. Receives power via OVP relay (87L pin). Receives inputs from sensors and driver switch; commands the shock absorber solenoids. (See Electronics Bay Module Layout appendix in Engineering Diary.)
 - **ADS Console Switch** — center console rocker/button: Sport / Comfort mode selection. Sends a ground signal to N51. **Status: WORKING** — LED illuminates, turns RED in Sport/up position (confirmed 2026-03-23).
 - **Speed Sensor Input** — N51 receives vehicle speed from the speedometer or ABS controller.
 - **Steering Angle Sensor** — input for dynamic damping adjustment.
-- **4× ADS Shock Absorbers** — each contains a proportional solenoid valve that adjusts damping force. Solenoid coil resistance is typically 4–8 Ω. Each shock also contains a nitrogen-charged gas cushion (accumulator sphere). **Front Right sphere is ruptured/hydro-locked** — invisible to N51.
+- **4× ADS Shock Absorbers** — each contains a proportional solenoid valve that adjusts damping force. Solenoid coil resistance is typically 4–8 Ω. Each shock also contains a nitrogen-charged gas cushion (accumulator sphere). **Front Right sphere suspect** (stiffness difference noted 2026-03-22, but may be air-lock — "straw test" needed before condemning). Invisible to N51.
 - **ADS Warning Lamp** — cluster warning lamp for damping faults (page 92: *"The indicator lamp comes on with the key in steering lock position 2 and goes out when the engine is running"*). **Status: MISSING from indicator strip** — either dead bulb behind dead-fronting, or cluster variant issue.
 - **Diagnostic Output** — X11 Pin 9 blink-code interface (pre-OBD). Requires >13V supply. **Returns 1 blink = no stored damping faults.**
 
@@ -77,7 +97,7 @@ Controls ride height via a hydraulic system. On ADS I, height sensing is **MECHA
   - Section 1 = Power Steering (draws from metal canister) — **WORKING** (brown/aged fluid, steering assisted)
   - Section 2 = Niveauregulierung (draws from plastic reservoir next to washer fluid) — **NOT WORKING** (clear/un-aged fluid = no circulation for years)
   - Rebuilt pumps: ABCspecialist (NL), ~€850 + old core return
-- **ADS/Niveauregulierung Reservoir** — translucent plastic, next to washer fluid bottle. Fluid: MB 343.0 / ZH-M (part number 000 989 91 03). **Level is below MIN. No active leak. Fluid is clear (stagnant).**
+- **ADS/Niveauregulierung Reservoir** — translucent plastic, next to washer fluid bottle. Fluid: MB 343.0 / ZH-M (part number 000 989 91 03). **Flushed with 4L fresh ZH-M (2026-03-29). Level at MAX (engine off). Filter cleaned — new filter (A 129 327 00 91) to be ordered.**
 - **Rear Level Control Valve (A 129 320 00 58 / A 129 320 08 58)** — hydraulic proportioning valve, mounted mid-rear-axle. Height sensing is MECHANICAL: a **linkage from the rear anti-roll bar** mechanically operates the valve's lever arm. As load changes rotate the ARB, the valve directs fluid to raise or lower the car. **No electronic sensors involved.**
 - **Anti-Roll Bar Linkage** — the "sensor" of ADS I level control. A plastic/metal rod connecting the ARB to the proportioning valve lever. Known failure point: shears at lower mounting. If broken, the valve stays in one position and cannot adjust height. **This failure produces NO electronic fault codes.**
 - **Hydraulic Lines** — from the pump to the valve block, and from the valve to the rear hydraulic struts.
@@ -113,13 +133,28 @@ All steps completed with battery >13V:
 </details>
 
 <details>
-<summary><b>Phase 2: Fuse & Power — PARTIALLY DONE, remainder deprioritized</b></summary>
+<summary><b>Phase 2: Fuse & Power — OVP RELAY ROOT CAUSE FOUND (2026-03-30)</b></summary>
 
-Module communicates and reports healthy, so power supply is confirmed adequate. Remaining steps are reference only if a regression occurs.
+- **2.1 — ADS Fuse** — Not checked individually. N51 communicates when OVP provides clean power.
+- **2.2 — OVP Relay Fuse** — DONE (2026-03-22). 10A internal fuse is intact.
+- **2.3 — OVP Relay PCB Inspection** — DONE (2026-03-30). **ROOT CAUSE FOUND.** 3–4 ring-shaped thermal fatigue fractures on PCB, worst on 87L (N51 power feed). OVP interior clean/dry — pure thermal fatigue. **→ Re-solder is now Phase 0 (Active).**
 
-- **2.1 — ADS Fuse** — Not checked individually. Moot point: module has power (it communicates).
-- **2.2 — OVP Relay Fuse** — DONE (2026-03-22). 10A fuse is intact. Full relay test deferred (module is alive, OVP is not the issue).
-- **2.3 — Module Power & Ground** — Skipped. Module communicates at >13V = power path is intact.
+</details>
+
+<details>
+<summary><b>Phase 1 Hydraulic: Open-Loop Flush — COMPLETED 2026-03-29</b></summary>
+
+4L ZH-M pumped through via open-loop flush. Key results:
+- Fluid ran clear very quickly (<1L of new fluid).
+- No air bubbles seen from return line (air trapped in dead-end circuits, not main loop).
+- Filter cleaned (~99%) — small amount of sediment. New filter (A 129 327 00 91) to be ordered.
+- System shut down mid-flush due to OVP solder joint failure (identified 2026-03-30).
+- Closed-loop bleed was NOT performed (blocked by OVP failure). → Now Phase 1 (Active).
+
+References used:
+- MBWorld R129 ADS Fluid Change thread (MB-Dude / Jeff's procedure)
+- Rodionenkin.de Ölwechsel Zentralhydraulik
+- Classic Jalopy SLS Flush (W126, same system)
 
 </details>
 
@@ -139,59 +174,57 @@ These steps were written when the module was presumed dead. Now that N51 communi
 
 ### Active Phases (in priority order)
 
-### Phase 1: Hydraulic Flush, Filter Replacement & Pump Test (NEXT ACTION)
+### Phase 0: OVP Relay Re-Solder (NEXT ACTION — 2026-03-31)
 
-*Added 2026-03-23. This is the cheapest and most likely fix for the inoperative level control. A clogged suction filter (A 129 327 00 91, ~€7–11) can completely starve the ADS pump section even though the pump physically spins. Combined with a full fluid flush, this test will definitively prove whether the tandem pump's ADS section is alive or dead — before spending €850 on a rebuilt pump.*
+*Added 2026-03-30. The OVP relay is the power gateway for N51. Cracked solder joints on 87L are the identified root cause of all intermittent ADS symptoms. Everything else is blocked until this is fixed.*
 
-**References:**
-- MBWorld R129 ADS Fluid Change thread (MB-Dude / Jeff's procedure): https://mbworld.org/forums/sl-class-r129/500408-ads-fluid-change.html
-- Rodionenkin.de Ölwechsel Zentralhydraulik (W124/W126/R129): https://www.rodionenkin.de/de/pages/mb-reparaturanleitungen/oelwechsel-zentralhydraulik-asd-niveauregulierung.php
-- Classic Jalopy SLS Flush (W126, same system): https://www.classicjalopy.com/2019/09/mercedes-self-leveling-rear-suspension-flush/
-- MercedesSource SLS Flush Video ($12.99 or free with kit): https://mercedessource.com/store/replacing-the-fluid-a-self-leveling-rear-suspension-sls-demand-video
+**What was found:** 3–4 ring-shaped thermal fatigue fractures on the OVP relay PCB. Worst on 87L connector pin (suspected N51 power feed). OVP interior clean and dry — pure thermal fatigue from 35 years of engine heat cycling, not corrosion.
 
 **Tools & materials:**
-- Brake cleaner (have)
-- Transparent PVC hose, 6–8mm inner diameter, ~1m
-- Waste oil container (e.g. empty milk jug / bottle)
-- Lint-free cloth (have)
-- 4L fresh ZH-M / MB 343.0 fluid (have 1L Febi 02615 — **need 3L more**)
-- New filter element: **A 129 327 00 91** (Old one cleaned ~99% on 2026-03-29, but new one should be ordered for long-term reliability)
-- Old syringe or turkey baster (to extract remaining old fluid from reservoir)
+- Sn63/Pb37 leaded solder (source from office/electronics lab)
+- Desoldering wick (to remove old solder cleanly)
+- Soldering iron with fine tip
+- Isopropyl alcohol + cotton swab (clean pads after desoldering)
+- Magnifying glass / loupe (inspect joints after re-flow)
 
-**Phase A — Open-Loop Flush (purge old fluid):**
+**Procedure:**
+1. Remove old solder from ALL joints using desoldering wick — not just 87L. At 35 years, all joints are suspect.
+2. Clean pads with isopropyl alcohol.
+3. Re-flow each joint with fresh Sn63/Pb37. Ensure good wetting (shiny, concave fillet).
+4. Inspect all joints under magnification. No ring cracks, no cold joints, no bridges.
+5. Reassemble OVP housing.
+6. Reinstall OVP in electronics bay socket.
+7. Reconnect battery.
 
-1. Warm up the engine, activate the Fahrzeugniveau switch up/down a couple of times, then turn off the engine.
-2. Clean the reservoir cap and return line fitting with brake cleaner.
-3. Remove the reservoir cap.
-4. Disconnect the return line at the top of the reservoir. Attach transparent PVC hose to the return line fitting, route into waste container.
-5. Remove the sieve/filter element from the reservoir (unscrew counterclockwise). Inspect — if clogged with dark debris, **this may be the root cause.**
-6. Using a syringe/turkey baster, withdraw as much old fluid from the reservoir as possible. Wipe the reservoir interior with a lint-free cloth, especially the bottom (sediment).
-7. Fill the reservoir with fresh ZH-M (OK to overfill slightly, but not to the brim).
-8. Have an assistant start the engine (or do it yourself — the flow rate at idle is slow enough for one person). The pump pushes old fluid out through the return hose into the waste container.
-9. **CRITICAL: Keep the reservoir topped up.** Never let it run dry — air ingestion will make things worse. Add fresh fluid continuously as the level drops.
-10. With engine idling, activate the Fahrzeugniveau switch UP at least twice — this forces fluid through the level control circuit specifically, not just the power steering loop.
-11. Continue until the fluid coming out of the return hose is **clear** (matching fresh ZH-M). Typically takes 3–4L.
-12. Turn off the engine.
+**Verification:**
+1. Turn ignition to position 2 (engine OFF). Check ADS console switch LED — should illuminate.
+2. Connect blink-code reader to Pin 9. Press button. If N51 boots: should get blink codes.
+3. If fault codes present: read and clear. Then start engine, perform lock-to-lock steering (re-initialize N49 steering angle sensor).
+4. Verify both switches work: console Sport/Comfort + Fahrzeugniveau level.
+5. If Pin 9 is STILL dim glow after OVP fix: inspect N51 connector pins for corrosion, check ground point W10, consider pulling N51 for internal capacitor inspection.
 
-**Phase B — Close Loop & Pump Test (the critical diagnostic moment):**
+### Phase 1: Closed-Loop Bleed & Ride Height Assessment (after OVP fix)
 
-1. Clean the filter element with brake cleaner or denatured alcohol (spray/soak from outside to inside, let dry completely) — or install the new filter (A 129 327 00 91).
-2. Reinstall the filter in the reservoir.
-3. **Reconnect the return line.** The hydraulic loop is now closed.
-4. Top up the reservoir to MAX with fresh ZH-M. **Mark the level with a pen/tape on the outside of the reservoir.**
-5. Start the engine. Press the Fahrzeugniveau switch to UP (Raised Level).
-6. Let the engine idle for 5–10 minutes. **Watch the reservoir level:**
-   - **Level DROPS** = fluid is being drawn into the rear circuit = **ADS pump section is working!** The pump had simply lost prime or the filter was clogged. Keep topping up as air purges from the lines. The car should begin to rise at the rear.
-   - **Level STAYS STATIC** = the ADS pump section is NOT building pressure. Internal failure (worn vanes/seals). Tandem pump replacement needed (**A 129 460 07 80**, ~€850 rebuilt).
-7. Turn off engine. Final fluid level check — top up to MAX with level control in Normal position.
-8. If the car rose: drive slowly (<50 km/h) for a few minutes, return, and re-check level. Top up as needed. The system may self-bleed over several drive cycles.
+*Phase 1 open-loop flush was COMPLETED on 2026-03-29 (4L ZH-M, fluid clear, filter cleaned). Air entrapment was confirmed (bubbling). This phase picks up where the flush left off — the system shut down mid-flush due to OVP failure, so the closed-loop bleed was never performed.*
 
-**Expected outcome for AOK912:** The fluid has been stagnant (clear) for years. Most likely scenario:
-- **(a) Clogged filter** blocked suction → flush + new filter restores flow → **cheapest fix (~€7)**
-- **(b) Air-locked circuit** from running low on fluid → flush + top-up restores prime → **cost of fluid only**
-- **(c) Internal pump failure** → level stays static after flush → pump replacement needed → **~€850**
+**Prerequisite:** N51 online and stable after OVP re-solder (Phase 0).
 
-### Phase 2: Mechanical Inspection Under Car (after flush proves pump status)
+**Procedure:**
+1. Top up reservoir to MAX with fresh ZH-M.
+2. Start engine. Verify ADS switches are active (console + Fahrzeugniveau).
+3. Jack rear to full droop — forces the rear level control valve to "fill" position, pushing fluid into rear struts and forcing trapped air back to reservoir.
+4. Lower rear back to ground. Repeat 2–3 times.
+5. "Trunk bounce" — load/unload weight in the trunk to cycle the rear valve through its range.
+6. Activate Fahrzeugniveau UP/DOWN several times during the process.
+7. Check reservoir for bubbling after engine off. Repeat until no bubbles.
+8. **Measure fender-to-ground** at all four corners. Compare to baseline (Rear L: 67cm, R: 66cm / Front L: 69cm, R: 68.5cm).
+9. Top up reservoir to MAX.
+
+**Success criteria:** Rear height increases from baseline. Bubbling eliminated. Reservoir level stable.
+
+**If rear still static after bleed:** proceed to Phase 2 (mechanical inspection — rear level control valve, ARB linkage).
+
+### Phase 2: Mechanical Inspection Under Car (after bleed proves system status)
 
 *Do this with the car on a lift or jack stands, regardless of Phase 1 outcome.*
 
@@ -265,45 +298,65 @@ N51 currently reports 0 faults on Pin 9. These tests are needed only if new faul
 
 ### Phase 5: Final Assessment & Decision
 
-- **5.1 — Compile Results**
-  - After Phases 1–4, the confirmed issues are:
+- **5.1 — Compile Results (updated 2026-03-30)**
 
-  | Issue | Status | Fix |
-  | ----- | ------ | --- |
-  | ADS pump section not circulating | Phase 1 will determine: clogged filter / air lock / dead pump | €7 filter → €45 fluid → €850 pump |
-  | Front Right sphere hydro-locked | Confirmed 2026-03-22 | Replace front pair: A 129 320 01 15 (~€100–150 each) |
-  | ADS cluster warning lamp missing | Confirmed 2026-03-23 | Pull cluster, inspect socket, replace bulb (Phase 3) |
-  | Rear level control linkage | Unknown — inspect in Phase 2 | If sheared: cheap plastic/metal rod replacement |
+  | Issue | Status | Fix | Cost |
+  | ----- | ------ | --- | ---- |
+  | OVP relay cracked solder joints | **ROOT CAUSE FOUND (2026-03-30)** | Re-solder with Sn63/Pb37 | ~€0 (solder from lab) |
+  | ADS pump section not circulating | **RESOLVED** — pump alive, flush completed | Flush done, closed-loop bleed pending | €40 (fluid used) |
+  | Air in hydraulic system | **CONFIRMED** — bubbling observed | Closed-loop bleed (Phase 1 active) | €0 (labor only) |
+  | Front Right sphere suspect | Pending "straw test" after system online | If blown: replace front pair A 129 320 01 15 | ~€200–300 |
+  | Rear height static | Pending — cannot evaluate until N51 online + bleed done | May resolve with bleed; if not, inspect valve/linkage | TBD |
+  | ADS cluster warning lamp missing | Confirmed non-ADS cluster swap | Pull cluster, read P/N, source correct strip or cluster | TBD |
+  | Hydraulic filter aging | Old filter cleaned, needs replacement | Order A 129 327 00 91 | ~€7–11 |
 
 - **5.2 — Decision: Repair or Bypass**
-  - **Repair** (recommended — electronics work, only mechanical issues remain):
-    - Phase 1 flush + filter may restore level control for ~€50.
-    - Front sphere pair replacement restores FR ride quality for ~€200–300.
-    - Cluster lamp is cosmetic.
-  - **Intentional bypass** (only if pump is dead AND rebuilt pump is uneconomical):
+  - **Repair** (strongly recommended — the most expensive feared failure (pump: €850) is ruled out; OVP fix is essentially free; electronics are healthy):
+    - OVP re-solder restores N51 power for ~€0.
+    - Closed-loop bleed should clear remaining air.
+    - Front spheres may not even be blown (air-lock possible) — test first.
+    - Cluster lamp is cosmetic but important for oil-level warning visibility.
+  - **Intentional bypass** (only if unexpected further failures emerge):
     - Convert to conventional Bilstein B4/B6 shocks and delete ADS. Document the conversion.
-  - **Module replacement** — NOT NEEDED. N51 is alive and healthy.
+  - **Module replacement** — NOT NEEDED. N51 is healthy when powered.
 
 ## Parts & Tools Needed
 
-**Phase 1 — Hydraulic Flush (NEXT ACTION):**
+**Phase 0 — OVP Re-Solder (NEXT ACTION):**
 
 | Item | Purpose | Status |
 | ---- | ------- | ------ |
-| ZH-M / MB 343.0 Hydraulic Fluid (4L total) | Flush + top-up. Part no. 000 989 91 03. | **1L Acquired ✓ (Febi 02615) — need 3L more** |
-| Hydraulic Suspension Filter (A 129 327 00 91) | Suction filter — prime suspect for blocked pump. ~€7–11. | **Needed** |
-| Transparent PVC Hose (6–8mm ID, ~1m) | Open-loop flush — return line to waste container. | **Needed** |
-| Brake cleaner | Cleaning reservoir cap and return line fitting. | Acquired ✓ |
-| Syringe / turkey baster | Extract old fluid from reservoir. | Acquired ✓ (MTX 500ml) |
-| Lint-free cloth | Wipe reservoir interior (sediment). | Acquired ✓ |
+| Sn63/Pb37 leaded solder | Re-solder all OVP relay joints | **Source from office/lab** |
+| Desoldering wick | Remove old solder cleanly | **Source from office/lab** |
+| Soldering iron (fine tip) | Re-flow joints | Available ✓ |
+| Isopropyl alcohol + cotton swabs | Clean pads after desoldering | Available ✓ |
+| Magnifying glass / loupe | Post-solder inspection | Available ✓ |
+
+**Phase 1 — Closed-Loop Bleed (after OVP fix):**
+
+| Item | Purpose | Status |
+| ---- | ------- | ------ |
+| ZH-M / MB 343.0 Hydraulic Fluid | Top-up during bleed (~0.5–1L) | 4L acquired, most used in flush — check remaining level |
+| Hydraulic Suspension Filter (A 129 327 00 91) | Replace cleaned filter for long-term reliability. ~€7–11. | **ORDER NEEDED** |
+| Jack + jack stands | Jack rear to full droop for bleed | Available ✓ |
+| Wheel chocks | Safety during jack work | Acquired ✓ (Motonet) |
+
+**Hydraulic flush supplies (COMPLETED 2026-03-29):**
+
+| Item | Purpose | Status |
+| ---- | ------- | ------ |
+| ZH-M / MB 343.0 Hydraulic Fluid (4L) | Open-loop flush | Used ✓ |
+| Transparent PVC Hose (6mm + 8mm, 2m each) | Return line to waste container | Acquired ✓ (Motonet) |
+| Brake cleaner | Cleaning fittings | Used ✓ |
+| Syringe / turkey baster (MTX 500ml) | Extract old fluid from reservoir | Used ✓ |
 
 **On hand (diagnostic tools):**
 
 | Item | Purpose | Status |
 | ---- | ------- | ------ |
 | Multimeter (Owon HDS242) | Voltage, resistance, continuity | Acquired ✓ |
-| Oscilloscope (Owon HDS242) | Signal waveform analysis (Phase 4, if needed) | Acquired ✓ |
-| 12V LED blink-code reader | X11 Pin 9 diagnostics | Built ✓ |
+| Oscilloscope (Owon HDS242) | Signal waveform analysis (if needed) | Acquired ✓ |
+| 12V LED blink-code reader (V2) | X11 Pin 9 diagnostics | Built ✓ |
 
 **Later phases (not blocking):**
 
@@ -311,7 +364,7 @@ N51 currently reports 0 faults on Pin 9. These tests are needed only if new faul
 | ---- | ------- | ------ |
 | Cluster removal hooks (140 589 02 33 00) or DIY 90° pick | Pull instrument cluster (Phase 3) | Needed (can fabricate) |
 | W1.2W / W2W wedge bulbs | ADS cluster lamp + spares (Phase 3) | Needed |
-| Front Accumulator Spheres x2 (A 129 320 01 15) | Replace hydro-locked FR + pair FL (Phase 2) | Needed |
+| Front Accumulator Spheres x2 (A 129 320 01 15) | Pending "straw test" — may not be needed if air-lock was the cause | Pending assessment |
 
 
 ## Related Work Items
@@ -350,5 +403,6 @@ N51 currently reports 0 faults on Pin 9. These tests are needed only if new faul
 | 2026-03-26 | 1     | **Quick pump test (top-up, no flush)** | **PUMP IS ALIVE!** Topped reservoir to MAX, started engine. System started in Sport mode (red LED on, first time seen as default). Fahrzeugniveau switch LED on, toggled UP. **Reservoir level dropped ~2/3 of MAX-to-MIN range** — pump IS circulating fluid. No visible ride height change (circuit full of air). L/R suspension stiffness difference felt smaller (subjective). **FAULT TRIGGERED:** after first run, both switch LEDs went dark and could not be re-illuminated — not even during ignition-ON bulb check. System unresponsive on subsequent starts (~2min wait). N51 likely stored fault from air/pressure anomaly and entered full shutdown. | **Pump confirmed working — €850 rebuilt pump NOT needed.** System was starved/air-locked, not dead. Air in circuit triggered fault → N51 shutdown. **NEXT: (1) Read Pin 9 blink codes. (2) Clear faults. (3) Top up reservoir (level dropped significantly). (4) Proceed with full Phase 1 flush to purge air. (5) Re-test.** |
 | 2026-03-27 | 1     | **Pin 9 blink-code read (post-pump-test)** | **14 blinks = Steering angle sensor (N49) not initialized.** Single fault code only. Soft fault — N51 lost steering angle calibration when it shut down during pump test air/pressure anomaly. Sensor hardware intact. | **Clear code via Pin 9 reset, start engine, turn steering full lock L → full lock R → center (re-initialization). If Pin 9 reads 1 blink after, system is clean. Proceed with Phase 1 flush.** |
 | 2026-03-28 | 1     | **Lock-to-lock + extended observation** | **CODE 14 CLEARED — SYSTEM FULLY ONLINE.** Lock-to-lock steering re-initialized N49. System stable across multiple engine starts throughout the day (car not driven — not registered). **Key observations:** (1) Both switch LEDs illuminate correctly and remain active. (2) Console Sport/Comfort works consistently (red on/off). (3) **Reservoir level returned to near-MAX with engine off** — fluid enters circuit when running, returns when depressurized. No net loss (>100ml), confirms no external leaks. (4) **Possible front height change** — visual impression only, needs fender-to-ground measurement. (5) **Rear height static** — no change with Fahrzeugniveau UP. (6) **Fahrzeugniveau switch slow to deactivate** — LED stays on for some time after toggling off. | **System stable and ready for Phase 1 flush.** Rear-specific issue confirmed — front may respond to level commands while rear does not. Post-flush focus: rear level control valve, rear ARB linkage, air in rear lines. **ACTION: measure fender-to-ground at all four corners before and after flush.** |
-| 2026-03-29 | 1     | **Phase 1 Flush Execution** | **Flush completed using 4L ZH-M.** Findings: (1) Fluid ran clear very quickly (<1L). (2) **No air bubbles** seen from return line during the open-loop flush. (3) Reservoir kept above MIN successfully. (4) **System shut down mid-test:** Fahrzeugniveau switch LED went dark and stopped responding. (5) **Diagnostic ports unresponsive:** Pins 7, 8, and 9 all show "static dim glow" on the LED tester, no blinks — **even with engine running at 14V.** | **Analysis:** (A) Static dim glow despite 14V system voltage suggests either a severely degraded battery (bad cell dragging down bus stability) or a hung diagnostic bus. (B) Switch shutdown is N51 hitting a fault (likely pressure limit from open-loop) and going offline. (C) No bubbles during open-loop means the fluid took the bypass path of least resistance; the trapped air is still in the dead-ends (struts/accumulators). **NEXT:** Let battery charge fully overnight. If Pin 9 still glows dim tomorrow, disconnect battery negative for 15 mins to hard-reset modules. Then clear codes and perform closed-loop weighted bleeding (trunk bounce). |
+| 2026-03-29 | 1     | **Phase 1 Flush Execution** | **Flush completed using 4L ZH-M.** Findings: (1) Fluid ran clear very quickly (<1L). (2) **No air bubbles** seen from return line during the open-loop flush. (3) Reservoir kept above MIN successfully. (4) **System shut down mid-test:** Fahrzeugniveau switch LED went dark and stopped responding. (5) **Diagnostic ports unresponsive:** Pin 9 shows "static dim glow" on the LED tester, no blinks — even with engine running at 14V. | See 2026-03-30 OVP findings below — the mid-flush shutdown was likely caused by OVP solder joint failure under sustained heat/vibration. |
+| 2026-03-30 | —     | **OVP RELAY CRACKED SOLDER JOINTS FOUND (ROOT CAUSE?)** | **MAJOR FINDING.** Removed and disassembled the OVP relay (red box, center of electronics bay). Visual inspection of the PCB revealed **3–4 obvious ring-shaped solder fractures** — classic thermal fatigue / cold solder joint failures on a 35-year-old relay. The worst fractures were on the **87L connector pin**, which is suspected to be the ADS (N51) power feed. | **This likely explains ALL intermittent ADS symptoms:** (1) The "dim glow" on Pin 9 = N51 receiving glitchy/insufficient power through the cracked joint — enough leakage current for a dim LED but not enough for the processor to boot and communicate. (2) Why the system sometimes worked after battery disconnect = thermal cycling from the disconnect briefly restored contact across the fracture. (3) Why the system died mid-flush = extended engine running caused heat buildup + vibration in the OVP, widening the fracture gap and killing the 87L contact. (4) Why it never recovered afterward = the fracture is now open enough that no amount of voltage or power cycling can bridge it. **FIX: Re-solder all OVP joints with proper leaded solder (Sn63/Pb37). Then test Pin 9 — if N51 gets clean power, it should wake up immediately.** |
 
