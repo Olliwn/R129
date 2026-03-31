@@ -174,34 +174,22 @@ These steps were written when the module was presumed dead. Now that N51 communi
 
 ### Active Phases (in priority order)
 
-### Phase 0: OVP Relay Re-Solder (NEXT ACTION — 2026-03-31)
+### Phase 0: OVP Relay Re-Solder — RE-SOLDER DONE (2026-03-31), AWAITING REINSTALL + TEST
 
 *Added 2026-03-30. The OVP relay is the power gateway for N51. Cracked solder joints on 87L are the identified root cause of all intermittent ADS symptoms. Everything else is blocked until this is fixed.*
 
-**What was found:** 3–4 ring-shaped thermal fatigue fractures on the OVP relay PCB. Worst on 87L connector pin (suspected N51 power feed). OVP interior clean and dry — pure thermal fatigue from 35 years of engine heat cycling, not corrosion.
+**What was found (2026-03-30):** 3–4 ring-shaped thermal fatigue fractures on the OVP relay PCB. Worst on 87L connector pin (suspected N51 power feed). OVP interior clean and dry — pure thermal fatigue from 35 years of engine heat cycling, not corrosion.
 
-**Tools & materials:**
-- Sn63/Pb37 leaded solder (source from office/electronics lab)
-- Desoldering wick (to remove old solder cleanly)
-- Soldering iron with fine tip
-- Isopropyl alcohol + cotton swab (clean pads after desoldering)
-- Magnifying glass / loupe (inspect joints after re-flow)
+**Re-solder completed (2026-03-31):** All solder joints on the OVP PCB reworked — old solder removed with desoldering wick, pads cleaned, all joints re-flowed with Sn63/Pb37 leaded solder. Optical inspection confirmed good wetting, no ring cracks, no cold joints, no bridges.
 
-**Procedure:**
-1. Remove old solder from ALL joints using desoldering wick — not just 87L. At 35 years, all joints are suspect.
-2. Clean pads with isopropyl alcohol.
-3. Re-flow each joint with fresh Sn63/Pb37. Ensure good wetting (shiny, concave fillet).
-4. Inspect all joints under magnification. No ring cracks, no cold joints, no bridges.
-5. Reassemble OVP housing.
-6. Reinstall OVP in electronics bay socket.
-7. Reconnect battery.
-
-**Verification:**
-1. Turn ignition to position 2 (engine OFF). Check ADS console switch LED — should illuminate.
-2. Connect blink-code reader to Pin 9. Press button. If N51 boots: should get blink codes.
-3. If fault codes present: read and clear. Then start engine, perform lock-to-lock steering (re-initialize N49 steering angle sensor).
-4. Verify both switches work: console Sport/Comfort + Fahrzeugniveau level.
-5. If Pin 9 is STILL dim glow after OVP fix: inspect N51 connector pins for corrosion, check ground point W10, consider pulling N51 for internal capacitor inspection.
+**Remaining — Reinstall & Verify (NEXT ACTION):**
+1. Reinstall OVP in electronics bay socket.
+2. Reconnect battery.
+3. Turn ignition to position 2 (engine OFF). Check ADS console switch LED — should illuminate.
+4. Connect blink-code reader to Pin 9. Press button. If N51 boots: should get blink codes.
+5. If fault codes present: read and clear. Then start engine, perform lock-to-lock steering (re-initialize N49 steering angle sensor).
+6. Verify both switches work: console Sport/Comfort + Fahrzeugniveau level.
+7. If Pin 9 is STILL dim glow after OVP fix: inspect N51 connector pins for corrosion, check ground point W10, consider pulling N51 for internal capacitor inspection.
 
 ### Phase 1: Closed-Loop Bleed & Ride Height Assessment (after OVP fix)
 

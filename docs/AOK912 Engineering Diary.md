@@ -418,6 +418,15 @@
     - **Moisture assessment (refined):** Earlier, dried residue was noted on the plastic cover attached to the fuse box. However, further inspection found **no water intrusion** on driver or passenger side dashboards, and no pooled water evidence in the electronics bay itself. The bay shows general surface oxidation from 35 years of unsealed exposure to engine bay temperature cycling — not water damage. **The OVP relay interior was clean and dry — no moisture ingress, just a light dust layer on top.** The solder fractures are attributed to **pure thermal fatigue** (decades of engine heat/cool cycles causing micro-expansion/contraction of the joints).
 *   **Repair Plan:** Re-solder all OVP relay joints with proper leaded solder (Sn63/Pb37) — the original lead-free solder is more prone to thermal fatigue cracking. Remove old solder with desoldering wick, clean pads, and re-flow with fresh solder. Then reinstall OVP, reconnect battery, and test Pin 9. If N51 gets clean 87L power, it should boot immediately and respond to the blink-code reader.
 
+### **March 31, 2026 \- OVP Relay Re-Soldered**
+
+**Location:** Oulu, Finland
+
+**Event:** Completed OVP relay re-solder. All solder joints on the OVP relay PCB were reworked — old solder removed with desoldering wick, pads cleaned, and all joints re-flowed with Sn63/Pb37 leaded solder. Visual/optical inspection confirmed good wetting on all joints, no ring cracks, no cold joints, no solder bridges.
+
+*   **Status:** Re-solder COMPLETE. OVP relay ready for reinstallation and testing.
+*   **Next:** Reinstall OVP in electronics bay → reconnect battery → turn ignition to position 2 → test Pin 9 with blink-code reader. If N51 boots: read/clear codes, lock-to-lock steering, verify both switches.
+
 ### **March 30, 2026 \- Deliveries Received, Filter Replacement & Detailing Products Order**
 
 **Location:** Oulu, Finland
@@ -542,12 +551,10 @@
 * **Priority:** HIGH — Both are age-related, non-symptomatic failure modes. By the time symptoms appear (chain rattle, cam tick), damage is done. This is the single most important M119 preventive maintenance task.
 * **Action Item:** Order gaskets, timing guides, and aluminum oil bridge clip kit. Full procedure documented. *(See project: [M119 Upper Timing](../work/m119_upper_timing/README.md))*
 
-### **12. OVP Relay Re-Solder (NEW 2026-03-30) — NEXT ACTION**
+### **12. OVP Relay Re-Solder (2026-03-30) — RE-SOLDER DONE ✓, AWAITING REINSTALL + TEST**
 * **Scope:** Re-solder all joints on the OVP relay PCB with Sn63/Pb37 leaded solder. 3–4 ring-shaped thermal fatigue fractures found (worst on 87L, suspected N51 power feed). OVP interior was clean and dry — pure thermal fatigue, no corrosion.
-* **Priority:** CRITICAL — This is the identified root cause of all intermittent ADS behavior. Blocks all further ADS work (closed-loop bleed, ride height assessment, solenoid testing).
-* **Tools:** Soldering iron (fine tip), desoldering wick, Sn63/Pb37 solder, isopropyl alcohol, loupe/magnifier. Source solder from office/electronics lab.
-* **Procedure:** Remove old solder (wick) → clean pads (IPA) → re-flow all joints → inspect under magnification → reassemble → reinstall → test Pin 9.
-* **Verification:** If N51 boots: read/clear codes, lock-to-lock steering, verify both switches. If still dim glow: inspect N51 connector pins, check ground W10, consider pulling N51.
+* **Re-solder completed (2026-03-31):** All joints reworked — old solder removed with desoldering wick, pads cleaned, all joints re-flowed with Sn63/Pb37. Optical inspection confirmed good wetting, no ring cracks, no cold joints, no bridges.
+* **Remaining:** Reinstall OVP → reconnect battery → test Pin 9 → read/clear codes → verify switches.
 * **Action Item:** Full procedure in `work/ads_diagnostic/README.md` Phase 0.
 
 ### **13. Battery Health Verification (NEW 2026-03-30)**
@@ -556,6 +563,27 @@
 * **Method 1 — Internal resistance (Owon HDS242 multimeter mode):** Measure V_oc (resting, 1h+ after charge), turn on high beams, wait 30s, measure V_load. R_internal = (V_oc − V_load) / ~11A. Target: <25 mΩ (healthy new battery).
 * **Method 2 — Cranking voltage drop (Owon scope mode):** DC coupling, 2V/div, 1s/div timebase, single-shot trigger at ~11V falling edge. Record video of Owon display during cranking. Healthy: voltage holds above 10V. Damaged: sags below 9.5V.
 * **Decision:** If internal resistance >50 mΩ or cranking voltage <9.5V → replace battery at Motonet (Varta H3, €159.90, exact same unit, 20+ in stock).
+
+### **14. Predictive Electronics Maintenance — Capacitor & Solder Joint Audit (NEW 2026-03-31)**
+
+*Prompted by the OVP relay failure. If the OVP — which lives inside a sealed, relatively protected box — had thermal fatigue cracks on 25% of its joints after 35 years, other modules exposed to the same engine bay thermal cycling are almost certainly showing similar age-related degradation. Additionally, early '90s electrolytic capacitors ("elcos") are a known ticking time bomb: when they leak, the acidic electrolyte actively eats through PCB copper traces, permanently destroying the board.*
+
+**Hit list (ranked by failure consequence):**
+
+| # | Module | Location | Risk | What to Inspect | Priority |
+|---|--------|----------|------|-----------------|----------|
+| 1 | **N4/1 EA/CC/ISC** (E-Gas / Cruise Control) | Electronics bay, far left (tall silver module, wavy ribs, lever lock) | Controls electronic throttle actuator. Contains heavy power-driver transistors generating massive heat. Dried/leaking elcos can cause erratic throttle voltage → sudden limp mode, surging idle, or burning out the throttle body motor (very expensive part). | Open case. Inspect elcos for bulging/leaking. Reflow heavy transistor legs (thermal cycling cracks). | HIGH |
+| 2 | **MAS (N16)** (Mixture Adjustment System) | Electronics bay, middle left (twist-knob lock, next to OVP) | Handles high-amperage current for the fuel pump relay. Same cracked-solder-joint failure mode as OVP. If fuel pump circuit cracks → car dies on the highway. High-resistance joint → engine runs lean under load → can damage V8. | Open case. Inspect solder joints on heavy pins (same technique as OVP). Inspect elcos. | HIGH |
+| 3 | **Instrument Cluster (KI)** | Dashboard | Early R129 clusters infamous for leaking elcos. Leaked electrolyte eats PCB traces → coolant temperature or oil pressure gauge reads falsely or dies. Driving the aluminum M119 V8 without knowing it's overheating = blown head gasket. Symptoms: needle flutter, sluggish econometer. | Pull cluster (Phase 3 in ADS diagnostic plan — already planned). Inspect/replace the 4–5 electrolytic capacitors on the back board. Standard R129 rite of passage. | HIGH (sneaky) |
+| 4 | **EZL (Ignition Control Module)** | Usually driver-side inner fender well (large black box, heavy cooling fins, two round plugs on top) — or possibly the heavily finned front module in the electronics bay | If this dies, car cranks but never starts. Replacements extremely rare (>$1,000). Internals are potted — **DO NOT OPEN**. The thermal paste between the module and its mounting surface has dried to chalk after 35 years, causing the module to overheat and slowly cook itself. | **Do NOT open.** Unbolt from mounting. Clean off old dried thermal paste. Apply fresh modern thermal compound (e.g., Arctic MX-6 or similar). Remount securely. This is maintenance, not repair. | CRUCIAL |
+| 5 | **N51 ADS** (Adaptive Damping System) | Electronics bay, second from right | Now that OVP is fixed, N51 should boot. If it still shows "dim glow" after OVP reinstall, it may have its own internal elco/solder issues. Lower risk than N4/1 or MAS since ADS failure = limp mode ride, not stranding. | Inspect only if N51 fails to boot after OVP fix. Open case, inspect elcos and solder joints. | CONDITIONAL |
+
+**Approach:**
+- Combine with existing planned work where possible (cluster is already scheduled for Phase 3 ADS investigation).
+- Modules can be pulled one at a time during workshop sessions — each inspection takes 30–60 minutes.
+- Photograph all PCBs before touching anything (reference for trace damage assessment).
+- Any replaced elcos should use 105°C-rated, long-life replacements (e.g., Nichicon UHE or Panasonic EEU-FR series).
+- **EZL thermal paste refresh is the single highest-value preventive action** — a dead EZL is a >$1,000 replacement and can kill the car without warning.
 
 ### **11. Baseline Service — Unknown History (Spring 2026)**
 
