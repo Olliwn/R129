@@ -1,0 +1,21 @@
+doc_id: head_rest2
+title: Head rest2
+filename: Head rest2.pdf
+source_url: https://www.benzworld.org/attachments/head-rest2-pdf.2765295/
+pages: 3
+topics:
+- doors
+- seats
+toc:
+- page: 1
+  heading: Repair information
+- page: 2
+  heading: Repair information
+- page: 3
+  heading: Repair information
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

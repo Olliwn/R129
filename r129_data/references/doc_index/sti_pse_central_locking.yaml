@@ -1,0 +1,36 @@
+doc_id: sti_pse_central_locking
+title: STI_PSE_Central_Locking
+filename: STI_PSE_Central_Locking.pdf
+source_url: ''
+pages: 47
+topics:
+- audio
+- body
+- central_locking
+- climate
+- diagnostics
+- doors
+- electrical
+- engine
+- hydraulics
+- roof
+- suspension
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**3.5 Pneumatic System Equipment  (PSE)**'
+- page: 2
+  heading: '**3.5 Pneumatic System Equipment  (PSE)**'
+- page: 3
+  heading: '**3.5 Pneumatic System Equipment (PSE)**'
+- page: 4
+  heading: '**3.5 Pneumatic System Equipment (PSE)**'
+- page: 5
+  heading: '**3.5 Pneumatic System Equipment (PSE)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

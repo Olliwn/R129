@@ -62,7 +62,7 @@ If lubricating the mechanism doesn't fix the parking issue:
 | T-splitters / Silicone tubing | Replacing cracked washer lines | Monitor |
 
 ## Related Work Items
-- Engineering Diary Task #1 & #2 → [docs/AOK912 Engineering Diary.md](../../docs/AOK912%20Engineering%20Diary.md)
+- Active Tasks #1 & #2 → [docs/tasks.md](../../docs/tasks.md)
 - Baseline Service (Vacuum / Rubber Lines) → [work/baseline_service/](../baseline_service/README.md)
 
 ## Diagnostic Log

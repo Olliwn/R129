@@ -1,0 +1,36 @@
+doc_id: 129_roof_function
+title: 129 roof function
+filename: 129 roof function.pdf
+source_url: https://www.benzworld.org/attachments/129-roof-function-pdf.2765255/
+pages: 26
+topics:
+- central_locking
+- diagnostics
+- doors
+- electrical
+- engine
+- hydraulics
+- instrument_cluster
+- roll_bar
+- roof
+- seats
+- suspension
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**77-010 Function description of roadster top, coupe roof**'
+- page: 2
+  heading: '**General**'
+- page: 3
+  heading: '**Prerequisites for actuating top**'
+- page: 4
+  heading: '## **Coupe roof**'
+- page: 5
+  heading: '**==> picture [443 x 419] intentionally omitted <==**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

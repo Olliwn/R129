@@ -1,0 +1,34 @@
+doc_id: sti_pse_control_module_129_140
+title: STI_PSE_Control_Module_129_140
+filename: STI_PSE_Control_Module_129_140.pdf
+source_url: ''
+pages: 44
+topics:
+- audio
+- body
+- central_locking
+- climate
+- diagnostics
+- doors
+- electrical
+- engine
+- hydraulics
+- seats
+- wiring
+toc:
+- page: 1
+  heading: '**3.5 Pneumatic System Equipment (PSE)**'
+- page: 2
+  heading: '**3.5 Pneumatic System Equipment (PSE)**'
+- page: 3
+  heading: '**Models 129, 140, 170 as of M.Y. 1998**'
+- page: 4
+  heading: '**3.5 Pneumatic System Equipment (PSE)**'
+- page: 5
+  heading: '**3.5 Pneumatic System Equipment (PSE)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

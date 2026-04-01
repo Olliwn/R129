@@ -2,7 +2,7 @@
 
 **Vehicle:** WDB 129066 1F 044414 | **Engine:** M119.960 (KE-Jetronic) | **Trans:** 722.3
 
-*Consolidated list of parts needed but NOT yet purchased. Organized by priority/project. Print this and walk into MB-osat Oulu — they can cross-reference by VIN and confirm fitment for the tricky M119.960 early-model parts that Autodoc gets wrong.*
+*Single source of truth for all parts, consumables, and tools. Replaces the former `Karkkainen_Shopping_List.md`. Organized by priority/project. Print this and walk into MB-osat Oulu — they can cross-reference by VIN and confirm fitment for the tricky M119.960 early-model parts that Autodoc gets wrong.*
 
 **Recommended sourcing strategy:**
 - **MB-osat (Oulu):** First stop for anything with an "A 1xx..." OEM number. They have the MB parts catalog and can verify fitment by VIN. Best for gaskets, seals, cooling parts, and anything where early/late M119 confusion is a problem.
@@ -48,7 +48,13 @@
 | Part | OEM Number | Qty | Notes |
 | :--- | :--- | :--- | :--- |
 | ADS Suction Filter | A 129 327 00 91 | 1 | ~7–11 €. Old one cleaned on 2026-03-29, but a new one is needed for long-term reliability. |
-| ZH-M Hydraulic Fluid (MB 343.0) | 000 989 91 03 (Febi 02615) | 2–4 L | May need more for the closed-loop bleed phase. 4L used in the open-loop flush on 03-29. |
+| ZH-M Hydraulic Fluid (MB 343.0) | 000 989 91 03 (Febi 02615) | 1–2 L | Top-up for closed-loop bleed. 4L used in open-loop flush on 03-29. Check remaining level. |
+
+### Predictive Electronics Maintenance (Task #14)
+
+| Part | Ref | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| Thermal Compound | Arctic MX-6 or Noctua NT-H1 | 1 tube (4g) | EZL ignition module thermal paste refresh — original has dried to chalk after 35 years. Non-conductive type required. Also useful for any heat-sinked power modules. |
 
 ---
 
@@ -93,17 +99,22 @@
 | V-Belt Set (M119) | (verify w/ MB-osat) | 1 set | **Inspect first** | M119 uses multiple V-belts, not single serpentine. Replace if cracked/glazed or age unknown. |
 | Belt Tensioners / Idler Pulleys | (verify w/ MB-osat) | as needed | **Inspect first** | Check for bearing play/noise. |
 | Brake Flex Hoses (all 4 corners) | (verify w/ MB-osat) | 4 | **Inspect first** | 35-year-old rubber. Replace if any doubt. |
+| Flare Nut Wrench Set (7–19mm) | **Bahco** | 1 set | **Needed** | 6-point chrome-vanadium. For brake bleed nipples (7/8mm) and ADS hydraulic fittings. Frequent use expected. Check Kärkkäinen stock. |
+| One-Person Pressure Bleeder | Gunson Eezibleed or similar | 1 | **Needed** | Connects to brake reservoir cap, pressurizes to ~1 bar. Best for ABS-equipped cars. |
+| Brake Fluid (extra) | ATE TYP200 DOT4 | 1 L | **Needed** | Second bottle for a full flush if fluid is dark (1L already on hand). |
+| PTFE / Teflon Tape | — | 1 roll | **Needed** | Wrap around brake bleed nipple threads to prevent false air ingestion during vacuum bleeding. Also useful for general hydraulic thread sealing. |
 
 ---
 
-## PRIORITY 5 — Suspension (Post-Flush Diagnosis)
+## PRIORITY 5 — Suspension (Post-OVP Fix + Closed-Loop Bleed)
 
-*Order AFTER the closed-loop ADS bleed confirms the pump works and rear height behavior is understood.*
+*Order AFTER OVP re-solder → N51 online → closed-loop bleed confirms rear height behavior. Pump is confirmed working (2026-03-26).*
 
 | Part | OEM Number | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| Front Accumulator Spheres | A 129 320 01 15 | 2 | FR confirmed hydro-locked. Replace as a pair. Corteco brand. ~100–150 € each. |
+| Front Accumulator Spheres | A 129 320 01 15 | 2 | FR suspect (stiffness noted 2026-03-22, but may be air-lock). Pending "straw test" after system is online. Replace as pair if confirmed. Corteco brand. ~100–150 € each. |
 | Rear Level Control Linkage | (inspect under car first) | 1 | Known ADS I failure: plastic link shears at lower mount. Inspect BEFORE ordering. |
+| ADS Tandem Pump (CONDITIONAL) | A 129 460 07 80 | 1 | ~€850 rebuilt from ABCspecialist NL + core deposit. **Pump confirmed ALIVE (2026-03-26) — DO NOT ORDER.** Only if future testing reveals internal failure. |
 
 ---
 
@@ -136,4 +147,95 @@
 
 ---
 
-*Last updated: 2026-03-29*
+---
+
+## ACQUIRED — Tools, Consumables & Fluids (Reference)
+
+*Items already purchased and on hand. Formerly tracked in `Karkkainen_Shopping_List.md` (now retired).*
+
+<details>
+<summary><b>Tools (all acquired)</b></summary>
+
+- Socket/Wrench: Bahco S910, SBSL25, combination wrenches
+- Torx: Bondhus set
+- Pliers: 3× Knipex (87, 70, 26)
+- Floor Jack: >2.5t low-profile
+- Jack Stands: Bahco BH33000 3T ×4 + 100mm rubber pads ×4
+- Breaker Bar: MTX 1/2" 600mm
+- Wheel Chocks: 2× plastic 155mm
+- Torque Wrench: 20–110Nm + 40–210Nm
+- Oil Filter Wrench: Bahco BE6307614F 74mm/14-flute
+- Fluid Syringe: MTX 500ml
+- Pry Bar Set: Bahco 2484T/S4
+- Transmission Funnel: KABI set
+- Magnetic Pick-up Tool, Magnetic Parts Tray
+- Oil Drain Pan
+- Multimeter: MS8233B (car kit) + Owon HDS242 (scope/DMM combo)
+- Soldering Iron & Solder
+- Wire Strippers, Crimping Tool, Automotive Test Light
+- Trim Removal Tools: MTX Automotive set
+- Work Light: Berg COB+XPE LED
+- Heat Shrink Tubing assortment
+- Wet/Dry Shop Vacuum: Kärcher WD3
+
+</details>
+
+<details>
+<summary><b>Consumables (all acquired)</b></summary>
+
+- Brake Cleaner (6× cans)
+- Penetrating Oil (WD-40)
+- Dielectric Grease, Lithium Grease (CRC), Silicone Grease (CRC)
+- Threadlocker (Loctite 243 Blue)
+- Microfiber Cloths (8 pcs), Shop Towels
+- Nitrile Gloves (NEO TOOLS Orange Diamond 50pcs)
+- APC / Plastic Cleaner / Engine Bay Cleaner
+- Plastic Dressing: Chemical Guys VRP 473ml
+- Iron Remover: Korrek Pro Irox 700ml
+- Adhesive Remover: AT Stripper 400ml
+- Leather Conditioner: Leather Master Leather Vital 250ml
+- Polishing Compound: King Carthur Reshine Finish 3/3
+- Car Wax: Soft99 FUSSO Coat White 200g
+- Detailing Brushes: Soft99 exterior/interior
+- Drop cloths (old linen/blankets)
+
+</details>
+
+<details>
+<summary><b>Fluids & Filters (all acquired)</b></summary>
+
+- Engine Oil: 8L Mobil 1 FS 0W-40 (MB 229.5)
+- Oil Filter: MANN H 829/1 x
+- Engine Air Filters: MANN C 3388 ×2 (installed 03-30)
+- Cabin Air Filter: MANN CU 5041 (installed 03-30)
+- Fuel Filter: MANN WK 830/3
+- Power Steering Filter: MANN H 85
+- Spark Plugs: NGK BP5ES ×8
+- Brake Fluid: ATE TYP200 DOT4 1L
+- Power Steering Fluid: 2L Febi 08972 MB 236.3
+- ADS Hydraulic Fluid: 4L Febi 02615 MB 343.0/ZH-M (used in flush 03-29)
+- Coolant: Motox Classic G11 Blue 10L + 10L distilled water
+- Windshield Washer Fluid
+- Fuses: Ceramic/Copper torpedo set (installed 03-30) + Dunlop blade assortment
+- PVC Hose: ToppBright 6mm + 8mm clear, 2m each
+
+</details>
+
+<details>
+<summary><b>Engine & Drivetrain Mounts (acquired, awaiting install)</b></summary>
+
+- Engine Mounts ×2: Corteco 80001913
+- Transmission Mount: Corteco 21652116
+
+</details>
+
+<details>
+<summary><b>Body Parts (acquired, awaiting install)</b></summary>
+
+- Hood Insulation Pad + Clips: IPG-87742-Set (AMS Auto)
+
+</details>
+
+---
+
+*Last updated: 2026-03-31*

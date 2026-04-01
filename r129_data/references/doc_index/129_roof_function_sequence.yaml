@@ -1,0 +1,21 @@
+doc_id: 129_roof_function_sequence
+title: 129 roof function.sequence
+filename: 129 roof function.sequence.pdf
+source_url: https://www.benzworld.org/attachments/129-roof-function-sequence-pdf.2765256/
+pages: 2
+topics:
+- doors
+- roof
+- suspension
+toc:
+- page: 1
+  heading: AD77.30-P-2000-02A Roadster soft top (RST) diagnosis basic knowledge function
+    sequence
+- page: 2
+  heading: '**Function sequence - closing soft top** Figure 2'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

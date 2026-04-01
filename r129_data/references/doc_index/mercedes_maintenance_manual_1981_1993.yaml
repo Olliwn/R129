@@ -1,0 +1,44 @@
+doc_id: mercedes_maintenance_manual_1981_1993
+title: Mercedes_Maintenance_Manual_1981-1993
+filename: Mercedes_Maintenance_Manual_1981-1993.pdf
+source_url: ''
+pages: 331
+topics:
+- audio
+- body
+- brakes
+- central_locking
+- climate
+- diagnostics
+- doors
+- electrical
+- engine
+- general
+- hydraulics
+- instrument_cluster
+- lighting
+- roll_bar
+- roof
+- seats
+- steering
+- suspension
+- transmission
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**EXIT**'
+- page: 2
+  heading: '**EXIT**'
+- page: 3
+  heading: '**EXIT**'
+- page: 4
+  heading: '**EXIT**'
+- page: 5
+  heading: '**EXIT**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

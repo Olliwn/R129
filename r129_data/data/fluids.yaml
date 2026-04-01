@@ -1,0 +1,173 @@
+fluids:
+  - id: engine_oil
+    system: "Engine (M119.960)"
+    fluid_type: "Synthetic motor oil 5W-40 or 0W-40"
+    mercedes_spec: "MB 229.5"
+    recommended_products:
+      - "Mobil 1 0W-40 European Car Formula"
+      - "Liqui Moly Leichtlauf High Tech 5W-40"
+      - "Castrol Edge 0W-40"
+    capacity_liters: 8.0
+    capacity_notes: "7.5L oil change, 8.0L with filter. Dipstick between min/max = ~1.5L."
+    change_interval_km: 10000
+    change_interval_notes: "Every 10,000 km or 12 months, whichever comes first. Shorter for severe duty."
+    applies_to:
+      years: [1989, 1998]
+      engines: ["M119.960", "M119.972"]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, Maintenance section"
+      confidence: "high"
+
+  - id: transmission_fluid
+    system: "Transmission (722.3)"
+    fluid_type: "ATF (Automatic Transmission Fluid)"
+    mercedes_spec: "MB 236.10"
+    recommended_products:
+      - "Fuchs Titan ATF 4134"
+      - "Febi 08971"
+    capacity_liters: 8.5
+    capacity_notes: "Total system capacity ~8.5L. Drain-and-fill yields ~4L. Full flush requires multiple cycles."
+    change_interval_km: 60000
+    change_interval_notes: "Mercedes officially says 'lifetime fill' but community strongly recommends 60,000 km intervals."
+    applies_to:
+      years: [1989, 1995]
+      chassis: ["129.060", "129.061", "129.066"]
+    source:
+      type: "community"
+      ref: "BenzWorld consensus, confirmed by multiple independent sources"
+      confidence: "medium"
+
+  - id: coolant
+    system: "Cooling system"
+    fluid_type: "Mercedes-Benz antifreeze (blue)"
+    mercedes_spec: "MB 325.0"
+    recommended_products:
+      - "Mercedes-Benz Genuine Coolant (blue)"
+      - "Zerex G-48 (blue, phosphate-free)"
+    capacity_liters: 11.5
+    capacity_notes: "Total system capacity. Mix 50/50 with distilled water. Do NOT use green/orange coolant."
+    change_interval_km: 50000
+    change_interval_years: 3
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual"
+      confidence: "high"
+
+  - id: brake_fluid
+    system: "Brakes"
+    fluid_type: "DOT 4+"
+    mercedes_spec: "MB 331.0"
+    recommended_products:
+      - "ATE Typ 200 (amber, DOT 4)"
+      - "Castrol SRF"
+    capacity_liters: 0.6
+    capacity_notes: "Reservoir capacity. Total system flush requires ~1L."
+    change_interval_years: 2
+    change_interval_notes: "Every 2 years regardless of mileage. Brake fluid is hygroscopic."
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual"
+      confidence: "high"
+
+  - id: power_steering
+    system: "Power steering"
+    fluid_type: "ATF (MB 236.3)"
+    mercedes_spec: "MB 236.3"
+    recommended_products:
+      - "Febi 08972 (MB 236.3)"
+      - "Pentosin CHF 11S (compatible)"
+    capacity_liters: 1.2
+    capacity_notes: "Reservoir + lines. Cold fill between MIN and MAX marks on dipstick."
+    change_interval_notes: "Not in official schedule. Flush every 50,000 km or when fluid darkens."
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual"
+      confidence: "high"
+
+  - id: zhm_hydraulic
+    system: "Roof hydraulics (soft top, tonneau, roll bar)"
+    fluid_type: "ZH-M hydraulic fluid (mineral-based, green)"
+    mercedes_spec: "MB 343.0"
+    recommended_products:
+      - "Pentosin CHF 11S (green)"
+      - "Febi 06161"
+    capacity_liters: 1.5
+    capacity_notes: "Reservoir + cylinders + lines. Do NOT mix with mineral oil or DOT brake fluid."
+    change_interval_notes: "Flush every 2-3 years or when fluid turns dark. System is sensitive to contamination."
+    notes: "Same fluid as power steering on some models. NEVER use DOT brake fluid."
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "community"
+      ref: "BenzWorld, confirmed by multiple R129 specialists"
+      confidence: "high"
+
+  - id: ads_hydraulic
+    system: "ADS (Adaptive Damping System)"
+    fluid_type: "ADS hydraulic fluid (mineral-based)"
+    mercedes_spec: "MB 343.0"
+    recommended_products:
+      - "Pentosin CHF 11S"
+    capacity_liters: 1.0
+    capacity_notes: "Reservoir behind left headlight. Level should be between MIN and MAX with engine off."
+    change_interval_notes: "Not in official schedule. Flush when fluid is dark or system faults occur."
+    notes: "ADS I (option 211) uses separate reservoir from roof hydraulics."
+    applies_to:
+      years: [1989, 1998]
+      chassis: "all"
+      options: [211]
+    source:
+      type: "engineering_diary"
+      ref: "docs/AOK912 Engineering Diary.md, ADS investigation"
+      confidence: "medium"
+
+  - id: washer_fluid
+    system: "Windshield/headlamp washer"
+    fluid_type: "Windshield washer fluid with antifreeze"
+    capacity_liters: 5.5
+    capacity_notes: "Shared reservoir for windshield and headlamp washers (option 600)."
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual"
+      confidence: "high"
+
+  - id: ac_refrigerant
+    system: "Air conditioning"
+    fluid_type: "R-12 (pre-1993) / R-134a (post-1993)"
+    capacity_notes: "Pre-1993 uses R-12 (Freon). Factory retrofit to R-134a available. Capacity varies by system."
+    notes: "1991 models originally filled with R-12. Conversion to R-134a requires new receiver-drier and O-rings."
+    applies_to:
+      years: [1989, 1993]
+      chassis: "all"
+    source:
+      type: "community"
+      ref: "General R129 knowledge"
+      confidence: "medium"
+
+  - id: differential
+    system: "Rear differential"
+    fluid_type: "Hypoid gear oil SAE 90"
+    mercedes_spec: "MB 235.0"
+    capacity_liters: 1.2
+    change_interval_km: 60000
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual"
+      confidence: "high"

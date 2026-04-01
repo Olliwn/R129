@@ -1,0 +1,44 @@
+doc_id: epc_detailedguide7may07
+title: EPC detailedGuide7MAY07
+filename: EPC detailedGuide7MAY07.pdf
+source_url: https://www.benzworld.org/attachments/epc-detailedguide7may07-pdf.2765288/
+pages: 64
+topics:
+- audio
+- body
+- brakes
+- central_locking
+- climate
+- doors
+- electrical
+- engine
+- general
+- hydraulics
+- instrument_cluster
+- lighting
+- roll_bar
+- roof
+- seats
+- steering
+- suspension
+- transmission
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '## **A Guide to the**'
+- page: 2
+  heading: '## **Table of Contents**'
+- page: 3
+  heading: Page 3
+- page: 4
+  heading: _The information in this guide is the latest available at the time of publication,
+    and is believed t
+- page: 5
+  heading: '## **1. Introduction**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

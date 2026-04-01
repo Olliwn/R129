@@ -1,0 +1,27 @@
+doc_id: 129_067windshieldrnr_01
+title: 129.067WindshieldRnR-01
+filename: 129.067WindshieldRnR-01.pdf
+source_url: https://www.benzworld.org/attachments/129-067windshieldrnr-01-pdf.2765257/
+pages: 3
+topics:
+- body
+- doors
+- electrical
+- engine
+- general
+- roof
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**AR67.10-P-1000C**'
+- page: 2
+  heading: '## **Check values for windshield**'
+- page: 3
+  heading: '**==> picture [106 x 70] intentionally omitted <==**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

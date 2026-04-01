@@ -1,0 +1,30 @@
+doc_id: sti_cd_changer
+title: STI_CD_Changer
+filename: STI_CD_Changer.pdf
+source_url: ''
+pages: 9
+topics:
+- audio
+- body
+- diagnostics
+- electrical
+- engine
+- general
+- wiring
+toc:
+- page: 1
+  heading: '**6.1 CD Changer (CDC)**'
+- page: 2
+  heading: '**6.1 CD Changer (CDC)**'
+- page: 3
+  heading: '**6.1 CD Changer (CDC)**'
+- page: 4
+  heading: '**6.1 CD Changer (CDC)**'
+- page: 5
+  heading: '**6.1 CD Changer (CDC)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

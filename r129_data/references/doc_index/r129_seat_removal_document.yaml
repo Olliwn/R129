@@ -1,0 +1,29 @@
+doc_id: r129_seat_removal_document
+title: R129 seat removal document
+filename: R129 seat removal document.pdf
+source_url: https://www.benzworld.org/attachments/r129-seat-removal-document-pdf.2765332/
+pages: 5
+topics:
+- engine
+- lighting
+- roof
+- seats
+- suspension
+- wiring
+toc:
+- page: 1
+  heading: '**91-100 Removing and installing front seat**'
+- page: 2
+  heading: Front seat (1)
+- page: 3
+  heading: '## **Removal, installation**'
+- page: 4
+  heading: '- 6 Unscrew screw (1 each) on left seat rail (arrow).'
+- page: 5
+  heading: Seat mounting points on longitudinal member.
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

@@ -1,0 +1,39 @@
+doc_id: sti_ic_digital_odo_129
+title: STI_IC_Digital_Odo_129
+filename: STI_IC_Digital_Odo_129.pdf
+source_url: ''
+pages: 44
+topics:
+- brakes
+- central_locking
+- diagnostics
+- doors
+- electrical
+- engine
+- general
+- instrument_cluster
+- lighting
+- roll_bar
+- roof
+- steering
+- suspension
+- transmission
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**1.8 Instrument Cluster (IC)**'
+- page: 2
+  heading: '**Technical Changes**'
+- page: 3
+  heading: '**Model 129**'
+- page: 4
+  heading: '**1.8 Instrument Cluster (IC) (with Digital Odometer)**'
+- page: 5
+  heading: '**Model 129**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

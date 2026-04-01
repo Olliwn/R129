@@ -1,0 +1,263 @@
+description: >
+  R129 fuse box assignments for pre-facelift models (1989-1995).
+  The main fuse box is located in the engine compartment, left side.
+  Additional fuses are in the trunk (rear SAM).
+  NOTE: Specific fuse assignments need verification from the ETM.
+  The owner's manual provides the fuse legend but circuit details require ETM data.
+
+fuses:
+  - id: F1
+    rating_amps: 8
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Instrument cluster"
+      - "Diagnostic connector"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F2
+    rating_amps: 8
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Turn signals"
+      - "Hazard warning lights"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F3
+    rating_amps: 8
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Brake lights"
+      - "Cruise control (Tempomat)"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F4
+    rating_amps: 8
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "License plate lights"
+      - "Tail lights"
+      - "Side marker lights"
+      - "Instrument cluster illumination"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F5
+    rating_amps: 8
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Right low beam headlight"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F6
+    rating_amps: 8
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Left low beam headlight"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F7
+    rating_amps: 8
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Right high beam headlight"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F8
+    rating_amps: 8
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Left high beam headlight"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F9
+    rating_amps: 25
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Blower motor (climate control)"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F10
+    rating_amps: 16
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Headlight washer/wiper"
+      - "Windshield washer pump"
+      - "Wiper motor"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F11
+    rating_amps: 16
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Power windows"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F12
+    rating_amps: 8
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Cigar lighter"
+      - "Interior lights"
+      - "Glove box light"
+      - "Trunk light"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F13
+    rating_amps: 16
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Power seats"
+      - "Seat memory"
+      - "Mirror memory"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F14
+    rating_amps: 8
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Fog lights (front)"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F15
+    rating_amps: 16
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Radio / audio system"
+      - "Power antenna"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F16
+    rating_amps: 8
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "ABS control module"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F17
+    rating_amps: 8
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Rear window defroster"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: F18
+    rating_amps: 16
+    location: "Main fuse box, engine compartment"
+    protects:
+      - "Seat heater"
+    notes: "Only present with option 873."
+    applies_to:
+      years: [1989, 1995]
+      options: [873]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, fuse chart"
+      confidence: "medium"
+
+  - id: TRUNK_F1
+    rating_amps: 25
+    location: "Trunk fuse box"
+    protects:
+      - "Soft top hydraulic pump motor"
+    applies_to:
+      years: [1989, 2001]
+    source:
+      type: "community"
+      ref: "BenzWorld, Trunk Fuses.pdf from PDF collection"
+      confidence: "medium"
+
+  - id: TRUNK_F2
+    rating_amps: 25
+    location: "Trunk fuse box"
+    protects:
+      - "PSE central locking pump"
+    applies_to:
+      years: [1989, 2001]
+    source:
+      type: "community"
+      ref: "BenzWorld, Trunk Fuses.pdf from PDF collection"
+      confidence: "medium"

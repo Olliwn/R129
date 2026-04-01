@@ -1,0 +1,76 @@
+# Tier 2 -- requires ETM data to populate fully.
+# Seeded with components known from the engineering diary.
+
+components:
+  - id: N7
+    designation: "N7"
+    name: "Exterior lamp failure module"
+    system: "lighting"
+    function: "Monitors all exterior bulbs via current sensing. Triggers dashboard warning lamp on failure."
+    location: "Behind instrument cluster"
+    notes: "In series with all exterior lighting. Key component for the Phase 2 electrical model."
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "community"
+      ref: "General R129 knowledge, ETM references"
+      confidence: "medium"
+
+  - id: N51
+    designation: "N51"
+    name: "ADS control module"
+    system: "ads"
+    function: "Controls adaptive damping (shock firmness). Reports faults via Pin 9 blink codes on X11."
+    location: "Behind right kick panel"
+    notes: "Only monitors electronic damping, NOT level control on ADS I."
+    applies_to:
+      years: [1989, 1998]
+      options: [211]
+    source:
+      type: "engineering_diary"
+      ref: "docs/AOK912 Engineering Diary.md, ADS investigation"
+      confidence: "high"
+
+  - id: X11
+    designation: "X11"
+    name: "Diagnostic connector"
+    system: "diagnostics"
+    function: "38-pin diagnostic port for Star Diagnosis, blink code readout, and signal monitoring."
+    location: "Engine compartment, left side, near fuse box"
+    connector_pins: 38
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "engineering_diary"
+      ref: "docs/AOK912 Engineering Diary.md"
+      confidence: "high"
+
+  - id: PSE_PUMP
+    designation: "PSE pump"
+    name: "Pneumatic System Electronics pump"
+    system: "central_locking"
+    function: "Provides vacuum/pressure for central locking, trunk, and fuel filler flap."
+    location: "Trunk, right side"
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "engineering_diary"
+      ref: "docs/AOK912 Engineering Diary.md"
+      confidence: "high"
+
+  - id: ADS_PUMP
+    designation: "ADS hydraulic pump"
+    name: "ADS level control hydraulic pump"
+    system: "ads"
+    function: "Supplies hydraulic pressure for the Niveauregulierung level control system."
+    location: "Engine compartment, left side"
+    applies_to:
+      years: [1989, 1998]
+      options: [211]
+    source:
+      type: "engineering_diary"
+      ref: "docs/AOK912 Engineering Diary.md, ADS investigation"
+      confidence: "high"

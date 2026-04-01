@@ -1,0 +1,40 @@
+doc_id: sti_soft_top_rst_129_pre1994
+title: STI_Soft_Top_RST_129_pre1994
+filename: STI_Soft_Top_RST_129_pre1994.pdf
+source_url: ''
+pages: 188
+topics:
+- audio
+- body
+- brakes
+- central_locking
+- climate
+- diagnostics
+- doors
+- electrical
+- engine
+- hydraulics
+- instrument_cluster
+- lighting
+- roll_bar
+- roof
+- suspension
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**Contents**'
+- page: 2
+  heading: '**11.2 Roadster Soft Top (RST), Roll Bar (RB) (Manual Deployment)**'
+- page: 3
+  heading: '**11.2 Roadster Soft Top (RST), Roll Bar (RB) (Manual Deployment)**'
+- page: 4
+  heading: '**Model 129**'
+- page: 5
+  heading: '**Model 129**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

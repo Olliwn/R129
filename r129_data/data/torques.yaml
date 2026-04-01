@@ -1,0 +1,89 @@
+torques:
+  - id: wheel_bolts
+    system: "Wheels"
+    component: "Wheel lug bolts"
+    torque_nm: 110.0
+    thread_size: "M14x1.5"
+    notes: "Torque in star pattern. Re-check after 50 km on new wheels."
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, wheel change section"
+      confidence: "high"
+
+  - id: oil_drain_plug
+    system: "Engine (M119)"
+    component: "Oil drain plug"
+    torque_nm: 25.0
+    thread_size: "M14"
+    notes: "Always use new crush washer."
+    applies_to:
+      years: [1989, 1998]
+      engines: ["M119.960", "M119.972"]
+    source:
+      type: "workshop_manual"
+      ref: "M119 workshop procedures"
+      confidence: "medium"
+
+  - id: oil_filter_housing
+    system: "Engine (M119)"
+    component: "Oil filter housing cap"
+    torque_nm: 25.0
+    notes: "Hand-tight plus 1/4 turn. Do not overtighten."
+    applies_to:
+      years: [1989, 1998]
+      engines: ["M119.960", "M119.972"]
+    source:
+      type: "workshop_manual"
+      ref: "M119 workshop procedures"
+      confidence: "medium"
+
+  - id: spark_plugs_m119
+    system: "Engine (M119)"
+    component: "Spark plugs"
+    torque_nm: 20.0
+    thread_size: "M14x1.25"
+    notes: "Bosch W5DTC or equivalent. Gap 0.8mm."
+    applies_to:
+      years: [1989, 1998]
+      engines: ["M119.960", "M119.972"]
+    source:
+      type: "workshop_manual"
+      ref: "M119 workshop procedures"
+      confidence: "medium"
+
+  - id: trans_drain_plug
+    system: "Transmission (722.3)"
+    component: "Transmission oil pan drain plug"
+    torque_nm: 15.0
+    notes: "Use new seal ring."
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "workshop_manual"
+      ref: "722.3 service procedures"
+      confidence: "medium"
+
+  - id: caliper_bolts_front
+    system: "Brakes"
+    component: "Front brake caliper bolts"
+    torque_nm: 115.0
+    applies_to:
+      years: [1989, 2001]
+    source:
+      type: "workshop_manual"
+      ref: "R129 brake service manual"
+      confidence: "medium"
+
+  - id: caliper_bolts_rear
+    system: "Brakes"
+    component: "Rear brake caliper bolts"
+    torque_nm: 85.0
+    applies_to:
+      years: [1989, 2001]
+    source:
+      type: "workshop_manual"
+      ref: "R129 brake service manual"
+      confidence: "medium"

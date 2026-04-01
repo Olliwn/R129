@@ -1,0 +1,28 @@
+---
+description: How to update the AOK912 engineering diary and related project documentation
+alwaysApply: true
+---
+
+# Documentation Practice
+
+This project tracks engineering and maintenance work on a 1991 Mercedes-Benz 500 SL (R129).
+
+## File Map -- What to Read/Update
+
+| Purpose | File | Notes |
+|---------|------|-------|
+| **Monthly diary** (detailed log entries) | `docs/diary/YYYY-MM.md` | Full detail. New month = new file. Old months are append-only archive. |
+| **Summary diary** (condensed timeline) | `docs/AOK912 Engineering Diary.md` | Vehicle identity + 1-2 line summary per date. Update after adding a monthly entry. |
+| **Known issues** (current defect state) | `docs/known_issues.md` | Single source of truth for issue status. Do NOT duplicate status in log entries. |
+| **Active tasks** (work queue) | `docs/tasks.md` | Brief entries with priority. Detailed procedures live in `work/*/README.md`. |
+| **Budget** | `docs/budget.md` | Cost tracking table. Add new purchases here. |
+| **References & tools** | `docs/references.md` | Documentation links and tool inventory. |
+| **Technical data search** | `r129_data/SKILL.md` | How to search the 2,435-chunk document repository. |
+
+## Rules
+
+1. **New diary entry**: Write full detail in `docs/diary/YYYY-MM.md`, then add a condensed 1-2 line entry to the summary diary's timeline table.
+2. **Issue status change**: Update `docs/known_issues.md`. The monthly diary records what happened; known_issues.md records current state.
+3. **New task**: Add to `docs/tasks.md` with a link to the `work/*/README.md` where the detailed procedure lives.
+4. **New purchase**: Add a row to `docs/budget.md`.
+5. **Detailed work plans**: Always go in `work/*/README.md`, never inlined in the diary or tasks file.

@@ -1,0 +1,28 @@
+doc_id: door_panel_ra72001290100x
+title: Door panel ra72001290100x
+filename: Door panel ra72001290100x.pdf
+source_url: https://www.benzworld.org/attachments/door-panel-ra72001290100x-pdf.2765283/
+pages: 6
+topics:
+- doors
+- electrical
+- seats
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**72-100     Removal and installation of door liner**'
+- page: 2
+  heading: '## **Removal, installation**'
+- page: 3
+  heading: 5 Open door pocket cover and press off front cover (arrow).
+- page: 4
+  heading: 8 Press large wood cover downward and remove from door liner (arrows).
+- page: 5
+  heading: '- 11   Screw out screw at front of door pocket (arrow).'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

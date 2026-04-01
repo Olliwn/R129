@@ -1,0 +1,33 @@
+doc_id: ra80001290400x_descrip_irc
+title: ra80001290400x_Descrip_IRC
+filename: ra80001290400x_Descrip_IRC.pdf
+source_url: https://www.benzworld.org/attachments/ra80001290400x_descrip_irc-pdf.2765342/
+pages: 14
+topics:
+- body
+- central_locking
+- doors
+- electrical
+- engine
+- hydraulics
+- lighting
+- roof
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: Repair information
+- page: 2
+  heading: Repair information
+- page: 3
+  heading: Repair information
+- page: 4
+  heading: Repair information
+- page: 5
+  heading: Page 5 of 14
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

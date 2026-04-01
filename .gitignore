@@ -1,0 +1,12 @@
+# Binary / large generated files
+r129_data/references/pdfs/
+r129_data/references/images/
+r129_data/references/embeddings/
+r129_data/.venv/
+
+# OS
+.DS_Store
+
+# Python
+__pycache__/
+*.pyc

@@ -1,0 +1,43 @@
+doc_id: acronym_list_mercedes_benz
+title: Acronym-list-mercedes-benz
+filename: Acronym-list-mercedes-benz.pdf
+source_url: https://www.benzworld.org/attachments/acronym-list-mercedes-benz-pdf.2765270/
+pages: 6
+topics:
+- audio
+- body
+- brakes
+- central_locking
+- climate
+- diagnostics
+- doors
+- engine
+- general
+- hydraulics
+- instrument_cluster
+- lighting
+- roll_bar
+- roof
+- seats
+- steering
+- suspension
+- transmission
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: 'BROUGHT TO YOU BY : **MERCEDES MEDIC.com**'
+- page: 2
+  heading: 'BROUGHT TO YOU BY : **MERCEDES MEDIC.com**'
+- page: 3
+  heading: 'BROUGHT TO YOU BY : **MERCEDES MEDIC.com**'
+- page: 4
+  heading: 'BROUGHT TO YOU BY : **MERCEDES MEDIC.com**'
+- page: 5
+  heading: 'BROUGHT TO YOU BY : **MERCEDES MEDIC.com**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

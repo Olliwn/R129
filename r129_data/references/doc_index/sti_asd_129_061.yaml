@@ -1,0 +1,37 @@
+doc_id: sti_asd_129_061
+title: STI_ASD_129_061
+filename: STI_ASD_129_061.pdf
+source_url: ''
+pages: 40
+topics:
+- brakes
+- central_locking
+- diagnostics
+- doors
+- electrical
+- engine
+- general
+- hydraulics
+- instrument_cluster
+- lighting
+- roof
+- suspension
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**4.1 Automatic Locking Differential (ASD)**'
+- page: 2
+  heading: '**4.1 Automatic Locking Differential (ASD)**'
+- page: 3
+  heading: '**4.1 Automatic Locking Differential (ASD)**'
+- page: 4
+  heading: '**4.1 Automatic Locking Differential (ASD)**'
+- page: 5
+  heading: '**4.1 Automatic Locking Differential (ASD)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

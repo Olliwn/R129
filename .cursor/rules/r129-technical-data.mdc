@@ -1,0 +1,21 @@
+---
+description: R129 technical data repository awareness -- vehicle specs, fuses, wiring, service docs
+alwaysApply: true
+---
+
+# R129 Technical Data Repository
+
+This workspace contains a searchable knowledge base for a **1991 Mercedes-Benz 500 SL** (chassis 129.066, engine M119.960, KE-Jetronic/CIS-E fuel injection, EZL ignition, 722.3 transmission, ADS I suspension).
+
+## Quick Reference
+
+- **Structured data** (YAML): `r129_data/data/*.yaml` -- fuses, relays, fluids, torques, known issues
+- **Ingested service docs** (JSONL): `r129_data/references/chunks/all_chunks.jsonl` -- 2400+ searchable chunks from 110 factory manuals
+- **Document index**: `r129_data/references/doc_index/*.yaml` -- topics and TOC per document
+- **Project documentation**: see `docs/` file map in the diary-practice rule
+
+## How to Answer R129 Technical Questions
+
+Read the skill at `r129_data/SKILL.md` for detailed search instructions and CLI commands.
+
+The venv is at `r129_data/.venv/` -- activate it before running CLI tools.

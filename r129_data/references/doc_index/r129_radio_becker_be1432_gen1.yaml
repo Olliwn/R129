@@ -1,0 +1,35 @@
+doc_id: r129_radio_becker_be1432_gen1
+title: R129_Radio_Becker_BE1432_Gen1
+filename: R129_Radio_Becker_BE1432_Gen1.pdf
+source_url: ''
+pages: 15
+topics:
+- audio
+- body
+- central_locking
+- doors
+- engine
+- hydraulics
+- instrument_cluster
+- roof
+- seats
+- suspension
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**==> picture [44 x 44] intentionally omitted <==**'
+- page: 2
+  heading: '## **Overview**'
+- page: 3
+  heading: '## **RADIO FUNCTIONS**'
+- page: 4
+  heading: '## **CASSETTE PLAYER FUNCTIONS**'
+- page: 5
+  heading: '## **COMPACT DISC CHANGER FUNCTIONS**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

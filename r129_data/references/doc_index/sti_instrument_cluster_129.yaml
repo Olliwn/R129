@@ -1,0 +1,37 @@
+doc_id: sti_instrument_cluster_129
+title: STI_Instrument_Cluster_129
+filename: STI_Instrument_Cluster_129.pdf
+source_url: ''
+pages: 29
+topics:
+- brakes
+- central_locking
+- diagnostics
+- doors
+- electrical
+- engine
+- instrument_cluster
+- lighting
+- roll_bar
+- roof
+- suspension
+- transmission
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**1.2 Instrument Cluster (CLUS)**'
+- page: 2
+  heading: '**1.2 Instrument Cluster (CLUS)**'
+- page: 3
+  heading: '**1.2 Instrument Cluster (CLUS)**'
+- page: 4
+  heading: '**1.2 Instrument Cluster (CLUS)**'
+- page: 5
+  heading: '**1.2 Instrument Cluster (CLUS)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

@@ -1,0 +1,139 @@
+service_items:
+  - id: engine_oil_change
+    system: "Engine"
+    task: "Change engine oil and filter"
+    interval_km: 10000
+    interval_years: 1
+    notes: "Use MB 229.5 spec oil. 5W-40 or 0W-40 synthetic."
+    applies_to:
+      years: [1989, 1998]
+      engines: ["M119.960", "M119.972"]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, maintenance schedule"
+      confidence: "high"
+
+  - id: air_filter
+    system: "Engine"
+    task: "Replace air filter element"
+    interval_km: 30000
+    interval_years: 2
+    applies_to:
+      years: [1989, 1998]
+      engines: ["M119.960", "M119.972"]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, maintenance schedule"
+      confidence: "high"
+
+  - id: fuel_filter
+    system: "Fuel system"
+    task: "Replace fuel filter"
+    interval_km: 30000
+    applies_to:
+      years: [1989, 1998]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, maintenance schedule"
+      confidence: "high"
+
+  - id: spark_plugs
+    system: "Engine"
+    task: "Replace spark plugs"
+    interval_km: 30000
+    notes: "M119: 8 plugs. Bosch W5DTC or equivalent. Gap 0.8mm."
+    applies_to:
+      years: [1989, 1998]
+      engines: ["M119.960", "M119.972"]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual, maintenance schedule"
+      confidence: "high"
+
+  - id: coolant_flush
+    system: "Cooling system"
+    task: "Flush and replace coolant"
+    interval_km: 50000
+    interval_years: 3
+    notes: "Use MB 325.0 spec blue coolant only. 50/50 mix with distilled water."
+    applies_to:
+      years: [1989, 2001]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual"
+      confidence: "high"
+
+  - id: brake_fluid
+    system: "Brakes"
+    task: "Replace brake fluid (full flush)"
+    interval_years: 2
+    notes: "DOT 4+. Brake fluid is hygroscopic, must be changed on schedule regardless of mileage."
+    applies_to:
+      years: [1989, 2001]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual"
+      confidence: "high"
+
+  - id: transmission_fluid
+    system: "Transmission (722.3)"
+    task: "Change transmission fluid and filter"
+    interval_km: 60000
+    interval_notes: "Mercedes says 'lifetime fill' but community strongly recommends periodic changes."
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "community"
+      ref: "BenzWorld consensus"
+      confidence: "medium"
+
+  - id: differential_fluid
+    system: "Rear axle"
+    task: "Change differential fluid"
+    interval_km: 60000
+    notes: "SAE 90 hypoid gear oil, MB 235.0."
+    applies_to:
+      years: [1989, 2001]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual"
+      confidence: "high"
+
+  - id: drive_belt
+    system: "Engine"
+    task: "Inspect and replace serpentine belt"
+    interval_km: 60000
+    interval_notes: "Inspect at every service. Replace if cracked, glazed, or squealing."
+    applies_to:
+      years: [1989, 1998]
+      engines: ["M119.960", "M119.972"]
+    source:
+      type: "owner_manual"
+      ref: "1990 Owner's Manual"
+      confidence: "high"
+
+  - id: zhm_fluid
+    system: "Roof hydraulics"
+    task: "Flush ZH-M hydraulic fluid"
+    interval_years: 3
+    interval_notes: "Not in official schedule. Community recommendation based on fluid degradation."
+    notes: "Pentosin CHF 11S (green). Never mix with DOT fluid."
+    applies_to:
+      years: [1989, 2001]
+    source:
+      type: "community"
+      ref: "BenzWorld, SLShop recommendations"
+      confidence: "medium"
+
+  - id: valve_adjustment
+    system: "Engine"
+    task: "Check valve clearance (M119 has hydraulic lifters -- no adjustment needed)"
+    interval_notes: "M119 uses hydraulic valve lifters. No periodic adjustment required."
+    notes: "If lifter tick develops, it indicates a failing lifter, not a need for adjustment."
+    applies_to:
+      years: [1989, 1998]
+      engines: ["M119.960", "M119.972"]
+    source:
+      type: "workshop_manual"
+      ref: "M119 engine documentation"
+      confidence: "high"

@@ -1,0 +1,18 @@
+# Tier 2 -- requires ETM data to populate fully.
+# Ground point locations are critical for the Phase 2 electrical model.
+# Placeholder with known ground points.
+
+ground_points: []
+# To be populated from ETM when acquired.
+# Expected format:
+#   - id: W1
+#     location: "Engine block, rear left"
+#     circuits: ["engine management", "ignition"]
+#     notes: "Main engine ground"
+#     applies_to:
+#       years: [1989, 2001]
+#       chassis: "all"
+#     source:
+#       type: "etm"
+#       ref: "ETM page X"
+#       confidence: "high"

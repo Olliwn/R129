@@ -1,0 +1,36 @@
+doc_id: 77_010_functional_description_of_roadster_top
+title: 77-010_functional_description_of_roadster_top
+filename: 77-010_functional_description_of_roadster_top.pdf
+source_url: https://www.benzworld.org/attachments/77-010_functional_description_of_roadster_top-pdf.2765254/
+pages: 24
+topics:
+- central_locking
+- diagnostics
+- doors
+- electrical
+- engine
+- hydraulics
+- instrument_cluster
+- roll_bar
+- roof
+- seats
+- suspension
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: Repair information
+- page: 2
+  heading: Repair information
+- page: 3
+  heading: Repair information
+- page: 4
+  heading: Repair information
+- page: 5
+  heading: Page 5 of 24
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

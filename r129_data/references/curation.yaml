@@ -1,0 +1,2819 @@
+vehicle: '1991 Mercedes-Benz 500 SL, chassis 129.066, engine M119.960 (5.0L V8 32-valve DOHC), fuel system KE-Jetronic, transmission
+  722.3, key systems: ADS I (Adaptive Damping System, first generation), Niveauregulierung (mechanical level control, independent
+  from ADS electronics), KE-Jetronic (CIS-E mechanical/electronic fuel injection), EZL ignition (distributorless), PSE (pneumatic
+  central locking system), N7 exterior lamp failure module, Infrared remote control (IRC/IRCL)'
+total_documents: 150
+auto_included: 110
+auto_excluded: 40
+newly_classified: 149
+instructions: 'Review each document below. Set ''include: true'' to ingest, ''include: false'' to skip. The AI classification
+  is a starting point -- override as needed. Pay special attention to ''applicability: partially_applicable'' entries.'
+documents:
+- filename: Car Telephone Speaker Location.pdf
+  pages: 1
+  size_kb: 43
+  title: Car Telephone Speaker Location
+  system: audio
+  description: Details the location of car telephone components, including hands-free speakers, for Model 129.
+  applicability: likely_applicable
+  applicability_reason: The document explicitly targets 'Model 129' and describes an optional car telephone system that was
+    available for the 1991 model year, with no conflicting year-specific information.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: Removal of Dash Speakers.pdf
+  pages: 2
+  size_kb: 112
+  title: Removal of Dash Speakers
+  system: audio
+  description: Provides instructions for removing and installing dash loudspeaker covers and speakers.
+  applicability: exact_match
+  applicability_reason: The procedure for removing dash speakers and their covers involves interior trim and is a physical,
+    mechanical task which remains consistent across all R129 model years, independent of engine, transmission, or specific
+    electronic system variations.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: 129.067WindshieldRnR-01.pdf
+  pages: 3
+  size_kb: 70
+  title: Remove/install windshield
+  system: body
+  description: This document provides detailed instructions for removing and installing the windshield on Mercedes-Benz R129
+    models.
+  applicability: exact_match
+  applicability_reason: The document explicitly states "MODEL 129" and provides specific notes for "vehicles up to middle
+    of 1997" and "vehicles as of middle of 1997", directly covering the 1991 model year.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: 311 Trailer coupling for R129 1.pdf
+  pages: 20
+  size_kb: 268
+  title: Trailer coupling for R129
+  system: body
+  description: Installation instructions for a trailer coupling on Mercedes-Benz R129 models, covering mechanical mounting
+    and electrical components for chassis types 129.05 and 129.06.
+  applicability: likely_applicable
+  applicability_reason: The document explicitly applies to "Model 129.05/06," which includes the owner's 1991 500 SL (129.066),
+    and the physical installation steps are universally applicable, with a new wiring harness provided for electrical integration.
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  priority: high
+  include: true
+- filename: 311 Trailer coupling for R129.pdf
+  pages: 20
+  size_kb: 268
+  title: Trailer coupling for R129
+  system: body
+  description: Installation instructions for a trailer coupling, including mechanical and electrical components, for Mercedes-Benz
+    R129 models.
+  applicability: exact_match
+  applicability_reason: The document explicitly states applicability for "Model 129.05/06", which directly includes the owner's
+    129.066 chassis, and its general installation steps are not dependent on specific year-related electronic or engine differences.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: 72-181_Removal and Install of Window Lift_ra72001290181x.pdf
+  pages: 7
+  size_kb: 248
+  title: Removal and installation of window lift
+  system: body
+  description: Details the step-by-step procedure for removing and installing the door window lift mechanism, including preliminary
+    steps, required tools, and fastening with rivets.
+  applicability: exact_match
+  applicability_reason: The window lift mechanism and its removal/installation procedure are universal across all Mercedes-Benz
+    R129 model years (1989-2001), making this document fully applicable to the 1991 500 SL.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: Door striker ra72001290210x.pdf
+  pages: 1
+  size_kb: 108
+  title: Removal and installation of door holder
+  system: body
+  description: This document details the removal and installation procedure for the door holder (door check) and associated
+    door panel components on the R129 chassis.
+  applicability: likely_applicable
+  applicability_reason: The door holder is a fundamental mechanical body component that remained consistent across all R129
+    model years, with procedures for its replacement being universal.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: Mercedes-Benz_124_129_and_201_Wiper_.pdf
+  pages: 14
+  size_kb: 1972
+  title: R129 Wiper Transmission Gear Replacement
+  system: body
+  description: This document provides instructions for replacing the Bosch wiper transmission gear in Mercedes-Benz 124, 129,
+    and 201 chassis vehicles.
+  applicability: exact_match
+  applicability_reason: The document explicitly mentions the "129 Chassis," directly matching the vehicle, and wiper transmission
+    components are generally consistent across R129 model years for a given manufacturer.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: R129 A pillar.pdf
+  pages: 1
+  size_kb: 27
+  title: R129 A-pillar Window Molding Removal/Installation
+  system: body
+  description: Instructions for removing and installing the window molding on the A-pillar side of the windshield.
+  applicability: exact_match
+  applicability_reason: The document describes a body panel operation (A-pillar window molding) which is universally consistent
+    across all R129 model years, including the 1991 model.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: R129 Door holder removal ra72001290210x.pdf
+  pages: 1
+  size_kb: 108
+  title: R129 Door holder removal
+  system: body
+  description: Provides instructions for the removal and installation of the door holder in an R129 chassis.
+  applicability: exact_match
+  applicability_reason: The document describes a procedure for door holder removal, a component that is universal across all
+    R129 model years, including the 1991 vehicle.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: R129 Fog Lamp screw part number.pdf
+  pages: 1
+  size_kb: 198
+  title: R129 Fog Lamp Screw Part Number
+  system: body
+  description: Provides part numbers for fog lamp screws on the R129 chassis.
+  applicability: likely_applicable
+  applicability_reason: The document directly addresses R129 fog lamp screw part numbers, which is relevant to the 1991 model,
+    although specific part numbers may differ by pre-facelift/post-facelift design.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: R129 Removal and Installation of rear bumper.pdf
+  pages: 1
+  size_kb: 221
+  title: Removal and Installation of rear bumper
+  system: body
+  description: This document outlines the procedure for removing and installing the rear bumper on a Mercedes-Benz R129 model.
+  applicability: likely_applicable
+  applicability_reason: Rear bumper removal and installation procedures are generally consistent across all Mercedes-Benz
+    R129 model years, as body panels are universal components.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: R129 front window molding.pdf
+  pages: 2
+  size_kb: 60
+  title: R129 Front Windshield Top Molding Removal and Installation
+  system: body
+  description: This document details the removal and installation procedure for the windshield top molding and associated
+    interior trim components.
+  applicability: likely_applicable
+  applicability_reason: The procedure for replacing the windshield top molding and associated interior trim components is
+    consistent across most R129 model years, as these are universal body and interior parts not dependent on specific engine
+    or electronic systems.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: Removal and Install door handle R129.pdf
+  pages: 3
+  size_kb: 314
+  title: Removal and Installation of Exterior Door Handle
+  system: body
+  description: Provides steps for removing and installing the exterior door handle, including the lock cylinder and associated
+    components, for the Mercedes-Benz R129.
+  applicability: exact_match
+  applicability_reason: The exterior door handle design and its removal and installation procedure are universal across all
+    R129 model years (1989-2001), consistent with body panel and lock components.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: Roll bar valve block.pdf
+  pages: 1
+  size_kb: 78
+  title: Roll bar valve block operation
+  system: body
+  description: This document details the hydraulic and mechanical operation of the R129 automatic roll bar system, describing
+    the cylinder, pawls, and control valves.
+  applicability: likely_applicable
+  applicability_reason: The document describes the fundamental hydraulic and mechanical operation of the R129's automatic
+    roll bar system, which was consistent across all model years.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: SL Dimensions.pdf
+  pages: 2
+  size_kb: 421
+  title: SL Dimensions
+  system: body
+  description: This document provides physical measurements and specifications for the R129 chassis and body panels.
+  applicability: exact_match
+  applicability_reason: Chassis and body dimensions are universal for all R129 model years, as the core structure remained
+    consistent from 1989 to 2001.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: Windshield moulding 68-400.pdf
+  pages: 1
+  size_kb: 27
+  title: Windshield molding removal and installation
+  system: body
+  description: Instructions for removing and installing the windshield side window molding.
+  applicability: exact_match
+  applicability_reason: Windshield molding is a body panel component that is universal across all R129 model years, including
+    the 1991 500 SL.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: Windshield moulding 68-410.pdf
+  pages: 1
+  size_kb: 24
+  title: Windshield molding removal and installation
+  system: body
+  description: This document details the procedure for removing and installing the molding above the windshield, requiring
+    the coupe roof to be removed as a preliminary step.
+  applicability: exact_match
+  applicability_reason: The windshield molding is a universal body component for the R129 chassis, and its removal/installation
+    procedure remained consistent across all model years (1989-2001).
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: Windshield moulding trim 68-425.pdf
+  pages: 2
+  size_kb: 60
+  title: Windshield moulding trim removal and installation
+  system: body
+  description: Instructions for removing and installing the windshield top molding, including steps for interior trim and
+    hardtop preparation.
+  applicability: likely_applicable
+  applicability_reason: The physical components and procedures for the windshield molding and surrounding interior trim, especially
+    concerning hardtop removal, are consistent across all R129 model years.
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: r129 Windshiled molding.pdf
+  pages: 1
+  size_kb: 24
+  title: Windshield Molding Removal and Installation
+  system: body
+  description: Details the removal and installation procedure for the molding above the windshield, requiring the hardtop
+    to be removed.
+  applicability: likely_applicable
+  applicability_reason: The windshield molding and its attachment points are fundamental body components that remained consistent
+    across all R129 model years, irrespective of engine or electronic system changes.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: windshield nozzles aim points.pdf
+  pages: 1
+  size_kb: 44
+  title: windshield nozzles aim points
+  system: body
+  description: This document provides instructions for aiming the windshield washer nozzles.
+  applicability: exact_match
+  applicability_reason: Windshield nozzles and their aim points are part of the universal body design of the R129 chassis,
+    making this document applicable to all model years.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: windshield nozzles aim points[1].pdf
+  pages: 1
+  size_kb: 44
+  title: Windshield Nozzles Aim Points
+  system: body
+  description: Document detailing the aiming procedure and specifications for the windshield washer nozzles.
+  applicability: likely_applicable
+  applicability_reason: Windshield washer nozzles and their aiming points are part of the body structure which remained consistent
+    across all R129 model years.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: Fault Code manual MB.pdf
+  pages: 107
+  size_kb: 558
+  title: Mercedes-Benz Fault Code Manual (Analog and Digital Systems)
+  system: diagnostics
+  description: A comprehensive fault code manual covering diagnostic procedures and codes for Mercedes-Benz analog systems
+    (1988-1997) and digital systems (1993-2000).
+  applicability: partially_applicable
+  applicability_reason: The document explicitly covers "Analog Systems 1988-1997" and "Continuous Fuel Injection System (CFI),"
+    which directly applies to the 1991 R129's KE-Jetronic engine management.
+  model_years:
+  - 1988
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  priority: high
+  include: true
+- filename: mercedes_trouble_codes.pdf
+  pages: 107
+  size_kb: 558
+  title: Fault Code Manual for Mercedes-Benz Analog & Digital Systems
+  system: diagnostics
+  description: A fault code manual covering analog (1988-1997) and digital (1993-2000) Mercedes-Benz systems, including continuous
+    fuel injection.
+  applicability: likely_applicable
+  applicability_reason: The document explicitly covers "Analog Systems 1988-1997" and lists "Continuous Fuel Injection System
+    (CFI)," which directly applies to the KE-Jetronic (CIS-E) system of the 1991 500 SL, and references the 38-pin diagnostic
+    connector.
+  model_years:
+  - 1988
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  priority: high
+  include: true
+- filename: 129_Wiper_Washer.pdf
+  pages: 4
+  size_kb: 166
+  title: Wiper Washer System
+  system: electrical
+  description: This document pertains to the windshield wiper and washer system for the R129 chassis.
+  applicability: likely_applicable
+  applicability_reason: Wiper and washer systems are fundamental electrical and mechanical components typically consistent
+    across the R129 production, making this document highly relevant to a 1991 model.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: 159845d1201540162 r129 illuminated door sills connecting wiring harness pdf .pdf
+  pages: 1
+  size_kb: 48
+  title: R129 Illuminated Door Sills Wiring Harness
+  system: electrical
+  description: This document describes the wiring harness and connection for illuminated door sills in the R129 chassis.
+  applicability: likely_applicable
+  applicability_reason: Illuminated door sills are an interior electrical accessory whose wiring is largely consistent across
+    all R129 model years, independent of major engine or transmission changes.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: 159845d1201540162 r129 illuminated door sills connecting wiring harness pdf2 .pdf
+  pages: 1
+  size_kb: 48
+  title: Illuminated Door Sills Wiring Harness
+  system: electrical
+  description: This document describes the wiring harness connection for illuminated door sills in an R129 SL-Class.
+  applicability: exact_match
+  applicability_reason: The document concerns an accessory (illuminated door sills) whose wiring is generally consistent across
+    all R129 model years, as the body and interior structure relating to the door sills are universal.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: AZ82.20-P-0001-02E Illuminated Door Sill schematic.pdf
+  pages: 2
+  size_kb: 386
+  title: Illuminated Door Sill Schematic
+  system: electrical
+  description: Schematic and installation instructions for connecting the wiring harness for illuminated door sill moldings.
+  applicability: likely_applicable
+  applicability_reason: The document specifies "Model 129" and describes an electrical accessory that connects to universal
+    door contact switches (S17/3, S17/4) and a general special equipment connector block (X30), components whose basic functionality
+    and interface remained largely consistent across the R129 production run, especially for early models.
+  model_years: 1989-2001
+  priority: medium
+  include: true
+- filename: Instrument Cluster test R129.pdf
+  pages: 3
+  size_kb: 196
+  title: Instrument Cluster Test R129
+  system: electrical
+  description: Provides testing procedures for the R129 instrument cluster.
+  applicability: partially_applicable
+  applicability_reason: While basic cluster functions and physical aspects are similar, specific warning lights and their
+    diagnostic tests are highly dependent on the vehicle's engine management and other electronic systems, which changed significantly
+    after 1992.
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: Instrument cluster shopping list.pdf
+  pages: 1
+  size_kb: 171
+  title: Instrument cluster shopping list
+  system: electrical
+  description: A shopping list detailing various bulbs and a socket for the instrument cluster, referencing an R129 600SL
+    (V12) chassis.
+  applicability: partially_applicable
+  applicability_reason: The document lists instrument cluster bulbs and sockets, which are largely common across early R129
+    models, but the referenced VIN (WDB1290671F146829) is for a 600SL (129.067, M120 V12 engine), not the specified 500SL
+    (129.066, M119 V8 engine).
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  priority: medium
+  include: true
+- filename: Part serach Cable Harness and Engine.pdf
+  pages: 2
+  size_kb: 175
+  title: Part Search Cable Harness and Engine
+  system: electrical
+  description: This document lists part numbers for engine and body-mounted cable harnesses specific to the R129.066 chassis.
+  applicability: exact_match
+  applicability_reason: The document explicitly targets chassis code 129.066, which perfectly matches the specified 1991 500
+    SL.
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  priority: high
+  include: true
+- filename: R&R Power Window Motor 1.pdf
+  pages: 1
+  size_kb: 291
+  title: Removing and installing power window motor
+  system: electrical
+  description: This document provides instructions for removing and installing the power window motor in the front door of
+    a Mercedes-Benz R129.
+  applicability: exact_match
+  applicability_reason: The document explicitly applies to "MODEL 129", and power window motors and their replacement procedures
+    are universal across all R129 model years, including the 1991 500 SL.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: R129 Infra remote sync.pdf
+  pages: 1
+  size_kb: 121
+  title: R129 Infrared Remote Synchronization
+  system: electrical
+  description: This document provides instructions for synchronizing the infrared remote control for the Mercedes-Benz R129.
+  applicability: likely_applicable
+  applicability_reason: The 1991 R129 explicitly features an Infrared remote control (IRC/IRCL) system, and the document's
+    title directly refers to "Infra remote sync" for the R129.
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  priority: high
+  include: true
+- filename: R129 Instrument cluster function test.pdf
+  pages: 3
+  size_kb: 196
+  title: R129 Instrument cluster function test
+  system: electrical
+  description: Covers procedures for testing the functionality of the R129 instrument cluster.
+  applicability: likely_applicable
+  applicability_reason: Instrument cluster fundamental functions and general test procedures are largely consistent across
+    all R129 model years, though specific warning lights may vary.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: R129 Instrument cluster functional test.pdf
+  pages: 3
+  size_kb: 196
+  title: R129 Instrument cluster functional test
+  system: electrical
+  description: This document outlines procedures for testing the various functions of the R129 instrument cluster.
+  applicability: likely_applicable
+  applicability_reason: The instrument cluster is a fundamental electrical component present in all R129 models, and its core
+    functions for the 1991 model would largely align with general test procedures.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: Trunk Fuses.pdf
+  pages: 1
+  size_kb: 62
+  title: Trunk Fuses
+  system: electrical
+  description: Document describes fuse locations and ratings in the trunk area.
+  applicability: likely_applicable
+  applicability_reason: Fuses for common systems like PSE (pneumatic central locking) and the N7 exterior lamp failure module,
+    both located in the trunk, are likely consistent for early R129 models.
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  priority: high
+  include: true
+- filename: Trunk Lid Opening Problems[1].pdf
+  pages: 1
+  size_kb: 13
+  title: Trunk Lid Opening Problems
+  system: electrical
+  description: This document addresses issues and troubleshooting for problems related to opening the trunk lid.
+  applicability: likely_applicable
+  applicability_reason: The trunk lid mechanism, associated locks, and the Pneumatic Central Locking System (PSE) are largely
+    consistent across all R129 model years, including the 1991 model.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: ra80001290010xFunctionalDescripCentralLocking 1.pdf
+  pages: 21
+  size_kb: 584
+  title: Central Locking System Function Description
+  system: electrical
+  description: This document describes the function and components of the central locking system, specifically "Version 1"
+    applicable to early R129 models.
+  applicability: exact_match
+  applicability_reason: The document explicitly states "Version 1 up to 11/94", which directly covers the 1991 model year
+    and its pneumatic central locking (PSE) system.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  priority: high
+  include: true
+- filename: ra80001290010x_Functional_Descrip_Central_Locking.pdf
+  pages: 21
+  size_kb: 584
+  title: Functional Description of Central Locking
+  system: electrical
+  description: This document describes the central locking system, specifically "Version 1" which covers the 1991 Mercedes-Benz
+    500 SL, detailing components like the PSE pump and actuators.
+  applicability: likely_applicable
+  applicability_reason: The document explicitly details "Version 1" of the central locking system which applies to model years
+    up to 11/94 and 8/95, directly covering the 1991 vehicle, though some specific components like the EDW relay are noted
+    as applying only from 01/94.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  priority: medium
+  include: true
+- filename: ra80001290400x_Descrip_IRC.pdf
+  pages: 14
+  size_kb: 505
+  title: Function Description of Infrared Remote Control
+  system: electrical
+  description: Describes the operation and function of the infrared remote control system for central locking, ATA, and convenience
+    features, distinguishing between early (lock cylinder receivers) and later (rearview mirror receiver) R129 versions.
+  applicability: exact_match
+  applicability_reason: The document explicitly covers "Version 1" of the infrared remote control system, applicable to vehicles
+    up to 11/94 (or 08/95), which includes the 1991 model, and details like receiver location in lock cylinders match the
+    owner's vehicle.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: ra80001290440x_R&R_IRCL.pdf
+  pages: 3
+  size_kb: 87
+  title: Removing and installing infrared remote control module (N54)
+  system: electrical
+  description: This document details the procedure for removing and installing the infrared remote control module (N54) for
+    the R129 chassis.
+  applicability: exact_match
+  applicability_reason: The document provides procedures for "Version 1 up to 11/94," which directly applies to a 1991 model
+    year vehicle.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  priority: high
+  include: true
+- filename: Changing Plugs - M119 Engine.pdf
+  pages: 3
+  size_kb: 872
+  title: DIY Spark Plug Change - R129 M119 Engine
+  system: engine
+  description: Provides a step-by-step guide for changing spark plugs on the Mercedes-Benz M119 engine in an R129 chassis,
+    detailing tools and procedure for coil pack removal.
+  applicability: exact_match
+  applicability_reason: The document's description of the ignition coil configuration (4 coil packs, each secured by 2 screws,
+    totaling 8 screws) perfectly matches the EZL ignition system of the M119.960 engine used in the 1991 R129.
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  priority: high
+  include: true
+- filename: Cylinder head covers R&R.pdf
+  pages: 4
+  size_kb: 409
+  title: Cylinder Head Covers Remove & Replace
+  system: engine
+  description: Procedure for removing and replacing the cylinder head covers on the Mercedes-Benz M119 V8 engine.
+  applicability: exact_match
+  applicability_reason: The procedure for cylinder head covers on the M119 engine is physically identical across all M119
+    variants (M119.960, M119.972, M119.982) used in the R129 chassis, directly applying to the owner's 1991 M119.960 engine.
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  priority: high
+  include: true
+- filename: AMG Early R129..pdf
+  pages: 5
+  size_kb: 789
+  title: AMG Early R129
+  system: general
+  description: Document detailing AMG modifications or features for early R129 models.
+  applicability: likely_applicable
+  applicability_reason: The title "AMG Early R129" strongly suggests relevance to the initial production years (1990-1992),
+    which includes the 1991 model.
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  priority: high
+  include: true
+- filename: AMG price List, 06-90.pdf
+  pages: 2
+  size_kb: 75
+  title: AMG Price List (June 1990)
+  system: general
+  description: A price list detailing AMG performance parts and accessories available in June 1990 for Mercedes-Benz models,
+    including the R129 platform.
+  applicability: likely_applicable
+  applicability_reason: The 1991 Mercedes-Benz 500 SL shares the same chassis, engine (M119.960), and major systems with the
+    1990 R129 model year for which AMG would have been offering parts in June 1990.
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  priority: medium
+  include: true
+- filename: Acronym-list-mercedes-benz.pdf
+  pages: 6
+  size_kb: 317
+  title: Acronym List Mercedes-Benz
+  system: general
+  description: A comprehensive list of acronyms and their descriptions used across various Mercedes-Benz systems and models.
+  applicability: partially_applicable
+  applicability_reason: This general Mercedes-Benz acronym list contains many terms relevant to the 1991 R129 (e.g., ADS,
+    ABS, ASR, ATA, A/C, CC, CL, EI, EGR, EPC), but also includes systems found only on later models (e.g., ABC, BAS, EAM 2000+,
+    EIS/DAS3) or specific to diesel engines.
+  model_years:
+  - 1980-2005
+  priority: medium
+  include: true
+- filename: EPC BeginGuide.pdf
+  pages: 10
+  size_kb: 36
+  title: Beginner's Guide to Mercedes-Benz Electronic Parts Catalog
+  system: general
+  description: This document provides a beginner's guide to using the Mercedes-Benz Electronic Parts Catalog (EPCnet Online)
+    for identifying vehicle parts.
+  applicability: likely_applicable
+  applicability_reason: The document explains how to use the universal Mercedes-Benz EPC system, which is the standard method
+    for finding parts for a 1991 R129.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: EPC detailedGuide7MAY07.pdf
+  pages: 64
+  size_kb: 1371
+  title: Guide to Mercedes-Benz Electronic Parts Catalog (EPCnet)
+  system: general
+  description: A guide explaining how to use the Mercedes-Benz Electronic Parts Catalog (EPCnet) software to find parts information.
+  applicability: likely_applicable
+  applicability_reason: This document is a user guide for the Electronic Parts Catalog (EPCnet), which is the official system
+    used to identify parts for the 1991 Mercedes-Benz R129 and all other Mercedes-Benz models.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: Roll bar photos and valve block.pdf
+  pages: 3
+  size_kb: 200
+  title: Roll bar photos and valve block
+  system: general
+  description: Explains the hydraulic and mechanical operation of the R129 roll bar system, including its deployment, lowering,
+    and raising mechanisms.
+  applicability: exact_match
+  applicability_reason: The hydraulic roll bar system described is fundamentally consistent across all R129 model years, including
+    the 1991 500 SL.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: r129_StarArticleon129Roadsters.compr.pdf
+  pages: 4
+  size_kb: 1419
+  title: STAR Article on R129 Roadsters
+  system: general
+  description: An official Mercedes-Benz STAR article providing comprehensive information on R129 SL Roadsters across all
+    model years.
+  applicability: likely_applicable
+  applicability_reason: As an official Mercedes-Benz STAR article covering R129 Roadsters generally, it will contain information
+    pertinent to the 1991 model, even if it covers later years as well.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: 72-100 R&R door liner.pdf
+  pages: 6
+  size_kb: 542
+  title: Removal and installation of door liner
+  system: interior
+  description: Provides step-by-step instructions for removing and installing the R129 door liner.
+  applicability: exact_match
+  applicability_reason: The physical procedure for removing and installing the door liner and its associated trim components
+    is universal across all Mercedes-Benz R129 model years.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: 9116 - Installation instructions Lumbar support for front.pdf
+  pages: 4
+  size_kb: 26
+  title: Installation instructions Lumbar support for front seats
+  system: interior
+  description: Instructions for installing an orthopaedic lumbar support with a hand-operated pump in the front seats of a
+    Mercedes-Benz R129.
+  applicability: exact_match
+  applicability_reason: The document explicitly states "Model 129" and details an interior modification (lumbar support) using
+    a hand-operated pump, which is universal across all R129 model years as seat structures did not change fundamentally.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: 912 - Orthopedic driverspassengerpassenger seat backrest Model 129.pdf
+  pages: 7
+  size_kb: 91
+  title: Orthopedic driver/passenger seat backrest installation
+  system: interior
+  description: Provides installation instructions for orthopedic driver's and passenger seat backrests, detailing trim removal
+    and connections to the pneumatic central locking system pump.
+  applicability: likely_applicable
+  applicability_reason: The document specifically targets "Model 129" and describes installation of orthopedic seats, which
+    rely on the universal R129 pneumatic central locking (PSE) system present in the 1991 model.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: 915 R129 Drivers Seat Heater Retrofit.pdf
+  pages: 8
+  size_kb: 185
+  title: R129 Drivers Seat Heater Retrofit
+  system: interior
+  description: Installation instructions for retrofitting a driver's seat heater in a Mercedes-Benz R129.
+  applicability: exact_match
+  applicability_reason: The document explicitly targets 'Model 129' and seat structures/heating systems are universal across
+    R129 model years, with no year-specific incompatibilities mentioned.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: Door panel ra72001290100x.pdf
+  pages: 6
+  size_kb: 494
+  title: Removal and installation of door liner
+  system: interior
+  description: This document details the step-by-step procedure for removing and installing the door liner (panel) on an R129.
+  applicability: exact_match
+  applicability_reason: The procedure for removing the door liner and associated trim on the R129 chassis remained largely
+    consistent across all model years, and no conflicting year-specific references are present in the document.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: Head rest1.pdf
+  pages: 3
+  size_kb: 146
+  title: Removing and installing front seat head restraints
+  system: interior
+  description: Procedure for removing and installing the front seat head restraints, including the adjustment mechanism and
+    cover.
+  applicability: exact_match
+  applicability_reason: The document describes a procedure for front seat head restraints, and seats are explicitly listed
+    as a universal component across all R129 model years.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: Head rest2.pdf
+  pages: 3
+  size_kb: 138
+  title: Headrest Backrest Covering Removal/Installation
+  system: interior
+  description: Instructions for removing and installing the covering on the side of the front seat backrest frame, near the
+    headrest.
+  applicability: exact_match
+  applicability_reason: The document details front seat backrest covering removal, and front seats are universally designed
+    across all R129 model years, including the 1991 model.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: Head rest3.pdf
+  pages: 3
+  size_kb: 131
+  title: Removing and installing cover on upper belt guide fitting
+  system: interior
+  description: Details the procedure for removing and installing the cover on the upper seat belt guide fitting and associated
+    backrest components.
+  applicability: likely_applicable
+  applicability_reason: The document describes seat belt guide and backrest cover procedures, and R129 seats and their basic
+    components are largely universal across all model years (1989-2001).
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: New Insturment Cluster.pdf
+  pages: 5
+  size_kb: 68
+  title: New Instrument Cluster Service Bulletin
+  system: interior
+  description: This service bulletin details the introduction of a new instrument cluster design for Model 129 from November
+    1993 onwards and its differences from the older style.
+  applicability: likely_applicable
+  applicability_reason: Although the "new" instrument cluster described was phased into production from late 1993, this service
+    bulletin is relevant for a 1991 model owner as it details changes to replacement clusters and potential special handling
+    procedures for any R129.
+  model_years: 1990-2001
+  priority: high
+  include: true
+- filename: Orthopedic Seat Adapter.pdf
+  pages: 1
+  size_kb: 87
+  title: Orthopedic Seat Adapter
+  system: interior
+  description: This document details the orthopedic seat adapter components for the R129 chassis front seats and restraint
+    systems.
+  applicability: exact_match
+  applicability_reason: The document explicitly references chassis 129.066 and model 500 SL USA, and the catalog validity
+    "Up to 06/98" confirms its applicability to the 1991 model year R129's universal seat components.
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  priority: high
+  include: true
+- filename: R129 Door lIner removal ra72001290100x.pdf
+  pages: 6
+  size_kb: 494
+  title: R129 Door Liner Removal
+  system: interior
+  description: Instructions for removing and installing the door liner and its associated trim pieces on an R129.
+  applicability: exact_match
+  applicability_reason: The document details a procedure for removing the door liner, which is explicitly categorized as a
+    universal component across all R129 model years, with no specific year-dependent features mentioned.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: R129 MCS pneumatic lines for Multi Contour Seats.pdf
+  pages: 2
+  size_kb: 358
+  title: R129 MCS pneumatic lines for Multi Contour Seats
+  system: interior
+  description: Details the pneumatic line routing and function for Multi Contour Seats (MCS) in the R129 chassis.
+  applicability: likely_applicable
+  applicability_reason: Multi Contour Seats and their associated pneumatic systems are a core interior feature, generally
+    consistent across all R129 model years, as seats are listed as universal.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: R129 seat removal document.pdf
+  pages: 5
+  size_kb: 384
+  title: Removing and installing front seat
+  system: interior
+  description: This document provides detailed instructions for removing and installing the front seats in an R129, including
+    fastener torques, electrical disconnections, and airbag system considerations.
+  applicability: exact_match
+  applicability_reason: The front seats and their removal procedure are universal across all R129 model years (1989-2001),
+    making this document directly applicable to the 1991 500 SL.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: R129_genuine_mercedes_benz_floor_mats_fitment_guide[1].pdf
+  pages: 1
+  size_kb: 25
+  title: R129 Genuine Mercedes-Benz Floor Mats Fitment Guide
+  system: interior
+  description: This document is a fitment guide listing genuine Mercedes-Benz floor mat part numbers for R129, W126, and W140
+    models, organized by model year and color.
+  applicability: exact_match
+  applicability_reason: The document explicitly provides fitment information for the R129 SL500 model within the 1991-1998
+    model year range, which directly includes the user's 1991 500 SL.
+  model_years:
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  priority: low
+  include: true
+- filename: door1.pdf
+  pages: 1
+  size_kb: 290
+  title: R129 Door Panel Removal and Check Strap Installation
+  system: interior
+  description: A forum discussion providing instructions for removing the door panel and installing the door check strap on
+    Mercedes-Benz R129 models.
+  applicability: likely_applicable
+  applicability_reason: The process for door panel removal and door check strap installation is largely similar across all
+    R129 model years, as door trim is a universally applicable component per the vehicle specification.
+  model_years: 1989-2001
+  priority: medium
+  include: true
+- filename: ra91001290120x seat rail removal.pdf
+  pages: 2
+  size_kb: 309
+  title: Seat Rail Removal and Installation
+  system: interior
+  description: Provides instructions for removing and installing the front seat rails, including tightening torques for fasteners.
+  applicability: exact_match
+  applicability_reason: The document describes removal and installation of front seat rails, which are universal components
+    across all R129 model years, including the 1991 500 SL.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: 129 roof function.pdf
+  pages: 26
+  size_kb: 1891
+  title: R129 Roof Function Description
+  system: roof
+  description: Describes the automatic opening and closing sequence of the hydraulically actuated roadster soft top and hardtop
+    on the Mercedes-Benz R129.
+  applicability: exact_match
+  applicability_reason: The document describes the fundamental hydraulic and mechanical operation of the R129's convertible
+    top and hardtop, which remained consistent across all model years, including the 1991 model specified.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: 129 roof function.sequence.pdf
+  pages: 2
+  size_kb: 92
+  title: R129 Soft Top Function Sequence
+  system: roof
+  description: Describes the function sequence for opening and closing the R129 roadster soft top, including associated sensor
+    inputs and diagnostics.
+  applicability: exact_match
+  applicability_reason: The document details the soft top mechanism and its function sequence, which is listed as universal
+    across all R129 model years, with specific sensor references for "up to 12/94" confirming its direct relevance to a 1991
+    model.
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  priority: high
+  include: true
+- filename: 77-010 Function Description of RST_ra77001290010x.pdf
+  pages: 24
+  size_kb: 873
+  title: Function Description of Roadster Top, Coupe Roof
+  system: roof
+  description: This document describes the hydraulic function and operation of the roadster soft top and hardtop (coupe roof)
+    on the Mercedes-Benz R129 model.
+  applicability: exact_match
+  applicability_reason: The document explicitly states it applies to "model 129" and describes the roadster top and coupe
+    roof system, which is universal across all R129 model years, including the 1991 500 SL.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: 77-010_functional_description_of_roadster_top.pdf
+  pages: 24
+  size_kb: 873
+  title: Roadster Top and Coupe Roof Function Description
+  system: roof
+  description: This document provides a detailed functional description of the hydraulic roadster soft top and coupe hardtop
+    operation for the Mercedes-Benz R129.
+  applicability: exact_match
+  applicability_reason: The R129 roof/top mechanism, including the roadster top and coupe roof, is functionally universal
+    across all model years, making this document directly applicable to the 1991 500 SL.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: Hardtop bracket and clip part number.pdf
+  pages: 1
+  size_kb: 203
+  title: Hardtop bracket and clip part number
+  system: roof
+  description: Document detailing part numbers for hardtop brackets and clips.
+  applicability: exact_match
+  applicability_reason: Hardtop attachment points and associated hardware are consistent across all R129 model years.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: roll bar valves.pdf
+  pages: 1
+  size_kb: 109
+  title: Roll Bar Valves
+  system: roof
+  description: This document likely describes the hydraulic or pneumatic valves associated with the R129's automatic roll
+    bar system.
+  applicability: likely_applicable
+  applicability_reason: The R129's roll bar mechanism, including its hydraulic or pneumatic valves, is a core safety and convertible
+    top component that is largely consistent across all model years.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: Front suspension diagrams.pdf
+  pages: 3
+  size_kb: 255
+  title: Front suspension diagrams
+  system: suspension
+  description: Diagrams detailing the components and assembly of the front suspension for R129 models.
+  applicability: likely_applicable
+  applicability_reason: Many fundamental front suspension mechanical components are consistent across R129 model years, making
+    these diagrams broadly relevant, though specific details related to the ADS I (Adaptive Damping System) shocks may differ
+    if not explicitly shown.
+  model_years:
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: Front suspension.pdf
+  pages: 3
+  size_kb: 255
+  title: Front suspension
+  system: suspension
+  description: Provides information and procedures for the R129 front suspension system.
+  applicability: likely_applicable
+  applicability_reason: The fundamental mechanical design of the R129 front suspension is largely consistent across all model
+    years, making this document broadly relevant despite potential minor differences in specific ADS components.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: SL suspension.pdf
+  pages: 3
+  size_kb: 255
+  title: SL Suspension
+  system: suspension
+  description: General document regarding the suspension system of the Mercedes-Benz R129 SL-Class.
+  applicability: likely_applicable
+  applicability_reason: The document title "SL suspension.pdf" directly relates to the target 1991 R129 500 SL's suspension
+    system, making it highly relevant, though specific details on ADS I versus later ADS systems cannot be confirmed without
+    content.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: Mercedes-Benz-Light-alloy Wheels_Out-of-Production-Car-Series.pdf
+  pages: 60
+  size_kb: 3240
+  title: Mercedes-Benz Light-alloy Wheels for Out-of-production Car Series
+  system: wheels
+  description: This document is a brochure detailing Mercedes-Benz and AMG light-alloy wheels for out-of-production car series.
+  applicability: likely_applicable
+  applicability_reason: The R129 chassis, including the 1991 model, was out of production by the document's publication date
+    (2008), making this brochure relevant for light-alloy wheels applicable to such series.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: true
+- filename: R129wheels.pdf
+  pages: 4
+  size_kb: 2027
+  title: R129 Wheels Information
+  system: wheels
+  description: Document discussing wheel fitment, specifications, and options for the Mercedes-Benz R129 chassis.
+  applicability: likely_applicable
+  applicability_reason: Wheel fitment, bolt pattern, and general specifications are largely consistent across all R129 model
+    years, making this document highly relevant to a 1991 500 SL.
+  model_years:
+  - 1989
+  - 1990
+  - 1991
+  - 1992
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: true
+- filename: R129 loudspeakers.pdf
+  pages: 1
+  size_kb: 34
+  title: R129 Loudspeaker Systems
+  system: audio
+  description: This document details the loudspeaker systems, components, and locations for Model 129 vehicles starting from
+    model year 1994.
+  applicability: wrong_model_year
+  applicability_reason: The document explicitly states it applies "as of M.Y. 1994", while the owner's vehicle is a 1991 model
+    year.
+  model_years:
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: low
+  include: false
+- filename: r129-radio-bose-93-99.pdf
+  pages: 1
+  size_kb: 221
+  title: Radio Bose 1993-1999
+  system: audio
+  description: This document covers the Bose radio system for Mercedes-Benz R129 models manufactured between 1993 and 1999.
+  applicability: wrong_model_year
+  applicability_reason: The document title explicitly indicates it applies to R129 models from 1993 to 1999, which does not
+    include the owner's 1991 vehicle.
+  model_years:
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  priority: low
+  include: false
+- filename: Air Conditioning Diagnostics Manual.pdf
+  pages: 41
+  size_kb: 650
+  title: Air Conditioning Diagnostics Manual
+  system: climate
+  description: Provides diagnostic procedures for the Model 129 climate control system.
+  applicability: wrong_model_year
+  applicability_reason: The document explicitly states it applies to 'Model 129 as of M.Y. 1997', which is significantly later
+    than the target 1991 vehicle and features a different climate control system.
+  model_years:
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: low
+  include: false
+- filename: Climate Control DTC's from 9-95.pdf
+  pages: 1
+  size_kb: 20
+  title: Climate Control DTC's from 9-95
+  system: climate
+  description: This document details A/C self-diagnostic procedures and actual value readouts for R129 models equipped with
+    push-button climate control (N22).
+  applicability: wrong_model_year
+  applicability_reason: The document describes a self-diagnostic procedure using a REST button and digital display, which
+    is only present on 1993+ R129 models with push-button climate control, not the 1991's rotary system.
+  model_years:
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  priority: high
+  include: false
+- filename: STAR TekInfo Climate Control 1.pdf
+  pages: 2
+  size_kb: 155
+  title: Climate Control DTC Diagnostic Manual
+  system: climate
+  description: This document details diagnostic trouble code (DTC) readout and interpretation for the N22 pushbutton climate
+    control module.
+  applicability: wrong_model_year
+  applicability_reason: The document describes DTC readout from the N22 pushbutton climate control module via the temperature
+    display, which is only present in R129 models from 1993 onwards, not the 1991 model with rotary controls.
+  model_years:
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  priority: high
+  include: false
+- filename: STAR TekInfo climate control.pdf
+  pages: 2
+  size_kb: 145
+  title: STAR TekInfo climate control diagnostic manual
+  system: climate
+  description: This document describes how to read actual values and diagnostic codes via the A/C pushbutton control module
+    (N22).
+  applicability: wrong_model_year
+  applicability_reason: The document details diagnostic procedures for the N22 A/C pushbutton control module, which was introduced
+    in 1993 R129 models, whereas the 1991 model has a rotary climate control unit without display diagnostics.
+  model_years:
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: false
+- filename: 1996 Instrument cluster.pdf
+  pages: 1
+  size_kb: 422
+  title: 1996 Instrument cluster
+  system: electrical
+  description: Document detailing the instrument cluster for the 1996 Mercedes-Benz R129.
+  applicability: wrong_model_year
+  applicability_reason: The document describes the instrument cluster for a 1996 model, which features significant electronic
+    differences like OBD-II, updated engine management, and climate control interfaces compared to the 1991 vehicle.
+  model_years:
+  - 1996
+  - 1997
+  - 1998
+  priority: low
+  include: false
+- filename: Cellular Telephone installation.pdf
+  pages: 10
+  size_kb: 343
+  title: Cellular Telephone System Installation
+  system: electrical
+  description: This document provides work instructions for installing a cellular telephone system, including an in-dash controller
+    and handset, into a Model 129.
+  applicability: wrong_model_year
+  applicability_reason: The document explicitly states it is for "MODEL YEAR 1995," which features significantly different
+    core electrical architecture and components compared to the 1991 model, potentially affecting electrical integration of
+    accessories.
+  model_years:
+  - 1995
+  priority: low
+  include: false
+- filename: Cellular Telephone.pdf
+  pages: 10
+  size_kb: 343
+  title: Cellular Telephone System Installation
+  system: electrical
+  description: Installation instructions for a cellular telephone system, including an in-dash controller and handset, for
+    the R129 chassis.
+  applicability: wrong_model_year
+  applicability_reason: The document explicitly states it applies to the 1995 model year, which has a significantly different
+    electrical architecture and potentially different wiring connectors for accessories compared to the 1991 model.
+  model_years:
+  - 1995
+  priority: low
+  include: false
+- filename: Horn Relay Part Numbers item 125.pdf
+  pages: 1
+  size_kb: 176
+  title: Horn Relay Part Numbers
+  system: electrical
+  description: This document lists part numbers for various relays, including two-tone horn relays, for R129 models.
+  applicability: wrong_model_year
+  applicability_reason: The document explicitly targets "MODEL YEAR '93 FEDERAL" in its header, and the specific horn relay
+    part numbers listed include restrictions "As of ident. no. F 079709" and "FROM MODEL YEAR '96", none of which apply to
+    a 1991 model.
+  model_years:
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  priority: low
+  include: false
+- filename: Horn Relay parts picture.pdf
+  pages: 1
+  size_kb: 241
+  title: Horn Relay Parts Picture
+  system: electrical
+  description: This document provides a parts picture for a horn relay located in the fuse cabinet for a specific R129 model.
+  applicability: wrong_model_year
+  applicability_reason: The document explicitly targets a 1993 Federal R129 (chassis 129.067) and not the owner's 1991 R129
+    (chassis 129.066).
+  model_years:
+  - 1993
+  - 1994
+  - 1995
+  priority: low
+  include: false
+- filename: Instrument cluster bulb part numbers.pdf
+  pages: 1
+  size_kb: 176
+  title: Instrument cluster bulb part numbers
+  system: electrical
+  description: This document provides part numbers for instrument cluster bulbs for the R129 SL 500 starting from model year
+    1993.
+  applicability: wrong_model_year
+  applicability_reason: The document explicitly states its applicability begins with 'MODEL YEAR '93 FEDERAL', which excludes
+    the target 1991 vehicle.
+  model_years:
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  priority: low
+  include: false
+- filename: Instrument cluster legend.pdf
+  pages: 4
+  size_kb: 351
+  title: Instrument cluster legend
+  system: electrical
+  description: A legend for instrument cluster components, indicator lamps, and related control modules, including various
+    engine management system references.
+  applicability: not_applicable
+  applicability_reason: The document references HFM-SFI and ME-SFI engine control modules (N3/4, N3/10, N3/12), an EPC MIL,
+    and a preglow indicator lamp (A1e16), none of which are present in the 1991 KE-Jetronic M119.960 gasoline engine.
+  model_years:
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: false
+- filename: Instrument cluster picture.pdf
+  pages: 1
+  size_kb: 308
+  title: Instrument Cluster (1993 Model Year)
+  system: electrical
+  description: Picture and catalog information for an instrument cluster from a 1993 model year SL 500, chassis WDB129067.
+  applicability: wrong_model_year
+  applicability_reason: The document explicitly states it applies to "MODEL YEAR '93 FEDERAL UP TO..." and references chassis
+    WDB129067, which is different from the owner's 1991 WDB129066.
+  model_years:
+  - 1993
+  - 1994
+  - 1995
+  priority: high
+  include: false
+- filename: MY as of 1996 horn diagnostics.pdf
+  pages: 2
+  size_kb: 268
+  title: MY as of 1996 horn diagnostics
+  system: electrical
+  description: This document provides diagnostic procedures for the horn system, specifically relay K39.
+  applicability: wrong_model_year
+  applicability_reason: The document title explicitly states "MY as of 1996", indicating it applies to model years 1996 and
+    later, not the 1991 model year of this vehicle.
+  model_years:
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: false
+- filename: MY as of 1996 horn legend.pdf
+  pages: 1
+  size_kb: 397
+  title: Horn System Component Legend
+  system: electrical
+  description: This document provides a legend of components for the R129 horn system, including the clock spring, relay,
+    and fuses.
+  applicability: wrong_model_year
+  applicability_reason: The document filename explicitly states "MY as of 1996", indicating it applies to model years from
+    1996 onward, which is later than the specified 1991 vehicle.
+  model_years:
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: false
+- filename: MY as of 1996 horn wiring diagram.pdf
+  pages: 1
+  size_kb: 121
+  title: Horn wiring diagram MY 1996 onwards
+  system: electrical
+  description: This document provides the wiring diagram for the horn system for R129 models from model year 1996 onwards.
+  applicability: wrong_model_year
+  applicability_reason: The document title explicitly states it applies "as of 1996", while the target vehicle is a 1991 model
+    year.
+  model_years:
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: false
+- filename: R129 mirror 97-98[1].pdf
+  pages: 3
+  size_kb: 87
+  title: R129 Exterior Mirror Document (1997-1998)
+  system: electrical
+  description: This document pertains to exterior mirrors for the Mercedes-Benz R129 model years 1997-1998.
+  applicability: wrong_model_year
+  applicability_reason: The document filename specifies applicability for 1997-1998 models, which had updated electronics
+    and features for mirrors compared to the 1991 pre-facelift R129.
+  model_years:
+  - 1997
+  - 1998
+  priority: medium
+  include: false
+- filename: R129 wiring diagram mirror 97-98[1].pdf
+  pages: 3
+  size_kb: 87
+  title: R129 wiring diagram mirror 97-98
+  system: electrical
+  description: This document contains wiring diagrams for the Mercedes-Benz R129 chassis specifically for model years 1997-1998.
+  applicability: wrong_model_year
+  applicability_reason: The document explicitly covers 1997-1998 model years, which feature significantly different engine
+    management (M119.982 with OBD-II), transmission, and other electronic systems compared to the 1991 model's KE-Jetronic
+    and ADS I setup.
+  model_years:
+  - 1997
+  - 1998
+  priority: low
+  include: false
+- filename: R129fusecard.pdf
+  pages: 1
+  size_kb: 270
+  title: Assignment of R129 Fuse Box
+  system: electrical
+  description: This document provides a detailed assignment of fuses, their ratings, and colors for various electrical consumers
+    in an R129 model.
+  applicability: wrong_model_year
+  applicability_reason: The document, dated 01.04.98, explicitly lists "OBD II" and "Electronic Stability Program" (ESP),
+    neither of which were present on the 1991 R129.
+  model_years: 1996-1998
+  priority: low
+  include: false
+- filename: Wiring diagrams mb129ed-1996sl500.pdf
+  pages: 5
+  size_kb: 613
+  title: R129 Wiring Diagrams
+  system: electrical
+  description: Comprehensive electrical wiring diagrams for the R129 chassis.
+  applicability: wrong_model_year
+  applicability_reason: This document is specifically for a 1996 SL500, which has distinct electrical systems including OBD-II
+    engine management (M119.982) and updated electronics not present in the 1991 KE-Jetronic model.
+  model_years:
+  - 1996
+  - 1997
+  - 1998
+  priority: low
+  include: false
+- filename: fuse holder 2015400350.pdf
+  pages: 2
+  size_kb: 1575
+  title: Fuse Holder 201 540 03 50
+  system: electrical
+  description: Document details a fuse holder identified by part number 201 540 03 50.
+  applicability: not_applicable
+  applicability_reason: The part number 201 540 03 50 indicates the component was primarily designed for the W201 chassis
+    (190E/190D), not the R129 chassis (129.066).
+  model_years: []
+  priority: low
+  include: false
+- filename: Bosch - L-Jet - Troubleshooting.pdf
+  pages: 76
+  size_kb: 8534
+  title: Bosch L-jetronic Troubleshooting
+  system: engine
+  description: This document provides troubleshooting, maintenance, and repair information for Bosch L-Jetronic fuel injection
+    systems.
+  applicability: not_applicable
+  applicability_reason: The document describes Bosch L-Jetronic, which is a fundamentally different fuel injection system
+    than the KE-Jetronic (CIS-E) used in the 1991 R129 500 SL.
+  model_years: []
+  priority: low
+  include: false
+- filename: Changing Plugs - M119 Engine 1996-1998.pdf
+  pages: 3
+  size_kb: 900
+  title: DIY – Changing Spark Plugs R129 with M119 Engine 1996-1998
+  system: engine
+  description: This document describes changing spark plugs on an M119 engine with 8 individual coil packs, specific to 1996-1998
+    R129 models.
+  applicability: wrong_model_year
+  applicability_reason: The document explicitly states it applies to 1996-1998 M119 engines with 8 individual coil packs,
+    which is different from the 1991 M119.960 engine's EZL ignition system with 4 coil packs.
+  model_years:
+  - 1996
+  - 1997
+  - 1998
+  priority: high
+  include: false
+- filename: M113.96 oil pump parts picture.pdf
+  pages: 1
+  size_kb: 214
+  title: M113.96 oil pump parts picture
+  system: engine
+  description: This document provides a picture and part details for an oil pump specific to the M113.961 engine.
+  applicability: wrong_engine
+  applicability_reason: This document applies to the M113.961 engine from model year 1999 onwards, whereas the target vehicle
+    is a 1991 model equipped with the M119.960 engine.
+  model_years:
+  - 1999
+  - 2000
+  - 2001
+  priority: low
+  include: false
+- filename: M113.961 pressure relief valve listing.pdf
+  pages: 1
+  size_kb: 173
+  title: M113.961 Pressure Relief Valve Listing
+  system: engine
+  description: This document lists part numbers for the oil pump pressure relief valve specifically for the M113.961 engine.
+  applicability: wrong_engine
+  applicability_reason: The document explicitly applies to the M113.961 engine from model year 1999 onwards, while the owner's
+    vehicle is a 1991 model with an M119.960 engine.
+  model_years:
+  - 1999
+  - 2000
+  - 2001
+  priority: high
+  include: false
+- filename: PURGE-VALVE.pdf
+  pages: 1
+  size_kb: 70
+  title: CLEANING THE PURGE VALVE (1999 E320)
+  system: engine
+  description: This document details the cleaning of a purge valve to resolve an OBD-II P0455 code on a 1999 E320.
+  applicability: not_applicable
+  applicability_reason: The document explicitly describes procedures for a 1999 E320 and references an OBD-II code (P0455),
+    neither of which apply to the 1991 R129 which is a different chassis and not OBD-II compliant.
+  model_years:
+  - 1999
+  priority: low
+  include: false
+- filename: R129 97 coils.pdf
+  pages: 1
+  size_kb: 53
+  title: R129 1997 Ignition Coils
+  system: engine
+  description: This document likely discusses ignition coils for a 1997 Mercedes-Benz R129, which uses a different engine
+    management and ignition system than earlier models.
+  applicability: wrong_model_year
+  applicability_reason: The document filename explicitly references '97', indicating it applies to a 1997 R129 (M119.982 engine),
+    which has a different ignition system compared to the 1991 M119.960 with EZL.
+  model_years:
+  - 1996
+  - 1997
+  - 1998
+  priority: low
+  include: false
+- filename: Remove and install oil level sensor M113 engine.pdf
+  pages: 5
+  size_kb: 344
+  title: Remove and install oil level sensor (M112/M113 engine)
+  system: engine
+  description: This document provides instructions for removing and installing the oil level sensor on M112 and M113 engines.
+  applicability: wrong_engine
+  applicability_reason: The document explicitly states it applies to M112 and M113 engines, but the owner's 1991 500 SL has
+    an M119.960 engine.
+  model_years:
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  - 2002
+  - 2003
+  - 2004
+  - 2005
+  - 2006
+  priority: high
+  include: false
+- filename: wiring diagram engine mb129ed-1996sl500.pdf
+  pages: 5
+  size_kb: 613
+  title: Engine Wiring Diagram for 1996 SL500
+  system: engine
+  description: Wiring diagram specifically for the engine and associated management systems of a 1996 R129 SL500.
+  applicability: wrong_model_year
+  applicability_reason: This document is for a 1996 model year SL500 (M119.982 engine with OBD-II), which has significantly
+    different engine management and wiring compared to the owner's 1991 500 SL (M119.960 engine with KE-Jetronic/EZL).
+  model_years:
+  - 1996
+  - 1997
+  - 1998
+  priority: high
+  include: false
+- filename: 1997 MB Line up Brochure.pdf
+  pages: 25
+  size_kb: 4536
+  title: 1997 Mercedes-Benz R129 Lineup Brochure
+  system: general
+  description: This document is a marketing brochure showcasing the Mercedes-Benz R129 model as it was offered in the 1997
+    model year.
+  applicability: wrong_model_year
+  applicability_reason: The document describes the 1997 R129, which has major differences in engine (M119.982), fuel system
+    (HFM/ME-SFI), electronics (OBD-II, N22 climate control), and transmission (5-speed) compared to the 1991 model.
+  model_years:
+  - 1997
+  priority: low
+  include: false
+- filename: 1997 Mercedes Brochure-icompressed.pdf
+  pages: 25
+  size_kb: 4536
+  title: 1997 R129 Brochure
+  system: general
+  description: A marketing brochure detailing the features, options, and specifications of the Mercedes-Benz R129 for the
+    1997 model year.
+  applicability: wrong_model_year
+  applicability_reason: The 1997 R129 featured significantly different technical systems like HFM fuel injection, ADS II,
+    5-speed transmission, pushbutton climate control, and OBD-II diagnostics, which are not present in the 1991 model.
+  model_years:
+  - 1997
+  priority: low
+  include: false
+- filename: 1997 R129 Owners Manual.pdf
+  pages: 161
+  size_kb: 4512
+  title: 1997 R129 Owners Manual
+  system: general
+  description: Comprehensive guide for operating and maintaining the Mercedes-Benz R129 SL models from 1997, including 320
+    SL, 500 SL, and 600 SL.
+  applicability: wrong_model_year
+  applicability_reason: This 1997 manual describes systems significantly different from the 1991 model, particularly engine
+    management (HFM/ME vs KE-Jetronic), transmission (722.5/722.6 vs 722.3), climate control (pushbutton vs rotary), and diagnostics
+    (OBD-II vs none), making it largely inapplicable for specific technical details.
+  model_years:
+  - 1997
+  priority: high
+  include: false
+- filename: Quick Tips booklet 1997 SL-Class.pdf
+  pages: 16
+  size_kb: 10169
+  title: Quick Tips booklet 1997 SL-Class
+  system: general
+  description: A booklet containing quick tips and common solutions primarily for 1997 Mercedes-Benz SL-Class models.
+  applicability: wrong_model_year
+  applicability_reason: The document is for the 1997 model year, which features significantly different engine management
+    (HFM/ME vs KE-Jetronic), climate control (pushbutton vs rotary), ADS (II vs I), transmission (5-speed vs 4-speed), and
+    diagnostics (OBD-II vs none) compared to the 1991 model.
+  model_years:
+  - 1997
+  priority: low
+  include: false
+- filename: R129 front seat cushion removal 91-055.pdf
+  pages: 5
+  size_kb: 328
+  title: R129 Front Seat Cushion Removal and Installation
+  system: interior
+  description: Instructions for removing and installing the front seat cushion and backrest cushion for Mercedes-Benz R129
+    models.
+  applicability: wrong_model_year
+  applicability_reason: The document's primary instructions describe the "screwed connection" front seat cushion mount, which
+    was introduced from approximately 11/92 (VIN F 074890 onwards), not the earlier "plug-in type" found on the 1991 model.
+  model_years:
+  - 1993
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: medium
+  include: false
+- filename: door2.pdf
+  pages: 1
+  size_kb: 278
+  title: Newer door panel removal / door check strap installation
+  system: interior
+  description: A forum discussion providing instructions for removing a newer R129 door panel and replacing a door check strap.
+  applicability: wrong_model_year
+  applicability_reason: The document title refers to "newer door panel removal," and a 1997 SL500 owner explicitly states
+    the content differs from their vehicle, indicating it is not applicable to the early 1991 model.
+  model_years:
+  - 1999
+  - 2000
+  - 2001
+  priority: low
+  include: false
+- filename: ko_performance_genuine_mercedes_benz_floor_mats_fitment_guide[1].pdf
+  pages: 11
+  size_kb: 83
+  title: Genuine Mercedes-Benz Floor Mats Fitment Guide
+  system: interior
+  description: A fitment guide for genuine Mercedes-Benz floor mats, listing part numbers by chassis and color.
+  applicability: not_applicable
+  applicability_reason: The provided content of the floor mat fitment guide does not list the R129 (129) chassis.
+  model_years: []
+  priority: low
+  include: false
+- filename: Soft Top Troubleshooting_AD7730-P-5000A.pdf
+  pages: 12
+  size_kb: 73
+  title: Roadster soft top (RST) diagnosis troubleshooting
+  system: roof
+  description: Troubleshooting guide for the R129 roadster soft top (RST) hydraulic system and control module.
+  applicability: wrong_model_year
+  applicability_reason: The document explicitly states it applies to "MODEL 129 as of 1.1.94", excluding the target 1991 model
+    year.
+  model_years:
+  - 1994
+  - 1995
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  priority: low
+  include: false
+- filename: Top cylinders R&R all.pdf
+  pages: 57
+  size_kb: 4838
+  title: Top cylinders R&R all
+  system: roof
+  description: This document describes the removal and reinstallation of convertible top hydraulic cylinders, specifically
+    bow extension cylinders.
+  applicability: wrong_model_year
+  applicability_reason: The document explicitly states its procedures are specific to 1996-2002 models with e-clip bow cylinder
+    pins, while the 1991 model uses Allen head bolts requiring different access and steps.
+  model_years:
+  - 1996
+  - 1997
+  - 1998
+  - 1999
+  - 2000
+  - 2001
+  - 2002
+  priority: low
+  include: false
+- filename: r129-betriebsanleitung-1991-1993-DE.pdf
+  pages: 156
+  size_kb: 5984
+  title: R129 Betriebsanleitung 1991-1993 (European spec, German)
+  system: general
+  description: European-spec owner's manual in German covering 1991-1993. Contains European-specific details (metric specs, ECE
+    lighting, European options) matching AOK912's Finnish market origin.
+  applicability: exact_match
+  applicability_reason: European spec manual for 1991-1993, exact match for AOK912. German language handled by AI transcription.
+  model_years:
+  - 1991
+  - 1992
+  - 1993
+  priority: high
+  include: true
+- filename: STI_Engine_CFI_KE-Jetronic_Diag.pdf
+  size_kb: 1233
+  title: STI CFI (KE-Jetronic/CIS-E) Engine Diagnostic Manual - Engines 104, 119
+  system: engine
+  description: Official Mercedes STAR TekInfo diagnostic manual for the Continuous Fuel Injection (CFI/KE-Jetronic/CIS-E) system,
+    covering malfunction memory readout, on-off ratio tests, electrical and hydraulic test programs.
+  applicability: exact_match
+  applicability_reason: Covers engine 119 with CFI (CIS-E/KE-Jetronic), the exact fuel injection system on the 1991 500 SL M119.960.
+  model_years: [1990, 1991, 1992]
+  priority: high
+  include: true
+- filename: STI_ADS_I_129_061_066.pdf
+  size_kb: 813
+  title: STI ADS I Diagnostic Manual - Model 129.061/066
+  system: suspension
+  description: Official STAR TekInfo ADS I (Adaptive Damping System) diagnostic manual specifically for chassis 129.061/066.
+  applicability: exact_match
+  applicability_reason: Explicitly covers model 129.066 which is the 1991 500 SL chassis code.
+  model_years: [1989, 1990, 1991, 1992]
+  priority: high
+  include: true
+- filename: STI_ABS_129_CFI.pdf
+  size_kb: 307
+  title: STI ABS Diagnostic Manual - Model 129 with CFI
+  system: brakes
+  description: Official STAR TekInfo ABS diagnostic manual specifically for R129 models with CFI (CIS-E/KE-Jetronic) engines.
+  applicability: exact_match
+  applicability_reason: Explicitly for Model 129 with CFI only, matching the 1991 500 SL exactly.
+  model_years: [1990, 1991, 1992]
+  priority: high
+  include: true
+- filename: STI_ASR_129_061_066.pdf
+  size_kb: 508
+  title: STI ASR (Traction Control) Diagnostic Manual - Models 129.061/066
+  system: brakes
+  description: Official STAR TekInfo ASR (Acceleration Slip Regulation) diagnostic manual for chassis 129.061/066.
+  applicability: exact_match
+  applicability_reason: Explicitly covers model 129.066, the exact chassis of the 1991 500 SL.
+  model_years: [1989, 1990, 1991, 1992]
+  priority: high
+  include: true
+- filename: STI_ASD_129_061.pdf
+  size_kb: 991
+  title: STI ASD (Automatic Locking Differential) Diagnostic Manual - Models 124.128, 129.061, 201
+  system: brakes
+  description: Official STAR TekInfo ASD diagnostic manual covering models including 129.061.
+  applicability: likely_applicable
+  applicability_reason: Covers 129.061 (300 SL-24) but ASD system is mechanically similar across early R129 models.
+  model_years: [1989, 1990, 1991, 1992]
+  priority: medium
+  include: true
+- filename: STI_PSE_Control_Module_129_140.pdf
+  size_kb: 865
+  title: STI PSE Control Module Diagnostic Manual - Models 129, 140, 170
+  system: electrical
+  description: Official STAR TekInfo diagnostic manual for the PSE (Pneumatic System Equipment) control module,
+    covering function tests, DTC memory, electrical and pneumatic test programs.
+  applicability: exact_match
+  applicability_reason: Covers Model 129 PSE system, which is identical across all R129 model years.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: high
+  include: true
+- filename: STI_PSE_Central_Locking.pdf
+  size_kb: 931
+  title: STI PSE Central Locking Diagnostic Manual
+  system: electrical
+  description: Official STAR TekInfo diagnostic manual for the PSE-based central locking system.
+  applicability: exact_match
+  applicability_reason: PSE central locking system is universal across all R129 models.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: high
+  include: true
+- filename: STI_PSE_Retractable_Head_Restraints.pdf
+  size_kb: 446
+  title: STI PSE Retractable Rear Head Restraints Diagnostic Manual
+  system: interior
+  description: Diagnostic manual for PSE-controlled retractable rear head restraints.
+  applicability: likely_applicable
+  applicability_reason: PSE-based system, universal across R129.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: low
+  include: true
+- filename: STI_PSE_Manifold_Vacuum_Assist.pdf
+  size_kb: 143
+  title: STI PSE Manifold Vacuum Assist Diagnostic Manual
+  system: electrical
+  description: Diagnostic manual for PSE manifold vacuum assist system.
+  applicability: likely_applicable
+  applicability_reason: PSE sub-system applicable to all R129 models.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: low
+  include: true
+- filename: STI_PSE_Remote_Trunk_Release.pdf
+  size_kb: 585
+  title: STI PSE Remote Trunk Release Diagnostic Manual
+  system: electrical
+  description: Diagnostic manual for PSE remote trunk release system.
+  applicability: likely_applicable
+  applicability_reason: PSE sub-system applicable to all R129 models.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: medium
+  include: true
+- filename: STI_Soft_Top_RST_129_pre1994.pdf
+  size_kb: 2300
+  title: STI Roadster Soft Top / Roll Bar Diagnostic Manual - Model 129 (pre-1994)
+  system: roof
+  description: Official STAR TekInfo diagnostic manual for the RST (Roadster Soft Top) and roll bar manual deployment system,
+    specific to pre-1994 Model 129.
+  applicability: exact_match
+  applicability_reason: Pre-1994 version matches the 1991 model exactly, covers the specific soft top control system variant.
+  model_years: [1989, 1990, 1991, 1992, 1993]
+  priority: high
+  include: true
+- filename: STI_Soft_Top_RST_129_post1994.pdf
+  size_kb: 2300
+  title: STI Roadster Soft Top / Roll Bar Diagnostic Manual - Model 129 (1994+)
+  system: roof
+  description: Official STAR TekInfo diagnostic manual for the RST and roll bar, Model 129 from January 1994 onwards.
+  applicability: wrong_model_year
+  applicability_reason: Post-1994 variant with updated control system, different from the 1991 model.
+  model_years: [1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: low
+  include: false
+- filename: STI_Exterior_Lighting_129.pdf
+  size_kb: 196
+  title: STI Exterior Lighting (Xenon Headlamps) Diagnostic Manual - Models 129, 140
+  system: electrical
+  description: Official STAR TekInfo diagnostic manual for exterior lighting, Xenon headlamp systems on Models 129 and 140.
+  applicability: likely_applicable
+  applicability_reason: Covers Model 129 exterior lighting. Xenon was optional, but wiring diagrams cover the general lighting system.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: high
+  include: true
+- filename: STI_Instrument_Cluster_129.pdf
+  size_kb: 443
+  title: STI Instrument Cluster Diagnostic Manual - Model 129
+  system: electrical
+  description: Official STAR TekInfo diagnostic manual for the R129 instrument cluster.
+  applicability: exact_match
+  applicability_reason: Covers the base Model 129 instrument cluster applicable to early models.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996]
+  priority: high
+  include: true
+- filename: STI_IC_Digital_Odo_129.pdf
+  size_kb: 487
+  title: STI Instrument Cluster (Digital Odometer) Diagnostic Manual - Model 129
+  system: electrical
+  description: Diagnostic manual for the R129 instrument cluster variant with digital odometer, up to MY 1996.
+  applicability: likely_applicable
+  applicability_reason: Digital odometer IC variant; may or may not apply to the 1991 model depending on equipment.
+  model_years: [1992, 1993, 1994, 1995, 1996]
+  priority: medium
+  include: true
+- filename: STI_Climate_AC_129_pre1997.pdf
+  size_kb: 362
+  title: STI Climate Control A/C Diagnostic Manual - Model 129 up to MY 1997
+  system: climate
+  description: Official STAR TekInfo diagnostic manual for the air conditioning system on Model 129 up to MY 1997.
+  applicability: exact_match
+  applicability_reason: Covers the climate control system for all R129 models up to 1997, including the 1991 rotary control variant.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996]
+  priority: high
+  include: true
+- filename: STI_Base_Module_129_140.pdf
+  size_kb: 327
+  title: STI Base Module Diagnostic Manual - Models 129.067/076, 140
+  system: electrical
+  description: Diagnostic manual for the base module on later R129 variants (with EDS, LH-SFI, ME-SFI).
+  applicability: partially_applicable
+  applicability_reason: Covers 129.067/076 (not 129.066), but some base module diagnostics may overlap.
+  model_years: [1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: medium
+  include: true
+- filename: STI_ETC_129_CFI_722_5.pdf
+  size_kb: 331
+  title: STI Electronic Transmission Control (ETC) - Model 129 with CFI (722.5)
+  system: general
+  description: Diagnostic manual for electronic automatic transmission control on 129 with CFI and 722.5 transmission.
+  applicability: partially_applicable
+  applicability_reason: The 1991 500 SL had the 722.3 (4-speed), not 722.5 (5-speed), but some ETC diagnostics may apply.
+  model_years: [1993, 1994, 1995]
+  priority: low
+  include: true
+- filename: STI_ADS_I_129_063_067_076.pdf
+  size_kb: 1200
+  title: STI ADS I Diagnostic Manual - Models 129.063/067/076 up to 09/95
+  system: suspension
+  description: ADS I diagnostic manual for later R129 variants (6-cyl and V12).
+  applicability: partially_applicable
+  applicability_reason: Covers 129.063/067/076, not 129.066, but ADS I principle is similar.
+  model_years: [1993, 1994, 1995]
+  priority: low
+  include: true
+- filename: STI_Anti_Theft_Alarm.pdf
+  size_kb: 288
+  title: STI Anti-Theft Alarm Diagnostic Manual
+  system: electrical
+  description: Diagnostic manual for the anti-theft alarm system.
+  applicability: likely_applicable
+  applicability_reason: Anti-theft system is broadly applicable across R129 models.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: medium
+  include: true
+- filename: STI_Heated_Seats.pdf
+  size_kb: 204
+  title: STI Heated Seats Diagnostic Manual
+  system: interior
+  description: Diagnostic manual for heated seat systems.
+  applicability: likely_applicable
+  applicability_reason: Heated seats are universal across R129 if equipped.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: medium
+  include: true
+- filename: STI_Electric_Seat_Adj.pdf
+  size_kb: 331
+  title: STI Electric Seat Adjustment Diagnostic Manual
+  system: interior
+  description: Diagnostic manual for electric seat adjustment systems.
+  applicability: likely_applicable
+  applicability_reason: Electric seat adjustment is standard on all R129 models.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: medium
+  include: true
+- filename: STI_Mirror_Steering_Column.pdf
+  size_kb: 141
+  title: STI Mirror, Steering Column Adjustment, Heated Mirrors Diagnostic Manual
+  system: electrical
+  description: Diagnostic manual for mirror heating, tilt steering column adjustment, and related systems.
+  applicability: likely_applicable
+  applicability_reason: Mirror and steering column systems are common across R129.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: medium
+  include: true
+- filename: STI_ETR.pdf
+  size_kb: 194
+  title: STI Emergency Tensioning Retractor Diagnostic Manual
+  system: body
+  description: Diagnostic manual for the emergency tensioning retractor (seatbelt pretensioner) system.
+  applicability: likely_applicable
+  applicability_reason: ETR system is standard safety equipment on all R129 models.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: medium
+  include: true
+- filename: STI_Cellular_Telephone_129_140.pdf
+  size_kb: 129
+  title: STI Cellular Telephone Diagnostic Manual - Models 129, 140 up to MY 1993
+  system: audio
+  description: Diagnostic manual for the factory cellular telephone system.
+  applicability: likely_applicable
+  applicability_reason: Covers Models 129 and 140 up to 1993, applicable if equipped.
+  model_years: [1989, 1990, 1991, 1992, 1993]
+  priority: low
+  include: true
+- filename: STI_CD_Changer.pdf
+  size_kb: 87
+  title: STI CD Changer Diagnostic Manual - All Models
+  system: audio
+  description: Diagnostic manual for the CD changer system.
+  applicability: likely_applicable
+  applicability_reason: Universal CD changer system for all models.
+  model_years: [1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001]
+  priority: low
+  include: true
+- filename: MB129_Handbuch_Exterieur_DE.pdf
+  size_kb: 12000
+  title: R129 Benutzerhandbuch - Exterieur (German)
+  system: body
+  description: Official Mercedes-Benz R129 owner's handbook section on exterior features, in German.
+  applicability: exact_match
+  applicability_reason: German handbook matching the user's European-spec vehicle.
+  model_years: [1989, 1990, 1991, 1992, 1993]
+  priority: high
+  include: true
+- filename: MB129_Handbuch_Interieur_DE.pdf
+  size_kb: 4600
+  title: R129 Benutzerhandbuch - Interieur (German)
+  system: interior
+  description: Official R129 owner's handbook section on interior features, in German.
+  applicability: exact_match
+  applicability_reason: German handbook matching the user's European-spec vehicle.
+  model_years: [1989, 1990, 1991, 1992, 1993]
+  priority: high
+  include: true
+- filename: MB129_Handbuch_Fahren_DE.pdf
+  size_kb: 1100
+  title: R129 Benutzerhandbuch - Fahren (German)
+  system: general
+  description: Official R129 owner's handbook driving section, in German.
+  applicability: exact_match
+  applicability_reason: German handbook matching the user's European-spec vehicle.
+  model_years: [1989, 1990, 1991, 1992, 1993]
+  priority: high
+  include: true
+- filename: MB129_Handbuch_Technische_Daten_DE.pdf
+  size_kb: 944
+  title: R129 Benutzerhandbuch - Technische Daten (German)
+  system: general
+  description: Official R129 owner's handbook technical data section, in German.
+  applicability: exact_match
+  applicability_reason: German handbook with specifications matching the user's European-spec vehicle.
+  model_years: [1989, 1990, 1991, 1992, 1993]
+  priority: high
+  include: true
+- filename: R129_Radio_Becker_BE1432_Gen1.pdf
+  size_kb: 526
+  title: Radio Operation Manual - Becker BE1432 (Gen 1)
+  system: audio
+  description: Operation manual for the first-generation Becker BE1432 radio.
+  applicability: exact_match
+  applicability_reason: Becker BE1432 was the standard radio in early R129 models including 1991.
+  model_years: [1989, 1990, 1991, 1992, 1993]
+  priority: medium
+  include: true
+- filename: R129_Radio_Becker_BE1492_Gen2.pdf
+  size_kb: 365
+  title: Radio Operation Manual - Becker BE1492 (Gen 2)
+  system: audio
+  description: Operation manual for the second-generation Becker BE1492 radio.
+  applicability: likely_applicable
+  applicability_reason: Gen 2 radio; may have been available as upgrade for 1991 model.
+  model_years: [1993, 1994, 1995, 1996]
+  priority: low
+  include: true
+- filename: Mercedes_Maintenance_Manual_1981-1993.pdf
+  size_kb: 20000
+  title: Mercedes-Benz Maintenance Manual 1981-1993 (Series 107/123/124/126/129/140/201)
+  system: general
+  description: Official Mercedes-Benz maintenance manual covering service intervals, filling capacities, torques,
+    and maintenance procedures for 1981-1993 models including the 500 SL (129.066).
+  applicability: exact_match
+  applicability_reason: Covers the 500 SL (129.066) with M119.960 engine for 1990-1993.
+  model_years: [1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993]
+  priority: high
+  include: true

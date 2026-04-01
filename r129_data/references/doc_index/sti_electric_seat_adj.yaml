@@ -1,0 +1,34 @@
+doc_id: sti_electric_seat_adj
+title: STI_Electric_Seat_Adj
+filename: STI_Electric_Seat_Adj.pdf
+source_url: ''
+pages: 52
+topics:
+- diagnostics
+- doors
+- electrical
+- engine
+- instrument_cluster
+- lighting
+- roof
+- seats
+- steering
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**15.1 Electric Seat Adjustment (ESA)**'
+- page: 2
+  heading: '**15.1 Electric Seat Adjustment (ESA)**'
+- page: 3
+  heading: '**15.1 Electric Seat Adjustment (ESA)**'
+- page: 4
+  heading: '**15.1 Electric Seat Adjustment (ESA)**'
+- page: 5
+  heading: '**15.1 Electric Seat Adjustment (ESA)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

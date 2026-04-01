@@ -1,0 +1,36 @@
+doc_id: sti_etc_129_cfi_722_5
+title: STI_ETC_129_CFI_722_5
+filename: STI_ETC_129_CFI_722_5.pdf
+source_url: ''
+pages: 20
+topics:
+- brakes
+- central_locking
+- diagnostics
+- doors
+- electrical
+- engine
+- hydraulics
+- instrument_cluster
+- lighting
+- suspension
+- transmission
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**2.1 Electronic Automatic Transmission Control (ETC)**'
+- page: 2
+  heading: '**2.1 Electronic Automatic Transmission Control (ETC)**'
+- page: 3
+  heading: '**2.1 Electronic Automatic Transmission Control (ETC)**'
+- page: 4
+  heading: '**2.1 Electronic Automatic Transmission Control (ETC)**'
+- page: 5
+  heading: '**2.1 Electronic Automatic Transmission Control (ETC)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

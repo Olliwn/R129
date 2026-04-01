@@ -1,0 +1,65 @@
+description: >
+  R129 relay assignments for pre-facelift models (1989-1995).
+  Relays are located in the engine compartment relay box and auxiliary relay box.
+  NOTE: Relay designations need verification from the ETM.
+
+relays:
+  - id: K1
+    designation: "K1"
+    function: "Headlight relay (main)"
+    location: "Engine compartment relay box"
+    applies_to:
+      years: [1989, 2001]
+    source:
+      type: "community"
+      ref: "General R129 knowledge"
+      confidence: "low"
+
+  - id: K40
+    designation: "K40"
+    function: "Over-voltage protection relay"
+    location: "Engine compartment relay box"
+    notes: "Common failure point. Controls power distribution to many systems. Failure can cause multiple electrical faults."
+    applies_to:
+      years: [1989, 2001]
+    source:
+      type: "community"
+      ref: "BenzWorld, well-known R129 failure point"
+      confidence: "medium"
+
+  - id: FUEL_PUMP_RELAY
+    designation: "Fuel pump relay"
+    function: "Controls fuel pump power"
+    location: "Engine compartment relay box"
+    notes: "Failure causes no-start condition."
+    applies_to:
+      years: [1989, 1998]
+      engines: ["M119.960", "M119.972"]
+    source:
+      type: "community"
+      ref: "General R129/M119 knowledge"
+      confidence: "medium"
+
+  - id: ADS_RELAY
+    designation: "ADS relay"
+    function: "ADS hydraulic pump relay"
+    location: "Engine compartment relay box"
+    notes: "Controls power to the ADS level control pump. Only on ADS-equipped cars."
+    applies_to:
+      years: [1989, 1998]
+      options: [211]
+    source:
+      type: "community"
+      ref: "ADS system documentation"
+      confidence: "medium"
+
+  - id: SOFT_TOP_RELAY
+    designation: "Soft top relay"
+    function: "Soft top hydraulic pump relay"
+    location: "Trunk"
+    applies_to:
+      years: [1989, 2001]
+    source:
+      type: "community"
+      ref: "General R129 knowledge"
+      confidence: "medium"

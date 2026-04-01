@@ -1,0 +1,21 @@
+doc_id: az82_20_p_0001_02e_illuminated_door_sill_schematic
+title: AZ82.20-P-0001-02E Illuminated Door Sill schematic
+filename: AZ82.20-P-0001-02E Illuminated Door Sill schematic.pdf
+source_url: https://www.benzworld.org/attachments/az82-20-p-0001-02e-illuminated-door-sill-schematic-pdf.2765274/
+pages: 2
+topics:
+- body
+- doors
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: AZ82.20-P-0001-02E Connecting wiring harness
+- page: 2
+  heading: '- 4 Place converter (7) and connector (10) in cable duct.'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

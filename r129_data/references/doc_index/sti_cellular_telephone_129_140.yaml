@@ -1,0 +1,36 @@
+doc_id: sti_cellular_telephone_129_140
+title: STI_Cellular_Telephone_129_140
+filename: STI_Cellular_Telephone_129_140.pdf
+source_url: ''
+pages: 22
+topics:
+- audio
+- body
+- brakes
+- central_locking
+- climate
+- diagnostics
+- doors
+- electrical
+- engine
+- general
+- seats
+- suspension
+- wiring
+toc:
+- page: 1
+  heading: '**7.2 Cellular Telephone (CTEL)**'
+- page: 2
+  heading: '**7.2 Cellular Telephone (CTEL)**'
+- page: 3
+  heading: '**7.2 Cellular Telephone (CTEL)**'
+- page: 4
+  heading: '**7.2 Cellular Telephone (CTEL)**'
+- page: 5
+  heading: '**7.2 Cellular Telephone (CTEL)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

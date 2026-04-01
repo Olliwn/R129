@@ -1,0 +1,32 @@
+doc_id: sti_etr
+title: STI_ETR
+filename: STI_ETR.pdf
+source_url: ''
+pages: 11
+topics:
+- central_locking
+- diagnostics
+- doors
+- electrical
+- engine
+- general
+- roll_bar
+- seats
+- wiring
+toc:
+- page: 1
+  heading: '**Contents**'
+- page: 2
+  heading: '**17.1 Emergency Tensioning Retractor**'
+- page: 3
+  heading: '**17.1 Emergency Tensioning Retractor**'
+- page: 4
+  heading: '**17.1 Emergency Tensioning Retractor**'
+- page: 5
+  heading: '**17.1 Emergency Tensioning Retractor**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

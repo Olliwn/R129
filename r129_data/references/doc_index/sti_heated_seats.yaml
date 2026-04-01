@@ -1,0 +1,33 @@
+doc_id: sti_heated_seats
+title: STI_Heated_Seats
+filename: STI_Heated_Seats.pdf
+source_url: ''
+pages: 12
+topics:
+- central_locking
+- climate
+- diagnostics
+- doors
+- electrical
+- engine
+- lighting
+- seats
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**14.1 Heated Seats (HS)**'
+- page: 2
+  heading: '**14.1 Heated Seats (HS)**'
+- page: 3
+  heading: '**14.1 Heated Seats (HS)**'
+- page: 4
+  heading: '**14.1 Heated Seats (HS)**'
+- page: 5
+  heading: '**14.1 Heated Seats (HS)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

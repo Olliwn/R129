@@ -1,0 +1,35 @@
+doc_id: sti_climate_ac_129_pre1997
+title: STI_Climate_AC_129_pre1997
+filename: STI_Climate_AC_129_pre1997.pdf
+source_url: ''
+pages: 31
+topics:
+- audio
+- central_locking
+- climate
+- diagnostics
+- doors
+- electrical
+- engine
+- hydraulics
+- roof
+- suspension
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**3.1 Air Conditioning (A/C)**'
+- page: 2
+  heading: '**3.1 Air Conditioning (A/C)**'
+- page: 3
+  heading: '**3.1 Air Conditioning (A/C)**'
+- page: 4
+  heading: '**3.1 Air Conditioning (A/C)**'
+- page: 5
+  heading: '**3.1 Air Conditioning (A/C)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

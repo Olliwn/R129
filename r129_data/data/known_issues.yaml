@@ -1,0 +1,188 @@
+known_issues:
+  - id: 3rd_brake_light_fuse_dashboard
+    title: "3rd brake light fuse shared with instrument cluster"
+    severity: "high"
+    description: >
+      On certain R129 models, the third brake light circuit shares a fuse with
+      the instrument cluster backlight. A short circuit in the brake light wiring
+      (often from chafing in the trunk lid hinge area) blows the fuse and kills
+      the dashboard illumination. Appears as two unrelated failures.
+    affected_systems: ["lighting", "instrument_cluster"]
+    affected_fuse: "TBD"
+    symptoms:
+      - "Dashboard goes dark / no backlight"
+      - "Third brake light not working"
+    diagnostic_hint: "Check shared fuse. Inspect 3rd brake light wiring at trunk lid hinge for chafe/short."
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "community"
+      ref: "Forum knowledge, multiple R129 owners report this cross-system dependency"
+      confidence: "medium"
+
+  - id: ads_cluster_lamp_missing
+    title: "ADS warning lamp missing from non-ADS instrument cluster"
+    severity: "high"
+    description: >
+      If the instrument cluster has been swapped from a non-ADS R129, the ADS
+      warning indicator symbol is physically absent from the indicator strip --
+      not a dead bulb but a missing printed symbol. This makes ADS faults
+      completely invisible. The N51 ADS module may report healthy via blink codes
+      (Pin 9 = 1 blink) while the level control system is dead.
+    affected_systems: ["ads", "instrument_cluster"]
+    symptoms:
+      - "No ADS warning lamp visible in cluster (symbol absent, not just burned out)"
+      - "Car may sit unevenly without any dashboard warning"
+      - "ADS blink code on Pin 9 shows 1 blink (healthy) even with failed level control"
+    diagnostic_hint: >
+      Photograph the indicator strip and compare to a known ADS cluster. ADS I level
+      control is mechanical/hydraulic and NOT monitored by N51 -- Pin 9 blink codes only
+      cover electronic damping, not height adjustment.
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+      options: [211]
+    source:
+      type: "engineering_diary"
+      ref: "docs/AOK912 Engineering Diary.md, 2026-03-26 ADS investigation"
+      confidence: "high"
+
+  - id: ads_i_two_subsystems
+    title: "ADS I has TWO independent subsystems"
+    severity: "high"
+    description: >
+      ADS I (option 211, pre-1996) consists of two completely independent subsystems:
+      (A) Adaptive Damping -- electronic, monitored by N51 module via Pin 9 blink codes,
+      controls shock absorber firmness. (B) Niveauregulierung (Level Control) -- mechanical/
+      hydraulic, uses anti-roll bar linkage to proportioning valve, NO electronic sensors
+      on ADS I, NOT monitored by N51. The entire level control can be dead while Pin 9
+      reports 1 blink = healthy. The only indicator for level control faults is the cluster
+      warning lamp, which may be missing (see ads_cluster_lamp_missing).
+    affected_systems: ["ads"]
+    symptoms:
+      - "Rear of car sits low but ADS blink code shows healthy"
+      - "Pump runs but car doesn't level"
+    diagnostic_hint: >
+      Test each subsystem independently. Damping: console switch should change between
+      Sport/Comfort. Level control: measure fender-to-ground height before/after engine run.
+    applies_to:
+      years: [1989, 1995]
+      chassis: "all"
+      options: [211]
+    source:
+      type: "engineering_diary"
+      ref: "docs/AOK912 Engineering Diary.md, extensive ADS I investigation 2026-03"
+      confidence: "high"
+
+  - id: pse_pneumatic_failure
+    title: "PSE central locking system failure"
+    severity: "medium"
+    description: >
+      The PSE (Pneumatic System Electronics) central locking uses vacuum/pressure from
+      a trunk-mounted pump to operate door locks, trunk, and fuel filler flap. The pump
+      and its internal valves commonly fail after 25+ years. Complete silence from the
+      pump on actuation indicates dead motor, seized internals, or no power reaching it.
+    affected_systems: ["central_locking"]
+    symptoms:
+      - "Central locking completely inoperative"
+      - "No sound from trunk pump when locking/unlocking"
+      - "Only key barrel operation works"
+    diagnostic_hint: >
+      Check power at the PSE pump connector first (12V when key turned). If power present
+      and pump silent, the pump motor or internal valves are dead. Rebuild kits are available.
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "engineering_diary"
+      ref: "docs/AOK912 Engineering Diary.md, known issues section"
+      confidence: "high"
+
+  - id: hirschmann_antenna_mast
+    title: "Hirschmann power antenna mast cable failure"
+    severity: "low"
+    description: >
+      The Hirschmann power antenna uses a nylon toothed mast cable (Zahnseele) that meshes
+      with an internal drive gear. After 30+ years the teeth strip, causing the motor to
+      run but the mast to not extend/retract. #1 failure mode for these antennas.
+    affected_systems: ["audio"]
+    symptoms:
+      - "Antenna stuck extended or retracted"
+      - "Motor whines/grinds but mast doesn't move"
+    diagnostic_hint: >
+      Apply 12V reverse polarity directly to motor connector. If motor runs but mast
+      doesn't move, mast cable is stripped. Replacement mast kits available. If motor
+      is completely silent, check antenna fuse and relay first.
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "engineering_diary"
+      ref: "docs/AOK912 Engineering Diary.md, power antenna investigation"
+      confidence: "high"
+
+  - id: engine_mount_collapse
+    title: "M119 fluid-filled engine mount collapse"
+    severity: "medium"
+    description: >
+      The M119 V8 uses fluid-filled (hydro) engine mounts that collapse with age,
+      allowing excess engine vibration at idle (700-800 RPM). Noticeable as a rough
+      idle vibration transmitted into the cabin and steering wheel.
+    affected_systems: ["engine"]
+    symptoms:
+      - "Rough idle vibration felt in cabin at 700-800 RPM"
+      - "Vibration in steering wheel at idle"
+      - "Vibration disappears above 1000 RPM"
+    diagnostic_hint: >
+      Visual check: collapsed mounts show the engine sitting lower. Definitive test:
+      have someone blip throttle while observing mount deflection from outside.
+    applies_to:
+      years: [1989, 1998]
+      engines: ["M119.960", "M119.972"]
+    source:
+      type: "engineering_diary"
+      ref: "docs/AOK912 Engineering Diary.md, known issues"
+      confidence: "high"
+
+  - id: parasitic_drain
+    title: "Battery parasitic drain from multiple sources"
+    severity: "medium"
+    description: >
+      R129s are prone to parasitic current draw from multiple sources: dead PSE pump
+      circuit, ATA/IRCL modules in static glow state, aftermarket radio wiring, stuck
+      relays, or failing instrument cluster voltage regulators.
+    affected_systems: ["electrical"]
+    symptoms:
+      - "Battery drains from ~13V to ~12V in 2 days of sitting"
+      - "Dead battery after a week of non-use"
+    diagnostic_hint: >
+      Measure parasitic draw with ammeter in series on negative terminal (expect <50mA
+      normal). Pull fuses one by one to isolate the circuit. Common culprits: PSE fuse,
+      radio fuse, ATA/IRCL module. Also test battery CCA and internal resistance.
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "engineering_diary"
+      ref: "docs/AOK912 Engineering Diary.md, battery investigation 2026-03-27"
+      confidence: "high"
+
+  - id: wiper_park_position
+    title: "Wiper does not return to correct park position"
+    severity: "low"
+    description: >
+      The wiper motor park switch contacts corrode over time, causing the wipers to
+      stop at incorrect positions. May also be caused by worn linkage bushings.
+    affected_systems: ["wiper"]
+    symptoms:
+      - "Wipers stop mid-sweep or at wrong position"
+      - "Wipers overshoot the park position"
+    diagnostic_hint: "Check park switch contacts in wiper motor. Check linkage bushings for wear."
+    applies_to:
+      years: [1989, 2001]
+      chassis: "all"
+    source:
+      type: "engineering_diary"
+      ref: "docs/AOK912 Engineering Diary.md"
+      confidence: "medium"

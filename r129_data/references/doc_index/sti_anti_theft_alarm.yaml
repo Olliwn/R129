@@ -1,0 +1,37 @@
+doc_id: sti_anti_theft_alarm
+title: STI_Anti_Theft_Alarm
+filename: STI_Anti_Theft_Alarm.pdf
+source_url: ''
+pages: 26
+topics:
+- audio
+- body
+- brakes
+- central_locking
+- climate
+- diagnostics
+- doors
+- electrical
+- engine
+- general
+- lighting
+- steering
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**Contents**'
+- page: 2
+  heading: '**Technical Changes**'
+- page: 3
+  heading: '**13.1 Anti–Theft Alarm (ATA)**'
+- page: 4
+  heading: '**13.1 Anti–Theft Alarm (ATA)**'
+- page: 5
+  heading: '**13.1 Anti–Theft Alarm (ATA)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

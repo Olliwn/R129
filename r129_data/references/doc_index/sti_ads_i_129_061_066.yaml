@@ -1,0 +1,38 @@
+doc_id: sti_ads_i_129_061_066
+title: STI_ADS_I_129_061_066
+filename: STI_ADS_I_129_061_066.pdf
+source_url: ''
+pages: 45
+topics:
+- brakes
+- central_locking
+- diagnostics
+- doors
+- electrical
+- engine
+- hydraulics
+- instrument_cluster
+- lighting
+- roof
+- seats
+- steering
+- suspension
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**3.1 Adaptive Damping System (ADS)**'
+- page: 2
+  heading: '**3.1 Adaptive Damping System (ADS)**'
+- page: 3
+  heading: '**3.1 Adaptive Damping System (ADS)**'
+- page: 4
+  heading: '**3.1 Adaptive Damping System (ADS)**'
+- page: 5
+  heading: '**3.1 Adaptive Damping System (ADS)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

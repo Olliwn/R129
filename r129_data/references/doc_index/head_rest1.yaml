@@ -1,0 +1,20 @@
+doc_id: head_rest1
+title: Head rest1
+filename: Head rest1.pdf
+source_url: https://www.benzworld.org/attachments/head-rest1-pdf.2765294/
+pages: 3
+topics:
+- seats
+toc:
+- page: 1
+  heading: Repair information
+- page: 2
+  heading: Repair information
+- page: 3
+  heading: Repair information
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

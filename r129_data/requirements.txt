@@ -1,0 +1,19 @@
+# Core
+pydantic>=2.0
+pyyaml>=6.0
+rich>=13.0
+
+# PDF processing
+pymupdf>=1.24
+pymupdf4llm>=0.0.17
+
+# Web / search
+requests>=2.31
+beautifulsoup4>=4.12
+googlesearch-python>=1.3
+
+# AI
+google-genai>=1.0
+
+# Embeddings storage
+numpy>=1.26

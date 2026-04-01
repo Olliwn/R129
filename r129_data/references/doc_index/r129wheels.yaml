@@ -1,0 +1,22 @@
+doc_id: r129wheels
+title: R129wheels
+filename: R129wheels.pdf
+source_url: https://www.benzworld.org/attachments/r129wheels-pdf.2765339/
+pages: 4
+topics:
+- wheels
+toc:
+- page: 1
+  heading: '**==> picture [649 x 612] intentionally omitted <==**'
+- page: 2
+  heading: '**==> picture [792 x 509] intentionally omitted <==**'
+- page: 3
+  heading: '**==> picture [647 x 612] intentionally omitted <==**'
+- page: 4
+  heading: '**==> picture [792 x 506] intentionally omitted <==**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

@@ -1,0 +1,30 @@
+doc_id: sti_exterior_lighting_129
+title: STI_Exterior_Lighting_129
+filename: STI_Exterior_Lighting_129.pdf
+source_url: ''
+pages: 11
+topics:
+- diagnostics
+- electrical
+- engine
+- general
+- lighting
+- roof
+- wiring
+toc:
+- page: 1
+  heading: '**1.1 Xenon Headlamps**'
+- page: 2
+  heading: '**1.1 Xenon Headlamps**'
+- page: 3
+  heading: '**1.1 Xenon Headlamps**'
+- page: 4
+  heading: '**1.1 Xenon Headlamps**'
+- page: 5
+  heading: '**1.1 Xenon–headlamps**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

@@ -1,0 +1,33 @@
+doc_id: sti_abs_129_cfi
+title: STI_ABS_129_CFI
+filename: STI_ABS_129_CFI.pdf
+source_url: ''
+pages: 18
+topics:
+- brakes
+- central_locking
+- diagnostics
+- doors
+- electrical
+- engine
+- hydraulics
+- lighting
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**6.1 Anti-Lock Brake System (ABS)**'
+- page: 2
+  heading: '**6.1 Anti-Lock Brake System (ABS)**'
+- page: 3
+  heading: '**6.1 Anti-Lock Brake System (ABS)**'
+- page: 4
+  heading: '**6.1 Anti-Lock Brake System (ABS)**'
+- page: 5
+  heading: '**6.1 Anti-Lock Brake System (ABS)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

@@ -1,4 +1,10 @@
-# Kärkkäinen Tool Shopping List
+# ~~Kärkkäinen Tool Shopping List~~ — RETIRED
+
+> **This file is retired as of 2026-03-31.** All content has been consolidated into **[docs/parts_to_order.md](parts_to_order.md)** which is now the single source of truth for parts, tools, consumables, and fluids.
+
+*Original list below preserved for reference only. Do not update — edit `parts_to_order.md` instead.*
+
+---
 
 *This list comprises the tools required for the M119/722.3 maintenance, electrical work, and general R129 bulletproofing tasks.*
 
@@ -58,6 +64,7 @@
 - [x] **Threadlocker / Kierrelukite** (Loctite 243 Blue purchased)
 - [x] **Lithium Grease / Litiumrasva (Valkovaseliini)** (CRC Multi Grease purchased)
 - [x] **Silicone Grease / Silikonirasva** (CRC Silicone Grease purchased)
+- [ ] **Thermal Compound / Lämpötahna** (High-quality non-conductive paste, e.g. Arctic MX-6 or Noctua NT-H1. For EZL ignition module thermal paste refresh — old paste has dried to chalk after 35 years, causing the module to overheat. Also useful for any other power modules with heat-sink mounting. *See Task #14: Predictive Electronics Maintenance.*)
 
 ## Fluids & Filters (Baseline Service & Diagnostics)
 - [x] **Engine Air Filters / Moottorin ilmansuodattimet** (M119.960 early KE-Jetronic requires the **THIN** 35mm filters. OEM Part: `A 003 094 46 04` / MANN **C 3388**. Do NOT buy the 44mm W140/Later M119 filters ending in 61 04. *Motonet parts returned*. Purchased)

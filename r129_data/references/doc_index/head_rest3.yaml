@@ -1,0 +1,21 @@
+doc_id: head_rest3
+title: Head rest3
+filename: Head rest3.pdf
+source_url: https://www.benzworld.org/attachments/head-rest3-pdf.2765296/
+pages: 3
+topics:
+- seats
+- wiring
+toc:
+- page: 1
+  heading: Repair information
+- page: 2
+  heading: Repair information
+- page: 3
+  heading: Repair information
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

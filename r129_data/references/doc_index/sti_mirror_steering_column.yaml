@@ -1,0 +1,32 @@
+doc_id: sti_mirror_steering_column
+title: STI_Mirror_Steering_Column
+filename: STI_Mirror_Steering_Column.pdf
+source_url: ''
+pages: 16
+topics:
+- diagnostics
+- doors
+- electrical
+- engine
+- lighting
+- seats
+- steering
+- transmission
+- wiring
+toc:
+- page: 1
+  heading: '**12.1 Electric Mirror, Steering Column Adjustment, Heated Mirrors (EMSC)**'
+- page: 2
+  heading: '**Model 129**'
+- page: 3
+  heading: '**12.1 Electric Mirror, Steering Column Adjustment, Heated Mirrors (EMSC)**'
+- page: 4
+  heading: '**12.1 Electric Mirror, Steering Column Adjustment, Heated Mirrors (EMSC)**'
+- page: 5
+  heading: '**12.1 Electric Mirror, Steering Column Adjustment, Heated Mirrors (EMSC)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

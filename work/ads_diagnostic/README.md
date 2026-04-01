@@ -359,7 +359,7 @@ N51 currently reports 0 faults on Pin 9. These tests are needed only if new faul
 
 - ADS Blink-Code Reader (tool & results) → [work/ads_blink_reader/](../ads_blink_reader/README.md)
 - Blink-Code Channel Inventory → [work/ads_blink_reader/blinker_report.md](../ads_blink_reader/blinker_report.md)
-- Suspension Refresh (mechanical) → [Engineering Diary Task #4](../../docs/AOK912%20Engineering%20Diary.md)
+- Suspension Refresh (mechanical) → [Active Tasks #4](../../docs/tasks.md)
 - nRF5430 Interface Board (digital diagnostic tool) → [work/nRF5430_interface_board/](../nRF5430_interface_board/)
 - Baseline Service → [work/baseline_service/](../baseline_service/README.md)
 

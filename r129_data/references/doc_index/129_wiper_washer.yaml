@@ -1,0 +1,31 @@
+doc_id: 129_wiper_washer
+title: 129_Wiper_Washer
+filename: 129_Wiper_Washer.pdf
+source_url: https://www.benzworld.org/attachments/129_wiper_washer-pdf.2765258/
+pages: 4
+topics:
+- central_locking
+- doors
+- electrical
+- general
+- hydraulics
+- instrument_cluster
+- lighting
+- transmission
+- wiring
+toc:
+- page: 1
+  heading: '**==> picture [50 x 88] intentionally omitted <==**'
+- page: 2
+  heading: '**==> picture [377 x 128] intentionally omitted <==**'
+- page: 3
+  heading: PE82.30-U-2000-60YC
+- page: 4
+  heading: _Copyright DaimlerChrysler AG  26.08.2014 CD-Ausgabe G/09/05 . This WIS
+    print-out will not be record
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

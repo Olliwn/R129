@@ -139,10 +139,10 @@ No written service history exists for this vehicle. Assume all consumables and w
 ## Related Work Items
 
 * **[How to Safely Lift the R129 (Jacking Instructions)](Jacking_Instructions.md)**
-* Air Intake Hoses & Engine Air Filters → [Engineering Diary Task #6](../../docs/AOK912%20Engineering%20Diary.md)
-* Power Steering Flush & Filter → [Engineering Diary Task #6](../../docs/AOK912%20Engineering%20Diary.md)
+* Air Intake Hoses & Engine Air Filters → [Active Tasks #6](../../docs/tasks.md)
+* Power Steering Flush & Filter → [Active Tasks #6](../../docs/tasks.md)
 * Engine Mounts & Steering Damper → [Master Plan Phase 4](../../docs/R129%20Master%20Plan.md)
-* Suspension Refresh (LCA, Links, Bushings) → [Engineering Diary Task #4](../../docs/AOK912%20Engineering%20Diary.md)
+* Suspension Refresh (LCA, Links, Bushings) → [Active Tasks #4](../../docs/tasks.md)
 * ADS Diagnostics → [ADS Blink-Code Reader](../ads_blink_reader/README.md)
 * PSE Central Locking → [PSE Project](../pse_central_locking/README.md)
 

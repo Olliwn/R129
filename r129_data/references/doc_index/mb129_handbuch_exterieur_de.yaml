@@ -1,0 +1,28 @@
+doc_id: mb129_handbuch_exterieur_de
+title: MB129_Handbuch_Exterieur_DE
+filename: MB129_Handbuch_Exterieur_DE.pdf
+source_url: ''
+pages: 115
+topics:
+- audio
+- brakes
+- doors
+- general
+- lighting
+- roof
+- suspension
+toc:
+- page: 2
+  heading: '## **Inhaltsverzeichnis**'
+- page: 3
+  heading: '## **Umweltschutz**'
+- page: 4
+  heading: '**Bedienung – Radio, Telefon, Reiserechner, Auto Pilot System und Funkgerät**'
+- page: 5
+  heading: '**Betrieb – mobile Telefone und Funkgeräte**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

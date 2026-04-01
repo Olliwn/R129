@@ -1,0 +1,27 @@
+doc_id: mb129_handbuch_technische_daten_de
+title: MB129_Handbuch_Technische_Daten_DE
+filename: MB129_Handbuch_Technische_Daten_DE.pdf
+source_url: ''
+pages: 23
+topics:
+- body
+- brakes
+- general
+- suspension
+toc:
+- page: 2
+  heading: Die aufgeführten technischen Daten und Füllmengen sind vorläufige, teilweise
+    errechnete Werte. Endgü
+- page: 3
+  heading: '## **Umweltschutz**'
+- page: 4
+  heading: '## **Mercedes-Benz Originalteile**'
+- page: 5
+  heading: Werden andere Teile verwendet, die nicht von Mercedes-Benz geprüft und
+    freigegeben sind, kann die Be
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

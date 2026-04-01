@@ -1,0 +1,37 @@
+doc_id: sti_engine_cfi_ke_jetronic_diag
+title: STI_Engine_CFI_KE-Jetronic_Diag
+filename: STI_Engine_CFI_KE-Jetronic_Diag.pdf
+source_url: ''
+pages: 97
+topics:
+- central_locking
+- climate
+- diagnostics
+- doors
+- electrical
+- engine
+- hydraulics
+- instrument_cluster
+- lighting
+- roof
+- suspension
+- transmission
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**2.1 Continuous Fuel Injection System**'
+- page: 2
+  heading: '**2.1 Continuous Fuel Injection System**'
+- page: 3
+  heading: '**2.1 Continuous Fuel Injection System**'
+- page: 4
+  heading: '**Continuous Fuel Injection System**'
+- page: 5
+  heading: '**2.1 Continuous Fuel Injection System**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

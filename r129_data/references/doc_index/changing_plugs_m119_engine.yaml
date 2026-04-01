@@ -1,0 +1,27 @@
+doc_id: changing_plugs_m119_engine
+title: Changing Plugs - M119 Engine
+filename: Changing Plugs - M119 Engine.pdf
+source_url: https://www.benzworld.org/attachments/changing-plugs-m119-engine-pdf.2765280/
+pages: 3
+topics:
+- body
+- brakes
+- engine
+- roof
+- seats
+- wiring
+toc:
+- page: 1
+  heading: '## _**DIY – Changing Spark Plugs**_'
+- page: 2
+  heading: Remove the three 8 mm screws from the black plastic cover.  Lift cover
+    up by grabbing the end closes
+- page: 3
+  heading: The coil pack will now easily slide out.  Check inside the rubber boot
+    for corrosion or moisture and
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

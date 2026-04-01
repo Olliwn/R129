@@ -1,0 +1,37 @@
+doc_id: sti_base_module_129_140
+title: STI_Base_Module_129_140
+filename: STI_Base_Module_129_140.pdf
+source_url: ''
+pages: 26
+topics:
+- brakes
+- central_locking
+- climate
+- diagnostics
+- electrical
+- engine
+- general
+- hydraulics
+- lighting
+- steering
+- suspension
+- transmission
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**Contents**'
+- page: 2
+  heading: '**Models 124.034/036, 129.067/076, 140 (EDS, LH-SFI, ME-SFI)**'
+- page: 3
+  heading: '**Models 124.034/036, 129.067/076, 140 (EDS, LH-SFI, ME-SFI)**'
+- page: 4
+  heading: '**Models 124.034/036, 129.067/076, 140 (EDS, LH-SFI, ME-SFI)**'
+- page: 5
+  heading: '**Models 124.34/036, 129.067/076, 140 (EDS, LH-SFI, ME-SFI)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

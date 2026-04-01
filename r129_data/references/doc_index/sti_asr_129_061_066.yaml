@@ -1,0 +1,36 @@
+doc_id: sti_asr_129_061_066
+title: STI_ASR_129_061_066
+filename: STI_ASR_129_061_066.pdf
+source_url: ''
+pages: 33
+topics:
+- brakes
+- central_locking
+- diagnostics
+- doors
+- electrical
+- engine
+- general
+- hydraulics
+- lighting
+- roof
+- transmission
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**5.1 Acceleration Slip Regulation (ASR)**'
+- page: 2
+  heading: '**5.1 Acceleration Slip Regulation (ASR)**'
+- page: 3
+  heading: '**5.1 Acceleration Slip Regulation (ASR)**'
+- page: 4
+  heading: '**5.1 Acceleration Slip Regulation (ASR)**'
+- page: 5
+  heading: '**5.1 Acceleration Slip Regulation (ASR)**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

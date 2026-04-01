@@ -1,0 +1,32 @@
+doc_id: sti_pse_remote_trunk_release
+title: STI_PSE_Remote_Trunk_Release
+filename: STI_PSE_Remote_Trunk_Release.pdf
+source_url: ''
+pages: 22
+topics:
+- audio
+- body
+- central_locking
+- diagnostics
+- doors
+- electrical
+- hydraulics
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**3.5 Pneumatic System Equipment  (PSE)**'
+- page: 2
+  heading: '**3.5 Pneumatic System Equipment (PSE)**'
+- page: 3
+  heading: '**3.5 Pneumatic System Equipment (PSE)**'
+- page: 4
+  heading: '**Models 129, 140, 170 as of M.Y. 1998**'
+- page: 5
+  heading: '**Models 129, 140, 170 as of M.Y. 1998**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

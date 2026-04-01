@@ -1,0 +1,56 @@
+vin: "WDB1290661F044414"
+model: "Mercedes-Benz 500 SL"
+model_year: 1991
+chassis_code: "129.066"
+engine_code: "M119.960"
+engine_description: "5.0L V8 32-valve DOHC"
+transmission_code: "722.3"
+transmission_description: "4-speed automatic (4G-Tronic)"
+fuel_system: "KE-Jetronic"
+paint_code: "199 M"
+paint_name: "Blauschwarz Metallic (Blue-Black Metallic)"
+interior_code: "271 A"
+interior_name: "Black/Anthracite Leather"
+gvwr_kg: 2190
+front_axle_kg: 1010
+rear_axle_kg: 1180
+registration: "AOK912"
+country: "Finland"
+
+option_codes:
+  - code: 211
+    description: "Adaptive Damping System (ADS)"
+  - code: 241
+    description: "Front seat LH electric adjustable with memory"
+  - code: 242
+    description: "Front seat RH electric adjustable with memory"
+  - code: 246
+    description: "Mirror with memory circuit"
+  - code: 283
+    description: "Draft deflector / wind deflector"
+  - code: 440
+    description: "Tempomat (Cruise control)"
+  - code: 581
+    description: "Automatic climate control"
+  - code: 592
+    description: "Heat-insulating glass, all-around, heated rear window pane"
+  - code: 600
+    description: "Headlamp wiper/washer"
+  - code: 740
+    description: "Black soft top fabric 9001"
+  - code: 873
+    description: "Seat heater for left and right front seats"
+
+key_systems:
+  - "ADS I (Adaptive Damping System, first generation)"
+  - "Niveauregulierung (mechanical level control, independent from ADS electronics)"
+  - "KE-Jetronic (CIS-E mechanical/electronic fuel injection)"
+  - "EZL ignition (distributorless)"
+  - "PSE (pneumatic central locking system)"
+  - "N7 exterior lamp failure module"
+  - "Infrared remote control (IRC/IRCL)"
+
+source:
+  type: "engineering_diary"
+  ref: "docs/AOK912 Engineering Diary.md, vehicle data plate"
+  confidence: "high"

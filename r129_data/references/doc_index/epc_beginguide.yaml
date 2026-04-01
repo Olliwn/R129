@@ -1,0 +1,40 @@
+doc_id: epc_beginguide
+title: EPC BeginGuide
+filename: EPC BeginGuide.pdf
+source_url: https://www.benzworld.org/attachments/epc-beginguide-pdf.2765287/
+pages: 10
+topics:
+- body
+- brakes
+- doors
+- electrical
+- engine
+- general
+- lighting
+- roof
+- steering
+- suspension
+- transmission
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '## **A beginner’s Guide to the Mercedes-Benz Electronic Parts Catalog**'
+- page: 2
+  heading: Most passenger cars have a VIN prefix of WDB, but the M Class and G Class,
+    for example, start with 4
+- page: 3
+  heading: your vehicle are listed on the Vehicle Data Card, which is either provided
+    at new delivery or availa
+- page: 4
+  heading: 'Start by selecting a likely Group for your search. Carefully review the
+    Subgroup descriptions for a '
+- page: 5
+  heading: 'A note about Codes: You often have to make an educated guess with Codes.
+    That means, you need to loo'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

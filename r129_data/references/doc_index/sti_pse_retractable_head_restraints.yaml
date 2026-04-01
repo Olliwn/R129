@@ -1,0 +1,32 @@
+doc_id: sti_pse_retractable_head_restraints
+title: STI_PSE_Retractable_Head_Restraints
+filename: STI_PSE_Retractable_Head_Restraints.pdf
+source_url: ''
+pages: 15
+topics:
+- central_locking
+- diagnostics
+- doors
+- electrical
+- engine
+- hydraulics
+- seats
+- wheels
+- wiring
+toc:
+- page: 1
+  heading: '**3.5 Pneumatic System Equipment  (PSE)**'
+- page: 2
+  heading: '**3.5 Pneumatic System Equipment (PSE)**'
+- page: 3
+  heading: '**3.5 Pneumatic System Equipment (PSE)**'
+- page: 4
+  heading: '**Models 129, 140, 170 as of M.Y. 1998**'
+- page: 5
+  heading: '**Models 129, 140, 170 as of M.Y. 1998**'
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium

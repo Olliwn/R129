@@ -1,0 +1,181 @@
+variants:
+  - model_name: "300 SL"
+    chassis_code: "129.060"
+    engine_code: "M103.984"
+    engine_description: "3.0L I6 12-valve"
+    transmission_codes: ["722.3", "717.4"]
+    years_from: 1989
+    years_to: 1993
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article, Models table"
+      confidence: "high"
+
+  - model_name: "300 SL-24"
+    chassis_code: "129.061"
+    engine_code: "M104.981"
+    engine_description: "3.0L I6 24-valve"
+    transmission_codes: ["722.3", "717.4"]
+    years_from: 1989
+    years_to: 1993
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article, Models table"
+      confidence: "high"
+
+  - model_name: "SL 280 (I6)"
+    chassis_code: "129.058"
+    engine_code: "M104.943"
+    engine_description: "2.8L I6 24-valve"
+    transmission_codes: ["722.4"]
+    years_from: 1993
+    years_to: 1998
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article, Models table"
+      confidence: "high"
+
+  - model_name: "SL 280 (V6)"
+    chassis_code: "129.059"
+    engine_code: "M112.923"
+    engine_description: "2.8L V6 18-valve"
+    transmission_codes: ["722.6"]
+    years_from: 1998
+    years_to: 2001
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article, Models table"
+      confidence: "high"
+
+  - model_name: "SL 320 (I6)"
+    chassis_code: "129.063"
+    engine_code: "M104.991"
+    engine_description: "3.2L I6 24-valve"
+    transmission_codes: ["722.5", "717.4"]
+    years_from: 1993
+    years_to: 1998
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article, Models table"
+      confidence: "high"
+
+  - model_name: "SL 320 (V6)"
+    chassis_code: "129.064"
+    engine_code: "M112.943"
+    engine_description: "3.2L V6 18-valve"
+    transmission_codes: ["722.6"]
+    years_from: 1998
+    years_to: 2001
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article, Models table"
+      confidence: "high"
+
+  - model_name: "500 SL (pre-facelift)"
+    chassis_code: "129.066"
+    engine_code: "M119.960"
+    engine_description: "5.0L V8 32-valve DOHC, KE-Jetronic"
+    transmission_codes: ["722.3"]
+    years_from: 1989
+    years_to: 1993
+    notes: "KE-Jetronic (CIS-E) fuel injection. 4-speed hydraulic automatic."
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article, Models table"
+      confidence: "high"
+
+  - model_name: "500 SL / SL 500 (mid)"
+    chassis_code: "129.067"
+    engine_code: "M119.972"
+    engine_description: "5.0L V8 32-valve DOHC, HFM (hot-film MAF)"
+    transmission_codes: ["722.3", "722.5"]
+    years_from: 1993
+    years_to: 1998
+    notes: "HFM fuel injection replaced KE-Jetronic. 722.5 (5-speed) from 1996."
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article, Models table"
+      confidence: "high"
+
+  - model_name: "SL 500 (facelift)"
+    chassis_code: "129.068"
+    engine_code: "M113.961"
+    engine_description: "5.0L V8 24-valve SOHC (3-valve)"
+    transmission_codes: ["722.6"]
+    years_from: 1998
+    years_to: 2001
+    notes: "M113 (single-cam, 3-valve) replaced the M119 (DOHC, 4-valve). 5-speed electronic auto."
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article, Models table"
+      confidence: "high"
+
+  - model_name: "600 SL / SL 600"
+    chassis_code: "129.076"
+    engine_code: "M120.981"
+    engine_description: "6.0L V12 48-valve DOHC"
+    transmission_codes: ["722.3", "722.5", "722.6"]
+    years_from: 1991
+    years_to: 2001
+    notes: "722.5 from 1996, 722.6 from 1998."
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article, Models table"
+      confidence: "high"
+
+production_changes:
+  - year: 1989
+    description: "R129 production begins. 300 SL (M103), 300 SL-24 (M104), 500 SL (M119.960)."
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article"
+      confidence: "high"
+
+  - year: 1991
+    description: "600 SL (M120 V12) added to lineup. ADS optional across range."
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article"
+      confidence: "high"
+
+  - year: 1993
+    description: "300 SL/SL-24 replaced by SL 280 and SL 320. 500 SL becomes 129.067 with M119.972 (HFM). Naming convention reversal (500 SL -> SL 500)."
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article"
+      confidence: "high"
+
+  - year: 1995
+    description: "Odometer switched from mechanical to electronic. Clear front turn signals (US). Bose stereo standard. Portable cell phone option."
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article"
+      confidence: "high"
+
+  - year: 1996
+    description: "Minor facelift: 2-slot fender vents (replacing 3-slot), body-color bumpers, side airbags. V8/V12 get 722.5 (5-speed electronic auto). Xenon HID standard on SL 600, optional on SL 500."
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article"
+      confidence: "high"
+
+  - year: 1997
+    description: "Panoramic roof added. Rain-sensing wipers standard. HomeLink garage door opener in rear-view mirror. Passenger occupant detection sensor."
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article"
+      confidence: "high"
+
+  - year: 1999
+    description: "Major refresh: M119 V8 replaced by M113 V8 (SL 500 becomes 129.068). 722.6 5-speed auto. Nappa leather. New steering wheel and taillights. 17-inch wheels standard. Fiber-optic audio. Tip-start ignition. Silver gauge rings."
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article"
+      confidence: "high"
+
+  - year: 2001
+    description: "Final production year. Replaced by R230 for 2002 model year."
+    source:
+      type: "wikipedia"
+      ref: "Wikipedia R129 article"
+      confidence: "high"

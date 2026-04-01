@@ -1,0 +1,34 @@
+doc_id: new_insturment_cluster
+title: New Insturment Cluster
+filename: New Insturment Cluster.pdf
+source_url: https://www.benzworld.org/attachments/new-insturment-cluster-pdf.2765310/
+pages: 5
+topics:
+- audio
+- brakes
+- central_locking
+- diagnostics
+- doors
+- electrical
+- engine
+- instrument_cluster
+- lighting
+- roof
+- wheels
+toc:
+- page: 1
+  heading: Page 1 of 5
+- page: 2
+  heading: Page 2 of 5
+- page: 3
+  heading: Page 3 of 5
+- page: 4
+  heading: Page 4 of 5
+- page: 5
+  heading: Page 5 of 5
+applies_to:
+  years:
+  - 1989
+  - 2001
+  chassis: all
+quality: medium
