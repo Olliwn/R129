@@ -12,6 +12,19 @@
 
 ---
 
+## ⚠️ URGENT — ADS Strut Dust Boots (ORDER IMMEDIATELY)
+
+*Discovered 2026-04-02 during katsastus underbody inspection. Lower sections of the dust boots are missing on the ADS shock absorbers, leaving the chrome piston shafts exposed to road debris, grit, and moisture. Pitting on exposed shafts will destroy the internal seals and kill the ADS shocks — which are extremely expensive (~€500–800+ each) and increasingly unavailable. DO NOT drive significant distances until these are installed.*
+
+| Part | OEM Number | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| ADS Shock Absorber Dust Boot (front) | A 129 323 01 92 | 2 | Fits R129/W124/W201. Also: VAICO V30-6033, MEYLE 0140320032, FEBI KIT 13034. ~€5–13 each. |
+| ADS Shock Absorber Dust Boot (rear) | A 129 323 01 92 (verify) | 2 | May be same P/N as front — verify with MB-osat by VIN. Rear ADS shocks may use a different boot dimension. |
+
+**Source:** MB-osat Oulu (email order with VIN), or Autodoc/Pelican Parts. These are cheap, common parts — the urgency is installation, not sourcing.
+
+---
+
 ## PRIORITY 1 — Next Session (ADS + Cooling + Engine Bay)
 
 ### Air Intake Hoses (M119 KE-Jetronic)
@@ -22,17 +35,17 @@
 | Right Intake Hose (passenger side) | A 119 094 01 82 | 1 | **BROKEN — taped as temp fix.** Priority. |
 | Left Intake Hose (driver side) | A 119 094 00 82 | 1 | Inspect — likely same age/condition. Order with the right side. |
 
-**Ask MB-osat:** Confirm these are for the early M119.960 (KE-Jetronic, thin air filters). Late M119 intake hoses are different.
+**MB-osat result (2026-04-02):** NOT AVAILABLE — discontinued / no longer in stock. >100 € each when they were available. **Plan B:** DIY permanent repair — damage is highly localized (banding sections). Splice/replace the cracked banding sections and bond with appropriate adhesive. Research suitable method.
 
 ### Cooling System
 *Thermostat and radiator cap are cheap insurance items with unknown service history.*
 
 | Part | OEM Number | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| Thermostat (80°C) | A 119 200 04 15 (verify) | 1 | Known M119 failure point. Causes overcooling or overheating. |
+| Thermostat (82°C) | A 119 200 04 15 (verify) | 1 | **ORDERED from MB-osat 2026-04-02.** |
 | Radiator Cap | A 124 500 04 06 (verify) | 1 | Cheap insurance — weak cap lowers boiling point. |
 
-**Ask MB-osat:** Confirm thermostat part number and operating temperature for M119.960.
+**MB-osat (2026-04-02):** Thermostat confirmed and ordered (82°C). Radiator cap not yet ordered.
 
 ### Transmission Fluid (722.3)
 *No filter to change on the 722.3 — just fluid. Need enough for 2–3 drain-and-fill cycles (~5L per cycle).*
@@ -47,7 +60,7 @@
 
 | Part | OEM Number | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| ADS Suction Filter | A 129 327 00 91 | 1 | ~7–11 €. Old one cleaned on 2026-03-29, but a new one is needed for long-term reliability. |
+| ADS Suction Filter | A 129 327 00 91 | 1 | **ORDERED from MB-osat 2026-04-02.** Old one cleaned on 2026-03-29 as interim fix. |
 | ZH-M Hydraulic Fluid (MB 343.0) | 000 989 91 03 (Febi 02615) | 1–2 L | Top-up for closed-loop bleed. 4L used in open-loop flush on 03-29. Check remaining level. |
 
 ### Predictive Electronics Maintenance (Task #14)
@@ -64,14 +77,14 @@
 
 | Part | OEM Number / Ref | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| Valve Cover Gasket Set (Right bank) | 119 010 03 30 | 1 | Incl. spark plug hole seals. Elring or Victor Reinz preferred. |
-| Valve Cover Gasket Set (Left bank) | 119 010 04 30 | 1 | Incl. spark plug hole seals. |
-| Upper Timing Chain Guide (Slide rail) | 119 050 02 16 | 2 | Check fitment per VIN / sub-version. |
+| Valve Cover Gasket Set (Right bank) | 119 010 03 30 | 1 | **ORDERED from MB-osat 2026-04-02.** Incl. spark plug hole seals. |
+| Valve Cover Gasket Set (Left bank) | 119 010 04 30 | 1 | **ORDERED from MB-osat 2026-04-02.** Incl. spark plug hole seals. |
+| Upper Timing Chain Guide (Slide rail) | 119 050 02 16 | 2 | **ORDERED from MB-osat 2026-04-02.** >100 € per side. |
 | Upper Timing Chain Guide (U-shape) | 119 052 09 16 | 1–2 | Depending on M119 sub-version — confirm with MB-osat. |
 | Aluminum Camshaft Oiler Tubes | URO 1191800266PRM (OEM: 119 180 02 66) | 16 | [RockAuto](https://www.rockauto.com/en/catalog/mercedes-benz,1990,500sl,5.0l+v8,1195141) (Engine → Camshaft Oiler Kit). URO Parts anodized aluminum w/ Viton FKM o-rings. ~€14.15/ea × 16 = ~€226 + FedEx/customs/VAT ≈ **€285 delivered.** Use FedEx "Pay import duties in advance." **Verify qty 16 with MB-osat EPC before ordering.** |
-| Breather Hose (Crankcase vent) | 119 094 03 82 | 1 | Old ones usually cracked — replace preventively while the top end is open. |
+| Breather Hose (Crankcase vent) | 119 094 03 82 | 1 | **NOT ORDERED** — will inspect condition first. |
 
-**Ask MB-osat:** Confirm timing guide part numbers for M119.960 (VIN ...044414). Early vs. late M119 guides may differ. They can pull the EPC diagram.
+**MB-osat (2026-04-02):** Timing guides confirmed and ordered. Breather hose deferred to inspect-first. Future orders to be sent by email.
 
 ---
 
@@ -112,7 +125,7 @@
 
 | Part | OEM Number | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| Front Accumulator Spheres | A 129 320 01 15 | 2 | FR suspect (stiffness noted 2026-03-22, but may be air-lock). Pending "straw test" after system is online. Replace as pair if confirmed. Corteco brand. ~100–150 € each. |
+| ~~Front Accumulator Spheres~~ | ~~A 129 320 01 15~~ | ~~2~~ | **CANCELLED (2026-04-02).** All four spheres confirmed healthy — exceptional ride quality on first drive, inspector commented. Earlier FR stiffness was air-lock from depleted system. |
 | Rear Level Control Linkage | (inspect under car first) | 1 | Known ADS I failure: plastic link shears at lower mount. Inspect BEFORE ordering. |
 | ADS Tandem Pump (CONDITIONAL) | A 129 460 07 80 | 1 | ~€850 rebuilt from ABCspecialist NL + core deposit. **Pump confirmed ALIVE (2026-03-26) — DO NOT ORDER.** Only if future testing reveals internal failure. |
 
@@ -124,7 +137,7 @@
 | :--- | :--- | :--- | :--- |
 | Antenna Grommet (Upper) | A 129 827 02 98 | 1 | Cracked seal leaks water onto the PSE pump in the trunk. |
 | Antenna Grommet (Lower) | A 129 827 03 98 | 1 | Order with upper. |
-| Touch-up Paint Pen | Color code 199 (Blauschwarz Metallic) | 1 | Base coat + clear coat. For the hood scratch and behind-wheel bare steel. |
+| Touch-up Paint Pen | Color code **744 Brilliant Silver Metallic** | 1 | Base coat + clear coat. For the hood scratch and behind-wheel bare steel. |
 | Plastic Scrapers | — | 1 set | For the hood pad adhesive removal. No metal on aluminum. |
 
 ---
@@ -143,7 +156,9 @@
 4. **722.3 ATF:** Confirm MB 236.1 is the right spec (not 236.10/236.14).
 5. **Cluster removal hooks:** Do they stock tool 140 589 02 33 00, or can they suggest a substitute?
 6. **Aluminum oil bridge clips:** They won't have these (aftermarket only), but ask if they've seen M119 cam lobe pitting from loose bridges — shop experience is valuable.
-7. **Availability & lead times:** Which parts are in stock vs. special order from MB Germany?
+7. **Paint code confirmed:** 744 Brilliant Silver Metallic (from mbdecoder.com VIN decode, 2026-04-01). Ask MB-osat to confirm and source correct touch-up pen.
+8. **ADS confirmed factory (option 216):** Lastvin.com shows option 216 (self-leveling + ADS). All ADS hardware is original. The mbdecoder.com decode was incomplete.
+9. **Availability & lead times:** Which parts are in stock vs. special order from MB Germany?
 
 ---
 
@@ -238,4 +253,4 @@
 
 ---
 
-*Last updated: 2026-03-31*
+*Last updated: 2026-04-02*

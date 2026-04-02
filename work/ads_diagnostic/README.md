@@ -4,19 +4,19 @@
 
 The 1991 Mercedes-Benz 500 SL (R129) — AOK912 (manufactured 09/1991, possibly MY1992 spec) is equipped with ADS I (Adaptive Damping System, first generation). The car drives well and the ride is comfortable ("floating"), confirming the base mechanical springs and nitrogen accumulators are functional.
 
-**STATUS (2026-03-30): ADS SYSTEM CURRENTLY OFFLINE — OVP RELAY ROOT CAUSE IDENTIFIED.**
+**STATUS (2026-04-01): ADS SYSTEM ONLINE — OVP FIX CONFIRMED.**
 
-The OVP (Overvoltage Protection) relay was removed and disassembled. Visual inspection revealed **3–4 ring-shaped cracked solder joints** from thermal fatigue, worst on the **87L connector pin** — suspected to be the N51 power feed. This single hardware failure explains the entire chain of intermittent symptoms since purchase.
+The OVP relay was the root cause. After re-soldering all joints with Sn63/Pb37 (2026-03-31) and reinstalling (2026-04-01), N51 boots cleanly, both cabin ADS switches show red LEDs, and the diagnostic bus is stable. Pin 9 returns **fault code 14** (steering angle sensor N49 not initialized — expected after extended power loss). No other codes. Clear with lock-to-lock steering.
 
-**What still holds from prior sessions:**
-- The ADS control module (N51) is healthy — when it had clean power (Mar 23–28), it communicated correctly (1 blink / no faults), both switches worked, Sport/Comfort switching was reliable.
-- The tandem pump ADS section is working (confirmed 2026-03-26 — reservoir level dropped ~2/3 after engine start).
-- Phase 1 flush completed (2026-03-29): 4L ZH-M pumped through, fluid ran clear quickly, no external leaks. Filter cleaned.
+**Current state:**
+- N51 online and communicating reliably. OVP 87L joint confirmed as the root cause of all intermittent failures since purchase.
+- The tandem pump ADS section is working (confirmed 2026-03-26).
+- Phase 1 open-loop flush completed (2026-03-29): 4L ZH-M pumped through, fluid clear, filter cleaned.
 - Air in system confirmed (bubbling in reservoir after engine off, 2026-03-29).
-- Rear height remains static. Front may respond. Cannot evaluate level control further until N51 has reliable power.
+- Rear height remains static. Front may respond.
 - Baseline measurements (2026-03-29): Rear L: 67cm, R: 66cm / Front L: 69cm, R: 68.5cm.
 
-**NEXT ACTION: Re-solder OVP relay with Sn63/Pb37 leaded solder (especially 87L), reinstall, and test Pin 9.**
+**NEXT ACTION: Clear code 14 (lock-to-lock steering), then proceed with closed-loop bleed (Phase 1).**
 
 **IMPORTANT — Manual Discovery (2026-03-23):** We had been referencing the **1990** owner's manual, but the car is a **1991** model. The 1991 manual (now downloaded) reveals major differences: ADS, ASR, ASD, and the snow chain switch were all added for 1991. Critically, **the 1991 manual confirms ADS has a dedicated instrument cluster warning lamp** (page 92: "The indicator lamp comes on with the key in steering lock position 2 and goes out when the engine is running"). Our earlier conclusion that "ADS was never in the standard R129 indicator set" was wrong — it was based on the 1990 manual which predates ADS. **The original "missing lamp" observation may have been the ADS warning lamp.** Needs verification during ignition-ON bulb check.
 
@@ -51,20 +51,32 @@ The OVP (Overvoltage Protection) relay was removed and disassembled. Visual insp
 | **OVP relay: 3–4 cracked solder joints found (thermal fatigue).** Worst on 87L (N51 power feed). Interior clean/dry. | OVP disassembly & inspection | 2026-03-30 |
 | Electronics bay inspected — general surface oxidation but no water pooling. No moisture inside OVP. | Visual inspection | 2026-03-30 |
 | ADS system currently OFFLINE — Pin 9 shows "dim glow," no blink response | Blink-code reader test | 2026-03-30 |
+| **OVP reinstalled — ADS ONLINE.** N51 stable, both switches active, Pin 9 returns code 14 only. | OVP reinstall + test | 2026-04-01 |
+| **First drive (post-OVP fix): Sport/Comfort damping CONFIRMED WORKING.** Inspector independently commented on smooth ride. | Road test + katsastus | 2026-04-02 |
+| **All four accumulator spheres HEALTHY.** Ride quality exceptional — earlier FR stiffness was air-lock, not blown sphere. | Road test observation | 2026-04-02 |
+| **Fahrzeugniveau switch STUCK** — red LED permanently on, toggle has no effect on LED or ride height. Different from pre-flush behavior. | First drive observation | 2026-04-02 |
+| **⚠️ ADS strut dust boots — lower sections MISSING.** Chrome piston shafts exposed to road debris. Urgent: pitting will destroy internal seals on irreplaceable ADS shocks. | Underbody inspection (katsastus) | 2026-04-02 |
+| Underbody generally clean (summer-only car). No transmission leaks. Exhaust center silencer outer shell starting to rust. Rear diff surface rust. | Underbody inspection | 2026-04-02 |
 
 
-**Working hypothesis (revised 2026-03-30):**
+**Working hypothesis (revised 2026-04-02):**
 
-The ADS electronic system (N51, switches, wiring) is proven healthy when it receives clean power. The **root cause of all intermittent ADS failures is the OVP relay** — cracked solder joints on 87L deprive N51 of stable power. The hydraulic side has been flushed and the pump is proven working; remaining hydraulic work (closed-loop bleed, rear height assessment) is blocked until N51 is back online.
+**Subsystem A (Adaptive Damping) is FULLY WORKING.** OVP root cause resolved (2026-04-01). Sport/Comfort modes confirmed on first drive (2026-04-02) — damping difference perceptible, inspector independently commented on smooth ride. All four accumulator spheres are healthy (earlier FR stiffness was air-lock from depleted system). Code 14 (steering angle sensor) needs clearing.
 
-**Issue tracker (updated 2026-03-30):**
+**Subsystem B (Level Control / Niveauregulierung) is NOT WORKING.** Fahrzeugniveau switch is stuck with red LED permanently on — toggling does not change state or affect ride height. This is a **new symptom** (different from pre-flush behavior when the switch toggled normally). Rear height remains static. Pump is proven alive, flush is done, fluid is fresh. The remaining unknowns are: switch/relay logic, rear level control valve function, and whether the hydraulic circuit to the rear struts flows.
 
-1.  **~~Level control inoperative — pump not circulating.~~** **PUMP CONFIRMED ALIVE (2026-03-26). Phase 1 flush COMPLETED (2026-03-29).** 4L ZH-M pumped through, fluid ran clear quickly (<1L), no external leaks. Filter cleaned (~99%). Air in system confirmed (bubbling after engine off, 2026-03-29). Baseline: Rear L: 67cm, R: 66cm / Front L: 69cm, R: 68.5cm. Rear height remains static. **→ PARKED until N51 has reliable power (OVP fix). Then: closed-loop bleed (jack rear for full droop + trunk bounce) to clear trapped air from rear circuit. Re-measure ride heights.**
-2.  **Front accumulator spheres suspect.** Earlier (2026-03-22) Front Right felt significantly stiffer than Front Left. On 2026-03-26, the difference felt smaller after engine run. The stiffness could be due to air lock rather than ruptured spheres. **→ PARKED until after OVP fix + closed-loop bleed. Then perform "straw test" to check nitrogen diaphragm integrity before ordering replacements (A 129 320 01 15).**
-3.  **ADS cluster warning lamp missing — likely cluster swap (2026-03-26).** Photo of the indicator strip shows **no ADS symbol at all** to the left of ASR — not even a dead-fronted print. The strip itself is a non-ADS variant. Combined with option 211 confirming the car IS factory ADS-spec, this points to a **cluster swap from a non-ADS R129**. The oil-level float warning has NEVER worked since the swap — explaining why chronic low fluid went unnoticed. Odometer accuracy in question. **→ Pull cluster when tools available (Phase 3).**
-4.  **~~Fault code 14 (steering angle sensor).~~** **RESOLVED (2026-03-28).** Cleared by lock-to-lock steering. System was online and stable across multiple engine starts on Mar 28. **Then lost again (2026-03-29) when OVP joint failed during flush.** Will need to re-read/clear codes after OVP re-solder.
-5.  **Cluster swap — historical analysis (2026-03-27).** Swedish records show smooth odometer 2013–2024 (~340 km/yr). No pre-2013 records available publicly. Swap likely pre-2008. Full analysis in Engineering Diary.
-6.  **OVP RELAY CRACKED SOLDER JOINTS — ROOT CAUSE (2026-03-30).** Removed and disassembled OVP relay. Found **3–4 ring-shaped thermal fatigue fractures** on PCB, worst on **87L connector pin** (suspected N51 power feed). OVP interior was clean and dry (light dust only) — no moisture ingress. Electronics bay shows general surface oxidation from 35 years of unsealed engine bay exposure but no evidence of water pooling or directed leaks. Fractures attributed to **pure thermal fatigue**. This explains all intermittent symptoms: dim glow (leakage current, not clean power), recovery after battery disconnect (thermal cycling briefly closes fracture), mid-flush system death (sustained engine heat widened fracture permanently). **→ FIX: re-solder all joints with Sn63/Pb37 leaded solder. Test Pin 9. If N51 boots, read/clear codes and proceed with closed-loop bleed.**
+**⚠️ URGENT — ADS strut dust boots are missing lower sections.** Chrome piston shafts are exposed to road debris. Pitting on the shafts will destroy internal seals and kill the ADS shocks, which are extremely expensive and increasingly unavailable. **Order and install dust boots before any further driving.**
+
+**Issue tracker (updated 2026-04-02):**
+
+1.  **~~Level control inoperative — pump not circulating.~~** **PUMP ALIVE (2026-03-26). Flush DONE (2026-03-29).** Rear height still static. Fahrzeugniveau switch now stuck (red LED permanently on, new symptom post-OVP-fix). **→ Next: (a) Clear code 14. (b) Read Pin 9 for any new codes. (c) Manual valve test — disconnect ARB linkage from rear level control valve, manually move lever with system pressurized on jack stands. (d) If valve responds to manual input, problem is upstream (switch/relay/wiring). If not, valve or hydraulic supply is blocked.**
+2.  **~~Front accumulator spheres suspect.~~** **CLEARED (2026-04-02).** Ride quality exceptional on first drive — inspector commented on smooth adaptive ride. All four spheres healthy. Earlier FR stiffness (2026-03-22) was air-lock from depleted hydraulic system, not a ruptured diaphragm. **No replacement needed.**
+3.  **ADS cluster warning lamp missing — confirmed cluster swap (option 216 factory ADS, confirmed via lastvin.com 2026-04-01).** Non-ADS cluster. **→ Pull cluster when tools available (Phase 3).**
+4.  **Fault code 14 (steering angle sensor).** Returned after OVP reinstall (expected — N51 was unpowered for days). **→ Clear with lock-to-lock steering.**
+5.  **Cluster swap — historical analysis (2026-03-27).** Swedish records show smooth odometer 2013–2024. Swap likely pre-2008.
+6.  **~~OVP RELAY CRACKED SOLDER JOINTS.~~** **CONFIRMED & RESOLVED (2026-04-01).** Done.
+7.  **⚠️ ADS STRUT DUST BOOTS — LOWER SECTIONS MISSING (2026-04-02).** Chrome piston shafts exposed. Pitting will destroy seals on irreplaceable ADS shocks. **→ ORDER IMMEDIATELY. Install before further driving.**
+8.  **Fahrzeugniveau switch stuck (2026-04-02).** Red LED permanently on, toggle has no effect. New behavior — switch worked normally before flush (Mar 23–28). Possible: stuck relay, N51 latched state, switch failure, or wiring issue from electronics bay work. **→ Investigate after clearing code 14 and reading all stored codes.**
 
 ## ADS I System Architecture (Reference)
 
@@ -80,7 +92,7 @@ Controls shock absorber stiffness via electronic solenoid valves. This subsystem
 - **ADS Console Switch** — center console rocker/button: Sport / Comfort mode selection. Sends a ground signal to N51. **Status: WORKING** — LED illuminates, turns RED in Sport/up position (confirmed 2026-03-23).
 - **Speed Sensor Input** — N51 receives vehicle speed from the speedometer or ABS controller.
 - **Steering Angle Sensor** — input for dynamic damping adjustment.
-- **4× ADS Shock Absorbers** — each contains a proportional solenoid valve that adjusts damping force. Solenoid coil resistance is typically 4–8 Ω. Each shock also contains a nitrogen-charged gas cushion (accumulator sphere). **Front Right sphere suspect** (stiffness difference noted 2026-03-22, but may be air-lock — "straw test" needed before condemning). Invisible to N51.
+- **4× ADS Shock Absorbers** — each contains a proportional solenoid valve that adjusts damping force. Solenoid coil resistance is typically 4–8 Ω. Each shock also contains a nitrogen-charged gas cushion (accumulator sphere). **All four spheres confirmed healthy (2026-04-02)** — exceptional ride quality on first drive, inspector commented. Earlier FR stiffness was air-lock. **⚠️ Dust boots missing lower sections — shafts exposed. Urgent replacement needed to protect these irreplaceable shocks.**
 - **ADS Warning Lamp** — cluster warning lamp for damping faults (page 92: *"The indicator lamp comes on with the key in steering lock position 2 and goes out when the engine is running"*). **Status: MISSING from indicator strip** — either dead bulb behind dead-fronting, or cluster variant issue.
 - **Diagnostic Output** — X11 Pin 9 blink-code interface (pre-OBD). Requires >13V supply. **Returns 1 blink = no stored damping faults.**
 
@@ -174,28 +186,19 @@ These steps were written when the module was presumed dead. Now that N51 communi
 
 ### Active Phases (in priority order)
 
-### Phase 0: OVP Relay Re-Solder — RE-SOLDER DONE (2026-03-31), AWAITING REINSTALL + TEST
+### Phase 0: OVP Relay Re-Solder — COMPLETED ✓ (2026-04-01)
 
-*Added 2026-03-30. The OVP relay is the power gateway for N51. Cracked solder joints on 87L are the identified root cause of all intermittent ADS symptoms. Everything else is blocked until this is fixed.*
+*Root cause confirmed. OVP relay cracked solder joints on 87L (N51 power feed) caused all intermittent ADS failures since purchase.*
 
-**What was found (2026-03-30):** 3–4 ring-shaped thermal fatigue fractures on the OVP relay PCB. Worst on 87L connector pin (suspected N51 power feed). OVP interior clean and dry — pure thermal fatigue from 35 years of engine heat cycling, not corrosion.
+- **Found (2026-03-30):** 3–4 ring-shaped thermal fatigue fractures on OVP PCB, worst on 87L.
+- **Re-soldered (2026-03-31):** All joints reworked with Sn63/Pb37. Optical inspection passed.
+- **Reinstalled & verified (2026-04-01):** N51 boots cleanly. Both cabin switches show red LEDs. Diagnostic bus stable. Pin 9 returns code 14 (N49 steering angle sensor — expected, clear with lock-to-lock). **No other fault codes.**
 
-**Re-solder completed (2026-03-31):** All solder joints on the OVP PCB reworked — old solder removed with desoldering wick, pads cleaned, all joints re-flowed with Sn63/Pb37 leaded solder. Optical inspection confirmed good wetting, no ring cracks, no cold joints, no bridges.
+### Phase 1: Closed-Loop Bleed & Ride Height Assessment (NEXT ACTION)
 
-**Remaining — Reinstall & Verify (NEXT ACTION):**
-1. Reinstall OVP in electronics bay socket.
-2. Reconnect battery.
-3. Turn ignition to position 2 (engine OFF). Check ADS console switch LED — should illuminate.
-4. Connect blink-code reader to Pin 9. Press button. If N51 boots: should get blink codes.
-5. If fault codes present: read and clear. Then start engine, perform lock-to-lock steering (re-initialize N49 steering angle sensor).
-6. Verify both switches work: console Sport/Comfort + Fahrzeugniveau level.
-7. If Pin 9 is STILL dim glow after OVP fix: inspect N51 connector pins for corrosion, check ground point W10, consider pulling N51 for internal capacitor inspection.
+*Phase 0 prerequisite MET — N51 is online and stable. Open-loop flush was completed on 2026-03-29 (4L ZH-M, fluid clear, filter cleaned). Air entrapment confirmed (bubbling). The closed-loop bleed was never performed because OVP failed mid-flush.*
 
-### Phase 1: Closed-Loop Bleed & Ride Height Assessment (after OVP fix)
-
-*Phase 1 open-loop flush was COMPLETED on 2026-03-29 (4L ZH-M, fluid clear, filter cleaned). Air entrapment was confirmed (bubbling). This phase picks up where the flush left off — the system shut down mid-flush due to OVP failure, so the closed-loop bleed was never performed.*
-
-**Prerequisite:** N51 online and stable after OVP re-solder (Phase 0).
+**Before starting:** Clear code 14 — start engine, turn steering full lock left → full lock right → center. Read Pin 9 to confirm 1 blink (no faults).
 
 **Procedure:**
 1. Top up reservoir to MAX with fresh ZH-M.
@@ -392,5 +395,7 @@ N51 currently reports 0 faults on Pin 9. These tests are needed only if new faul
 | 2026-03-27 | 1     | **Pin 9 blink-code read (post-pump-test)** | **14 blinks = Steering angle sensor (N49) not initialized.** Single fault code only. Soft fault — N51 lost steering angle calibration when it shut down during pump test air/pressure anomaly. Sensor hardware intact. | **Clear code via Pin 9 reset, start engine, turn steering full lock L → full lock R → center (re-initialization). If Pin 9 reads 1 blink after, system is clean. Proceed with Phase 1 flush.** |
 | 2026-03-28 | 1     | **Lock-to-lock + extended observation** | **CODE 14 CLEARED — SYSTEM FULLY ONLINE.** Lock-to-lock steering re-initialized N49. System stable across multiple engine starts throughout the day (car not driven — not registered). **Key observations:** (1) Both switch LEDs illuminate correctly and remain active. (2) Console Sport/Comfort works consistently (red on/off). (3) **Reservoir level returned to near-MAX with engine off** — fluid enters circuit when running, returns when depressurized. No net loss (>100ml), confirms no external leaks. (4) **Possible front height change** — visual impression only, needs fender-to-ground measurement. (5) **Rear height static** — no change with Fahrzeugniveau UP. (6) **Fahrzeugniveau switch slow to deactivate** — LED stays on for some time after toggling off. | **System stable and ready for Phase 1 flush.** Rear-specific issue confirmed — front may respond to level commands while rear does not. Post-flush focus: rear level control valve, rear ARB linkage, air in rear lines. **ACTION: measure fender-to-ground at all four corners before and after flush.** |
 | 2026-03-29 | 1     | **Phase 1 Flush Execution** | **Flush completed using 4L ZH-M.** Findings: (1) Fluid ran clear very quickly (<1L). (2) **No air bubbles** seen from return line during the open-loop flush. (3) Reservoir kept above MIN successfully. (4) **System shut down mid-test:** Fahrzeugniveau switch LED went dark and stopped responding. (5) **Diagnostic ports unresponsive:** Pin 9 shows "static dim glow" on the LED tester, no blinks — even with engine running at 14V. | See 2026-03-30 OVP findings below — the mid-flush shutdown was likely caused by OVP solder joint failure under sustained heat/vibration. |
-| 2026-03-30 | —     | **OVP RELAY CRACKED SOLDER JOINTS FOUND (ROOT CAUSE?)** | **MAJOR FINDING.** Removed and disassembled the OVP relay (red box, center of electronics bay). Visual inspection of the PCB revealed **3–4 obvious ring-shaped solder fractures** — classic thermal fatigue / cold solder joint failures on a 35-year-old relay. The worst fractures were on the **87L connector pin**, which is suspected to be the ADS (N51) power feed. | **This likely explains ALL intermittent ADS symptoms:** (1) The "dim glow" on Pin 9 = N51 receiving glitchy/insufficient power through the cracked joint — enough leakage current for a dim LED but not enough for the processor to boot and communicate. (2) Why the system sometimes worked after battery disconnect = thermal cycling from the disconnect briefly restored contact across the fracture. (3) Why the system died mid-flush = extended engine running caused heat buildup + vibration in the OVP, widening the fracture gap and killing the 87L contact. (4) Why it never recovered afterward = the fracture is now open enough that no amount of voltage or power cycling can bridge it. **FIX: Re-solder all OVP joints with proper leaded solder (Sn63/Pb37). Then test Pin 9 — if N51 gets clean power, it should wake up immediately.** |
+| 2026-03-30 | —     | **OVP RELAY CRACKED SOLDER JOINTS FOUND** | Removed and disassembled OVP relay. 3–4 ring-shaped thermal fatigue fractures on PCB, worst on 87L (N51 power feed). Interior clean/dry — pure thermal fatigue. | Root cause of all intermittent ADS symptoms identified. Re-solder with Sn63/Pb37. |
+| 2026-03-31 | 0     | **OVP re-soldered** | All joints reworked with Sn63/Pb37 leaded solder. Optical inspection: good wetting, no ring cracks, no cold joints, no bridges. | Awaiting reinstall + test. |
+| 2026-04-01 | 0     | **OVP REINSTALLED — ADS ONLINE ✓** | OVP reinstalled. N51 boots cleanly. Both cabin switches show red LEDs. Diagnostic bus stable. **Pin 9 returns code 14 only** (steering angle sensor N49 — expected after extended power loss). No other fault codes. | **ROOT CAUSE CONFIRMED.** OVP 87L cracked solder joint was the sole cause of all intermittent ADS failures since purchase. Next: clear code 14 (lock-to-lock), then closed-loop bleed (Phase 1). |
 
