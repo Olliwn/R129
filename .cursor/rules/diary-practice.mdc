@@ -24,7 +24,7 @@ This project tracks engineering and maintenance work on a 1991 Mercedes-Benz 500
 1. **New diary entry**: Write full detail in `docs/diary/YYYY-MM.md`, then add a summary entry to the summary diary's timeline table. The summary should include key technical facts (part numbers, fuse ratings, diagnostic results, measurements) -- not just a headline. Aim for 2-4 lines per date with enough detail that someone reading only the summary diary can understand what was found and what state things were left in.
 2. **Issue status change**: Update `docs/known_issues.md`. The monthly diary records what happened; known_issues.md records current state.
 3. **New task**: Add to `docs/tasks.md` with a link to the `work/*/README.md` where the detailed procedure lives.
-4. **New purchase**: Add a row to `docs/budget.md`.
+4. **New vehicle purchase** (parts, fluids, consumables, services, fees): Add a row to `docs/budget.md`. Tools and equipment are **excluded** from the vehicle budget -- log those in the Tool Inventory section of `docs/references.md` instead.
 5. **Detailed work plans**: Always go in `work/*/README.md`, never inlined in the diary or tasks file.
 
 ## Reading the Diary (for agents)

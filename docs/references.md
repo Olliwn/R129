@@ -53,3 +53,6 @@ Curation decisions: `r129_data/references/curation.yaml`
 * **Torque Wrenches:** 3/8" (20-100 Nm) and 1/2" (up to 200 Nm). (Acquired)
 * **Hose Clamp Pliers:** MTX letkunsulkijapihtisarja. (Acquired 2026-03-28)
 * **Multimeter & Oscilloscope:** Owon HDS242. (Acquired)
+
+### Power Tools (DeWalt 20V MAX / 18V XR Platform)
+* **DeWalt DCS438 Cordless 3" Cut-Off Tool:** Brushless, 20,000 RPM, 22mm max depth. Incl. abrasive, diamond multi-material & diamond tile wheels. (Acquired 2026-04, Puuilo, €129)
