@@ -113,8 +113,9 @@
 | Belt Tensioners / Idler Pulleys | (verify w/ MB-osat) | as needed | **Inspect first** | Check for bearing play/noise. |
 | Brake Flex Hoses (all 4 corners) | (verify w/ MB-osat) | 4 | **Inspect first** | 35-year-old rubber. Replace if any doubt. |
 | Flare Nut Wrench Set (7–19mm) | **Bahco** | 1 set | **Needed** | 6-point chrome-vanadium. For brake bleed nipples (7/8mm) and ADS hydraulic fittings. Frequent use expected. Check Kärkkäinen stock. |
-| One-Person Pressure Bleeder | Gunson Eezibleed or similar | 1 | **Needed** | Connects to brake reservoir cap, pressurizes to ~1 bar. Best for ABS-equipped cars. |
-| Brake Fluid (extra) | ATE TYP200 DOT4 | 1 L | **Needed** | Second bottle for a full flush if fluid is dark (1L already on hand). |
+| ~~One-Person Pressure Bleeder~~ | ~~Gunson Eezibleed or similar~~ | ~~1~~ | **REPLACED** | ~~Connects to brake reservoir cap, pressurizes to ~1 bar.~~ **Replaced by MTX pneumatic vacuum bleeder (see below).** |
+| MTX Automotive pneumatic brake bleeder 1L | Motonet 75-1000 | 1 | **Ordering from Motonet 2026-04-03** | Pneumatic vacuum bleeder, 6-12 bar, 1L tank, connects to compressor. One-person brake flush tool. Also usable for ADS bleed points (with separate clean hose — never cross-contaminate DOT4/ZH-M). **Buy 1/4" air pistoke fitting separately.** 29.90€. |
+| Brake Fluid (extra) | ATE TYP200 DOT4 | 1 L | **Ordering from Motonet 2026-04-03** | Second bottle for a full 4-corner flush (1L already on hand, need 2L total). |
 | PTFE / Teflon Tape | — | 1 roll | **Needed** | Wrap around brake bleed nipple threads to prevent false air ingestion during vacuum bleeding. Also useful for general hydraulic thread sealing. |
 
 ---
