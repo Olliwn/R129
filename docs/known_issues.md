@@ -39,7 +39,7 @@ Pneumatic pump completely silent since purchase. Trunk fuse holder F20 (P/N A 12
 
 Voltage drops ~13V to ~12V in ~2 days idle. Battery is Varta Silver Dynamic H3 (100Ah, 890A CCA), manufactured August 2025. Experienced at least one deep discharge. Trickle charger keeping it alive. Candidates: PSE circuit, ATA/IRCL modules (static glow on X11), stuck relay. **Note (2026-04-01):** The "ATA/IRCL static glow" observed on March 18/26 may have been caused by trunk fuse 6 being blown (module unpowered). Re-test ATA blink codes after fuse replacement before concluding module fault.
 
-**Next:** Test CCA/internal resistance, then parasitic draw test if battery is healthy. Re-test ATA/IRCL blink codes after trunk fuse 6 replacement.
+**Next:** Test CCA/internal resistance (still not done as of 2026-04-02 — either Owon scope cranking test or free Motonet counter test). Then parasitic draw test if battery is healthy. Re-test ATA/IRCL blink codes after trunk fuse 6 replacement. **Full X11/4 diagnostic sweep should be run once fuse 6 is replaced** — all ECUs should then be powered and give valid blink codes.
 
 ### Power Antenna -- Stuck Extended
 **Status:** OPEN | **Priority:** LOW | **Since:** 2026-03-29
@@ -65,7 +65,22 @@ Slight vibration at 700-800 RPM idle. Corteco replacement mounts received (2026-
 ### Engine Belt Noise
 **Status:** OPEN | **Priority:** LOW | **Since:** 2026-03-21
 
-Squeals/chirps immediately after cold start. Needs diagnosis (slipping belt vs. bad tensioner bearing).
+Squeals/chirps immediately after cold start. Needs diagnosis (slipping belt vs. bad tensioner bearing). **First aid:** Try belt friction spray (on hand) to determine if squeal is slipping belt vs. bearing. If spray eliminates squeal → belt tension or glazed belt. If squeal persists → bearing.
+
+### Headlight Switch Knob Worn
+**Status:** OPEN | **Priority:** LOW | **Since:** 2026-04-02
+
+The headlight switch rotary knob is worn out / soft. Feels mushy and imprecise. Needs replacement or refurbishment.
+
+### Seat Adjustment Panels (Door) Loose
+**Status:** OPEN | **Priority:** LOW | **Since:** 2026-04-02
+
+Both driver and passenger door seat adjustment panels are loose at the bottom. Clips/fasteners likely broken or missing. Inspect mounting method and source replacement clips or fabricate a fix.
+
+### Front Grille — Clean & Polish
+**Status:** OPEN | **Priority:** LOW | **Since:** 2026-04-02
+
+Front grille needs thorough cleaning and polishing (Autosol Metal Polish on hand). Cosmetic item, no urgency.
 
 ### Hardtop Fitment
 **Status:** OPEN | **Priority:** LOW | **Since:** 2026-03-13

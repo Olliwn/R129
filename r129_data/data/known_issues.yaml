@@ -42,7 +42,7 @@ known_issues:
     applies_to:
       years: [1989, 2001]
       chassis: "all"
-      options: [211]
+      options: [211, 216]
     source:
       type: "engineering_diary"
       ref: "docs/AOK912 Engineering Diary.md, 2026-03-26 ADS investigation"
@@ -185,4 +185,74 @@ known_issues:
     source:
       type: "engineering_diary"
       ref: "docs/AOK912 Engineering Diary.md"
+      confidence: "medium"
+
+  - id: trunk_fuse_card_mismatch
+    title: "Trunk fuse designation card (129 545 25 00) is post-facelift only"
+    severity: "high"
+    description: >
+      The fuse designation card P/N 129 545 25 00 (dated 15.12.99, sourced from
+      BenzWorld as trunk_fuses.pdf) describes the POST-FACELIFT F4 trunk fuse box
+      (9 blade fuses, ~09/1995-2002). Pre-facelift cars (1989 to ~08/1995) have a
+      different unit: the F20 Auxiliary Fuse Holder with torpedo fuses. The F20
+      assignments are different from F4 -- for example, on F4 fuse 6 = ATA alarm
+      (15A blue) and fuse 5 = central locking, but on F20 forum evidence suggests
+      fuse 6 = central locking. Using the wrong card leads to misidentification of
+      blown fuse circuits. The 1991 Betriebsanleitung (p.95) states the F20 fuse
+      assignments are printed on the fuse box cover itself; no factory chart for F20
+      has been sourced for this repository.
+    affected_systems: ["electrical", "central_locking"]
+    symptoms:
+      - "Wrong circuit attributed to a blown trunk fuse"
+      - "Diagnostic blind spot when using post-facelift fuse card on pre-facelift car"
+    diagnostic_hint: >
+      Verify which trunk fuse box the car has: F20 (torpedo fuses, pre-facelift) or
+      F4 (blade fuses, post-facelift). Check the fuse box cover for the printed
+      assignment list. Do not rely on the 129 545 25 00 card for pre-facelift cars.
+      Source the correct F20 assignments from the ETM (Electrical Troubleshooting Manual)
+      or photograph the F20 cover.
+    applies_to:
+      years: [1989, 1995]
+      chassis: "all"
+    source:
+      type: "engineering_investigation"
+      ref: "2026-04-01 fuse 6 investigation, internet cross-reference"
+      confidence: "high"
+
+  - id: trunk_fuse_6_blown
+    title: "Trunk fuse 6 blown -- likely central locking (pre-facelift F20)"
+    severity: "medium"
+    description: >
+      On AOK912, trunk fuse 6 was found blown on 2026-03-30 (old aluminum torpedo
+      fuse). All 8 trunk fuses were replaced with copper/ceramic units. The car has
+      had dead PSE central locking since purchase (2026-03-09). Forum evidence for
+      pre-facelift R129s (BenzWorld, 1995 SL500) indicates fuse 6 = central locking
+      (and possibly power antenna). This is NOT the same as post-facelift F4 fuse 6
+      which = ATA alarm. The pre-facelift assignment has not been verified from
+      factory documentation. If the new fuse blows again, the PSE pump motor or its
+      wiring has a short circuit. If it holds but central locking is still dead, the
+      PSE pump itself has failed (common after 30+ years). Also re-test ATA blink
+      code (X11/4 Pin 11) -- the March 2026 "dead ATA module" diagnosis should be
+      rechecked since the ATA may have been unpowered due to a different trunk fuse
+      being its supply.
+    affected_systems: ["central_locking", "electrical"]
+    affected_fuse: "F20 fuse 6 (pre-facelift trunk)"
+    symptoms:
+      - "PSE central locking completely inoperative"
+      - "Power antenna may also be dead (if shared circuit)"
+      - "ATA alarm module may appear dead if also affected by trunk fuse"
+    diagnostic_hint: >
+      Step 1: Replace fuse 6, turn key to position 2, test central locking with
+      key fob and door lock. Step 2: If fuse blows immediately, there is an active
+      short -- disconnect PSE pump connector and retry. If fuse holds with pump
+      disconnected, the pump motor is shorted. Step 3: If fuse holds but PSE is
+      still dead, check 12V at PSE pump connector during lock/unlock actuation.
+      Step 4: Re-test ATA (X11/4 Pin 11) and IRCL (Pin 12) blink codes to
+      determine if the March 2026 "dead module" diagnosis was caused by the blown fuse.
+    applies_to:
+      years: [1989, 1995]
+      chassis: "129.066"
+    source:
+      type: "engineering_diary"
+      ref: "2026-03-30 diary, 2026-04-01 investigation"
       confidence: "medium"

@@ -47,8 +47,8 @@ The rear storage compartments are the perfect acoustic chambers. Since this is h
 *   **Cost:** ~€735.00
 *   **Pros:** Zero fabrication time. Perfectly tuned port for the exact volume of the R129 cubby.
 
-**Option B: The High-Tech "Dual Drive" DIY Route (Punch over Volume)**
-Since cosmetic perfection isn't required beneath the factory lid, you can build a custom sealed MDF enclosure. For a "Genelec" style tight, punchy, and distortion-free bass response (rather than booming volume), dual small-diameter high-tech woofers are ideal. This pairs perfectly with the Match UP 6DSP, utilizing its two 160W channels.
+**Option B: The High-Tech DIY Route (Dual-Drive or Single DVC)**
+Since cosmetic perfection isn't required beneath the factory lid, you can build a custom sealed MDF enclosure. For a "Genelec" style tight, punchy, and distortion-free bass response (rather than booming volume), you can use high-tech elements driven by the Match UP 8DSP's two 160W subwoofer channels.
 
 *   **Approach 1: Dual Audison Prima APS 8 D (8" Shallow)**
     *   **The Tech:** Specifically designed for ultra-small sealed boxes. Flat cone geometry and suspension built to handle high box pressure.
@@ -58,6 +58,11 @@ Since cosmetic perfection isn't required beneath the factory lid, you can build 
     *   **The Tech:** Pure acoustic engineering marvel. Uses a patented "MMD" dual magnetic gap motor to drastically lower distortion and allow massive 14.7mm excursion. It's technically a 5.5", but plays like an 8".
     *   **Required Box Volume:** Approx. 4 to 5 liters per woofer (approx. 10 liters total for the dual box). The box could literally be the size of two shoeboxes.
     *   **Cost:** ~€139/each (~€280 total) + MDF materials.
+*   **Approach 3: Single Eton MW8 (8" Dual Voice Coil)**
+    *   **The Tech:** A German-engineered powerhouse. This is a massive, heavy-duty 8" element with an extreme ±48mm mechanical excursion limit and a 2x2 Ω dual voice coil. 
+    *   **The Wiring Trick:** Because it has a dual 2-Ohm voice coil, you wire Channel 7 of the Match 8DSP to coil one, and Channel 8 to coil two. This feeds the single Eton woofer a combined **320W RMS** of clean DSP power.
+    *   **Consideration:** It has a deep 140mm (5.5") mounting depth, so your cardboard mockup will dictate if it needs an angled or protruding baffle to fit in the shallow R129 tub.
+    *   **Cost:** ~€200 + MDF materials.
 *   **Next Step:** Build a cardboard mockup of the R129 storage tub to determine how to best utilize the space. Because these require so little volume (10-16 liters), you may only need to use the bottom half of the tub, leaving the top half usable for storage by building a false floor.
 
 ### 3. Amplification & Digital Signal Processing (Fully Active 8-Channel Approach)

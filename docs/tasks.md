@@ -8,10 +8,6 @@
 
 ## HIGH Priority
 
-### 12. OVP Relay Reinstall + Test
-Re-solder complete (2026-03-31). Reinstall OVP → reconnect battery → test Pin 9 → read/clear codes → verify both switches.
-**Work plan:** [work/ads_diagnostic/README.md](../work/ads_diagnostic/README.md) Phase 0
-
 ### 13. Battery Health Verification
 Measure internal resistance and cranking voltage drop (Owon HDS242). Varta H3, 100Ah, 890A CCA, manufactured Aug 2025. One deep discharge event. If CCA is marginal → replace at Motonet.
 **Method:** V_oc vs V_load under high beams (target R_internal <25 mΩ). Cranking voltage must hold >10V.
@@ -36,7 +32,7 @@ Front: replace LCA complete units. Rear: replace 5-link set + squeak bushings. S
 ## MEDIUM Priority
 
 ### 5. Central Locking (PSE)
-Fuse #6 replaced (2026-03-30). Awaiting test. If pump activates → resolved. If fuse blows → investigate short.
+Fuse #6 (8A white, F20 position 6) found blown (2026-03-30). Not yet replaced. Replace all 6 torpedo fuses with copper/ceramic units. If pump activates → resolved. If fuse 6 blows again → investigate short (disconnect PSE pump to isolate).
 **Work plan:** [work/pse_central_locking/README.md](../work/pse_central_locking/README.md)
 
 ### 6. Engine Bay Maintenance (Intake, Filters & Fluids)
@@ -64,10 +60,10 @@ Clean and unclog nozzles. Inspect fluid lines.
 **Work plan:** [work/wiper_system/README.md](../work/wiper_system/README.md)
 
 ### 3. Paint Inspection (Rear Fender & Hood)
-Test hood with magnet (aluminum vs steel). Source OEM touch-up paint (199 Blauschwarz). Inspect once weather improves.
+Test hood with magnet (aluminum vs steel). Source OEM touch-up paint (744 Brilliant Silver Metallic, confirmed via VIN decode 2026-04-01). Inspect once weather improves.
 
 ---
 
 ## Finnish Registration (Admin)
 
-Autovero paid (€837.05, 2026-03-27). Waiting for rekisteröintilupa. Then: siirtolupa → rekisteröintikatsastus → ensirekisteröinti → Finnish plates.
+Autovero paid (€837.05, 2026-03-27). Waiting for rekisteröintilupa. Full vehicle insurance (liikennevakuutus + kasko) based on VIN is already active. Then: siirtolupa → rekisteröintikatsastus → ensirekisteröinti → Finnish plates.

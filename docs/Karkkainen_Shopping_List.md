@@ -51,7 +51,7 @@
 - [x] **Adhesive Remover / Liimanpoistoaine** (AT Stripper Tiivistejäänteiden poistaja 400ml purchased from Motonet online 2026-03-26)
 - [ ] **Plastic Scrapers / Muoviset raapat** (Do not use metal on the aluminum hood)
 - [x] **Large Plastic Drop Cloths / Suojamuovit** (Will use old linen/blankets to cover M119 during hood glue removal)
-- [ ] **Touch-up Paint Pen / Paikkamaalikynä** (Code: 199 Blauschwarz Metallic - base coat + clear coat)
+- [ ] **Touch-up Paint Pen / Paikkamaalikynä** (Code: 744 Brilliant Silver Metallic - base coat + clear coat)
 - [x] **Iron Remover / Raudanpoisto** (Korrek Pro Irox 700ml purchased from Motonet online 2026-03-26)
 - [x] **Microfiber Cloths / Mikroliinat** (8 pcs purchased)
 - [x] **Detailing Brushes** (Soft99 exterior/interior purchased)

@@ -131,7 +131,18 @@
 
 ---
 
-## PRIORITY 6 — Body & Trim (Whenever Convenient)
+## PRIORITY 6 — Electrical Consumables & Small Items
+
+| Part | OEM Number / Ref | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| Torpedo Fuses (8A white) | — | 5+ | For trunk F20 fuse box. Need enough to replace all positions + spares. Check current ratings: 16A, 16A, 25A, 8A, 16A, 8A. |
+| Torpedo Fuses (16A red) | — | 5+ | Most common in F20 box (3 positions). Copper/ceramic preferred over aluminum. |
+| Torpedo Fuses (25A blue) | — | 2+ | One position in F20 box. |
+| Headlight Switch Knob | (verify P/N w/ MB-osat by VIN) | 1 | Current knob is worn/soft. Check if the knob is replaceable separately or if the entire switch assembly is needed. |
+
+---
+
+## PRIORITY 7 — Body & Trim (Whenever Convenient)
 
 | Part | OEM Number / Ref | Qty | Notes |
 | :--- | :--- | :--- | :--- |
@@ -139,6 +150,7 @@
 | Antenna Grommet (Lower) | A 129 827 03 98 | 1 | Order with upper. |
 | Touch-up Paint Pen | Color code **744 Brilliant Silver Metallic** | 1 | Base coat + clear coat. For the hood scratch and behind-wheel bare steel. |
 | Plastic Scrapers | — | 1 set | For the hood pad adhesive removal. No metal on aluminum. |
+| Seat Adjustment Panel Clips (door) | (verify P/N — inspect mounting first) | as needed | Both door panels loose at bottom. Likely broken/missing clips. |
 
 ---
 

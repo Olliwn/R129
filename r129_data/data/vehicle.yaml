@@ -1,56 +1,105 @@
 vin: "WDB1290661F044414"
 model: "Mercedes-Benz 500 SL"
 model_year: 1991
+build_date: "1991-09"
 chassis_code: "129.066"
 engine_code: "M119.960"
+engine_serial: "119960 12 024990"
 engine_description: "5.0L V8 32-valve DOHC"
 transmission_code: "722.3"
+transmission_serial: "722353 03 604950"
 transmission_description: "4-speed automatic (4G-Tronic)"
 fuel_system: "KE-Jetronic"
-paint_code: "199 M"
-paint_name: "Blauschwarz Metallic (Blue-Black Metallic)"
+paint_code: "744"
+paint_name: "Brilliant Silver Metallic"
 interior_code: "271 A"
-interior_name: "Black/Anthracite Leather"
+interior_name: "Leather Anthracite"
 gvwr_kg: 2190
 front_axle_kg: 1010
 rear_axle_kg: 1180
 registration: "AOK912"
 country: "Finland"
+order_number: "0156948800"
+order_location: "Sweden"
 
 option_codes:
-  - code: 211
-    description: "Adaptive Damping System (ADS)"
+  # Factory build data from lastvin.com VIN lookup (2026-04-01)
+  - code: 216
+    description: "Self-leveling suspension all-around, with Adaptive Damping System (ADS)"
+  - code: 236
+    description: "Special lamp switching — daytime running lamps"
   - code: 241
     description: "Front seat LH electric adjustable with memory"
   - code: 242
     description: "Front seat RH electric adjustable with memory"
   - code: 246
     description: "Mirror with memory circuit"
-  - code: 283
-    description: "Draft deflector / wind deflector"
+  - code: 291
+    description: "Airbag for front passenger"
+  - code: 341
+    description: "Additional blinker lamps"
+  - code: 406
+    description: "Single seat with orthopaedic front seat backrest, left and right"
   - code: 440
     description: "Tempomat (Cruise control)"
+  - code: 524
+    description: "Paintwork preservation"
+  - code: 538
+    description: "Automatic antenna and front loudspeaker — without radio set"
+  - code: 551
+    description: "Anti-theft/anti-break-in warning system (ATA)"
   - code: 581
     description: "Automatic climate control"
   - code: 592
-    description: "Heat-insulating glass, all-around, heated rear window pane"
+    description: "Heat-insulating glass, all-around, heated rear window pane, band filter"
   - code: 600
     description: "Headlamp wiper/washer"
+  - code: 630
+    description: "ECE warning triangle"
+  - code: 682
+    description: "Fire extinguisher"
   - code: 740
     description: "Black soft top fabric 9001"
+  - code: 802
+    description: "Change of model year (internal production code)"
+  - code: 825
+    description: "Vehicles for Sweden, additional parts"
   - code: 873
     description: "Seat heater for left and right front seats"
+  - code: 880
+    description: "Closing system with infrared remote control (IRCL)"
+  - code: 881
+    description: "Central locking inside for roadster storage compartments"
+
+factory_notes:
+  - note: "ADS is factory option 216 (not 211)"
+    detail: >
+      Option 216 = self-leveling suspension + ADS (full package including
+      Niveauregulierung). The earlier mbdecoder.com lookup missed this code;
+      lastvin.com shows it. All ADS hardware is original factory equipment.
+      The non-ADS instrument cluster (missing ADS warning lamp) is therefore
+      a confirmed swap by a previous owner.
+  - note: "Option 538 — delivered without radio (common in European market)"
+    detail: >
+      Factory build says 'automatic antenna and front loudspeaker — without
+      radio set'. Car was delivered with Hirschmann power antenna mechanism,
+      front door speakers, and wiring harness — but no head unit and no
+      amplifier. This was standard practice for European-market Mercedes
+      (~90% of W124s were delivered the same way). No factory amplifier
+      exists in the trunk. The Becker BE2210 currently installed drives
+      speakers directly via its built-in amp. The Sony CDX-410 found at
+      purchase was also aftermarket.
 
 key_systems:
-  - "ADS I (Adaptive Damping System, first generation)"
-  - "Niveauregulierung (mechanical level control, independent from ADS electronics)"
+  - "ADS I with Niveauregulierung (option 216, factory-fitted)"
   - "KE-Jetronic (CIS-E mechanical/electronic fuel injection)"
   - "EZL ignition (distributorless)"
   - "PSE (pneumatic central locking system)"
   - "N7 exterior lamp failure module"
-  - "Infrared remote control (IRC/IRCL)"
+  - "ATA anti-theft warning system (option 551)"
+  - "IRCL infrared remote control closing system (option 880)"
 
 source:
-  type: "engineering_diary"
-  ref: "docs/AOK912 Engineering Diary.md, vehicle data plate"
+  type: "lastvin.com VIN lookup"
+  ref: "https://www.lastvin.com/vin/41My62Y44RlNEve9N, confirmed 2026-04-01"
   confidence: "high"

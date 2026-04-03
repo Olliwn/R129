@@ -1,9 +1,21 @@
 description: >
   R129 fuse box assignments for pre-facelift models (1989-1995).
-  The main fuse box is located in the engine compartment, left side.
-  Additional fuses are in the trunk (rear SAM).
+  The main fuse box is located in the engine compartment, left side (F1).
+  Additional fuses: component compartment (F19), trunk (F20), CTEL (F22/2).
   NOTE: Specific fuse assignments need verification from the ETM.
   The owner's manual provides the fuse legend but circuit details require ETM data.
+
+trunk_fuse_box_warning: >
+  CAUTION: Two different trunk fuse boxes exist across R129 production.
+  Pre-facelift (1989 to ~08/1995): Auxiliary Fuse Holder F20 (torpedo fuses).
+  Post-facelift (~09/1995 to 2002): Fuse Box F4 (blade fuses, 9 positions).
+  The fuse designation card P/N 129 545 25 00 (dated 15.12.99, ingested as
+  trunk_fuses.pdf) describes the POST-FACELIFT F4 box only and does NOT apply
+  to pre-facelift cars like AOK912 (1991, 129.066). The pre-facelift F20
+  assignments are printed on the fuse box cover (per the 1991 Betriebsanleitung
+  p.95) but no factory chart has been sourced for this repository yet.
+  Forum evidence (BenzWorld) suggests pre-facelift fuse 6 = central locking,
+  but this requires physical verification against the F20 cover or ETM data.
 
 fuses:
   - id: F1
@@ -238,26 +250,227 @@ fuses:
       ref: "1990 Owner's Manual, fuse chart"
       confidence: "medium"
 
-  - id: TRUNK_F1
-    rating_amps: 25
-    location: "Trunk fuse box"
-    protects:
-      - "Soft top hydraulic pump motor"
-    applies_to:
-      years: [1989, 2001]
-    source:
-      type: "community"
-      ref: "BenzWorld, Trunk Fuses.pdf from PDF collection"
-      confidence: "medium"
+  # === POST-FACELIFT TRUNK FUSE BOX (F4, ~09/1995-2002, 9 blade fuses) ===
+  # Source: Fuse designation card P/N 129 545 25 00 (dated 15.12.99)
+  # WARNING: These do NOT apply to pre-facelift cars (1989 to ~08/1995).
 
-  - id: TRUNK_F2
+  - id: F4_FUSE1
     rating_amps: 25
-    location: "Trunk fuse box"
+    color: "natural"
+    location: "Trunk fuse box F4 (post-facelift only)"
     protects:
-      - "PSE central locking pump"
+      - "Power windows"
     applies_to:
-      years: [1989, 2001]
+      years: [1996, 2002]
+    source:
+      type: "factory_card"
+      ref: "P/N 129 545 25 00 (15.12.99), ingested as trunk_fuses.pdf"
+      confidence: "high"
+
+  - id: F4_FUSE2
+    rating_amps: 25
+    color: "natural"
+    location: "Trunk fuse box F4 (post-facelift only)"
+    protects:
+      - "Power windows"
+    applies_to:
+      years: [1996, 2002]
+    source:
+      type: "factory_card"
+      ref: "P/N 129 545 25 00 (15.12.99), ingested as trunk_fuses.pdf"
+      confidence: "high"
+
+  - id: F4_FUSE3
+    rating_amps: 20
+    color: "yellow"
+    location: "Trunk fuse box F4 (post-facelift only)"
+    protects:
+      - "Roll-over bar"
+      - "Seat belt lock"
+    applies_to:
+      years: [1996, 2002]
+    source:
+      type: "factory_card"
+      ref: "P/N 129 545 25 00 (15.12.99), ingested as trunk_fuses.pdf"
+      confidence: "high"
+
+  - id: F4_FUSE4
+    rating_amps: 15
+    color: "blue"
+    location: "Trunk fuse box F4 (post-facelift only)"
+    protects:
+      - "Power windows"
+      - "Roll-over bar"
+      - "Soft top"
+    applies_to:
+      years: [1996, 2002]
+    source:
+      type: "factory_card"
+      ref: "P/N 129 545 25 00 (15.12.99), ingested as trunk_fuses.pdf"
+      confidence: "high"
+
+  - id: F4_FUSE5
+    rating_amps: 10
+    color: "red"
+    location: "Trunk fuse box F4 (post-facelift only)"
+    protects:
+      - "Central locking"
+      - "Automatic antenna"
+      - "Trunk lamp"
+    applies_to:
+      years: [1996, 2002]
+    source:
+      type: "factory_card"
+      ref: "P/N 129 545 25 00 (15.12.99), ingested as trunk_fuses.pdf"
+      confidence: "high"
+
+  - id: F4_FUSE6
+    rating_amps: 15
+    color: "blue"
+    location: "Trunk fuse box F4 (post-facelift only)"
+    protects:
+      - "ATA system (Anti-Theft Alarm)"
+    applies_to:
+      years: [1996, 2002]
+    source:
+      type: "factory_card"
+      ref: "P/N 129 545 25 00 (15.12.99), ingested as trunk_fuses.pdf"
+      confidence: "high"
+
+  - id: F4_FUSE7
+    rating_amps: 25
+    color: "natural"
+    location: "Trunk fuse box F4 (post-facelift only)"
+    protects:
+      - "Trailer coupling"
+    applies_to:
+      years: [1996, 2002]
+    source:
+      type: "factory_card"
+      ref: "P/N 129 545 25 00 (15.12.99), ingested as trunk_fuses.pdf"
+      confidence: "high"
+
+  - id: F4_FUSE8
+    rating_amps: 10
+    color: "red"
+    location: "Trunk fuse box F4 (post-facelift only)"
+    protects:
+      - "TeleAid / E-Call"
+      - "Telephone"
+    applies_to:
+      years: [1996, 2002]
+    source:
+      type: "factory_card"
+      ref: "P/N 129 545 25 00 (15.12.99), ingested as trunk_fuses.pdf"
+      confidence: "high"
+
+  - id: F4_FUSE9
+    rating_amps: 40
+    color: "orange"
+    location: "Trunk fuse box F4 (post-facelift only)"
+    protects:
+      - "Soft top"
+    applies_to:
+      years: [1996, 2002]
+    source:
+      type: "factory_card"
+      ref: "P/N 129 545 25 00 (15.12.99), ingested as trunk_fuses.pdf"
+      confidence: "high"
+
+  # === PRE-FACELIFT TRUNK AUXILIARY FUSE HOLDER (F20, 1989 to ~08/1995) ===
+  # Part number: A 129 540 04 50 (confirmed from AOK912 photo, 2026-04-01)
+  # Physical layout: 6 torpedo fuse positions (numbered 1 at top, 6 at bottom),
+  # plus round screw-type terminals at top of the holder.
+  # The 1991 Betriebsanleitung (p.95) states this box contains fuses for
+  # "Schließanlage und Dachbetätigung" (locking system and roof operation).
+  # Per-position assignments have NOT been verified from the factory ETM or
+  # fuse box cover. Forum evidence (BenzWorld, 2013 thread on 1995 SL500)
+  # suggests: Fuse 6 = Central locking (and possibly power antenna).
+  # A 1993 500SL owner (PeachParts) reported 6 fuses with ratings:
+  #   1=16A red, 2=16A red, 3=25A blue, 4=8A white, 5=16A red, 6=8A white.
+  # AOK912 photo (2026-04-01) confirms 6 torpedo fuses and fuse 6 (bottom)
+  # is 8A white, matching the PeachParts data.
+
+  - id: F20_FUSE1
+    rating_amps: 16
+    color: "red"
+    location: "Trunk auxiliary fuse holder F20, position 1 (top)"
+    protects:
+      - "UNVERIFIED"
+    applies_to:
+      years: [1989, 1995]
     source:
       type: "community"
-      ref: "BenzWorld, Trunk Fuses.pdf from PDF collection"
+      ref: "PeachParts (1993 500SL fuse ratings)"
+      confidence: "low"
+
+  - id: F20_FUSE2
+    rating_amps: 16
+    color: "red"
+    location: "Trunk auxiliary fuse holder F20, position 2"
+    protects:
+      - "UNVERIFIED"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "community"
+      ref: "PeachParts (1993 500SL fuse ratings)"
+      confidence: "low"
+
+  - id: F20_FUSE3
+    rating_amps: 25
+    color: "blue"
+    location: "Trunk auxiliary fuse holder F20, position 3"
+    protects:
+      - "UNVERIFIED"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "community"
+      ref: "PeachParts (1993 500SL fuse ratings)"
+      confidence: "low"
+
+  - id: F20_FUSE4
+    rating_amps: 8
+    color: "white"
+    location: "Trunk auxiliary fuse holder F20, position 4"
+    protects:
+      - "UNVERIFIED"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "community"
+      ref: "PeachParts (1993 500SL fuse ratings)"
+      confidence: "low"
+
+  - id: F20_FUSE5
+    rating_amps: 16
+    color: "red"
+    location: "Trunk auxiliary fuse holder F20, position 5"
+    protects:
+      - "UNVERIFIED"
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "community"
+      ref: "PeachParts (1993 500SL fuse ratings)"
+      confidence: "low"
+
+  - id: F20_FUSE6
+    rating_amps: 8
+    color: "white"
+    location: "Trunk auxiliary fuse holder F20, position 6 (bottom)"
+    protects:
+      - "UNVERIFIED -- likely central locking (per BenzWorld 1995 SL500 thread)"
+      - "UNVERIFIED -- possibly power antenna (shared circuit per BenzWorld)"
+    notes: >
+      Found BLOWN on AOK912 on 2026-03-30 (original aluminum torpedo fuse).
+      Confirmed 8A white from photo (2026-04-01). Diary attributed this as root
+      cause of dead PSE central locking. Forum evidence supports this for some
+      pre-facelift cars. Needs verification from the F20 cover or ETM.
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "community + photo"
+      ref: "BenzWorld (1995 SL500), PeachParts (1993 500SL), AOK912 photo 2026-04-01"
       confidence: "medium"

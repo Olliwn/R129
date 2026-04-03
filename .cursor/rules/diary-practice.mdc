@@ -12,7 +12,7 @@ This project tracks engineering and maintenance work on a 1991 Mercedes-Benz 500
 | Purpose | File | Notes |
 |---------|------|-------|
 | **Monthly diary** (detailed log entries) | `docs/diary/YYYY-MM.md` | Full detail. New month = new file. Old months are append-only archive. |
-| **Summary diary** (condensed timeline) | `docs/AOK912 Engineering Diary.md` | Vehicle identity + 1-2 line summary per date. Update after adding a monthly entry. |
+| **Summary diary** (timeline with key facts) | `docs/AOK912 Engineering Diary.md` | Vehicle identity + 2-4 line summary per date including key technical facts (part numbers, readings, diagnostic results, what was/wasn't done). Update after adding a monthly entry. |
 | **Known issues** (current defect state) | `docs/known_issues.md` | Single source of truth for issue status. Do NOT duplicate status in log entries. |
 | **Active tasks** (work queue) | `docs/tasks.md` | Brief entries with priority. Detailed procedures live in `work/*/README.md`. |
 | **Budget** | `docs/budget.md` | Cost tracking table. Add new purchases here. |
@@ -21,8 +21,12 @@ This project tracks engineering and maintenance work on a 1991 Mercedes-Benz 500
 
 ## Rules
 
-1. **New diary entry**: Write full detail in `docs/diary/YYYY-MM.md`, then add a condensed 1-2 line entry to the summary diary's timeline table.
+1. **New diary entry**: Write full detail in `docs/diary/YYYY-MM.md`, then add a summary entry to the summary diary's timeline table. The summary should include key technical facts (part numbers, fuse ratings, diagnostic results, measurements) -- not just a headline. Aim for 2-4 lines per date with enough detail that someone reading only the summary diary can understand what was found and what state things were left in.
 2. **Issue status change**: Update `docs/known_issues.md`. The monthly diary records what happened; known_issues.md records current state.
 3. **New task**: Add to `docs/tasks.md` with a link to the `work/*/README.md` where the detailed procedure lives.
 4. **New purchase**: Add a row to `docs/budget.md`.
 5. **Detailed work plans**: Always go in `work/*/README.md`, never inlined in the diary or tasks file.
+
+## Reading the Diary (for agents)
+
+When investigating any technical question, **always read the relevant monthly diary** (`docs/diary/YYYY-MM.md`), not just the summary diary. The summary diary is an index -- it does not contain enough detail for diagnostics, cross-referencing, or root-cause analysis. Key information like exact diagnostic readings, what was/wasn't done, part numbers, and contextual notes lives only in the monthly files.

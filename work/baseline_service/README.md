@@ -40,6 +40,7 @@ No written service history exists for this vehicle. Assume all consumables and w
 
 ## D. Drive Belts
 
+- [ ] **Belt Squeal First Aid** — Apply belt friction spray (on hand) to V-belts during cold start squeal. If squeal stops → slipping belt (tension or glazing). If squeal persists → bearing noise (tensioner/idler).
 - [ ] **Serpentine / V-Belts** — Inspect all belts for cracking, glazing, and tension. The M119 uses multiple V-belts (not a single serpentine). Replace the full set if age/condition is unknown.
 - [ ] **Belt Tensioners & Idler Pulleys** — Check for bearing play/noise. Replace any that are rough.
 
@@ -94,10 +95,12 @@ No written service history exists for this vehicle. Assume all consumables and w
 
 ## I. Electrical Baseline
 
-- [ ] **Battery** — Test CCA and internal resistance. Replace if marginal (Nordic winters are brutal on old batteries).
+- [ ] **Battery Health Test** — Test CCA and internal resistance. Options: Owon HDS242 scope cranking test (2V/div, 1s/div, single-shot at 11V) or free Motonet counter test. Battery is Varta H3 100Ah/890A (Aug 2025), experienced one deep discharge. Target: >10V during cranking, <25 mΩ internal resistance. **Still pending as of 2026-04-02.**
 - [ ] **Alternator Output** — Verify 13.8–14.4V at idle with loads on. Check for AC ripple (indicates failing diodes).
 - [ ] **All Exterior Lights** — Walk-around test: headlights (low/high), fog lights, turn signals, brake lights, reverse lights, license plate lights, side markers.
-- [ ] **Fuse Box Inspection** — Open both fuse boxes (underhood + interior). Inspect for corrosion, melted terminals, and incorrect fuse ratings.
+- [ ] **Fuse Box Inspection** — Replace all trunk F20 torpedo fuses with fresh copper/ceramic units. Replace fuse 6 (8A, blown) first and test PSE + antenna. Need full assortment: 8A ×2, 16A ×3, 25A ×1 (+ spares). Inspect underhood and interior fuse boxes for corrosion, melted terminals, and incorrect ratings.
+- [ ] **Full X11/4 Blink-Code Diagnostic Sweep** — After trunk fuse 6 is replaced (powers ATA/IRCL?), run all diagnostic pins: 7 (RB), 8 (DI/EZL), 9 (ADS), 10 (RST), 11 (ATA), 12 (IRCL), 14 (ESMC). Record all codes. The March "dead ATA/IRCL" diagnosis may have been caused by unpowered modules (blown fuse 6).
+- [ ] **Front Grille** — Clean and polish with Autosol Metal Polish (on hand). Cosmetic.
 
 ### Instructions
 *TODO: Add fuse box diagrams, bulb specs, and alternator bench-test procedure.*
