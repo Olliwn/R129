@@ -1,7 +1,7 @@
-# Binary / large generated files
-r129_data/references/pdfs/
-r129_data/references/images/
-r129_data/references/embeddings/
+# Large files (>100 MB GitHub limit)
+r129_data/references/pdfs/r129-infoaccess-course.zip
+
+# Python venv
 r129_data/.venv/
 
 # OS
