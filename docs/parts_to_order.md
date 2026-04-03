@@ -148,6 +148,8 @@
 | :--- | :--- | :--- | :--- |
 | Antenna Grommet (Upper) | A 129 827 02 98 | 1 | Cracked seal leaks water onto the PSE pump in the trunk. |
 | Antenna Grommet (Lower) | A 129 827 03 98 | 1 | Order with upper. |
+| Silicone Spray (aerosol) | Biltema / Würth / CRC | 1 can | For antenna mast tube long-term lubrication (WD-40 freed segments 2026-04-03, not a lasting lubricant). Also useful for rubber seals. Motonet/Biltema/Kärkkäinen. |
+| Scotch Fix Extreme Exterior 19mm × 5m | 3M (double-sided, 13kg max) | 1 roll | For re-securing door seat control panels (P/N 129 820 71 10) where front lower plastic clip broke. Biltema basic tape failed. 3M acrylic foam (VHB-class). -40°C to +90°C. Clean surfaces with brake cleaner before applying. **Ordered from Motonet 2026-04-03.** |
 | Touch-up Paint Pen | Color code **744 Brilliant Silver Metallic** | 1 | Base coat + clear coat. For the hood scratch and behind-wheel bare steel. |
 | Plastic Scrapers | — | 1 set | For the hood pad adhesive removal. No metal on aluminum. |
 | Seat Adjustment Panel Clips (door) | (verify P/N — inspect mounting first) | as needed | Both door panels loose at bottom. Likely broken/missing clips. |
