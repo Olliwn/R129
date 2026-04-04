@@ -1,105 +1,234 @@
-# R129 Audio Upgrade Blueprint (OEM+ 2.1 System)
+# R129 Audio Upgrade Blueprint — Fully Active 2.1 System
 
-## Philosophy & Architecture
-This document details a "First Principles" audio upgrade for the Mercedes R129. The goal is to provide modern, high-fidelity sound with sufficient dynamic headroom while maintaining a strictly 100% factory aesthetic.
+## Philosophy
 
-Since restoring the rest of the car is a priority, this architecture optimizes for **time savings and proven drop-in fitment** over absolute cost savings. 
+Modern, high-fidelity audio with full DSP control, while maintaining 100% factory aesthetic. Every speaker gets its own dedicated amplifier channel, time-alignment, and EQ — no passive crossovers in the signal path. The Becker BE2210 stays in the DIN slot for period-correct cassette/FM. All digital streaming audio flows through the RPi5 to the DSP via lossless USB.
 
-### The 2.1 Channel Strategy
-The R129 is a 2-seat convertible. Rear speakers only muddy the soundstage. The optimal setup is a powerful 2.1 system:
-1. **Front Stage:** High-quality 3-way speakers in the factory door/dash locations.
-2. **Subwoofer:** A dedicated 10" subwoofer hidden in the rear driver-side storage cubby.
-3. **Amplification:** A micro Class-D 4-channel amplifier hidden behind the dashboard.
-   - Channels 1 & 2: Power the front door 3-way speakers.
-   - Channels 3 & 4 (Bridged): Power the subwoofer.
-   - **Trick:** By wiring the Becker BE2210's "Rear" outputs to the amplifier's Subwoofer inputs, the physical "Fader" dial on the radio becomes the Subwoofer Bass Knob.
+2-way active front stage (woofer + tweeter per side) was chosen over 3-way after thorough analysis. In the R129's noisy convertible environment, a dedicated midrange driver provides diminishing returns while tripling door wiring complexity and risking the fragile PSE vacuum lines in the door boots. The Hertz MP 28.3 tweeter's low resonance frequency (900 Hz) allows a low crossover point (~2.5 kHz) that covers the critical vocal presence range normally handled by a midrange. Factory door wiring is reused for the woofers — no new wires through the door boots.
 
 ---
 
-## Bill of Materials & Budget
+## System Architecture
 
-### 1. Front Stage (Doors & Dash)
-There are two paths here depending on how far down the audiophile rabbit hole you want to go.
+```
+                                 ┌─ Ch 1: L Tweeter (65W @ 4Ω)  ── Hertz MP 28.3
+                                 ├─ Ch 2: R Tweeter (65W @ 4Ω)  ── Hertz MP 28.3
+iPhone ──BT/CarPlay──→ RPi5     ├─ Ch 3: L Woofer  (65W @ 4Ω)  ── Hertz MP 165P.3
+                         │      ├─ Ch 4: R Woofer  (65W @ 4Ω)  ── Hertz MP 165P.3
+                    USB (UAC)   ├─ Ch 5: Sub coil 1 (160W @ 2Ω) ── Helix IK S10-DVC2
+                         │      └─ Ch 6: Sub coil 2 (160W @ 2Ω) ── Helix IK S10-DVC2
+                         ▼
+                   Match UP 6DSP
+                   + MEC HD-USB
+```
 
-**Option A: The Time-Saver (Jehnert Drop-In) - RECOMMENDED**
-Instead of fabricating custom mounts and wrestling with crossover wiring, this system is a proven drop-in solution specifically tuned for the R129's cabin acoustics.
-*   **Component:** **Jehnert 3-Way Retrofit System (R129)**
-*   **Details:** Includes 6.5" woofers, midrange drivers, angled tweeters, and pre-wired R129-specific crossovers. Drops perfectly behind factory grilles.
-*   **Cost:** ~€299.00
-*   **Time Savings:** Massive. The R129 door cards are notoriously complex. Fabricating custom adapters that seal properly against the door panel (to prevent frequency cancellation) is incredibly time-consuming. This kit preserves your sanity.
+The RPi5 acts as the audio source (Bluetooth A2DP sink or CarPlay via Carlinkit dongle). PipeWire routes audio to the Match UP 6DSP via the MEC HD-USB module — fully digital, lossless USB Audio Class. The DSP handles all crossovers, time alignment, level matching, and EQ. No analog conversion until the amplifier output stage.
 
-**Option B: The Audiophile Route (Focal / Morel / Audison + Adapters)**
-If you want absolutely world-class front imaging, you can run high-end aftermarket 3-way components. This requires mounting adapters, as modern speakers don't fit the R129 door cards naturally.
-*   **Component 1 (Adapters):** **MR129.com Front 3-Way Component Speaker Upgrade Bracket Kit** ($39 for 3D printing STL files, or ~$150 for physical plastic brackets).
-*   **Component 2 (Speakers):** High-end 6.5" 3-way set. 
-    *   *Mid-Tier Audiophile:* **Audison Prima APK 163** (~€400)
-    *   *High-End:* **Focal PS 165 F3E Flax Evo** (~€499)
-    *   *Ultra High-End:* **Focal ES 165 KX3E (K2 Power Series)** (~€1,399)
-*   **Cost:** ~€450 to €2,300+ (depending on speaker choice)
-*   **Time Cost:** Requires printing/buying adapters, potentially trimming door plastic, custom wiring the crossovers, and finding space inside the door card for the crossover boxes.
-
-### 2. Subwoofer (Phase 2 / Long-Term Project)
-The rear storage compartments are the perfect acoustic chambers. Since this is hidden beneath the factory locking lids, cosmetic perfection is not required—just a clean, vibration-free installation that doesn't damage the car.
-
-**Option A: The Time-Saver (Jehnert Drop-In)**
-*   **Component:** **Jehnert R129 Bassreflex Subwoofer**
-*   **Details:** Custom fiberglass enclosure with a 10" (250mm) double voice coil woofer. Replaces the cubby liner to maximize air volume.
-*   **Cost:** ~€735.00
-*   **Pros:** Zero fabrication time. Perfectly tuned port for the exact volume of the R129 cubby.
-
-**Option B: The High-Tech DIY Route (Dual-Drive or Single DVC)**
-Since cosmetic perfection isn't required beneath the factory lid, you can build a custom sealed MDF enclosure. For a "Genelec" style tight, punchy, and distortion-free bass response (rather than booming volume), you can use high-tech elements driven by the Match UP 8DSP's two 160W subwoofer channels.
-
-*   **Approach 1: Dual Audison Prima APS 8 D (8" Shallow)**
-    *   **The Tech:** Specifically designed for ultra-small sealed boxes. Flat cone geometry and suspension built to handle high box pressure.
-    *   **Required Box Volume:** 7.5 to 8.5 liters per woofer (approx. 16 liters total for the dual box). This is incredibly small, leaving room in the cubby for the DSP or other storage.
-    *   **Cost:** ~€159/each (~€320 total) + MDF materials.
-*   **Approach 2: Dual Dayton Audio Epique E150HE-44 (5.5" Extended Range)**
-    *   **The Tech:** Pure acoustic engineering marvel. Uses a patented "MMD" dual magnetic gap motor to drastically lower distortion and allow massive 14.7mm excursion. It's technically a 5.5", but plays like an 8".
-    *   **Required Box Volume:** Approx. 4 to 5 liters per woofer (approx. 10 liters total for the dual box). The box could literally be the size of two shoeboxes.
-    *   **Cost:** ~€139/each (~€280 total) + MDF materials.
-*   **Approach 3: Single Eton MW8 (8" Dual Voice Coil)**
-    *   **The Tech:** A German-engineered powerhouse. This is a massive, heavy-duty 8" element with an extreme ±48mm mechanical excursion limit and a 2x2 Ω dual voice coil. 
-    *   **The Wiring Trick:** Because it has a dual 2-Ohm voice coil, you wire Channel 7 of the Match 8DSP to coil one, and Channel 8 to coil two. This feeds the single Eton woofer a combined **320W RMS** of clean DSP power.
-    *   **Consideration:** It has a deep 140mm (5.5") mounting depth, so your cardboard mockup will dictate if it needs an angled or protruding baffle to fit in the shallow R129 tub.
-    *   **Cost:** ~€200 + MDF materials.
-*   **Next Step:** Build a cardboard mockup of the R129 storage tub to determine how to best utilize the space. Because these require so little volume (10-16 liters), you may only need to use the bottom half of the tub, leaving the top half usable for storage by building a false floor.
-
-### 3. Amplification & Digital Signal Processing (Fully Active 8-Channel Approach)
-If the goal is to run all three front elements (tweeter, midrange, mid-bass) independently—bypassing passive crossovers entirely for ultimate "Genelec-level" control—you need an 8-channel DSP amplifier. This gives every single speaker in the car its own dedicated amplifier channel, time-alignment, and EQ.
-
-*   **Component: Match UP 8DSP** (~€749.00)
-    *   **Details:** 8-channel DSP Amplifier (6 × 65W + 2 × 160W). Made by Audiotec Fischer.
-    *   **Why it's the Holy Grail:** 
-        *   **Channels 1 & 2 (65W):** Left/Right Tweeters
-        *   **Channels 3 & 4 (65W):** Left/Right Midranges
-        *   **Channels 5 & 6 (65W):** Left/Right Mid-bass Woofers
-        *   **Channels 7 & 8 (160W):** Left/Right Subwoofers (Perfect for the dual-drive DIY box).
-    *   **Size:** Astonishingly compact (153 x 130 x 46 mm), making it very easy to mount in the rear cubby.
+All 6 channels utilized — zero waste.
 
 ---
 
-## 4. Alternative Front Stage (2-Way)
-If simplifying the door wiring (omitting the midrange speaker entirely) is preferred while maintaining high-end build quality.
-*   **Component:** **Ground Zero GZHC 165.2** (6.5" 2-way component set)
-*   **Details:** 220W power handling, cast aluminum basket. 
-*   **Cost:** ~€349.00
-*   **Trade-off:** Losing the 3-way midrange means you lose some of the vocal richness the R129 door placement naturally supports, but installation is much faster as there is one less speaker per door to mount.
+## Finalized Bill of Materials
 
-### 4. Wiring & Connectors
-*   **ISO Speaker Harness Extensions:** To run from the BE2210 to the amp, and amp back to the factory wiring.
-*   **Speaker Wire:** 10m OFC 2x1.5mm² (Already in inventory: SP Elektroniikka).
-*   **Cost:** ~€30.00
+### 1. DSP Amplifier — Match UP 6DSP
+
+| Spec | Value |
+| :--- | :--- |
+| Channels | 6 amplified (4 × 65W @ 4Ω + 2 × 160W @ 2Ω) |
+| DSP | 7-channel, 64-bit fixed-point |
+| Inputs | 4 high-level speaker, 1 optical SPDIF, MEC slot |
+| Dimensions | 46 × 130 × 153 mm |
+| Price | **€649** (Kärkkäinen) |
+| Status | **ORDERED 2026-04-04** |
+
+Chosen over the UP 8DSP (€749) for €100 savings — the 2-way front stage needs only 4 speaker channels + 2 sub channels, matching the UP 6DSP exactly. The UP 8DSP's extra 2 × 65W channels for a dedicated midrange would sit unused.
+
+The 7-channel DSP includes a virtual center channel (RealCenter) and bass processing (Augmented Bass Processing) that compensate for the asymmetric driver position in the R129. Tuning via laptop using Audiotec Fischer's DSP PC-Tool software.
+
+**Mounting location:** Rear storage cubby, alongside the subwoofer enclosure. The center console cavity behind the climate control is a heat trap and must be avoided.
+
+### 2. USB Audio Interface — MEC HD-USB (M142045)
+
+| Spec | Value |
+| :--- | :--- |
+| Resolution | Up to 192 kHz / 32-bit |
+| Interface | USB Audio Class (UAC) — driverless on Linux |
+| Compatibility | UP 6DSP, UP 8DSP, UP 8BMW |
+| Price | **€149** (Kärkkäinen) |
+| Status | **ORDERED 2026-04-04** |
+
+Plugs into the MEC expansion slot inside the UP 6DSP. The RPi5 sees it as a standard USB audio sink via PipeWire — no proprietary drivers. Full Speed mode (up to 96 kHz) works without any driver on any OS; more than sufficient for car audio.
+
+### 3. Front Stage — Hertz MPK 1650.3 (Mille Pro 2-Way)
+
+| Driver | Model | Size | Sensitivity | Impedance | Depth | Opening |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| Woofer | MP 165P.3 | 6.5" (165mm) | 94 dB | 3Ω | **63mm** | 141mm |
+| Tweeter | MP 28.3 | 28mm Tetolon dome | 91 dB | 4Ω | **17mm** | 35mm |
+
+| Spec | Value |
+| :--- | :--- |
+| System sensitivity | 93 dB SPL |
+| Tweeter resonance (Fs) | 900 Hz |
+| Frequency range | 45 Hz – 28 kHz |
+| Crossover (passive, unused) | MPCX 165.3 (bi-metallic caps, air-wound inductors, 3-pos tweeter level) |
+| V-cone profile | Yes (improved off-axis dispersion) |
+| Made in | Italy |
+| Price | **€331.26** (masori.de, free shipping to FI, 3-year warranty) |
+| Status | **ORDERED 2026-04-04** |
+
+**Why MPK 1650.3 over alternatives:**
+- **MP 28.3 premium tweeter** — Tetolon dome with 900 Hz Fs allows crossing at ~2.5 kHz in the active setup, covering the critical vocal presence range that a midrange driver would handle in a 3-way system. This is the key driver that makes the 2-way approach viable.
+- **63mm woofer depth** — fits behind R129 factory door grilles with the MR129 adapter brackets, unlike the Focal PS 165 F3E at 72.7mm.
+- **93 dB sensitivity** — excellent match for the UP 6DSP's 65W channels. Compared to the MPK 130.3 (5"/88 dB), the 5 dB advantage means ~3× less amplifier power needed for equivalent volume.
+- **3Ω impedance** — draws slightly more current from the 4Ω-rated amp channels, effectively extracting more power.
+
+**Alternatives evaluated:**
+- *Focal PS 165 F3E (3-way, €499):* Warm tone but 72.7mm woofer depth won't clear R129 grilles. 3-way adds door wiring complexity.
+- *Hertz MPK 163.3 (3-way, €377):* Excellent 3-way set but requires 6 wires per door through the R129 rubber boots — high risk to PSE vacuum lines. The midrange benefit is diminished in a convertible.
+- *Hertz MPK 130.3 (5" 2-way, €235):* Smaller woofer reduces beaming but ships with inferior MP 25.3 tweeter (higher Fs, crosses higher) and has 5 dB lower sensitivity. The Genelec-inspired approach doesn't translate to car audio without a waveguide.
+- *Hertz MPK 165.3 (2-way, €298):* Good value but uses the standard MP 25.3 tweeter. The €33 premium for the 1650.3 buys the significantly better MP 28.3.
+
+The kit includes passive crossovers (MPCX 165.3) which will not be used — every driver connects directly to its own UP 6DSP channel. Crossovers kept as spares.
+
+**Mounting:**
+- **Woofer (6.5"):** Factory door speaker location with MR129.com 3D adapter brackets. 2 brackets per door (4 total). The 63mm woofer depth + bracket should clear the factory grille.
+- **Tweeter (28mm):** Factory dash tweeter location (surface or flush mount). 17mm depth — fits anywhere. Wire routed through cabin (under dash trim, along A-pillar) — no door boot penetration needed.
+- **STL files:** ~$39 from mr129.com. Print test-fit prototypes in PLA first, then PETG/ABS final. Verify Hertz MP 165P.3 mounting hole (141mm) and depth (63mm) against STL dimensions before final print.
+
+### 4. Subwoofer — Helix IK S10-DVC2
+
+| Spec | Value |
+| :--- | :--- |
+| Size | 10" (250mm) |
+| Voice coil | Dual 2Ω (DVC2) |
+| Power handling | 300W RMS / 600W peak |
+| Mounting depth | 84.5mm |
+| Sealed box volume | 14L net |
+| Sealed box F3 (-3dB) | 46 Hz |
+| Qts | 0.51 |
+| Fs | 37 Hz |
+| Xmax | ±6.0mm |
+| Includes | Grille, gasket, terminal plate |
+| Manufacturer | Audiotec Fischer (same as Match) |
+| Price | **€199** (Kärkkäinen) |
+| Status | **ORDERED 2026-04-04** |
+
+The DVC2 configuration is ideal for the UP 6DSP: each voice coil connects to its own 160W sub channel (Ch 5 and Ch 6) at 2Ω. The DSP processes both coils independently for optimal thermal and distortion management. Total combined power to the sub: 320W RMS.
+
+**Enclosure:** Sealed 14L MDF box in the rear driver-side storage cubby. The 84.5mm driver depth + 16mm MDF baffle = ~100mm total — fits under the factory locking lid. Internal polyfill damping. The Helix datasheet recommends a DSP highpass filter at 45 Hz (Q = 1.3) and a parametric cut at 100 Hz (Q = 1.0, -3 dB) for the sealed alignment.
+
+**Alternatives evaluated:**
+- *Hertz Mille Pro MPS 250:* Impressive specs (500W RMS, 16.8mm Xmax) but wants more amplifier power than the UP 6DSP provides. Single voice coil. ~€217+.
+- *Eton MW8:* 140mm mounting depth — too deep for the shallow R129 cubby.
+
+### 5. Wiring & Installation
+
+| Item | Qty | Notes |
+| :--- | :--- | :--- |
+| OFC speaker wire 2×1.5mm² | ~10m | Tweeter runs (cabin routing only) + sub run. |
+| OFC speaker wire 2×2.5mm² | ~5m | Sub feed (higher current). |
+| Spade / ring terminals | assorted | For DSP and speaker connections. |
+| MDF (16mm) | ~0.5m² | Sub enclosure. |
+| Polyfill damping | 200g | Sealed sub box fill. |
+| MR129.com bracket kit (STL) | 1 set | 3D adapter brackets for R129 doors. ~$39 for STL files. 4 pieces (2 per door, woofer only). |
+
+**No professional door wiring needed.** The 2-way setup eliminates the most difficult and expensive part of the installation:
+- **Woofers:** Connected via existing factory door speaker wiring (0.75–1.0mm² adequate for 65W @ 3Ω over short runs). No new wires through door boots.
+- **Tweeters:** Mounted in the dash/A-pillar area. New wire routed entirely within the cabin — under dash trim, along A-pillar. Never enters the door boot.
+- **Subwoofer:** In the rear cubby alongside the DSP. Short wire run, no routing challenges.
+
+This was the decisive factor in choosing 2-way over 3-way. Running 3 pairs of new wire per door through the R129's rubber boots (which contain 35-year-old PSE vacuum lines) would require professional labor (€150–300) and risk damaging the pneumatic central locking system.
 
 ---
 
-## Total Estimated Budget: ~€1,314.00
+## Budget Summary
 
-## Installation Workflow (Time-Optimized)
-1. **Amp Placement (Revised):** DO NOT mount the DSP amplifier behind the climate control/ashtray. That cavity sits above the transmission tunnel and is a notorious heat trap, leading to thermal shutdown. Route the high-level inputs from the BE2210 under the center console carpet to the **rear storage cubby**, and mount the DSP amplifier there alongside the subwoofer.
-2. **Wiring Upgrade (Fully Active & Reversible):** To maintain the ability to restore the car to factory 100% original spec, **do not cut or remove the 1991 factory door wiring.** Simply unplug the factory harness from the old speakers, tape off the connectors, and tuck them safely inside the door cavity. Run fresh 16-gauge OFC speaker wire from the rear-mounted Match UP 8DSP directly to *each individual new speaker* in the doors (3 pairs of wire per door). 
-    *   *Critical R129 Warning (The Door Boots):* Snaking three pairs of new speaker wire through the R129's rubber door boots is notoriously difficult. These boots also contain the fragile plastic vacuum lines for the PSE central locking system. If you force a coat hanger through and crack a 35-year-old vacuum line, your door locks will stop working. 
-    *   *Pro-Tip:* Do the easy work yourself (mount speakers, mount amp, run wire under sills), and consider paying a professional high-end car audio shop for 2-3 hours of labor *just* to safely fish the wires through the door boots. They have the specialized fiberglass fish-tape, lubricants, and liability insurance.
-3. **Front Doors:** Remove door panels. Remove old speakers. Screw in the Jehnert (or Focal + adapter) 3-way components. 
-4. **Subwoofer:** Build the custom sealed MDF dual-drive enclosure or install the Jehnert drop-in box into the rear cubby. 
-5. **Final Connection:** Connect all fresh wiring to the rear-mounted DSP amplifier and tune via laptop.
+| Component | Source | Cost (€) | Status |
+| :--- | :--- | :--- | :--- |
+| Match UP 6DSP | Kärkkäinen | 649 | ORDERED 2026-04-04 |
+| MEC HD-USB (M142045) | Kärkkäinen | 149 | ORDERED 2026-04-04 |
+| Hertz MPK 1650.3 | masori.de | 331 | ORDERED 2026-04-04 |
+| Helix IK S10-DVC2 | Kärkkäinen | 199 | ORDERED 2026-04-04 |
+| MR129.com brackets (STL) | mr129.com | ~36 | Pending |
+| Wiring & hardware | inventory + local | ~40 | Pending |
+| MDF + polyfill | local | ~30 | Pending |
+| **Total** | | **~€1,434** | |
+
+Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring): **~€336**.
+
+---
+
+## Installation Plan
+
+### Phase 1 — Rear Cubby (Self-Install)
+1. Build the sealed 14L MDF enclosure for the Helix IK S10-DVC2.
+2. Mount the Match UP 6DSP alongside the enclosure in the rear cubby.
+3. Install the MEC HD-USB module in the DSP's MEC slot.
+4. Run USB cable from RPi5 (behind dash) to the MEC HD-USB in the rear cubby.
+5. Run high-level input wires from BE2210 speaker outputs to the UP 6DSP (backup analog path / signal detection for auto-on).
+6. Connect sub to Ch 5 + Ch 6 (one coil per channel).
+7. Test sub + DSP with laptop tuning before touching the doors.
+
+### Phase 2 — Door Wiring
+**No professional door wiring needed.** Factory speaker wires (already in doors) are reused for the woofers. Tweeter wires run entirely within the cabin.
+
+1. Identify factory speaker wire pairs at the door connector and at the DSP end (sill plate area).
+2. Extend/splice factory wires to reach the DSP in the rear cubby if needed.
+3. Run new tweeter wire pairs from DSP → under sill plates → up A-pillar → to dash tweeter locations. Entirely within the cabin — never enters door boots.
+
+### Phase 3 — Speaker Mounting (Self-Install)
+1. Remove door panels (trim removal tools on hand).
+2. Remove factory door speakers.
+3. Install MR129.com 3D-printed woofer adapter brackets (2 per door).
+4. Mount Hertz MP 165P.3 woofers. Connect to factory speaker wires.
+5. Reassemble door panels.
+6. Mount Hertz MP 28.3 tweeters in dash/A-pillar locations. Connect to new tweeter wires.
+
+### Phase 4 — DSP Tuning
+1. Connect laptop to UP 6DSP via USB (DSP PC-Tool software).
+2. Set crossover points (starting points, refine by ear):
+   - Tweeter HP: ~2.5 kHz (Linkwitz-Riley 24 dB/oct) — MP 28.3's low Fs allows this
+   - Woofer BP: ~80 Hz HP / ~2.5 kHz LP
+   - Sub LP: ~80 Hz with HP ~45 Hz (subsonic protection)
+3. Time-align all drivers (measure distances from listening position).
+4. Level-match tweeter and woofer (compensate for sensitivity difference: 94 dB woofer vs 91 dB tweeter).
+5. Apply room correction EQ if needed (pink noise + measurement mic).
+6. Save tuning preset to DSP internal memory.
+
+---
+
+## Audio Signal Paths
+
+### Path 1 — Bluetooth Streaming (Primary)
+```
+iPhone → BT A2DP (AAC) → RPi5 PipeWire → USB (UAC) → MEC HD-USB → UP 6DSP → Speakers
+```
+
+### Path 2 — CarPlay Audio (Wireless)
+```
+iPhone → WiFi Direct → Carlinkit CPC200-CCPA → USB → RPi5 PipeWire → USB (UAC) → MEC HD-USB → UP 6DSP → Speakers
+```
+
+### Path 3 — Legacy (Cassette/Radio)
+```
+Becker BE2210 → factory speaker wiring → factory speakers (or high-level input to UP 6DSP)
+```
+The BE2210's high-level outputs can also feed the UP 6DSP's speaker-level inputs for amplified cassette/FM playback through the new speakers. The DSP auto-detects signal presence and switches on.
+
+### Path 4 — Backup Analog
+```
+RPi5 → HDMI audio → Waveshare 3.5mm HP jack → BE2210 AUX input
+```
+Fallback if the MEC HD-USB is unavailable.
+
+---
+
+## Reversibility
+
+The entire system is non-destructive and fully reversible:
+- No factory wiring is cut or removed — only unplugged and extended/spliced.
+- The BE2210 stays functional in the DIN slot.
+- Tweeter wiring runs parallel to existing harness (cabin only).
+- The rear cubby enclosure and DSP can be removed, restoring the original storage space.
+- Door speakers can be swapped back to factory units by reconnecting the original harness.

@@ -168,7 +168,7 @@ Apple CarPlay requires MFi hardware authentication (cannot be implemented in sof
 
 Key capabilities:
 - Hardware-accelerated video pipeline (H.264 decode)
-- GStreamer audio backend (integrates with PipeWire → Match UP 10DSP)
+- GStreamer audio backend (integrates with PipeWire → MEC HD-USB → Match UP 6DSP)
 - Touchscreen and multi-touch support
 - Audio metadata and playback state integration (feeds the Music view)
 - iAP2 turn-by-turn navigation data (can overlay directions on the gauge view)
@@ -243,30 +243,30 @@ Handles optional networking, sync, logging upload, or future remote capabilities
 ## Audio Architecture
 
 ### Overview
-The audio system combines the original Becker BE2210 head unit (cassette/radio) with a modern digital streaming path through the Match UP 10DSP. The BE2210 stays installed and functional for period-correct use; high-quality streaming audio is handled entirely by the RPi5 → DSP path.
+The audio system combines the original Becker BE2210 head unit (cassette/radio) with a modern digital streaming path through the Match UP 6DSP. The BE2210 stays installed and functional for period-correct use; high-quality streaming audio is handled entirely by the RPi5 → DSP path.
 
 ### Audio paths
 
 #### Path 1 — Bluetooth streaming (primary, best quality)
 ```
-iPhone → Bluetooth A2DP (AAC) → RPi5 PipeWire → USB (UAC digital, lossless) → Match UP 10DSP → Speakers
+iPhone → Bluetooth A2DP (AAC) → RPi5 PipeWire → USB (UAC digital, lossless) → Match UP 6DSP → Speakers
 ```
 - iPhone streams from any music service (YouTube Music, Apple Music, Spotify, podcasts, etc.)
 - RPi5 acts as a Bluetooth A2DP audio sink
-- PipeWire routes audio to the Match UP 10DSP via USB Audio Class (UAC) — fully digital, lossless
+- PipeWire routes audio to the Match UP 6DSP via USB Audio Class (UAC) — fully digital, lossless
 - DSP handles crossovers, time alignment, EQ, and amplification
 - AVRCP metadata (track title, artist, album, position) sent alongside audio; displayed on the Pi in the Music view
 - AVRCP controls (play/pause/skip/volume) sent from Pi touchscreen back to iPhone
 
 #### Path 2 — CarPlay audio (wireless)
 ```
-iPhone ~~WiFi Direct~~→ Carlinkit dongle → USB (PCM audio) → RPi5 PipeWire → USB (UAC) → Match UP 10DSP → Speakers
+iPhone ~~WiFi Direct~~→ Carlinkit dongle → USB (PCM audio) → RPi5 PipeWire → USB (UAC) → Match UP 6DSP → Speakers
 ```
 - Wireless CarPlay: iPhone connects to the dongle via WiFi Direct (automatic, no cable)
 - When CarPlay is active, the iPhone stops sending Bluetooth A2DP audio and routes everything through CarPlay instead
 - The CarPlay dongle delivers both H.264 video and PCM audio over USB to the Pi
 - LIVI decodes both: video to its display surface, audio → GStreamer → PipeWire source
-- PipeWire routes CarPlay audio to the same output sink (Match UP 10DSP)
+- PipeWire routes CarPlay audio to the same output sink (Match UP 6DSP)
 - CarPlay audio includes music, navigation voice prompts, phone calls, and Siri
 - The output side (Pi → USB → Match DSP) is identical to Path 1 — only the input source changes
 
@@ -275,7 +275,7 @@ The iPhone controls which path is active. Bluetooth A2DP and CarPlay audio are m
 - **CarPlay disconnected/inactive:** iPhone → Bluetooth A2DP → Pi (Path 1)
 - **CarPlay active:** iPhone → CarPlay dongle → Pi USB (Path 2)
 
-PipeWire handles both sources and routes whichever is active to the Match UP 10DSP output sink. No manual switching needed.
+PipeWire handles both sources and routes whichever is active to the Match UP 6DSP output sink. No manual switching needed.
 
 #### Path 3 — Legacy (cassette/radio)
 ```
@@ -295,7 +295,7 @@ RPi5 → HDMI audio → Waveshare 3.5mm HP jack → cable → BE2210 AUX input �
 ### Audio backend
 - **PipeWire** + **WirePlumber** (running, verified 2026-04-03)
 - No PulseAudio — PipeWire handles ALSA, Bluetooth, and USB audio natively
-- When the Match UP 10DSP USB module is connected, it will appear as a standard ALSA/PipeWire audio sink
+- When the Match UP 6DSP USB module is connected, it will appear as a standard ALSA/PipeWire audio sink
 - Default sink priority: Match USB > HDMI-0 (Waveshare HP jack)
 - PipeWire automatically routes whichever audio source is active (BT A2DP or CarPlay USB) to the default output sink
 
@@ -306,11 +306,13 @@ A PyQt5 view in the stacked UI styled as a period-correct amber-on-black VDO dis
 - Touch controls: previous / play-pause / next / volume (sent via AVRCP D-Bus commands)
 - No web browser, no streaming service APIs, no authentication — works with any music app on the iPhone
 
-### Match UP 10DSP USB integration
-- The Match UP 10DSP USB input module registers as a USB Audio Class (UAC1 or UAC2) device
-- Linux kernel ALSA driver handles UAC devices natively — no proprietary drivers needed
+### Match UP 6DSP USB integration
+- The MEC HD-USB module (part M142045, €149) plugs into the UP 6DSP's MEC expansion slot
+- Registers as a USB Audio Class (UAC1/UAC2) device — Linux kernel ALSA driver handles it natively, no proprietary drivers
 - PipeWire automatically discovers and routes to the USB sink
+- Full Speed mode (up to 96 kHz / 24-bit) works driverless on all platforms — more than sufficient for car audio
 - Expected on `lsusb` as an Audiotec Fischer device; verify with `aplay -l` after connecting
+- The UP 6DSP provides 6 amplified channels (4 × 65W @ 4Ω + 2 × 160W @ 2Ω) — exact fit for fully active 2-way front + DVC2 subwoofer with zero unused channels
 
 ## Boot Configuration
 
@@ -382,5 +384,5 @@ The planned cellular module is a Nordic **nRF93 Cat-1bis** connected via USB. It
 - Build Music view (AVRCP metadata display + touch controls)
 - Add diagnostics view (fault code list from X11 blink codes)
 - Order and integrate CarPlay USB dongle for navigation
-- Connect and verify Match UP 10DSP USB audio path
+- Connect and verify Match UP 6DSP + MEC HD-USB (M142045) audio path
 - Mechanical mounting design for in-car installation

@@ -158,6 +158,25 @@
 
 ---
 
+## PRIORITY 6B — Audio System (Fully Active 2.1)
+
+*Complete audio upgrade: fully active 2-way front + 10" DVC2 subwoofer, driven by 6-channel DSP amplifier. RPi5 feeds digital audio via USB. Factory door wiring reused for woofers — no new wires through door boots, no professional labor needed. See `work/audio_upgrade_blueprint.md` for full architecture and installation plan.*
+
+| Part | Ref / Model | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| DSP Amplifier | **Match UP 6DSP** | 1 | 6-ch DSP amp (4×65W + 2×160W). **€649 from Kärkkäinen. ORDERED 2026-04-04.** Mounts in rear cubby. Chosen over UP 8DSP (€749) — 2-way setup needs exactly 6 channels. ETA 2026-04-09. |
+| USB Audio Module | **MEC HD-USB (M142045)** | 1 | USB Audio Class input for UP 6DSP. Driverless on Linux. **€149 from Kärkkäinen. ORDERED 2026-04-04.** Compatible with UP 6DSP / UP 8DSP / UP 8BMW. ETA 2026-04-09. |
+| Front 2-Way Speakers | **Hertz MPK 1650.3** (Mille Pro) | 1 set | MP 165P.3 woofer (63mm depth, 3Ω) + **MP 28.3 tweeter (Tetolon, 900 Hz Fs)**. Passive crossovers included but unused (fully active). **€331.26 from masori.de. ORDERED 2026-04-04.** Free shipping to FI, 3-yr warranty. 93 dB sensitivity. Chosen for premium tweeter enabling low 2.5 kHz crossover in 2-way active setup. |
+| Subwoofer | **Helix IK S10-DVC2** | 1 | 10" sub, DVC 2×2Ω, 300W RMS, 84.5mm depth. **€199 from Kärkkäinen. ORDERED 2026-04-04.** Each coil → separate DSP channel (Ch 5 + Ch 6). Same manufacturer (Audiotec Fischer) as Match DSP. ETA 2026-04-09. |
+| Door Speaker Brackets | **MR129.com Bracket Kit** (STL) | 1 set | 3D adapter brackets (4 pieces, 2/door — woofer only). ~$39 for STL download. Self-printed: PLA test-fit → PETG/ABS final. Verify Hertz MP 165P.3 141mm mounting hole + 63mm depth against STL dimensions before final print. |
+| Speaker Wire | OFC 2×1.5mm² + 2×2.5mm² | ~15m total | Tweeter runs in cabin (1.5mm²) + sub run (2.5mm²). Partially in inventory. |
+| Sub Enclosure Materials | 16mm MDF + polyfill | — | Sealed 14L box for rear cubby. ~€30. |
+
+**All major components ordered 2026-04-04. Audio system total: ~€1,434.**
+Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring): ~€336.
+
+---
+
 ## PRIORITY 7 — Electrical Consumables & Small Items
 
 | Part | OEM Number / Ref | Qty | Notes |
@@ -294,4 +313,4 @@
 
 ---
 
-*Last updated: 2026-04-02*
+*Last updated: 2026-04-04*
