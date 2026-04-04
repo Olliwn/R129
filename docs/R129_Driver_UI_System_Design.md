@@ -25,8 +25,8 @@ The system must boot and operate correctly with no Internet connection, no hotsp
 
 ### 3. Connectivity is opportunistic
 Future network paths such as:
-- iPhone personal hotspot
-- a cellular node based on `nRF9160`
+- iPhone personal hotspot (opportunistic WiFi tethering)
+- **nRF93 Cat-1bis cellular module** via USB (planned, replaces earlier nRF9160 reference)
 
 are useful additions, but they must be treated as background capabilities. Failure or delay in these paths must never prevent the UI from starting.
 
@@ -93,30 +93,45 @@ If a service is not required to paint the first useful UI screen, it should star
 
 ## Display Strategy
 
-### Current display plan
-Use the original official `7"` Raspberry Pi Touch Display as the local driver display.
+### Current display
+Waveshare `5.5"` AMOLED capacitive touchscreen (USB ID `0712:000a`).
 
-### Important hardware note
-The original official Touch Display supports:
-- `DSI` for display/touch data
-- either `GPIO` power from the Raspberry Pi or separate `micro USB` power to the display controller board
+- **Native resolution:** `1080x1920` (portrait)
+- **Operating resolution:** `1920x1080` (landscape via `transform 90`)
+- **Display interface:** HDMI (micro-HDMI on Pi side, full HDMI on display side)
+- **Touch interface:** USB HID multitouch (10-point), micro-USB on display to USB-A on Pi
+- **Power:** Supplied through the touch USB cable — no separate power cable needed
+- **Audio:** 3.5mm headphone jack on display (labeled "HP"), unused
+- **EDID:** Reports as `HLT WaveShsare`
 
-This matters because the `M.2 HAT+` makes GPIO/header access more awkward. For this hardware combination, separate `micro USB` power to the display may be the cleanest integration path.
+### Cabling (2 cables total)
+1. **HDMI:** Pi 5 HDMI-0 (micro-HDMI, port closest to USB-C power) → display HDMI input
+2. **Touch/Power USB:** Display touch micro-USB → Pi 5 USB-A port
 
-### Current design assumption
-- Treat the original display's documented `micro USB` power option as a valid baseline design choice.
-- If `micro USB` power is used, do not also connect display power over GPIO.
-- In that mode, the only connection between Pi and display should be the `DSI` ribbon.
-- Prefer separate display power over awkward GPIO power wiring if it simplifies the `Pi 5 + M.2 HAT+` mechanical stack.
+The display's dedicated "power" micro-USB port is not needed — the touch USB carries enough current for the AMOLED panel.
 
-### Integration consequence
-Display integration should be treated as a dedicated hardware/software step after the core boot and UI startup path is stable.
+### In-car installation cabling
+The display ships with 180° U-turn adapter connectors for both HDMI and micro-USB. These redirect the cables straight behind the display instead of exiting sideways, minimizing depth for flush panel mounting. Combined with flat FPC cables (micro-HDMI to HDMI flat ribbon + flat micro-USB), the entire assembly can be very thin:
 
-### Safety and integration note
-If the display is powered by `micro USB`:
-- do not connect the display's GPIO power wires to the Pi at the same time
-- keep the Pi and the display on their intended power inputs
-- use the `DSI` cable only for the Pi-to-display connection
+- **Display-side:** 180° adapters on HDMI and touch micro-USB → cables exit rearward
+- **Cables:** Flat FPC HDMI (micro-HDMI Type D → HDMI Type A) + flat micro-USB
+- **Pi-side:** Standard micro-HDMI and USB-A ports
+
+### Display rotation (persistent)
+Rotation is handled by `kanshi` (auto-started by labwc on RPi OS):
+
+`~/.config/kanshi/config`:
+```
+profile {
+    output HDMI-A-1 mode 1080x1920 position 0,0 transform 90
+}
+```
+
+Touch coordinate mapping is handled automatically by the `autotouch` package (pre-installed on RPi OS with labwc).
+
+### Hardware notes
+- The display ships with **two** protective films. The inner film is non-conductive and blocks capacitive touch — it must be removed for touch to work.
+- The display can also accept separate power via a second micro-USB port, but this is redundant when the touch USB is connected to the Pi.
 
 ## Data Flow
 
@@ -131,37 +146,188 @@ The UI should degrade gracefully:
 - if diagnostics are unavailable, show "connecting" or last known state
 - if networking is unavailable, show no error that blocks normal use
 
-## Software Architecture Direction
+## Tech Stack (Decided 2026-04-03)
 
-### Recommended logical layers
+**Python 3.13 + PyQt5 (Qt 5.15.15)** on Raspberry Pi OS with labwc (Wayland).
+
+### Why PyQt5
+Benchmarked on the actual RPi5 hardware (2026-04-03):
+- **PyQt5 first frame: 136ms** (fastest of all tested options)
+- pygame first frame: 371ms
+- PySide6: not available in system packages
+- Electron/Chromium: estimated 3-8s (disqualified on boot time)
+- C++ Qt/QML: estimated ~80-120ms (marginal gain, much harder to develop)
+
+PyQt5 combines the fastest startup with full widget toolkit (QPainter for custom gauge rendering, QWidgets for settings/menus, signals/slots for data binding).
+
+### CarPlay integration path
+Apple CarPlay requires MFi hardware authentication (cannot be implemented in software alone). The planned approach uses a **Carlinkit CPC200-CCPA** USB dongle that handles MFi auth and outputs an H.264 video stream and PCM audio over USB. Touch events are forwarded back to the dongle over USB.
+
+#### Software: LIVI (Linux In-Vehicle Infotainment)
+**[LIVI](https://github.com/f-io/LIVI)** (formerly `pi-carplay`) is the chosen CarPlay host software. It explicitly supports the CPC200-CCPA dongle on RPi5 with Pi OS Trixie.
+
+Key capabilities:
+- Hardware-accelerated video pipeline (H.264 decode)
+- GStreamer audio backend (integrates with PipeWire → Match UP 10DSP)
+- Touchscreen and multi-touch support
+- Audio metadata and playback state integration (feeds the Music view)
+- iAP2 turn-by-turn navigation data (can overlay directions on the gauge view)
+- Microphone input for Siri and phone calls
+- Distributed as an AppImage with an automated RPi install script
+- Actively maintained (v5.6.0+)
+
+Alternative projects evaluated:
+- `react-carplay` (Electron/React, 816 stars) — more community but rougher edges, heavier runtime
+- `FastCarPlay` (C++, 87 stars) — lightest weight but fewest features, no wireless CarPlay confirmed
+
+#### Wireless CarPlay (primary mode)
+The CPC200-CCPA dongle supports both wired and wireless CarPlay. Wireless is the intended mode:
+- The dongle creates a WiFi Direct link to the iPhone — CarPlay connects automatically when the driver is in the car
+- The dongle stays permanently connected to the Pi via USB, hidden behind the dash
+- No user-facing USB port or cable needed in the cabin
+- First-time pairing may require a temporary wired connection; after that, reconnection is automatic
+
+#### Physical installation
+```
+Behind dash (hidden):  Carlinkit dongle ──USB──→ RPi5 USB-A port
+In driver's pocket:    iPhone ~~WiFi Direct~~→ Carlinkit dongle (automatic)
+```
+
+#### CarPlay display layout
+CarPlay negotiates its viewport size with the host. The dongle output resolution is configurable. Two layout modes are planned:
+
+**Full-screen mode:** CarPlay takes the entire 1920x1080 display. The gauge view is not visible. Activated by user gesture (e.g. swipe or touch target).
+
+**Split-screen mode (preferred):** CarPlay runs in a sub-viewport while a persistent status bar shows critical vehicle data:
+```
+┌──────────────────────────────────────────────────────────┐
+│  RPM: 2400  ·  85 km/h  ·  90°C  ·  ADS: COMFORT       │  ← PyQt5 status bar
+├──────────────────────────────────────────────────────────┤
+│                                                          │
+│                   Apple CarPlay                          │  ← LIVI CarPlay viewport
+│                 (navigation map)                         │
+│                                                          │
+└──────────────────────────────────────────────────────────┘
+```
+The CarPlay viewport resolution is set to match the available area (e.g. 1920x960 or similar). Touch events within the CarPlay region are mapped to the CarPlay coordinate space and forwarded to the dongle; touches on the status bar are handled by PyQt5.
+
+### Source location
+`UI_rpi5/src/` — deployed to `/home/pi/r129-ui/src/` on the Pi.
+
+### Application files
+- `main.py` — entry point, `QApplication` bootstrap
+- `main_window.py` — fullscreen `QMainWindow` with `QStackedWidget` for view switching
+- `gauge_view.py` — QPainter-rendered VDO-style instrument cluster (tachometer, speedometer, coolant, oil temp, fuel, voltage, ADS mode)
+
+## Software Architecture
+
+### Logical layers
 
 #### 1. Acquisition layer
-Responsible for talking to the diagnostics module and normalizing incoming data.
+Responsible for talking to the diagnostics module (BLE from Nordic nRF5340) and normalizing incoming data. Will use Qt signals to push updates to the UI.
 
 #### 2. State/cache layer
 Maintains the current local vehicle/application state so the UI can render quickly and survive transient disconnects.
 
 #### 3. UI layer
-The full-screen driver-facing application. This should be able to launch independently of optional services.
+Fullscreen PyQt5 application with stacked views:
+- **Gauge view** — primary driving display (QPainter custom rendering)
+- **Music view** — now-playing display with AVRCP metadata and touch controls, amber VDO style (future)
+- **Diagnostics view** — fault codes, sensor readings (future)
+- **Settings view** — configuration (future)
+- **CarPlay view** — embedded H.264 video from CarPlay dongle (future)
 
 #### 4. Background integration layer
 Handles optional networking, sync, logging upload, or future remote capabilities.
 
-## Boot Mode Direction
+## Audio Architecture
 
-### Near-term
-Keep using Raspberry Pi OS as installed, but reduce unnecessary startup overhead and auto-launch the UI.
+### Overview
+The audio system combines the original Becker BE2210 head unit (cassette/radio) with a modern digital streaming path through the Match UP 10DSP. The BE2210 stays installed and functional for period-correct use; high-quality streaming audio is handled entirely by the RPi5 → DSP path.
 
-### Medium-term
-Consider whether the final system should:
-- keep a lightweight desktop session and launch a full-screen app, or
-- run an even more direct kiosk/appliance path with fewer desktop dependencies
+### Audio paths
 
-The correct choice should be driven by:
-- display/touch support quality
-- boot time
-- reliability
-- PySide6/graphics behavior on the target screen
+#### Path 1 — Bluetooth streaming (primary, best quality)
+```
+iPhone → Bluetooth A2DP (AAC) → RPi5 PipeWire → USB (UAC digital, lossless) → Match UP 10DSP → Speakers
+```
+- iPhone streams from any music service (YouTube Music, Apple Music, Spotify, podcasts, etc.)
+- RPi5 acts as a Bluetooth A2DP audio sink
+- PipeWire routes audio to the Match UP 10DSP via USB Audio Class (UAC) — fully digital, lossless
+- DSP handles crossovers, time alignment, EQ, and amplification
+- AVRCP metadata (track title, artist, album, position) sent alongside audio; displayed on the Pi in the Music view
+- AVRCP controls (play/pause/skip/volume) sent from Pi touchscreen back to iPhone
+
+#### Path 2 — CarPlay audio (wireless)
+```
+iPhone ~~WiFi Direct~~→ Carlinkit dongle → USB (PCM audio) → RPi5 PipeWire → USB (UAC) → Match UP 10DSP → Speakers
+```
+- Wireless CarPlay: iPhone connects to the dongle via WiFi Direct (automatic, no cable)
+- When CarPlay is active, the iPhone stops sending Bluetooth A2DP audio and routes everything through CarPlay instead
+- The CarPlay dongle delivers both H.264 video and PCM audio over USB to the Pi
+- LIVI decodes both: video to its display surface, audio → GStreamer → PipeWire source
+- PipeWire routes CarPlay audio to the same output sink (Match UP 10DSP)
+- CarPlay audio includes music, navigation voice prompts, phone calls, and Siri
+- The output side (Pi → USB → Match DSP) is identical to Path 1 — only the input source changes
+
+#### Audio source switching
+The iPhone controls which path is active. Bluetooth A2DP and CarPlay audio are mutually exclusive:
+- **CarPlay disconnected/inactive:** iPhone → Bluetooth A2DP → Pi (Path 1)
+- **CarPlay active:** iPhone → CarPlay dongle → Pi USB (Path 2)
+
+PipeWire handles both sources and routes whichever is active to the Match UP 10DSP output sink. No manual switching needed.
+
+#### Path 3 — Legacy (cassette/radio)
+```
+Becker BE2210 → car speaker wiring → speakers
+```
+- Cassette and FM/AM radio through the original head unit
+- Independent of the Pi audio system — plays through the BE2210's own amplification
+- The BE2210 has an aftermarket AUX input, usable as a backup analog path from the Pi (Waveshare 3.5mm HP jack → BE2210 AUX)
+
+#### Path 4 — Backup analog (if needed)
+```
+RPi5 → HDMI audio → Waveshare 3.5mm HP jack → cable → BE2210 AUX input → speakers
+```
+- Analog fallback if the Match USB module is unavailable
+- Lower quality than the USB-to-DSP path but functional
+
+### Audio backend
+- **PipeWire** + **WirePlumber** (running, verified 2026-04-03)
+- No PulseAudio — PipeWire handles ALSA, Bluetooth, and USB audio natively
+- When the Match UP 10DSP USB module is connected, it will appear as a standard ALSA/PipeWire audio sink
+- Default sink priority: Match USB > HDMI-0 (Waveshare HP jack)
+- PipeWire automatically routes whichever audio source is active (BT A2DP or CarPlay USB) to the default output sink
+
+### Music view (planned)
+A PyQt5 view in the stacked UI styled as a period-correct amber-on-black VDO display:
+- Track title, artist, album from AVRCP metadata (read via D-Bus `org.bluez.MediaPlayer1`)
+- Playback position bar
+- Touch controls: previous / play-pause / next / volume (sent via AVRCP D-Bus commands)
+- No web browser, no streaming service APIs, no authentication — works with any music app on the iPhone
+
+### Match UP 10DSP USB integration
+- The Match UP 10DSP USB input module registers as a USB Audio Class (UAC1 or UAC2) device
+- Linux kernel ALSA driver handles UAC devices natively — no proprietary drivers needed
+- PipeWire automatically discovers and routes to the USB sink
+- Expected on `lsusb` as an Audiotec Fischer device; verify with `aplay -l` after connecting
+
+## Boot Configuration
+
+### Measured boot time (2026-04-03)
+After disabling `NetworkManager-wait-online` and `cloud-init-*`:
+- **Total: 5.3s** (1.6s kernel + 3.7s userspace)
+- `graphical.target` reached at 3.7s
+- UI service starts immediately after → **first frame at ~5.5s from power-on**
+
+### Auto-start
+The UI runs as a `systemd` user service (`r129-ui.service`) with `After=graphical.target`. User linger is enabled so the service starts at boot without requiring a login session.
+
+Service file: `UI_rpi5/r129-ui.service` → deployed to `~/.config/systemd/user/r129-ui.service`
+
+### Disabled services
+- `NetworkManager-wait-online.service` (saved 6s)
+- `cloud-init-main.service`, `cloud-init-local.service`, `cloud-init-network.service` (saved ~1s)
 
 ## Networking Policy
 
@@ -174,28 +340,47 @@ If an iPhone hotspot is used later:
 - it must never delay UI startup
 - failure to connect must remain silent or low-priority
 
-### Cellular policy
-If an `nRF9160` is added later:
-- treat it as a secondary communications module
-- keep its startup independent from the driver UI path
-- use it for enrichment, upload, remote diagnostics, or telemetry only after core local functionality is stable
+### Cellular policy — nRF93 Cat-1bis
+The planned cellular module is a Nordic **nRF93 Cat-1bis** connected via USB. It replaces the earlier nRF9160 reference and is a better fit for this project:
+- Connects as a standard USB network adapter (CDC-ECM/RNDIS) — no driver work on the Pi, NetworkManager picks it up natively
+- Cat-1bis provides up to ~10 Mbps — more than enough for OTA updates, telemetry, and remote access
+- Higher power consumption than nRF9160 is acceptable in a car environment (12V supply, not battery-constrained)
+- Stays within the Nordic ecosystem alongside the nRF5340 diagnostics node
+- Requires an external LTE antenna — antenna selection and routing must be resolved before committing to installation
+
+**Planned use cases (all non-blocking, background-only):**
+- OTA software updates without WiFi — push new UI builds to the car remotely
+- Telemetry upload — continuous vehicle data logging (ADS, temperatures, fault codes) to a server
+- Remote SSH — debug the Pi without physical access to the car
+- Always-on sentry — status and alert reporting independent of the iPhone
+
+**Design rules:**
+- Cellular startup must be independent from the driver UI path
+- Failure to connect must never block or delay any local functionality
+- Use for enrichment, upload, and remote access only — core features work fully offline
+- SIM card with a small data plan (~200-500 MB/month) is sufficient
+
+**Status:** Planned. Antenna solution must be determined before hardware integration.
 
 ## Immediate Design Priorities
-1. Remove or defer startup services that do not contribute to the initial driver UI.
-2. Decide the final UI launch method under `systemd`.
-3. Integrate the original `7"` Touch Display cleanly with the Pi 5 and `M.2 HAT+`, likely using separate `micro USB` display power and `DSI` only between boards.
-4. Define the local interface contract between the diagnostics module and the Pi UI.
-5. Establish the first minimal UI screen set.
+1. ~~Remove or defer startup services.~~ **DONE (2026-04-03).** 12.2s → 5.3s boot.
+2. ~~Decide the final UI launch method under `systemd`.~~ **DONE (2026-04-03).** User service with linger.
+3. ~~Integrate display.~~ **DONE (2026-04-03).** Waveshare 5.5" AMOLED via HDMI + USB.
+4. Define the local interface contract between the diagnostics module (nRF5340 BLE) and the Pi UI.
+5. ~~Establish the first minimal UI screen set.~~ **DONE (2026-04-03).** Gauge view with simulated data running.
 
 ## Open Questions
-- What exact transport will the diagnostics module use to talk to the Pi?
-- Is the first production UI portrait or landscape on the `7"` display?
-- Will the first UI run on top of a desktop session or as a more direct kiosk target?
-- Which services from the stock Raspberry Pi OS image can be removed safely for this project?
-- How should the original `7"` display and its separate power lead be mounted mechanically together with the `M.2 HAT+`?
+- What exact BLE service/characteristic UUIDs will the Nordic node expose?
+- How should the Waveshare 5.5" AMOLED be mounted mechanically in the car?
+- Should the desktop session (labwc) be kept or replaced with a minimal Wayland compositor for the kiosk path?
+- nRF93 Cat-1bis antenna: internal PCB antenna vs. external antenna routed to the roof/rear window? Needs RF evaluation in the intended mounting location.
 
-## Next Document Candidates
-- UI boot optimization plan
-- original Touch Display integration notes
-- diagnostics-to-UI interface contract
-- driver screen information architecture
+## Next Steps
+- Define BLE data contract (Nordic → Pi)
+- Replace simulated gauge values with live BLE data
+- Configure Bluetooth A2DP sink and pair iPhone for music streaming
+- Build Music view (AVRCP metadata display + touch controls)
+- Add diagnostics view (fault code list from X11 blink codes)
+- Order and integrate CarPlay USB dongle for navigation
+- Connect and verify Match UP 10DSP USB audio path
+- Mechanical mounting design for in-car installation

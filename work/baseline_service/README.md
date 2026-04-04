@@ -12,7 +12,66 @@ No written service history exists for this vehicle. Assume all consumables and w
 - [ ] **Oil Filter Housing Cap** — Inspect the plastic cap for cracks when removing (requires 36mm socket). Replace if cracked.
 
 ### Instructions
-*TODO: Add step-by-step procedure, torque specs, and drain plug washer part number.*
+
+#### Parts
+| Part | P/N / Spec | Qty | Status |
+| :--- | :--- | :--- | :--- |
+| Engine Oil | Mobil 1 0W-40 (MB 229.5) | 8L | On hand |
+| Oil Filter | MANN H 829/1 x (cartridge) | 1 | On hand |
+| Drain Plug Washer (copper, 14mm ID) | A 007 603 014 106 (or generic M14 copper) | 1 | **Needed — order for next change** |
+
+#### Tools
+- 13mm hex socket or Allen key (drain plug)
+- 36mm socket **or** Bahco BE6307614F 74mm/14-flute oil filter wrench (housing cap)
+- Oil drain pan
+- Nitrile gloves, shop towels, brake cleaner for drips
+- Torque wrench (3/8" or 1/2")
+
+#### Step-by-Step Procedure
+
+**Prep:**
+1. Warm up the engine (5 min idle or a short drive). Warm oil drains faster and suspends more contaminants.
+2. Lift the front of the car on jack stands (see [Jacking Instructions](Jacking_Instructions.md)). Side-skirt rubber pad method is easiest — no undershield removal needed.
+3. Remove the plastic undershield if present (four 8mm bolts) for drain plug access.
+
+**Phase 1 — Oil Filter (from above, engine bay):**
+
+4. Locate the oil filter housing on the **passenger (right) side** of the block. It is a vertical canister with a plastic cap on top.
+5. Use the 36mm socket or Bahco filter wrench to unscrew the plastic housing cap. **Turn slowly and carefully** — the cap is plastic and will crack if forced or cross-loaded.
+6. Lift out the old filter cartridge. Oil from the housing will drain back into the sump — this is why the filter is done first.
+7. **Inspect the plastic cap for cracks** (common M119 failure point). A cracked cap will weep oil and must be replaced.
+8. Remove the old O-ring from the cap. Install the new O-ring (supplied with the MANN filter). Lightly oil the new O-ring with fresh engine oil.
+9. Insert the new MANN H 829/1 x cartridge into the housing.
+10. Hand-thread the cap back on, then snug with the wrench. **Do not overtorque** — approximately **25 Nm** (hand-tight + ~1/4 turn). Plastic cap threading into aluminum.
+
+**Phase 2 — Drain Oil (from below):**
+
+11. Place drain pan under the oil pan drain plug.
+12. Remove the drain plug with the **13mm hex** socket. **Oil will be hot** — position the pan and keep hands clear.
+13. Let it drain fully — at least 5–10 minutes. Tilt the drain pan slightly if needed to catch the last drips.
+14. Inspect the copper crush washer on the drain plug. If it is flat and undamaged, it can be reused once. If deformed, cracked, or on its second use, replace it.
+15. Reinstall the drain plug with washer. Torque to approximately **30–40 Nm**. The oil pan is aluminum — do not strip the threads.
+
+**Phase 3 — Refill (car on stands, then level ground):**
+
+16. Pour approximately **7L** of Mobil 1 0W-40 through the oil filler cap on top of the engine. Deliberately underfill at this stage.
+17. Start the engine — the oil pressure warning light **must** go out within 2–3 seconds. If it stays on, shut off immediately and check the filter cap and drain plug.
+18. Let the engine idle for 30 seconds to fill the new filter and circulate oil. Shut off.
+19. **Lower the car off the stands** onto level ground.
+20. Wait 2–3 minutes for oil to settle back into the pan.
+21. Check the dipstick on level ground. Top up in small increments (0.25L at a time) to the **max** mark. Total capacity with filter is approximately 8L.
+
+**Phase 4 — Leak Check:**
+
+22. Start the engine, let it idle for 1 minute.
+23. Shut off. Check the drain plug and filter housing cap area for leaks. Both should be dry.
+24. Recheck oil level after 2 minutes — adjust if needed.
+
+#### Warnings
+- **Plastic filter cap** is the most fragile part of this job. Never use an impact driver. If it's seized, apply penetrating oil around the base and wait — do not force it.
+- **Aluminum oil pan** — the drain plug threads are soft. Always hand-start the plug before using a wrench.
+- **Do not overfill.** Excess oil can be forced into the crankcase ventilation system and foul the intake. If over the max mark, extract excess with the fluid syringe.
+- The dipstick reading is only accurate on **level ground** with the engine off for at least 2 minutes.
 
 ---
 

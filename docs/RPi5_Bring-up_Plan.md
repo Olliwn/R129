@@ -106,6 +106,25 @@ Success criteria:
    git clone git@github.com:YOUR_USERNAME/R129-Pi-UI.git
    ```
 
+## Step 6: Display Integration (DONE — 2026-04-03)
+
+### Hardware
+- **Display:** Waveshare 5.5" AMOLED capacitive touchscreen (USB ID `0712:000a`)
+- **Resolution:** 1080x1920 native (portrait), rotated to 1920x1080 (landscape) via kanshi `transform 90`
+- **Cabling:** 2 cables total:
+  1. HDMI: Pi 5 HDMI-0 (micro-HDMI) → display HDMI input
+  2. Touch/Power USB: display touch micro-USB → Pi 5 USB-A
+- **Touch:** 10-point multitouch, auto-mapped to rotated display by `autotouch` package
+- **Power:** Display powered through the touch USB cable — no separate power needed
+
+### Configuration files
+- `~/.config/kanshi/config` — persistent display rotation
+- `autotouch` package handles touch-to-display coordinate mapping
+
+### Gotchas discovered
+- Display ships with two protective films. The inner film is non-conductive and blocks capacitive touch.
+- First two USB cables tried were charge-only (no data lines). Third cable worked.
+
 ## Next Steps
 - Measure boot time and remove unnecessary startup overhead.
 - Setup systemd service to auto-start the PySide6 app on boot.

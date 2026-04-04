@@ -43,18 +43,18 @@
 | Part | OEM Number | Qty | Notes |
 | :--- | :--- | :--- | :--- |
 | Thermostat (82°C) | A 119 200 04 15 (verify) | 1 | **ORDERED from MB-osat 2026-04-02.** |
-| Radiator Cap | A 124 500 04 06 (verify) | 1 | Cheap insurance — weak cap lowers boiling point. |
+| Radiator Cap (1.4 bar) | A 124 500 04 06 | 1 | **ORDERED from Autodoc 2026-04-04.** Febi 06568, €6.59. |
 
-**MB-osat (2026-04-02):** Thermostat confirmed and ordered (82°C). Radiator cap not yet ordered.
+**MB-osat (2026-04-02):** Thermostat confirmed and ordered (82°C). Radiator cap ordered from Autodoc (Febi 06568).
 
 ### Transmission Fluid (722.3)
 *No filter to change on the 722.3 — just fluid. Need enough for 2–3 drain-and-fill cycles (~5L per cycle).*
 
 | Part | Spec | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| ATF (MB 236.1 spec) | e.g., Fuchs TITAN ATF 3353 or Febi 08971 | 10–15 L | 722.3 capacity ~7L total; 2–3 drain cycles needed for near-complete exchange. |
+| ATF (MB 236.1 spec) | e.g., Fuchs TITAN ATF 3353 or Febi 08971 | 10 L | 722.3 capacity ~7L total; 2–3 drain cycles needed for near-complete exchange. |
 
-**Source:** Motonet or MB-osat. Confirm MB 236.1 (NOT 236.10 or 236.14 — those are for later transmissions).
+**Source:** Buy locally from Motonet or Biltema when ready — Dexron II / MB 236.1 is common shelf stock. No need to ship. Confirm MB 236.1 (NOT 236.10 or 236.14 — those are for later transmissions).
 
 ### ADS Hydraulic System
 
@@ -62,6 +62,20 @@
 | :--- | :--- | :--- | :--- |
 | ADS Suction Filter | A 129 327 00 91 | 1 | **ORDERED from MB-osat 2026-04-02.** Old one cleaned on 2026-03-29 as interim fix. |
 | ZH-M Hydraulic Fluid (MB 343.0) | 000 989 91 03 (Febi 02615) | 1–2 L | Top-up for closed-loop bleed. 4L used in open-loop flush on 03-29. Check remaining level. |
+
+### Engine Oil Service Consumables
+
+| Part | OEM Number | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| Oil Drain Plug Washer (copper, M14) | A 007 603 014 106 (Febi 07215) | 5 | **ORDERED from Autodoc 2026-04-04.** €0.59 each. Buy a pack — one used per oil change. |
+
+### Crankshaft Position Sensor (EZL Code 17 — Active Fault)
+
+*Diagnosed 2026-04-04 during full X11/4 sweep. Pin 8 code 17 = crankshaft position sensor (L5) defective. Code reappears after every drive. Sensor is marginal/intermittent — car starts and runs but EZL falls back to base timing map. A full failure will cause a no-start.*
+
+| Part | OEM Number | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| Crankshaft Position Sensor | A 003 153 01 28 (Topran 408 205) | 1 | **ORDERED from Autodoc 2026-04-04.** €50.99. Located at back of engine near bellhousing (~11 o'clock). 6mm Allen bolt + Phillips screwdriver. 5 min job if sensor isn't seized. OEM Bosch 0261210055 was out of stock / €161 — Topran is a reputable German aftermarket, correct OE cross-reference confirmed. |
 
 ### Predictive Electronics Maintenance (Task #14)
 
@@ -132,7 +146,19 @@
 
 ---
 
-## PRIORITY 6 — Electrical Consumables & Small Items
+## PRIORITY 6 — Telematics / RPi5 Display System
+
+| Part | Ref | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| CarPlay USB Dongle | Carlinkit CPC200-CCPA | 1 | **ORDERED from MyTrendyPhone.fi 2026-04-03.** ~€48. USB dongle with MFi authentication for wireless Apple CarPlay. Dongle connects to Pi via USB (hidden behind dash), iPhone connects to dongle via WiFi Direct (automatic, no cable). Outputs H.264 video + PCM audio over USB, accepts touch input back. No user-facing USB port needed in the cabin. Used with [LIVI](https://github.com/f-io/LIVI) open-source CarPlay host on the Pi (explicitly supports CPC200-CCPA on RPi5). |
+| Flat FPC HDMI Cable | Micro-HDMI (Type D) → HDMI (Type A) | 1 | Thin flexible ribbon cable for flush panel mounting. Replaces the round HDMI cable. ~10–20cm length depending on mounting. AliExpress/Amazon. |
+| Flat Micro-USB Cable | Micro-USB → USB-A | 1 | Thin flexible cable for touch/power connection. For flush panel mounting alongside the FPC HDMI cable. |
+
+**Note:** Waveshare 5.5" AMOLED display, 180° adapter connectors, and standard cables already on hand (2026-04-03).
+
+---
+
+## PRIORITY 7 — Electrical Consumables & Small Items
 
 | Part | OEM Number / Ref | Qty | Notes |
 | :--- | :--- | :--- | :--- |
@@ -143,7 +169,7 @@
 
 ---
 
-## PRIORITY 7 — Body & Trim (Whenever Convenient)
+## PRIORITY 8 — Body & Trim (Whenever Convenient)
 
 | Part | OEM Number / Ref | Qty | Notes |
 | :--- | :--- | :--- | :--- |
