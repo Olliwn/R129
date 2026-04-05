@@ -25,12 +25,18 @@ Level control still needs work:
 
 [work/ads_diagnostic/README.md](../work/ads_diagnostic/README.md) | [work/ads_blink_reader/README.md](../work/ads_blink_reader/README.md)
 
-### Central Locking (PSE) -- Fuse 6 Replaced, PSE Still Untested
-**Status:** INVESTIGATING | **Priority:** MEDIUM | **Since:** 2026-03-13
+### Central Locking (PSE) -- FUNCTIONAL (Passenger Side), Driver Lock Disconnected
+**Status:** PARTIALLY RESOLVED | **Priority:** LOW | **Since:** 2026-03-13 | **Updated:** 2026-04-05
 
-Pneumatic pump completely silent since purchase. Trunk fuse holder F20 (P/N A 129 540 04 50, 6 torpedo positions) **fuse 6 (8A white, bottom position) was blown** (found 2026-03-30). **Fuse replaced 2026-04-03 — fuse is holding.** Replacing the fuse immediately brought the power antenna and IRCL module back to life, confirming fuse 6 powers multiple trunk-area systems. PSE central locking actuation has not yet been explicitly tested post-fuse.
+**Root cause was blown trunk fuse 6** (replaced 2026-04-03). PSE pump confirmed alive on 2026-04-04 (first actuation from driver key). System progressively improved with repeated use as seized pneumatic valves freed up.
 
-**Next:** Test PSE central locking — lock/unlock from key, interior switch, and IRCL remote.
+**2026-04-05:** Full central locking now operational from **passenger side key** — both keys work, red/green dashboard lights, all doors lock/unlock, pump runs reliably. System is fully functional.
+
+**Driver side key lock:** Both keys turn freely (after WD-40 lubrication) but do **not** actuate the lock mechanism at all — no click, no latch movement, no PSE signal. Diagnosis: **lock cylinder coupling/linkage disconnected or broken.** The metal rod connecting the lock cylinder to the door lock mechanism has likely detached (brittle plastic retaining clip, common R129 age issue). Requires driver door panel removal to inspect and reconnect.
+
+**IRCL remote (2026-04-05):** CR2025 batteries installed in both key fobs. **Neither fob successfully activates the car.** Key 1: IR LED transmitted 2-3 times then stopped (likely cracked solder joint on PCB). Key 2: dim IR glow that brightens with sustained press (corroded battery contacts, needs cleaning). Key 2 not yet tested on the car after contact cleaning. IRCL module on car is healthy (Pin 12 = 1 blink).
+
+**Next:** Clean key 2 battery contacts (pencil eraser), test on car. If IRCL works, driver side key lock becomes very low priority. If time allows, remove driver door panel and inspect lock cylinder linkage. Key 1 may need PCB re-solder.
 
 [work/pse_central_locking/README.md](../work/pse_central_locking/README.md)
 
@@ -43,14 +49,14 @@ Voltage drops ~13V to ~12V in ~2 days idle. Battery is Varta Silver Dynamic H3 (
 
 **IRCL (Pin 12) confirmed alive** after fuse 6 replacement — 1 blink, no faults. ATA (Pin 11) confirmed dead (genuine module fault, deprioritized — see ATA entry below).
 
-**Next:** Re-test CCA in warm weather. Parasitic draw test still needed to identify the drain source. Prime suspect now is the dead ATA module (static glow on Pin 11 = constant small draw?).
+**Parasitic draw test (2026-04-05):** First valid reading was 400mA with trunk open + car unlocked — invalid (modules in standby, trunk light on). Attempt to measure with trunk closed blew the Owon HDS242 current fuse due to battery reconnection inrush surge (>8A). Test deferred until fuse replaced. Correct method documented: use a bypass wire during reconnection, remove bypass after settling, then measure. Prime suspect for elevated draw is the dead ATA module (static glow on Pin 11 = constant draw in fault loop?).
+
+**Next:** Replace Owon current fuse, re-test parasitic draw with bypass wire method. Re-test CCA in warm weather.
 
 ### Power Antenna -- Functional, One Segment Slightly Stiff
-**Status:** MOSTLY RESOLVED | **Priority:** LOW | **Since:** 2026-03-29 | **Updated:** 2026-04-03
+**Status:** RESOLVED | **Priority:** — | **Since:** 2026-03-29 | **Resolved:** 2026-04-05
 
-**Root cause was blown trunk fuse 6.** After fuse replacement (2026-04-03), antenna motor immediately came alive. Upper segments extended/retracted with radio. Two lowest segments were initially stuck — freed with WD-40 penetrant and light manual assist. Antenna now fully operational. One segment is not perfectly smooth but does not get stuck.
-
-**Follow-up:** Apply silicone spray (aerosol) into the mast tube for long-term lubrication. Silicone spray added to `parts_to_order.md`.
+**Root cause was blown trunk fuse 6.** After fuse replacement (2026-04-03), antenna motor immediately came alive. Upper segments extended/retracted with radio. Two lowest segments were initially stuck — freed with WD-40 penetrant and light manual assist. CRC silicone spray applied into mast tube (2026-04-04). **All segments now fully smooth after silicone lubrication (confirmed 2026-04-05).** Issue fully resolved.
 
 ### Windshield Wiper / Washer
 **Status:** OPEN | **Priority:** LOW | **Since:** 2026-03-15
@@ -66,6 +72,18 @@ Slight vibration at 700-800 RPM idle. Corteco replacement mounts received (2026-
 
 [work/engine_trans_mounts/README.md](../work/engine_trans_mounts/README.md)
 
+### Crankshaft Position Sensor — Active Fault (EZL Code 17)
+**Status:** PARTS ORDERED | **Priority:** HIGH | **Since:** 2026-04-04
+
+Pin 8 Code 17 returns after every drive. Sensor is marginal/intermittent — car starts and runs but EZL falls back to base timing map. A full failure will cause a no-start. **Topran 408 205 ordered from Autodoc 2026-04-04** (€50.99, ETA ~1 week). Installation is a 5-minute job (6mm Allen bolt, rear of engine near bellhousing). No calibration required.
+
+### Valve Cover Gaskets & Spark Plug Tube Seals — Oil in Wells
+**Status:** OPEN | **Priority:** MEDIUM | **Since:** 2026-04-05
+
+6 of 8 spark plug wells contain oil. Only front cylinders (1, 5) are dry. Both banks affected. Root cause: degraded spark plug tube seals allowing valve cover oil to leak into the wells. Oil is external only — all combustion chambers healthy (clean electrode tips on all 8 plugs). Risk: oil eventually soaks plug wire boots causing misfires/arcing.
+
+**Fix:** Replace both valve cover gasket sets + 8× spark plug tube seals. Combine with Priority 2 timing chain guide inspection (valve covers must come off for both jobs). Parts needed — add to MB-osat order.
+
 ### Engine Belt Noise -- Glazed Belt Confirmed
 **Status:** OPEN | **Priority:** MEDIUM | **Since:** 2026-03-21 | **Updated:** 2026-04-03
 
@@ -79,11 +97,11 @@ Squeals/chirps on startup. **V-belt friction spray test (2026-04-03): noise disa
 The headlight switch rotary knob is worn out / soft. Feels mushy and imprecise. Needs replacement or refurbishment.
 
 ### Seat Adjustment Panels (Door) Loose
-**Status:** OPEN | **Priority:** LOW | **Since:** 2026-04-02 | **Updated:** 2026-04-03
+**Status:** RESOLVED | **Priority:** — | **Since:** 2026-04-02 | **Resolved:** 2026-04-05
 
-Both door seat control panels (P/N 129 820 71 10, "W.-Germany") loose at the bottom. **Cause identified (2026-04-03):** front lower plastic locating clip broken (age embrittlement). Metal mounting clips at corners are intact. Biltema double-sided tape attempted — failed. 
+Both door seat control panels (P/N 129 820 71 10, "W.-Germany") loose at the bottom. **Cause identified (2026-04-03):** front lower plastic locating clip broken (age embrittlement). Metal mounting clips at corners are intact. Biltema double-sided tape attempted — failed.
 
-**Next:** Source proper 3M VHB trim tape, or fabricate a fix by cutting remaining plastic and repurposing the existing screw mount point for a new clip.
+**Fix (2026-04-04/05):** Scotch Fix Extreme Exterior tape (3M VHB-class) applied at broken clip locations on both sides. Driver side done April 4, passenger side April 5 (old duct tape + hot glue bodge by previous owner removed first). Both panels now secure. Minor leather wear/whitening from panel movement — will address during door card removal for speaker installation.
 
 ### Front Grille — Clean & Polish
 **Status:** OPEN | **Priority:** LOW | **Since:** 2026-04-02

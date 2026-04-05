@@ -18,7 +18,7 @@ No written service history exists for this vehicle. Assume all consumables and w
 | :--- | :--- | :--- | :--- |
 | Engine Oil | Mobil 1 0W-40 (MB 229.5) | 8L | On hand |
 | Oil Filter | MANN H 829/1 x (cartridge) | 1 | On hand |
-| Drain Plug Washer (copper, 14mm ID) | A 007 603 014 106 (or generic M14 copper) | 1 | **Needed — order for next change** |
+| Drain Plug Washer (copper, 14mm ID) | A 007 603 014 106 / Febi 07215 | 5 | **ORDERED from Autodoc 2026-04-04.** ETA ~1 week. |
 
 #### Tools
 - 13mm hex socket or Allen key (drain plug)
@@ -77,13 +77,25 @@ No written service history exists for this vehicle. Assume all consumables and w
 
 ## B. Ignition System (M119 Twin-Distributor)
 
-- [ ] **Spark Plugs** — Replace all 8 with **NGK BP5ES** non-resistor copper plugs. Gap to 0.8mm.
-- [ ] **Distributor Caps & Rotors (×2)** — Inspect both left and right distributor caps and rotors for carbon tracking and corrosion. Clean or replace as needed.
-- [ ] **Spark Plug Wires** — Inspect resistance (should be <10 kΩ per wire). Replace full set if any are out of spec or brittle.
+- [x] **Spark Plugs** — ✅ Replaced all 8 (2026-04-05). **NGK BCP5ES** (7496) non-resistor copper plugs, 16mm hex, 0.8mm gap, torqued to 22 Nm.
+- [x] **Distributor Caps & Rotors (×2)** — ✅ Inspected 2026-04-05. Both caps and rotors in serviceable condition — no carbon tracking, no deep pitting, no cracks. Clean with minor oxidation. Replace as preventive during valve cover gasket service.
+- [ ] **Spark Plug Wires** — Inspect resistance (should be <10 kΩ per wire). Replace full set if any are out of spec or brittle. *(Not yet measured — Owon current fuse blown, voltage/resistance still works but deferred.)*
 
 ### Instructions
-*Note: The M119 KE-Jetronic requires non-resistor plugs because the factory plug wire boots already contain resistors. Using resistor plugs (like Bosch FR8DC+) will cause a weak spark and rough idle.*
-*TODO: Add firing order, distributor cap orientation marks, and torque specs for spark plugs.*
+
+**⚠️ IMPORTANT: Correct spark plug for M119.960 (KE-Jetronic) is NGK BCP5ES or Bosch F8DC4 — both are 16mm hex.** The commonly suggested NGK BP5ES has a 20.8mm hex that is too large for the M119 spark plug wells. The "C" in BCP5ES = compact (16mm) hex.
+
+| Plug | Hex | Thread | Reach | Gap | Resistor | Status |
+| :--- | :--- | :--- | :--- | :--- | :--- | :--- |
+| **NGK BCP5ES** (7496) | **16mm** ✅ | M14×1.25 | 19mm | 0.8mm | Non-resistor (SOLID) | **Installed 2026-04-05** |
+| **Bosch F8DC4** | **16mm** ✅ | M14×1.25 | 19mm | 0.8mm | Non-resistor | OEM equivalent |
+| ~~NGK BP5ES~~ | ~~20.8mm~~ ❌ | M14×1.25 | 19mm | 0.8mm | Non-resistor | **WRONG — too large** |
+
+*The M119 KE-Jetronic requires non-resistor plugs because the factory plug wire boots already contain resistors. Using resistor plugs (like Bosch FR8DC+) will cause a weak spark and rough idle.*
+
+**Spark plug well oil leak finding (2026-04-05):** 6 of 8 wells contain oil — only front cylinders (1 and 5) are dry. Both banks affected. Root cause: degraded spark plug tube seals. Oil is external only (valve cover → well), not entering combustion chambers (all electrode tips were clean/healthy). **Both valve cover gasket sets + 8× tube seals needed** — schedule with Priority 2 timing chain guide inspection.
+
+**Procedure:** Remove plastic spark plug wire covers (2 per bank, large flat screwdriver on twist-fasteners). Pull wire boots by twisting and pulling straight up. 16mm magnetic spark plug socket + extension + ratchet. Hand-thread new plugs first to avoid cross-threading aluminum heads. Torque: 20–25 Nm. Cap screws are Phillips (not Torx).
 
 ---
 
@@ -218,4 +230,8 @@ No written service history exists for this vehicle. Assume all consumables and w
 
 | Date | Section | Item | Notes |
 | :--- | :--- | :--- | :--- |
-| | | | |
+| 2026-04-05 | B | Spark plugs replaced ×8 | NGK BCP5ES 7496, 22 Nm. Old plugs were Bosch, all loose, 6/8 wells oily. |
+| 2026-04-05 | B | Distributor caps & rotors inspected ×2 | Serviceable — no tracking, no cracks. Replace during valve cover service. |
+| 2026-04-04 | I | All torpedo fuses replaced | Front + trunk F20, fresh ceramic. All aluminum fuses retired. |
+| 2026-04-04 | I | Full X11/4 diagnostic sweep | Pin 8 Code 17 active (crank sensor). All others clean or expected. |
+| 2026-04-04 | — | Power steering flush | 5-6 cycles Febi 08972, new MANN H 85 filter. Fluid clear. |

@@ -91,8 +91,8 @@
 
 | Part | OEM Number / Ref | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| Valve Cover Gasket Set (Right bank) | 119 010 03 30 | 1 | **ORDERED from MB-osat 2026-04-02.** Incl. spark plug hole seals. |
-| Valve Cover Gasket Set (Left bank) | 119 010 04 30 | 1 | **ORDERED from MB-osat 2026-04-02.** Incl. spark plug hole seals. |
+| Valve Cover Gasket Set (Right bank) | 119 010 03 30 | 1 | **ORDERED from MB-osat 2026-04-02.** Incl. spark plug tube seals. **Confirmed needed 2026-04-05** — 6/8 plug wells have oil. |
+| Valve Cover Gasket Set (Left bank) | 119 010 04 30 | 1 | **ORDERED from MB-osat 2026-04-02.** Incl. spark plug tube seals. **Confirmed needed 2026-04-05** — both banks affected. |
 | Upper Timing Chain Guide (Slide rail) | 119 050 02 16 | 2 | **ORDERED from MB-osat 2026-04-02.** >100 € per side. |
 | Upper Timing Chain Guide (U-shape) | 119 052 09 16 | 1–2 | Depending on M119 sub-version — confirm with MB-osat. |
 | Aluminum Camshaft Oiler Tubes | URO 1191800266PRM (OEM: 119 180 02 66) | 16 | [RockAuto](https://www.rockauto.com/en/catalog/mercedes-benz,1990,500sl,5.0l+v8,1195141) (Engine → Camshaft Oiler Kit). URO Parts anodized aluminum w/ Viton FKM o-rings. ~€14.15/ea × 16 = ~€226 + FedEx/customs/VAT ≈ **€285 delivered.** Use FedEx "Pay import duties in advance." **Verify qty 16 with MB-osat EPC before ordering.** |
@@ -285,7 +285,7 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 - Cabin Air Filter: MANN CU 5041 (installed 03-30)
 - Fuel Filter: MANN WK 830/3
 - Power Steering Filter: MANN H 85
-- Spark Plugs: NGK BP5ES ×8
+- ~~Spark Plugs: NGK BP5ES ×8~~ **WRONG HEX (20.8mm).** Replaced with NGK BCP5ES 7496 ×8 (16mm hex, Puuilo €4.49/ea). **INSTALLED 2026-04-05.**
 - Brake Fluid: ATE TYP200 DOT4 1L
 - Power Steering Fluid: 2L Febi 08972 MB 236.3
 - ADS Hydraulic Fluid: 4L Febi 02615 MB 343.0/ZH-M (used in flush 03-29)
@@ -313,4 +313,4 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 
 ---
 
-*Last updated: 2026-04-04*
+*Last updated: 2026-04-05*

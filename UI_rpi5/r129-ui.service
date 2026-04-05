@@ -1,0 +1,16 @@
+[Unit]
+Description=R129 Driver UI
+After=graphical.target
+Wants=graphical.target
+
+[Service]
+Type=simple
+Environment=QT_QPA_PLATFORM=wayland
+Environment=WAYLAND_DISPLAY=wayland-0
+Environment=XDG_RUNTIME_DIR=/run/user/1000
+ExecStart=/usr/bin/python3 /home/pi/r129-ui/src/main.py
+Restart=on-failure
+RestartSec=2
+
+[Install]
+WantedBy=default.target
