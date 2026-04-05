@@ -111,9 +111,9 @@ No written service history exists for this vehicle. Assume all consumables and w
 
 ## D. Drive Belts
 
-- [ ] **Belt Squeal First Aid** — Apply belt friction spray (on hand) to V-belts during cold start squeal. If squeal stops → slipping belt (tension or glazing). If squeal persists → bearing noise (tensioner/idler).
-- [ ] **Serpentine / V-Belts** — Inspect all belts for cracking, glazing, and tension. The M119 uses multiple V-belts (not a single serpentine). Replace the full set if age/condition is unknown.
-- [ ] **Belt Tensioners & Idler Pulleys** — Check for bearing play/noise. Replace any that are rough.
+- [ ] **Belt Squeal First Aid** — Apply belt friction spray (on hand) to V-belts during cold start squeal. Squeal stopped immediately
+- [ ] **Serpentine / V-Belts** — Inspect all belts for cracking, glazing, and tension. The M119 uses multiple V-belts (not a single serpentine). No cracking, but since squal was fixed with v-belt spray the belt is to be replaced (age unknown but likely very old)
+- [ ] **Belt Tensioners & Idler Pulleys** — Check for bearing play/noise. No noise, play is not checked yet.
 
 ### Instructions
 *TODO: Add belt routing diagram, belt part numbers, and tension specs.*
@@ -128,7 +128,82 @@ No written service history exists for this vehicle. Assume all consumables and w
 - [ ] **Radiator Cap** — Replace (cheap insurance; a weak cap lowers boiling point).
 
 ### Instructions
-*TODO: Add drain plug locations, thermostat housing torque, bleed procedure, and coolant capacity.*
+
+#### Parts
+| Part | P/N / Spec | Qty | Status |
+| :--- | :--- | :--- | :--- |
+| Coolant Concentrate | Motox Classic G11 Blue (MB 325.0 / G48 equiv.) | 10L | On hand |
+| Distilled Water | — | 10L | On hand |
+| Thermostat (82°C) | A 119 200 04 15 | 1 | **ORDERED from MB-osat 2026-04-02.** |
+| Radiator Cap (1.4 bar) | A 124 500 04 06 / Febi 06568 | 1 | **ORDERED from Autodoc 2026-04-04.** |
+| Thermostat Gasket / O-ring | *(supplied with thermostat — verify)* | 1 | Check with thermostat delivery |
+
+Total system capacity: ~11.5L. Final fill is 50/50 mix (≈5.5–6L concentrate + 5.5–6L distilled water). Extra concentrate and water is consumed by the flush cycles.
+
+#### Tools
+- Drain pan (≥12L, or empty and reuse between cycles)
+- 19mm socket (block drain plugs — verify size before starting)
+- Flathead screwdriver or pliers (radiator petcock)
+- Funnel with narrow neck (expansion tank filler)
+- Nitrile gloves, shop towels
+- Garden hose with low-pressure nozzle (optional, for running-water flush)
+
+#### Drain Points (M119 in R129)
+1. **Radiator petcock** — lower right (passenger) side of radiator. Plastic valve, turn by hand or with pliers. Drains the radiator (~4L).
+2. **Engine block drain plugs** — one per bank, lower sides of the block. 19mm hex (verify before starting — some blocks use a different size). Drains the water jackets (~4–5L combined).
+3. **Heater core** — no dedicated drain. Flushed by flow during the flush cycles with the heater valve open.
+
+#### Step-by-Step Procedure
+
+**⚠️ Engine must be COLD. Pressurized coolant at 90°C+ will cause severe burns.**
+
+**Phase 1 — Drain Old Coolant:**
+
+1. Open the expansion tank cap (left/driver side of engine bay) to break vacuum.
+2. Place drain pan under the radiator. Open the radiator petcock (lower right side). Let it drain.
+3. Open both engine block drain plugs. Let everything drain — at least 10 minutes. Rock the car gently if accessible to help clear trapped pockets.
+4. Total recovered: typically 8–10L (some remains trapped in the heater core and hoses).
+
+**Phase 2 — Flush (Distilled Water):**
+
+5. Close the block drain plugs and radiator petcock.
+6. Fill the system through the expansion tank with plain distilled water (or clean tap water for flush cycles only). Fill slowly to reduce air pockets.
+7. Set the cabin heater to **full hot** (opens the heater valve so water flows through the heater core).
+8. Start the engine, let it idle with the expansion tank cap **off**. Watch for air bubbles rising in the tank.
+9. Let the engine run until the thermostat opens (temp gauge rises then stabilizes, upper radiator hose gets hot). This circulates water through the entire system including the heater core.
+10. Shut off the engine. Let it cool enough to handle safely (~15–20 min, does not need to be fully cold).
+11. Drain again from all three points (radiator petcock + both block plugs).
+12. **Inspect the drained water.** If it's brown, rust-colored, or has visible particles, repeat steps 5–11 until it runs reasonably clear. Two flush cycles is typical; heavily contaminated systems may need three.
+
+**Phase 3 — Fill with Coolant (50/50 Premix):**
+
+13. Close all drain plugs and the radiator petcock. Ensure block plugs are snug — aluminum block, do not overtorque.
+14. Pre-mix coolant: 5.5–6L Motox G11 concentrate + equal volume distilled water in a clean container.
+15. Fill slowly through the expansion tank. If there is a bleed screw on the thermostat housing (small screw on the housing where the upper radiator hose meets the engine), open it now — close it when coolant flows out bubble-free.
+16. Fill to the **MAX** mark on the expansion tank. Install the cap loosely (not fully tightened).
+17. Heater still on full hot. Start the engine, idle with the cap loose.
+18. Watch the expansion tank — air bubbles will rise as the system purges. Top up as the level drops.
+19. When the thermostat opens (upper hose gets hot, you'll see a sudden rush of bubbles and a level drop), top up again to the MAX mark.
+20. Tighten the expansion tank cap fully. Let the engine idle for another 2–3 minutes. Shut off.
+
+**Phase 4 — Thermostat & Radiator Cap Replacement (if parts have arrived):**
+
+21. If replacing the thermostat: do it **before** Phase 3 (while the system is drained). The thermostat housing is at the front of the engine where the upper radiator hose connects. Remove the housing bolts, swap the thermostat and gasket/O-ring, reinstall. Torque housing bolts to ~10 Nm (small aluminum housing — do not overtorque).
+22. The new radiator cap (Febi 06568, 1.4 bar) simply replaces the old one on the expansion tank — no tools needed. Install after the final fill.
+
+**Phase 5 — Leak Check & Final Level:**
+
+23. With the engine off, visually inspect all drain plugs, the radiator petcock, thermostat housing, and all hose connections for leaks.
+24. Let the car cool completely (several hours or overnight).
+25. Check the expansion tank level cold — should be between MIN and MAX. Top up if needed.
+26. After the first drive, recheck the level once more. The system may purge a final air pocket and drop slightly.
+
+#### Warnings
+- **Never open the expansion tank cap on a hot engine.** The system is pressurized to 1.4 bar — boiling coolant will erupt.
+- **Block drain plugs thread into aluminum.** Hand-start always. Snug only — no torque wrench needed, just firm-and-stop.
+- **Coolant is toxic to animals.** Ethylene glycol is sweet-tasting and lethal. Clean up all spills and dispose of old coolant properly (Oulu waste station accepts it).
+- **Heater valve must be open (full hot)** during both flushing and filling, or the heater core will trap old coolant / air.
+- **Do not mix G11/G48 (blue-green, silicate) with G12/G13 (pink/purple, OAT).** If unsure what's in the system, the flush cycles will dilute any old coolant to negligible levels before the final fill.
 
 ---
 
