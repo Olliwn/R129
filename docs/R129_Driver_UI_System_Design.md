@@ -212,12 +212,39 @@ CarPlay negotiates its viewport size with the host. The dongle output resolution
 The CarPlay viewport resolution is set to match the available area (e.g. 1920x960 or similar). Touch events within the CarPlay region are mapped to the CarPlay coordinate space and forwarded to the dongle; touches on the status bar are handled by PyQt5.
 
 ### Source location
-`UI_rpi5/src/` — deployed to `/home/pi/r129-ui/src/` on the Pi.
+`UI_rpi5/src/` — deployed to `/home/pi/R129_UI/src/` on the Pi.
 
 ### Application files
-- `main.py` — entry point, `QApplication` bootstrap
-- `main_window.py` — fullscreen `QMainWindow` with `QStackedWidget` for view switching
-- `gauge_view.py` — QPainter-rendered VDO-style instrument cluster (tachometer, speedometer, coolant, oil temp, fuel, voltage, ADS mode)
+- `main.py` — entry point, dotenv loader, platform-aware launch (fullscreen on RPi, windowed on desktop)
+- `main_window.py` — fullscreen `QMainWindow`: sidebar + status bar + `QStackedWidget` with 8 pages
+- `input_actions.py` — `InputAction` enum (UP, DOWN, LEFT, RIGHT, CW, CCW, PRESS, LONG_PRESS)
+- `input_manager.py` — unified input from GPIO joystick/encoder (RPi5) and keyboard (desktop dev)
+- `vehicle_state.py` — central `QObject` data model with `pyqtSignal` for live updates
+- `sim_provider.py` — simulated data generator for development
+- `view_manager.py` — 4-state navigation model (SIDEBAR → PAGE → MENU → PARAM_EDIT)
+- `sidebar.py` — vertical sidebar with 9×9 dot-matrix pixel-art icons
+- `status_bar.py` — compact top bar (clock, page name, warnings)
+- `theme.py` — centralized colors, fonts, scaling, retro FX settings, map constants
+- `dot_matrix.py` — 5×7 dot-matrix text renderer with glow bleed and flicker effects
+- `home_view.py` — wireframe 3D car (Bresenham rasterized dot-matrix), touch pitch/yaw, vehicle info
+- `r129_wireframe.py` — 3D vertex/edge data for the R129 wireframe model
+- `classic_cluster_view.py` — R129 VDO-style instrument cluster reproduction
+- `gauge_view.py` — modern 3-gauge + bars cluster with tapered needles and bezel rings
+- `split_pane_view.py` — reusable 25/75 split-pane base class for menu views
+- `settings_view.py` — settings page (display style, brightness, retro FX toggle)
+- `diag_view.py` — diagnostics page (system fault codes, sensor readings)
+- `map_view.py` — slippy-tile map renderer using CartoDB/OSM tiles (see Map section)
+- `placeholder_view.py` — placeholder for unimplemented pages
+
+### Map view (implemented 2026-04-06)
+Interactive slippy-tile map renderer. **QWebEngineView was rejected** — Chromium's GPU compositor corrupts the Wayland surface on RPi5 + AMOLED (horizontal pixel stride mismatch, persists across page switches, not fixable with software rendering flags).
+
+**Solution:** Custom tile renderer fetching 512×512 @2x PNG tiles from CartoDB dark basemap via `urllib` in background threads. LRU tile cache (256 tiles), 1-tile pre-fetch margin for smooth panning.
+
+- **Tile layers:** Dark (CartoDB dark_all), Light (CartoDB light_all), OSM (openstreetmap.org). PRESS cycles layers.
+- **Controls:** Joystick arrows pan, CW/CCW zoom (range 2–18). Touch drag-to-pan, scroll/wheel zoom. Recenter button (crosshair icon, bottom-right) appears when panned away from home.
+- **GPS-ready:** `set_home(lat, lng)` method for future GPS integration. Default: Helsinki (60.17°N, 24.94°E).
+- **No API key required** for CartoDB/OSM tiles.
 
 ## Software Architecture
 
@@ -370,6 +397,7 @@ The planned cellular module is a Nordic **nRF93 Cat-1bis** connected via USB. It
 3. ~~Integrate display.~~ **DONE (2026-04-03).** Waveshare 5.5" AMOLED via HDMI + USB.
 4. Define the local interface contract between the diagnostics module (nRF5340 BLE) and the Pi UI.
 5. ~~Establish the first minimal UI screen set.~~ **DONE (2026-04-03).** Gauge view with simulated data running.
+6. ~~Build full 8-page application with input infrastructure.~~ **DONE (2026-04-06).** Joystick + touch, sidebar navigation, retro dot-matrix aesthetics, interactive map.
 
 ## Open Questions
 - What exact BLE service/characteristic UUIDs will the Nordic node expose?
@@ -382,7 +410,8 @@ The planned cellular module is a Nordic **nRF93 Cat-1bis** connected via USB. It
 - Replace simulated gauge values with live BLE data
 - Configure Bluetooth A2DP sink and pair iPhone for music streaming
 - Build Music view (AVRCP metadata display + touch controls)
-- Add diagnostics view (fault code list from X11 blink codes)
-- Order and integrate CarPlay USB dongle for navigation
+- Populate diagnostics view with live data from X11 blink codes
+- Order and integrate CarPlay USB dongle for navigation (Carlinkit CPC200-CCPA ordered 2026-04-03)
 - Connect and verify Match UP 6DSP + MEC HD-USB (M142045) audio path
+- Add GPS module for live map tracking (`set_home()` already wired in map view)
 - Mechanical mounting design for in-car installation
