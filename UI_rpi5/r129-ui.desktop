@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=R129 Driver UI
+Comment=Launch the R129 instrument display
+Exec=env WAYLAND_DISPLAY=wayland-0 QT_QPA_PLATFORM=wayland python3 /home/pi/R129_UI/src/main.py
+Path=/home/pi/R129_UI/src
+Icon=utilities-system-monitor
+Terminal=false
+Type=Application
+Categories=System;
+StartupNotify=false

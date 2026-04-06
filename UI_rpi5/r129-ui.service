@@ -5,10 +5,11 @@ Wants=graphical.target
 
 [Service]
 Type=simple
+WorkingDirectory=/home/pi/R129_UI/src
 Environment=QT_QPA_PLATFORM=wayland
 Environment=WAYLAND_DISPLAY=wayland-0
 Environment=XDG_RUNTIME_DIR=/run/user/1000
-ExecStart=/usr/bin/python3 /home/pi/r129-ui/src/main.py
+ExecStart=/usr/bin/python3 /home/pi/R129_UI/src/main.py
 Restart=on-failure
 RestartSec=2
 
