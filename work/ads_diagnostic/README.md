@@ -13,7 +13,7 @@ The OVP relay was the root cause. After re-soldering all joints with Sn63/Pb37 (
 - The tandem pump ADS section is working (confirmed 2026-03-26).
 - Phase 1 open-loop flush completed (2026-03-29): 4L ZH-M pumped through, fluid clear, filter cleaned.
 - Air in system confirmed (bubbling in reservoir after engine off, 2026-03-29).
-- Rear height remains static. Front may respond.
+- Rear height remains static. Fahrzeugniveau switch stuck (2026-04-02). Y36 solenoid and main control valve not yet inspected.
 - Baseline measurements (2026-03-29): Rear L: 67cm, R: 66cm / Front L: 69cm, R: 68.5cm.
 
 **NEXT ACTION: Clear code 14 (lock-to-lock steering), then proceed with closed-loop bleed (Phase 1).**
@@ -76,7 +76,8 @@ The OVP relay was the root cause. After re-soldering all joints with Sn63/Pb37 (
 5.  **Cluster swap — historical analysis (2026-03-27).** Swedish records show smooth odometer 2013–2024. Swap likely pre-2008.
 6.  **~~OVP RELAY CRACKED SOLDER JOINTS.~~** **CONFIRMED & RESOLVED (2026-04-01).** Done.
 7.  **⚠️ ADS STRUT DUST BOOTS — LOWER SECTIONS MISSING (2026-04-02).** Chrome piston shafts exposed. Pitting will destroy seals on irreplaceable ADS shocks. **→ ORDER IMMEDIATELY. Install before further driving.**
-8.  **Fahrzeugniveau switch stuck (2026-04-02).** Red LED permanently on, toggle has no effect. New behavior — switch worked normally before flush (Mar 23–28). Possible: stuck relay, N51 latched state, switch failure, or wiring issue from electronics bay work. **→ Investigate after clearing code 14 and reading all stored codes.**
+8.  **Fahrzeugniveau switch stuck (2026-04-02).** Red LED permanently on, toggle has no effect. New behavior — switch worked normally before flush (Mar 23–28). Possible causes: stuck relay, N51 latched state, switch failure, wiring issue from electronics bay work, or Y36 solenoid seized in energized position. **→ Investigate: (a) Check 12V at Y36 connector (right front wheel well) — if voltage present continuously, switch/relay circuit is latched. (b) Y36 click test. (c) If Y36 is clicking but no height change, suspect clogged sintered bronze filter inside Y36 (documented #1 failure on European ADS I). See [level_control_system.md](level_control_system.md) for detailed failure mode analysis.**
+9.  **Level control not raising car — full Y36/valve diagnostic needed (2026-04-06).** With pump alive, flush done, and fluid fresh, the remaining suspects for no height change are: (a) Y36 sintered filter clogged (most likely — car has sat for years). (b) Height control rod pistons seized from inactivity. (c) Rear ARB linkage sheared. (d) Main valve regulating piston (50c) orientation incorrect or stuck. (e) Main valve ball check valves stuck. **→ Systematic diagnosis in Phase 2 steps 2.1–2.4.**
 
 ## ADS I System Architecture (Reference)
 
@@ -102,17 +103,31 @@ Controls ride height via a hydraulic system. On ADS I, height sensing is **MECHA
 
 *(Note: ADS II (1996+ R129) upgraded to electronic ride height sensors and integrated level control monitoring into the module. ADS I does not have this.)*
 
-- **Fahrzeugniveau-Einstellung (Vehicle Level Switch)** — position 2 on left instrument panel (next to headlight switch, replaces headlight range adjuster on ADS cars). Controls ride height set point with its own indicator LED. **Status: PRESENT and LED illuminates (confirmed 2026-03-23). No effect on ride height when activated.**
-  - **Down = Normales Niveau (Normal Level):** Default. Above ~120 km/h, auto-lowers ~15mm.
-  - **Up = Erhöhtes Niveau (Raised Level):** For poor roads. LED illuminates. Below ~50 km/h, raises ~30mm. Auto-reverts to Normal at 120 km/h.
+**For detailed system operation, valve internals, control loops, failure modes, and electronic replacement concept, see [level_control_system.md](level_control_system.md).**
+
+The level control has **three independent control functions** (not two as initially assumed):
+
+1. **Automatic rear self-leveling** — purely mechanical closed loop via rear ARB linkage → proportional valve
+2. **Manual height adjustment** — Fahrzeugniveau switch → Y36 solenoid → height control rods at **both front and rear** (not front only)
+3. **Automatic speed-dependent lowering** — Y37 solenoid → lowers ~15mm above ~120 km/h
+
+Key components summary (details in the reference doc):
+
+- **Fahrzeugniveau-Einstellung (Vehicle Level Switch)** — position 2 on left instrument panel (next to headlight switch, replaces headlight range adjuster on ADS cars). Controls ride height set point with its own indicator LED. **Status: PRESENT and LED illuminates (confirmed 2026-03-23). STUCK with LED permanently on (2026-04-02).**
+  - **Down = Normales Niveau (Normal Level):** Default. Above ~120 km/h, auto-lowers ~15mm via Y37.
+  - **Up = Erhöhtes Niveau (Raised Level):** For poor roads. LED illuminates. Below ~50 km/h, raises ~30mm via Y36. Auto-reverts to Normal at 120 km/h.
+  - **Absent on US-market ADS I cars** (likely bumper height regulations). This is why US forum threads rarely discuss height control.
+- **Main Control Valve (A 129 320 00 58)** — central valve block, mounted in **right front wheel well area**. Contains sliding valve, 3× ball check valves, regulating piston, overpressure valve (160 bar max), and distributor valve (50a). All level control hydraulics pass through it.
+- **Y36 Height Control Solenoid** — mounted on/adjacent to the main control valve. Energized by Fahrzeugniveau switch. Opens pressure path to height control rods. Contains a **sintered bronze filter** that is the #1 documented failure cause (clogs after 25–35 years). **Status: NOT YET TESTED.**
+- **Y37 Speed-Dependent Lowering Solenoid** — second solenoid on valve block. Driven by speed relay. **Status: NOT YET TESTED.**
+- **Height Control Rods** — hydraulic cylinders at **both front and rear** axles. Pistons extend/retract to change ride height. Can seize if system has been inactive for years. OEM replacements >€500 each.
 - **Hydraulic Tandem Pump (A 129 460 07 80)** — engine-driven (belt), mounted on the M119. ONE pump with TWO internal sections sharing one drive shaft:
   - Section 1 = Power Steering (draws from metal canister) — **WORKING** (brown/aged fluid, steering assisted)
-  - Section 2 = Niveauregulierung (draws from plastic reservoir next to washer fluid) — **NOT WORKING** (clear/un-aged fluid = no circulation for years)
-  - Rebuilt pumps: ABCspecialist (NL), ~€850 + old core return
+  - Section 2 = Niveauregulierung (draws from plastic reservoir next to washer fluid) — **PUMP ALIVE (confirmed 2026-03-26)**, flush done, but level control still not working
+  - Min pressure: 133 bar. Min flow at idle: 0.2 L/min. Rebuilt pumps: ABCspecialist (NL), ~€850 + old core return
 - **ADS/Niveauregulierung Reservoir** — translucent plastic, next to washer fluid bottle. Fluid: MB 343.0 / ZH-M (part number 000 989 91 03). **Flushed with 4L fresh ZH-M (2026-03-29). Level at MAX (engine off). Filter cleaned — new filter (A 129 327 00 91) to be ordered.**
-- **Rear Level Control Valve (A 129 320 00 58 / A 129 320 08 58)** — hydraulic proportioning valve, mounted mid-rear-axle. Height sensing is MECHANICAL: a **linkage from the rear anti-roll bar** mechanically operates the valve's lever arm. As load changes rotate the ARB, the valve directs fluid to raise or lower the car. **No electronic sensors involved.**
+- **Rear Level Control Valve** — hydraulic proportioning valve, mounted mid-rear-axle. Height sensing is MECHANICAL: a **linkage from the rear anti-roll bar** mechanically operates the valve's lever arm. As load changes rotate the ARB, the valve directs fluid to raise or lower the car. **No electronic sensors involved.**
 - **Anti-Roll Bar Linkage** — the "sensor" of ADS I level control. A plastic/metal rod connecting the ARB to the proportioning valve lever. Known failure point: shears at lower mounting. If broken, the valve stays in one position and cannot adjust height. **This failure produces NO electronic fault codes.**
-- **Hydraulic Lines** — from the pump to the valve block, and from the valve to the rear hydraulic struts.
 - **Oil Level Warning** — the reservoir likely has a float sensor wired directly to the cluster warning lamp (the same missing ADS lamp). This warning is independent of N51 — it does not generate a blink code.
 
 ### Why Pin 9 = "1 Blink" Despite a Dead Level Control
@@ -215,25 +230,46 @@ These steps were written when the module was presumed dead. Now that N51 communi
 
 **If rear still static after bleed:** proceed to Phase 2 (mechanical inspection — rear level control valve, ARB linkage).
 
-### Phase 2: Mechanical Inspection Under Car (after bleed proves system status)
+### Phase 2: Mechanical & Hydraulic Inspection Under Car (after bleed proves system status)
 
-*Do this with the car on a lift or jack stands, regardless of Phase 1 outcome.*
+*Do this with the car on a lift or jack stands, regardless of Phase 1 outcome. See [level_control_system.md](level_control_system.md) for detailed component descriptions.*
 
-- **2.1 — Rear Level Control Valve & Linkage**
+- **2.1 — Y36 Solenoid Click Test (can do before jacking)**
+  - Engine running, have someone press Fahrzeugniveau switch to Raised position.
+  - Listen near the **right front wheel well** for an audible **click** from Y36.
+  - If click: solenoid energizing. Problem is downstream (clogged sintered filter, seized height control rods, blocked hydraulic path).
+  - If no click: measure 12V at Y36 connector. Voltage present + no click → seized solenoid. No voltage → wiring/switch/relay fault.
+  - **Note:** Fahrzeugniveau switch is currently STUCK with LED permanently on (since 2026-04-02). Y36 may be receiving continuous power — check with multimeter at Y36 connector even without pressing the switch.
+
+- **2.2 — Main Control Valve & Y36 Visual Inspection**
+  - Locate the **main control valve** (A 129 320 00 58) in the right front wheel well area. Multiple hydraulic steel lines attach to it, plus electrical connectors for Y36 and Y37.
+  - Check for external leaks at all fittings and solenoid connections.
+  - Identify Y36 electrical connector — 2-pin, 12V when Fahrzeugniveau is active.
+  - Identify Y37 electrical connector — second solenoid on the valve body.
+
+- **2.3 — Rear Level Control Valve & Linkage**
   - Locate the **rear level control valve** (hydraulic proportioning valve) mounted approximately in the middle of the rear axle area.
   - Trace the **linkage from the rear anti-roll bar** to the proportioning valve lever arm.
   - **CHECK FOR SHEARED LINKAGE:** Known ADS I failure. The plastic linkage part can shear at the lower mounting, causing the system to lose rear ride height completely. A MBClub UK user with a 1992 500SL had this exact failure.
   - Inspect hydraulic lines from the rear shocks to the valve for leaks, kinks, or disconnection.
-  - *Pass criteria:* Linkage intact and securely connected at both ends, no hydraulic leaks.
-- **2.2 — Accumulator Sphere Condition**
-  - Front Right is confirmed hydro-locked (2026-03-22). Assess the other three corners by manual compression test after >24h standing.
+  - **Manual valve test:** Disconnect ARB linkage from the valve lever. Manually move lever back and forth with engine running. If car rises/lowers → hydraulics are good, problem is upstream (linkage, switch, Y36). If no response → valve or hydraulic supply is blocked.
+  - *Pass criteria:* Linkage intact and securely connected at both ends, no hydraulic leaks, manual lever test responds.
+
+- **2.4 — Height Control Rods**
+  - Inspect front and rear height control rods. Pressure line marked with **red paint blob**.
+  - Check rod pistons for freedom of movement (if accessible). Pistons seize after years of inactivity.
+  - *Pass criteria:* Rods not visibly seized, no external leaks at rod seals.
+
+- **2.5 — Accumulator Sphere Condition**
+  - ~~Front Right is confirmed hydro-locked (2026-03-22).~~ **CLEARED (2026-04-02)** — all four spheres healthy, earlier FR stiffness was air-lock.
   - *Pass criteria:* Shock compresses under body weight and returns without bouncing.
-  - *Known result:* Front Left OK, Rear Left/Right compress but sag more than front.
-- **2.3 — Shock Absorber External Inspection**
+
+- **2.6 — Shock Absorber External Inspection**
   - Visually inspect all four ADS shocks for oil leaks, dented bodies, or damaged solenoid connectors.
   - Check solenoid connector pins for corrosion.
   - *Pass criteria:* No external oil weep, connectors clean and dry.
-- **2.4 — Spring Pad Assessment (only if hydraulic system is restored and rear still sits low)**
+
+- **2.7 — Spring Pad Assessment (only if hydraulic system is restored and rear still sits low)**
   - Measure ride height at all four corners (wheel arch to center of hub).
   - Compare to factory spec (~380–390mm front, ~375–385mm rear).
   - If rear is still low with working level control AND intact linkage, inspect rubber spring pads (nubs 1–4).
@@ -360,6 +396,7 @@ N51 currently reports 0 faults on Pin 9. These tests are needed only if new faul
 
 ## Related Work Items
 
+- **Level Control System Reference** → [level_control_system.md](level_control_system.md) — detailed operation of the Niveauregulierung: valve internals, Y36/Y37 solenoids, height control rods, control loops, known failure modes, and electronic replacement concept
 - ADS Blink-Code Reader (tool & results) → [work/ads_blink_reader/](../ads_blink_reader/README.md)
 - Blink-Code Channel Inventory → [work/ads_blink_reader/blinker_report.md](../ads_blink_reader/blinker_report.md)
 - Suspension Refresh (mechanical) → [Active Tasks #4](../../docs/tasks.md)

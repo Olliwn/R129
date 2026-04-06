@@ -209,11 +209,66 @@ Total system capacity: ~11.5L. Final fill is 50/50 mix (≈5.5–6L concentrate 
 
 ## F. Transmission (722.3)
 
-- [ ] **ATF Drain & Fill** — Drain and refill with MB 236.1 spec ATF. The 722.3 does not have a serviceable filter; fluid change is the maintenance item. Capacity: ~5L per drain cycle (do 2–3 drain-and-fill cycles for a near-complete exchange).
+- [ ] **ATF Drain & Fill** — Drain and refill with MB 236.1 spec ATF. The 722.3 does not have a serviceable filter; fluid change is the maintenance item. Capacity: ~5L per drain cycle (do 2–3 drain-and-fill cycles for a near-complete exchange). **Priority: do this first.** Old ATF loses friction-modifier properties, directly worsening coast-down shift quality — the primary harshness symptom on this car. Fresh fluid alone may noticeably improve the harsh decel downshifts.
+- [ ] **Kickdown Cable Adjustment** — Check and adjust the Bowden cable free play. This is the single most important transmission adjustment — it is fully analog/proportional, continuously modulating both shift points and line pressure across the entire throttle range. Current symptom: part-throttle downshifts require near-WOT to trigger (cable likely too loose / too much free play — transmission doesn't see enough throttle input at moderate pedal positions).
+- [ ] **Modulating Pressure Check** — Verify base line pressure is within spec. Too high = harsh shifts at all throttle positions; too low = clutch/band slip. Requires pan removal to access the adjustment screw on the valve body. Defer until after ATF change and kickdown cable adjustment — the harsh-shift symptom may resolve with fresh fluid.
+- [ ] **Band Adjustments (B1 & B2)** — Check front brake band (B1, 2nd gear hold) and rear brake band (B2, 1st/reverse hold). Both are adjusted via external screws on the transmission case: torque the screw to spec (~10 Nm), then back off a specified number of turns (varies by variant, typically 2.5–3 turns). Over-tightened bands cause harsh engagement. Defer until after ATF change.
+- [ ] **Selector Linkage** — Verify console lever detent positions match the transmission manual valve. Misadjustment causes gear indicator mismatch or difficulty engaging Park.
 - [ ] **Transmission Mount** — Inspect for sagging/cracking. Replace if collapsed (causes drivetrain vibration).
 
 ### Instructions
-*TODO: Add drain plug location, fluid level check procedure (dipstick at 80°C in Park), and mount part number.*
+
+#### ATF Drain & Fill
+1. Warm the transmission to operating temperature (~80 °C) with a short drive.
+2. Place the car on level ground on jack stands (see Jacking_Instructions.md).
+3. Remove the 5 mm hex drain plug on the bottom of the transmission oil pan. Collect the fluid (~5 L per drain). Note the color and smell — dark/burnt fluid indicates overheating history.
+4. Reinstall the drain plug with a new copper seal ring. Torque: 15 Nm.
+5. Refill through the dipstick tube using a long funnel. Add ~5 L of MB 236.1 spec ATF (Fuchs TITAN ATF 3292 or equivalent).
+6. Start the engine in Park, let it idle for 2 minutes, then cycle through all gear positions (P-R-N-D-3-2-1 and back) pausing 3 seconds in each.
+7. Return to Park. Check fluid level on the dipstick at 80 °C — level should be between the two marks. Top up as needed.
+8. Repeat the drain-and-fill cycle 2–3 times total for a near-complete fluid exchange (~85–90%).
+
+#### Kickdown Cable Adjustment
+The kickdown cable runs from the throttle linkage (engine side, near the KE-Jetronic throttle body) to the transmission. It is analog — not an on/off switch — and proportionally controls line pressure and shift points across the full throttle range.
+
+1. With the engine off, confirm the throttle is fully closed (resting on idle stop).
+2. At the cable's attachment point on the engine-side bracket, check free play: there should be ~1 mm of slack in the cable with throttle fully closed. **Current suspicion: cable is too loose (excess free play).** This would explain why part-throttle downshifts require near-WOT — the transmission doesn't see meaningful throttle input until very late in the pedal travel.
+3. Adjust the threaded sleeve or clip at the engine-side mounting point to set ~1 mm free play — no more, no less. Taking up excess slack will make the transmission respond to throttle input earlier, enabling part-throttle downshifts without flooring it.
+4. Have a helper press the throttle to WOT. The cable must reach full travel and actuate the kickdown detent on the transmission lever — you should feel/hear it click past a resistance point. **Note:** full-kickdown (the detent click at the very end of pedal travel) is by design a near-WOT event on the 722.3. This is normal and intentional — it prevents accidental kickdowns. What should improve with correct adjustment is the range of *part-throttle downshifts* (60–80% pedal) that currently aren't happening.
+5. If the cable cannot achieve both correct idle free play AND full WOT travel, the cable may be stretched or the wrong length (check part number). A stretched cable would explain both symptoms — loose at idle but unable to reach the kickdown detent reliably at WOT.
+6. **Trade-off awareness:** tightening the cable (reducing free play to spec) will also slightly increase line pressure at any given throttle position, which could make the already-firm downshifts even firmer. If shift harshness worsens after cable adjustment, the modulating pressure is too high and should be addressed next.
+7. Road test: at light throttle, shifts should be soft and early (1-2 at ~20 km/h, 2-3 at ~40 km/h). At 60–80% throttle on the highway, a brisk downshift should occur for overtaking without flooring it. At WOT, the kickdown detent should engage with a positive click and the transmission should hold gears to near-redline. Downshifts at part-throttle should be firm but not jarring.
+
+#### Coast-Down Shift Harshness (observed symptom)
+The harsh downshifts on this car occur almost exclusively on quick throttle lift-off (deceleration), not under load. This is a different mechanism from kickdown cable or modulating pressure issues:
+
+- **Coast-down shifts** are controlled by governor pressure (speed-dependent, not adjustable) and rely on the freewheel clutches (F1, F2) — one-way clutches that absorb the gear transition by letting the reaction member overrun momentarily. The kickdown cable and modulating pressure have minimal influence here because at zero throttle, line pressure is already at its minimum.
+- **ATF condition is the biggest lever.** Degraded fluid with spent friction modifiers makes these lightly-loaded transitions noticeably harsher. This is why the ATF drain-and-fill is the first priority.
+- **Freewheel clutch wear (F1/F2)** is a possible internal cause — if a freewheel is slipping, the band catches what the freewheel should absorb, causing a jolt. Not externally adjustable; would require teardown to diagnose definitively. Monitor after ATF change: if coast-down harshness persists with fresh fluid, worn freewheels become a suspect.
+- **Normal 722.3 character.** Even in perfect condition, the hydraulic control system cannot feather rapid throttle-release transitions the way a modern electronically-controlled transmission does. A gradual throttle lift-off will always produce smoother coast-down shifts than a snap release. Some firmness here is era-correct and not a fault.
+- **Driver adaptation note.** The owner's primary car is a Tesla Model 3 Performance, which has trained aggressive throttle-on / snap throttle-off muscle memory (optimal for EV regen, hostile to hydraulic automatics). The perceived harshness may largely disappear once driving style adapts to smoother throttle transitions. Reassess coast-down shift quality after a few weeks of regular driving before chasing mechanical adjustments.
+
+#### Modulating Pressure
+*Requires transmission pan removal and a pressure gauge for definitive verification. Defer to a specialist if not confident with valve body work. The adjustment screw is on the modulating pressure valve — small turns make a large difference.*
+
+#### Band Adjustment (B1 front, B2 rear)
+1. Locate the band adjustment screws on the outside of the transmission case (accessible from underneath without pan removal). B1 is on the left side of the case, B2 toward the rear.
+2. Loosen the locknut on the adjustment screw.
+3. Torque the adjustment screw inward to ~10 Nm (finger-tight with a small torque wrench), which seats the band against the drum.
+4. Back off the screw the specified number of turns for the 722.353 variant (consult WIS — typically 2.5–3 turns).
+5. Hold the screw in position and tighten the locknut.
+6. Road test: 1-2 shift (B1) should engage firmly without harshness; reverse engagement (B2) should be prompt without a bang.
+
+#### Selector Linkage
+1. Place the console selector in "N" (Neutral).
+2. Under the car, verify the transmission manual valve lever is centered in the Neutral detent.
+3. If misaligned, loosen the clamp bolt on the shift rod at the transmission lever, reposition, and retighten.
+4. Verify all positions: P should engage the parking pawl with a clear click, R/N/D should match the indicator, and the key should only come out in P.
+
+#### Fluid Level Check (standalone)
+- Engine idling in Park, transmission at operating temp (~80 °C).
+- Pull the dipstick (right side of the transmission, accessible from above). Wipe, reinsert fully, pull again.
+- Level must be between the upper and lower marks. Overfilling causes foaming; underfilling causes slip and overheating.
 
 ---
 
