@@ -8,7 +8,7 @@ The focus here is not the Pi GUI itself. The focus is the layer beneath it:
 `R129 signal source -> protected front-end -> Nordic node -> BLE -> Raspberry Pi 5 UI`
 
 ## Architectural Overview
-The system is split into three hardware roles:
+The system is split into four hardware roles:
 
 ### 1. Cabin hub: `Raspberry Pi 5`
 - fast-boot local UI
@@ -26,8 +26,20 @@ The system is split into three hardware roles:
 - separate from the engine-bay measurement path
 - handles BLE wake-on-approach
 - controls the Pi power-enable path
+- **BLE keyless lock/unlock:** drives the PSE central locking lock/unlock signal via a transistor output, replacing the factory IRCL infrared remote (deprioritized — fobs non-functional, re-pairing not cost-effective). Phone BLE with bonded encryption is more secure than 1991 IR rolling codes. Requires identifying the IRCL→PSE signal wire at the IRCL module connector and adding one GPIO + small MOSFET/transistor to the sentry board. Walk-up experience: phone proximity triggers both unlock and RPi5 boot simultaneously
 
-This split matters because the always-on node and the engine-bay measurement node have different electrical risk profiles.
+### 4. Trunk battery monitor: `INA226` + `DS18B20`
+- mounted in the trunk next to the battery
+- connected to the RPi5 via a short I2C cable (< 1 m) and one-wire bus, not via BLE
+- **non-invasive design:** no series connection in the battery cable, no added failure points
+- measures battery voltage directly at the terminals via a fused sense wire (INA226 bus voltage: 0–36V, 1.25 mV resolution)
+- measures battery case temperature (DS18B20: ±0.5°C) for state-of-charge compensation
+- parasitic draw estimated from voltage decay rate over time, combined with lead-acid battery model and temperature compensation
+- cranking health tracked via voltage sag depth and recovery rate
+- replaces the battery voltage divider previously planned for `ADS1115 A1` on the engine-bay node, freeing that channel for a second engine-bay analog sensor
+- upgrade path: a bolt-terminal current shunt can be added inline with the battery negative cable later if direct current measurement proves necessary
+
+This four-node split matters because the always-on sentry, the engine-bay measurement node, and the trunk battery monitor have different electrical risk profiles and physical locations. The battery monitor is the simplest node electrically — I2C + one-wire only, no automotive signal conditioning, and no modifications to the battery wiring.
 
 ## The Two R129 Diagnostic Port Families
 To study the possibilities properly, it helps to separate platform-wide `R129` knowledge from what is most likely present on `AOK912`.
@@ -175,9 +187,9 @@ The planned `ADS1115` remains a good choice for `Phase 2.2` because it suits slo
 
 Best uses:
 - air-flow potentiometer
-- conditioned battery monitor
 - future pressure sensors
-- low-bandwidth shunt-derived measurements
+- low-bandwidth shunt-derived measurements (e.g. EHA current)
+- oil temperature or oil pressure sender
 
 Poor uses:
 - raw ignition-like pulses
@@ -201,7 +213,7 @@ Poor uses:
 A sensible first layout is:
 
 - `ADS1115 A0`: direct air-flow potentiometer channel
-- `ADS1115 A1`: battery or switched-supply monitor
+- `ADS1115 A1`: spare conditioned channel (battery voltage monitoring moved to the dedicated trunk INA226 module)
 - `ADS1115 A2/A3`: differential or spare conditioned channel
 - `4051 common`: routed to one spare ADC input for future slow sensors
 

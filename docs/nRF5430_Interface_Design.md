@@ -137,9 +137,9 @@ Why it fits:
 
 Where it fits well:
 - air-flow potentiometer voltage
-- battery voltage after divider
 - low-bandwidth temperature / pressure sensors
-- conditioned shunt measurements
+- conditioned shunt measurements (e.g. EHA current)
+- oil pressure or secondary analog sensor
 
 Where it does not fit well by itself:
 - raw `12V` pulse lines
@@ -231,14 +231,14 @@ Notes:
 - do not put it behind the analog switch until the direct path is validated
 - sample slowly but repeatedly and correlate against RPM and duty-cycle
 
-### 2. Battery voltage monitor
-Suggested path:
+### 2. ~~Battery voltage monitor~~ → Moved to trunk INA226 module
 
-`KL30 or KL15 -> resistor divider -> RC filter -> ADS1115 A1`
+Battery voltage and temperature monitoring is now handled by a dedicated non-invasive module mounted in the trunk next to the battery, connected directly to the RPi5 via I2C + one-wire. An INA226 measures voltage at the battery terminals (0–36V, 1.25 mV resolution) via a fused sense wire. A DS18B20 measures battery case temperature for state-of-charge compensation. No series connection in the battery cable — parasitic draw is estimated from voltage decay rate over time. See `work/battery_monitor/README.md` for full design.
 
-Notes:
-- useful for confirming supply droop during crank or wake events
-- good sanity channel for every logging session
+`ADS1115 A1` is now a **spare conditioned analog channel** available for a second engine-bay sensor:
+- oil pressure sender (if tapped)
+- secondary temperature sensor
+- conditioned switched-supply (KL15) monitor for ignition-on detection
 
 ### 3. EHA current via insert harness
 Suggested path:

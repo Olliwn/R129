@@ -156,6 +156,20 @@
 
 **Note:** Waveshare 5.5" AMOLED display, 180° adapter connectors, and standard cables already on hand (2026-04-03).
 
+### Battery Voltage & Temperature Monitor (Trunk Module)
+
+*Non-invasive battery monitor mounted in the trunk next to the battery. INA226 measures voltage directly at the terminals (0–36V, 1.25 mV resolution) via a fused sense wire. DS18B20 measures battery case temperature for SoC compensation. No series connection in battery cable — zero added failure points. Parasitic draw estimated from voltage decay over time. See `work/battery_monitor/README.md` for full design. Current shunt can be added later as a bolt-on upgrade if needed.*
+
+| Part | Ref | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| INA226 Breakout Board (×5) | CJMCU-226 (Fyndiq, €15.39/5-pack) | 5 | **ORDERING from Fyndiq 2026-04-05.** €3.08/ea. Generic INA226 breakout. Shunt inputs unused (IN+/IN− shorted) — bus voltage measurement only. ETA 2026-04-16–22. |
+| DS18B20 Temperature Sensor | Waterproof probe (AliExpress/Motonet) | 1 | ~€2–3. One-wire digital, ±0.5°C. Strap to battery case for electrolyte temperature tracking. |
+| 4.7 kΩ Resistor | 1/4W through-hole | 1 | ~€0.10. Pull-up for DS18B20 one-wire data line. |
+| Inline Fuse + Holder (1A) | Glass fuse, fast-blow | 1 | ~€1. Protects VBUS sense wire from battery positive terminal. |
+| 5-Wire Shielded Cable (~80 cm) | I2C + one-wire: SDA, SCL, 3.3V, GND, DATA | 1 | ~€2. Short run from INA226 + DS18B20 to RPi5 GPIO header. |
+
+**Source:** INA226 breakout from Fyndiq (€15.39 for 5-pack). DS18B20 from AliExpress or Motonet. Fuse holder from Motonet/Biltema. Estimated total: ~€21 (includes 4 spare INA226 boards).
+
 ---
 
 ## PRIORITY 6B — Audio System (Fully Active 2.1)

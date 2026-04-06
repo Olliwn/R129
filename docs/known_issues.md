@@ -34,9 +34,11 @@ Level control still needs work:
 
 **Driver side key lock:** Both keys turn freely (after WD-40 lubrication) but do **not** actuate the lock mechanism at all — no click, no latch movement, no PSE signal. Diagnosis: **lock cylinder coupling/linkage disconnected or broken.** The metal rod connecting the lock cylinder to the door lock mechanism has likely detached (brittle plastic retaining clip, common R129 age issue). Requires driver door panel removal to inspect and reconnect.
 
-**IRCL remote (2026-04-05):** CR2025 batteries installed in both key fobs. **Neither fob successfully activates the car.** Key 1: IR LED transmitted 2-3 times then stopped (likely cracked solder joint on PCB). Key 2: dim IR glow that brightens with sustained press (corroded battery contacts, needs cleaning). Key 2 not yet tested on the car after contact cleaning. IRCL module on car is healthy (Pin 12 = 1 blink).
+**IRCL remote — DEPRIORITIZED (2026-04-06):** Both key fobs tested with fresh CR2025 batteries. Key 1: IR LED fired 2-3 times then stopped (hardware fault). Key 2: dim IR output, tested on car — **no response.** Either transmission too weak or rolling code out of sync after years of disuse. Re-pairing requires MB Star Diagnosis tool (~€200+ dealer visit) — not cost-effective for a convenience feature. IRCL module on car is healthy (Pin 12 = 1 blink).
 
-**Next:** Clean key 2 battery contacts (pencil eraser), test on car. If IRCL works, driver side key lock becomes very low priority. If time allows, remove driver door panel and inspect lock cylinder linkage. Key 1 may need PCB re-solder.
+**Decision:** IRCL repair abandoned. The planned **BLE sentry node (nRF5340)** will implement phone-based keyless lock/unlock by driving the PSE signal directly. More secure (BLE bonded encryption vs 1991 IR), no line-of-sight required, and already part of the telemetry architecture. Requires identifying the IRCL→PSE signal wire during door panel removal.
+
+**Next:** Driver side key lock linkage repair (low priority — passenger side key works for daily use). BLE lock/unlock implementation tracked in Phase 2.2 architecture.
 
 [work/pse_central_locking/README.md](../work/pse_central_locking/README.md)
 
@@ -62,6 +64,8 @@ Voltage drops ~13V to ~12V in ~2 days idle. Battery is Varta Silver Dynamic H3 (
 **Status:** OPEN | **Priority:** LOW | **Since:** 2026-03-15
 
 Wiper does not consistently park correctly. Washer fluid only from 2 of 4 nozzles.
+
+**Likely cause identified (2026-04-05, video research):** Wiper park position switch — a circular contact disc inside the wiper motor assembly. Metal dust/debris accumulates on the contact tracks over time, causing the switch to misread blade position and stop at the wrong point. The R129 mono-wiper uses this same principle. Symptom is milder than severe cases (blade doesn't keep running, just parks incorrectly) — suggests dirty contacts rather than full failure. **Fix: disassemble wiper mechanism, clean park switch contact tracks with isopropanol or electrical contact cleaner.** Mechanism is accessible from underneath the cowl cover.
 
 [work/wiper_system/README.md](../work/wiper_system/README.md)
 
