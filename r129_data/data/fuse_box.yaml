@@ -1,258 +1,628 @@
 description: >
   R129 fuse box assignments for pre-facelift models (1989-1995).
-  The main fuse box is located in the engine compartment, left side (F1).
-  Additional fuses: component compartment (F19), trunk (F20), CTEL (F22/2).
-  NOTE: Specific fuse assignments need verification from the ETM.
-  The owner's manual provides the fuse legend but circuit details require ETM data.
+  Three fuse locations:
+    1. Hauptsicherungskasten (main fuse box) — engine compartment, left side (F1), 16 fuses
+    2. Zusatzsicherungsdose Motorraum (auxiliary fuse box F19) — engine compartment, behind main box near brake booster, fuses A-H + 1-3
+    3. Zusatzsicherungsdose Kofferraum (trunk auxiliary fuse box F20) — trunk rear wall, 7 positions (pre-facelift torpedo fuses)
+  Post-facelift (~09/1995-2002) cars have a different trunk fuse box (F4, 9 blade fuses) — listed separately below.
 
-trunk_fuse_box_warning: >
-  CAUTION: Two different trunk fuse boxes exist across R129 production.
-  Pre-facelift (1989 to ~08/1995): Auxiliary Fuse Holder F20 (torpedo fuses).
-  Post-facelift (~09/1995 to 2002): Fuse Box F4 (blade fuses, 9 positions).
-  The fuse designation card P/N 129 545 25 00 (dated 15.12.99, ingested as
-  trunk_fuses.pdf) describes the POST-FACELIFT F4 box only and does NOT apply
-  to pre-facelift cars like AOK912 (1991, 129.066). The pre-facelift F20
-  assignments are printed on the fuse box cover (per the 1991 Betriebsanleitung
-  p.95) but no factory chart has been sourced for this repository yet.
-  Forum evidence (BenzWorld) suggests pre-facelift fuse 6 = central locking,
-  but this requires physical verification against the F20 cover or ETM data.
+source_note: >
+  Main fuse box and F19/F20 assignments verified from the 1991 Betriebsanleitung
+  (r129-betriebsanleitung-1991-1993-DE.pdf, pages 119-120). This is the factory
+  owner's manual and supersedes earlier community-sourced data in this file.
+  Post-facelift F4 data from fuse designation card P/N 129 545 25 00 (15.12.99).
+
+# =============================================================================
+# HAUPTSICHERUNGSKASTEN (Main Fuse Box F1, Engine Compartment) — 16 fuses
+# Source: Betriebsanleitung 1991-1993, page 119
+# All fuses are blade type. Fuse legend is printed inside the fuse box cover.
+# =============================================================================
 
 fuses:
-  - id: F1
+  - id: MAIN_1
     rating_amps: 8
-    location: "Main fuse box, engine compartment"
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
     protects:
-      - "Instrument cluster"
-      - "Diagnostic connector"
+      - "Parking/tail light right (Stand-/Schlußlicht rechts)"
+      - "Light warning buzzer (Lichtwarnsummer)"
+      - "Illumination: license plate, instrument cluster, controls (Beleuchtung: Kennzeichen, Kombi-Instrument, Bedienungselemente)"
+      - "Headlamp cleaning system (Scheinwerfer-Reinigungsanlage)"
+    terminal: "58"
+    permanent_12v: false
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
 
-  - id: F2
+  - id: MAIN_2
     rating_amps: 8
-    location: "Main fuse box, engine compartment"
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
     protects:
-      - "Turn signals"
-      - "Hazard warning lights"
+      - "Fog light / rear fog light (Nebel-/Nebelschlußlicht)"
+    terminal: "58"
+    permanent_12v: false
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
 
-  - id: F3
+  - id: MAIN_3
     rating_amps: 8
-    location: "Main fuse box, engine compartment"
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
     protects:
-      - "Brake lights"
+      - "Parking/tail light left (Stand-/Schlußlicht links)"
+    terminal: "58"
+    permanent_12v: false
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
+
+  - id: MAIN_4
+    rating_amps: 16
+    color: "red"
+    location: "Main fuse box F1, engine compartment"
+    protects:
+      - "Seat adjustment control unit / proximity switch (Steuergerät/Näherungsschalter Sitzverstellung)"
+      - "Steering wheel and mirror adjustment (Lenkrad- und Spiegelverstellung)"
+    terminal: "30"
+    permanent_12v: true
+    notes: "Memory functions require permanent power for position recall."
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
+
+  - id: MAIN_5
+    rating_amps: 8
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
+    protects:
+      - "Brake light (Bremslicht)"
+      - "Instrument cluster (Kombi-Instrument)"
+      - "Front interior light (Innenraumleuchte vorn)"
+      - "Lamp failure control unit (Glühlampenkontrollgerät)"
       - "Cruise control (Tempomat)"
+      - "Trailer control unit (Kontrollgerät Anhänger)"
+    terminal: "15"
+    permanent_12v: false
+    notes: "Interior light has permanent feed via door switches, but the control path runs through fuse 9."
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
 
-  - id: F4
+  - id: MAIN_6
     rating_amps: 8
-    location: "Main fuse box, engine compartment"
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
     protects:
-      - "License plate lights"
-      - "Tail lights"
-      - "Side marker lights"
-      - "Instrument cluster illumination"
+      - "Safety package relay left (Relais Sicherheitspaket links)"
+      - "Backup light (Rückfahrlicht)"
+      - "Horn"
+      - "Soft top control (Verdecksteuerung)"
+      - "Fanfare horns (Fanfaren)"
+      - "Outside temperature display (Außentemperaturanzeige)"
+    terminal: "15"
+    permanent_12v: false
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
 
-  - id: F5
+  - id: MAIN_7
     rating_amps: 8
-    location: "Main fuse box, engine compartment"
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
     protects:
-      - "Right low beam headlight"
+      - "Heating/air conditioning control unit (Steuergerät Heizung/Klimatisierung)"
+      - "Heating water valves (Heizwasserventile)"
+      - "Water pump (Wasserpumpe)"
+      - "Auxiliary fan relay terminal 86 (Relais Zusatzlüfter Kl. 86)"
+    terminal: "15"
+    permanent_12v: false
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
 
-  - id: F6
+  - id: MAIN_8
     rating_amps: 8
-    location: "Main fuse box, engine compartment"
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
     protects:
-      - "Left low beam headlight"
+      - "Safety package relay right (Relais Sicherheitspaket rechts)"
+      - "Outside mirrors (Außenspiegel)"
+      - "Heated washer system (Beheizung Waschanlage)"
+      - "Roll bar control unit (Steuergerät Überrollbügel)"
+      - "Infrared remote control (Infrarot-Fernbedienung)"
+    terminal: "30"
+    permanent_12v: true
+    notes: >
+      IRCL receiver and roll bar control unit require permanent power.
+      Parasitic draw test candidate.
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
 
-  - id: F7
+  - id: MAIN_9
     rating_amps: 8
-    location: "Main fuse box, engine compartment"
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
     protects:
-      - "Right high beam headlight"
+      - "Diagnostics terminal 6 (Diagnose Kl. 6)"
+      - "Hazard warning system (Warnblinkanlage)"
+      - "Turn signal light (Blinklicht)"
+      - "Electronic clock (Elektronische Uhr)"
+      - "Front interior light (Innenraumleuchte vorn)"
+      - "Footwell lights (Fußraumleuchten)"
+      - "Electronic radio (Elektronik-Radio)"
+      - "Mirror illumination in sun visor (Spiegelbeleuchtung Sonnenblende)"
+      - "Trip computer (Reiserechner)"
+    terminal: "30"
+    permanent_12v: true
+    notes: >
+      Major permanent-power fuse: clock, radio memory, hazard system, interior
+      lighting, diagnostics. Top parasitic draw candidate in the main fuse box.
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
 
-  - id: F8
+  - id: MAIN_10
     rating_amps: 8
-    location: "Main fuse box, engine compartment"
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
     protects:
-      - "Left high beam headlight"
+      - "Engine residual heat utilization (Motorrestwärmeausnutzung)"
+    terminal: "15"
+    permanent_12v: false
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
 
-  - id: F9
+  - id: MAIN_11
+    rating_amps: 16
+    color: "red"
+    location: "Main fuse box F1, engine compartment"
+    protects:
+      - "Wiper/washer system (Wisch-/Waschanlage)"
+      - "Time function relay (Zeitfunktionsrelais)"
+      - "Headlight flasher (Lichthupe)"
+      - "Headlamp cleaning system relay terminal 86 (Relais Scheinwerfer-Reinigungsanlage Kl. 86)"
+    terminal: "15"
+    permanent_12v: false
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
+
+  - id: MAIN_12
+    rating_amps: 8
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
+    protects:
+      - "Cigarette lighter (Zigarrenanzünder)"
+      - "Glove box light (Handschuhkastenleuchte)"
+      - "Convenience feature relay terminal 86 (Relais Komfortschaltung Kl. 86)"
+      - "Storage tray illumination (Beleuchtung Ablageschale)"
+    terminal: "30"
+    permanent_12v: true
+    notes: >
+      Convenience relay controls delayed interior light shutoff and
+      trunk light. Parasitic draw test candidate.
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
+
+  - id: MAIN_13
+    rating_amps: 8
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
+    protects:
+      - "Low beam left (Abblendlicht links)"
+    terminal: "58"
+    permanent_12v: false
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
+
+  - id: MAIN_14
+    rating_amps: 8
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
+    protects:
+      - "Low beam right (Abblendlicht rechts)"
+    terminal: "58"
+    permanent_12v: false
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
+
+  - id: MAIN_15
+    rating_amps: 8
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
+    protects:
+      - "High beam left (Fernlicht links)"
+    terminal: "58"
+    permanent_12v: false
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
+
+  - id: MAIN_16
+    rating_amps: 8
+    color: "white"
+    location: "Main fuse box F1, engine compartment"
+    protects:
+      - "High beam right (Fernlicht rechts)"
+      - "High beam indicator (Fernlichtkontrolle)"
+    terminal: "58"
+    permanent_12v: false
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.119"
+      confidence: "high"
+
+  # =============================================================================
+  # ZUSATZSICHERUNGSDOSE MOTORRAUM (Auxiliary Fuse Box F19, Engine Compartment)
+  # Located behind the main fuse box, near brake booster.
+  # Two sub-groups: lettered fuses A-H (blade) and numbered fuses 1-3 (large).
+  # Source: Betriebsanleitung 1991-1993, page 120
+  # =============================================================================
+
+  - id: F19_A
+    rating_amps: 8
+    color: "white"
+    location: "Auxiliary fuse box F19, engine compartment"
+    protects:
+      - "Radio / electronic radio (Elektronik-Radio)"
+      - "Trip computer (Reiserechner)"
+    terminal: "30"
+    permanent_12v: true
+    notes: "Radio memory keep-alive. Parasitic draw test candidate."
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
+
+  - id: F19_B
+    rating_amps: 8
+    color: "white"
+    location: "Auxiliary fuse box F19, engine compartment"
+    protects:
+      - "Magnetic clutch air pump (Magnetkupplung Luftpumpe)"
+      - "A/C compressor magnetic clutch (Magnetkupplung Kältekompressor)"
+      - "Kickdown solenoid valve, automatic transmission (Magnetventil Kickdown automatisches Getriebe)"
+    terminal: "15"
+    permanent_12v: false
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
+
+  - id: F19_C
+    rating_amps: 8
+    color: "white"
+    location: "Auxiliary fuse box F19, engine compartment"
+    protects:
+      - "Exit lights (Ausstiegleuchten)"
+      - "Sound system (Sound-System)"
+      - "CD player (CD-Player)"
+    terminal: "30"
+    permanent_12v: true
+    notes: "Door exit lights and audio amplifier may have permanent feed."
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
+
+  - id: F19_D
+    rating_amps: 16
+    color: "red"
+    location: "Auxiliary fuse box F19, engine compartment"
+    protects:
+      - "Seat heating left and right (Sitzheizung links und rechts)"
+    terminal: "15"
+    permanent_12v: false
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
+
+  - id: F19_E
     rating_amps: 25
-    location: "Main fuse box, engine compartment"
+    color: "blue"
+    location: "Auxiliary fuse box F19, engine compartment"
     protects:
-      - "Blower motor (climate control)"
+      - "Driver/passenger seat adjustment (Fahrer-/Beifahrersitzverstellung)"
+    terminal: "30"
+    permanent_12v: false
+    notes: "Seat motors only draw when actively adjusting. No sleep-state draw."
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
 
-  - id: F10
-    rating_amps: 16
-    location: "Main fuse box, engine compartment"
+  - id: F19_F
+    rating_amps: 25
+    color: "blue"
+    location: "Auxiliary fuse box F19, engine compartment"
     protects:
-      - "Headlight washer/wiper"
-      - "Windshield washer pump"
-      - "Wiper motor"
+      - "Driver/passenger seat adjustment (Fahrer-/Beifahrersitzverstellung)"
+    terminal: "30"
+    permanent_12v: false
+    notes: "Second fuse for seat adjustment, likely separate L/R or motor group."
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
 
-  - id: F11
-    rating_amps: 16
-    location: "Main fuse box, engine compartment"
-    protects:
-      - "Power windows"
-    applies_to:
-      years: [1989, 1995]
-    source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
-
-  - id: F12
+  - id: F19_G
     rating_amps: 8
-    location: "Main fuse box, engine compartment"
+    color: "white"
+    location: "Auxiliary fuse box F19, engine compartment"
     protects:
-      - "Cigar lighter"
-      - "Interior lights"
-      - "Glove box light"
-      - "Trunk light"
+      - "Auxiliary heating (Zusatzheizung)"
+    terminal: "15"
+    permanent_12v: false
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
 
-  - id: F13
+  - id: F19_H
     rating_amps: 16
-    location: "Main fuse box, engine compartment"
+    color: "red"
+    location: "Auxiliary fuse box F19, engine compartment"
     protects:
-      - "Power seats"
-      - "Seat memory"
-      - "Mirror memory"
+      - "Auxiliary heating (Zusatzheizung)"
+    terminal: "15"
+    permanent_12v: false
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
 
-  - id: F14
-    rating_amps: 8
-    location: "Main fuse box, engine compartment"
+  - id: F19_1
+    rating_amps: 30
+    location: "Auxiliary fuse box F19, engine compartment (large fuse)"
     protects:
-      - "Fog lights (front)"
+      - "Blower motor (Gebläsemotor)"
+    terminal: "30"
+    permanent_12v: false
+    notes: "Large cartridge fuse. Only draws with ignition on and climate active."
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
 
-  - id: F15
+  - id: F19_2
+    rating_amps: 30
+    location: "Auxiliary fuse box F19, engine compartment (large fuse)"
+    protects:
+      - "Auxiliary fan, dual (Zusatzlüfter, 2-fach)"
+    terminal: "30"
+    permanent_12v: false
+    notes: "Radiator cooling fans. Can run briefly after engine off (thermal afterrun)."
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
+
+  - id: F19_3
+    rating_amps: 30
+    location: "Auxiliary fuse box F19, engine compartment (large fuse)"
+    protects:
+      - "Heated rear window (heizbare Heckscheibe)"
+    terminal: "15"
+    permanent_12v: false
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
+
+  # =============================================================================
+  # PRE-FACELIFT TRUNK FUSE BOX (F20, 1989 to ~08/1995) — 7 positions
+  # Part number: A 129 540 04 50 (confirmed from AOK912 photo, 2026-04-01)
+  # Physical layout: torpedo fuses, numbered 1-7.
+  # Source: Betriebsanleitung 1991-1993, page 120
+  #
+  # NOTE: Position 5 is factory-unassigned ("nicht belegt").
+  # Position 6 is on permanent 12V (terminal 30) and powers the trunk light,
+  # central locking controller, automatic antenna, and IRCL — the single
+  # biggest parasitic draw source in the car.
+  # AOK912: Fuse 6 was found BLOWN on 2026-03-30 (original aluminum torpedo).
+  # =============================================================================
+
+  - id: F20_1
     rating_amps: 16
-    location: "Main fuse box, engine compartment"
+    color: "red"
+    location: "Trunk fuse box F20, position 1"
     protects:
-      - "Radio / audio system"
-      - "Power antenna"
+      - "Window lifter left (Fensterheber links)"
+    terminal: "30"
+    permanent_12v: false
+    notes: "Motor only draws when operating. No sleep-state current."
     applies_to:
       years: [1989, 1995]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
 
-  - id: F16
-    rating_amps: 8
-    location: "Main fuse box, engine compartment"
-    protects:
-      - "ABS control module"
-    applies_to:
-      years: [1989, 1995]
-    source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
-
-  - id: F17
-    rating_amps: 8
-    location: "Main fuse box, engine compartment"
-    protects:
-      - "Rear window defroster"
-    applies_to:
-      years: [1989, 1995]
-    source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
-
-  - id: F18
+  - id: F20_2
     rating_amps: 16
-    location: "Main fuse box, engine compartment"
+    color: "red"
+    location: "Trunk fuse box F20, position 2"
     protects:
-      - "Seat heater"
-    notes: "Only present with option 873."
+      - "Window lifter right (Fensterheber rechts)"
+    terminal: "30"
+    permanent_12v: false
+    notes: "Motor only draws when operating. No sleep-state current."
     applies_to:
       years: [1989, 1995]
-      options: [873]
     source:
-      type: "owner_manual"
-      ref: "1990 Owner's Manual, fuse chart"
-      confidence: "medium"
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
 
-  # === POST-FACELIFT TRUNK FUSE BOX (F4, ~09/1995-2002, 9 blade fuses) ===
+  - id: F20_3
+    rating_amps: 16
+    color: "red"
+    location: "Trunk fuse box F20, position 3"
+    protects:
+      - "Soft top control unit and solenoid valves (Steuergerät und Magnetventile Verdecksteuerung)"
+    terminal: "30"
+    permanent_12v: false
+    notes: "Top control unit may have a small keep-alive, but typically negligible."
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
+
+  - id: F20_4
+    rating_amps: 8
+    color: "white"
+    location: "Trunk fuse box F20, position 4"
+    protects:
+      - "Roll bar control unit and solenoid (Steuergerät und Magnet Überrollbügel)"
+      - "Electric belt lock (elektrische Gurtsperre)"
+    terminal: "30"
+    permanent_12v: true
+    notes: "Roll bar controller must respond to crash signals at all times."
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
+
+  - id: F20_5
+    rating_amps: 0
+    location: "Trunk fuse box F20, position 5"
+    protects:
+      - "NOT ASSIGNED (nicht belegt)"
+    terminal: "n/a"
+    permanent_12v: false
+    notes: "Factory empty position. No fuse installed."
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
+
+  - id: F20_6
+    rating_amps: 8
+    color: "white"
+    location: "Trunk fuse box F20, position 6"
+    protects:
+      - "Trunk light (Kofferraumleuchte)"
+      - "Central locking control unit (Steuergerät Zentralverriegelung)"
+      - "Automatic antenna (automatische Antenne)"
+      - "Infrared remote control unit (Steuergerät Infrarot-Fernbedienung)"
+    terminal: "30"
+    permanent_12v: true
+    notes: >
+      PRIMARY parasitic draw fuse. Powers four always-on or semi-always-on
+      consumers: trunk light (0.6A when lid open), PSE controller (standby),
+      IRCL receiver (always listening), and antenna relay. Found BLOWN on
+      AOK912 on 2026-03-30 (original aluminum torpedo fuse). Replaced and
+      PSE central locking restored. Confirmed 8A white from photo (2026-04-01).
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
+
+  - id: F20_7
+    rating_amps: 30
+    location: "Trunk fuse box F20, position 7"
+    protects:
+      - "Soft top hydraulic unit (Hydraulikeinheit Verdecksteuerung)"
+    terminal: "30"
+    permanent_12v: false
+    notes: "High-current fuse for the top hydraulic pump motor. Only draws during top operation."
+    applies_to:
+      years: [1989, 1995]
+    source:
+      type: "factory_manual"
+      ref: "Betriebsanleitung 1991-1993, p.120"
+      confidence: "high"
+
+  # =============================================================================
+  # POST-FACELIFT TRUNK FUSE BOX (F4, ~09/1995-2002, 9 blade fuses)
   # Source: Fuse designation card P/N 129 545 25 00 (dated 15.12.99)
   # WARNING: These do NOT apply to pre-facelift cars (1989 to ~08/1995).
+  # =============================================================================
 
   - id: F4_FUSE1
     rating_amps: 25
@@ -376,101 +746,3 @@ fuses:
       type: "factory_card"
       ref: "P/N 129 545 25 00 (15.12.99), ingested as trunk_fuses.pdf"
       confidence: "high"
-
-  # === PRE-FACELIFT TRUNK AUXILIARY FUSE HOLDER (F20, 1989 to ~08/1995) ===
-  # Part number: A 129 540 04 50 (confirmed from AOK912 photo, 2026-04-01)
-  # Physical layout: 6 torpedo fuse positions (numbered 1 at top, 6 at bottom),
-  # plus round screw-type terminals at top of the holder.
-  # The 1991 Betriebsanleitung (p.95) states this box contains fuses for
-  # "Schließanlage und Dachbetätigung" (locking system and roof operation).
-  # Per-position assignments have NOT been verified from the factory ETM or
-  # fuse box cover. Forum evidence (BenzWorld, 2013 thread on 1995 SL500)
-  # suggests: Fuse 6 = Central locking (and possibly power antenna).
-  # A 1993 500SL owner (PeachParts) reported 6 fuses with ratings:
-  #   1=16A red, 2=16A red, 3=25A blue, 4=8A white, 5=16A red, 6=8A white.
-  # AOK912 photo (2026-04-01) confirms 6 torpedo fuses and fuse 6 (bottom)
-  # is 8A white, matching the PeachParts data.
-
-  - id: F20_FUSE1
-    rating_amps: 16
-    color: "red"
-    location: "Trunk auxiliary fuse holder F20, position 1 (top)"
-    protects:
-      - "UNVERIFIED"
-    applies_to:
-      years: [1989, 1995]
-    source:
-      type: "community"
-      ref: "PeachParts (1993 500SL fuse ratings)"
-      confidence: "low"
-
-  - id: F20_FUSE2
-    rating_amps: 16
-    color: "red"
-    location: "Trunk auxiliary fuse holder F20, position 2"
-    protects:
-      - "UNVERIFIED"
-    applies_to:
-      years: [1989, 1995]
-    source:
-      type: "community"
-      ref: "PeachParts (1993 500SL fuse ratings)"
-      confidence: "low"
-
-  - id: F20_FUSE3
-    rating_amps: 25
-    color: "blue"
-    location: "Trunk auxiliary fuse holder F20, position 3"
-    protects:
-      - "UNVERIFIED"
-    applies_to:
-      years: [1989, 1995]
-    source:
-      type: "community"
-      ref: "PeachParts (1993 500SL fuse ratings)"
-      confidence: "low"
-
-  - id: F20_FUSE4
-    rating_amps: 8
-    color: "white"
-    location: "Trunk auxiliary fuse holder F20, position 4"
-    protects:
-      - "UNVERIFIED"
-    applies_to:
-      years: [1989, 1995]
-    source:
-      type: "community"
-      ref: "PeachParts (1993 500SL fuse ratings)"
-      confidence: "low"
-
-  - id: F20_FUSE5
-    rating_amps: 16
-    color: "red"
-    location: "Trunk auxiliary fuse holder F20, position 5"
-    protects:
-      - "UNVERIFIED"
-    applies_to:
-      years: [1989, 1995]
-    source:
-      type: "community"
-      ref: "PeachParts (1993 500SL fuse ratings)"
-      confidence: "low"
-
-  - id: F20_FUSE6
-    rating_amps: 8
-    color: "white"
-    location: "Trunk auxiliary fuse holder F20, position 6 (bottom)"
-    protects:
-      - "UNVERIFIED -- likely central locking (per BenzWorld 1995 SL500 thread)"
-      - "UNVERIFIED -- possibly power antenna (shared circuit per BenzWorld)"
-    notes: >
-      Found BLOWN on AOK912 on 2026-03-30 (original aluminum torpedo fuse).
-      Confirmed 8A white from photo (2026-04-01). Diary attributed this as root
-      cause of dead PSE central locking. Forum evidence supports this for some
-      pre-facelift cars. Needs verification from the F20 cover or ETM.
-    applies_to:
-      years: [1989, 1995]
-    source:
-      type: "community + photo"
-      ref: "BenzWorld (1995 SL500), PeachParts (1993 500SL), AOK912 photo 2026-04-01"
-      confidence: "medium"
