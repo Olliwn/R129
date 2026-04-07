@@ -1,0 +1,5 @@
+# Trigger RNDIS bring-up when nRF93M1 DK (EigenComm) ttyACM port appears.
+# Uses ATTRS{} to match parent USB device vendor/product.
+# Restarts (not just starts) the service so it re-runs after a DK power cycle.
+ACTION=="add", SUBSYSTEM=="tty", KERNEL=="ttyACM[0-9]*", ATTRS{idVendor}=="19d1", ATTRS{idProduct}=="0001", RUN+="/bin/systemctl restart nrf93-rndis.service"
+ACTION=="remove", SUBSYSTEM=="tty", KERNEL=="ttyACM[0-9]*", ENV{ID_VENDOR_ID}=="19d1", RUN+="/bin/systemctl stop nrf93-rndis.service"

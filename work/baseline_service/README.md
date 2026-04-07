@@ -292,6 +292,9 @@ The harsh downshifts on this car occur almost exclusively on quick throttle lift
 ### Instructions
 *TODO: Add mount part numbers, jack placement points, and torque specs.*
 
+#### Reference
+- [R129 Engine & Transmission Mount Replacement (YouTube)](https://www.youtube.com/watch?v=DlsjAP1dRIk)
+
 ---
 
 ## I. Electrical Baseline
@@ -340,11 +343,65 @@ The harsh downshifts on this car occur almost exclusively on quick throttle lift
 
 ---
 
+## M. Variable Valve Timing (VVT) Solenoid Check
+
+- [ ] **VVT Solenoid — Electrical Resistance (Static)** — Verify the electromagnetic coil is intact. Measure resistance across solenoid pins: 5–10 Ω = pass, OL = open coil (dead), 0–2 Ω = shorted coil. Engine OFF, connector unplugged.
+- [ ] **VVT Solenoid — Mechanical Actuation (Live Engine)** — Verify the solenoid physically opens and the camshaft adjuster advances under oil pressure. Jumper 12V to solenoid pins at idle — engine should stumble/shake. No RPM change = stuck adjuster or blown seals.
+
+### Instructions
+
+**⚠️ Only proceed if the wiring harness is verified safe from "eco-wire" degradation.** The biodegradable harness insulation on pre-1996 M119s can crumble when disturbed, creating shorts. Inspect the solenoid connector and nearby loom before handling.
+
+**Application:** M119 V8 (pre-1996, KE/LH-Jetronic). The solenoid is located on the front of the intake camshaft.
+
+#### Tools
+- Digital multimeter (resistance mode, 200 Ω range)
+- Two jumper wires with alligator clips
+- 12V power source (vehicle battery)
+
+#### Test 1: Electrical Resistance (Static Test)
+
+**Purpose:** Verify the internal electromagnetic coil is intact.
+
+1. Engine **OFF**.
+2. Locate the camshaft solenoid on the front of the intake camshaft. Squeeze the tabs and remove the 2-pin plastic harness plug.
+3. Set the multimeter to Resistance (Ω), lowest range (200 Ω).
+4. Touch probes to the two metal pins inside the metallic solenoid housing (polarity does not matter).
+
+| Reading | Result | Action |
+| :--- | :--- | :--- |
+| **5–10 Ω** | **Pass** — internal copper winding intact | Proceed to Test 2 |
+| **OL / Infinite** | **Fail** — open circuit, wire snapped or burned out | Replace solenoid |
+| **0–2 Ω** | **Fail** — shorted coil, internal winding melted together | Replace solenoid |
+
+#### Test 2: Mechanical Actuation (Live Engine Test)
+
+**Purpose:** Verify the solenoid physically opens and the camshaft gears advance under oil pressure.
+
+1. Engine warmed to operating temperature, fresh oil. Idle in Park.
+2. Unplug the 2-pin connector from the solenoid (idle should remain unchanged — the solenoid is normally closed).
+3. Connect one jumper wire to the battery **Positive (+)** terminal, the other to **Negative (−)** or bare metal chassis ground.
+4. **Briefly** touch the free ends of the jumper wires to the two solenoid pins. **Do not let the jumper wires touch each other.**
+
+| Observation | Result | Action |
+| :--- | :--- | :--- |
+| **Click + engine stumbles/RPM drops** (idle smooths out when wires removed) | **Pass** — electrical and mechanical function confirmed | Solenoid and cam adjuster are working |
+| **Click, but no idle change** | **Fail (mechanical)** — solenoid triggers but cam gear is stuck, clogged, or blowing past internal oil seals | Mechanical teardown of the adjuster mechanism required |
+| **No click, no idle change** | **Fail (electrical)** — solenoid dead or jammed | Re-verify with resistance test; replace solenoid if confirmed |
+
+#### Warnings
+- **Do not hold the jumper wires on the solenoid for extended periods.** The coil is designed for pulsed duty — sustained 12V direct will overheat it. Brief contact (1–2 seconds) is sufficient to observe the idle change.
+- **Fresh oil is a prerequisite for Test 2.** The cam adjuster is hydraulic — old, thick, or low oil will prevent the mechanism from advancing even if the solenoid is perfect. Complete **Section A (Oil & Filtration)** before running the live engine test.
+- **Reconnect the harness plug after testing.** The solenoid must be connected for the ECU to control cam timing during normal driving.
+
+---
+
 ## Related Work Items
 
 * **[How to Safely Lift the R129 (Jacking Instructions)](Jacking_Instructions.md)**
 * Air Intake Hoses & Engine Air Filters → [Active Tasks #6](../../docs/tasks.md)
 * Power Steering Flush & Filter → [Active Tasks #6](../../docs/tasks.md)
+* Timing Chain Guides + Valve Cover Gaskets → [Master Plan Phase 2](../../docs/R129%20Master%20Plan.md) | Reference videos: [1](https://www.youtube.com/watch?v=OEGeKMyupls), [2](https://www.youtube.com/watch?v=TiWVde3Mbvo)
 * Engine Mounts & Steering Damper → [Master Plan Phase 4](../../docs/R129%20Master%20Plan.md)
 * Suspension Refresh (LCA, Links, Bushings) → [Active Tasks #4](../../docs/tasks.md)
 * ADS Diagnostics → [ADS Blink-Code Reader](../ads_blink_reader/README.md)

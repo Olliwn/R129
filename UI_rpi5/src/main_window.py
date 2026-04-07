@@ -15,6 +15,7 @@ from sim_provider import SimulatedProvider
 from view_manager import ViewManager
 from sidebar import Sidebar
 from status_bar import StatusBar
+from modem_state import ModemState
 from home_view import HomeView
 from classic_cluster_view import ClassicClusterView
 from gauge_view import GaugeView
@@ -31,6 +32,7 @@ class MainWindow(QMainWindow):
         self.setAttribute(Qt.WA_AcceptTouchEvents, True)
 
         self._state = VehicleState(self)
+        self._modem = ModemState(self)
         self._provider = SimulatedProvider(self._state, self)
 
         container = QWidget()
@@ -46,7 +48,7 @@ class MainWindow(QMainWindow):
         right_layout.setContentsMargins(0, 0, 0, 0)
         right_layout.setSpacing(0)
 
-        self._status_bar = StatusBar(self._state)
+        self._status_bar = StatusBar(self._state, modem=self._modem)
         self._status_bar.setMinimumHeight(StatusBar.HEIGHT)
         self._status_bar.setMaximumHeight(StatusBar.HEIGHT)
         right_layout.addWidget(self._status_bar, 0)
@@ -62,7 +64,7 @@ class MainWindow(QMainWindow):
         self._view_mgr.add_view("CLASSIC", ClassicClusterView(self._state))
         self._view_mgr.add_view("MODERN", GaugeView(self._state))
         self._view_mgr.add_view("DIAG", DiagView())
-        self._view_mgr.add_view("SETTINGS", SettingsView())
+        self._view_mgr.add_view("SETTINGS", SettingsView(modem=self._modem))
         self._view_mgr.add_view("MEDIA", PlaceholderView("MEDIA"))
         self._view_mgr.add_view("MAP", MapView())
         self._view_mgr.add_view("SPARE", PlaceholderView("SYSTEM INFO"))

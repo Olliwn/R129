@@ -1,0 +1,17 @@
+[Unit]
+Description=nRF93M1 RNDIS cellular bring-up
+After=dev-ttyACM0.device
+Wants=dev-ttyACM0.device
+
+[Service]
+Type=oneshot
+ExecStartPre=/bin/sleep 3
+ExecStart=/usr/bin/python3 /home/pi/R129_tools/nrf93_rndis_bringup.py
+RemainAfterExit=yes
+ExecStop=/usr/bin/python3 /home/pi/R129_tools/nrf93_rndis_bringup.py --teardown
+TimeoutStartSec=90
+Restart=on-failure
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
