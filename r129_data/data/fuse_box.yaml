@@ -12,6 +12,15 @@ source_note: >
   owner's manual and supersedes earlier community-sourced data in this file.
   Post-facelift F4 data from fuse designation card P/N 129 545 25 00 (15.12.99).
 
+field_test_note: >
+  2026-04-07 AOK912 field test: ALL 16 main fuse box (F1) positions tested with
+  key out — NONE have 12V. The entire Hauptsicherungskasten is on switched circuits.
+  Permanent terminal 30 power routes exclusively through the auxiliary boxes F19
+  (engine compartment) and F20 (trunk). The terminal assignments below for F1 fuses
+  marked as "30" (e.g. MAIN_4, MAIN_8, MAIN_9, MAIN_12) are corrected to reflect
+  this: these circuits get their permanent feed via a different path (likely through
+  F19/F20 or the combination relay), not directly from the F1 fuse box.
+
 # =============================================================================
 # HAUPTSICHERUNGSKASTEN (Main Fuse Box F1, Engine Compartment) — 16 fuses
 # Source: Betriebsanleitung 1991-1993, page 119
@@ -74,9 +83,9 @@ fuses:
     protects:
       - "Seat adjustment control unit / proximity switch (Steuergerät/Näherungsschalter Sitzverstellung)"
       - "Steering wheel and mirror adjustment (Lenkrad- und Spiegelverstellung)"
-    terminal: "30"
-    permanent_12v: true
-    notes: "Memory functions require permanent power for position recall."
+    terminal: "15"
+    permanent_12v: false
+    notes: "No 12V with key out (field-verified 2026-04-07). Memory keep-alive likely routed through F19."
     applies_to:
       years: [1989, 1995]
     source:
@@ -153,11 +162,11 @@ fuses:
       - "Heated washer system (Beheizung Waschanlage)"
       - "Roll bar control unit (Steuergerät Überrollbügel)"
       - "Infrared remote control (Infrarot-Fernbedienung)"
-    terminal: "30"
-    permanent_12v: true
+    terminal: "15"
+    permanent_12v: false
     notes: >
-      IRCL receiver and roll bar control unit require permanent power.
-      Parasitic draw test candidate.
+      No 12V with key out (field-verified 2026-04-07). IRCL and roll bar
+      permanent feeds route through F20 trunk fuse box, not through F1.
     applies_to:
       years: [1989, 1995]
     source:
@@ -179,11 +188,12 @@ fuses:
       - "Electronic radio (Elektronik-Radio)"
       - "Mirror illumination in sun visor (Spiegelbeleuchtung Sonnenblende)"
       - "Trip computer (Reiserechner)"
-    terminal: "30"
-    permanent_12v: true
+    terminal: "15"
+    permanent_12v: false
     notes: >
-      Major permanent-power fuse: clock, radio memory, hazard system, interior
-      lighting, diagnostics. Top parasitic draw candidate in the main fuse box.
+      No 12V with key out (field-verified 2026-04-07). Clock, radio memory,
+      hazard, and interior lights get permanent feed through F19-A/C or
+      the combination relay, not through this F1 fuse.
     applies_to:
       years: [1989, 1995]
     source:
@@ -233,11 +243,11 @@ fuses:
       - "Glove box light (Handschuhkastenleuchte)"
       - "Convenience feature relay terminal 86 (Relais Komfortschaltung Kl. 86)"
       - "Storage tray illumination (Beleuchtung Ablageschale)"
-    terminal: "30"
-    permanent_12v: true
+    terminal: "15"
+    permanent_12v: false
     notes: >
-      Convenience relay controls delayed interior light shutoff and
-      trunk light. Parasitic draw test candidate.
+      No 12V with key out (field-verified 2026-04-07). Convenience relay
+      permanent feed likely through F19 or combination relay path.
     applies_to:
       years: [1989, 1995]
     source:

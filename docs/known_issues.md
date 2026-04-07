@@ -51,9 +51,24 @@ Voltage drops ~13V to ~12V in ~2 days idle. Battery is Varta Silver Dynamic H3 (
 
 **IRCL (Pin 12) confirmed alive** after fuse 6 replacement — 1 blink, no faults. ATA (Pin 11) confirmed dead (genuine module fault, deprioritized — see ATA entry below).
 
-**Parasitic draw test (2026-04-05):** First valid reading was 400mA with trunk open + car unlocked — invalid (modules in standby, trunk light on). Attempt to measure with trunk closed blew the Owon HDS242 current fuse due to battery reconnection inrush surge (>8A). Test deferred until fuse replaced. Correct method documented: use a bypass wire during reconnection, remove bypass after settling, then measure. Prime suspect for elevated draw is the dead ATA module (static glow on Pin 11 = constant draw in fault loop?).
+**Parasitic draw test (2026-04-05):** First valid reading was 400mA with trunk open + car unlocked — invalid (modules in standby, trunk light on). Attempt to measure with trunk closed blew the Owon HDS242 current fuse due to battery reconnection inrush surge (>8A).
 
-**Next:** Replace Owon current fuse, re-test parasitic draw with bypass wire method. Re-test CCA in warm weather.
+**24h voltage decay test (2026-04-06→07):**
+- 12.88V (Apr 6 13:00, 3h post-charger) → 12.46V (Apr 7 13:00) = 420 mV/24h. Trunk light ON, car unlocked → ~790 mA average (trunk light accounts for ~600 mA).
+- 12.46V (Apr 7 13:00) → 12.38V (Apr 7 21:37) = 80 mV in 8.5h. Trunk light OFF, car unlocked → **~226 mV/day rate** — much lower, consistent with <100 mA parasitic draw.
+
+**Fuse-by-fuse test (2026-04-07 evening):**
+- All 16 main fuse box fuses are on switched power (no 12V with key out). Permanent 30 circuits route through auxiliary boxes F19 and F20 only.
+- F20-6 (PSE, IRCL, antenna, trunk light): 1 mV change on Owon — negligible steady-state draw. MAS830 multimeter blew instantly on inrush when reconnected (capacitor charge surge from PSE/IRCL modules).
+- Remaining F20 fuses (1-4, 7): no measurable voltage change on Owon.
+- **Conclusion: no rogue consumer.** Per-fuse voltage changes are below Owon's 1 mV resolution because battery impedance × individual circuit current ≈ 0.2 mV.
+
+**Battery internal resistance — ELEVATED:**
+- Trunk light (0.6 A known load) causes **40 mV drop at battery terminals** → 67 mΩ DC impedance.
+- Healthy 95 Ah battery: 5–10 mΩ. This battery: ~20 mΩ dynamic (from cranking sag to 8.5V at ~200 A) and ~67 mΩ DC (from 0.6 A trunk light, includes polarization).
+- **Battery is 3–4× higher impedance than expected.** Consistent with deep discharge damage or internal sulfation from the previous neglect period. Car starts reliably now but may fail on first cold Oulu morning.
+
+**Next:** Morning voltage reading (Apr 8, trunk closed, car unlocked) for clean overnight decay rate. Consider battery replacement before autumn. Re-test CCA in warmer weather. Owon current fuse replacement still pending.
 
 ### Power Antenna -- Functional, One Segment Slightly Stiff
 **Status:** RESOLVED | **Priority:** — | **Since:** 2026-03-29 | **Resolved:** 2026-04-05
