@@ -60,7 +60,7 @@
 | Valve Cover Gasket Set (Left)      | 119 010 04 30              | 1     | Includes spark plug hole seals                  |
 | Upper Timing Chain Guide (Slide)   | 119 050 02 16              | 2     | Check fitment per VIN / sub-version             |
 | Upper Timing Chain Guide (U-shape) | 119 052 09 16              | 1–2   | Depending on M119 sub-version                   |
-| Aluminum Camshaft Oiler Tubes      | URO 1191800266PRM (OEM: 119 180 02 66) | 16 | URO Parts anodized aluminum w/ Viton FKM o-rings. Replaces entire plastic oil bridge. RockAuto ~€14.15/ea = ~€226 + shipping/customs. Forum reference: 16 pcs incl. FedEx/tax/customs = ~€285. **Qty 16 per forum; verify with MB-osat EPC.** |
+| Aluminum Camshaft Oiler Tubes      | URO 1191800266PRM (OEM: 119 180 02 66) | 16 | URO Parts anodized aluminum w/ Viton FKM o-rings. Replaces entire plastic oil bridge. RockAuto ~€14.15/ea = ~€226 + shipping/customs ≈ **€285 delivered.** MB-osat OEM plastic priced similarly → aluminum is the obvious upgrade. **Order before opening valve covers** (longest lead-time item). |
 | Breather Hose (Crankcase)          | 119 094 03 82              | 1     | Old ones usually cracked — replace preventively |
 | Spark Plugs (NGK BP5ES)            | —                          | 8     | Already on hand (ordered 2026-03-22)            |
 
@@ -68,7 +68,7 @@
 ## Sourcing Notes
 
 - Valve cover gaskets and timing guides: Autodoc, MB-osat, or FCP Euro (OEM Elring or Victor Reinz preferred for gaskets).
-- Aluminum camshaft oiler tubes: **URO Parts 1191800266PRM** from [RockAuto — 1990 500SL 5.0L V8](https://www.rockauto.com/en/catalog/mercedes-benz,1990,500sl,5.0l+v8,1195141) (under Engine → Camshaft Oiler Kit). Only known manufacturer of the aluminum upgrade. Replaces the entire plastic oil bridge tube (not just the clips) with anodized aluminum + Viton o-rings. ~€14.15/ea × 16 = ~€226 (+ FedEx shipping/customs/VAT ≈ **€285 total delivered to Finland**). OEM interchange: 119 180 00 66 / 119 180 02 66. Use FedEx as shipping provider — they handle all customs paperwork if you select "Pay import duties in advance." Quantity 16 per forum recommendation; confirm with MB-osat EPC before ordering.
+- Aluminum camshaft oiler tubes: **URO Parts 1191800266PRM** from [RockAuto — 1990 500SL 5.0L V8](https://www.rockauto.com/en/catalog/mercedes-benz,1990,500sl,5.0l+v8,1195141) (under Engine → Camshaft Oiler Kit). Only known manufacturer of the aluminum upgrade. Replaces the entire plastic oil bridge tube (not just the clips) with anodized aluminum + Viton o-rings. ~€14.15/ea × 16 = ~€226 (+ FedEx shipping/customs/VAT ≈ **€285 total delivered to Finland**). OEM interchange: 119 180 00 66 / 119 180 02 66. Use FedEx as shipping provider — they handle all customs paperwork if you select "Pay import duties in advance." MB-osat confirmed OEM plastic tubes are priced similarly — aluminum upgrade is the clear choice at equal cost.
 - Breather hose: Autodoc or MB-osat (OEM or URO Parts).
 
 ## Work Log

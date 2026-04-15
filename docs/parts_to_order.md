@@ -95,7 +95,7 @@
 | Valve Cover Gasket Set (Left bank) | 119 010 04 30 | 1 | **ORDERED from MB-osat 2026-04-02.** Incl. spark plug tube seals. **Confirmed needed 2026-04-05** — both banks affected. |
 | Upper Timing Chain Guide (Slide rail) | 119 050 02 16 | 2 | **ORDERED from MB-osat 2026-04-02.** >100 € per side. |
 | Upper Timing Chain Guide (U-shape) | 119 052 09 16 | 1–2 | Depending on M119 sub-version — confirm with MB-osat. |
-| Aluminum Camshaft Oiler Tubes | URO 1191800266PRM (OEM: 119 180 02 66) | 16 | [RockAuto](https://www.rockauto.com/en/catalog/mercedes-benz,1990,500sl,5.0l+v8,1195141) (Engine → Camshaft Oiler Kit). URO Parts anodized aluminum w/ Viton FKM o-rings. ~€14.15/ea × 16 = ~€226 + FedEx/customs/VAT ≈ **€285 delivered.** Use FedEx "Pay import duties in advance." **Verify qty 16 with MB-osat EPC before ordering.** |
+| Aluminum Camshaft Oiler Tubes | URO 1191800266PRM (OEM: 119 180 02 66) | 16 | [RockAuto](https://www.rockauto.com/en/catalog/mercedes-benz,1990,500sl,5.0l+v8,1195141) (Engine → Camshaft Oiler Kit). URO Parts anodized aluminum w/ Viton FKM o-rings. ~€14.15/ea × 16 = ~€226 + FedEx/customs/VAT ≈ **€285 delivered.** Use FedEx "Pay import duties in advance." MB-osat OEM plastic tubes priced similarly → aluminum upgrade is the obvious choice. **ORDER BEFORE opening valve covers** — longest lead-time item (RockAuto → FI via FedEx, ~1-2 weeks + customs). |
 | Breather Hose (Crankcase vent) | 119 094 03 82 | 1 | **NOT ORDERED** — will inspect condition first. |
 
 **MB-osat (2026-04-02):** Timing guides confirmed and ordered. Breather hose deferred to inspect-first. Future orders to be sent by email.
@@ -229,7 +229,7 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 3. **Thermostat:** Confirm correct part number and 80°C spec for M119.960.
 4. **722.3 ATF:** Confirm MB 236.1 is the right spec (not 236.10/236.14).
 5. **Cluster removal hooks:** Do they stock tool 140 589 02 33 00, or can they suggest a substitute?
-6. **Aluminum oil bridge clips:** They won't have these (aftermarket only), but ask if they've seen M119 cam lobe pitting from loose bridges — shop experience is valuable.
+6. ~~**Aluminum oil bridge clips:**~~ Resolved — MB-osat OEM plastic tubes priced similarly to URO aluminum. Ordering aluminum from RockAuto.
 7. **Paint code confirmed:** 744 Brilliant Silver Metallic (from mbdecoder.com VIN decode, 2026-04-01). Ask MB-osat to confirm and source correct touch-up pen.
 8. **ADS confirmed factory (option 216):** Lastvin.com shows option 216 (self-leveling + ADS). All ADS hardware is original. The mbdecoder.com decode was incomplete.
 9. **Availability & lead times:** Which parts are in stock vs. special order from MB Germany?
