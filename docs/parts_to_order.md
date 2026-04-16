@@ -42,7 +42,7 @@
 
 | Part | OEM Number | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| Thermostat (82°C) | A 119 200 04 15 (verify) | 1 | **ORDERED from MB-osat 2026-04-02.** |
+| Thermostat (82°C) | A 119 200 04 15 (verify) | 1 | **ORDERED from MB-osat 2026-04-02. ARRIVED 2026-04-16.** |
 | Radiator Cap (1.4 bar) | A 124 500 04 06 | 1 | **ORDERED from Autodoc 2026-04-04.** Febi 06568, €6.59. |
 
 **MB-osat (2026-04-02):** Thermostat confirmed and ordered (82°C). Radiator cap ordered from Autodoc (Febi 06568).
@@ -60,7 +60,7 @@
 
 | Part | OEM Number | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| ADS Suction Filter | A 129 327 00 91 | 1 | **ORDERED from MB-osat 2026-04-02.** Old one cleaned on 2026-03-29 as interim fix. |
+| ADS Suction Filter | A 129 327 00 91 | 1 | **ORDERED from MB-osat 2026-04-02. ARRIVED 2026-04-16.** Old one cleaned on 2026-03-29 as interim fix. |
 | ZH-M Hydraulic Fluid (MB 343.0) | 000 989 91 03 (Febi 02615) | 1–2 L | Top-up for closed-loop bleed. 4L used in open-loop flush on 03-29. Check remaining level. |
 
 ### Engine Oil Service Consumables
@@ -91,9 +91,9 @@
 
 | Part | OEM Number / Ref | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| Valve Cover Gasket Set (Right bank) | 119 010 03 30 | 1 | **ORDERED from MB-osat 2026-04-02.** Incl. spark plug tube seals. **Confirmed needed 2026-04-05** — 6/8 plug wells have oil. |
-| Valve Cover Gasket Set (Left bank) | 119 010 04 30 | 1 | **ORDERED from MB-osat 2026-04-02.** Incl. spark plug tube seals. **Confirmed needed 2026-04-05** — both banks affected. |
-| Upper Timing Chain Guide (Slide rail) | 119 050 02 16 | 2 | **ORDERED from MB-osat 2026-04-02.** >100 € per side. |
+| Valve Cover Gasket Set (Right bank) | 119 010 03 30 | 1 | **ORDERED from MB-osat 2026-04-02. ARRIVED 2026-04-16.** Incl. spark plug tube seals. **Confirmed needed 2026-04-05** — 6/8 plug wells have oil. |
+| Valve Cover Gasket Set (Left bank) | 119 010 04 30 | 1 | **ORDERED from MB-osat 2026-04-02. ARRIVED 2026-04-16.** Incl. spark plug tube seals. **Confirmed needed 2026-04-05** — both banks affected. |
+| Upper Timing Chain Guide (Slide rail) | 119 050 02 16 | 2 | **ORDERED from MB-osat 2026-04-02. ARRIVED 2026-04-16.** >100 € per side. |
 | Upper Timing Chain Guide (U-shape) | 119 052 09 16 | 1–2 | Depending on M119 sub-version — confirm with MB-osat. |
 | Aluminum Camshaft Oiler Tubes | URO 1191800266PRM (OEM: 119 180 02 66) | 16 | [RockAuto](https://www.rockauto.com/en/catalog/mercedes-benz,1990,500sl,5.0l+v8,1195141) (Engine → Camshaft Oiler Kit). URO Parts anodized aluminum w/ Viton FKM o-rings. ~€14.15/ea × 16 = ~€226 + FedEx/customs/VAT ≈ **€285 delivered.** Use FedEx "Pay import duties in advance." MB-osat OEM plastic tubes priced similarly → aluminum upgrade is the obvious choice. **ORDER BEFORE opening valve covers** — longest lead-time item (RockAuto → FI via FedEx, ~1-2 weeks + customs). |
 | Breather Hose (Crankcase vent) | 119 094 03 82 | 1 | **NOT ORDERED** — will inspect condition first. |
@@ -150,7 +150,7 @@
 
 | Part | Ref | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| CarPlay USB Dongle | Carlinkit CPC200-CCPA | 1 | **ORDERED from MyTrendyPhone.fi 2026-04-03.** ~€48. USB dongle with MFi authentication for wireless Apple CarPlay. Dongle connects to Pi via USB (hidden behind dash), iPhone connects to dongle via WiFi Direct (automatic, no cable). Outputs H.264 video + PCM audio over USB, accepts touch input back. No user-facing USB port needed in the cabin. Used with [LIVI](https://github.com/f-io/LIVI) open-source CarPlay host on the Pi (explicitly supports CPC200-CCPA on RPi5). |
+| CarPlay USB Dongle | Carlinkit CPC200-CCPA | 1 | **ORDERED from MyTrendyPhone.fi 2026-04-03. ARRIVED 2026-04-16.** ~€48. Connected, enumerated, and integrated into the PyQt5 UI same day (see `RPi5_Bring-up_Plan.md` Step 7). USB dongle with MFi authentication for wireless Apple CarPlay. Dongle connects to Pi via USB (hidden behind dash), iPhone connects to dongle via WiFi Direct (automatic, no cable). Outputs H.264 video + PCM audio over USB, accepts touch input back. No user-facing USB port needed in the cabin. Used with [LIVI](https://github.com/f-io/LIVI) open-source CarPlay host on the Pi (explicitly supports CPC200-CCPA on RPi5). |
 | Flat FPC HDMI Cable | Micro-HDMI (Type D) → HDMI (Type A) | 1 | Thin flexible ribbon cable for flush panel mounting. Replaces the round HDMI cable. ~10–20cm length depending on mounting. AliExpress/Amazon. |
 | Flat Micro-USB Cable | Micro-USB → USB-A | 1 | Thin flexible cable for touch/power connection. For flush panel mounting alongside the FPC HDMI cable. |
 
@@ -162,7 +162,7 @@
 
 | Part | Ref | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| INA226 Breakout Board (×5) | CJMCU-226 (Fyndiq, €15.39/5-pack) | 5 | **ORDERING from Fyndiq 2026-04-05.** €3.08/ea. Generic INA226 breakout. Shunt inputs unused (IN+/IN− shorted) — bus voltage measurement only. ETA 2026-04-16–22. |
+| INA226 Breakout Board (×5) | CJMCU-226 (Fyndiq, €15.39/5-pack) | 5 | **ORDERED from Fyndiq 2026-04-05. ARRIVED 2026-04-16** (on the early end of the ETA window). €3.08/ea. Generic INA226 breakout. Shunt inputs unused (IN+/IN− shorted) — bus voltage measurement only. |
 | DS18B20 Temperature Sensor | Waterproof probe (AliExpress/Motonet) | 1 | ~€2–3. One-wire digital, ±0.5°C. Strap to battery case for electrolyte temperature tracking. |
 | 4.7 kΩ Resistor | 1/4W through-hole | 1 | ~€0.10. Pull-up for DS18B20 one-wire data line. |
 | Inline Fuse + Holder (1A) | Glass fuse, fast-blow | 1 | ~€1. Protects VBUS sense wire from battery positive terminal. |
@@ -178,10 +178,10 @@
 
 | Part | Ref / Model | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| DSP Amplifier | **Match UP 6DSP** | 1 | 6-ch DSP amp (4×65W + 2×160W). **€649 from Kärkkäinen. ORDERED 2026-04-04.** Mounts in rear cubby. Chosen over UP 8DSP (€749) — 2-way setup needs exactly 6 channels. ETA 2026-04-09. |
-| USB Audio Module | **MEC HD-USB (M142045)** | 1 | USB Audio Class input for UP 6DSP. Driverless on Linux. **€149 from Kärkkäinen. ORDERED 2026-04-04.** Compatible with UP 6DSP / UP 8DSP / UP 8BMW. ETA 2026-04-09. |
+| DSP Amplifier | **Match UP 6DSP** | 1 | 6-ch DSP amp (4×65W + 2×160W). **€649 from Kärkkäinen. ORDERED 2026-04-04. ARRIVED 2026-04-16.** Mounts in rear cubby. Chosen over UP 8DSP (€749) — 2-way setup needs exactly 6 channels. |
+| USB Audio Module | **MEC HD-USB (M142045)** | 1 | USB Audio Class input for UP 6DSP. Driverless on Linux. **€149 from Kärkkäinen. ORDERED 2026-04-04. ARRIVED 2026-04-16.** Compatible with UP 6DSP / UP 8DSP / UP 8BMW. |
 | Front 2-Way Speakers | **Hertz MPK 1650.3** (Mille Pro) | 1 set | MP 165P.3 woofer (63mm depth, 3Ω) + **MP 28.3 tweeter (Tetolon, 900 Hz Fs)**. Passive crossovers included but unused (fully active). **€331.26 from masori.de. ORDERED 2026-04-04.** Free shipping to FI, 3-yr warranty. 93 dB sensitivity. Chosen for premium tweeter enabling low 2.5 kHz crossover in 2-way active setup. |
-| Subwoofer | **Helix IK S10-DVC2** | 1 | 10" sub, DVC 2×2Ω, 300W RMS, 84.5mm depth. **€199 from Kärkkäinen. ORDERED 2026-04-04.** Each coil → separate DSP channel (Ch 5 + Ch 6). Same manufacturer (Audiotec Fischer) as Match DSP. ETA 2026-04-09. |
+| Subwoofer | **Helix IK S10-DVC2** | 1 | 10" sub, DVC 2×2Ω, 300W RMS, 84.5mm depth. **€199 from Kärkkäinen. ORDERED 2026-04-04. ARRIVED 2026-04-16.** Each coil → separate DSP channel (Ch 5 + Ch 6). Same manufacturer (Audiotec Fischer) as Match DSP. |
 | Door Speaker Brackets | **MR129.com Bracket Kit** (STL) | 1 set | 3D adapter brackets (4 pieces, 2/door — woofer only). ~$39 for STL download. Self-printed: PLA test-fit → PETG/ABS final. Verify Hertz MP 165P.3 141mm mounting hole + 63mm depth against STL dimensions before final print. |
 | Speaker Wire | OFC 2×1.5mm² + 2×2.5mm² | ~15m total | Tweeter runs in cabin (1.5mm²) + sub run (2.5mm²). Partially in inventory. |
 | Sub Enclosure Materials | 16mm MDF + polyfill | — | Sealed 14L box for rear cubby. ~€30. |
@@ -327,4 +327,4 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 
 ---
 
-*Last updated: 2026-04-05*
+*Last updated: 2026-04-16 (delivery day — Kärkkäinen audio order, MB-osat MB parts order, Carlinkit dongle, Fyndiq INA226 boards all arrived).*
