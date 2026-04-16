@@ -64,6 +64,19 @@ Test hood with magnet (aluminum vs steel). Source OEM touch-up paint (744 Brilli
 
 ---
 
+## Backlog (no active work, park for later)
+
+### In-car AI assistant access
+CarPlay only surfaces OpenAI's ChatGPT today; no CarPlay build exists for Gemini, Grok, or Claude (the ones with active subscriptions). A custom PyQt5 "AI" view on the Pi was considered and **rejected** because a native client wouldn't share the real web/app session history, which is the main reason to return to a chat (picking up older threads when context changes).
+
+**Preferred workarounds when this becomes worth pursuing:**
+- Browser session to `claude.ai` / `gemini.google.com` / `grok.com` inside a Pi-side chromium tab, reusing the real logged-in session (and therefore the persistent chat history).
+- Or a Cursor session on Linux with a dedicated "in-car" workspace/repo that acts as long-term context storage (notes, ongoing threads, vehicle state). More flexible than a browser tab, plus gives file-level memory Cursor can search.
+
+**Revisit when:** one of Google/xAI/Anthropic ships CarPlay support, or the need for quick in-car AI use becomes frequent enough to justify the browser-tab / Cursor-workspace path.
+
+---
+
 ## Finnish Registration (Admin)
 
 Autovero paid (€837.05, 2026-03-27). Waiting for rekisteröintilupa. Full vehicle insurance (liikennevakuutus + kasko) based on VIN is already active. Then: siirtolupa → rekisteröintikatsastus → ensirekisteröinti → Finnish plates.
