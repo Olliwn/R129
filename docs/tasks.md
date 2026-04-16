@@ -66,6 +66,43 @@ Test hood with magnet (aluminum vs steel). Source OEM touch-up paint (744 Brilli
 
 ## Backlog (no active work, park for later)
 
+### Microphone integration (RPi5 / car audio)  ⚠ decision needed before Task #9 (Center Console Refresh)
+Goal: get a microphone into the RPi5 audio stack, primarily so phone calls routed through CarPlay can use the car's speakers + an in-cabin mic (hands-free). Secondary: future on-Pi voice features if the iPhone-as-primary-AI stance ever changes.
+
+**Why this blocks the dash-out:** the mic cable has to be pulled during Task #9 together with the AUX/CAT6/power loom. Running trim twice is unacceptable. A decision on *where the mic lives* and *what cable it needs* must be locked in before the console is opened.
+
+**Hardware options considered (2026-04-16):**
+
+| Option | Mic | Cable to Pi | Mounting | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| A. ReSpeaker 2-Mic Pi HAT + remote analog capsule | 2× MEMS on HAT *or* 3.5mm TRRS external | Short to HAT, then external 3–4m shielded analog for remote capsule | HAT in cubby, capsule in headliner near dome light | Best voice-tuned option, hardware AEC/DOA, occupies GPIO header. Analog run is the weak point over 3m. |
+| B. I2S MEMS (INMP441 / SPH0645) direct to Pi GPIO | Digital MEMS | 4-wire I2S (BCLK/LRCLK/DATA/GND + 3.3V), max ~1–2m reliable | Capsule in headliner or A-pillar | Cheapest, cleanest digital signal, **but I2S length limit is marginal for headliner → cubby run**. Needs ferrite + twisted pairs. Software AEC only. |
+| C. USB conference mic puck | USB | 3–4m USB (active cable / hub if needed) | On-dash or headliner | Plug-and-play. PipeWire sees it as a standard input. Aesthetically least OEM. |
+| D. Automotive OEM-style electret + USB sound card | Analog electret (e.g. MB gooseneck replica) | 3–4m shielded analog → USB ADC in cubby | Near dome light / A-pillar, OEM look | Most period-correct visually. Needs a decent USB ADC (e.g. Behringer UCA202-class) and bias for the electret. |
+
+**Software path (common to all options):**
+- PipeWire is already present on the Pi. Add `module-echo-cancel` (WebRTC AEC) *unless* the mic hardware provides its own (ReSpeaker does).
+- LIVI / Carlinkit path: the dongle exposes an audio sink + source pair to CarPlay; the iPhone expects mic audio on the source. Needs a PipeWire route: `alsa_input.<mic>` → (AEC) → `carplay_source`.
+- Car-audio playback path is unchanged (already routed via BE2210 AUX per Task #9 plan).
+
+**Placement constraints:**
+- Best SNR: headliner near dome light, aimed down at driver.
+- A-pillar works but picks up more HVAC noise.
+- Dash-top is worst for echo (speakers below, glass in front).
+- Whichever chosen, the cable run is: mic location → down A-pillar → along headliner → under dash → into center stack void → into RPi5 cubby.
+
+**Current leaning (to revisit after sleeping on it):**
+- Primary: **Option A (ReSpeaker HAT + headliner capsule)** — best voice quality, hardware AEC, but uses the GPIO header (check collision with Alps joystick wiring).
+- Fallback: **Option C (USB conference mic)** — zero risk, fastest to ship, ugliest.
+- Rejected for now: Option B (I2S length limit), Option D (too much wiring work for marginal SNR gain over A).
+
+**Decisions to finalize before dash-out:**
+1. Pick option A / B / C / D.
+2. Decide mic physical location (headliner dome vs. A-pillar vs. visor).
+3. Spec the exact cable type + length for that option (so it can be pulled in the same loom as AUX + CAT6 + power).
+4. Confirm no GPIO conflict with the Alps joystick wiring (only relevant for Option A/B).
+5. Order the mic hardware so it's on hand *before* the console comes apart.
+
 ### In-car AI assistant access
 CarPlay only surfaces OpenAI's ChatGPT today; no CarPlay build exists for Gemini, Grok, or Claude (the ones with active subscriptions). A custom PyQt5 "AI" view on the Pi was considered and **rejected** because a native client wouldn't share the real web/app session history, which is the main reason to return to a chat (picking up older threads when context changes).
 

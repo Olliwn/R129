@@ -80,6 +80,7 @@ This project combines three objectives into a single console disassembly:
   - **CAT6** (Alps joystick GPIO): From ashtray void → down through cigarette lighter channel → up behind console → into cubby
   - **Display cable** (HDMI or DSI ribbon): Internal to cubby (short run from RPi5 to OLED)
   - **5V power**: From ignition-switched source → into cubby (for RPi5 + display)
+  - **Microphone cable** ⚠ **decision required before this step** — pick hardware/location per the "Microphone integration" backlog entry in [tasks.md](../../docs/tasks.md). Cable spec depends on the option chosen (USB active / shielded analog / I2S 4-wire). Whichever option wins, the cable run will be: mic at headliner or A-pillar → down A-pillar → along under-dash → into center stack void → into cubby. **Do not close the console without pulling this cable** — re-pulling trim in a month is not acceptable.
 - [ ] **4.4 — Wrap the loom.** Bundle all cables with Tesa cloth tape to match the factory harness aesthetic. Secure to existing harness clips with black cable ties.
 
 ### Phase 5: Reassembly
