@@ -48,8 +48,10 @@ class ViewManager(QObject):
 
     def switch_to(self, index: int):
         if 0 <= index < self._stack.count():
+            self._notify_hidden(self._stack.currentIndex())
             self._stack.setCurrentIndex(index)
             self._sidebar.set_selected(index)
+            self._notify_shown(index)
             self.view_changed.emit(index, self._names[index])
 
     def _set_state(self, new_state: str):
@@ -58,11 +60,26 @@ class ViewManager(QObject):
             self._sidebar.set_bright(new_state == "sidebar")
             self.state_changed.emit(new_state)
 
+    def _notify_hidden(self, index: int):
+        """Tell the outgoing view it is no longer visible."""
+        if 0 <= index < self._stack.count():
+            w = self._stack.widget(index)
+            if hasattr(w, "on_hidden"):
+                w.on_hidden()
+
+    def _notify_shown(self, index: int):
+        """Tell the incoming view it is now visible."""
+        if 0 <= index < self._stack.count():
+            w = self._stack.widget(index)
+            if hasattr(w, "on_shown"):
+                w.on_shown()
+
     def _on_sidebar_touch(self, index: int):
         self.switch_to(index)
         self._set_state("page")
 
     def _go_sidebar(self):
+        self._notify_hidden(self._stack.currentIndex())
         self._set_state("sidebar")
 
     def _activate_page(self):

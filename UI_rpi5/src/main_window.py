@@ -1,7 +1,7 @@
 """
 R129 Driver UI -- Main Window
 Fullscreen container: Sidebar | (StatusBar / ViewStack).
-8 pages: Home, Classic, Modern, Diag, Settings, Media, Map, Spare.
+8 pages: Home, Classic, Modern, Diag, Settings, CarPlay, Map, Exit.
 """
 
 from PyQt5.QtWidgets import (
@@ -22,6 +22,8 @@ from gauge_view import GaugeView
 from diag_view import DiagView
 from settings_view import SettingsView
 from placeholder_view import PlaceholderView
+from carplay_view import CarPlayView
+from exit_view import ExitView
 from map_view import MapView
 
 
@@ -65,9 +67,10 @@ class MainWindow(QMainWindow):
         self._view_mgr.add_view("MODERN", GaugeView(self._state))
         self._view_mgr.add_view("DIAG", DiagView())
         self._view_mgr.add_view("SETTINGS", SettingsView(modem=self._modem))
-        self._view_mgr.add_view("MEDIA", PlaceholderView("MEDIA"))
+        self._carplay_view = CarPlayView()
+        self._view_mgr.add_view("CARPLAY", self._carplay_view)
         self._view_mgr.add_view("MAP", MapView())
-        self._view_mgr.add_view("SPARE", PlaceholderView("SYSTEM INFO"))
+        self._view_mgr.add_view("EXIT", ExitView())
         self._view_mgr.switch_to(0)
 
         self._view_mgr.view_changed.connect(
@@ -80,3 +83,7 @@ class MainWindow(QMainWindow):
         if event.key() in (Qt.Key_Escape, Qt.Key_Q):
             self.close()
         super().keyPressEvent(event)
+
+    def closeEvent(self, event):
+        self._carplay_view.shutdown()
+        super().closeEvent(event)

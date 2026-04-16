@@ -125,7 +125,78 @@ Success criteria:
 - Display ships with two protective films. The inner film is non-conductive and blocks capacitive touch.
 - First two USB cables tried were charge-only (no data lines). Third cable worked.
 
+## Step 7: CarPlay Integration (DONE — 2026-04-16)
+
+### Hardware
+- **Dongle:** Carlinkit CPC200-CCPA (USB ID `1314:1520`)
+- **Connection:** Pi 5 USB-A port (USB 2.0), self-powered
+- **Capabilities:** Wired + Wireless CarPlay (WiFi Direct 5 GHz), Android Auto
+
+### Software
+- **LIVI v5.9.3** — Electron-based CarPlay host (AppImage)
+- **Location:** `/home/pi/LIVI/LIVI.AppImage`
+- **Config:** `~/.config/LIVI/config.json` — 1792×1080 viewport (leaves room for the 128 px R129 sidebar), 60 fps, night mode, `kiosk: false`
+- **udev:** `/etc/udev/rules.d/52-carplay.rules` — automatic dongle permissions
+
+### UI integration (PyQt5)
+- `CarPlayView` (`UI_rpi5/src/carplay_view.py`) occupies the 6th sidebar slot ("CARPLAY" icon).
+- Tap or PRESS launches LIVI as a detached subprocess (`start_new_session=True`, `--no-sandbox`). Dongle presence is polled from `/sys/bus/usb/devices/3-1/idVendor` (fallback `lsusb`) at 5 s intervals; repaint only on state change.
+- Navigating away calls `wlrctl window minimize app_id:livi` — **the LIVI process stays alive so the phone connection is preserved**. Returning calls `wlrctl window focus app_id:livi`.
+- On UI shutdown (`closeEvent`), `os.killpg(pgid, SIGTERM)` cleans up the whole Electron process group.
+- `ViewManager` grew `on_hidden()` / `on_shown()` lifecycle hooks used for this.
+
+### labwc window rules (`~/.config/labwc/rc.xml`)
+Positions the LIVI window beside the sidebar so the R129 icons stay touchable:
+```xml
+<windowRule identifier="livi" serverDecoration="no" fixedPosition="yes">
+    <action name="MoveTo" x="128" y="0" />
+    <action name="ResizeTo" width="1792" height="1080" />
+</windowRule>
+```
+
+### Verified
+- Dongle enumerates and is recognized by LIVI on startup
+- LIVI renders in the 1792×1080 area beside the R129 sidebar (no overlap)
+- Minimize / restore on view switch works with zero reconnection cost
+- Telemetry socket on port 4000
+
+### Pending
+- iPhone pairing (wired first, then wireless auto-reconnect)
+- Audio pipeline testing (PipeWire → Match UP 6DSP)
+
+## Step 8: Exit-to-Desktop & Fallback Desktop Usability (DONE — 2026-04-16)
+
+### Exit slot
+- Last sidebar slot is **EXIT** (`exit_view.py`, power-symbol icon).
+- Tap or PRESS calls `QApplication.quit()` → systemd user service exits cleanly → Linux desktop is revealed.
+- The desktop is a rare-use fallback, not a primary feature. Restart via a desktop launcher icon (`~/Desktop/r129-ui.desktop`) that runs `systemctl --user start r129-ui.service`.
+
+### Dynamic compositor output scaling
+The driver UI is hand-tuned for 1920×1080 @ 1.0× scale. The Pi desktop at that scale is unreadable on a 5.5" panel. Solution: flip the Wayland compositor's output scale only while the UI is not running.
+
+Implemented via systemd hooks in `r129-ui.service`:
+```ini
+ExecStartPre=/usr/bin/wlr-randr --output HDMI-A-1 --scale 1
+ExecStopPost=/usr/bin/wlr-randr --output HDMI-A-1 --scale 1.5
+```
+
+- On UI start: scale snaps to **1×** → R129 and LIVI render at their designed sizes.
+- On UI exit (clean, crash, or manual stop): scale snaps to **1.5×** → desktop, taskbar, file manager, squeekboard OSK all become readable.
+- Brief (~few frames) flicker during the transition — acceptable for a fallback path.
+
+### Other desktop usability tweaks
+- `~/.config/labwc/environment`: `GDK_SCALE=2` for non-layer-shell GTK apps (harmless fallback — layer-shell clients honour the compositor scale instead).
+- `~/.config/lxterminal/lxterminal.conf`: `fontname=Monospace 16` — VTE ignores `GDK_SCALE`, so the terminal grid font is bumped explicitly.
+
+### Why this separation works
+| Launch path | Env scope | Compositor scale at paint time |
+| :--- | :--- | :--- |
+| R129 UI (systemd user svc) | systemd-user env — no `GDK_SCALE` | 1× (set by `ExecStartPre`) |
+| LIVI (child of R129 UI) | Inherits from R129 UI | 1× (LIVI is Chromium/Electron, follows compositor) |
+| Desktop apps (pcmanfm, wf-panel-pi, lxterminal…) | labwc session env — `GDK_SCALE=2` visible | 1.5× when UI is off |
+
 ## Next Steps
-- Measure boot time and remove unnecessary startup overhead.
-- Setup systemd service to auto-start the PySide6 app on boot.
+- iPhone pairing flow for the CarPlay dongle.
+- Connect and verify Match UP 6DSP + MEC HD-USB audio path.
+- Add GPS module for live map tracking.
 - Continue higher-level UI and system architecture work in `R129_Driver_UI_System_Design.md`.
