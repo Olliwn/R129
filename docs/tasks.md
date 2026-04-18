@@ -12,8 +12,8 @@
 Measure internal resistance and cranking voltage drop (Owon HDS242). Varta H3, 100Ah, 890A CCA, manufactured Aug 2025. One deep discharge event. If CCA is marginal → replace at Motonet.
 **Method:** V_oc vs V_load under high beams (target R_internal <25 mΩ). Cranking voltage must hold >10V.
 
-### 10. M119 Upper Timing Components & Oil Bridge Clip Upgrade
-Valve cover-off inspection of upper timing chain guides (plastic, brittle) and camshaft oil bridge clips (plastic, loosen). Upgrade clips to billet aluminum. Replace valve cover gaskets, breather hose, spark plugs.
+### 10. M119 Upper Timing Components & Valve-Cover Service
+Valve cover-off inspection of upper timing chain guides (plastic, brittle — replacement guides on hand from MB-osat). Replace valve cover gaskets, spark plug tube seals, breather hose, spark plugs. **Oiler-tube upgrade deprecated** — AOK912 (1991-09 build) should already have factory aluminum oiler tubes (P/N 119 187 00 87); plastic didn't appear until ~1993. Pre-inspect via oil filler hole before committing to any tube work. URO aftermarket aluminum (the earlier recommendation) dropped — European forum feedback negative on casting/O-ring quality.
 **Work plan:** [work/m119_upper_timing/README.md](../work/m119_upper_timing/README.md)
 
 ### 14. Predictive Electronics Maintenance -- Capacitor & Solder Joint Audit

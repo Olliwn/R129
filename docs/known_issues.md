@@ -43,9 +43,13 @@ Level control still needs work:
 [work/pse_central_locking/README.md](../work/pse_central_locking/README.md)
 
 ### Battery / Parasitic Drain
-**Status:** INVESTIGATING | **Priority:** MEDIUM | **Since:** 2026-03-27 | **Updated:** 2026-04-03
+**Status:** BATTERY REPLACED — PARASITIC DRAW RETEST PENDING | **Priority:** LOW | **Since:** 2026-03-27 | **Updated:** 2026-04-18
 
-Voltage drops ~13V to ~12V in ~2 days idle. Battery is Varta Silver Dynamic H3 (100Ah, 890A CCA), manufactured August 2025. Experienced at least one deep discharge. Trickle charger keeping it alive.
+**Battery replaced 2026-04-18** — new battery from Kärkkäinen Oulu (€159). Resolves the sulfated incumbent (Varta H3, 100 Ah, mfg Aug 2025) which tested at ~67 mΩ DC impedance (3–4× healthy) with cranking dip to 8.5 V at 3 °C. Trickle charger disconnected. Clean Owon cranking waveform to be captured at next opportunity as the new baseline.
+
+**Historical data below is retained for context** — but all further parasitic-draw measurements must be taken on the new battery, since the old battery's elevated impedance made every sub-100 mA reading ambiguous (0.2 mV per fuse circuit was below the Owon's resolution).
+
+*History — incumbent Varta H3 (retired 2026-04-18):* Voltage drops ~13 V to ~12 V in ~2 days idle. Manufactured August 2025. Experienced at least one deep discharge before AOK912 purchase.
 
 **CCA test performed (2026-04-03):** Owon HDS242 cranking waveform at battery terminals (2V/div, 200ms/div). Resting voltage ~12.4V. Cranking dip ~4V to approximately 8.5V. **Ambient temperature was 3°C** — cold soak significantly worsens the dip. Engine caught immediately (very short crank). Assessment: borderline at 3°C but not alarming. Re-test in warmer conditions (~15-20°C) for a fair comparison.
 

@@ -35,6 +35,8 @@
 | 2026-03-30 | Detailing | Leather Master Leather Vital 250ml (HS3065) | Kärkkäinen | 22.90 | Ordered |
 | 2026-03-30 | Detailing | King Carthur Reshine Finish 3/3 250ml (HS4660) | Kärkkäinen | 19.90 | Ordered |
 | 2026-03-30 | Detailing | Soft99 FUSSO Coat White 200g (HS3492) | Kärkkäinen | 39.90 | Ordered |
-| **Total** | | **Year-to-Date Spend (parts + tax)** | | **~€3,125 + TBD** | |
+| 2026-04-17 | Wheels/Tires | Tire fitment & balancing (Michelin 17" staggered) | Tire shop | TBD | Installed |
+| 2026-04-18 | Electrical | Starter battery (replacement for sulfated Varta H3) | Kärkkäinen | 159.00 | Installed |
+| **Total** | | **Year-to-Date Spend (parts + tax)** | | **~€3,284 + TBD** | |
 
 *(Note: Estimated prices used for Motonet local purchases; will update with exact receipts. Insurance premium excluded from total (recurring cost). Electronics/hobby add-ons like Raspberry Pi, Owon oscilloscope, or custom displays are excluded from this vehicle maintenance budget.)*

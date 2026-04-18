@@ -29,13 +29,28 @@
   - **Fail criteria:** Plastic is dark brown/black, brittle, cracked, or has chunks missing. **Replace immediately** — broken guide fragments circulate through the oil system and can block oil galleries.
 - **2.2 — Inspect timing chain.** While visible, check chain for excessive slack, stiff links, or discoloration. A stretched chain with worn guides = full timing chain job (much bigger scope — would be a separate work item).
 
-### Camshaft Oil Bridges
+### Camshaft Oil Tubes (Oilers)
 
-- **2.3 — Inspect oil bridge clips.** The M119 uses hollow oil feed tubes ("oil bridges") that run the length of each camshaft, feeding pressurized oil to each cam lobe. These tubes are held in position by small clips. The factory clips are plastic and become brittle with age/heat cycling, allowing the oil bridge to shift or develop play. When the bridge shifts, oil flow to one or more cam lobes is reduced.
-  - Check for: lateral play in the oil bridge, cracked/missing clips, oil weeping around clip positions.
-- **2.4 — Upgrade to aluminum oil bridge clips.** Replace all original plastic clips with billet aluminum aftermarket clips. This is the single most important M119 preventive upgrade — eliminates the #1 cause of cam lobe wear on high-mileage M119s.
-  - Search for: **"M119 Aluminum Oil Bridge Kit"** or **"M119 Nockenwelle Ölbrücke Alu Clips"**
-  - Both banks (left + right) need the upgrade.
+**IMPORTANT — PART HISTORY CORRECTION (2026-04-18):** Earlier versions of this plan recommended "upgrading plastic oil bridges to aluminum" via URO Parts. That framing was wrong for this car. The correct history:
+
+| Era | Part number | Material | Notes |
+| :--- | :--- | :--- | :--- |
+| ~1989 – ~1992 (AOK912's build: 1991-09) | **119 180 00 87 / 119 187 00 87** | **Factory aluminum** | Original design. Known to hold up well. |
+| ~1993 onward | 119 180 02 66 | Plastic | Cost-reduction swap. This is the part prone to aging/loosening and causing the reputation issue. |
+
+AOK912 (engine 119960 12 024990, built 1991-09, one of the earliest R129 500 SLs) should have **factory aluminum oiler tubes already installed.** There is likely nothing to "upgrade." The job becomes *inspect and leave alone*, not *replace with aftermarket*.
+
+**URO 1191800266PRM (the earlier recommendation):** mixed European reception. Per BenzWorld/PeachParts: variable casting quality, rubber/O-ring components viewed skeptically. On a car with original factory aluminum tubes, there is no benefit to swapping to URO. Reserved as a last-resort only if the factory tubes are somehow found degraded and no used OEM 119 187 00 87 can be sourced.
+
+- **2.3 — Non-invasive pre-inspection via oil filler hole.** *Do this BEFORE scheduling the valve-cover-off job.* Remove the engine oil filler cap and shine a bright LED flashlight (or small borescope, e.g. Bosch GIC 120 / cheap USB endoscope) down the neck. The top of one camshaft and a portion of the oiler tube are visible.
+  - What to confirm: **material colour/finish of the oiler tube** — factory aluminum = dull matte silver, possibly with light oil film; plastic = ivory/cream or black.
+  - Look for tube retention — tube should sit stationary against its mounts, no visible lateral shift, no fractured retainers.
+  - Document with a phone photo through the oil filler hole for the diary.
+  - **Outcome tree:**
+    - If factory aluminum, intact → no tube replacement, no retainer upgrade needed. Priority 2 job proceeds with gaskets + slide rails only. This likely applies to AOK912.
+    - If factory aluminum, visibly shifted or retainer broken → source a used OEM set P/N 119 187 00 87 (eBay Germany, R129 breakers, or ask MB-osat).
+    - If plastic (unexpected — would imply a prior engine swap or post-warranty repair) → same sourcing path: used OEM aluminum 119 187 00 87 preferred over new URO.
+- **2.4 — Valve-cover-off inspection (only if the non-invasive inspection is inconclusive, or as part of the scheduled gasket job).** With the valve cover off, check tube seating, any O-ring weepage, and retainer integrity directly.
 
 ### Camshaft Lobe Inspection
 
@@ -60,7 +75,8 @@
 | Valve Cover Gasket Set (Left)      | 119 010 04 30              | 1     | Includes spark plug hole seals                  |
 | Upper Timing Chain Guide (Slide)   | 119 050 02 16              | 2     | Check fitment per VIN / sub-version             |
 | Upper Timing Chain Guide (U-shape) | 119 052 09 16              | 1–2   | Depending on M119 sub-version                   |
-| Aluminum Camshaft Oiler Tubes      | URO 1191800266PRM (OEM: 119 180 02 66) | 16 | URO Parts anodized aluminum w/ Viton FKM o-rings. Replaces entire plastic oil bridge. RockAuto ~€14.15/ea = ~€226 + shipping/customs ≈ **€285 delivered.** MB-osat OEM plastic priced similarly → aluminum is the obvious upgrade. **Order before opening valve covers** (longest lead-time item). |
+| Camshaft Oiler Tubes (OEM aluminum, factory) | 119 187 00 87 (early) / 119 180 00 87 | 16 | **AOK912 (1991-09 build) almost certainly has these already fitted from factory.** Pre-inspect via the oil filler hole with a flashlight before sourcing anything. Only replace if inspection shows damage; then prefer used-OEM from R129 breakers over new URO aftermarket. |
+| ~~Aluminum Camshaft Oiler Tubes (URO aftermarket)~~ | ~~URO 1191800266PRM (OEM: 119 180 02 66)~~ | — | **SUPERSEDED 2026-04-18.** Previous entry incorrectly assumed the car had the plastic post-1993 design. European forums report variable casting quality and skepticism of URO's rubber/O-ring components. Keep only as a last-resort fallback if factory aluminum is damaged AND no used-OEM 119 187 00 87 can be sourced. |
 | Breather Hose (Crankcase)          | 119 094 03 82              | 1     | Old ones usually cracked — replace preventively |
 | Spark Plugs (NGK BP5ES)            | —                          | 8     | Already on hand (ordered 2026-03-22)            |
 
@@ -68,7 +84,7 @@
 ## Sourcing Notes
 
 - Valve cover gaskets and timing guides: Autodoc, MB-osat, or FCP Euro (OEM Elring or Victor Reinz preferred for gaskets).
-- Aluminum camshaft oiler tubes: **URO Parts 1191800266PRM** from [RockAuto — 1990 500SL 5.0L V8](https://www.rockauto.com/en/catalog/mercedes-benz,1990,500sl,5.0l+v8,1195141) (under Engine → Camshaft Oiler Kit). Only known manufacturer of the aluminum upgrade. Replaces the entire plastic oil bridge tube (not just the clips) with anodized aluminum + Viton o-rings. ~€14.15/ea × 16 = ~€226 (+ FedEx shipping/customs/VAT ≈ **€285 total delivered to Finland**). OEM interchange: 119 180 00 66 / 119 180 02 66. Use FedEx as shipping provider — they handle all customs paperwork if you select "Pay import duties in advance." MB-osat confirmed OEM plastic tubes are priced similarly — aluminum upgrade is the clear choice at equal cost.
+- Camshaft oiler tubes: **inspect-first, likely no replacement needed.** AOK912 is a 1991-09 build — per BenzWorld/PeachParts, all M119s through ~1992 left the factory with aluminum oilers (P/N 119 187 00 87). Plastic tubes (P/N 119 180 02 66) only appear from ~1993 production onward. Do the oil-filler-hole inspection (Phase 2.3) before ordering anything. If replacement is somehow needed: used OEM aluminum 119 187 00 87 from German/NL R129 breakers is the preferred source. URO 1191800266PRM is a last-resort fallback only, due to European reports of variable casting quality and O-ring issues.
 - Breather hose: Autodoc or MB-osat (OEM or URO Parts).
 
 ## Work Log

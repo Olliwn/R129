@@ -95,10 +95,12 @@
 | Valve Cover Gasket Set (Left bank) | 119 010 04 30 | 1 | **ORDERED from MB-osat 2026-04-02. ARRIVED 2026-04-16.** Incl. spark plug tube seals. **Confirmed needed 2026-04-05** — both banks affected. |
 | Upper Timing Chain Guide (Slide rail) | 119 050 02 16 | 2 | **ORDERED from MB-osat 2026-04-02. ARRIVED 2026-04-16.** >100 € per side. |
 | Upper Timing Chain Guide (U-shape) | 119 052 09 16 | 1–2 | Depending on M119 sub-version — confirm with MB-osat. |
-| Aluminum Camshaft Oiler Tubes | URO 1191800266PRM (OEM: 119 180 02 66) | 16 | [RockAuto](https://www.rockauto.com/en/catalog/mercedes-benz,1990,500sl,5.0l+v8,1195141) (Engine → Camshaft Oiler Kit). URO Parts anodized aluminum w/ Viton FKM o-rings. ~€14.15/ea × 16 = ~€226 + FedEx/customs/VAT ≈ **€285 delivered.** Use FedEx "Pay import duties in advance." MB-osat OEM plastic tubes priced similarly → aluminum upgrade is the obvious choice. **ORDER BEFORE opening valve covers** — longest lead-time item (RockAuto → FI via FedEx, ~1-2 weeks + customs). |
+| Camshaft Oiler Tubes | 119 187 00 87 (factory aluminum, early M119) | — | **INSPECT FIRST — likely already present.** Factory M119 oilers were aluminum through ~1992; the problematic plastic design (119 180 02 66) only appeared from ~1993. AOK912 engine 119960 12 024990 was built 1991-09, so the factory aluminum tubes are most likely still installed. **Pre-inspect via the oil filler hole with a flashlight** (work plan Phase 2.3) — if aluminum and intact, no order needed. If damaged, prefer used-OEM 119 187 00 87 from a German/NL R129 breaker. Superseded earlier URO aftermarket recommendation (2026-04-18 correction; European forum feedback negative on URO casting/O-ring quality). |
 | Breather Hose (Crankcase vent) | 119 094 03 82 | 1 | **NOT ORDERED** — will inspect condition first. |
 
-**MB-osat (2026-04-02):** Timing guides confirmed and ordered. Breather hose deferred to inspect-first. Future orders to be sent by email.
+**MB-osat (2026-04-02):** Timing guides confirmed and ordered (arrived 2026-04-16). Breather hose deferred to inspect-first. Future orders to be sent by email.
+
+**Oiler tube plan corrected (2026-04-18):** Earlier plan to order URO aftermarket aluminum tubes from RockAuto before opening valve covers has been **dropped.** AOK912's 1991-09 build is pre-plastic-transition, so factory aluminum tubes (P/N 119 187 00 87) are most likely already in place. New plan: oil-filler-hole visual inspection first (no tools, no ordering). The valve cover / gasket / timing guide job is therefore **not blocked** on the tube decision — it can proceed once the rest of the baseline is in shape, subject to what the inspection shows.
 
 ---
 
