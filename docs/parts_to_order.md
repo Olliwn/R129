@@ -12,16 +12,19 @@
 
 ---
 
-## ⚠️ URGENT — ADS Strut Dust Boots (ORDER IMMEDIATELY)
+## ⚠️ URGENT — ADS Strut Dust Boots (FRONT-ONLY, PENDING PHOTO CONFIRMATION)
 
-*Discovered 2026-04-02 during katsastus underbody inspection. Lower sections of the dust boots are missing on the ADS shock absorbers, leaving the chrome piston shafts exposed to road debris, grit, and moisture. Pitting on exposed shafts will destroy the internal seals and kill the ADS shocks — which are extremely expensive (~€500–800+ each) and increasingly unavailable. DO NOT drive significant distances until these are installed.*
+*Discovered 2026-04-02 during katsastus underbody inspection ("lower sections missing"). Initial assumption was ×4 all corners. **Rear strut photograph 2026-04-18** shows rear boots present, seated, no exposed chrome — Apr 2 note was front-biased. Quantity reduced to ×2 pending tomorrow's front-strut photo confirmation (Apr 19 on jack stands). Pitting on exposed front shafts will still destroy internal seals on the irreplaceable front ADS shocks — do the front install promptly once parts arrive.*
 
 | Part | OEM Number | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| ADS Shock Absorber Dust Boot (front) | A 129 323 01 92 | 2 | Fits R129/W124/W201. Also: VAICO V30-6033, MEYLE 0140320032, FEBI KIT 13034. ~€5–13 each. |
-| ADS Shock Absorber Dust Boot (rear) | A 129 323 01 92 (verify) | 2 | May be same P/N as front — verify with MB-osat by VIN. Rear ADS shocks may use a different boot dimension. |
+| ADS Shock Absorber Dust Boot (front) | A 129 323 01 92 (≡ `1293230192`) | 2 | **Confirmed correct OEM 2026-04-18.** Part crosses between W124/W201/R129 — same physical boot. Aftermarket crosses: MEYLE 0140320032, VAICO V30-6033, FEBI kit 13034, Monroe, SWAG. ~€10–15 OEM, ~€5–10 aftermarket. **Hold order until Apr 19 front-strut photos confirm fronts are the affected corners.** |
+| ~~ADS Shock Absorber Dust Boot (rear)~~ | ~~A 129 323 01 92 (verify)~~ | ~~2~~ | **DROPPED 2026-04-18.** Rear struts photographed, bellows intact. No part needed. |
 
-**Source:** MB-osat Oulu (email order with VIN), or Autodoc/Pelican Parts. These are cheap, common parts — the urgency is installation, not sourcing.
+**Source preference:**
+1. **MB-osat Oulu** — genuine MB, MB klubi −15 %, no shipping. Send email with VIN `WDB 129066 1F 044414` and part number, ask them to confirm no separate rear-specific PN exists (defensive — we don't think there is one, but we only have three corners worth of data and MB-osat has the EPC).
+2. **Fallback: ClassicFactoryShop (PL)** at €12.80/ea, 3–5 d to FI.
+3. **Last resort: Autodoc.fi** aftermarket (MEYLE) at ~€5–10/ea, Stettin dispatch 3–5 d.
 
 ---
 
@@ -65,9 +68,14 @@
 
 ### Engine Oil Service Consumables
 
+*Timing is relaxed after 2026-04-18 dipstick finding (light honey amber at 1800 km on owner-driven oil). Next change paired with UOA + filter element inspection + magnetic sump plug install — see `docs/engine_condition_baseline.md`.*
+
 | Part | OEM Number | Qty | Notes |
 | :--- | :--- | :--- | :--- |
 | Oil Drain Plug Washer (copper, M14) | A 007 603 014 106 (Febi 07215) | 5 | **ORDERED from Autodoc 2026-04-04.** €0.59 each. Buy a pack — one used per oil change. |
+| Magnetic Sump Plug (M14×1.5) | Dimple Magnetic or equivalent rare-earth | 1 | **New for the next change.** Replaces the factory non-magnetic plug. Passive early-warning for ferrous wear particles. ~€15 on Amazon.de / eBay. Inspect captured material at each subsequent change. |
+| Oil Filter Housing O-Ring Kit | (varies by mfr — Mann or Mahle usually bundle with the element) | 1 set | 3 rings: large lid, center stud, small sealing. One-shot — replace every time the housing is opened. Bundled with most OEM filter kits. |
+| Used-Oil Analysis (UOA) — service not part | Oelcheck Trucker/Car kit, DE | 1 | ~€30–40, mail-in postal kit. Sample drawn from the drain stream at the next change. Returns Fe/Al/Cu/Pb/Si wear metals, fuel %, coolant %, viscosity, TBN. One UOA on a 34-year-old engine of unknown history is worth more than a year of guessing. |
 
 ### Crankshaft Position Sensor (EZL Code 17 — Active Fault)
 
@@ -82,6 +90,20 @@
 | Part | Ref | Qty | Notes |
 | :--- | :--- | :--- | :--- |
 | Thermal Compound | Arctic MX-6 or Noctua NT-H1 | 1 tube (4g) | EZL ignition module thermal paste refresh — original has dried to chalk after 35 years. Non-conductive type required. Also useful for any heat-sinked power modules. |
+
+---
+
+## PRIORITY 1B — Belt Set (Glazed, Slipping, Spray-Exhausted)
+
+*Promoted from Priority 4 "inspect first" on 2026-04-19. Glazed-belt hypothesis (Apr 3 friction-spray test) confirmed when squeal re-emerged during Apr 19 test drive — spray treatment exhausted. Order the belt set with MB-osat on the next parts-counter visit; inspect the hydraulic tensioner at the same bench session so we don't risk a repeat glaze from weak preload.*
+
+| Part | OEM Number | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| Main Serpentine Belt (alternator / PS / water pump) | (verify w/ MB-osat by VIN) | 1 | M119.960 with A/C uses a poly-V main belt. Gates, Contitech, or INA acceptable aftermarket. MB-osat will confirm the exact width/length/rib count — do not blind-order from Autodoc (M119 variants differ). |
+| A/C Compressor V-Belt | (verify w/ MB-osat by VIN) | 1 | Separate V-belt on the early M119.960. Order with main belt. |
+| Belt Tensioner (hydraulic/damper type) | A 119 200 04 14 (verify) | 1 | **Inspect before ordering.** Criteria for replacement: visible oily weeping at damper seal, slow/fast return when compressed by hand, or any free play in the pivot. A weak tensioner is a common root cause of belt glazing — replacing the belt alone risks a repeat failure in months. Hydraulic damper degrades silently with age; 35 years is well past design life. |
+| Idler Pulleys | (verify w/ MB-osat) | as needed | **Inspect with belt off.** Spin each by hand — should turn silky smooth, no grit, no play. Replace any that aren't. Replacement at the same bench session is much cheaper than a separate labor visit later. |
+| V-Belt Friction Spray (interim) | any auto-parts brand | 1 can | Already have one on hand. Acceptable to nurse the belt with occasional re-application until the new set is installed. Do NOT rely on spray long-term — slipping belts overheat, crack, and eventually snap. |
 
 ---
 
@@ -125,8 +147,8 @@
 | Distributor Caps | A 119 158 01 02 | 2 | **Inspect first** | Replace only if carbon tracking, deep pitting, or cracking. Bosch or Bremi. |
 | Distributor Rotors | (verify w/ MB-osat) | 2 | **Inspect first** | Replace only if pitted or burned contact. |
 | Spark Plug Wires (full set) | (verify w/ MB-osat) | 1 set (8) | **Inspect first** | Measure resistance: <10 kΩ per wire. Replace if out of spec or brittle. |
-| V-Belt Set (M119) | (verify w/ MB-osat) | 1 set | **Inspect first** | M119 uses multiple V-belts, not single serpentine. Replace if cracked/glazed or age unknown. |
-| Belt Tensioners / Idler Pulleys | (verify w/ MB-osat) | as needed | **Inspect first** | Check for bearing play/noise. |
+| ~~V-Belt Set (M119) — moved to Priority 1B, glazed and slipping confirmed 2026-04-19~~ | — | — | **PROMOTED** | See new Priority 1B entry below. No longer "inspect first". |
+| ~~Belt Tensioners / Idler Pulleys — moved to Priority 1B, inspect during belt swap~~ | — | — | **PROMOTED** | See new Priority 1B entry below. |
 | Brake Flex Hoses (all 4 corners) | (verify w/ MB-osat) | 4 | **Inspect first** | 35-year-old rubber. Replace if any doubt. |
 | Flare Nut Wrench Set (7–19mm) | **Bahco** | 1 set | **Needed** | 6-point chrome-vanadium. For brake bleed nipples (7/8mm) and ADS hydraulic fittings. Frequent use expected. Check Kärkkäinen stock. |
 | ~~One-Person Pressure Bleeder~~ | ~~Gunson Eezibleed or similar~~ | ~~1~~ | **REPLACED** | ~~Connects to brake reservoir cap, pressurizes to ~1 bar.~~ **Replaced by MTX pneumatic vacuum bleeder (see below).** |
@@ -190,6 +212,97 @@
 
 **All major components ordered 2026-04-04. Audio system total: ~€1,434.**
 Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring): ~€336.
+
+---
+
+## PRIORITY 6C — Center Console-Out (Cable Harness & Refresh Consumables)
+
+*Single shopping list to finish the combined console-out task: BE2210 → UP 6DSP high-level tap, DSP-direction cable pull (USB + tweeters), Pi-direction cable pull (CAT6 + AUX + 5 V), and the wood/switch refresh. See `work/center_console_refresh/README.md` for the full plan. This is the enabling task for PRIORITY 6 (Pi infotainment) and PRIORITY 6B (Audio) — everything downstream needs these cables in place first.*
+
+### 6C.1 — BE2210 → UP 6DSP High-Level Tap
+
+| Part | Ref / Spec | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| Shielded 4-core audio cable | 4 × 0.75 mm² OFC twisted-pair, overall foil/braid shield | ~3 m | One continuous run from BE2210 ISO block → rear cubby. Sommer SC-Onyx 2025 MKII, Cordial CTL-2, or equivalent. **Thomann / SP Elektroniikka / any pro-audio supplier.** ~€3–5/m. |
+| Wago 221-413 (3-way lever nut) | 0.2–4 mm² clamp range | 4 pcs | Parallel tap at the BE2210 ISO speaker pigtail — one per signal (LF+, LF−, RF+, RF−). **Motonet, Puuilo, Biltema, Verkkokauppa.** ~€0.50–0.80 each in a 10-pack. Buy a pack, keep spares. |
+| Bootlace ferrules | 0.75 mm², insulated, red | ~10 pcs | DSP-end terminal entry (4 signals) + spares. Assortment kit from Motonet/SP Elektroniikka is fine. ~€5 for the kit. |
+| Ring terminal | M6, insulated, 0.5–1.5 mm² | 1 pc | Shield drain → DSP chassis ground bolt. **Motonet assortment.** |
+| Heat-shrink labels | 6 mm black + 3 mm black | — | Already in inventory (Stage 1 heat-shrink kit). Use a fine-tip marker + clear shrink-over for durable labels. |
+
+### 6C.2 — DSP-Direction Cable Pull (front cubby → rear cubby)
+
+| Part | Ref / Spec | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| USB 2.0 cable, shielded | Type-A → Type-B (**verify MEC HD-USB connector before buying** — some revisions are Type-A) | 3 m | RPi5 → MEC HD-USB (inside UP 6DSP). Shielded, ferrite chokes a plus. **Verkkokauppa, Clas Ohlson, Puuilo.** ~€8–12. |
+| Tweeter / speaker wire | OFC 2 × 1.5 mm² | +5 m | **10 m already in inventory** (Components inventory, SP Elektroniikka #15096). Need ~6 m total (two pairs, rear cubby → dash via A-pillar). The 10 m roll covers it — **no new purchase required** unless extra slack wanted for future changes. |
+
+### 6C.3 — Pi-Direction Cable Pull (ashtray / BE2210 → front cubby)
+
+| Part | Ref / Spec | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| CAT6 Ethernet cable | Shielded (F/UTP or S/FTP), stranded | 1.5 m | Alps RKJXT1F42001 (ashtray) → front cubby. 8 conductors = 7 GPIO + 1 GND. Stranded is easier to route than solid. **Verkkokauppa, Clas Ohlson, Puuilo.** A cheap 1 m patch cable cut and re-terminated is fine. ~€3–6. |
+| Stereo AUX cable, shielded | 3.5 mm TRS male ↔ 3.5 mm TRS male | 0.5–1 m | BE2210 rear AUX jack → front cubby (RPi5 Waveshare / USB DAC output). Short, shielded, slim (not the chunky speaker-use kind). **Clas Ohlson, Verkkokauppa.** ~€5–8. |
+| Hook-up wire | 2 × 1.5 mm² red/black automotive | 2 m | 5 V feed into the cubby from the nRF5430 wake-switch output. Can also be made from existing 1.5 mm² speaker cable in inventory — no new purchase strictly required if slack remains after 6C.2. |
+| Fuse holder + 3 A blade fuse | ATO blade, inline | 1 | On the 5 V-bound 12 V feed before it enters the cubby DC-DC buck. **Motonet/Biltema assortment** — already likely in inventory (check Priority 7 torpedo box — but 3 A ATO is different from torpedo). ~€2. |
+
+### 6C.4 — Loom Finishing & Pass-Through
+
+| Part | Ref / Spec | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| Tesa cloth tape | 51608 (or 51026), 19 mm × 25 m, black | 1 roll | Period-correct loom wrap. Automotive-grade cloth PET, heat-resistant, non-sticky residue. **Motonet, Biltema, Puuilo, or any auto-parts shop.** €8–12. |
+| Split loom / convoluted tubing | 6 mm ID, black polypropylene | 2 m | Protection where cables cross sharp metal edges (sill plate region, tweeter run). **Motonet, Biltema.** ~€5 for a small roll. |
+| Rubber grommets, assorted | 6–10 mm hole sizes | 1 assortment pack | Any new pass-throughs drilled in plastic dividers. **Motonet/Biltema assortment.** ~€5. |
+| Cable ties, black | 100 mm × 2.5 mm | 1 bag (~100 pcs) | Securing the loom to factory harness clips. **Motonet/Puuilo.** ~€3. Probably already on hand. |
+
+### 6C.5 — Wood Polish
+
+| Part | Ref / Spec | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| Beeswax wood polish | Howard Feed-N-Wax (or equivalent beeswax + orange oil for lacquered wood) | 1 bottle | Bench cleaning + protection of the Zebrano/Burl Walnut panels. **K-Rauta, Bauhaus, Amazon.fi, or furniture-restoration shops.** ~€12–15 / 473 ml bottle — lifetime supply. Alternative: Liberon Natural Finish Beeswax (more readily available in EU). |
+| Microfiber cloths | Lint-free, 30 × 30 cm | 2 fresh | Already in inventory (general detailing) — just use clean/unused ones for the wood. |
+
+### 6C.6 — Switch Refresh
+
+| Part | Ref / Spec | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| Contact cleaner, plastic-safe | CRC QD Electronic Cleaner 2-26, or WD-40 Specialist Contact Cleaner | 1 can | Non-residue, plastic-safe. Do **not** use generic brake cleaner on the rocker switch plastics. **Motonet, Biltema, Puuilo.** ~€10. |
+| Isopropyl alcohol 99% | Any lab-grade IPA | 100 ml+ | For plastic housings and illumination lenses. **Apteekki (pharmacy) or Motonet.** Probably already on hand. |
+| Cotton swabs | Regular | 1 pack | For rocker pivot points. Grocery-store aisle. |
+| PTFE dry lube or dielectric grease | CRC 2-50 PTFE or CRC Dielectric Grease (already in inventory) | 1 can / existing tube | Dielectric grease is **already in inventory** (Priority 4 consumables). A tiny dab per switch pivot. **No purchase needed if dielectric grease is used.** PTFE dry lube is an alternative if dust-attraction is a worry. |
+
+### 6C.7 — Optional / Nice-to-Have
+
+| Part | Ref / Spec | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| Replacement trim clips (universal) | R129-compatible dash-clip assortment | 1 pack | In case original clips break during wood-panel removal. **Biltema universal trim clip kit (~€10) or MB-specific from MB-osat if a specific clip breaks.** Buy pre-emptively — they *will* break on 35-year-old panels. |
+| Microphone hardware | **DECISION PENDING** (see `docs/tasks.md` "Microphone integration") | 1 | ⚠ **Must be decided before the console closes.** USB / analog shielded / I2S — spec depends on choice. Do not skip this line item — pulling a mic cable later means re-pulling the trim. |
+
+---
+
+### Summary — What to buy for Console-Out
+
+Net new purchases, excluding items already in inventory:
+
+| Category | Item | Est. cost |
+| :--- | :--- | :--- |
+| Audio signal | Shielded 4-core cable 3 m | €10–15 |
+| | Wago 221-413 × 4 | €3 |
+| | Ferrules assortment | €5 |
+| | Ring terminal M6 | €0.50 |
+| Data | USB 2.0 A-B shielded 3 m | €10 |
+| | CAT6 1.5 m | €5 |
+| | 3.5 mm TRS stereo 0.5 m | €6 |
+| Power | 3 A inline fuse holder + fuse | €2 |
+| Loom | Tesa cloth tape 19 mm × 25 m | €10 |
+| | Split loom 6 mm × 2 m | €5 |
+| | Grommet assortment | €5 |
+| Wood | Howard Feed-N-Wax or Liberon beeswax | €13 |
+| Switches | CRC QD Electronic Cleaner | €10 |
+| Safety net | Universal trim clip kit | €10 |
+| Pending | Microphone hardware | TBD — decide first |
+| **Subtotal** | | **~€95 + mic** |
+
+All sourceable within a single trip to Motonet + one online order (Verkkokauppa or Thomann for the shielded 4-core audio cable). Nothing is on long lead-time.
 
 ---
 
@@ -329,4 +442,4 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 
 ---
 
-*Last updated: 2026-04-16 (delivery day — Kärkkäinen audio order, MB-osat MB parts order, Carlinkit dongle, Fyndiq INA226 boards all arrived).*
+*Last updated: 2026-04-18 (added PRIORITY 6C — Center Console-Out cable harness and refresh consumables; ~€95 + mic-decision to close out the combined console-out task).*

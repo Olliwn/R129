@@ -21,6 +21,9 @@ Prompted by OVP relay failure. Inspect/reflow solder joints and electrolytic cap
 
 ### 11. Baseline Service -- Unknown History
 Full consumables flush: engine oil, ATF, brake fluid, coolant, power steering fluid. Filters, spark plugs, belts, hoses. 30-item checklist.
+
+**Engine oil sub-plan refined 2026-04-18:** Apr 18 dipstick check (light honey amber at ~1800 km of owner-driven use, no top-up) indicates the previous owner did a change immediately before the sale and the engine has low blowby. Oil change therefore **demoted from urgent to normal schedule** (end of season, or ~8 000 km from the previous-owner change, whichever first). No double-drain, no flush additive. Next change will be paired with: (a) used-oil analysis via Oelcheck (~€30–40), (b) filter element removal and post-drain inspection / cutting for particulate, (c) installation of a magnetic sump plug as a passive ferrous-particle early-warning. Track darkening rate with periodic dipstick photos (same paper towel, same lighting) at ~500 km intervals as a cheap ongoing engine-health metric. See `docs/engine_condition_baseline.md`.
+
 **Work plan:** [work/baseline_service/README.md](../work/baseline_service/README.md)
 
 ### 4. Suspension Refresh (ADS & Mechanical)

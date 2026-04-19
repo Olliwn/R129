@@ -57,6 +57,7 @@ The OVP relay was the root cause. After re-soldering all joints with Sn63/Pb37 (
 | **Fahrzeugniveau switch STUCK** — red LED permanently on, toggle has no effect on LED or ride height. Different from pre-flush behavior. | First drive observation | 2026-04-02 |
 | **⚠️ ADS strut dust boots — lower sections MISSING.** Chrome piston shafts exposed to road debris. Urgent: pitting will destroy internal seals on irreplaceable ADS shocks. | Underbody inspection (katsastus) | 2026-04-02 |
 | Underbody generally clean (summer-only car). No transmission leaks. Exhaust center silencer outer shell starting to rust. Rear diff surface rust. | Underbody inspection | 2026-04-02 |
+| **Rear ADS dust boots CONFIRMED INTACT** — photograph through rear wheel opening shows black convoluted rubber bellows present, seated, no exposed chrome, no hydraulic weep. Apr 2 note was front-biased; scope reduces from ×4 to ×2 fronts. Front photos pending Apr 19 jack-stand session. | Evening garage inspection | 2026-04-18 |
 
 
 **Working hypothesis (revised 2026-04-02):**
@@ -65,7 +66,7 @@ The OVP relay was the root cause. After re-soldering all joints with Sn63/Pb37 (
 
 **Subsystem B (Level Control / Niveauregulierung) is NOT WORKING.** Fahrzeugniveau switch is stuck with red LED permanently on — toggling does not change state or affect ride height. This is a **new symptom** (different from pre-flush behavior when the switch toggled normally). Rear height remains static. Pump is proven alive, flush is done, fluid is fresh. The remaining unknowns are: switch/relay logic, rear level control valve function, and whether the hydraulic circuit to the rear struts flows.
 
-**⚠️ URGENT — ADS strut dust boots are missing lower sections.** Chrome piston shafts are exposed to road debris. Pitting on the shafts will destroy internal seals and kill the ADS shocks, which are extremely expensive and increasingly unavailable. **Order and install dust boots before any further driving.**
+**⚠️ ADS strut dust boots — partial concern.** Apr 2 katsastus noted "lower sections missing" on the ADS shocks. Apr 18 evening photograph of the rear shows the rear bellows is actually intact and seated — Apr 2 observation was front-biased. **Scope reduces from ×4 to ×2 fronts pending Apr 19 front-strut photos on jack stands.** Order plan is 2× `A 129 323 01 92` from MB-osat (OEM, shared with W124/W201/R129) once the front photos confirm, or zero if the fronts also turn out intact.
 
 **Issue tracker (updated 2026-04-02):**
 
@@ -75,7 +76,7 @@ The OVP relay was the root cause. After re-soldering all joints with Sn63/Pb37 (
 4.  **Fault code 14 (steering angle sensor).** Returned after OVP reinstall (expected — N51 was unpowered for days). **→ Clear with lock-to-lock steering.**
 5.  **Cluster swap — historical analysis (2026-03-27).** Swedish records show smooth odometer 2013–2024. Swap likely pre-2008.
 6.  **~~OVP RELAY CRACKED SOLDER JOINTS.~~** **CONFIRMED & RESOLVED (2026-04-01).** Done.
-7.  **⚠️ ADS STRUT DUST BOOTS — LOWER SECTIONS MISSING (2026-04-02).** Chrome piston shafts exposed. Pitting will destroy seals on irreplaceable ADS shocks. **→ ORDER IMMEDIATELY. Install before further driving.**
+7.  **ADS STRUT DUST BOOTS — scope reduced to fronts only (2026-04-18).** Rear photographed intact 2026-04-18. **→ Photograph fronts on jack stands Apr 19. If fronts confirm missing, order 2× `A 129 323 01 92` from MB-osat. If fronts also intact, close this item.**
 8.  **Fahrzeugniveau switch stuck (2026-04-02).** Red LED permanently on, toggle has no effect. New behavior — switch worked normally before flush (Mar 23–28). Possible causes: stuck relay, N51 latched state, switch failure, wiring issue from electronics bay work, or Y36 solenoid seized in energized position. **→ Investigate: (a) Check 12V at Y36 connector (right front wheel well) — if voltage present continuously, switch/relay circuit is latched. (b) Y36 click test. (c) If Y36 is clicking but no height change, suspect clogged sintered bronze filter inside Y36 (documented #1 failure on European ADS I). See [level_control_system.md](level_control_system.md) for detailed failure mode analysis.**
 9.  **Level control not raising car — full Y36/valve diagnostic needed (2026-04-06).** With pump alive, flush done, and fluid fresh, the remaining suspects for no height change are: (a) Y36 sintered filter clogged (most likely — car has sat for years). (b) Height control rod pistons seized from inactivity. (c) Rear ARB linkage sheared. (d) Main valve regulating piston (50c) orientation incorrect or stuck. (e) Main valve ball check valves stuck. **→ Systematic diagnosis in Phase 2 steps 2.1–2.4.**
 
@@ -93,7 +94,7 @@ Controls shock absorber stiffness via electronic solenoid valves. This subsystem
 - **ADS Console Switch** — center console rocker/button: Sport / Comfort mode selection. Sends a ground signal to N51. **Status: WORKING** — LED illuminates, turns RED in Sport/up position (confirmed 2026-03-23).
 - **Speed Sensor Input** — N51 receives vehicle speed from the speedometer or ABS controller.
 - **Steering Angle Sensor** — input for dynamic damping adjustment.
-- **4× ADS Shock Absorbers** — each contains a proportional solenoid valve that adjusts damping force. Solenoid coil resistance is typically 4–8 Ω. Each shock also contains a nitrogen-charged gas cushion (accumulator sphere). **All four spheres confirmed healthy (2026-04-02)** — exceptional ride quality on first drive, inspector commented. Earlier FR stiffness was air-lock. **⚠️ Dust boots missing lower sections — shafts exposed. Urgent replacement needed to protect these irreplaceable shocks.**
+- **4× ADS Shock Absorbers** — each contains a proportional solenoid valve that adjusts damping force. Solenoid coil resistance is typically 4–8 Ω. Each shock also contains a nitrogen-charged gas cushion (accumulator sphere). **All four spheres confirmed healthy (2026-04-02)** — exceptional ride quality on first drive, inspector commented. Earlier FR stiffness was air-lock. **Dust boots: rear pair confirmed intact (2026-04-18 photo), front pair photo pending Apr 19 jack-stand session. Boot order scope reduced from ×4 to ×2 fronts.**
 - **ADS Warning Lamp** — cluster warning lamp for damping faults (page 92: *"The indicator lamp comes on with the key in steering lock position 2 and goes out when the engine is running"*). **Status: MISSING from indicator strip** — either dead bulb behind dead-fronting, or cluster variant issue.
 - **Diagnostic Output** — X11 Pin 9 blink-code interface (pre-OBD). Requires >13V supply. **Returns 1 blink = no stored damping faults.**
 

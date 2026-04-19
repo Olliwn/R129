@@ -18,10 +18,10 @@ Damping side now working:
 - **Adaptive Damping (N51):** Sport/Comfort modes CONFIRMED WORKING on first drive (2026-04-02). All four accumulator spheres healthy — inspector independently commented on smooth ride. Earlier FR stiffness was air-lock.
 
 Level control still needs work:
-- **Level Control (Niveauregulierung):** Rear height remains static. Fahrzeugniveau switch STUCK (red LED permanently on, toggle has no effect — new symptom post-OVP-fix). Flush completed. Next: manual valve test (disconnect ARB linkage, move lever manually on jack stands).
+- **Level Control (Niveauregulierung) — refined diagnosis 2026-04-19.** Rear height remains static. **Fahrzeugniveau switch electrical side RESOLVED:** LED now toggles on/off correctly with the center-console switch (observed during 2026-04-19 test drive, first normal switch behavior since Apr 2). Likely self-healed via new battery (Apr 18) + exercised contacts + ZH-M flush. **Hydraulic side still inoperative:** raise commands produce no observable ride-height change, so the rear-droop problem is now **confirmed hydraulic**, not electrical. Candidates: rear mechanical level valve (ARB linkage stuck/misadjusted), solenoid valve in manifold, weak pump discharge pressure, slow internal leak, or degraded rear sphere pre-charge. **Next:** manual valve test (disconnect ARB linkage, move lever by hand on jack stands), read Pin 9 immediately after a raise command, measure pump discharge pressure if manual valve test doesn't isolate the cause.
 - **Cluster swap confirmed:** Indicator strip has no ADS symbol -- non-ADS cluster (option 216 factory ADS confirmed via lastvin.com).
 
-⚠️ **URGENT — Dust boots missing lower sections.** Chrome ADS shock shafts exposed to road debris. Order and install A 129 323 01 92 (×4) before further driving.
+⚠️ **Dust boots — front suspected missing, REAR CONFIRMED INTACT (2026-04-18).** Apr 2 katsastus noted "lower sections missing" and we initially assumed ×4. Rear strut photograph (2026-04-18 evening) shows black convoluted rubber bellows present, seated, no exposed chrome — Apr 2 note was front-biased. **Remaining work:** photograph both front struts on jack stands tomorrow (Apr 19), confirm fronts are the ones missing boots, then order 2× `A 129 323 01 92` from MB-osat. Part is common (W124/W201/R129 shared) — no sourcing risk.
 
 [work/ads_diagnostic/README.md](../work/ads_diagnostic/README.md) | [work/ads_blink_reader/README.md](../work/ads_blink_reader/README.md)
 
@@ -95,10 +95,17 @@ Slight vibration at 700-800 RPM idle. Corteco replacement mounts received (2026-
 
 [work/engine_trans_mounts/README.md](../work/engine_trans_mounts/README.md)
 
-### Crankshaft Position Sensor — Active Fault (EZL Code 17)
-**Status:** PARTS ORDERED | **Priority:** HIGH | **Since:** 2026-04-04
+### Crankshaft Position Sensor — RESOLVED (New Topran Sensor Installed)
+**Status:** RESOLVED | **Priority:** — | **Since:** 2026-04-04 | **Resolved:** 2026-04-19
 
-Pin 8 Code 17 returns after every drive. Sensor is marginal/intermittent — car starts and runs but EZL falls back to base timing map. A full failure will cause a no-start. **Topran 408 205 ordered from Autodoc 2026-04-04** (€50.99, ETA ~1 week). Installation is a 5-minute job (6mm Allen bolt, rear of engine near bellhousing). No calibration required.
+**Topran 408 205 installed 2026-04-19.** Old sensor had been routed around a bolted-on engine feature; wire was cut during extraction. New sensor uses same endpoints but bypasses the last "top of engine" loop (see Apr 19 diary for thermal-exposure notes on the re-routed section).
+
+**Verification:**
+*   **First-start (1–2 min idle) 2026-04-19:** engine caught immediately, no unusual noises, no leaks.
+*   **Pin 8 post-drive 2026-04-19 (engine still running, ~15 km drive incl. revs to ~6 k):** **1 blink, no faults.** This is the definitive test — the Apr 4 failure mode was "Code 17 returns after every drive" with the old sensor, and that no longer occurs.
+*   **KOEO artifact documented** — Pin 8 reads 17 blinks with ignition on, engine stopped. This is a normal variable-reluctance-sensor reading (zero signal at zero RPM, EZL can't distinguish "stopped" from "broken"). **All future Pin 8 reads must be done with engine running or within seconds of shutdown.**
+
+**Related remaining task** (tracked in Apr 19 diary, not reopened here): walk the new sensor wire hot after the next drive and decide whether the "top of engine" section needs heat-shielded loom. Not a fault per se; a durability precaution.
 
 ### Valve Cover Gaskets & Spark Plug Tube Seals — Oil in Wells
 **Status:** OPEN | **Priority:** MEDIUM | **Since:** 2026-04-05
@@ -107,12 +114,40 @@ Pin 8 Code 17 returns after every drive. Sensor is marginal/intermittent — car
 
 **Fix:** Replace both valve cover gasket sets + 8× spark plug tube seals. Combine with Priority 2 timing chain guide inspection (valve covers must come off for both jobs). Parts needed — add to MB-osat order.
 
-### Engine Belt Noise -- Glazed Belt Confirmed
-**Status:** OPEN | **Priority:** MEDIUM | **Since:** 2026-03-21 | **Updated:** 2026-04-03
+### Engine Belt Noise -- Glazed Belt Confirmed, Spray Treatment Exhausted
+**Status:** OPEN — ORDER BELT NOW | **Priority:** MEDIUM | **Since:** 2026-03-21 | **Updated:** 2026-04-19
 
-Squeals/chirps on startup. **V-belt friction spray test (2026-04-03): noise disappeared instantly.** This confirms the belt surface is glazed and slipping — not a bearing issue. Spray is a temporary fix only.
+Squeals/chirps on startup. **V-belt friction spray test (2026-04-03):** noise disappeared instantly, confirming glazed/slipping belt (not a bearing issue).
 
-**Next:** Replace V-belt set. Confirm belt P/Ns with MB-osat (M119 uses multiple V-belts). Already listed in `parts_to_order.md` Priority 4 under inspect-first — now confirmed as needing replacement.
+**Re-emerged 2026-04-19 during test drive.** Spray applied again to silence — but this confirms the Apr 3 prediction that spray is temporary only. The friction modifier wears off / washes off in days to weeks, and the underlying glaze is still present. Further spray applications are band-aid only; belt replacement is now the mandatory fix.
+
+**Next:**
+1.  **Order belt set from MB-osat** — promoted out of "inspect first" in `parts_to_order.md`. Confirm full P/N list with parts counter (M119.960 has main poly-V serpentine + separate A/C compressor V-belt).
+2.  **Inspect hydraulic belt tensioner at the same time.** A glazed belt with no oil/coolant contamination is frequently a *symptom* of weak tensioner preload. Hydraulic damper in the M119 tensioner leaks down with age. Replace if discharge-rate visibly slow or if any oily weeping at the damper seal.
+3.  **Spin all idler pulleys by hand with belt off** — listen for bearing grit, feel for play. Replace any that aren't silky smooth.
+4.  Interim: belt can be kept quiet with occasional friction spray until the new set arrives. Not a long-term state — slipping belts overheat, crack, and eventually snap.
+
+### Exhaust — Center Silencer Shell Perforated, Load-Range Resonance
+**Status:** OPEN — UNDER-CAR INSPECTION PENDING | **Priority:** MEDIUM | **Since:** 2026-04-19 (Mar 15 precursor note "exhaust center silencer starting to rust" confirmed escalated)
+
+**Symptom (observed 2026-04-19 test drive):** light resonance/drone in the 2–3.2 k RPM band, **load-dependent only** (absent in neutral at the same RPM, absent above ~3.5 k). Reduces as the engine warms. Owner had noted this previously on earlier drives.
+
+**Visual finding (photo 2026-04-19):** center silencer shell shows a visible crack / through-hole on the lower portion, surrounded by heavy scale and rust staining. External heat-shield partially detached. Adjacent mid-pipe section also heavily corroded. Brand stamp on the heat-shield wrap reads "Thermopos[…]" (partial).
+
+**Physics consistent with symptom:**
+*   Exhaust firing pulse at 2–3.2 k on an 8-cyl is 133–213 Hz, a typical cavity-resonance band for a mid-silencer. Load dependence confirms it's exhaust-flow-excited (flow is 3–5× higher at same RPM under load). Warm-up improvement is consistent with thermal expansion tightening loose baffles or heat shield.
+
+**Cats and other components — not yet inspected.** Cats are up-front in the tunnel (separate units per bank, upstream of this component). Their condition is unknown pending the on-jack-stand full exhaust walk-through.
+
+**Next:**
+1.  **Full exhaust photo survey** on jack stands (now unlocked by Apr 19 saddle-pad fabrication). Manifold-back, both banks, focused shots of cats, flex sections, mid-silencer, rear mufflers.
+2.  **Push-test each component by hand cold** — listen for internal rattle (loose baffles or broken substrate), check hanger integrity, wiggle heat shields.
+3.  **Probe the visible crack with a screwdriver.** Crumbles → shell terminal, replace silencer. Solid edges → weld-patch is viable.
+4.  **Decision gate:**
+    *   Silencer shell only → weld-patch at local exhaust shop (Ristimaa Oulu or similar), ~€50–150.
+    *   Silencer baffles loose or shell terminal → replace center silencer (aftermarket Bosal/Walker/Ernst ~€80–250 + install).
+    *   Cats also failing → plan a full mid-section replacement (€500–1500), coordinate with belt + valve-cover service for a single lift visit.
+5.  Not urgent (car drives; April katsastus passed) but push into the next 1–2 weeks. Avoid soft-top-up + windows-closed + heavy-traffic combination while exhaust is leaking (CO intrusion is low-probability but not zero).
 
 ### Headlight Switch Knob Worn
 **Status:** OPEN | **Priority:** LOW | **Since:** 2026-04-02
