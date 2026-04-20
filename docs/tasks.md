@@ -106,6 +106,15 @@ Goal: get a microphone into the RPi5 audio stack, primarily so phone calls route
 4. Confirm no GPIO conflict with the Alps joystick wiring (only relevant for Option A/B).
 5. Order the mic hardware so it's on hand *before* the console comes apart.
 
+### Radar cockpit — MIMO mmWave front/rear view on the RPi5 OLED  📅 Winter 2026–27
+Two automotive MIMO mmWave radars (one behind each bumper) feeding a custom amber-on-black top-down radar scope on the 5.5" OLED. Zero external vehicle modifications — mmWave penetrates painted plastic bumpers. Replaces the originally-considered rear camera (rejected: no invisible R129 mount) and ultrasonic sensors (viable but still needs 4 bumper holes).
+
+**Key insight:** no custom signal-processing chain to build — TI's free chip firmware (IWR6843AOPEVM or AWR1843BOOST) runs the full MIMO DSP pipeline (range-FFT, Doppler-FFT, CFAR, AoA, tracking) on-chip and streams a point cloud over UART. Pi-side work is purely parsing + PyQt5 visualisation, leveraging existing open-source Python libraries (ibaiGorordo / pymmw / OpenRadar). Estimated MVP effort: 3–4 weekends.
+
+**Parked for Winter 2026–27.** Summer 2026 queue is full (baseline service, center console refresh, audio upgrade, electronics audit). Revisit October/November 2026.
+
+**Work plan:** [work/radar/README.md](../work/radar/README.md)
+
 ### In-car AI assistant access
 CarPlay only surfaces OpenAI's ChatGPT today; no CarPlay build exists for Gemini, Grok, or Claude (the ones with active subscriptions). A custom PyQt5 "AI" view on the Pi was considered and **rejected** because a native client wouldn't share the real web/app session history, which is the main reason to return to a chat (picking up older threads when context changes).
 
