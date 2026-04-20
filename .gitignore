@@ -3,6 +3,7 @@ r129_data/references/pdfs/r129-infoaccess-course.zip
 
 # Python venv
 r129_data/.venv/
+**/.venv/
 
 # OS
 .DS_Store

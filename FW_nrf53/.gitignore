@@ -1,0 +1,14 @@
+build/
+build_*/
+*.hex
+*.elf
+*.bin
+*.map
+*.dSYM/
+.DS_Store
+.vscode/
+.idea/
+
+# host_test build artifacts
+host_test/test_payload
+host_test/*.o
