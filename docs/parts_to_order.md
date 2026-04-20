@@ -18,7 +18,7 @@
 
 | Part | OEM Number | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| ADS Shock Absorber Dust Boot (front) | A 129 323 01 92 (≡ `1293230192`) | 2 | **Confirmed correct OEM 2026-04-18.** Part crosses between W124/W201/R129 — same physical boot. Aftermarket crosses: MEYLE 0140320032, VAICO V30-6033, FEBI kit 13034, Monroe, SWAG. ~€10–15 OEM, ~€5–10 aftermarket. **Hold order until Apr 19 front-strut photos confirm fronts are the affected corners.** |
+| ADS Shock Absorber Dust Boot (front) | A 129 323 01 92 (≡ `1293230192`) | 2 | **ORDERED from Autodoc 2026-04-20** — MEYLE 014 032 0032 (ORIGINAL Quality, "Etuakseli"), €8.29 each = €16.58 total. Front-axle separation at lower compression seal confirmed via photograph 2026-04-20 (see diary) — matches Apr 2 katsastus "lower sections missing" observation. Passenger-side front not yet photographed but ordering 2× on the assumption of symmetric degradation (matched ADS corners typically age together). |
 | ~~ADS Shock Absorber Dust Boot (rear)~~ | ~~A 129 323 01 92 (verify)~~ | ~~2~~ | **DROPPED 2026-04-18.** Rear struts photographed, bellows intact. No part needed. |
 
 **Source preference:**
@@ -95,15 +95,25 @@
 
 ## PRIORITY 1B — Belt Set (Glazed, Slipping, Spray-Exhausted)
 
-*Promoted from Priority 4 "inspect first" on 2026-04-19. Glazed-belt hypothesis (Apr 3 friction-spray test) confirmed when squeal re-emerged during Apr 19 test drive — spray treatment exhausted. Order the belt set with MB-osat on the next parts-counter visit; inspect the hydraulic tensioner at the same bench session so we don't risk a repeat glaze from weak preload.*
+*Promoted from Priority 4 "inspect first" on 2026-04-19. Glazed-belt hypothesis (Apr 3 friction-spray test) confirmed when squeal re-emerged during Apr 19 test drive — spray treatment exhausted. Order the two belts now from MB-osat; inspect the tensioner + pulleys at the same bench session when the belts arrive so we don't risk a repeat glaze from weak preload or a failed bearing.*
 
-| Part | OEM Number | Qty | Notes |
-| :--- | :--- | :--- | :--- |
-| Main Serpentine Belt (alternator / PS / water pump) | (verify w/ MB-osat by VIN) | 1 | M119.960 with A/C uses a poly-V main belt. Gates, Contitech, or INA acceptable aftermarket. MB-osat will confirm the exact width/length/rib count — do not blind-order from Autodoc (M119 variants differ). |
-| A/C Compressor V-Belt | (verify w/ MB-osat by VIN) | 1 | Separate V-belt on the early M119.960. Order with main belt. |
-| Belt Tensioner (hydraulic/damper type) | A 119 200 04 14 (verify) | 1 | **Inspect before ordering.** Criteria for replacement: visible oily weeping at damper seal, slow/fast return when compressed by hand, or any free play in the pivot. A weak tensioner is a common root cause of belt glazing — replacing the belt alone risks a repeat failure in months. Hydraulic damper degrades silently with age; 35 years is well past design life. |
-| Idler Pulleys | (verify w/ MB-osat) | as needed | **Inspect with belt off.** Spin each by hand — should turn silky smooth, no grit, no play. Replace any that aren't. Replacement at the same bench session is much cheaper than a separate labor visit later. |
-| V-Belt Friction Spray (interim) | any auto-parts brand | 1 can | Already have one on hand. Acceptable to nurse the belt with occasional re-application until the new set is installed. Do NOT rely on spray long-term — slipping belts overheat, crack, and eventually snap. |
+*Part numbers verified 2026-04-20 for M119.960 serial 024990 (1991-09 build) with catalytic converter + air conditioning. Cross-referenced against SL Shop, Pelican, mbpartsgiant, and benzworld / 500Eboard technical archives. **Terminology correction:** the 1990–92 M119.960 tensioner is a **rubber-bushed** design, not hydraulic — the hydraulic/spring-loaded redesign came in ~1993 on later M119 variants. The "shock" you see in some diagrams is actually a threaded adjustment rod (A 119 200 00 36), not a hydraulic damper.*
+
+| Part | OEM Number | Qty | Posture | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| **Main Poly-V Serpentine Belt** (alternator / PS / water pump) | **A 010 997 99 92** | 1 | **ORDERED Autodoc 2026-04-20** | **ContiTech 6PK2523** (51% off RRP, €32.49). Spec 6PK2523 (6 ribs × 2523 mm). Cross-listed as A 011 997 68 92 / A 119 997 01 92. Correct specifically for M119.960 *with catalytic converter* (AOK912 match). Do NOT substitute the 6PK2510 (late M119.982 w/ A/C), 6PK2425 (M119.982 w/o A/C), 6PK2535 / 6PK2540 (M119.972) — all are different M119 variants with different accessory drive layouts. |
+| **A/C Compressor V-Belt** (separate classic V-belt) | **A 004 997 05 92** | 1 | **ORDERED Autodoc 2026-04-20** | **ContiTech AVX13X950** (43% off RRP, €10.49). Modern raw-edge cogged replacement for the factory 12 × 960 wrapped V-belt — same application, same OEM cross-reference, functional upgrade. Early M119.960 uses a dedicated V-belt for the A/C compressor in addition to the main poly-V. |
+| **Belt Tensioner Rod / Adjustment Bar** | **A 119 200 00 36** | 1 | **CHECK STOCK** | The threaded adjusting rod that sets belt preload (#12 in WIS diagram, pivots the tensioner arm). Often listed discontinued at US dealers — **this is the hardest-to-find item of the set**; ask MB-osat to check stock when placing the belt order. ~€25–35 when available. Aftermarket Febi/Meyle is an acceptable fallback if MB is out. |
+| **Belt Tensioner Assembly** (rubber-bushed, 1990–92 early design) | A 119 200 02 70 | 1 | **INSPECT FIRST** | Criteria for replacement: any visible cracking in the rubber bushing, pivot free play, or audible slop when belt removed. Rubber bushings are a documented M119 wear point (benzworld reports 2–3 year failures in hot climates); at 35 years this is absolutely past design life, but Finnish climate is much kinder to it than Texas. Febi 1192000270 ~€100, genuine ~€200+. |
+| **Tensioner Pulley** (bearing on the tensioner arm) | A 119 200 14 70 | 1 | **INSPECT FIRST** | Spin by hand with belt off — should turn silky smooth, no grit, no lateral play. Replace if in doubt. |
+| **Deflection / Guide Pulley** | A 119 200 04 70 | 1 | **INSPECT FIRST** | Same hand-spin check. |
+| **Auxiliary / Idler Pulley** (M119.960-specific) | A 601 200 09 70 | 1 | **INSPECT FIRST** | The M119.960 uses the 601-prefix aux pulley, NOT the later A 601 200 10 70 used on other R129 variants — confirm by VIN at the parts counter. Same hand-spin check. |
+| V-Belt Friction Spray (interim) | any auto-parts brand | 1 can | On hand | Acceptable to nurse the belt with occasional re-application until the new set is installed. Do NOT rely on spray long-term — slipping belts overheat, crack, and eventually snap. |
+
+**MB-osat email / counter talking points** (VIN `WDB 129066 1F 044414`):
+1. Confirm A 010 997 99 92 and A 004 997 05 92 by VIN → order both.
+2. Check stock on A 119 200 00 36 (tensioner rod) → order now if available, fallback to aftermarket if not.
+3. Price-check but do NOT order the tensioner assembly (A 119 200 02 70), the two pulleys (A 119 200 14 70, A 119 200 04 70), and the aux pulley (A 601 200 09 70). Decide at the bench session after hand-spin inspection.
 
 ---
 
@@ -223,8 +233,9 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 
 | Part | Ref / Spec | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| Shielded 4-core audio cable | 4 × 0.75 mm² OFC twisted-pair, overall foil/braid shield | ~3 m | One continuous run from BE2210 ISO block → rear cubby. Sommer SC-Onyx 2025 MKII, Cordial CTL-2, or equivalent. **Thomann / SP Elektroniikka / any pro-audio supplier.** ~€3–5/m. |
-| Wago 221-413 (3-way lever nut) | 0.2–4 mm² clamp range | 4 pcs | Parallel tap at the BE2210 ISO speaker pigtail — one per signal (LF+, LF−, RF+, RF−). **Motonet, Puuilo, Biltema, Verkkokauppa.** ~€0.50–0.80 each in a 10-pack. Buy a pack, keep spares. |
+| Shielded CAT6 cable (F/UTP or S/FTP) | 4 twisted pairs, 23 AWG solid-core preferred, overall foil shield + drain wire | ~3.5 m | **ORDER NEXT** — any reputable brand. Verkkokauppa.com (Deltaco / LogiLink / Digitus shielded patch cable, ~€8–15 for 5 m) or Biltema bulk solid-core install cable (~€1.50/m). Pair assignment: Blue = LF+/LF−, Orange = RF+/RF−, Green + Brown = future spares (line-level input + DC control). Keep pair twist intact within ≤13 mm of termination. Overall shield grounded at DSP end only. **Decision rationale (2026-04-20):** substituted for originally-planned Sommer/Cordial audio multi-core because (a) CAT6 is the right technical fit — twisted pairs + overall shield; 100 Ω impedance is irrelevant at audio frequencies; 23 AWG gauge is fine for high-Z DSP input (≥10 kΩ, μA-level signal current, not a speaker-drive application); (b) pro-audio precedent (Rane, Radial, Whirlwind, BSS Soundweb all use CAT5/6 for balanced analog runs); (c) trivially sourceable in Finland vs. multi-week EU order for Sommer / Cordial. **Buy one bulk spool and share with §6C.3 Alps CAT6 run.** |
+| ~~Motonet 7 × 1.5 mm² unshielded cable (art. 0000606156)~~ | ~~7-conductor automotive cable, 7 m~~ | — | **RE-PARKED to inventory 2026-04-20.** Initially purchased 2026-04-20 to substitute for a proper shielded cable, with a manual twist-pairs + pseudo-shield install plan. Superseded same day by the shielded-CAT6 decision above (cleaner, no jacket-strip-and-retwist labour, no long-term Tesa-glue dependency for re-sheathing). **Probable future use:** Hertz door-woofer multi-conductor harness during the Priority 6B speaker upgrade — 2× woofer pairs + tweeter pair + spare = 7 conductors, speaker-level signals so unshielded is fine. Parked in electrical stock until that task opens. |
+| Wago 221-413 (3-way lever nut) | 0.2–4 mm² clamp range | 4 pcs | **ACQUIRED from Motonet 2026-04-20** (art. 0000728703, "Wago 3-napainen vipuliitin 0,2[–4 mm²]", €9.99/pack). Parallel tap at the BE2210 ISO speaker pigtail — one per signal (LF+, LF−, RF+, RF−). Spares retained. |
 | Bootlace ferrules | 0.75 mm², insulated, red | ~10 pcs | DSP-end terminal entry (4 signals) + spares. Assortment kit from Motonet/SP Elektroniikka is fine. ~€5 for the kit. |
 | Ring terminal | M6, insulated, 0.5–1.5 mm² | 1 pc | Shield drain → DSP chassis ground bolt. **Motonet assortment.** |
 | Heat-shrink labels | 6 mm black + 3 mm black | — | Already in inventory (Stage 1 heat-shrink kit). Use a fine-tip marker + clear shrink-over for durable labels. |
@@ -240,7 +251,7 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 
 | Part | Ref / Spec | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| CAT6 Ethernet cable | Shielded (F/UTP or S/FTP), stranded | 1.5 m | Alps RKJXT1F42001 (ashtray) → front cubby. 8 conductors = 7 GPIO + 1 GND. Stranded is easier to route than solid. **Verkkokauppa, Clas Ohlson, Puuilo.** A cheap 1 m patch cable cut and re-terminated is fine. ~€3–6. |
+| CAT6 Ethernet cable | Shielded (F/UTP or S/FTP) | 1.5 m | Alps RKJXT1F42001 (ashtray) → front cubby. 8 conductors = 7 GPIO + 1 GND. **Shared purchase with §6C.1 BE2210 tap (2026-04-20 decision):** buy one 5 m spool of shielded CAT6 and cut two lengths — 3.5 m for §6C.1, 1.5 m for §6C.3. **Verkkokauppa, Clas Ohlson, Puuilo, or Biltema bulk solid-core.** ~€8–15 for the shared 5 m. |
 | Stereo AUX cable, shielded | 3.5 mm TRS male ↔ 3.5 mm TRS male | 0.5–1 m | BE2210 rear AUX jack → front cubby (RPi5 Waveshare / USB DAC output). Short, shielded, slim (not the chunky speaker-use kind). **Clas Ohlson, Verkkokauppa.** ~€5–8. |
 | Hook-up wire | 2 × 1.5 mm² red/black automotive | 2 m | 5 V feed into the cubby from the nRF5430 wake-switch output. Can also be made from existing 1.5 mm² speaker cable in inventory — no new purchase strictly required if slack remains after 6C.2. |
 | Fuse holder + 3 A blade fuse | ATO blade, inline | 1 | On the 5 V-bound 12 V feed before it enters the cubby DC-DC buck. **Motonet/Biltema assortment** — already likely in inventory (check Priority 7 torpedo box — but 3 A ATO is different from torpedo). ~€2. |
@@ -251,7 +262,7 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 | :--- | :--- | :--- | :--- |
 | Tesa cloth tape | 51608 (or 51026), 19 mm × 25 m, black | 1 roll | Period-correct loom wrap. Automotive-grade cloth PET, heat-resistant, non-sticky residue. **Motonet, Biltema, Puuilo, or any auto-parts shop.** €8–12. |
 | Split loom / convoluted tubing | 6 mm ID, black polypropylene | 2 m | Protection where cables cross sharp metal edges (sill plate region, tweeter run). **Motonet, Biltema.** ~€5 for a small roll. |
-| Rubber grommets, assorted | 6–10 mm hole sizes | 1 assortment pack | Any new pass-throughs drilled in plastic dividers. **Motonet/Biltema assortment.** ~€5. |
+| Rubber grommets, assorted | 6–10 mm hole sizes | 1 assortment pack | **ACQUIRED from Motonet 2026-04-20** (art. 0000648787, "MTX Basic läpivientikumilajite", €6.99). Any new pass-throughs drilled in plastic dividers. |
 | Cable ties, black | 100 mm × 2.5 mm | 1 bag (~100 pcs) | Securing the loom to factory harness clips. **Motonet/Puuilo.** ~€3. Probably already on hand. |
 
 ### 6C.5 — Wood Polish
@@ -285,12 +296,12 @@ Net new purchases, excluding items already in inventory:
 
 | Category | Item | Est. cost |
 | :--- | :--- | :--- |
-| Audio signal | Shielded 4-core cable 3 m | €10–15 |
-| | Wago 221-413 × 4 | €3 |
+| Audio signal | Shielded CAT6 (F/UTP or S/FTP), 5 m (shared with §6C.3 Alps run) | €8–15 |
+| | ~~Wago 221-413 × 4~~ — ACQUIRED Motonet 2026-04-20 | ~~€3~~ |
 | | Ferrules assortment | €5 |
 | | Ring terminal M6 | €0.50 |
 | Data | USB 2.0 A-B shielded 3 m | €10 |
-| | CAT6 1.5 m | €5 |
+| | ~~CAT6 1.5 m~~ — included in the 5 m shared spool above | — |
 | | 3.5 mm TRS stereo 0.5 m | €6 |
 | Power | 3 A inline fuse holder + fuse | €2 |
 | Loom | Tesa cloth tape 19 mm × 25 m | €10 |
@@ -321,8 +332,8 @@ All sourceable within a single trip to Motonet + one online order (Verkkokauppa 
 
 | Part | OEM Number / Ref | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| Antenna Grommet (Upper) | A 129 827 02 98 | 1 | Cracked seal leaks water onto the PSE pump in the trunk. |
-| Antenna Grommet (Lower) | A 129 827 03 98 | 1 | Order with upper. |
+| ~~Antenna Grommet (Upper)~~ | ~~A 129 827 02 98~~ | — | **DEPRIORITIZED 2026-04-20.** Earlier notes (and the retired `Karkkainen_Shopping_List.md`) claimed a cracked seal leaks water onto the PSE pump — on direct inspection this is **not observed**; antenna grommet rubber looks healthy, no water staining in the trunk around the PSE pump area. Claim appears to have been copied from a generic R129 known-issue list, not from actual AOK912 observation. Re-inspect if PSE pump develops water-related faults; otherwise do not order. |
+| ~~Antenna Grommet (Lower)~~ | ~~A 129 827 03 98~~ | — | Same deprioritization as upper. |
 | Silicone Spray (aerosol) | Biltema / Würth / CRC | 1 can | For antenna mast tube long-term lubrication (WD-40 freed segments 2026-04-03, not a lasting lubricant). Also useful for rubber seals. Motonet/Biltema/Kärkkäinen. |
 | Scotch Fix Extreme Exterior 19mm × 5m | 3M (double-sided, 13kg max) | 1 roll | For re-securing door seat control panels (P/N 129 820 71 10) where front lower plastic clip broke. Biltema basic tape failed. 3M acrylic foam (VHB-class). -40°C to +90°C. Clean surfaces with brake cleaner before applying. **Ordered from Motonet 2026-04-03.** |
 | Touch-up Paint Pen | Color code **744 Brilliant Silver Metallic** | 1 | Base coat + clear coat. For the hood scratch and behind-wheel bare steel. |
@@ -442,4 +453,4 @@ All sourceable within a single trip to Motonet + one online order (Verkkokauppa 
 
 ---
 
-*Last updated: 2026-04-18 (added PRIORITY 6C — Center Console-Out cable harness and refresh consumables; ~€95 + mic-decision to close out the combined console-out task).*
+*Last updated: 2026-04-20 (6C.1 cable spec finalised: shielded CAT6 F/UTP substituted for dedicated multi-core audio cable — cleaner sourcing in Finland, technically correct for a high-Z DSP input, buy-once-share-with-§6C.3 economy. Motonet 7×1.5 mm² re-parked to inventory for future Hertz door-harness use.)*
