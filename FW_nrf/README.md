@@ -9,9 +9,8 @@
 
 ## Current milestone
 
-**M0 — BLE hello-world** ✅ *done 2026-04-20 (on nRF5340 DK)*
-**M1 — framed payload codec** ✅ *done 2026-04-20 (on nRF5340 DK)*
-**L15 port** — smoke-built on nRF54L15, bench-verification pending DK in hand
+**M0 — BLE hello-world** ✅ *done 2026-04-20 (on nRF5340 DK) · re-verified on nRF54L15 DK 2026-04-24*
+**M1 — framed payload codec** ✅ *done 2026-04-20 (on nRF5340 DK) · re-verified on nRF54L15 DK 2026-04-24*
 
 Firmware advertises as `R129-Diag` and emits a framed `HEARTBEAT` payload every 1 s on both the BLE diagnostics-stream notify characteristic and the USB-CDC / UART0 console. Every future telemetry type (analog sensors, blink codes, commands) is a new `TYPE` value + `DATA` layout on the same wire format — no GATT changes needed. M0/M1 verified end-to-end from CoreBluetooth (Mac) and BlueZ (Pi) with `bleak` on the nRF5340 DK; nothing in the app source changed for the L15 port, so the wire side is expected to behave identically. See `docs/diary/2026-04.md` for the bring-up writeup and the Apr 24 migration entry.
 
@@ -56,7 +55,7 @@ cd ~/R129/R129/FW_nrf
 # incremental rebuild
 ./tools/ncs.sh west build -d build
 
-# flash to the DK over USB (uses nrfjprog / nrfutil-device via J-Link OB)
+# flash to the DK over USB (uses the nrfutil runner on nRF54L15, not legacy nrfjprog)
 ./tools/ncs.sh west flash -d build
 
 # open a sub-shell with the toolchain on PATH (west, ninja, arm-zephyr-eabi-gcc...)
@@ -77,35 +76,33 @@ FLASH grew vs the nRF5340 app-core number (105 700 B) because the SoftDevice Con
 
 ### DK switch settings for bench development
 
-*To be confirmed on first physical bring-up.* The nRF54L15 DK uses a different silkscreen layout from the nRF5340 DK. Until the board is on the bench, follow the Nordic **nRF54L15 DK User Guide** (PCA10156). Expected items to nail down and then record here:
+As observed on 2026-04-24 with a PCA10156 L15 DK out of the box (serial `001057774115`), no switch changes were needed — plugging the debug USB (single IMCU USB-C port on this board) into the Mac was sufficient for `west flash` + UART + BLE to all work. The L15 DK does not have the nRF5340 DK's "nRF ONLY / DEFAULT" power-split slider (SW6 on the 5340); instead a single IMCU supply path powers the nRF when the debug USB is plugged in.
 
-| Switch / jumper | Likely position for bench work | Notes |
-|---|---|---|
-| Main power slider | ON | LEDs should light |
-| nRF power source select | VDD (IMCU-powered via USB) | Gives ~3.3 V on-board rail from the debugger MCU, no external supply needed |
-| Debug USB | J-Link VCOM port (IMCU USB) | Flash + UART share this cable |
-| External supply header | disconnected / tied to VDD | Only relevant when the DK is later wired to the R129 interface board's 3 V3 rail |
-
-The "nRF ONLY" / "DEFAULT" split that the nRF5340 DK uses (SW6 on that board) has no exact counterpart on the L15 DK; the L15 DK instead uses a single power-source selector for the nRF. Flashing and UART always work when power is routed through the debugger MCU.
+Document the actual switch / jumper positions here once a bench config other than "out-of-box + USB power" is needed (e.g. when the DK starts drawing power from the R129 interface board 3 V3 rail at M2).
 
 ### UART console over USB
 
-The L15 DK exposes **one** J-Link VCOM (vs two on the nRF5340 DK, which had separate app- and net-core consoles). On macOS it shows up as a single `/dev/tty.usbmodem*` port. Exact port suffix will depend on the DK's serial number — will record the observed value here during first bench session.
+Despite nRF54L15 being single-core, the DK's IMCU still enumerates **two** `tty.usbmodem*` VCOMs on macOS (observed; the nRF Connect SDK 3.2.0 shipping image does this on the L15 DK just like on the 5340). The **higher-suffix** one is the app-core UART0 — same heuristic as on the 5340 DK. Example observed:
+
+```
+/dev/tty.usbmodem0010577741151   # silent (auxiliary / Nordic Cloud-backhaul port, unused by our firmware)
+/dev/tty.usbmodem0010577741153   # app UART0 — use this
+```
 
 ```bash
-screen /dev/tty.usbmodem<suffix> 115200
+screen /dev/tty.usbmodem0010577741153 115200
 # expect, once per second:
 #   R129-CTR <n> uptime=<ms> ms
 #   R129-FRM AE 08 00 <uptime LE 4B> <counter LE 4B> <CRC HI> <CRC LO>
 # exit: Ctrl-A  K  y
 ```
 
-Or use the Python snippet we already have (works identically across the nRF5340 and nRF54L15 DK USB stacks):
+Or the Python snippet from the `.venv` (more robust under re-enumeration; `screen` sometimes fights with the Cursor terminal for port ownership):
 
 ```bash
 ~/R129/R129/UI_rpi5/tools/.venv/bin/python3 -c "
 import serial, time, sys
-s = serial.Serial('/dev/tty.usbmodem<suffix>', 115200, timeout=1)
+s = serial.Serial('/dev/tty.usbmodem0010577741153', 115200, timeout=1)
 for _ in range(5):
     line = s.readline()
     if line: sys.stdout.write(line.decode('utf-8', errors='replace'))
