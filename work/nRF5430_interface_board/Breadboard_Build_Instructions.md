@@ -1,5 +1,7 @@
 # nRF5430 Interface Board — Breadboard Build Instructions
 
+> **Stale-reference notice (2026-04-24):** the MCU has been re-targeted from nRF5340 to **nRF54L15**. Pin assignments, package footprint, current-draw figures and power-budget numbers in this file (and elsewhere under `work/nRF5430_interface_board/`) still reference the nRF5340 and will be refreshed during the M2 interface-board design pass — see `FW_nrf/README.md` and the Apr 24 entry in `docs/diary/2026-04.md`.
+
 **Project:** AOK912 R129 SL Diagnostics Interface
 **Design source:** SPICE netlists in `spice/netlists/` (simulation-verified 2026-03-21)
 **Approach:** Incremental staged build — verify each stage before proceeding
