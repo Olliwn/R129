@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Unit tests for r129_payload.py, matching FW_nrf53/host_test/test_payload.c.
+"""Unit tests for r129_payload.py, matching FW_nrf/host_test/test_payload.c.
 
 Keep these two files in lock-step: every test vector in the C suite has
 a Python twin here, so a change on one side that breaks the other is

@@ -7,7 +7,7 @@ service, subscribes to the diagnostics stream notify characteristic,
 and pretty-prints every framed payload it receives.
 
 From M1 onwards the notify payload is a framed r129_payload_t (see
-``r129_payload.py`` in this folder / ``FW_nrf53/payload/r129_payload.h``),
+``r129_payload.py`` in this folder / ``FW_nrf/payload/r129_payload.h``),
 not a raw uint32. Unknown frame types are dumped as hex.
 
 Runs on both the Pi5 (BlueZ) and macOS (CoreBluetooth) via the ``bleak``
@@ -20,7 +20,7 @@ Usage:
     python3 ble_probe.py --address XX:XX:XX:XX:XX:XX  # skip scan
     python3 ble_probe.py --raw           # also hex-dump each notification
 
-Firmware side: R129/FW_nrf53/app/src/ble_diag.c
+Firmware side: R129/FW_nrf/app/src/ble_diag.c
 """
 from __future__ import annotations
 

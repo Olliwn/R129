@@ -3,7 +3,7 @@
 # toolchain environment (Zephyr SDK, west, ninja, cmake all on PATH).
 #
 # Usage:
-#   tools/ncs.sh west build -b nrf5340dk/nrf5340/cpuapp app -d build -p always
+#   tools/ncs.sh west build -b nrf54l15dk/nrf54l15/cpuapp app -d build -p always
 #   tools/ncs.sh west flash -d build
 #   tools/ncs.sh bash            # drop into a sub-shell
 set -euo pipefail

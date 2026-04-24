@@ -1,6 +1,6 @@
 """R129 diagnostics wire-format decoder, host-side mirror.
 
-Counterpart to `FW_nrf53/payload/r129_payload.{h,c}`. Same frame layout:
+Counterpart to `FW_nrf/payload/r129_payload.{h,c}`. Same frame layout:
 
     0       SYNC    1       = 0xAE
     1       LEN     1       = N (Data byte count)
@@ -15,7 +15,7 @@ on the wire so hex dumps read left-to-right.
 
 Self-contained -- no bleak or other deps, plain stdlib. Unit tests live
 next door in `test_r129_payload.py` but match the C-side vectors in
-`FW_nrf53/host_test/test_payload.c` so the two ends stay in lockstep.
+`FW_nrf/host_test/test_payload.c` so the two ends stay in lockstep.
 """
 
 from __future__ import annotations
