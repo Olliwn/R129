@@ -2,7 +2,9 @@
 
 Opportunistic end-to-end bench test of the complete audio chain before the permanent install. Purpose: prove the signal path, the DSP auto-wake behaviour, and the absence of ground-loop hum, using a minimum of temporary wiring that can be torn down in ten minutes.
 
-**First-use context:** Sunday evening, 2026-04-26, only if the subwoofer carcass is sealed and drying per `work/subwoofer_enclosure/README.md`. Not a blocker — skip cleanly if tired.
+**First-use context:** Originally targeted for Sunday evening, 2026-04-26 if the subwoofer carcass was sealed and drying per `work/subwoofer_enclosure/README.md`. Revised 2026-04-25 evening: dropped from the weekend plan in favour of in-car DSP power wiring + BE2210 console-out tap (see `docs/diary/2026-04.md` April 25 evening). This bench test remains valuable as a fallback diagnostic if the in-car install surfaces a signal-path issue we want to isolate from the install variables — keep the procedure intact for future use.
+
+**DSP location note (2026-04-25):** The permanent DSP location is the **rear passenger-side cubby**, not driver-side. The bench test itself happens on a bench/floor rather than in either cubby, so the procedure below is unchanged; the only consequence is that "cubby chassis bolt" (Step 4 ground reference) refers to the passenger-side cubby once we move from bench to car.
 
 **Cross-references:**
 - BE2210 pinout + tap rationale: `work/center_console_refresh/README.md` §4

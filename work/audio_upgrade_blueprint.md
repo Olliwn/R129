@@ -45,7 +45,9 @@ Chosen over the UP 8DSP (€749) for €100 savings — the 2-way front stage ne
 
 The 7-channel DSP includes a virtual center channel (RealCenter) and bass processing (Augmented Bass Processing) that compensate for the asymmetric driver position in the R129. Tuning via laptop using Audiotec Fischer's DSP PC-Tool software.
 
-**Mounting location:** Rear storage cubby, alongside the subwoofer enclosure. The center console cavity behind the climate control is a heat trap and must be avoided.
+**Mounting location:** **Rear passenger-side storage cubby** (revised 2026-04-25 evening — the driver-side cubby is fully occupied by the sub box at 97 % volume utilisation; only ~0.5 L of triangular dead air remains, insufficient for the DSP's 1.7 L footprint with the mandatory 40 mm heatsink ventilation clearance). The passenger-side cubby has the same ~17 L envelope as the driver-side and is otherwise empty. The center console cavity behind the climate control is a heat trap and must be avoided.
+
+Cable-run impact of moving DSP to passenger-side: the only run that lengthens meaningfully is the DSP → sub speaker leg (0.4 m → ~1.6 m via under-carpet routing along the rear bulkhead, OR through the center console if it's already apart for the BE2210 tap). Resistance contribution at 2.5 mm² over the extra 1.2 m is ~9 mΩ per leg, ~0.9 % of the 2 Ω DVC2 load — power loss < 0.1 dB, inaudible. All other runs (battery → DSP power, BE2210 tap → DSP signal, DSP → front doors) are roughly the same length or slightly shorter on the passenger side.
 
 ### 2. USB Audio Interface — MEC HD-USB (M142045)
 
@@ -116,7 +118,7 @@ The kit includes passive crossovers (MPCX 165.3) which will not be used — ever
 
 The DVC2 configuration is ideal for the UP 6DSP: each voice coil connects to its own 160W sub channel (Ch 5 and Ch 6) at 2Ω. The DSP processes both coils independently for optimal thermal and distortion management. Total combined power to the sub: 320W RMS.
 
-**Enclosure:** Sealed 14L MDF box in the rear driver-side storage cubby. The 84.5mm driver depth + 16mm MDF baffle = ~100mm total — fits under the factory locking lid. Internal polyfill damping. The Helix datasheet recommends a DSP highpass filter at 45 Hz (Q = 1.3) and a parametric cut at 100 Hz (Q = 1.0, -3 dB) for the sealed alignment.
+**Enclosure:** Sealed 12.5L (effective) single-axis-tapered MDF box in the rear driver-side storage cubby — 16.9 L external in a 7-panel build with one chamfered corner matching the cubby's wheel-well intrusion. Geometry locked 2026-04-25 from cardboard mock-up; full build doc at `work/subwoofer_enclosure/README.md`. Realised F3 ~47–48 Hz vs datasheet 46 Hz at 14 L — within audibility threshold of reference, no DSP correction required. The Helix datasheet recommends a DSP highpass filter at 45 Hz (Q = 1.3) and a parametric cut at 100 Hz (Q = 1.0, -3 dB) for the sealed alignment.
 
 **Alternatives evaluated:**
 - *Hertz Mille Pro MPS 250:* Impressive specs (500W RMS, 16.8mm Xmax) but wants more amplifier power than the UP 6DSP provides. Single voice coil. ~€217+.
@@ -136,7 +138,7 @@ The DVC2 configuration is ideal for the UP 6DSP: each voice coil connects to its
 **No professional door wiring needed.** The 2-way setup eliminates the most difficult and expensive part of the installation:
 - **Woofers:** Connected via existing factory door speaker wiring (0.75–1.0mm² adequate for 65W @ 3Ω over short runs). No new wires through door boots.
 - **Tweeters:** Mounted in the dash/A-pillar area. New wire routed entirely within the cabin — under dash trim, along A-pillar. Never enters the door boot.
-- **Subwoofer:** In the rear cubby alongside the DSP. Short wire run, no routing challenges.
+- **Subwoofer:** In the rear driver-side cubby; the DSP lives in the rear passenger-side cubby (revised 2026-04-25 — sub box fully fills the driver-side cubby). The DSP→sub leg is ~1.6 m of 2.5 mm² speaker cable routed under the rear-bulkhead carpet OR through the center console (whichever access is convenient given the BE2210 tap work). Resistance over the longer run is acoustically negligible (< 0.1 dB loss into the 2 Ω DVC2 load).
 
 This was the decisive factor in choosing 2-way over 3-way. Running 3 pairs of new wire per door through the R129's rubber boots (which contain 35-year-old PSE vacuum lines) would require professional labor (€150–300) and risk damaging the pneumatic central locking system.
 
@@ -161,20 +163,20 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 
 ## Installation Plan
 
-### Phase 1 — Rear Cubby (Self-Install)
-1. Build the sealed 14L MDF enclosure for the Helix IK S10-DVC2.
-2. Mount the Match UP 6DSP alongside the enclosure in the rear cubby.
+### Phase 1 — Rear Cubbies (Self-Install)
+1. Build the sealed ~12.5 L (effective) MDF enclosure for the Helix IK S10-DVC2 in the **driver-side cubby**. Per `work/subwoofer_enclosure/README.md`.
+2. Mount the Match UP 6DSP in the **passenger-side cubby** (driver-side cubby is fully occupied by the sub box).
 3. Install the MEC HD-USB module in the DSP's MEC slot.
-4. Run USB cable from RPi5 (behind dash) to the MEC HD-USB in the rear cubby.
-5. Run high-level input wires from BE2210 speaker outputs to the UP 6DSP (backup analog path / signal detection for auto-on).
-6. Connect sub to Ch 5 + Ch 6 (one coil per channel).
+4. Run USB cable from RPi5 (behind dash) to the MEC HD-USB in the passenger-side cubby.
+5. Run high-level input wires from BE2210 speaker outputs to the UP 6DSP (backup analog path / signal detection for auto-on). Per `work/center_console_refresh/README.md` §4.
+6. Connect sub to Ch 5 + Ch 6 (one coil per channel) — speaker cable routes from passenger-side cubby to driver-side cubby via under-bulkhead-carpet OR through the center console.
 7. Test sub + DSP with laptop tuning before touching the doors.
 
 ### Phase 2 — Door Wiring
 **No professional door wiring needed.** Factory speaker wires (already in doors) are reused for the woofers. Tweeter wires run entirely within the cabin.
 
 1. Identify factory speaker wire pairs at the door connector and at the DSP end (sill plate area).
-2. Extend/splice factory wires to reach the DSP in the rear cubby if needed.
+2. Extend/splice factory wires to reach the DSP in the passenger-side cubby if needed.
 3. Run new tweeter wire pairs from DSP → under sill plates → up A-pillar → to dash tweeter locations. Entirely within the cabin — never enters door boots.
 
 ### Phase 3 — Speaker Mounting (Self-Install)
@@ -230,5 +232,5 @@ The entire system is non-destructive and fully reversible:
 - No factory wiring is cut or removed — only unplugged and extended/spliced.
 - The BE2210 stays functional in the DIN slot.
 - Tweeter wiring runs parallel to existing harness (cabin only).
-- The rear cubby enclosure and DSP can be removed, restoring the original storage space.
+- The rear cubby enclosure and DSP (driver- and passenger-side cubbies, respectively) can be removed, restoring the original storage space.
 - Door speakers can be swapped back to factory units by reconnecting the original harness.

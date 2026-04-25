@@ -289,6 +289,23 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 | Replacement trim clips (universal) | R129-compatible dash-clip assortment | 1 pack | In case original clips break during wood-panel removal. **Biltema universal trim clip kit (~€10) or MB-specific from MB-osat if a specific clip breaks.** Buy pre-emptively — they *will* break on 35-year-old panels. |
 | Microphone hardware | **DECISION PENDING** (see `docs/tasks.md` "Microphone integration") | 1 | ⚠ **Must be decided before the console closes.** USB / analog shielded / I2S — spec depends on choice. Do not skip this line item — pulling a mic cable later means re-pulling the trim. |
 
+### 6C.8 — Wireless iPhone Charger (drawer cubby behind the ashtray)
+
+*Embedded Qi pad mounted under the drawer floor, hidden from view. Phone sits flat in the drawer and charges with the lid closed — no surface modification to the original drawer. Powered from the cigarette-lighter hot wire: **MAIN_12 8A white, Klemme 15 (ignition-switched), `permanent_12v: false` field-verified 2026-04-07** — zero parasitic draw with key out. All wiring is local to the center console (no long run). Add to the §5.6b step in `work/center_console_refresh/README.md`.*
+
+| Part | Ref / Spec | Qty | Notes |
+| :--- | :--- | :--- | :--- |
+| **Embedded Qi wireless charger module** | **USB-C input, 7.5–15 W output, designed for under-surface mount** (Ugreen 15 W concealed / Choetech CH002 / Nillkin MagicCube class) | 1 | **DECISION PENDING — pick a specific model.** 7.5 W is the iPhone Qi ceiling so anything ≥7.5 W is sufficient; 15 W modules are usually the same price and future-proof for an Android. Mounts UNDER the drawer floor with 3M VHB or a 3D-printed bracket. Spec sheet should state field works through ≥10 mm of non-metal (most "concealed/under-desk" modules state 25–30 mm). **Source:** Verkkokauppa.com (Ugreen typically ~€20–30) or Amazon.de. Avoid round "puck" chargers that need a flat top surface — we want a flat embedded PCB-in-plastic disc. **Reject:** Aircharge Slimline (~€80, overkill — proper flush-mount needs a cutout we don't want), Apple MagSafe puck (~€45, sits visibly inside the drawer and eats vertical clearance). |
+| Automotive 12 V → 5 V buck converter | 5 V / 3 A output, 12 V automotive input rated, with input transient protection | 1 | Generic enclosed buck module (Motonet/AliExpress, ~€5–10). Mounts inside the lighter cavity / behind-ashtray void — keeps heat away from the drawer plastic. Or repurpose a gutted USB car-adapter (already on hand) if the bench-tested 5 V/3 A spec checks out. **Verify the module is rated for automotive 12 V (with load-dump tolerance), not just 12 V DC bench input** — the lighter circuit sees alternator transients. |
+| Inline 3 A blade fuse + holder | ATO blade, inline | 1 | On the buck's 5 V output. Module itself usually has internal fusing but the run to it is short and an extra 3 A is cheap insurance. **Motonet/Biltema assortment** — likely already on hand from §6C.3. |
+| Wago 221-413 (3-port lever nut) | 0.2–4 mm² clamp range | 1 pc | Tap onto the cigarette-lighter hot wire at the connector backshell. Same approach as the BE2210 audio tap. **Already in inventory** (4-pack acquired Motonet 2026-04-20, art. 0000728703 — only 4 used for the BE2210 tap, so spares cover this). |
+| Hook-up wire | 2 × 0.75 mm² red/black automotive | ~30 cm | Lighter Wago tap → buck input. Trivial run inside the console void. **Probably already in inventory**; if not, included with any small Motonet hook-up wire roll. |
+| 3D-printed mounting bracket (optional) | PETG or ABS, ~5 mm tall flange | 1 | Cleaner than VHB for holding the Qi module flat against the underside of the drawer floor. Print after the Qi module arrives so the bracket can be modeled to its exact dimensions. PLA is fine for first fit but PETG/ABS for the final to survive summer cabin temps. **Self-printed — no purchase.** |
+
+**Net cost: ~€25–35 (charger module) + ~€8–10 (buck + fuse + wire) = ~€35–45 all-in.** All sourceable in a single Verkkokauppa or Motonet trip.
+
+**Decision needed before ordering:** pick the specific Qi module. Recommendation is a Ugreen / Choetech / Nillkin USB-C-input embedded pad in the €20–30 range — confirm by spec sheet that it (a) accepts USB-C 5 V/2 A input (some need 9 V QC — we'd need a different buck), (b) supports through-surface install ≥10 mm, (c) has thermal cutoff and foreign-object detection (FOD).
+
 ---
 
 ### Summary — What to buy for Console-Out
@@ -311,10 +328,13 @@ Net new purchases, excluding items already in inventory:
 | Wood | Howard Feed-N-Wax or Liberon beeswax | €13 |
 | Switches | CRC QD Electronic Cleaner | €10 |
 | Safety net | Universal trim clip kit | €10 |
+| Wireless charger | Embedded Qi pad (USB-C, 7.5–15 W) | €25–30 |
+| | 12 V → 5 V / 3 A automotive buck | €8 |
+| | Inline 3 A fuse + holder + hook-up wire | €2 |
 | Pending | Microphone hardware | TBD — decide first |
-| **Subtotal** | | **~€95 + mic** |
+| **Subtotal** | | **~€135 + mic** |
 
-All sourceable within a single trip to Motonet + one online order (Verkkokauppa or Thomann for the shielded 4-core audio cable). Nothing is on long lead-time.
+All sourceable within a single trip to Motonet + one online order (Verkkokauppa for the shielded CAT6 + the embedded Qi pad). Nothing is on long lead-time.
 
 ---
 
