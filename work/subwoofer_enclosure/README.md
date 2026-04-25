@@ -131,9 +131,17 @@ Cut-list area for the 7-panel build (see §4):
 - Corner-cut wall (rectangle, 27.5 × 19): 523 cm²
 - **Total panel area: 4149 cm² ≈ 0.41 m²**
 - Plus kerf + waste + spare (20 %, higher than rectangular build because of the angled cuts): **0.50 m²**
-- Plus 4 cleat strips (16 × 16 mm cross-section, 22 + 22 + 27.5 + 27.5 = 99 cm length total): negligible — cut from offcuts.
+- Plus 4 cleat strips (16 × 16 mm cross-section, 22 + 22 + 27.5 + 27.5 = 99 cm length total) — only if cleats are used; otherwise cut from offcuts or omitted entirely (see §5.4 Strategy C below).
 
-A single **60 × 100 cm** raw sheet of 16 mm MDF from Bauhaus with panel-saw cuts is enough, with margin for one mistake or one re-cut.
+#### Panel-size options
+
+| Panel | Area | Slack (no cleats) | Slack (with cleats) | Notes |
+| :--- | :--- | :--- | :--- | :--- |
+| **60 × 100 cm** | 6000 cm² | 1500 cm² (33 %) | 1340 cm² (29 %) | Generous, allows one re-cut. Originally specified. |
+| **40 × 120 cm** (acquired 2026-04-25) | 4800 cm² | 308 cm² (6.4 %) | 150 cm² (3.1 %) | **Tight but feasible without cleats.** Strict strip-based cuts force everything into a single 37-wide strip; layout adds up to ~134 cm length using bounding rectangles, vs 120 cm available — i.e. 14 cm short with cleats, ~5 cm short without. Closing the gap requires nesting the smaller pieces (right-side trapezoid, back wall) into corner scraps. **Recommended: switch to Strategy C silicone-fillet (no cleats) per §5.4 — also saves the 4 pre-glue cleat-mount steps.** |
+| Other sizes | — | — | — | Anything between 50 × 100 and 40 × 130 works comfortably. |
+
+**Decision (2026-04-25):** 40 × 120 panel acquired Saturday. Strategy C (silicone-fillet, no cleats) becomes the default joinery strategy from this point — see §5.4. If the panel-saw layout still proves marginal at Bauhaus, the fallback is a free or €1–2 offcut from their offcut bin, sized for the back wall (22 × 19 cm = ~25 × 25 cm scrap is enough), cut to final size at home with a circular saw or jigsaw.
 
 ---
 
@@ -152,7 +160,7 @@ Construction style: **bottom-and-top plates capture the four side walls between 
 | 5 | Left side wall (trapezoid) | 1 | Parallel edges 27 + 33, height 18, slant edge sqrt(6² + 18²) ≈ 19.0 | Right-trapezoid | Front edge vertical 18 cm; bottom edge horizontal 27 cm; top edge horizontal 33 cm; back edge slants 19.0 cm at 18.4° from vertical. All edges 90° square cuts. |
 | 6 | Right side wall (small trapezoid, ahead of corner cut) | 1 | Parallel edges 4 + 10, height 18, slant edge ≈ 19.0 | Right-trapezoid | Mirror of #5 but truncated by the corner cut. Front edge vertical 18 cm; bottom edge 4 cm; top edge 10 cm; back edge slants 19.0 cm meeting the corner-cut wall. Small panel, easy to mis-cut — measure twice. |
 | 7 | Corner-cut wall | 1 | 27.5 × 19 (slant length, oversize by ~5 mm and trim flush after assembly) | Rectangle | All edges 90°. Tilts 18.4° from vertical. Diagonal-direction face. **Terminal cup hole pre-cut here, before installation** — see §5.3. Position: centred on the panel, ~5 cm up from bottom edge. |
-| 8 | Cleat strips (4 × triangular) | 4 | 16 × 16 × ~22 / ~22 / ~27.5 / ~27.5 cm long | Right-triangle cross-section, ripped on table saw at 18.4° bevel | One pair (top/bottom of the back wall joint, ~22 cm) provides the bevelled landing for the back wall; second pair (~27.5 cm) does the same for the corner-cut wall. See §5.4. |
+| ~~8~~ | ~~Cleat strips~~ | ~~4~~ | ~~16 × 16 × ~22 / ~22 / ~27.5 / ~27.5 cm long~~ | ~~Right-triangle cross-section~~ | **NOT USED** — Strategy C silicone-fillet adopted (§5.4) since the 40 × 120 panel doesn't have margin for cleat-strip stock. Original cleat-based plan documented in §5.4 as Strategy A for reference. |
 
 **Verification of internal volume:** prismatoidal formula with internal cross-sections (§3.3) → 11.3 L raw → 12.5 L effective with polyfill ✓
 
@@ -185,39 +193,45 @@ The panel saw can do the trapezoidal cuts (it tilts the workpiece, not the blade
 > - Pohjalevy: 370 × 270, kolmio 150 × 230 oikea yläkulma (1 kpl)
 > - Kansilevy: 370 × 330, kolmio 150 × 230 oikea yläkulma (1 kpl)
 >
-> Lisäksi rimoja (alkuperäisestä levystä leikatut):
-> - 4 kpl 18° viistettyä rimaa, n. 16 × 16 mm, pituudet 220 / 220 / 275 / 275 mm (kotona viimeistely riittää, ei panel-saw)
->
 > Kiitos."
+>
+> *Cleat strips removed from the cut request 2026-04-25 because Strategy C (silicone-fillet) is now the default — see §5.4.*
 
 Ask them to cut in this order: large rectangles first, then trapezoids, then pentagonal pieces (most fiddly last). 3 mm kerf per cut is normal; budget for it in the sheet-area math.
 
-The cleat strips (item 8) are ripped at home on a table saw or hand-cut with a guide — too small for a panel saw and need a specific bevel angle. If you don't have a table saw, the silicone-fillet alternative (see §5.4) avoids the cleat strips entirely.
+**Layout note for the 40 × 120 panel:** the strict strip layout (a 33-cm-wide plate strip alongside a 19-cm-wide wall strip) needs 52 cm of panel width and won't fit the 40 cm dimension. The operator will need to nest panels into a single 37 × 120 strip with the back wall, corner-cut wall, and right side trapezoid tucked into the spare lengths and corner scraps. Bring the cardboard mock-up and this README — let the operator nest it. If the operator says "won't fit", grab a free or €1–2 offcut from the offcut bin (~25 × 25 cm or larger) for the back wall and cut at home.
 
 ---
 
 ## 5. Assembly order
 
-Materials on hand before starting: PVA D3 wood glue, 4 × 40 mm wood screws (28–36 pcs), 3 mm pilot drill bit, neutral-cure silicone (one full tube), masking tape, clamps or heavy weights, square, pencil, tape measure, sliding bevel gauge (for marking the 18.4° tilt and laying out cleat strips), dust mask (MDF dust is irritant), shop vac.
+**Adhesive in use (revised 2026-04-25):** **Casco SuperFix+** (SMP / silane-modified polymer) construction adhesive substituted for the originally-spec'd PVA D3 wood glue. SF+ is gun-applied as a 5–10 mm bead, has ~20 min open time, cures elastically (Shore A 45–50, ~500 % elongation at break) by atmospheric humidity, reaching 3 mm depth in 24 h. **Net effect on this build is positive:**
+
+- Gap-filling up to 10 mm — forgiving on imprecise panel-saw cuts, unlike PVA.
+- 20 min open time vs PVA's ~5 min — ample breathing room for square-checking each joint.
+- Elastic cure resists hairline-crack development at MDF joints under bass pressure (PVA in MDF can creak over time).
+- Cure schedule unchanged: still plan 24 h before any further handling.
+
+**Application differences from PVA:**
+
+- Apply as a **continuous bead** (5–10 mm) along the joint edge, not spread thin.
+- Drive screws to clamp, but **do not over-clamp** — SMP joints want 1–3 mm bond line for full strength; squeezing the bead to nothing weakens the joint. "Snug, not aggressive" on the screws.
+- Squeeze-out is messier than PVA. Wipe with white spirit (mineraalitärpätti) before skin-over (~10–15 min).
+- Bead application means more squeeze-out — keep paper towels and white spirit at hand.
+
+Materials on hand before starting: **Casco SuperFix+** cartridge (~290 ml, one is enough for this build) + caulking gun, 4 × 40 mm wood screws (28–36 pcs), 3 mm pilot drill bit, neutral-cure silicone (one full tube), masking tape, clamps or heavy weights, square, pencil, tape measure, dust mask (MDF dust is irritant), shop vac, **white spirit + paper towels for SMP squeeze-out cleanup**.
 
 The build proceeds in three phases:
 
-- **Phase 1: Sub-assemblies.** Cleat strips glued to bottom and top plates (§5.1), terminal cup wired into the corner-cut wall (§5.3), pilot holes drilled (§5.2). Each step is independent and can be done in any order.
-- **Phase 2: Carcass glue-up.** Bottom plate is the foundation; vertical walls (front, sides) go up next; tilted walls (back, corner-cut) lean in against the cleat strips; top plate caps it (§5.5).
-- **Phase 3: Cure + seal.** 24-hour PVA cure, then silicone fillet pass on every interior seam (§6.4), then 48-hour silicone cure before any further work.
+- **Phase 1: Sub-assemblies.** Terminal cup wired into the corner-cut wall (§5.3), pilot holes drilled (§5.2). Each step is independent and can be done in any order.
+- **Phase 2: Carcass glue-up.** Bottom plate is the foundation; vertical walls (front, sides) go up next; tilted walls (back, corner-cut) butt directly against the plate edges (Strategy C silicone-fillet, §5.4); top plate caps it (§5.5).
+- **Phase 3: Cure + seal.** 24-hour SMP cure, then silicone fillet pass on every interior seam INCLUDING the tilted-wall gaps (§5.4 + §6.4), then 48-hour silicone cure before any further work.
 
-### 5.1 Cleat strip preparation (do this first)
+### 5.1 ~~Cleat strip preparation~~ — SKIPPED (Strategy C adopted)
 
-Four 16 × 16 mm triangular strips, each with one face bevelled at 18.4°:
+The cleat-strip preparation step is omitted as of 2026-04-25 because the 40 × 120 panel doesn't have material margin for the cleat stock. Strategy C (silicone-fillet, no cleats) is now the default joinery — see §5.4. This saves ~2 hours of Phase 1 work (cleat ripping + pre-gluing) and removes 4 cuts from the cut list.
 
-- 2 strips (~22 cm) for the back-wall landing — one glues to the inside of the bottom plate along its rear edge (from x=0 to x=22 — i.e., only the portion of the rear edge that the back wall covers, not extending into the corner-cut region), one glues to the inside of the top plate along the matching position.
-- 2 strips (~27.5 cm) for the corner-cut-wall landing — same arrangement, along the diagonal cut edge of the bottom and top plates.
-
-Cutting the strips on a table saw: rip a 16 mm-wide strip from offcut MDF with the blade tilted 18.4°. The result is a right-triangular cross-section — the 90° face glues to the plate, the bevelled face receives the tilted wall. If no table saw is available, hand-plane a 18.4° bevel on a square-section strip with a block plane and a marking gauge — slow but very doable for 4 × 30 cm of work.
-
-Pre-glue the cleats to the **inside faces** of the bottom plate and top plate before any other assembly. Glue + drive 3-4 small screws (3 × 25 mm) per cleat from the OUTSIDE of the plate into the cleat. Let dry 1 hour minimum before plate-to-wall assembly.
-
-**Alternative path (no cleats):** if cleats feel like too much fuss, skip them entirely and use the silicone-fillet butt-joint method (§5.4 below). The build will be ~2 hours faster but the joints rely on the silicone fillet for both sealing AND structural reinforcement at the tilted-wall edges. Acoustically equivalent, structurally adequate for this driver, but less robust against rough handling.
+If you later acquire more MDF and want to retrofit cleats for a more rigid build, the original cleat plan is preserved in §5.4 Strategy A. For this build, jump straight to §5.2.
 
 ### 5.2 Drill pilot holes
 
@@ -225,7 +239,7 @@ Mark screw positions:
 
 - Bottom plate / top plate to wall joints: every 6–8 cm along the joint, 4 cm in from each end.
 - Wall-to-wall joints (front-to-side, side-to-back, back-to-corner-cut): every 8 cm along the joint.
-- Through cleat strips: 3 screws per cleat, evenly spaced along the strip's length, into the receiving wall edge.
+- Tilted-wall joints (back wall, corner-cut wall to top and bottom plates): every 6–8 cm along the joint, screws driven from outside through the wall into the plate edge. Screws bite at 18.4° into the plate edge — pre-drill with a longer pilot hole (3 mm × 35 mm) to minimise splitting.
 
 Drill 3 mm pilot holes **through the outer panel into the edge of the inner panel**. Depth 25–30 mm. 16 mm MDF splits if you skip the pilot holes — non-negotiable. Countersink lightly so screw heads sit flush.
 
@@ -238,34 +252,39 @@ Wire the terminal cup BEFORE installing the corner-cut wall in the carcass — m
 3. Test continuity per §6.3 — log DCR values in the build diary BEFORE the panel is buried in the carcass.
 4. Set the wired panel aside, taped face-down on a clean surface so the binding posts aren't damaged during handling.
 
-### 5.4 Tilted-wall joinery — choose ONE strategy at the start
+### 5.4 Tilted-wall joinery — Strategy C adopted (silicone-fillet, no cleats)
 
-The back wall (panel 4) and corner-cut wall (panel 7) both tilt 18.4° from vertical. Their top and bottom edges meet the top and bottom plates at 18.4° dihedrals (not 90°). Three strategies to handle this — pick one and use it consistently:
+The back wall (panel 4) and corner-cut wall (panel 7) both tilt 18.4° from vertical. Their top and bottom edges meet the top and bottom plates at 18.4° dihedrals (not 90°). Three strategies were considered; **Strategy C is the default as of 2026-04-25** because the 40 × 120 panel doesn't accommodate cleat-strip stock, AND the gap-filling Casco SuperFix+ adhesive (§5 intro) makes Strategy C structurally robust even without cleats:
 
-**Strategy A (recommended): cleat strips.** As prepared in §5.1. Both tilted walls have square 90° edges and rest against the bevelled cleats. The walls are screwed THROUGH from outside into the cleat (the cleat absorbs the angled bite). Strongest, cleanest joint.
+**Strategy C (ADOPTED — silicone-fillet + SMP gap-fill): all 90° edges, fill the gaps.** Every panel cut at 90°. When the tilted walls are installed, their bottom and top edges sit at 18.4° against the plates, leaving a triangular gap of ~5 mm at the maximum point on the inside corner. **Two-stage sealing strategy:**
 
-**Strategy B (alternative): bevel the wall edges.** Cut the top and bottom edges of the back wall and corner-cut wall at an 18.4° bevel (using a router with a chamfer bit set to 18°, OR a block plane and patience). The bevelled edges then mate flush with the unmodified top and bottom plate edges. Cleanest visual joint, no cleat strips, but the bevel cuts are tedious on long panel edges.
+1. **During glue-up (Phase 2):** Casco SF+ bead along each plate edge fills the triangular gap as the wall is pressed into place. The 5 mm gap is well within SF+'s 10 mm gap-filling spec. Squeeze-out from the gap will be visible on the inside; tool with a wet finger or scrape after skin-over (~15 min).
+2. **After 24 h SMP cure (Phase 3):** silicone fillet pass per §6.4 along every interior seam (back wall to plates, corner-cut wall to plates, back-to-corner-cut wall, all four side seams). The silicone is the airtight seal — acoustically critical for a sealed-Q sub box. The SF+ underneath is structural; the silicone is hermetic.
 
-**Strategy C (silicone-fillet shortcut): all 90° edges, fill the gap.** Cut every panel with 90° edges. When the tilted walls are installed, the bottom and top edges sit at 18.4° against the plates, leaving a triangular gap of ~5 mm at the maximum point on the inside corner. After full assembly and PVA cure, run a generous bead of neutral-cure silicone along each gap and tool with a wet fingertip. The fillet seals AND fills, providing a structural-glue bond to supplement the screws. Acoustically and structurally adequate; visually the seams look slightly less crisp than A or B (but the box is hidden in the cubby so this doesn't matter).
+This combined approach gives a structurally and acoustically equivalent result to the cleat-based Strategy A. The visible interior seams may look a hair less crisp than a clean cleat-bevelled landing, but the box is hidden behind a decorative lid in a barely-visible cubby, so this doesn't matter.
+
+**Strategy A (cleat strips) — for reference if a future build retrofits.** Pre-glue four 16 × 16 mm right-triangular cleats (bevelled at 18.4° on a table saw) to the inside of the bottom and top plates along the back-wall and corner-cut-wall landings. The tilted walls then sit against the cleats with square 90° edges. Strongest joint, cleanest interior seam line. Requires ~158 cm² of MDF stock for the cleats and an additional Phase 1 step. Skipped on this build because the 40 × 120 panel can't spare the material.
+
+**Strategy B (bevelled wall edges) — for reference.** Cut the top and bottom edges of the back wall and corner-cut wall at an 18.4° bevel (router + chamfer bit, or block plane). Bevelled edges mate flush with unmodified top/bottom plate edges. Cleanest visual joint, no cleats, but the bevel cuts are tedious on panel edges with no jig. Skipped because Strategy C achieves equivalent acoustics with less precision work.
 
 **For the back-wall to corner-cut-wall seam** (interior dihedral 55.5°, sharper than 90°): bevel both edges at 27° each for a clean butt joint, OR use silicone fillet in the seam (Strategy C carries through here naturally). Recommended: silicone fillet — the 27° bevels are awkward to cut precisely and the joint is hidden inside the box.
 
 **For the back wall ↔ side wall seams** (interior dihedral 90° — the back wall tilts toward the box interior, the side wall is vertical, the dihedral remains 90° because the tilt direction is perpendicular to the side wall plane): standard 90° butt joint. Drill pilot holes perpendicular to the back wall surface — the screws go in at the natural 18.4° tilt relative to horizontal, which is fine for the joint.
 
-### 5.5 Glue + screw assembly sequence
+### 5.5 Glue + screw assembly sequence (Casco SuperFix+ + Strategy C)
 
-Each step: glue-up + screw-drive + wipe excess + square-check.
+Each step: bead-apply SMP + position panel + drive screws (snug, not aggressive — see §5 intro) + tool / scrape squeeze-out + square-check.
 
-1. **Bottom plate** sits on a flat work surface, inside face up, with cleat strips already glued in place per §5.1.
-2. **Front wall ← bottom plate.** Bead of PVA along the front edge of the bottom plate; stand front wall on it; drive screws from below the bottom plate up into the front wall edge. 4 screws across the 37 cm joint.
-3. **Left side wall (large trapezoid) ← bottom plate AND ← front wall.** Glue both contact edges; position the side wall so its bottom edge sits along the bottom plate's left edge AND its front edge mates with the left edge of the front wall; drive screws on both joints (3 from below into the side wall, 3 from the side wall into the front wall edge).
-4. **Right side wall (small trapezoid) ← bottom plate AND ← front wall.** Mirror of step 3. The right side wall is small (4 cm at bottom, 10 cm at top) and sits between the front wall and where the corner-cut wall will go. Be especially careful with this small panel — clamp it gently while screws drive.
-5. **Back wall ← cleat strip on bottom plate AND ← left side wall.** This is the first tilted wall. Glue the cleat strip's bevelled face; position the back wall so its bottom edge rests on the cleat (the wall now leans 18.4° away from vertical, toward the back of the cubby); also glue the contact edge to the left side wall's slanted back edge; drive screws from outside the back wall into both the cleat strip (3 screws) and the left side wall edge (3 screws). The wall is now held square in two of three axes; the corner-cut wall will pin it in the third.
-6. **Corner-cut wall ← cleat strip on bottom plate AND ← back wall AND ← right side wall.** The wired terminal-cup panel goes in here. Three glue lines this time: cleat (bottom), back wall (left edge of corner-cut wall meets right edge of back wall along the 55° interior dihedral — silicone fillet later), and right side wall's slanted back edge. Drive screws from outside into all three. Carcass is now complete except for the top plate.
-7. **30-minute pause.** Let PVA tack up. Verify carcass is square: measure diagonals on the bottom plate (corner to corner, two diagonals — should agree within 2 mm); measure that the front wall is vertical with a square; verify the tilted walls are symmetric about the box's centre line.
+1. **Bottom plate** sits on a flat work surface, inside face up. (No pre-glued cleats — Strategy C.)
+2. **Front wall ← bottom plate.** 5–8 mm bead of Casco SF+ along the front edge of the bottom plate; stand front wall on it; drive screws from below the bottom plate up into the front wall edge. 4 screws across the 37 cm joint. Snug only — the bead wants 1–3 mm of bond line. Tool any squeeze-out on the inside face with a wet fingertip or scrape after skin-over (~15 min).
+3. **Left side wall (large trapezoid) ← bottom plate AND ← front wall.** SF+ bead on both contact edges; position the side wall so its bottom edge sits along the bottom plate's left edge AND its front edge mates with the left edge of the front wall; drive screws on both joints (3 from below into the side wall, 3 from the side wall into the front wall edge).
+4. **Right side wall (small trapezoid) ← bottom plate AND ← front wall.** Mirror of step 3. The right side wall is small (4 cm at bottom, 10 cm at top) and sits between the front wall and where the corner-cut wall will go. Be especially careful with this small panel — its size makes it easy to over-compress the bead. Drive screws gently.
+5. **Back wall ← bottom plate (Strategy C butt joint) AND ← left side wall.** This is the first tilted wall. SF+ bead along the back edge of the bottom plate; position the back wall so it leans 18.4° away from vertical (use a sliding bevel gauge or a paper template cut at 18.4°); also bead-apply along the contact edge to the left side wall's slanted back edge; drive screws from outside the back wall into the bottom plate edge (3 screws — the screws bite at 18.4° into the plate edge, which is fine for a butt joint with SF+ filling the wedge gap) and into the left side wall edge (3 screws). The triangular gap on the inside (~5 mm at peak) fills with the SF+ bead's squeeze-out — tool any visible squeeze-out flat on the inside corner before skin-over. The wall is now held square in two of three axes; the corner-cut wall will pin it in the third.
+6. **Corner-cut wall ← bottom plate AND ← back wall AND ← right side wall.** The wired terminal-cup panel goes in here. Three SF+ bead lines: bottom plate edge (Strategy C butt joint, same 18.4° tilt), back wall (left edge of corner-cut wall meets right edge of back wall along the 55.5° interior dihedral — SF+ fills the seam, silicone fillet later), and right side wall's slanted back edge. Drive screws from outside into all three. Carcass is now complete except for the top plate. Total of ~10–12 screws driven this step.
+7. **30-minute pause.** Let SF+ skin over. Verify carcass is square: measure diagonals on the bottom plate (corner to corner, two diagonals — should agree within 2 mm); measure that the front wall is vertical with a square; verify the tilted walls' tops are symmetric about the box's centre line. Use this pause to scrape any inside-face squeeze-out flat — it'll wipe with white spirit on a paper towel before full cure.
 8. **Wire-tuck and polyfill loose-fill.** Tuck the terminal cup's internal coil leads against the right side wall (out of the way of the driver cutout). Stuff polyfill loosely through the still-open top opening, ~135 g, lightly fluffed (final compression happens when the top closes). Tape a strip of masking tape across the wiring to keep polyfill clear of the terminal posts and the future driver cutout.
-9. **Top plate (= driver baffle) ← cleat strips on top plate (back-wall and corner-cut-wall landings) AND ← all four wall edges (front, left side, right side).** Glue all four edges. Position the top plate from above; the cleat-strip-bevels on its underside register against the back wall and corner-cut wall, locking the assembly's tilt. Drive screws from above through the top plate into every wall edge — about 12-16 screws total around the perimeter and the corner cut. **Don't cut the driver hole yet** — see §8.2 (deferred to next weekend after full cure).
-10. **24-hour PVA cure** before any further handling. Place a heavy weight (full ATF jug, etc.) on the top plate to ensure it presses fully into the glue.
+9. **Top plate (= driver baffle) ← all five wall edges (front, left side, right side, back wall, corner-cut wall — Strategy C butt joints on the two tilted-wall edges).** SF+ bead on all five wall top edges. Position the top plate from above. The two tilted-wall edges (back, corner-cut) form 18.4° contact with the underside of the top plate — the SF+ bead fills the wedge gaps (same triangular gap as on the bottom). Drive screws from above through the top plate into every wall edge — about 12–16 screws total around the perimeter and the corner cut. **Don't cut the driver hole yet** — see §8.2 (deferred to next weekend after full cure).
+10. **24-hour SMP cure** before any further handling. Place a heavy weight (full 5 L ATF jug, car battery, etc.) on the top plate to ensure it presses fully into the SF+ beads. Don't apply more weight than needed to seat the panels — see §5 intro re. over-clamping SMP joints.
 
 **Square-check between each step:** measure corner-to-corner diagonals on the bottom plate and the perimeter walls; if any diagonal disagrees with its pair by more than 2 mm, clamp the long diagonal until the glue sets. The single-axis taper makes a couple of natural square-checks impossible (the side walls aren't rectangles), so rely on the bottom plate's perimeter and the front wall's verticality as your main reference checks.
 
@@ -283,7 +302,7 @@ The lid can be designed and built **after** the box is fully assembled and dropp
 
 ### 5.7 Clamp / weight strategy
 
-Where clamps are thin, stack phonebooks / full 5 L ATF jugs / car batteries on top of each joint while the glue sets. Screws give 80 % of the clamp force; weights close the last 20 % of hairline gaps. For the tilted walls, use a strip of masking tape across the joint to hold them in position against the cleat strip while the glue sets — they'll otherwise tend to slump backward.
+Where clamps are thin, stack phonebooks / full 5 L ATF jugs / car batteries on top of each joint while the SF+ skins over. **Important: SMP joints want a 1–3 mm bond line — don't over-weight.** Screws give 80 % of the clamp force; weights close the last 20 % of hairline gaps but should not squeeze the bead to nothing. For the tilted walls, use a strip of masking tape across the joint to hold them at the 18.4° angle against the bottom (and later top) plate while the SF+ skins over — they'll otherwise tend to slump backward off the plate edge before tack-up. A scrap of plywood or a paper template cut at 18.4° dihedral, taped to the inside corner, gives a positive angle reference during the 20-minute open time.
 
 ---
 
@@ -345,7 +364,7 @@ Seams to caulk:
 - Right side wall ↔ corner-cut wall (1 slanted seam, dihedral 90°)
 - Back wall ↔ corner-cut wall (1 slanted seam, dihedral 55.5° — the sharp interior corner; load this one with extra silicone since it's also serving as the structural fillet for the awkward-angle joint per §5.4)
 
-Tool each bead with a wet fingertip to push silicone into the seam. Hairline gaps at panel joints are the enemy of sealed-alignment Q — the silicone is insurance on top of the glue, AND it's load-bearing for the tilted-wall joints if Strategy C (no cleats) was chosen in §5.4.
+Tool each bead with a wet fingertip to push silicone into the seam. Hairline gaps at panel joints are the enemy of sealed-alignment Q — the silicone is insurance on top of the SF+ adhesive, AND it's the airtight final seal for the tilted-wall joints (Strategy C, §5.4). Pay particular attention to the back-wall-to-plate seams and the corner-cut-wall-to-plate seams; the SF+ filled the gross 5 mm wedge gap during glue-up, but the silicone seals the final hairline at the inside corner.
 
 Cure time before any further work: **48 hours minimum.** Premature handling can crack the silicone fillet.
 
@@ -363,11 +382,11 @@ Cure time before any further work: **48 hours minimum.** Premature handling can 
 
 ## 8. Driver install — DEFERRED to the weekend after cure
 
-Do **not** mount the driver on Sunday. The silicone and PVA need 24–48 hours to reach full cure, and a premature gasket compression can distort the baffle or drag on the wet silicone.
+Do **not** mount the driver on Sunday. The silicone and Casco SF+ need 24–48 hours to reach full cure, and a premature gasket compression can distort the baffle or drag on the wet silicone.
 
 ### 8.1 When to do it
 
-After ≥48 hours from the silicone pass. Paint/seal the baffle cutout raw edge with thinned PVA or silicone (edge moisture barrier) before seating the driver.
+After ≥48 hours from the silicone pass. Paint/seal the baffle cutout raw edge with thinned PVA, silicone, or polyurethane wipe-on (edge moisture barrier) before seating the driver.
 
 ### 8.2 Baffle cutout
 
@@ -422,6 +441,9 @@ Maintain this section as decisions are made or revised. The geometry was iterate
 | 2026-04-25 evening | Cardboard mock-up complete; cubby measured exactly: floor 37 × 27 with 15 × 23 corner cut, lid line 37 × 33 with 15 × 15 corner cut, height 18 cm. Decorative-lid architecture chosen (thin substrate covers structural box top plate) | Mock-up is authoritative; lid separation simplifies the box's structural duty |
 | 2026-04-25 evening | Build simplification: corner-cut wall must be flat MDF, requires 15 × 23 cut at BOTH top and bottom (top cut enlarged from 15 × 15 by 8 cm × 15 cm wedge of dead air at the back-right corner of the lid plane). External volume drops 0.5 L (17.4 → 16.9 L), effective volume drops ~0.5 L (~12.5 L final). Joinery becomes tractable. | Inaudible volume cost vs. major build complexity savings; verified analytically that exact cubby fit requires non-planar twisted corner-cut wall |
 | 2026-04-25 evening | Final dimensions locked. Cleat-strip joinery chosen for the tilted back wall and corner-cut wall (Strategy A in §5.4); silicone-fillet fallback documented as Strategy C if cleats prove fiddly. | Build doc executable as written |
+| 2026-04-25 (Sat shopping) | Joinery flipped: **Strategy C silicone-fillet adopted as default**, cleats dropped. Cause: 40 × 120 cm MDF acquired Saturday (vs the 60 × 100 originally spec'd) — ~5 % too tight to include cleat-strip stock with realistic kerf. Strategy C requires no cleats, removes 4 cuts and one Phase 1 step, and combines naturally with the SMP gap-filling adhesive (next row). | Material constraint forced the simpler joinery; acoustically and structurally equivalent per analytical comparison. Strategy A preserved in §5.4 for future retrofit reference. |
+| 2026-04-25 (Sat shopping) | Adhesive substituted: **Casco SuperFix+** (SMP / silane-modified polymer construction adhesive) replaces PVA D3. Properties: 100 % solids, ~20 min open time, gap-filling up to 10 mm, Shore A 45–50 cured (semi-elastic), tensile 2.2 MPa, 500 % elongation at break, moisture-cure 3 mm/24 h. | SF+ is **better matched** to this build than PVA: gap-filling absorbs panel-saw kerf inaccuracy (helpful given the tight 40 × 120 layout), 20 min open time eases square-checking, elastic cure resists hairline-crack development at MDF joints under bass pressure, Strategy C butt-joint gaps fill cleanly during glue-up. Application change: bead-apply, don't over-clamp (1–3 mm bond line preferred). |
+| 2026-04-25 (Sat shopping) | Terminal cup acquired: **included in Helix IK S10-DVC2 shipment** — no separate purchase needed. Verify before install: (a) 4 binding posts (two pairs, one per coil) for DVC2 isolation, (b) gasket present (or substitute thin silicone ring during install). | Saves the Autoviihde trip from the shopping list; if the included cup is single-pair, fall back to drilling a 4-post cup or buying a dual at Autoviihde during the week. |
 | 2026-04-25 evening | DSP relocated to passenger-side cubby. The 16.9 L sub box fully consumes the driver-side cubby; the DSP's 1.7 L footprint plus heatsink ventilation clearance does not fit. The terminal-cup placement on the corner-cut wall (§4.2) remains unchanged — that wall already faces the passenger-side cubby across the rear bulkhead, so the speaker leg routes naturally. See `work/audio_upgrade_blueprint.md` §1 and `work/center_console_refresh/README.md` §5.7b. | Geometry consequence; no build-side change beyond a shorter local pigtail from the cup (the long run is the cubby-to-cubby leg, owned by the console-refresh task). |
 
 ---
