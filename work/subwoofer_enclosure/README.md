@@ -53,7 +53,7 @@ The mock-up confirmed the cubby's depth taper, the corner intrusion shape, and t
 | Bottom plate (sits on cubby floor) | 37 × 27 cm | 15 × 23 cm | 826.5 cm² |
 | Height (flush with cubby lid line) | 18 cm | — | — |
 
-† **Build simplification:** the cubby intrusion is only 15 × 15 at the lid-line level, but the box's top plate uses the bottom plate's larger 15 × 23 cut anyway. This makes the corner-cut wall a single flat MDF panel (with the same 18.4° tilt as the back wall) instead of a twisted/multi-faceted surface. The dead air this leaves at the top corner — an 8 × 15 cm wedge tapering to nothing at the floor — costs ~0.5 L of external volume but eliminates a hard joinery problem. See §3 for the full trade-off analysis.
+† **Build simplification:** the cubby intrusion is only 15 × 15 at the lid-line level, but the box's top plate uses the bottom plate's larger 15 × 23 cut anyway. This makes the corner-cut wall a single flat MDF panel (with the same 22.1° tilt as the back wall) instead of a twisted/multi-faceted surface. The dead air this leaves at the top corner — an 8 × 15 cm wedge tapering to nothing at the floor — costs ~0.5 L of external volume but eliminates a hard joinery problem. See §3 for the full trade-off analysis.
 
 ---
 
@@ -64,9 +64,11 @@ The mock-up confirmed the cubby's depth taper, the corner intrusion shape, and t
 The box is a prismatoid with:
 
 - **Constant width** (37 cm) on the left-right axis — front wall and back wall are full-width.
-- **Tapered depth** on the front-back axis (27 cm at floor → 33 cm at lid line) — left and right side walls are TRAPEZOIDS with parallel edges of 27 cm (bottom) and 33 cm (top), and slant height ≈ 19 cm.
+- **Tapered depth** on the front-back axis (27 cm at floor → 33 cm at lid line) — left and right side walls are TRAPEZOIDS with parallel edges of 27 cm (bottom plate footprint) and 33 cm (top plate footprint), wall height **14.8 cm** (the gap between top and bottom plates after subtracting their 16 mm thickness from the 18 cm external box height), and slant edge **16 cm** (= sqrt(14.8² + 6²)).
 - **Chamfered corner** (15 × 23 cm right-triangle removed from the back-right corner, same cut at top and bottom) — adds a single flat diagonal corner-cut wall.
-- **Two tilted walls:** the back wall and the corner-cut wall both tilt 18.4° from vertical, in the same direction (away from the box interior as you go up). The front wall and side walls are vertical.
+- **Two tilted walls:** the back wall and the corner-cut wall both tilt **22.1° from vertical** (= atan(6 / 14.8)), in the same direction (away from the box interior as you go up). The front wall and side walls are vertical.
+
+**Construction-style note (critical for the cut list):** the bottom and top plates capture the four side walls between them (see §4 prose). With 16 mm plates and 18 cm external box height, the wall vertical extent is `180 - 16 - 16 = 148 mm = 14.8 cm`. The tilted-wall slant length is `sqrt(148² + 60²) = 159.7 mm ≈ 16 cm`. The tilt angle reflects the corrected geometry: `atan(60 / 148) = 22.1°` from vertical, NOT the 18.4° figure that earlier drafts of this doc used (which was based on the external silhouette `atan(60 / 180) = 18.4°` — the angle the rear face would have if walls extended through the plate thicknesses, which they don't).
 
 ### 3.2 Volume math (prismatoidal formula)
 
@@ -120,28 +122,28 @@ The 0.5 L volume cost of the simplification is acoustically below audibility. Bu
 
 ### 3.6 Material needed
 
-Cut-list area for the 7-panel build (see §4):
+Cut-list area for the 7-panel build (see §4) — **corrected 2026-04-26 noon** for proper wall height (= 14.8 cm between plates, NOT the full 18 cm external box height):
 
 - Top plate (37 × 33 with 15 × 23 cut): 1049 cm²
 - Bottom plate (37 × 27 with 15 × 23 cut): 827 cm²
-- Front wall (37 × 18): 666 cm²
-- Back wall (22 × 19, allowing for slant length): 418 cm² — note: the back wall only spans from x=0 to where the corner cut starts at x=22, not the full 37 cm box width
-- Left side wall (trapezoid, parallel sides 27 + 33, height 18): 540 cm²
-- Right side wall (trapezoid, parallel sides 4 + 10, height 18): 126 cm² (this is the SHORT right side, between front edge and corner cut)
-- Corner-cut wall (rectangle, 27.5 × 19): 523 cm²
-- **Total panel area: 4149 cm² ≈ 0.41 m²**
-- Plus kerf + waste + spare (20 %, higher than rectangular build because of the angled cuts): **0.50 m²**
-- Plus 4 cleat strips (16 × 16 mm cross-section, 22 + 22 + 27.5 + 27.5 = 99 cm length total) — only if cleats are used; otherwise cut from offcuts or omitted entirely (see §5.4 Strategy C below).
+- Front wall (37 × 14.8): **548 cm²**
+- Back wall (22 × 16, slant length): **352 cm²** — note: the back wall only spans from x=0 to where the corner cut starts at x=22, not the full 37 cm box width
+- Left side wall (trapezoid, parallel sides 27 + 33, height 14.8): **444 cm²**
+- Right side wall (trapezoid, parallel sides 4 + 10, height 14.8): **104 cm²** (this is the SHORT right side, between front edge and corner cut)
+- Corner-cut wall (rectangle, 27.5 × 16, slant length): **440 cm²**
+- **Total panel area: 3764 cm² ≈ 0.38 m²**
+- Plus kerf + waste + spare (15 %, slightly lower because the corrected smaller pieces leave more nesting room): **0.43 m²**
+- Plus 4 cleat strips (16 × 16 mm cross-section, ~22 + 22 + 27.5 + 27.5 = 99 cm linear total, ~158 cm² panel face area at rip width 48 mm × bevel-cut waste-half) — only if cleats are used; see §5.4 below.
 
-#### Panel-size options
+#### Panel-size options (corrected wall heights)
 
 | Panel | Area | Slack (no cleats) | Slack (with cleats) | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| **60 × 100 cm** | 6000 cm² | 1500 cm² (33 %) | 1340 cm² (29 %) | Generous, allows one re-cut. Originally specified. |
-| **40 × 120 cm** (acquired 2026-04-25) | 4800 cm² | 308 cm² (6.4 %) | 150 cm² (3.1 %) | **Tight but feasible without cleats.** Strict strip-based cuts force everything into a single 37-wide strip; layout adds up to ~134 cm length using bounding rectangles, vs 120 cm available — i.e. 14 cm short with cleats, ~5 cm short without. Closing the gap requires nesting the smaller pieces (right-side trapezoid, back wall) into corner scraps. **Recommended: switch to Strategy C silicone-fillet (no cleats) per §5.4 — also saves the 4 pre-glue cleat-mount steps.** |
-| Other sizes | — | — | — | Anything between 50 × 100 and 40 × 130 works comfortably. |
+| **60 × 100 cm** | 6000 cm² | 2236 cm² (37 %) | 2078 cm² (35 %) | Originally specified, generous. |
+| **40 × 120 cm** (acquired 2026-04-25) | 4800 cm² | **1036 cm² (22 %)** | **878 cm² (18 %)** | **Comfortable margin for either Strategy A (cleats) or Strategy C (no cleats).** The earlier "tight ~5 % slack" assessment was based on a wall-height bug (18 cm vs the correct 14.8 cm) — see decisions log §11 row "2026-04-26 noon — wall height corrected". With the corrected dimensions the strict strip layout is no longer geometrically forced into a single narrow strip; an operator can lay walls in a 16-cm-wide strip running the full 120 cm length and plates in a parallel 33-cm-wide × 60 cm strip, with room left for cleats. |
+| Other sizes | — | — | — | Any rectangle ≥ 4000 cm² with one dimension ≥ 37 cm works. |
 
-**Decision (2026-04-25):** 40 × 120 panel acquired Saturday. Strategy C (silicone-fillet, no cleats) becomes the default joinery strategy from this point — see §5.4. If the panel-saw layout still proves marginal at Bauhaus, the fallback is a free or €1–2 offcut from their offcut bin, sized for the back wall (22 × 19 cm = ~25 × 25 cm scrap is enough), cut to final size at home with a circular saw or jigsaw.
+**Decision (2026-04-25, partly invalidated 2026-04-26 noon):** 40 × 120 panel acquired Saturday. Strategy C (silicone-fillet, no cleats) was originally chosen because the panel was thought to be ~5 % short of cleat-inclusive layout; the wall-height correction shows the panel actually has 18 % slack with cleats. **Strategy C is retained as the default for build-simplicity reasons** (saves ~2 hours of Phase 1 cleat ripping + pre-gluing) but is no longer forced by material constraint — see §5.4 for the choice rationale, and the §11 decisions log row "2026-04-26 noon" for the bug history. If you want a more rigid joint and the table-saw + extra-time investment is acceptable, reverting to Strategy A is now feasible without buying more MDF.
 
 ---
 
@@ -153,16 +155,16 @@ Construction style: **bottom-and-top plates capture the four side walls between 
 
 | # | Panel | Qty | Dimensions (cm) | Cut style | Notes |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| 1 | Bottom plate | 1 | 37 × 27 with 15 × 23 corner cut at back-right | Pentagonal (5-sided) | All edges 90°. Mark cut lines on a 37 × 27 rectangle; cut diagonally from (22, 27) to (37, 4). |
-| 2 | Top plate (= driver baffle) | 1 | 37 × 33 with 15 × 23 corner cut at back-right | Pentagonal (5-sided) | All edges 90°. Same diagonal direction as bottom but from (22, 33) to (37, 10). **Driver cutout (Ø 221 mm) cut LAST**, after carcass cure — see §8.2. |
-| 3 | Front wall | 1 | 37 × 18 | Rectangle | All edges 90°. Faces front of cubby. |
-| 4 | Back wall | 1 | **22** × 19 (slant length, oversize by ~5 mm and trim flush after assembly) | Rectangle | All edges 90°. Width is 22 cm — the back wall only spans from x=0 to where the corner cut starts at x=22, not the full box width. The remaining back-of-box area (x=22 to x=37) is covered by the corner-cut wall. Tilts 18.4° from vertical in the assembled box; see §5.4 for joinery. |
-| 5 | Left side wall (trapezoid) | 1 | Parallel edges 27 + 33, height 18, slant edge sqrt(6² + 18²) ≈ 19.0 | Right-trapezoid | Front edge vertical 18 cm; bottom edge horizontal 27 cm; top edge horizontal 33 cm; back edge slants 19.0 cm at 18.4° from vertical. All edges 90° square cuts. |
-| 6 | Right side wall (small trapezoid, ahead of corner cut) | 1 | Parallel edges 4 + 10, height 18, slant edge ≈ 19.0 | Right-trapezoid | Mirror of #5 but truncated by the corner cut. Front edge vertical 18 cm; bottom edge 4 cm; top edge 10 cm; back edge slants 19.0 cm meeting the corner-cut wall. Small panel, easy to mis-cut — measure twice. |
-| 7 | Corner-cut wall | 1 | 27.5 × 19 (slant length, oversize by ~5 mm and trim flush after assembly) | Rectangle | All edges 90°. Tilts 18.4° from vertical. Diagonal-direction face. **Terminal cup hole pre-cut here, before installation** — see §5.3. Position: centred on the panel, ~5 cm up from bottom edge. |
-| ~~8~~ | ~~Cleat strips~~ | ~~4~~ | ~~16 × 16 × ~22 / ~22 / ~27.5 / ~27.5 cm long~~ | ~~Right-triangle cross-section~~ | **NOT USED** — Strategy C silicone-fillet adopted (§5.4) since the 40 × 120 panel doesn't have margin for cleat-strip stock. Original cleat-based plan documented in §5.4 as Strategy A for reference. |
+| 1 | Bottom plate | 1 | 37 × 27 with 15 × 23 corner cut at back-right | Pentagonal (5-sided) | All edges 90°. Mark cut lines on a 37 × 27 rectangle; cut diagonally from (22, 27) to (37, 4). Plate footprint, NOT affected by the wall-height correction. |
+| 2 | Top plate (= driver baffle) | 1 | 37 × 33 with 15 × 23 corner cut at back-right | Pentagonal (5-sided) | All edges 90°. Same diagonal direction as bottom but from (22, 33) to (37, 10). **Driver cutout (Ø 221 mm) cut LAST**, after carcass cure — see §8.2. Plate footprint, NOT affected by the wall-height correction. |
+| 3 | Front wall | 1 | **37 × 14.8** | Rectangle | All edges 90°. Faces front of cubby. Height = external box height 18 cm − 2 × 16 mm plate thickness = 14.8 cm. (Plates capture the wall between them — see §3.1 construction-style note + §4 prose.) |
+| 4 | Back wall | 1 | **22 × 16 (slant length, oversize by ~5 mm and trim flush after assembly)** | Rectangle | All edges 90°. Width 22 cm — the back wall only spans from x=0 to where the corner cut starts at x=22, not the full box width. The remaining back-of-box area (x=22 to x=37) is covered by the corner-cut wall. Tilts **22.1° from vertical** in the assembled box (= atan(6/14.8)); see §5.4 for joinery. Slant length = sqrt(14.8² + 6²) = 15.97 cm; cut at 16.5 cm to allow trim-flush. |
+| 5 | Left side wall (trapezoid) | 1 | **Parallel edges 27 + 33, height 14.8, slant edge sqrt(6² + 14.8²) ≈ 16.0** | Right-trapezoid | Front edge vertical 14.8 cm; bottom edge horizontal 27 cm; top edge horizontal 33 cm; back edge slants 16.0 cm at 22.1° from vertical. All edges 90° square cuts. |
+| 6 | Right side wall (small trapezoid, ahead of corner cut) | 1 | **Parallel edges 4 + 10, height 14.8, slant edge ≈ 16.0** | Right-trapezoid | Mirror of #5 but truncated by the corner cut. Front edge vertical 14.8 cm; bottom edge 4 cm; top edge 10 cm; back edge slants 16.0 cm meeting the corner-cut wall. Small panel, easy to mis-cut — measure twice. |
+| 7 | Corner-cut wall | 1 | **27.5 × 16 (slant length, oversize by ~5 mm and trim flush after assembly)** | Rectangle | All edges 90°. Tilts **22.1° from vertical**. Diagonal-direction face — the 27.5 cm width is the chord across the corner cut (= sqrt(15² + 23²) at both top and bottom plates, identical because the corner cut translates rigidly between plates). Slant length = sqrt(14.8² + 6²) = 15.97 cm; cut at 16.5 cm to allow trim-flush. **Terminal cup hole pre-cut here, before installation** — see §5.3. Position: centred on the panel, ~4 cm up from bottom edge. |
+| ~~8~~ | ~~Cleat strips~~ | ~~4~~ | ~~16 × 16 × ~22 / ~22 / ~27.5 / ~27.5 cm long~~ | ~~Right-triangle cross-section~~ | **NOT USED in default Strategy C** — see §5.4. The earlier panel-area justification for skipping cleats was based on a wall-height bug; with corrected dimensions the panel has 18 % slack with cleats included. Strategy C retained as default for build-simplicity (saves ~2 h Phase 1) but Strategy A (cleats) is materially feasible if preferred. |
 
-**Verification of internal volume:** prismatoidal formula with internal cross-sections (§3.3) → 11.3 L raw → 12.5 L effective with polyfill ✓
+**Verification of internal volume:** prismatoidal formula with internal cross-sections (§3.3, which uses the correct internal height of 14.8 cm) → 11.3 L raw → 12.5 L effective with polyfill ✓ (volume math was already correct — only the cut-list dimensions were affected by the bug.)
 
 ### 4.2 Where the terminal cup goes
 
@@ -181,13 +183,13 @@ The panel saw can do the trapezoidal cuts (it tilts the workpiece, not the blade
 > "Leikataan 16 mm MDF-levystä seuraavat palat (mitat millimetreinä):
 >
 > Suorakulmiot:
-> - Etuseinä: 370 × 180 (1 kpl)
-> - Takaseinä: 220 × 195 (1 kpl) — ylimittainen, höylätään asennuksen jälkeen
-> - Kulmaseinä: 275 × 195 (1 kpl) — ylimittainen, höylätään asennuksen jälkeen
+> - Etuseinä: 370 × 148 (1 kpl)
+> - Takaseinä: 220 × 165 (1 kpl) — ylimittainen, höylätään asennuksen jälkeen (lopullinen viisteleikkaus 160 mm)
+> - Kulmaseinä: 275 × 165 (1 kpl) — ylimittainen, höylätään asennuksen jälkeen (lopullinen viisteleikkaus 160 mm)
 >
 > Trapetsit (suorakulmainen trapetsi, lyhyempi sivu vasemmalla):
-> - Vasen sivu: korkeus 180, alaosa 270, yläosa 330 (1 kpl)
-> - Oikea sivu: korkeus 180, alaosa 40, yläosa 100 (1 kpl)
+> - Vasen sivu: korkeus 148, alaosa 270, yläosa 330 (1 kpl)
+> - Oikea sivu: korkeus 148, alaosa 40, yläosa 100 (1 kpl)
 >
 > Viisikulmiot (suorakulmio, jonka oikeasta yläkulmasta leikataan kolmio pois — terä jolla 15 × 23 cm):
 > - Pohjalevy: 370 × 270, kolmio 150 × 230 oikea yläkulma (1 kpl)
@@ -195,11 +197,13 @@ The panel saw can do the trapezoidal cuts (it tilts the workpiece, not the blade
 >
 > Kiitos."
 >
-> *Cleat strips removed from the cut request 2026-04-25 because Strategy C (silicone-fillet) is now the default — see §5.4.*
+> *Wall heights corrected 2026-04-26 noon (vs the 2026-04-25 evening draft): the four wall pieces drop from 180 → 148 mm height (front + sides) and 195 → 165 mm slant (back + corner-cut) because the plates capture the walls between them, leaving 18 cm − 2 × 16 mm = 14.8 cm of vertical extent for the wall pieces. Plates unaffected. See §3.1 construction-style note + §11 decisions log.*
+>
+> *Cleat strips removed from the cut request 2026-04-25; see §5.4 for current strategy. Cleats remain materially feasible if you change your mind — request 4 cleat strips (rimaa) ~16 × 16 × 220 / 220 / 275 / 275 mm separately, or rip them from offcuts at home.*
 
 Ask them to cut in this order: large rectangles first, then trapezoids, then pentagonal pieces (most fiddly last). 3 mm kerf per cut is normal; budget for it in the sheet-area math.
 
-**Layout note for the 40 × 120 panel:** the strict strip layout (a 33-cm-wide plate strip alongside a 19-cm-wide wall strip) needs 52 cm of panel width and won't fit the 40 cm dimension. The operator will need to nest panels into a single 37 × 120 strip with the back wall, corner-cut wall, and right side trapezoid tucked into the spare lengths and corner scraps. Bring the cardboard mock-up and this README — let the operator nest it. If the operator says "won't fit", grab a free or €1–2 offcut from the offcut bin (~25 × 25 cm or larger) for the back wall and cut at home.
+**Layout note for the 40 × 120 panel (revised 2026-04-26 noon after wall-height correction):** with corrected wall heights (max wall slant 16 cm), a 16-cm-wide wall strip and a 33-cm-wide plate strip together need 49 cm of panel width — still over 40 — but the corrected smaller pieces leave significant slack on the long dimension. **Recommended layout:** plates section 37 × 60 cm (top + bottom plates stacked along the long axis, 37 along width with 3 cm side scrap); walls section 40 × 60 cm with two 16-cm-tall rows hosting the 4 walls comfortably. Total panel utilisation ~78 % with 22 % slack. The operator should not need any clever nesting — the corrected dimensions fit straightforwardly. Bring the cardboard mock-up and this README in case any clarification is needed at the cutting desk.
 
 ---
 
@@ -239,7 +243,7 @@ Mark screw positions:
 
 - Bottom plate / top plate to wall joints: every 6–8 cm along the joint, 4 cm in from each end.
 - Wall-to-wall joints (front-to-side, side-to-back, back-to-corner-cut): every 8 cm along the joint.
-- Tilted-wall joints (back wall, corner-cut wall to top and bottom plates): every 6–8 cm along the joint, screws driven from outside through the wall into the plate edge. Screws bite at 18.4° into the plate edge — pre-drill with a longer pilot hole (3 mm × 35 mm) to minimise splitting.
+- Tilted-wall joints (back wall, corner-cut wall to top and bottom plates): every 6–8 cm along the joint, screws driven from outside through the wall into the plate edge. Screws bite at 22.1° into the plate edge — pre-drill with a longer pilot hole (3 mm × 35 mm) to minimise splitting.
 
 Drill 3 mm pilot holes **through the outer panel into the edge of the inner panel**. Depth 25–30 mm. 16 mm MDF splits if you skip the pilot holes — non-negotiable. Countersink lightly so screw heads sit flush.
 
@@ -252,24 +256,24 @@ Wire the terminal cup BEFORE installing the corner-cut wall in the carcass — m
 3. Test continuity per §6.3 — log DCR values in the build diary BEFORE the panel is buried in the carcass.
 4. Set the wired panel aside, taped face-down on a clean surface so the binding posts aren't damaged during handling.
 
-### 5.4 Tilted-wall joinery — Strategy C adopted (silicone-fillet, no cleats)
+### 5.4 Tilted-wall joinery — Strategy C as default (silicone-fillet, no cleats); Strategy A is also feasible
 
-The back wall (panel 4) and corner-cut wall (panel 7) both tilt 18.4° from vertical. Their top and bottom edges meet the top and bottom plates at 18.4° dihedrals (not 90°). Three strategies were considered; **Strategy C is the default as of 2026-04-25** because the 40 × 120 panel doesn't accommodate cleat-strip stock, AND the gap-filling Casco SuperFix+ adhesive (§5 intro) makes Strategy C structurally robust even without cleats:
+The back wall (panel 4) and corner-cut wall (panel 7) both tilt **22.1° from vertical** (= atan(6 / 14.8) — corrected 2026-04-26 noon from the earlier 18.4° figure, which mistakenly used the external box height instead of the wall-between-plates height; see §3.1 + §11). Their top and bottom edges meet the top and bottom plates at 22.1° dihedrals (not 90°). Three strategies were considered:
 
-**Strategy C (ADOPTED — silicone-fillet + SMP gap-fill): all 90° edges, fill the gaps.** Every panel cut at 90°. When the tilted walls are installed, their bottom and top edges sit at 18.4° against the plates, leaving a triangular gap of ~5 mm at the maximum point on the inside corner. **Two-stage sealing strategy:**
+**Strategy C (DEFAULT — silicone-fillet + SMP gap-fill): all 90° edges, fill the gaps.** Every panel cut at 90°. When the tilted walls are installed, their bottom and top edges sit at 22.1° against the plates, leaving a triangular gap of `16 mm × tan(22.1°) ≈ 6.5 mm` at the maximum point on the inside corner. **Two-stage sealing strategy:**
 
-1. **During glue-up (Phase 2):** Casco SF+ bead along each plate edge fills the triangular gap as the wall is pressed into place. The 5 mm gap is well within SF+'s 10 mm gap-filling spec. Squeeze-out from the gap will be visible on the inside; tool with a wet finger or scrape after skin-over (~15 min).
+1. **During glue-up (Phase 2):** Casco SF+ bead along each plate edge fills the triangular gap as the wall is pressed into place. The 6.5 mm gap is within SF+'s 10 mm gap-filling spec, with margin. Squeeze-out from the gap will be visible on the inside; tool with a wet finger or scrape after skin-over (~15 min).
 2. **After 24 h SMP cure (Phase 3):** silicone fillet pass per §6.4 along every interior seam (back wall to plates, corner-cut wall to plates, back-to-corner-cut wall, all four side seams). The silicone is the airtight seal — acoustically critical for a sealed-Q sub box. The SF+ underneath is structural; the silicone is hermetic.
 
 This combined approach gives a structurally and acoustically equivalent result to the cleat-based Strategy A. The visible interior seams may look a hair less crisp than a clean cleat-bevelled landing, but the box is hidden behind a decorative lid in a barely-visible cubby, so this doesn't matter.
 
-**Strategy A (cleat strips) — for reference if a future build retrofits.** Pre-glue four 16 × 16 mm right-triangular cleats (bevelled at 18.4° on a table saw) to the inside of the bottom and top plates along the back-wall and corner-cut-wall landings. The tilted walls then sit against the cleats with square 90° edges. Strongest joint, cleanest interior seam line. Requires ~158 cm² of MDF stock for the cleats and an additional Phase 1 step. Skipped on this build because the 40 × 120 panel can't spare the material.
+**Strategy A (cleat strips) — feasible alternative if you prefer the more rigid joint.** Pre-glue four right-triangular cleats (bevelled at 22.1° on a table saw, ~16 × 16 mm cross-section) to the inside of the bottom and top plates along the back-wall and corner-cut-wall landings. The tilted walls then sit against the cleats with square 90° edges. Strongest joint, cleanest interior seam line. Requires ~158 cm² of MDF stock for the cleats and an additional Phase 1 step (~2 hours: rip cleats, glue + screw to plates, 1 h dry before main assembly). The earlier blanket "Strategy A skipped — panel doesn't have margin" justification was based on a wall-height bug; with corrected dimensions the 40 × 120 panel has 18 % slack with cleats. **Skipped here purely on build-simplicity grounds, not material constraint.** If you want to revert to Strategy A, the table saw must be set to 22.1° (NOT 18.4° — the bevel angle is also corrected).
 
-**Strategy B (bevelled wall edges) — for reference.** Cut the top and bottom edges of the back wall and corner-cut wall at an 18.4° bevel (router + chamfer bit, or block plane). Bevelled edges mate flush with unmodified top/bottom plate edges. Cleanest visual joint, no cleats, but the bevel cuts are tedious on panel edges with no jig. Skipped because Strategy C achieves equivalent acoustics with less precision work.
+**Strategy B (bevelled wall edges) — for reference.** Cut the top and bottom edges of the back wall and corner-cut wall at a 22.1° bevel (router + chamfer bit, or block plane). Bevelled edges mate flush with unmodified top/bottom plate edges. Cleanest visual joint, no cleats, but the bevel cuts are tedious on panel edges with no jig. Skipped because Strategy C achieves equivalent acoustics with less precision work.
 
-**For the back-wall to corner-cut-wall seam** (interior dihedral 55.5°, sharper than 90°): bevel both edges at 27° each for a clean butt joint, OR use silicone fillet in the seam (Strategy C carries through here naturally). Recommended: silicone fillet — the 27° bevels are awkward to cut precisely and the joint is hidden inside the box.
+**For the back-wall to corner-cut-wall seam** (interior dihedral 55.5° — independent of the tilt angle; only depends on the corner-cut geometry in plan view): bevel both edges at 27° each for a clean butt joint, OR use silicone fillet in the seam (Strategy C carries through here naturally). Recommended: silicone fillet — the 27° bevels are awkward to cut precisely and the joint is hidden inside the box.
 
-**For the back wall ↔ side wall seams** (interior dihedral 90° — the back wall tilts toward the box interior, the side wall is vertical, the dihedral remains 90° because the tilt direction is perpendicular to the side wall plane): standard 90° butt joint. Drill pilot holes perpendicular to the back wall surface — the screws go in at the natural 18.4° tilt relative to horizontal, which is fine for the joint.
+**For the back wall ↔ side wall seams** (interior dihedral 90° — the back wall tilts toward the box interior, the side wall is vertical, the dihedral remains 90° because the tilt direction is perpendicular to the side wall plane): standard 90° butt joint. Drill pilot holes perpendicular to the back wall surface — the screws go in at the natural 22.1° tilt relative to horizontal, which is fine for the joint.
 
 ### 5.5 Glue + screw assembly sequence (Casco SuperFix+ + Strategy C)
 
@@ -279,11 +283,11 @@ Each step: bead-apply SMP + position panel + drive screws (snug, not aggressive 
 2. **Front wall ← bottom plate.** 5–8 mm bead of Casco SF+ along the front edge of the bottom plate; stand front wall on it; drive screws from below the bottom plate up into the front wall edge. 4 screws across the 37 cm joint. Snug only — the bead wants 1–3 mm of bond line. Tool any squeeze-out on the inside face with a wet fingertip or scrape after skin-over (~15 min).
 3. **Left side wall (large trapezoid) ← bottom plate AND ← front wall.** SF+ bead on both contact edges; position the side wall so its bottom edge sits along the bottom plate's left edge AND its front edge mates with the left edge of the front wall; drive screws on both joints (3 from below into the side wall, 3 from the side wall into the front wall edge).
 4. **Right side wall (small trapezoid) ← bottom plate AND ← front wall.** Mirror of step 3. The right side wall is small (4 cm at bottom, 10 cm at top) and sits between the front wall and where the corner-cut wall will go. Be especially careful with this small panel — its size makes it easy to over-compress the bead. Drive screws gently.
-5. **Back wall ← bottom plate (Strategy C butt joint) AND ← left side wall.** This is the first tilted wall. SF+ bead along the back edge of the bottom plate; position the back wall so it leans 18.4° away from vertical (use a sliding bevel gauge or a paper template cut at 18.4°); also bead-apply along the contact edge to the left side wall's slanted back edge; drive screws from outside the back wall into the bottom plate edge (3 screws — the screws bite at 18.4° into the plate edge, which is fine for a butt joint with SF+ filling the wedge gap) and into the left side wall edge (3 screws). The triangular gap on the inside (~5 mm at peak) fills with the SF+ bead's squeeze-out — tool any visible squeeze-out flat on the inside corner before skin-over. The wall is now held square in two of three axes; the corner-cut wall will pin it in the third.
-6. **Corner-cut wall ← bottom plate AND ← back wall AND ← right side wall.** The wired terminal-cup panel goes in here. Three SF+ bead lines: bottom plate edge (Strategy C butt joint, same 18.4° tilt), back wall (left edge of corner-cut wall meets right edge of back wall along the 55.5° interior dihedral — SF+ fills the seam, silicone fillet later), and right side wall's slanted back edge. Drive screws from outside into all three. Carcass is now complete except for the top plate. Total of ~10–12 screws driven this step.
+5. **Back wall ← bottom plate (Strategy C butt joint) AND ← left side wall.** This is the first tilted wall. SF+ bead along the back edge of the bottom plate; position the back wall so it leans **22.1° away from vertical** (use a sliding bevel gauge or a paper template cut at 22.1°); also bead-apply along the contact edge to the left side wall's slanted back edge; drive screws from outside the back wall into the bottom plate edge (3 screws — the screws bite at 22.1° into the plate edge, which is fine for a butt joint with SF+ filling the wedge gap) and into the left side wall edge (3 screws). The triangular gap on the inside (~6.5 mm at peak) fills with the SF+ bead's squeeze-out — tool any visible squeeze-out flat on the inside corner before skin-over. The wall is now held square in two of three axes; the corner-cut wall will pin it in the third.
+6. **Corner-cut wall ← bottom plate AND ← back wall AND ← right side wall.** The wired terminal-cup panel goes in here. Three SF+ bead lines: bottom plate edge (Strategy C butt joint, same 22.1° tilt), back wall (left edge of corner-cut wall meets right edge of back wall along the 55.5° interior dihedral — SF+ fills the seam, silicone fillet later), and right side wall's slanted back edge. Drive screws from outside into all three. Carcass is now complete except for the top plate. Total of ~10–12 screws driven this step.
 7. **30-minute pause.** Let SF+ skin over. Verify carcass is square: measure diagonals on the bottom plate (corner to corner, two diagonals — should agree within 2 mm); measure that the front wall is vertical with a square; verify the tilted walls' tops are symmetric about the box's centre line. Use this pause to scrape any inside-face squeeze-out flat — it'll wipe with white spirit on a paper towel before full cure.
 8. **Wire-tuck and polyfill loose-fill.** Tuck the terminal cup's internal coil leads against the right side wall (out of the way of the driver cutout). Stuff polyfill loosely through the still-open top opening, ~135 g, lightly fluffed (final compression happens when the top closes). Tape a strip of masking tape across the wiring to keep polyfill clear of the terminal posts and the future driver cutout.
-9. **Top plate (= driver baffle) ← all five wall edges (front, left side, right side, back wall, corner-cut wall — Strategy C butt joints on the two tilted-wall edges).** SF+ bead on all five wall top edges. Position the top plate from above. The two tilted-wall edges (back, corner-cut) form 18.4° contact with the underside of the top plate — the SF+ bead fills the wedge gaps (same triangular gap as on the bottom). Drive screws from above through the top plate into every wall edge — about 12–16 screws total around the perimeter and the corner cut. **Don't cut the driver hole yet** — see §8.2 (deferred to next weekend after full cure).
+9. **Top plate (= driver baffle) ← all five wall edges (front, left side, right side, back wall, corner-cut wall — Strategy C butt joints on the two tilted-wall edges).** SF+ bead on all five wall top edges. Position the top plate from above. The two tilted-wall edges (back, corner-cut) form 22.1° contact with the underside of the top plate — the SF+ bead fills the wedge gaps (same triangular gap as on the bottom). Drive screws from above through the top plate into every wall edge — about 12–16 screws total around the perimeter and the corner cut. **Don't cut the driver hole yet** — see §8.2 (deferred to next weekend after full cure).
 10. **24-hour SMP cure** before any further handling. Place a heavy weight (full 5 L ATF jug, car battery, etc.) on the top plate to ensure it presses fully into the SF+ beads. Don't apply more weight than needed to seat the panels — see §5 intro re. over-clamping SMP joints.
 
 **Square-check between each step:** measure corner-to-corner diagonals on the bottom plate and the perimeter walls; if any diagonal disagrees with its pair by more than 2 mm, clamp the long diagonal until the glue sets. The single-axis taper makes a couple of natural square-checks impossible (the side walls aren't rectangles), so rely on the bottom plate's perimeter and the front wall's verticality as your main reference checks.
@@ -302,7 +306,7 @@ The lid can be designed and built **after** the box is fully assembled and dropp
 
 ### 5.7 Clamp / weight strategy
 
-Where clamps are thin, stack phonebooks / full 5 L ATF jugs / car batteries on top of each joint while the SF+ skins over. **Important: SMP joints want a 1–3 mm bond line — don't over-weight.** Screws give 80 % of the clamp force; weights close the last 20 % of hairline gaps but should not squeeze the bead to nothing. For the tilted walls, use a strip of masking tape across the joint to hold them at the 18.4° angle against the bottom (and later top) plate while the SF+ skins over — they'll otherwise tend to slump backward off the plate edge before tack-up. A scrap of plywood or a paper template cut at 18.4° dihedral, taped to the inside corner, gives a positive angle reference during the 20-minute open time.
+Where clamps are thin, stack phonebooks / full 5 L ATF jugs / car batteries on top of each joint while the SF+ skins over. **Important: SMP joints want a 1–3 mm bond line — don't over-weight.** Screws give 80 % of the clamp force; weights close the last 20 % of hairline gaps but should not squeeze the bead to nothing. For the tilted walls, use a strip of masking tape across the joint to hold them at the **22.1°** angle against the bottom (and later top) plate while the SF+ skins over — they'll otherwise tend to slump backward off the plate edge before tack-up. A scrap of plywood or a paper template cut at 22.1° dihedral, taped to the inside corner, gives a positive angle reference during the 20-minute open time.
 
 ---
 
@@ -445,6 +449,7 @@ Maintain this section as decisions are made or revised. The geometry was iterate
 | 2026-04-25 (Sat shopping) | Adhesive substituted: **Casco SuperFix+** (SMP / silane-modified polymer construction adhesive) replaces PVA D3. Properties: 100 % solids, ~20 min open time, gap-filling up to 10 mm, Shore A 45–50 cured (semi-elastic), tensile 2.2 MPa, 500 % elongation at break, moisture-cure 3 mm/24 h. | SF+ is **better matched** to this build than PVA: gap-filling absorbs panel-saw kerf inaccuracy (helpful given the tight 40 × 120 layout), 20 min open time eases square-checking, elastic cure resists hairline-crack development at MDF joints under bass pressure, Strategy C butt-joint gaps fill cleanly during glue-up. Application change: bead-apply, don't over-clamp (1–3 mm bond line preferred). |
 | 2026-04-25 (Sat shopping) | Terminal cup acquired: **included in Helix IK S10-DVC2 shipment** — no separate purchase needed. Verify before install: (a) 4 binding posts (two pairs, one per coil) for DVC2 isolation, (b) gasket present (or substitute thin silicone ring during install). | Saves the Autoviihde trip from the shopping list; if the included cup is single-pair, fall back to drilling a 4-post cup or buying a dual at Autoviihde during the week. |
 | 2026-04-25 evening | DSP relocated to passenger-side cubby. The 16.9 L sub box fully consumes the driver-side cubby; the DSP's 1.7 L footprint plus heatsink ventilation clearance does not fit. The terminal-cup placement on the corner-cut wall (§4.2) remains unchanged — that wall already faces the passenger-side cubby across the rear bulkhead, so the speaker leg routes naturally. See `work/audio_upgrade_blueprint.md` §1 and `work/center_console_refresh/README.md` §5.7b. | Geometry consequence; no build-side change beyond a shorter local pigtail from the cup (the long run is the cubby-to-cubby leg, owned by the console-refresh task). |
+| **2026-04-26 noon — wall-height correction (cut-list bug fix)** | **Cut list panels 3–7 (front wall, back wall, both side trapezoids, corner-cut wall) had wall heights set to 18 cm — the full external box height — but §4 prose explicitly says "bottom-and-top plates capture the four side walls between them". With 16 mm plates top and bottom, walls span only `180 − 16 − 16 = 148 mm` vertically. Tilted-wall slant length is therefore `sqrt(148² + 60²) = 159.7 mm ≈ 16 cm`, NOT 19 cm; tilt angle is `atan(60 / 148) = 22.1°`, NOT 18.4°.** Updated panels: front 37 × 14.8, back 22 × 16 slant, left side trap h=14.8, right side trap h=14.8, corner-cut wall 27.5 × 16 slant. Tilt angle changed from 18.4° to 22.1° in §3.1, §5.4, §5.5, §5.7. | User catch (Sun ~12:10) on the cut-list math. Volume math in §3.3 was already correct (it always used 14.8 cm internal height) — only the cut-list dimensions were affected. Total panel area drops from 4149 → 3764 cm² (a 9 % reduction), which means the 40 × 120 cm panel actually has 18 % slack with cleats included (Strategy A would fit) — the earlier "panel too tight, force Strategy C" rationale was based on the buggy higher area number. Strategy C retained as default for build-simplicity reasons (saves ~2 h Phase 1 cleat-rip + pre-glue), but Strategy A is now an open option if the user prefers a more rigid joint. The SF+ wedge gap on Strategy C joints grows from 5 mm to 6.5 mm — still well within the SF+ 10 mm gap-filling spec. |
 
 ---
 
