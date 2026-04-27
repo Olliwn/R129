@@ -412,17 +412,33 @@ The top plate (= driver baffle) is a 37 × 33 cm pentagonal panel with the 15 ×
 4. Drive driver mounting screws — typically 6 × M4 × 30 mm wood screws (or whatever the driver hardware specifies). Pilot-drill all six holes first. Torque snug + 1/8 turn — **don't crush the gasket**, don't over-torque and split the MDF. 2–3 Nm is the target.
 5. Work in a diagonal pattern: top → bottom → left → right → top-right → bottom-left. Gradual even compression.
 
+### 8.4 M6 stabilizer screw — DEFERRED
+
+The Helix datasheet calls out an M6-threaded hole on the magnet pole piece, intended for back-bracing the driver to the bottom plate via a spacer to prevent magnet sag in high-excursion installs.
+
+**Decision (2026-04-27): skip the stabilizer install.** Recommended by Autoviihde staff who noted they do not install it on this class of build. Rationale:
+
+- The stabilizer matters most in **ported boxes** and **competition / high-Xmax setups** where reaction forces on the magnet are large and sustained.
+- For a 10″ sealed box at 300 W RMS in ~12.5 L effective, sealed loading naturally limits Xmax to safe levels — magnet sag is essentially a non-issue at this excursion regime.
+- Skipping avoids: (a) drilling and sealing a clearance hole through the cured bottom plate, (b) measuring and procuring the correct spacer length, (c) introducing an additional mechanical resonance path between driver and box.
+
+The threaded hole on the pole piece **stays available** — if any sag is ever observed (very unlikely), a retrofit is straightforward: drill a 7 mm clearance hole in the bottom plate from underneath, insert spacer + M6 bolt, seal with neutral-cure silicone. Documented here so the option isn't lost.
+
 ---
 
-## 9. Finish (deferred — optional)
+## 9. Finish
 
-Not required for acoustic performance. The decorative lid (§5.6) covers the entire box from view, so the box's external finish is purely a moisture-barrier and dust-repellence concern.
+The decorative lid (§5.6) covers the entire box from view, so the box's external finish is primarily a moisture-barrier and dust-repellence concern, with the secondary benefit of hiding the proud-screw-head cosmetic issue from glue-up.
 
-- **Raw MDF** — fine in the cubby since the decorative lid covers it. Fastest path. MDF will absorb ambient cabin moisture over years; if the car is regularly stored in a damp garage, consider one of the next two options.
-- **Paint** — Hammerite black or similar, 2 coats. Sand edges first. Provides good moisture barrier.
-- **Polyurethane wipe-on** — single coat of thinned wipe-on poly. Negligible thickness change. Good moisture barrier without much aesthetic commitment.
+**Decision (2026-04-27): wrap with acoustic carpet.** Acquired from Autoviihde — 2 m² dark-grey acoustic carpet (subwoofer cover material), enough for the box outer surfaces (~0.45 m²), the decorative lid top + edges (~0.30 m²), and ~1.25 m² spare. Adhesive: spray contact (3M Super 77 / equivalent — confirm Autoviihde's recommended brand at application time). Stretches over the proud screw heads and the slight angular wobble at the corner-cut wall — both disappear under the wrapped fabric. Standard car-audio install practice for a cubby-hidden box, and the spare material lets the decorative lid match the box's appearance for a unified look if the lid is ever opened.
 
-Carpet wrap (the original Option C) is unnecessary now that the lid is decorative-only. Save the effort.
+Application order: cure-confirm the SF+/silicone (≥48 h since glue-up) → mask the driver cutout opening → spray adhesive on box face + carpet backing → press, smooth, edge-tuck → trim opening with a sharp blade. Repeat for each face.
+
+**Alternatives kept on file for reference:**
+
+- **Raw MDF** — fastest path. Fine if storage is dry. MDF absorbs ambient cabin moisture over years; if the car is regularly garaged in damp conditions, consider painting or polyurethane wipe-on instead.
+- **Paint** — Hammerite black or similar, 2 coats; sand edges first. Good moisture barrier; doesn't hide the proud screws.
+- **Polyurethane wipe-on** — single thinned coat. Negligible thickness change, low aesthetic commitment, good moisture barrier; doesn't hide the proud screws either.
 
 ---
 
@@ -450,6 +466,7 @@ Maintain this section as decisions are made or revised. The geometry was iterate
 | 2026-04-25 (Sat shopping) | Terminal cup acquired: **included in Helix IK S10-DVC2 shipment** — no separate purchase needed. Verify before install: (a) 4 binding posts (two pairs, one per coil) for DVC2 isolation, (b) gasket present (or substitute thin silicone ring during install). | Saves the Autoviihde trip from the shopping list; if the included cup is single-pair, fall back to drilling a 4-post cup or buying a dual at Autoviihde during the week. |
 | 2026-04-25 evening | DSP relocated to passenger-side cubby. The 16.9 L sub box fully consumes the driver-side cubby; the DSP's 1.7 L footprint plus heatsink ventilation clearance does not fit. The terminal-cup placement on the corner-cut wall (§4.2) remains unchanged — that wall already faces the passenger-side cubby across the rear bulkhead, so the speaker leg routes naturally. See `work/audio_upgrade_blueprint.md` §1 and `work/center_console_refresh/README.md` §5.7b. | Geometry consequence; no build-side change beyond a shorter local pigtail from the cup (the long run is the cubby-to-cubby leg, owned by the console-refresh task). |
 | **2026-04-26 noon — wall-height correction (cut-list bug fix)** | **Cut list panels 3–7 (front wall, back wall, both side trapezoids, corner-cut wall) had wall heights set to 18 cm — the full external box height — but §4 prose explicitly says "bottom-and-top plates capture the four side walls between them". With 16 mm plates top and bottom, walls span only `180 − 16 − 16 = 148 mm` vertically. Tilted-wall slant length is therefore `sqrt(148² + 60²) = 159.7 mm ≈ 16 cm`, NOT 19 cm; tilt angle is `atan(60 / 148) = 22.1°`, NOT 18.4°.** Updated panels: front 37 × 14.8, back 22 × 16 slant, left side trap h=14.8, right side trap h=14.8, corner-cut wall 27.5 × 16 slant. Tilt angle changed from 18.4° to 22.1° in §3.1, §5.4, §5.5, §5.7. | User catch (Sun ~12:10) on the cut-list math. Volume math in §3.3 was already correct (it always used 14.8 cm internal height) — only the cut-list dimensions were affected. Total panel area drops from 4149 → 3764 cm² (a 9 % reduction), which means the 40 × 120 cm panel actually has 18 % slack with cleats included (Strategy A would fit) — the earlier "panel too tight, force Strategy C" rationale was based on the buggy higher area number. Strategy C retained as default for build-simplicity reasons (saves ~2 h Phase 1 cleat-rip + pre-glue), but Strategy A is now an open option if the user prefers a more rigid joint. The SF+ wedge gap on Strategy C joints grows from 5 mm to 6.5 mm — still well within the SF+ 10 mm gap-filling spec. |
+| 2026-04-27 evening — M6 stabilizer screw deferred + acoustic carpet acquired | (1) **M6 stabilizer install (§8.4) deferred.** Autoviihde staff recommended skipping; consistent with industry practice for sealed-box / non-competition installs at this excursion class. Threaded hole on driver pole piece stays available for future retrofit. (2) **Box finish (§9) finalised: acoustic carpet wrap.** 2 m² dark-grey acoustic carpet acquired from Autoviihde for the sub box (~0.45 m²) + decorative lid (~0.30 m²) + spare (~1.25 m²). Wraps over proud screw heads and corner-cut-wall angle wobble cleanly. Spray adhesive to be confirmed at application time per Autoviihde's recommendation. | Build-decision day after the cure started. M6 skip removes one step from the post-cure driver-install sequence; carpet wrap removes the proud-screw cosmetic issue without the counterboring detour and gives moisture protection as a bonus. Both decisions reduce remaining workload before driver install. |
 
 ---
 
