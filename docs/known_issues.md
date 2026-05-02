@@ -21,9 +21,24 @@ Level control still needs work:
 - **Level Control (Niveauregulierung) — refined diagnosis 2026-04-19.** Rear height remains static. **Fahrzeugniveau switch electrical side RESOLVED:** LED now toggles on/off correctly with the center-console switch (observed during 2026-04-19 test drive, first normal switch behavior since Apr 2). Likely self-healed via new battery (Apr 18) + exercised contacts + ZH-M flush. **Hydraulic side still inoperative:** raise commands produce no observable ride-height change, so the rear-droop problem is now **confirmed hydraulic**, not electrical. Candidates: rear mechanical level valve (ARB linkage stuck/misadjusted), solenoid valve in manifold, weak pump discharge pressure, slow internal leak, or degraded rear sphere pre-charge. **Next:** manual valve test (disconnect ARB linkage, move lever by hand on jack stands), read Pin 9 immediately after a raise command, measure pump discharge pressure if manual valve test doesn't isolate the cause.
 - **Cluster swap confirmed:** Indicator strip has no ADS symbol -- non-ADS cluster (option 216 factory ADS confirmed via lastvin.com).
 
-⚠️ **Dust boots — front suspected missing, REAR CONFIRMED INTACT (2026-04-18).** Apr 2 katsastus noted "lower sections missing" and we initially assumed ×4. Rear strut photograph (2026-04-18 evening) shows black convoluted rubber bellows present, seated, no exposed chrome — Apr 2 note was front-biased. **Remaining work:** photograph both front struts on jack stands tomorrow (Apr 19), confirm fronts are the ones missing boots, then order 2× `A 129 323 01 92` from MB-osat. Part is common (W124/W201/R129 shared) — no sourcing risk.
+⚠️ **Front ADS dust boots / bump stops — confirmed by MB-osat (2026-04-30).** Apr 2 katsastus noted "lower sections missing"; rear strut photograph (2026-04-18 evening) shows rear boots intact, so the issue is front-biased. MB-osat independently flagged the front shock dust covers and bump stops (`etuiskarien pölysuojat ja pohjaan lyöntikumit`). Parts are already on hand: 2× MEYLE 014 032 0032 / `A 129 323 01 92`, arrived 2026-04-27. **Next:** install at next jack-stand / suspension session.
 
 [work/ads_diagnostic/README.md](../work/ads_diagnostic/README.md) | [work/ads_blink_reader/README.md](../work/ads_blink_reader/README.md)
+
+### Steering & Suspension Wear — MB-osat Quote Pending
+**Status:** OPEN — QUOTE PENDING | **Priority:** HIGH | **Since:** 2026-04-30
+
+MB-osat inspection found multiple steering / suspension wear points. Offer for the fixes expected next Monday.
+
+- Rear lower control arm outer joints loose, left and right.
+- Right lower ball joint loose.
+- Left tie rod inner and outer end loose.
+- Right tie rod inner end loose; right outer tie-rod protective boot torn.
+- Idler arm has play.
+- Lower control arm rear bushings are in poor condition with chunks missing, but still stiff.
+- Front shock dust covers / bump stops need attention (also tracked under ADS front dust boots above).
+
+**Next:** wait for MB-osat quote, then decide whether to bundle the work with front ADS dust boots and any alignment-required steering parts. Alignment will be needed after tie rod / ball joint work.
 
 ### Central Locking (PSE) -- FUNCTIONAL (Passenger Side), Driver Lock Disconnected
 **Status:** PARTIALLY RESOLVED | **Priority:** LOW | **Since:** 2026-03-13 | **Updated:** 2026-04-05
@@ -36,7 +51,9 @@ Level control still needs work:
 
 **IRCL remote — DEPRIORITIZED (2026-04-06):** Both key fobs tested with fresh CR2025 batteries. Key 1: IR LED fired 2-3 times then stopped (hardware fault). Key 2: dim IR output, tested on car — **no response.** Either transmission too weak or rolling code out of sync after years of disuse. Re-pairing requires MB Star Diagnosis tool (~€200+ dealer visit) — not cost-effective for a convenience feature. IRCL module on car is healthy (Pin 12 = 1 blink).
 
-**Decision:** IRCL repair abandoned. The planned **BLE sentry node (nRF5340)** will implement phone-based keyless lock/unlock by driving the PSE signal directly. More secure (BLE bonded encryption vs 1991 IR), no line-of-sight required, and already part of the telemetry architecture. Requires identifying the IRCL→PSE signal wire during door panel removal.
+**Decision:** IRCL repair abandoned. Phone-based keyless lock/unlock will be implemented by the **always-on cabin signal node (`nRF54L15`)** driving the PSE signal directly. More secure (BLE bonded encryption vs 1991 IR), no line-of-sight required, and already part of the telemetry architecture. Requires identifying the IRCL→PSE signal wire during door panel / trunk-trim removal.
+
+**Architectural note (updated 2026-04-26):** This responsibility was previously assigned to a separate "sentry" node (`nRF5340`). It is now folded into the cabin signal node so there is exactly one always-on Nordic MCU in the car. The cabin node lives in the front cubby alongside the Pi, is permanently powered from `F20_6`, drives a small trunk-side PSE drive board over a control wire that reuses one spare CAT6 pair on the existing passenger-side BE2210 trim run. The tap on the IRCL→PSE wire is *additive* (parallel to the factory IRCL output) so any future re-paired IR fob would still work. Full design + bring-up plan: [`docs/cabin_signal_survey.md`](cabin_signal_survey.md) §"Always-On Operation and BLE Keyless Lock/Unlock" and [`work/cabin_signal_node/README.md`](../work/cabin_signal_node/README.md) Stages 6–7.
 
 **Next:** Driver side key lock linkage repair (low priority — passenger side key works for daily use). BLE lock/unlock implementation tracked in Phase 2.2 architecture.
 
@@ -88,10 +105,19 @@ Wiper does not consistently park correctly. Washer fluid only from 2 of 4 nozzle
 
 [work/wiper_system/README.md](../work/wiper_system/README.md)
 
-### Engine Mounts
-**Status:** OPEN | **Priority:** MEDIUM | **Since:** 2026-03-13
+### Idle Misfire / Distributor Service
+**Status:** OPEN — CAPS + ROTORS ORDERED | **Priority:** HIGH | **Since:** 2026-04-30
 
-Slight vibration at 700-800 RPM idle. Corteco replacement mounts received (2026-03-30).
+MB-osat noted the engine does not fire all cylinders cleanly at idle. A V8 should idle smoother than this. Earlier low-idle vibration was attributed mainly to aged engine mounts, but the new assessment points to an engine/ignition root cause first.
+
+MB-osat thought distributor-related was likely. Distributor-cap photo was shown; they agreed cap/rotor replacement makes sense regardless of whether it fully cures the idle.
+
+**Next:** follow [`work/rough_idle_debug/README.md`](../work/rough_idle_debug/README.md). Establish a baseline and localize the weak cylinder/path before the new distributor parts arrive if possible; then replace both distributor caps and both rotors as a controlled test when parts arrive (expected Tuesday). If still uneven: continue with the branch-specific ignition, vacuum/air, fuel, or mechanical checks in the work plan.
+
+### Engine Mounts
+**Status:** OPEN — IDLE ROOT CAUSE NO LONGER ASSUMED | **Priority:** MEDIUM | **Since:** 2026-03-13 | **Updated:** 2026-04-30
+
+Slight vibration at 700-800 RPM idle. Corteco replacement mounts received (2026-03-30). **Apr 30 MB-osat update:** do not assume mounts are the primary cause of idle roughness until the distributor service / ignition check is done; MB-osat observed incomplete cylinder firing at idle.
 
 [work/engine_trans_mounts/README.md](../work/engine_trans_mounts/README.md)
 
@@ -127,27 +153,18 @@ Squeals/chirps on startup. **V-belt friction spray test (2026-04-03):** noise di
 3.  **Spin all idler pulleys by hand with belt off** — listen for bearing grit, feel for play. Replace any that aren't silky smooth.
 4.  Interim: belt can be kept quiet with occasional friction spray until the new set arrives. Not a long-term state — slipping belts overheat, crack, and eventually snap.
 
-### Exhaust — Center Silencer Shell Perforated, Load-Range Resonance
-**Status:** OPEN — UNDER-CAR INSPECTION PENDING | **Priority:** MEDIUM | **Since:** 2026-04-19 (Mar 15 precursor note "exhaust center silencer starting to rust" confirmed escalated)
+### Exhaust — Loose Heat Shields Causing Load-Range Resonance
+**Status:** OPEN — SIMPLE HEAT-SHIELD FIX | **Priority:** LOW | **Since:** 2026-04-19 (Mar 15 precursor note "exhaust center silencer starting to rust" confirmed escalated) | **Updated:** 2026-04-30
 
 **Symptom (observed 2026-04-19 test drive):** light resonance/drone in the 2–3.2 k RPM band, **load-dependent only** (absent in neutral at the same RPM, absent above ~3.5 k). Reduces as the engine warms. Owner had noted this previously on earlier drives.
 
 **Visual finding (photo 2026-04-19):** center silencer shell shows a visible crack / through-hole on the lower portion, surrounded by heavy scale and rust staining. External heat-shield partially detached. Adjacent mid-pipe section also heavily corroded. Brand stamp on the heat-shield wrap reads "Thermopos[…]" (partial).
 
-**Physics consistent with symptom:**
-*   Exhaust firing pulse at 2–3.2 k on an 8-cyl is 133–213 Hz, a typical cavity-resonance band for a mid-silencer. Load dependence confirms it's exhaust-flow-excited (flow is 3–5× higher at same RPM under load). Warm-up improvement is consistent with thermal expansion tightening loose baffles or heat shield.
-
-**Cats and other components — not yet inspected.** Cats are up-front in the tunnel (separate units per bank, upstream of this component). Their condition is unknown pending the on-jack-stand full exhaust walk-through.
+**MB-osat finding (2026-04-30):** resonance was due to loose heat shields in the front exhaust pipe area (`etuputkien lämpösuojapellit irti`). Simple/cheap fix. **No need to change cats or any other exhaust parts.** Center silencer heat shield is also rusted and rattling (`keskimmäisen vaimentajan lämpösuojapelti ruostunut ja rämisee myös`), but MB-osat did not think that should be fixed now.
 
 **Next:**
-1.  **Full exhaust photo survey** on jack stands (now unlocked by Apr 19 saddle-pad fabrication). Manifold-back, both banks, focused shots of cats, flex sections, mid-silencer, rear mufflers.
-2.  **Push-test each component by hand cold** — listen for internal rattle (loose baffles or broken substrate), check hanger integrity, wiggle heat shields.
-3.  **Probe the visible crack with a screwdriver.** Crumbles → shell terminal, replace silencer. Solid edges → weld-patch is viable.
-4.  **Decision gate:**
-    *   Silencer shell only → weld-patch at local exhaust shop (Ristimaa Oulu or similar), ~€50–150.
-    *   Silencer baffles loose or shell terminal → replace center silencer (aftermarket Bosal/Walker/Ernst ~€80–250 + install).
-    *   Cats also failing → plan a full mid-section replacement (€500–1500), coordinate with belt + valve-cover service for a single lift visit.
-5.  Not urgent (car drives; April katsastus passed) but push into the next 1–2 weeks. Avoid soft-top-up + windows-closed + heavy-traffic combination while exhaust is leaking (CO intrusion is low-probability but not zero).
+1.  Secure front exhaust heat shields.
+2.  Leave center silencer heat shield alone unless the rattle becomes intrusive or repair is convenient during other lift work.
 
 ### Headlight Switch Knob Worn
 **Status:** OPEN | **Priority:** LOW | **Since:** 2026-04-02

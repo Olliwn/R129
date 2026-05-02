@@ -135,16 +135,25 @@ Touch coordinate mapping is handled automatically by the `autotouch` package (pr
 
 ## Data Flow
 
-### Primary path
-`Diagnostics module -> Pi local interface -> local service/process -> UI`
+### Primary paths (two local sources)
+The Pi has **two independent local data sources** plus the trunk monitor:
+
+1. **Engine-bay node over BLE** — under-hood-only signals (`X11` blink codes, `EHA` current, airflow potentiometer, lambda integrator, engine-side `ECT`). See `docs/nRF5430_Interface_Design.md` and `docs/PH2_2_architecture.md`.
+2. **Cabin signal node over USB-CDC** — cabin-side signals (cluster gauge senders, `VSS`, `TD` at cluster, brake / kickdown / reverse / hand-brake, `KL15`/`KL30`/`KL58`, console rocker switches, door / hood / trunk ajar, cabin ambient sensors `BME280` / IMU / `TSL2591`). See `docs/cabin_signal_survey.md` and `work/cabin_signal_node/README.md`.
+3. **Trunk battery monitor** — `INA226` + `DS18B20` directly on the Pi I²C / 1-Wire buses (`work/battery_monitor/README.md`).
+
+`Diagnostics modules (BLE + USB) -> Pi local interfaces -> acquisition layer -> vehicle_state.py -> UI`
+
+Both BLE and USB-CDC frames use the same `FW_nrf/payload/r129_payload.h` wire format (`SYNC + LEN + TYPE + DATA + CRC16`). The cabin node uses a new `R129_TYPE_CABIN = 0x04` payload type alongside the existing engine-node types.
 
 ### Secondary path
 `Optional network interface -> background services -> non-critical features`
 
 ### Design consequence
 The UI should degrade gracefully:
-- if diagnostics are unavailable, show "connecting" or last known state
+- if either diagnostics source is unavailable, show "connecting" or last known state for the affected signal group; the other source continues to feed its signals to the UI
 - if networking is unavailable, show no error that blocks normal use
+- the cabin USB-CDC source must tolerate Pi reboots cleanly (re-enumerate on boot, no firmware corruption on power cycle)
 
 ## Tech Stack (Decided 2026-04-03)
 
@@ -251,7 +260,13 @@ Interactive slippy-tile map renderer. **QWebEngineView was rejected** — Chromi
 ### Logical layers
 
 #### 1. Acquisition layer
-Responsible for talking to the diagnostics module (BLE from Nordic nRF5340) and normalizing incoming data. Will use Qt signals to push updates to the UI.
+Responsible for talking to **both** local diagnostics sources and normalizing incoming data into a single stream of Qt signals to the UI:
+
+- **BLE** from the engine-bay node (`nRF54L15` / `nRF5340`) — under-hood-only signals.
+- **USB-CDC** from the always-on cabin signal node (`nRF54L15`) — cabin-side signals + cabin ambient sensors + lock state, BLE proximity, and Pi power state.
+- **I²C / 1-Wire** from the trunk battery monitor (`INA226` + `DS18B20`).
+
+All three sources are independent — failure or disconnect of any one must not block the others. The BLE and USB sources share the `FW_nrf/payload/r129_payload.h` framing so a single decoder handles both.
 
 #### 2. State/cache layer
 Maintains the current local vehicle/application state so the UI can render quickly and survive transient disconnects.
@@ -381,7 +396,7 @@ The planned cellular module is a Nordic **nRF93 Cat-1bis** connected via USB. It
 - OTA software updates without WiFi — push new UI builds to the car remotely
 - Telemetry upload — continuous vehicle data logging (ADS, temperatures, fault codes) to a server
 - Remote SSH — debug the Pi without physical access to the car
-- Always-on sentry — status and alert reporting independent of the iPhone
+- Always-on remote channel — the cabin signal node (which owns BLE keyless lock/unlock and Pi wake) can also relay status over cellular for alert reporting independent of the owner's phone
 
 **Design rules:**
 - Cellular startup must be independent from the driver UI path
@@ -400,14 +415,16 @@ The planned cellular module is a Nordic **nRF93 Cat-1bis** connected via USB. It
 6. ~~Build full 8-page application with input infrastructure.~~ **DONE (2026-04-06).** Joystick + touch, sidebar navigation, retro dot-matrix aesthetics, interactive map.
 
 ## Open Questions
-- What exact BLE service/characteristic UUIDs will the Nordic node expose?
+- What exact BLE service/characteristic UUIDs will the engine-bay Nordic node expose?
+- Cabin signal node USB-CDC: confirm `/dev/ttyACM*` enumeration is stable across Pi reboots, and that the cabin MCU survives Pi power cycles cleanly. See `work/cabin_signal_node/README.md` Stage 1 exit criteria.
 - How should the Waveshare 5.5" AMOLED be mounted mechanically in the car?
 - Should the desktop session (labwc) be kept or replaced with a minimal Wayland compositor for the kiosk path?
 - nRF93 Cat-1bis antenna: internal PCB antenna vs. external antenna routed to the roof/rear window? Needs RF evaluation in the intended mounting location.
 
 ## Next Steps
-- Define BLE data contract (Nordic → Pi)
-- Replace simulated gauge values with live BLE data
+- Define BLE data contract (engine-bay Nordic → Pi)
+- Define USB-CDC data contract for the cabin signal node — recommended approach is to reuse `FW_nrf/payload/r129_payload.h` framing and add a `R129_TYPE_CABIN = 0x04` payload type, so a single decoder handles both transports. See `docs/cabin_signal_survey.md` §"Wire format" and `work/cabin_signal_node/README.md` §"Wire Format".
+- Replace simulated gauge values with live BLE + USB-CDC data
 - Configure Bluetooth A2DP sink and pair iPhone for music streaming
 - Build Music view (AVRCP metadata display + touch controls)
 - Populate diagnostics view with live data from X11 blink codes

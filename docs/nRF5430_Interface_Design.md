@@ -4,9 +4,11 @@
 This board now has two related but electrically different jobs:
 
 1. act as the always-on BLE wake manager for the Raspberry Pi 5
-2. provide a safe experimental front-end for reading selected `R129` diagnostic and sensor signals
+2. provide a safe experimental front-end for reading **engine-bay-only** `R129` diagnostic and sensor signals
 
 Those jobs should share as little raw vehicle wiring as possible. The Pi wake path is a low-power control function. The vehicle diagnostics path is an instrumentation problem and should be treated as a separate protected domain on the board.
+
+> **Scope narrowing 2026-04-26.** Cabin-side signals (instrument cluster gauge senders + lamp drives, brake-light feed, kickdown switch `S16/3`, `VSS`, `TD`-at-cluster, reverse, hand-brake, console rocker states, door / hood / trunk ajar, cabin ambient) have been moved off this board to a dedicated **cabin signal node** wired to the Pi over USB-CDC. Full rationale and signal table: [`docs/cabin_signal_survey.md`](cabin_signal_survey.md); bring-up doc: [`work/cabin_signal_node/README.md`](../work/cabin_signal_node/README.md). This board now owns *only* the under-hood-only signals — `X11` blink codes, `EHA` current via insert harness, airflow potentiometer (`B2`), lambda / integrator at `N3`, engine-side `ECT` (`B11/2`). The protection topology, BOM, and Veroboard build rules below are reused unchanged by the cabin node.
 
 ## Vehicle-Side Context: The Two R129 Diagnostic Port Families
 Across the `R129` platform there are two diagnostic connector families worth designing around:
@@ -86,8 +88,10 @@ Acquisition method:
 - best treated as a digital pulse train and measured by timer capture
 - can also be low-pass filtered into a DC value for slow trending, but the digital method preserves more information
 
-#### TD / engine-speed pulse
-If available in the chosen diagnostic path, this is valuable for correlating everything else to actual engine speed.
+#### TD / engine-speed pulse — *moved to cabin node*
+`TD` is now acquired by the cabin signal node at the instrument cluster (the cluster receives `TD` from `EZL` `N1/3` to drive the tach gauge, so the same signal is available cabin-side without crossing the firewall). See [`docs/cabin_signal_survey.md`](cabin_signal_survey.md) row 2.
+
+If a redundant engine-bay tap is later wanted (for cross-validation against the cabin node), the original guidance still applies:
 
 Acquisition method:
 - do not feed raw vehicle pulses straight into the `nRF5430`
@@ -268,10 +272,15 @@ Good candidates for the switched group:
 ## Development Order
 1. Build a passive breakout for the early `X11` socket and confirm power/ground safely.
 2. Implement blink-code reading first.
-3. Add digital capture for duty-cycle and any usable RPM/TD pulse.
+3. Add digital capture for duty-cycle. (`TD` / RPM is acquired cabin-side at the cluster — see [`docs/cabin_signal_survey.md`](cabin_signal_survey.md). Add a redundant engine-bay `TD` capture only if cabin-side cross-validation later proves it useful.)
 4. Add one clean direct ADC channel for the air-flow potentiometer.
 5. Add the analog switch only for already-conditioned low-speed channels.
 6. Leave `EHA` current measurement until a proper insert harness exists.
+
+## Cross-References
+- [`docs/cabin_signal_survey.md`](cabin_signal_survey.md) — signal inventory and split between engine-bay and cabin nodes.
+- [`work/cabin_signal_node/README.md`](../work/cabin_signal_node/README.md) — sister cabin node bring-up; reuses this board's protection topology and BOM.
+- [`docs/PH2_2_architecture.md`](PH2_2_architecture.md) — five-node architectural overview.
 
 ## SP Elektroniikka Shopping List (Updated)
 

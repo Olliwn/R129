@@ -2,7 +2,9 @@
 
 Opportunistic end-to-end bench test of the complete audio chain before the permanent install. Purpose: prove the signal path, the DSP auto-wake behaviour, and the absence of ground-loop hum, using a minimum of temporary wiring that can be torn down in ten minutes.
 
-**First-use context:** Originally targeted for Sunday evening, 2026-04-26 if the subwoofer carcass was sealed and drying per `work/subwoofer_enclosure/README.md`. Revised 2026-04-25 evening: dropped from the weekend plan in favour of in-car DSP power wiring + BE2210 console-out tap (see `docs/diary/2026-04.md` April 25 evening). This bench test remains valuable as a fallback diagnostic if the in-car install surfaces a signal-path issue we want to isolate from the install variables — keep the procedure intact for future use.
+**Status (2026-05-01):** ✅ **Executed via the USB-based variant** documented in §9 below — Windows PC → MEC HD-USB → UP 6DSP → all four Hertz speakers + Helix sub. All hardware confirmed functional, channel assignment + polarity correct, configuration persisted to DSP via Save & Store. The original BE2210 + high-level CAT6 procedure (§3–§8) remains intact for the in-car install's auto-wake / shield-termination / engine-on noise validation, none of which the USB bench test exercised. **First-time readers: read §9.3 "Gotchas" before powering anything on.**
+
+**First-use context:** Originally targeted for Sunday evening, 2026-04-26 if the subwoofer carcass was sealed and drying per `work/subwoofer_enclosure/README.md`. Revised 2026-04-25 evening: dropped from the weekend plan in favour of in-car DSP power wiring + BE2210 console-out tap (see `docs/diary/2026-04.md` April 25 evening). Re-revived 2026-05-01 evening as a USB-based variant — see §9 and `docs/diary/2026-05.md` May 1 entry. The §3–§8 BE2210 procedure remains valuable as a fallback diagnostic if the in-car install surfaces a signal-path issue we want to isolate from the install variables — keep the procedure intact for future use.
 
 **DSP location note (2026-04-25):** The permanent DSP location is the **rear passenger-side cubby**, not driver-side. The bench test itself happens on a bench/floor rather than in either cubby, so the procedure below is unchanged; the only consequence is that "cubby chassis bolt" (Step 4 ground reference) refers to the passenger-side cubby once we move from bench to car.
 
@@ -192,4 +194,70 @@ On the way out, before packing up, take these so the permanent install doesn't h
 
 ---
 
-*Created 2026-04-24 as a weekend-prep artifact. Procedure execution 2026-04-26 (opportunistic).*
+## 9. USB-based bench test variant (executed 2026-05-01)
+
+The procedure in §3–§8 above assumes the BE2210 head unit is the signal source. On Friday evening 2026-05-01 the bench test was executed in a different topology — **PC → MEC HD-USB → DSP** — because the goal was end-of-day low-effort progress with the car untouched, the BE2210 was still in the dash, and the MEC HD-USB module was already installed in the DSP. This variant proves nearly all the same things the BE2210 path proves (signal flow, channel assignment, crossovers, polarity, hardware integrity); the explicit exception is that the auto-wake DC-offset path was *not* exercised — REM was tied directly to +12 V instead.
+
+### 9.1 Topology delta
+
+```
+PC laptop (Windows 10)
+    │
+    │  USB cable (control)        →  UP 6DSP main USB port (PC-Tool tuning)
+    │  USB cable (audio)          →  MEC HD-USB module port (audio stream)
+    │
+UP 6DSP
+    │  +12 V  ← Varta H3 100Ah (old battery, ~12.5 V resting) via 40 A AGU fuse
+    │  GND    ← battery negative direct
+    │  REM    ← jumper wire to +12 V (forces amp ON without DC-offset auto-detect)
+    │
+    │  Outputs: same channel assignment as §2 (Ch 1/2 = tweeters, Ch 3/4 = mid-woofers, Ch 5/6 = sub coils)
+```
+
+### 9.2 What was different from §5
+
+- **No BE2210 in the loop** — input source is the PC's USB audio output, presented to Windows as `HD-AUDIO USB-INTERFACE FS`. No driver install needed (FS = Full Speed, up to 96 kHz / 32-bit, class-compliant USB audio).
+- **Auto-wake disabled** — physical "Auto Remote" switch on the UP 6DSP chassis flipped to **OFF**, REM tied to +12 V. Rationale: with no BE2210 in the loop there is no DC offset on the high-level inputs, so the auto-detect circuit has nothing to wake on.
+- **Sub driver loose, in temporary cardboard/MDF mock-up box** — final enclosure still curing; not yet wrapped/finished.
+- **Crossover defaults bumped slightly:** tweeter HP set to 3 kHz / 24 dB/oct LR (vs 2.5 kHz spec) for bench-test safety with loose speakers and no enclosure acoustics. Drop back to 2.5 kHz once in the car with measurements in hand.
+- **Bench location:** living-room floor on a carpet (battery on parquet). Distance from battery to amp ~1.5 m on the floor.
+
+### 9.3 Gotchas — every one of these cost real time, document so it doesn't happen twice
+
+These four traps are the "every first-time UP 6DSP installer hits these" set. They are not mentioned in the §3–§5 procedure above because that procedure assumed BE2210 auto-wake. **For any future bench test or first-power-on of an Audiotec Fischer DSP without a head unit, read this list first.**
+
+1. **Save & Store is mandatory.** Every change you make in the PC-Tool — IO routing matrix, DCM source priority, channel filters, gains — is **preview-only** until you click the **Save & Store** (disk icon) button at the top of the PC-Tool. Symptom when forgotten: the DSP appears configured correctly in the UI, but outputs are silent because the running configuration on the DSP is still the previous (or factory default) state. This single gotcha consumed roughly 30 minutes of debugging on 2026-05-01.
+
+2. **Auto Remote switch must be OFF for bench operation.** The UP 6DSP has a small physical slide switch on the chassis (near the screw terminals) labeled **"Auto Remote"**. When ON, the amp ignores the REM screw terminal and waits for DC-offset on the high-level inputs to wake up. For bench testing without a head unit, set this to **OFF** and tie REM to +12 V with a jumper wire. **Power-cycle the DSP after flipping this switch** — the position is only read at boot.
+
+3. **HEC/AUX Routing is a separate matrix from Main Routing.** In the IO menu, there are (at least) two routing tabs: **Main Routing** (for analog/high-level inputs from a head unit) and **HEC / AUX Routing** (for the MEC card audio). When the DCM source priority switches the active source from Main to HEC/AUX, the DSP also switches *which routing matrix it consults*. A populated Main matrix and an empty HEC/AUX matrix → silence. **Both matrices must be configured if both source paths will be used.**
+
+4. **DSP PC-Tool has no internal signal generator.** The PC-Tool **cannot generate test tones internally** — it has only an analyzer (RTA) for an external microphone. To bench-test a UP 6DSP you *must* provide an external audio source (BE2210, MEC HD-USB, or a stripped 3.5 mm AUX cable into the high-level inputs).
+
+Honourable mentions:
+- The PC-Tool's Master Volume slider lives at the bottom edge of the Outputs screen and is easy to miss the first time. Same for the channel level meters (left/right edges of the Outputs screen, only animate when audio is actively flowing through that channel post-routing).
+- Windows 10 default audio format on the MEC HD-USB device should be left at 48 kHz / 24-bit unless deliberately needed otherwise — sample-rate mismatches with the DSP's internal 48 kHz processing would show up as silent dropouts.
+
+### 9.4 Result (2026-05-01)
+
+- **All hardware confirmed functional:** UP 6DSP, MEC HD-USB card, both Hertz MP 28.3 tweeters, both Hertz MP 165P.3 mid-woofers, Helix IK S10-DVC2 sub driver and terminal cup.
+- **Signal path proven end-to-end:** Windows USB → MEC HD-USB → DSP processing (per `bench_test_v1` preset) → all 6 amp output channels → speakers.
+- **Channel assignment correct** (L stays L, R stays R, sub gets summed mono L+R).
+- **Crossover defaults applied:** tweeter HP 3 kHz / 24 dB/oct LR, woofer BP 80 Hz HP / 3 kHz LP / 24 dB/oct LR, sub LP 80 Hz / 24 dB/oct LR. All channels at −10 dB safety trim.
+- **Sub polarity:** cone moves outward first on bass — both DVC2 coils correctly in phase, no terminal-cup polarity swap needed.
+- **Subjective audio quality** on speakers loose on the carpet (no enclosures, no door panels, sub in temporary mock-up): "already pretty good on some material." Mid-bass thin (no door reinforcement) and sub a bit boomy and uneven (no proper enclosure or polyfill yet), but the system clearly responds to good source material with character that the BE2210-only baseline never had.
+- **Configuration persisted to DSP non-volatile memory** via Save & Store. Survives power-cycle; ready to be the starting preset for the in-car tuning pass.
+- **Bench setup photo:** `pics/F4D28352-6753-491F-8D2E-B9FAEDD892F1_1_102_o.jpeg`.
+
+### 9.5 What this variant does NOT prove (vs §1)
+
+- **Auto-wake on DC offset** — REM was tied to +12 V, so the DC-offset detection circuit was not exercised. This must still be confirmed during the in-car install when the BE2210 high-level tap is wired up (per `work/center_console_refresh/README.md` §4).
+- **Engine-on alternator noise rejection** — bench was on an old Varta H3, not the car's running alternator. CAT6 shield-termination strategy still needs the engine-on test in §6 once the car is the power source.
+- **Permanent ground integrity** — temporary battery clamps, not a chassis ground bolt with star washer.
+- **CAT6 high-level path** — the actual stripped CAT6 from the BE2210 ISO speaker-out pair is not exercised in this variant. That happens during the center-console refresh session.
+
+These four open items are what the in-car install will need to validate, but the "is the chain alive" question is now closed.
+
+---
+
+*Created 2026-04-24 as a weekend-prep artifact. Original §1–§8 (BE2210 + high-level CAT6 procedure) execution targeted 2026-04-26 → deferred. §9 (USB-based variant) executed 2026-05-01.*

@@ -61,8 +61,15 @@
 
 ### **Phase 5.3: Engine Sensor Node (Future)**
 
-* \[ \] Remove battery from Nordic Thingy:53. Add RC filters for ADS1115. Mount inside F32 ECU box.
+* \[ \] Remove battery from Nordic Thingy:53. Add RC filters for ADS1115. Mount inside F32 ECU box. **Scope narrowed 2026-04-26** — engine-bay node now owns *only* under-hood-only signals (`X11` blink codes, `EHA`, airflow pot, lambda, engine-side `ECT`). Cabin-side signals are owned by Phase 5.5 below. See `docs/nRF5430_Interface_Design.md` and `docs/cabin_signal_survey.md`.
 
 ### **Phase 5.4: Retro GUI (Future)**
 
 * \[ \] Develop PyQt/PySide6 UI using DIN 1451 font and amber VDO styling. Interface with EC11 rotary encoders.
+
+### **Phase 5.5: Always-On Cabin Signal Node (Future, added 2026-04-26)**
+
+* \[ \] **Always-on cabin signal node bring-up.** A small `nRF54L15` MCU (same family as the engine-bay node, single Nordic toolchain) mounted alongside the RPi5 in the front cubby, powered always-on from `F20_6` permanent 12 V via a low-Iq buck, wired to the Pi by USB-CDC. Acquires every cabin-side vehicle signal (cluster gauge senders + lamp drives, `VSS`, `TD` at cluster, brake-light feed, kickdown switch `S16/3`, reverse, hand-brake, `KL15`/`KL30`/`KL58`, console rocker switches, door / hood / trunk ajar) plus cabin ambient sensors (`BME280`, IMU, `TSL2591`). Reuses the engine-bay node's protection topology and most of its BOM. Survey + ownership table: `docs/cabin_signal_survey.md`. Bring-up plan and stage gates: `work/cabin_signal_node/README.md`.
+* \[ \] **Sentry node folded in.** The previously planned standalone "always-on sentry" node is deleted as a separate device; its three responsibilities (BLE wake / Pi `5 V` high-side switch / IRCL→PSE keyless drive replacing the dead IR remote keys per `docs/known_issues.md`) are absorbed into this cabin node, which is already in the right place and already BLE-aware. One always-on Nordic MCU in the car instead of two.
+* \[ \] **BLE proximity-based central locking.** Replaces the factory IR remote keys (one fob hardware-dead, the other rolling-code de-synced; MB Star re-pairing not cost-effective per the 2026-04-06 decision). Owner phone bonded to the cabin node; RSSI hysteresis controls lock / unlock pulses fed to a small **trunk-side PSE drive board** via one spare CAT6 pair on the existing passenger-side BE2210 trim run. Tap is *additive* on the IRCL→PSE wire so any future re-paired IR fob still works.
+* \[ \] **Stage 0 gates (do during the Priority 3 cluster-pull window):** finalize the cabin pin-out by photographing the (non-`ADS`) instrument cluster connectors **and** identify the IRCL → PSE signal wire at the trunk IRCL controller (probe with a scope while actuating the working passenger-side mechanical key — its pulse mirrors the IRCL output). Both must complete before ordering the cabin MCU module and the trunk PSE drive board parts.

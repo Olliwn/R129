@@ -93,7 +93,7 @@ factory_notes:
 key_systems:
   - "ADS I with Niveauregulierung (option 216, factory-fitted)"
   - "KE-Jetronic (CIS-E mechanical/electronic fuel injection)"
-  - "EZL ignition (distributorless)"
+  - "EZL electronic ignition with dual distributor caps/rotors"
   - "PSE (pneumatic central locking system)"
   - "N7 exterior lamp failure module"
   - "ATA anti-theft warning system (option 551)"

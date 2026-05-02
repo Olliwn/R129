@@ -154,8 +154,8 @@
 
 | Part | OEM Number / Ref | Qty | Condition | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| Distributor Caps | A 119 158 01 02 | 2 | **Inspect first** | Replace only if carbon tracking, deep pitting, or cracking. Bosch or Bremi. |
-| Distributor Rotors | (verify w/ MB-osat) | 2 | **Inspect first** | Replace only if pitted or burned contact. |
+| Distributor Caps | A 119 158 01 02 | 2 | **ORDERED 2026-04-30 — DUE NEXT TUESDAY** | Ordered after MB-osat observed incomplete cylinder firing at idle and agreed the cap photo justified replacement regardless. Delivery expected 2026-05-05. Bosch or Bremi preferred. |
+| Distributor Rotors | (verify w/ MB-osat) | 2 | **ORDERED 2026-04-30 — DUE NEXT TUESDAY** | Rotor arms on the engine side of the distributor caps. Ordered with caps after MB-osat idle-misfire assessment. Delivery expected 2026-05-05. |
 | Spark Plug Wires (full set) | (verify w/ MB-osat) | 1 set (8) | **Inspect first** | Measure resistance: <10 kΩ per wire. Replace if out of spec or brittle. |
 | ~~V-Belt Set (M119) — moved to Priority 1B, glazed and slipping confirmed 2026-04-19~~ | — | — | **PROMOTED** | See new Priority 1B entry below. No longer "inspect first". |
 | ~~Belt Tensioners / Idler Pulleys — moved to Priority 1B, inspect during belt swap~~ | — | — | **PROMOTED** | See new Priority 1B entry below. |
@@ -165,6 +165,25 @@
 | MTX Automotive pneumatic brake bleeder 1L | Motonet 75-1000 | 1 | **Ordering from Motonet 2026-04-03** | Pneumatic vacuum bleeder, 6-12 bar, 1L tank, connects to compressor. One-person brake flush tool. Also usable for ADS bleed points (with separate clean hose — never cross-contaminate DOT4/ZH-M). **Buy 1/4" air pistoke fitting separately.** 29.90€. |
 | Brake Fluid (extra) | ATE TYP200 DOT4 | 1 L | **Ordering from Motonet 2026-04-03** | Second bottle for a full 4-corner flush (1L already on hand, need 2L total). |
 | PTFE / Teflon Tape | — | 1 roll | **Needed** | Wrap around brake bleed nipple threads to prevent false air ingestion during vacuum bleeding. Also useful for general hydraulic thread sealing. |
+
+---
+
+## PRIORITY 4B — Steering / Suspension Wear (MB-osat Quote Pending)
+
+*MB-osat inspection 2026-04-30 found multiple loose steering/suspension joints. Wait for their offer next Monday before ordering parts piecemeal; the job likely needs bundling and alignment afterward.*
+
+| Finding | Side / Qty | Posture | Notes |
+| :--- | :--- | :--- | :--- |
+| Rear lower control arm outer joint loose | Left + right | **QUOTE PENDING** | Finnish note: `taka alatukivarren ulkopään nivel, vasen ja oikea väljät`. |
+| Lower ball joint loose | Right | **QUOTE PENDING** | Finnish note: `oikea alapallonivel väljä`. |
+| Tie rod inner + outer end loose | Left | **QUOTE PENDING** | Finnish note: `vasen raidetanko sisä ja ulkopää väljä`. |
+| Tie rod inner end loose | Right | **QUOTE PENDING** | Finnish note: `oikea raidetanko sisäpää väljä`. |
+| Tie rod outer-end protective boot torn | Right | **QUOTE PENDING** | Finnish note: `ulkopäässä suojakumi rikki`. |
+| Idler arm play | — | **QUOTE PENDING** | Finnish note: `apusimpukassa välys`. |
+| Lower control arm rear bushings deteriorated | Left/right likely | **QUOTE PENDING / MONITOR** | Finnish note: `alatukivarsien taaemmat puslat huonossa kunnossa ja paloja lähtenyt, mutta jäykät vielä`. |
+| Front shock dust covers + bump stops | Front ×2 | **PARTS ON HAND / INSTALL WITH SUSPENSION WORK** | Finnish note: `etuiskarien pölysuojat ja pohjaan lyöntikumit`. Dust boots already arrived 2026-04-27; confirm bump-stop part scope in quote. |
+
+**Decision point after quote:** ask whether MB-osat will bundle front ADS dust-boot / bump-stop installation with steering-joint work, and confirm wheel alignment is included after tie rod / ball joint replacement.
 
 ---
 
@@ -475,7 +494,7 @@ All sourceable within a single trip to Motonet + one online order (Verkkokauppa 
 
 ---
 
-*Last updated: 2026-04-27 (evening) — Status updates from Monday: (1) **URGENT row** front ADS dust boots (MEYLE 014 032 0032 ×2) ORDERED → **ARRIVED** from Autodoc — install at next jack-stand session. (2) **Priority 1B** main poly-V belt (ContiTech 6PK2523) + A/C V-belt (ContiTech AVX13X950) ORDERED → **ARRIVED** from Autodoc — install paired with tensioner / pulley inspection bench session per Priority 1B notes. (3) Acoustic carpet (2 m², dark grey) + polyfill acquired from Autoviihde for sub-box covering and decorative-lid finish — see `work/subwoofer_enclosure/README.md` §9 update. (4) M6 stabilizer screw deferred per Autoviihde recommendation — see sub README §8.4 + §11 decisions log.*
+*Last updated: 2026-04-30 — MB-osat inspection updates: distributor caps + rotors ORDERED after idle-misfire assessment (delivery expected 2026-05-05); new Priority 4B steering/suspension quote-pending section added from MB-osat findings; front ADS dust boots / bump stops now independently confirmed by MB-osat. Exhaust parts are NOT needed for the resonance; loose front heat shields are a simple fix and tracked in `known_issues.md`.*
 
 *Earlier: 2026-04-26 (evening) — §6B Audio: added "DSP Mount & Ground Hardware" row capturing the passenger-cubby install hardware list (M6 ring + star washer + nyloc for the welded-stud chassis ground, optional M5 self-tappers for trim-panel retention, M4 wood screws for amp → base plate, base plate cut from sub-box MDF offcut). Driven by 2026-04-26 evening recon: passenger cubby has a friction-fit factory plastic trim panel as the mounting surface, an M6 welded chassis stud for grounding (dedicated audio reference, isolated from the Becker Verdeck-control return path), and a hand-sized pass-through to the driver-side cubby for the sub speaker run. See diary entry "April 26, 2026 (evening) — DSP install recon: passenger cubby ground point + attachment strategy" for full rationale.*
 

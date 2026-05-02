@@ -8,25 +8,54 @@ The focus here is not the Pi GUI itself. The focus is the layer beneath it:
 `R129 signal source -> protected front-end -> Nordic node -> BLE -> Raspberry Pi 5 UI`
 
 ## Architectural Overview
-The system is split into four hardware roles:
+The system is split into four hardware roles. (An earlier revision had five — a separate "always-on sentry" node — but its responsibilities have been folded into the cabin signal node, which is naturally well-positioned to do them. See node 3 below.)
 
 ### 1. Cabin hub: `Raspberry Pi 5`
 - fast-boot local UI
 - logging, storage, and visualization
-- BLE central for the sensor node
+- BLE central for the engine-bay sensor node
+- USB-CDC host for the always-on cabin signal node
+- power-enable controlled by the cabin signal node's high-side switch (Pi boots when the owner's phone is in proximity)
 - no direct exposure to raw under-hood automotive signals
 
-### 2. Engine-bay instrumentation node: `Thingy:53` / `nRF5340`
+### 2. Engine-bay instrumentation node: `Thingy:53` / `nRF5340` / `nRF54L15`
 - mounted in the `F32` computer box area
 - battery removed before engine-bay deployment
-- reads protected analog and digital channels
+- reads protected analog and digital channels for **under-hood-only signals**: `X11` blink codes, `EHA` current, airflow potentiometer (`B2`), lambda / integrator at `N3`, engine-side `ECT` (`B11/2`)
 - timestamps and normalizes the data before sending it over BLE
+- *cabin-side signals (cluster gauge senders, brake, kickdown, VSS, TD, etc.) moved to node 3 below — see `docs/cabin_signal_survey.md`*
 
-### 3. Always-on sentry node: low-power Nordic device
-- separate from the engine-bay measurement path
-- handles BLE wake-on-approach
-- controls the Pi power-enable path
-- **BLE keyless lock/unlock:** drives the PSE central locking lock/unlock signal via a transistor output, replacing the factory IRCL infrared remote (deprioritized — fobs non-functional, re-pairing not cost-effective). Phone BLE with bonded encryption is more secure than 1991 IR rolling codes. Requires identifying the IRCL→PSE signal wire at the IRCL module connector and adding one GPIO + small MOSFET/transistor to the sentry board. Walk-up experience: phone proximity triggers both unlock and RPi5 boot simultaneously
+### 3. Always-on cabin signal node: `nRF54L15`
+
+Same MCU family as the engine-bay node, deliberately, for ecosystem consistency (one Zephyr/`nrfx` toolchain, one `FW_nrf/payload/` wire format, one Nordic SDK across the project).
+
+- mounted in or near the front cubby alongside the RPi5
+- powered always-on from `F20_6` (trunk fuse box, 8 A white, terminal 30 permanent 12 V — same fuse that already feeds `PSE`, `IRCL`, antenna, and trunk light) via a low-Iq automotive buck. Target standby ≤200 µA at the input
+- connected to the Pi over **USB-CDC** (wired, no BLE for telemetry) — appears as `/dev/ttyACM0`
+- reuses the [`FW_nrf/payload/r129_payload.h`](../FW_nrf/payload/r129_payload.h) wire format with a new `R129_TYPE_CABIN = 0x04` payload type
+
+This node has four responsibilities:
+
+#### 3a. Cabin signal acquisition (when ignition is on)
+Reads protected cabin-side signals: instrument cluster pulse and gauge-sender lines (`VSS`, `TD`, coolant gauge sender, fuel sender, outside-air temp), warning-lamp drives, brake-light feed (`KL54`), kickdown switch (`S16/3`), reverse light, hand-brake, `KL15`/`KL30`/`KL58`, console rocker switches, door / hood / trunk ajar. Hosts cabin ambient sensors over its own I²C bus: `BME280` (cabin temp/humidity/pressure), IMU (lateral-g for `ADS` correlation), `TSL2591` (ambient light for display auto-dim).
+
+#### 3b. BLE proximity-based central locking
+Replaces the factory IRCL infrared remote keys, which are effectively dead on `AOK912`. Both fobs tested with fresh batteries 2026-04-06: one has a hardware-dead IR LED, the other transmits weakly and the car does not respond — likely a rolling-code de-sync that requires MB Star Diagnosis re-pairing (~€200+ dealer visit). Decision: skip the IR repair, drive PSE directly from this always-on node instead.
+
+The cabin node BLE-scans for the bonded owner phone with RSSI hysteresis. Phone in proximity → unlock; phone out of range → lock (after a configurable delay). Drive is a single GPIO routed to a small **trunk-side PSE drive board** (one MOSFET / opto + flyback diode + ferrite, mounted near the IRCL/PSE controllers) over a control wire that reuses one spare CAT6 pair from the existing passenger-side BE2210 tap run. The tap onto the IRCL → PSE signal wire is *additive* (parallel to the factory IRCL output), so any future re-paired IR fob would still work.
+
+#### 3c. Pi `5 V` power-enable / wake control
+Drives a high-side P-channel MOSFET on the cabin board itself that switches the Pi `5 V` rail. Logic:
+- Phone proximity match → assert PSE unlock + assert Pi enable simultaneously. Pi boots while the car unlocks; UI is up by the time the driver sits down.
+- Doors close + `KL15` off + RSSI loss → keep Pi enabled for a configurable shutdown grace period (e.g. 60 s) so logs flush, then deassert.
+- `KL15` on (engine running) → keep Pi enabled regardless of BLE state.
+
+This is the function the standalone "sentry" node was originally going to provide; it's now on the cabin node's MCU because the cabin node already lives in the right place and is already BLE-aware.
+
+#### 3d. Lock / proximity / Pi-power state reporting
+The same USB-CDC frames carry the cabin telemetry plus lock state, BLE proximity, last-unlock-timestamp, and Pi power state. The Pi UI surfaces these on the home view.
+
+Detailed bring-up plan, BOM (including the trunk-side PSE drive board and the always-on supply), and stage gates are in [`work/cabin_signal_node/README.md`](../work/cabin_signal_node/README.md). Detailed signal inventory and PSE wiring approach are in [`docs/cabin_signal_survey.md`](cabin_signal_survey.md) §"Always-On Operation and BLE Keyless Lock/Unlock".
 
 ### 4. Trunk battery monitor: `INA226` + `DS18B20`
 - mounted in the trunk next to the battery
@@ -39,7 +68,14 @@ The system is split into four hardware roles:
 - replaces the battery voltage divider previously planned for `ADS1115 A1` on the engine-bay node, freeing that channel for a second engine-bay analog sensor
 - upgrade path: a bolt-terminal current shunt can be added inline with the battery negative cable later if direct current measurement proves necessary
 
-This four-node split matters because the always-on sentry, the engine-bay measurement node, and the trunk battery monitor have different electrical risk profiles and physical locations. The battery monitor is the simplest node electrically — I2C + one-wire only, no automotive signal conditioning, and no modifications to the battery wiring.
+This four-node split matters because each node has a distinct electrical risk profile and physical location:
+- the engine-bay node lives in a hot, electrically noisy environment and must be ruggedized;
+- the cabin node lives in the same cubby as the Pi, sees only cabin-tame signals, runs always-on at sub-mA standby off `F20_6` permanent 12 V, and uses USB-CDC for telemetry to the Pi (no firewall to cross, no BLE bandwidth needed) plus its BLE radio for owner-phone proximity unlock;
+- the trunk monitor is purely I²C + 1-Wire over a short cable and never touches a vehicle signal pin directly.
+
+The cabin and trunk monitor are the simplest nodes electrically. Routing every cabin signal through the engine-bay node was the previous plan; it was changed when it became clear that signals like `VSS`, `TD`, brake, kickdown, and the cluster gauge senders are all natively cabin-side and forcing them through the firewall costs BLE bandwidth and engine-bay ADC channels for no engineering benefit.
+
+**On the absorbed sentry node**: the previous architecture called for a fifth node, an always-on sentry that owned BLE wake / Pi power-enable / IRCL→PSE keyless drive. With the cabin signal node now necessarily present in the same cubby, and necessarily including BLE for proximity unlock, the cabin node becomes the natural home for those three responsibilities — keeping just one always-on Nordic MCU in the car. See [`work/cabin_signal_node/README.md`](../work/cabin_signal_node/README.md) Stages 6–7 for the bring-up plan.
 
 ## The Two R129 Diagnostic Port Families
 To study the possibilities properly, it helps to separate platform-wide `R129` knowledge from what is most likely present on `AOK912`.
@@ -91,7 +127,9 @@ Design implication:
 
 ## Signal Categories and What They Tell You
 
-### 1. Blink-code lines
+Each signal in this section is annotated with its owner node (engine-bay or cabin) — see [`docs/cabin_signal_survey.md`](cabin_signal_survey.md) for the full per-signal table.
+
+### 1. Blink-code lines (engine-bay node)
 These are the safest and most valuable first targets.
 
 Why they matter:
@@ -104,7 +142,7 @@ Recommended acquisition:
 - divider plus clamp and comparator, or optocoupler isolation
 - optional future open-collector code-clear output, but only with a deliberate interlock
 
-### 2. Lambda / integrator duty-cycle
+### 2. Lambda / integrator duty-cycle (engine-bay node)
 This is one of the best live KE-Jetronic signals for actual diagnosis.
 
 Why it matters:
@@ -116,7 +154,7 @@ Recommended acquisition:
 - primary path: digital pulse measurement
 - secondary path: RC-averaged analog trend if needed
 
-### 3. TD / RPM pulse
+### 3. TD / RPM pulse (cabin node — moved 2026-04-26)
 Useful as a common timing reference for all other measurements.
 
 Why it matters:
@@ -124,10 +162,11 @@ Why it matters:
 - makes air-flow and duty-cycle traces far more interpretable
 
 Recommended acquisition:
-- protected digital front-end with divider/clamp and edge cleanup
+- **tap at the instrument cluster** (cluster receives `TD` from `EZL` `N1/3` to drive the tach gauge — no need to cross the firewall)
+- protected digital front-end with divider/clamp and opto, MCU timer-capture pin
 - not a direct ADC target
 
-### 4. Air-flow potentiometer
+### 4. Air-flow potentiometer (engine-bay node)
 This is one of the best first analog signals to bring into the ADC path.
 
 Why it matters:
@@ -138,7 +177,7 @@ Recommended acquisition:
 - direct dedicated conditioned ADC channel first
 - series resistor, clamp, and RC filter before the ADC
 
-### 5. `EHA` current
+### 5. `EHA` current (engine-bay node)
 This is a high-value signal and a second-stage task.
 
 Why it matters:
@@ -154,6 +193,23 @@ Recommended acquisition:
 - dedicated insert harness only
 - precision shunt with proper amplifier or carefully designed differential measurement
 - do not attempt this through a casual probe arrangement
+
+### 6. Cabin-side signals (cabin node — added 2026-04-26)
+A large family of signals that physically appear inside the cabin and have nothing to gain from a firewall round-trip:
+
+- **Vehicle speed `VSS`** — pulse at the cluster, used by cruise, trans, and the rollover module. Tap at cluster `X25`.
+- **Brake-light feed `KL54`** — at the brake pedal switch (`S9`). Digital 12 V.
+- **Kickdown switch `S16/3`** — under the accelerator pedal, before the firewall. Digital 12 V momentary.
+- **Reverse light** — from the trans selector switch, reaches the cluster reverse-lamp circuit. Digital 12 V.
+- **Hand-brake switch** — switch-to-ground, lights the dash lamp.
+- **Cluster analog senders** — coolant gauge sender, fuel level sender, oil pressure / oil level switch, outside-air temperature (`B14`). Conditioned to an `ADS1115` on the cabin node.
+- **Cluster warning lamps** — `ADS`, `ABS`, `ASR`, alternator, brake-pad-wear, brake fluid, coolant low, washer low, fuel low, seatbelt. Read passively at the lamp drive lines.
+- **`KL15` / `KL30` / `KL58`** — ignition-on, battery-presence, illumination-dimmer references for the Pi UI auto-dim and wake logic.
+- **Console rocker switch states** — `ADS` Sport/Comfort, hazard, defroster, soft-top.
+- **Door / hood / trunk ajar** — interior-light circuit taps.
+- **Cabin ambient (new sensors)** — `BME280`, IMU, `TSL2591` over the cabin node's I²C bus.
+
+Full inventory and per-signal tap point / conditioning / ownership table: [`docs/cabin_signal_survey.md`](cabin_signal_survey.md).
 
 ## Front-End Electronics Strategy
 
@@ -287,6 +343,7 @@ The `Thingy:53` deployment assumptions still stand:
 - The later `38-pin` port is still worth documenting as the broader `R129` reference design target.
 - `ADS1115` is appropriate for conditioned slow analog signals, not raw vehicle lines.
 - The analog switch should sit after protection/filtering, never before it.
-- Blink-code, duty-cycle, and RPM are the best first data sources.
-- Air-flow potentiometer is the best first analog channel.
+- Blink-code and duty-cycle are the best first engine-bay data sources.
+- Air-flow potentiometer is the best first engine-bay analog channel.
 - `EHA` current is a high-value second-stage measurement that deserves its own insert harness and careful analog design.
+- **`VSS`, `TD`, brake, kickdown, cluster gauge senders, and warning lamps are owned by the new cabin signal node, not the engine-bay node** — see [`docs/cabin_signal_survey.md`](cabin_signal_survey.md). The engine-bay node's `ADS1115` channels and GPIO budget are reserved for genuinely under-hood signals.

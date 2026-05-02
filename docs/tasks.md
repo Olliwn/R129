@@ -94,17 +94,19 @@ Goal: get a microphone into the RPi5 audio stack, primarily so phone calls route
 - Dash-top is worst for echo (speakers below, glass in front).
 - Whichever chosen, the cable run is: mic location → down A-pillar → along headliner → under dash → into center stack void → into RPi5 cubby.
 
-**Current leaning (to revisit after sleeping on it):**
-- Primary: **Option A (ReSpeaker HAT + headliner capsule)** — best voice quality, hardware AEC, but uses the GPIO header (check collision with Alps joystick wiring).
-- Fallback: **Option C (USB conference mic)** — zero risk, fastest to ship, ugliest.
-- Rejected for now: Option B (I2S length limit), Option D (too much wiring work for marginal SNR gain over A).
+**Current leaning (revised 2026-05-02 evening — mic location locked to front cubby):**
+- **Mic location locked: front cubby, co-located with the OLED display, behind the fascia.** Decision rationale: the cable path simplifies dramatically — single ~2 m run alongside C16 (HDMI) / C17 (display USB) / C18 (cabin-node USB-CDC) in Bundle G of the §5.8 loom, all going front cubby ↔ rear passenger cubby (Pi). No headliner / A-pillar trim work, no separate cable run.
+- **Acoustic caveat to accept:** mid-dash position is closer to the HVAC vent than the headliner / A-pillar would be. Voice quality will be acceptable for hands-free CarPlay phone calls (the primary use case here) but not studio-grade. Pick hardware with software/HW AEC.
+- **Hardware leaning revised:** **Option C (USB conference mic puck)** is now primary — single 2 m USB cable, plug-and-play, no GPIO conflict with the Alps RKJXT1F42001 joystick wiring (which already takes the Pi GPIO header for 7 inputs + GND). Aesthetics aren't a concern because the mic capsule lives behind the display fascia, not visible in the cabin.
+- **Option A (ReSpeaker 2-Mic Pi HAT + analog electret in front cubby, ~2 m shielded analog up to the HAT in the rear cubby)** remains a viable fallback if Option C's voice quality disappoints — better hardware AEC, but adds GPIO arbitration with the Alps joystick (the joystick uses 7 GPIOs; ReSpeaker HAT uses 6 — potential overlap on at least 2 pins, would need pin-by-pin check).
+- Rejected: Option B (I2S length limit, even at the new 2 m it's marginal), Option D (USB sound card + analog electret = same complexity as A without the AEC win).
 
-**Decisions to finalize before dash-out:**
-1. Pick option A / B / C / D.
-2. Decide mic physical location (headliner dome vs. A-pillar vs. visor).
-3. Spec the exact cable type + length for that option (so it can be pulled in the same loom as AUX + CAT6 + power).
-4. Confirm no GPIO conflict with the Alps joystick wiring (only relevant for Option A/B).
-5. Order the mic hardware so it's on hand *before* the console comes apart.
+**Decisions to finalize before dash-out (status 2026-05-02 evening):**
+1. ~~Pick option A / B / C / D.~~ → **Option C primary, Option A fallback.** Final hardware order can wait, but cable path is locked.
+2. ~~Decide mic physical location (headliner dome vs. A-pillar vs. visor).~~ → **Front cubby, behind the OLED display fascia. Locked.**
+3. ~~Spec the exact cable type + length for that option.~~ → **Shielded USB 2.0 A-to-C 2 m (Option C) or shielded analog pair 2 m (Option A fallback). Joins Bundle G of the §5.8 loom.**
+4. ~~Confirm no GPIO conflict with the Alps joystick wiring~~ → **N/A for Option C (USB-only). For Option A fallback, pin-by-pin GPIO arbitration check still required.**
+5. **Still open:** order the mic hardware. Worst-case insurance: pull a fish-string in the Bundle G sleeve so the eventual USB cable can be drawn through later without re-opening the trim.
 
 ### Radar cockpit — MIMO mmWave front/rear view on the RPi5 OLED  📅 Winter 2026–27
 Two automotive MIMO mmWave radars (one behind each bumper) feeding a custom amber-on-black top-down radar scope on the 5.5" OLED. Zero external vehicle modifications — mmWave penetrates painted plastic bumpers. Replaces the originally-considered rear camera (rejected: no invisible R129 mount) and ultrasonic sensors (viable but still needs 4 bumper holes).

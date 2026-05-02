@@ -1,6 +1,6 @@
 vehicle: '1991 Mercedes-Benz 500 SL, chassis 129.066, engine M119.960 (5.0L V8 32-valve DOHC), fuel system KE-Jetronic, transmission
   722.3, key systems: ADS I (Adaptive Damping System, first generation), Niveauregulierung (mechanical level control, independent
-  from ADS electronics), KE-Jetronic (CIS-E mechanical/electronic fuel injection), EZL ignition (distributorless), PSE (pneumatic
+  from ADS electronics), KE-Jetronic (CIS-E mechanical/electronic fuel injection), EZL electronic ignition with dual distributor caps/rotors, PSE (pneumatic
   central locking system), N7 exterior lamp failure module, Infrared remote control (IRC/IRCL)'
 total_documents: 150
 auto_included: 110
