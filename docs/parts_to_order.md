@@ -154,8 +154,8 @@
 
 | Part | OEM Number / Ref | Qty | Condition | Notes |
 | :--- | :--- | :--- | :--- | :--- |
-| Distributor Caps | A 119 158 01 02 | 2 | **ORDERED 2026-04-30 — DUE NEXT TUESDAY** | Ordered after MB-osat observed incomplete cylinder firing at idle and agreed the cap photo justified replacement regardless. Delivery expected 2026-05-05. Bosch or Bremi preferred. |
-| Distributor Rotors | (verify w/ MB-osat) | 2 | **ORDERED 2026-04-30 — DUE NEXT TUESDAY** | Rotor arms on the engine side of the distributor caps. Ordered with caps after MB-osat idle-misfire assessment. Delivery expected 2026-05-05. |
+| Distributor Caps | A 119 158 01 02 | 2 | **DELIVERED + INSTALLED 2026-05-05** | Bosch caps, fitted by MB-osat 2026-05-05. Combined invoice with rotors + labour: **€426.70 total** (parts + labour bundled — line-item split not separately invoiced). Subjective post-install: idle *may* be smoother but no pre/post video baseline was captured (lesson logged for future swaps — always shoot a 30 s pre-change video). Cabin vibration persists → most likely engine mounts, deferred until after the suspension job. |
+| Distributor Rotors | A 119 158 06 88 (Bosch) | 2 | **DELIVERED + INSTALLED 2026-05-05** | Bosch rotors, fitted same session as the caps. See cap line above for combined €426.70 invoice and post-install notes. |
 | Spark Plug Wires (full set) | (verify w/ MB-osat) | 1 set (8) | **Inspect first** | Measure resistance: <10 kΩ per wire. Replace if out of spec or brittle. |
 | ~~V-Belt Set (M119) — moved to Priority 1B, glazed and slipping confirmed 2026-04-19~~ | — | — | **PROMOTED** | See new Priority 1B entry below. No longer "inspect first". |
 | ~~Belt Tensioners / Idler Pulleys — moved to Priority 1B, inspect during belt swap~~ | — | — | **PROMOTED** | See new Priority 1B entry below. |
@@ -168,22 +168,40 @@
 
 ---
 
-## PRIORITY 4B — Steering / Suspension Wear (MB-osat Quote Pending)
+## PRIORITY 4B — Steering / Suspension Wear (MB-osat Quote Received 2026-05-05 — Authorisation Pending)
 
-*MB-osat inspection 2026-04-30 found multiple loose steering/suspension joints. Wait for their offer next Monday before ordering parts piecemeal; the job likely needs bundling and alignment afterward.*
+*MB-osat inspection 2026-04-30 found multiple loose steering/suspension joints. Quote returned 2026-05-05: **€2545 total** (~€1502 labour + ~€1043 parts), 9-line scope including mandatory wheel alignment. Authorisation deferred pending answers to seven open questions (see below) and bundling decision with engine-mount inspection. Target authorisation date: 2026-05-12.*
 
 | Finding | Side / Qty | Posture | Notes |
 | :--- | :--- | :--- | :--- |
-| Rear lower control arm outer joint loose | Left + right | **QUOTE PENDING** | Finnish note: `taka alatukivarren ulkopään nivel, vasen ja oikea väljät`. |
-| Lower ball joint loose | Right | **QUOTE PENDING** | Finnish note: `oikea alapallonivel väljä`. |
-| Tie rod inner + outer end loose | Left | **QUOTE PENDING** | Finnish note: `vasen raidetanko sisä ja ulkopää väljä`. |
-| Tie rod inner end loose | Right | **QUOTE PENDING** | Finnish note: `oikea raidetanko sisäpää väljä`. |
-| Tie rod outer-end protective boot torn | Right | **QUOTE PENDING** | Finnish note: `ulkopäässä suojakumi rikki`. |
-| Idler arm play | — | **QUOTE PENDING** | Finnish note: `apusimpukassa välys`. |
-| Lower control arm rear bushings deteriorated | Left/right likely | **QUOTE PENDING / MONITOR** | Finnish note: `alatukivarsien taaemmat puslat huonossa kunnossa ja paloja lähtenyt, mutta jäykät vielä`. |
-| Front shock dust covers + bump stops | Front ×2 | **PARTS ON HAND / INSTALL WITH SUSPENSION WORK** | Finnish note: `etuiskarien pölysuojat ja pohjaan lyöntikumit`. Dust boots already arrived 2026-04-27; confirm bump-stop part scope in quote. |
+| Rear lower control arm outer joint loose | Left + right | **QUOTED €291.40 labour + parts** | Finnish note: `taka alatukivarren ulkopään nivel, vasen ja oikea väljät`. Quote line: "Taka-akselin alatukivarren alapallonivel (molemmat) ulompi kumityyny vaihto". |
+| Lower ball joint loose | Right | **QUOTED — possibly bundled with control arm** | Finnish note: `oikea alapallonivel väljä`. Quote line: "Olka-akselin oikean alemman kannatinnivelen vaihto" €28.20 + ball joint part €30.00. **Open question:** ball joint may be included with the lower control arm if item below is in scope ("alapallo sis alatukivarteen, jos vaihdetaan ne?"). |
+| Tie rod inner + outer end loose | Left | **QUOTED — full tie rod replacement** | Finnish note: `vasen raidetanko sisä ja ulkopää väljä`. Full assembly replaced (€140.00). |
+| Tie rod inner end loose | Right | **QUOTED — full tie rod replacement** | Finnish note: `oikea raidetanko sisäpää väljä`. Full assembly replaced (€143.50). |
+| Tie rod outer-end protective boot torn | Right | **QUOTED — covered by tie rod replacement** | Finnish note: `ulkopäässä suojakumi rikki`. Tie rod assembly comes complete with new boots. |
+| Tie rod labour | — | **QUOTED €112.80 + €263.20** | "Raide- ja yhdystanko irrotus ja asennus" + "Raidetangon kannatinvivun helat vaihto". |
+| Idler arm play | — | **QUOTED — bushing replacement** | Finnish note: `apusimpukassa välys`. Bushings only (rebuild kit unavailable, ~1 week loose); €185.00 parts. **Open question:** bolt requirement TBD ("pultti tarve?"); €111.50 bolt line currently quoted at qty 0. |
+| Front lower control arm rear bushings deteriorated | Left + right | **QUOTED — full control arm replacement** | Finnish note: `alatukivarsien taaemmat puslat huonossa kunnossa ja paloja lähtenyt`. Both arms replaced as complete assemblies: €300.00 + €177.12 + €50.00 adjustment bolts. **Open question:** asymmetric pricing + "TT" suffix on the €300 line — confirm L/R + part grade (OEM vs. MEYLE/TRW). Lead times: left ~1 week (Germany / EU), right in stock, bolts 1–2 days. Quote line: "Etuakselin vasemman ja oikean alemman poikittaistukivarren irrotus ja asennus" €206.80 labour. |
+| Left front wheel bearing | Left | **QUOTED €94.00 + €18.80 labour, kit €31.50, grease €6.00** | "Vasen etulaakeri välys". Quote lines: "Pyörännavan etu irrotus ja asennus, tiivisterenkaiden vaihto" + "Pyörännavan pyöränlaakerin etu vaihto". MB hub bushings ×2 €54.00 + M14×90 bolts ×2 €32.00 + bushing nuts ×2 €6.60. |
+| Front shock dust covers + bump stops | Front ×2 | **PARTS ON HAND (MEYLE boots) + Sachs bump-stop kit quoted €44.00** | Finnish note: `etuiskarien pölysuojat ja pohjaan lyöntikumit`. MEYLE 014 032 0032 dust boots arrived 2026-04-27. Quoted "2 vaimennintuen etu irrotus ja asennus" €206.80 labour + Sachs suojakumi-pohjaanlyönti srj. €44.00. **Open question:** can MB-osat use the on-hand MEYLE boots and only invoice the bump-stop portion of the Sachs kit, or is the kit not splittable? |
+| Exhaust heat shields loose | Front + middle | **QUOTED in pientarvikkeet/labour** | Quote line: "Kiinnitetään pakoputkien lämpösuojapellit esimerkiksi pakoputkiklemmarein". Etuputkien shield loose; centre muffler shield rusted + rattling. Closes out the "loose front heat shields" item from `docs/known_issues.md`. |
+| Wheel alignment | — | **QUOTED €99.00** | "Aurauskulmien säätö". Required after tie rod + ball joint replacement. **Open question:** front-only or 4-wheel alignment? R129 has rear toe-settable independent suspension. |
 
-**Decision point after quote:** ask whether MB-osat will bundle front ADS dust-boot / bump-stop installation with steering-joint work, and confirm wheel alignment is included after tie rod / ball joint replacement.
+**€2545 total breakdown (rough split): ~€1502 labour + ~€1043 parts + pientarvikkeet €5.48.**
+
+**Lead times:** tie rods ~2 weeks (longest pole); idler arm bushings ~1 week loose; left lower control arm ~1 week from Germany; everything else short order.
+
+**Open questions to resolve with MB-osat before authorisation (transcribed to diary 2026-05-05):**
+
+1. Lower ball joint (qty 1, €30.00) bundled into lower control arm (item 6) → drop the standalone line if so.
+2. Lower control arm L/R + grade clarification (`Tukivarsi (TT)` €300 vs `Alatukivarsi oikea` €177.12 — asymmetric pricing).
+3. Idler arm bolt: original reusable, or add the €111.50 line?
+4. Bump-stop kit splittable from MEYLE boots already on hand, or full Sachs kit only?
+5. MEYLE dust boots accepted as substitute parts by MB-osat?
+6. Wheel alignment scope (front only vs 4-wheel).
+7. Engine-mount inspection bundle while front lower control arms are out (cabin vibration finding from 2026-05-05 diary).
+
+**Decision posture:** authorisation deferred until 2026-05-12 (after belt swap next weekend — see Priority 1B / diary 2026-05-05) so cabin-vibration variable can be partly de-confounded by the belt + tensioner inspection, and so MB-osat answers above can be incorporated.
 
 ---
 

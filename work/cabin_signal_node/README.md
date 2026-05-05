@@ -2,13 +2,22 @@
 
 ## Purpose
 
-Build the always-on cabin node in the `R129` distributed system: a small `nRF54L15` MCU board mounted in or near the front cubby (alongside the RPi5), wired to the Pi over USB-CDC, with three responsibilities:
+Build the always-on cabin node in the `R129` distributed system: a small `nRF54L15` MCU board, wired to the Pi over USB-CDC, with three responsibilities:
 
 1. **Cabin signal acquisition** (when ignition is on) — instrument cluster gauge senders + lamp drives, brake and kickdown switches, hand-brake / reverse / door / hood / trunk ajar, console rocker switches, `KL15` / `KL30` / `KL58` references, plus cabin ambient sensors.
 2. **BLE proximity-based central locking** (always on) — replaces the dead IR remote keys; bonded phone in proximity → unlocks via `PSE` central-locking system; phone out of range → locks. See [`docs/known_issues.md`](../../docs/known_issues.md) §"Central Locking (PSE)" for the IR-key abandonment decision.
-3. **Pi `5 V` power-enable / wake control** (always on) — the high-side switch that brings the Pi up on phone approach and lets it shut down gracefully after the owner leaves.
+3. **Pi power-enable / wake control + cabin 12 V power-domain gate** (always on) — the high-side switch that brings the 85 W cigarette-lighter USB charger up on phone approach (and thereby the Pi, the Qi wireless charging pad, and the spare USB outlet that all hang off it) and lets the Pi shut down gracefully after the owner leaves. See §"Pi 5 V high-side switch" below for the upstream-12 V re-spec adopted 2026-05-04.
 
 Roles 2 and 3 were originally on a separate sentry node; they have been folded into this cabin node so that there's exactly one always-on Nordic MCU in the car. Full architectural rationale and the complete signal inventory live in [`docs/cabin_signal_survey.md`](../../docs/cabin_signal_survey.md). This document captures the bring-up tasks, BOM, and stage gates.
+
+### Physical split (as-installed 2026-05-03)
+
+The cabin node ended up **physically split across two locations** during the May 2026 center console refresh — the BLE / Pi-wake half moved to the rear passenger cubby alongside the Pi and the DSP; the cabin-signal-acquisition half is deferred to its own future board near the cluster:
+
+- **Rear cubby (built and powered now):** `nRF54L15` carrier with BLE radio, USB-CDC link to Pi, the high-side power gate for the 85 W charger domain, and the always-on power section (now sourced from a local tap off the post-AGU 8 mm² CCA rail — see §"Always-on power supply" below). This is the always-on portion required for keyless entry + Pi wake.
+- **Front (deferred):** The cluster-pinout, ambient-sensor, and instrument-tap acquisition front-end (Stages 2–5 below). Will likely live as a second small board near the cluster when the cluster is pulled. The two boards still appear to the Pi as a single logical "cabin node" because they share the same USB-CDC frame format; whether they end up on one MCU with a long sensor harness or two MCUs federated over a short serial link is a Stage-2 decision.
+
+The BOM, protection rules, frame format, and stage gates below are unchanged by this split — Stages 0–5 still describe the acquisition half, Stages 6–8 still describe the always-on half. Only the geometry and the always-on power source have changed.
 
 ## Why a Separate Node (and Not Just More Pi GPIO)
 
@@ -19,24 +28,39 @@ Roles 2 and 3 were originally on a separate sentry node; they have been folded i
 ## Architectural Position
 
 ```
-F20_6 +12V ─► fuse ─► low-Iq buck ─► +3.3 V always-on
-                                            │
-                ┌─────────────────── cabin signal node (this work) ───────────────────┐
-cluster X25/X3 ─►                                                                     │
-brake / kickdown ─► protection front-end ──┬─► nRF54L15 ──USB-CDC──►──► RPi5         │
-console / doors  ─►                        │       │                  vehicle_state.py
-ambient sensors  ─►                        ADS1115 │                                  │
-                                                   │                                  │
-                                                   ├── BLE radio (always-on, scanning)
-                                                   │     phone proximity, RSSI hysteresis
-                                                   │
-                                                   ├── GPIO out → trunk-side PSE drive board
-                                                   │              → IRCL→PSE wire (lock/unlock)
-                                                   │
-                                                   └── GPIO out → high-side MOSFET → Pi 5 V
-                                                                  (wake on approach,
-                                                                   shutdown grace after leave)
-                └─────────────────────────────────────────────────────────────────────┘
+trunk battery +12V ─► 40 A AGU ─► 8 mm² CCA to rear cubby ─► DSP +12V terminal
+                                                          │
+                                                          ├── local Wago tap
+                                                          │      │
+                                                          │      ├─► 1 A ATO fuse ─► low-Iq buck ─► +3.3 V always-on
+                                                          │      │                                       │
+                                                          │      │     ┌────── cabin node (rear half, always-on) ─────┐
+                                                          │      │     │                                              │
+                                                          │      │     │  nRF54L15 ──USB-CDC──►──► RPi5              │
+                                                          │      │     │       │                  vehicle_state.py    │
+                                                          │      │     │       │                                      │
+                                                          │      │     │       ├── BLE radio (scanning)               │
+                                                          │      │     │       │     phone proximity, RSSI hysteresis │
+                                                          │      │     │       │                                      │
+                                                          │      │     │       ├── GPIO out → trunk-side PSE drive    │
+                                                          │      │     │       │              board → IRCL→PSE wire   │
+                                                          │      │     │       │                                      │
+                                                          │      │     │       └── GPIO out → 12 V high-side MOSFET ──┼─► 85 W charger ─► Pi 5 V
+                                                          │      │     │                       (gates the entire      │                  ─► Qi pad
+                                                          │      │     │                        85 W charger domain)  │                  ─► spare USB
+                                                          │      │     └──────────────────────────────────────────────┘
+                                                          │      │
+                                                          │      └─► (high-side MOSFET drain — see above)
+                                                          │
+                                                          └─► (DSP — independent, always-on per audio architecture)
+
+
+                ┌──── cabin signal node, FRONT HALF (deferred — Stage 0/2–5) ────────┐
+cluster X25/X3 ─►                                                                    │
+brake / kickdown ─► protection front-end ──┬─► nRF54L15 ──USB-CDC──►──► RPi5        │
+console / doors  ─►                        │                       vehicle_state.py  │
+ambient sensors  ─►                        ADS1115                                   │
+                └────────────────────────────────────────────────────────────────────┘
 
                 ┌────────── engine-bay node (existing) ──────────────┐
 X11 / EHA / B2 ─► protection ─► nRF54L15/nRF5340 ──BLE─────────────►┤
@@ -90,13 +114,16 @@ Most parts are already in stock per the engine-bay node's `docs/nRF5430_Interfac
 
 ### Always-on power supply (new — was on the deleted sentry node)
 
+**Source change 2026-05-04:** The originally planned `F20_6` long pull from the cabin fuse box is **dropped**. With the cabin node's always-on half relocated to the rear cubby alongside the DSP, it now taps the post-AGU 8 mm² CCA rail locally (Wago lever-nut on the DSP +12 V terminal). This eliminates the long permanent-12 V cable run that would otherwise have been redundant with the CCA rail running to the same physical location, and consolidates everything downstream of one fuse (the 40 A AGU at the trunk battery). The local in-line fuse is still required to protect the cabin-node branch from the 40 A upstream limit.
+
 | # | Component | Part / Ref | Qty | Source | Notes |
 |---|-----------|------------|-----|--------|-------|
-| A1 | Low-Iq buck `12 V → 3.3 V` | `Recom R-78E3.3-0.5` (~10 µA Iq) *or* `TI TPS62840` SMD if available | 1 | new (~€8) | Powers the cabin node from `F20_6` permanent 12 V; target ≤200 µA standby |
-| A2 | In-line fuse holder | ATO blade in-line | 1 | new (~€3) | On the new `F20_6` tap before the buck |
-| A3 | ATO 5 A fuse | — | 2 | new (~€1) | Holder + spare |
-| A4 | Permanent-12V wire | 1.5 mm² red, ~3 m | qty | in stock | `F20_6` to front cubby along the passenger-side trim run |
-| A5 | Reverse-polarity / TVS protection | `SS24` Schottky + `SMBJ18A` TVS at the input | 1 | in stock | Standard automotive front-end |
+| A1 | Low-Iq buck `12 V → 3.3 V` | `Recom R-78E3.3-0.5` (~10 µA Iq) *or* `TI TPS62840` SMD if available | 1 | new (~€8) | Powers the cabin node from the post-AGU CCA rail; target ≤200 µA standby for the cabin board itself |
+| A2 | In-line fuse holder | ATO blade in-line | 1 | new (~€3) | On the local Wago tap branch — protects against an unfused short on the cabin-node branch (40 A AGU upstream is too coarse to protect 22 AWG branch wiring) |
+| A3 | ATO 1 A fuse | — | 2 | new (~€1) | Holder + spare. Sized to cabin-node + buck draw (~50 mA worst-case); high-side MOSFET drain takes its own dedicated tap branch — see §"Pi 5 V high-side switch" |
+| A4 | Local-tap branch wire | 1.5 mm² red, ~0.5 m | qty | in stock | Wago lever-nut on DSP +12 V terminal → fuse → buck (rear cubby internal run) |
+| A5 | Reverse-polarity / TVS protection | `SS24` Schottky + `SMBJ18A` TVS at the input | 1 | in stock | Standard automotive front-end (kept even though the post-AGU rail is reverse-polarity-clean by virtue of the AGU + battery clamp) |
+| A6 | Wago lever-nut, 3-conductor, 4 mm² | `221-413` | 1 | in stock | Tap point on DSP +12 V terminal — sized to land 8 mm² CCA + 1.5 mm² branch + 1.5 mm² high-side MOSFET drain branch on a single nut |
 
 ### PSE central-locking drive board (new — trunk-side, replaces IR remote function)
 
@@ -112,17 +139,27 @@ Lives in the trunk near the IRCL/PSE controllers. Driven from the cabin node by 
 | P6 | Veroboard for the trunk drive board | small offcut | 1 | in stock | ~30 × 25 mm enough |
 | P7 | Heat-shrink + small ABS enclosure | — | 1 | in stock | Mount in the right-rear trim near the IRCL controller |
 
-### Pi `5 V` high-side switch (new — was on the deleted sentry node)
+### Cabin 12 V power-domain high-side switch (re-spec 2026-05-04 — gates the entire 85 W charger downstream)
 
-Mounted on the cabin board itself. Same circuit topology as [`docs/nRF5430_Interface_Design.md`](../../docs/nRF5430_Interface_Design.md) §"Circuit Design: High-Side 12V Switch" Option A or B.
+**Re-spec context:** Originally this circuit was a small Pi-only `5 V` high-side switch (a few amps). With the architecture decision in [`work/center_console_refresh/README.md`](../center_console_refresh/README.md) §5.6b, this switch is **promoted to the upstream 12 V gate for the entire 85 W cigarette-lighter USB charger**, which in turn feeds the Pi (≤3 A @ 5 V), the Qi wireless charging pad (~2 A @ 5 V), and a spare USB outlet. By gating on the 12 V side *upstream of the charger*, the charger's own quiescent draw also collapses to zero when the Pi is off — a few hundred µA of switch / sense leakage is the only thing left on the always-on rail downstream of this MOSFET.
+
+Steady-state load: ~6–8 A at 12 V (85 W charger ≈ 90 % efficient at 70 % load). Worst-case start-up inrush into the charger's input bulk caps + Qi pad start-up: design for **15 A peak for ≤10 ms**, **10 A continuous** with thermal margin. Same circuit topology family as [`docs/nRF5430_Interface_Design.md`](../../docs/nRF5430_Interface_Design.md) §"Circuit Design: High-Side 12V Switch" Option B, scaled up.
 
 | # | Component | Part / Ref | Qty | Source | Notes |
 |---|-----------|------------|-----|--------|-------|
-| H1 | P-channel logic-level MOSFET | `IRF9540N` *or* `AO3401` (SMD) | 1 | new (~€2) | High-side switch for Pi `5 V` rail |
+| H1 | P-channel logic-level MOSFET | `IRF4905` (TO-220, ≥40 A, R<sub>DS(on)</sub> ~20 mΩ @ V<sub>GS</sub>=−10 V) **OR** `IPP80P03P4L` (D²PAK, 80 A, R<sub>DS(on)</sub> ~3 mΩ) | 1 | new (~€3–5) | **Re-specced from `IRF9540N` / `AO3401`** — those are sub-5 A parts and would dissipate too much at 8 A continuous. Mount with small heat-spreader tab on the Veroboard copper. Verify R<sub>DS(on)</sub> × I² ≤ 0.5 W at 8 A continuous. |
 | H2 | Gate-drive transistor | `2N3904` | 1 | in stock | Logic-level GPIO pulls gate low to enable |
-| H3 | Gate Zener | 12 V Zener | 1 | in stock | Vgs clamp |
-| H4 | Source/drain bulk capacitor | 100 µF / 25 V | 1 | in stock | Inrush smoothing |
-| H5 | Reverse-polarity protection | `SS24` Schottky | 1 | in stock | Already in `H1` package alternative |
+| H3 | Gate Zener | 12 V Zener | 1 | in stock | V<sub>GS</sub> clamp |
+| H4 | Gate pull-up | 10 kΩ | 1 | in stock | Default-off on power loss / MCU reset |
+| H5 | Source/drain bulk capacitor | 470 µF / 25 V low-ESR | 1 | new (~€1) | **Bumped from 100 µF** — supports the larger inrush into the charger's input caps. Place at the MOSFET drain. |
+| H6 | Inrush limiter | 10 Ω NTC inrush-current-limiter (`SCK-103`) **OR** soft-start RC on gate | 1 | new (~€2) | Optional but recommended — keeps inrush ≤15 A even into a fully-discharged charger input cap. Soft-start gate RC (10 kΩ × 100 nF) is the cheaper alternative if NTC self-heating is a concern. |
+| H7 | Reverse-polarity protection | `SS54` Schottky | 1 | in stock | Already covered upstream by AGU+battery, but local protection on the MOSFET source is cheap insurance |
+| H8 | High-side current sense (optional) | `INA226` | 1 | in stock | Reuses the spare INA226 from the trunk battery monitor 5-pack. Lets the cabin node tell the Pi "you are drawing X A right now" — useful for parasitic-draw diagnostics and for catching a stuck-on Qi pad. |
+| H9 | Local tap branch wire | 4 mm² red, ~0.3 m | qty | in stock | Wago tap on DSP +12 V terminal → MOSFET source. Sized for 10 A continuous + voltage drop. |
+
+**Default state on MCU reset / power loss:** OFF (gate pulled high by H4). On every clean boot, the cabin node holds the gate off until the proximity state machine has converged (≥3 scan windows). Combined with the rear-half cabin node also losing its own 3.3 V rail if the AGU blows, **a single fault upstream brings the entire cabin 12 V power domain down safely** — there is no path for the charger to stay on if the cabin node is dead.
+
+**Parasitic budget when off:** cabin node deep-sleep + BLE scan duty-cycle ≤200 µA, MOSFET gate-leak ≤1 µA, INA226 always-on ~330 µA, leakage through the 470 µF cap ≤10 µA → **target total ≤600 µA on the always-on rail downstream of the AGU.** At 12.5 V resting battery, that's ~7.5 mW or ~180 mWh/day — a 100 Ah battery loses 0.0014 % per day to this domain, well below normal self-discharge.
 
 **Net-new cost (rough): ~€100** (DK + module + low-Iq buck + PSE drive board parts + high-side switch + ambient sensors + USB cable). Slightly more than the original `nRF52840`-only estimate, but **offset by deleting the entire standalone sentry-node BOM** that would otherwise have been spent. Net delta vs. the original four-node plan is small.
 
@@ -258,13 +295,13 @@ The lowest-risk first batch — all simple optocoupled `0`/`12 V` inputs.
 
 This stage absorbs what was originally going to be the standalone sentry-node bring-up.
 
-- [ ] Build the always-on power section on the cabin Veroboard: `F20_6` tap → in-line fuse → reverse-polarity protection → low-Iq buck → 3.3 V always-on rail. Smoke-test on the bench with a 12 V supply and confirm steady-state input current ≤200 µA with the MCU asleep.
-- [ ] Run the new permanent-12-V wire from `F20_6` to the front cubby along the existing passenger-side trim run (same path used by the BE2210 tap and DSP power — see `work/center_console_refresh/README.md`).
+- [ ] Build the always-on power section on the cabin Veroboard: post-AGU CCA-rail Wago tap → 1 A in-line fuse → reverse-polarity protection → low-Iq buck → 3.3 V always-on rail. Smoke-test on the bench with a 12 V supply and confirm steady-state input current ≤200 µA with the MCU asleep.
+- [ ] Wire the local tap on the DSP +12 V terminal in the rear cubby (Wago `221-413`, 4 mm² lever-nut). Branch 1: cabin-node always-on (this stage). Branch 2: high-side MOSFET source for the 85 W charger domain (Stage 6b below).
 - [ ] Implement Zephyr System OFF / RAM-retention sleep with periodic BLE scan wake (e.g. 1 s scan every 5 s while idle).
 - [ ] Implement phone bonding flow: long-press the on-board "bond" button, accept pairing on the phone, store LTK in flash. Test re-bonding after `nrf` reflash. (One-time setup.)
 - [ ] Implement RSSI-based proximity state machine with hysteresis: `unlock` requires RSSI > −60 dBm sustained ≥3 scans; `lock` requires RSSI < −85 dBm or no advert seen for ≥30 s. Tune in the diary as part of in-car testing.
-- [ ] Build the Pi `5 V` high-side switch on the cabin board. Wire its enable input to a cabin-node GPIO. Stage 6 success is measured *without* the PSE drive yet — just confirm phone-approach turns the Pi on and phone-leave turns it off after the grace period.
-- [ ] Verify ignition on (`KL15`) overrides the proximity logic: while the engine is running, the Pi stays on regardless of phone state. (KL15 sense already wired in Stage 2.)
+- [ ] **Stage 6b (re-spec 2026-05-04):** Build the cabin **12 V power-domain high-side switch** on the cabin board (re-spec — see §"Cabin 12 V power-domain high-side switch" above). Drives the upstream 12 V input of the 85 W cigarette-lighter USB charger; the charger's downstream USB outputs feed the Pi (5 V), the Qi pad, and one spare USB outlet — the entire cabin domain comes up and down as one. Wire its enable input to a cabin-node GPIO. Bench-verify with a 12 V supply + a resistive load representing the ~70 W steady-state draw before connecting to the real charger. Stage 6 success is measured *without* the PSE drive yet — just confirm phone-approach turns the charger (and therefore the Pi) on and phone-leave turns it off after the grace period.
+- [ ] Verify ignition on (`KL15`) overrides the proximity logic: while the engine is running, the cabin charger domain stays on regardless of phone state. (KL15 sense lives on the deferred front-half acquisition board — until that board exists, use a temporary jumper from the BE2210 ACC-sense line in the rear cubby as a stand-in `KL15` input. Document the jumper in the diary so it's removed once the front-half board lands.)
 
 **Exit criteria:**
 
@@ -327,3 +364,4 @@ These are duplicated from `docs/cabin_signal_survey.md` §"Open Questions" so th
 | :--- | :--- | :--- |
 | 2026-04-26 | Created | Cabin signal node added as a new node in the architecture. Plan, BOM, and stage gates captured. Hardware procurement and Stage 0 cluster-pinout work scheduled to follow the cluster-pull task already on `docs/parts_to_order.md` Priority 3. |
 | 2026-04-26 | Scope expanded | MCU choice updated to `nRF54L15` (matches engine-bay node, single Nordic part family). Always-on operation, BLE proximity-based central locking (replacing the dead IR remote keys per `docs/known_issues.md` §"Central Locking (PSE)"), and the Pi `5 V` high-side switch all folded in from the previously planned standalone sentry node. Stage 0 expanded with IRCL → PSE wire identification; new Stages 6 (always-on + Pi wake), 7 (PSE drive), 8 (Pi UI) added. |
+| 2026-05-05 | Re-architecture (post-center-console-install) | Three coupled changes captured in this README following the May 2–5 center console install: (1) **Physical split** — always-on / BLE / Pi-wake half relocated to the rear passenger cubby alongside the Pi + DSP; cabin-signal acquisition half deferred to a future board near the cluster. Both still federate as one logical "cabin node" over the same USB-CDC frame format. (2) **Always-on power source change** — the planned `F20_6` long pull is **dropped**. The rear-half cabin board now taps the post-AGU 8 mm² CCA rail locally on the DSP +12 V terminal (Wago `221-413`, 1 A in-line fuse, low-Iq buck). Eliminates one long permanent-12 V cable run and consolidates everything downstream of the 40 A AGU at the trunk battery. (3) **Pi 5 V high-side switch promoted to cabin 12 V power-domain gate** — re-specced from a sub-5 A FET to `IRF4905` / `IPP80P03P4L` (≥10 A continuous, ≥15 A peak), now gating the upstream 12 V input of the 85 W cigarette-lighter USB charger that feeds the Pi + Qi pad + spare USB. Architectural rationale and the upstream-vs-downstream-gating trade-off is captured in detail in [`work/center_console_refresh/README.md`](../center_console_refresh/README.md) §5.6b. Net parasitic budget on the always-on rail downstream of the AGU drops to ≤600 µA (~7.5 mW). Stage 6b text updated; KL15 overrides documented as a temporary jumper until the front-half acquisition board is built. |
