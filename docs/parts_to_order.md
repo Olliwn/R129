@@ -196,12 +196,12 @@
 1. Lower ball joint (qty 1, €30.00) bundled into lower control arm (item 6) → drop the standalone line if so.
 2. Lower control arm L/R + grade clarification (`Tukivarsi (TT)` €300 vs `Alatukivarsi oikea` €177.12 — asymmetric pricing).
 3. Idler arm bolt: original reusable, or add the €111.50 line?
-4. Bump-stop kit splittable from MEYLE boots already on hand, or full Sachs kit only?
-5. MEYLE dust boots accepted as substitute parts by MB-osat?
+4. Bump-stop kit splittable from MEYLE boots already on hand, or full Sachs kit only? **Posture update 2026-05-05 (late):** boots may be DIY'd pre-shop pending part-geometry inspection this week (see open question #5). If DIY proceeds, this question collapses to "Sachs bump-stop only" and the dust-boot portion of the kit is dropped.
+5. MEYLE dust boots accepted as substitute parts by MB-osat? **Posture update 2026-05-05 (late):** **DIY pending part-geometry inspection this week.** Unbox MEYLE 014 032 0032 and confirm whether they're one-piece slip-on (requires strut removal + spring compressor — keep with MB-osat) or split/clamshell (snap on with strut in place, ~30 min/corner DIY — removes this question entirely). If DIY proceeds, also drop the "2 vaimennintuen etu irrotus ja asennus" €206.80 labour line from the quote.
 6. Wheel alignment scope (front only vs 4-wheel).
-7. Engine-mount inspection bundle while front lower control arms are out (cabin vibration finding from 2026-05-05 diary).
+7. ~~Engine-mount inspection bundle while front lower control arms are out (cabin vibration finding from 2026-05-05 diary).~~ **REMOVED FROM QUOTE 2026-05-05 (late):** engine mounts (Corteco 80001913 ×2) + trans mount (Corteco 21652116) are already on hand (see "Engine & Drivetrain Mounts (acquired, awaiting install)" inventory section below), and the 2–3 hr DIY procedure is documented in `work/engine_trans_mounts/README.md`. Planned for the same Saturday session as the belt swap (2026-05-09/10) — shared front-belly-pan access. Provides an independent A/B for cabin vibration before the suspension job; do not ask MB-osat to inspect.
 
-**Decision posture:** authorisation deferred until 2026-05-12 (after belt swap next weekend — see Priority 1B / diary 2026-05-05) so cabin-vibration variable can be partly de-confounded by the belt + tensioner inspection, and so MB-osat answers above can be incorporated.
+**Decision posture (updated 2026-05-05 late):** authorisation deferred until 2026-05-12 (after belt swap + pre-shop DIY items next weekend — see Priority 1B + diary 2026-05-05 late entry). Pre-shop DIY scope: engine mounts + trans mount confirmed (parts on hand, procedure documented); MEYLE dust boots conditional on part-geometry inspection this week. Potential MB-osat scope reduction: ~€15–230 depending on dust-boot DIY feasibility, plus removes the engine-mount variable from the cabin-vibration diagnostic.
 
 ---
 
