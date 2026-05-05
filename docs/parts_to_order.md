@@ -254,28 +254,32 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 
 | Part | Ref / Spec | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| Shielded CAT6 cable (F/UTP or S/FTP) | 4 twisted pairs, 23 AWG solid-core preferred, overall foil shield + drain wire | ~3.5 m | **ORDER NEXT** — any reputable brand. Verkkokauppa.com (Deltaco / LogiLink / Digitus shielded patch cable, ~€8–15 for 5 m) or Biltema bulk solid-core install cable (~€1.50/m). Pair assignment: Blue = LF+/LF−, Orange = RF+/RF−, Green + Brown = future spares (line-level input + DC control). Keep pair twist intact within ≤13 mm of termination. Overall shield grounded at DSP end only. **Decision rationale (2026-04-20):** substituted for originally-planned Sommer/Cordial audio multi-core because (a) CAT6 is the right technical fit — twisted pairs + overall shield; 100 Ω impedance is irrelevant at audio frequencies; 23 AWG gauge is fine for high-Z DSP input (≥10 kΩ, μA-level signal current, not a speaker-drive application); (b) pro-audio precedent (Rane, Radial, Whirlwind, BSS Soundweb all use CAT5/6 for balanced analog runs); (c) trivially sourceable in Finland vs. multi-week EU order for Sommer / Cordial. **Buy one bulk spool and share with §6C.3 Alps CAT6 run.** |
+| Shielded CAT6 cable (F/UTP or S/FTP) | 4 twisted pairs, 23 AWG solid-core preferred, overall foil shield + drain wire | ~2.5 m | **ACQUIRED from inventory 2026-05-02 walkthrough** — used 1 of 2 × 3 m CAT6 patch cables on hand (with RJ45 connectors cut off), inner conductors terminated with ferrules into Wago 221-413 at the BE2210 end and into the DSP terminal blocks at the rear cubby. Pair assignment per plan: Blue = LF+/LF−, Orange = RF+/RF−, Green = future UP 6DSP line-level input (uncommitted), Brown = reserved for cabin signal node PSE control to the trunk drive board (per `work/cabin_signal_node/README.md` Stage 7). Overall shield grounded at DSP end only. **Decision rationale (2026-04-20):** substituted for originally-planned Sommer/Cordial audio multi-core because (a) CAT6 is the right technical fit — twisted pairs + overall shield; 100 Ω impedance is irrelevant at audio frequencies; 23 AWG gauge is fine for high-Z DSP input (≥10 kΩ, μA-level signal current, not a speaker-drive application); (b) pro-audio precedent (Rane, Radial, Whirlwind, BSS Soundweb all use CAT5/6 for balanced analog runs); (c) trivially sourceable in Finland vs. multi-week EU order for Sommer / Cordial. |
 | ~~Motonet 7 × 1.5 mm² unshielded cable (art. 0000606156)~~ | ~~7-conductor automotive cable, 7 m~~ | — | **RE-PARKED to inventory 2026-04-20.** Initially purchased 2026-04-20 to substitute for a proper shielded cable, with a manual twist-pairs + pseudo-shield install plan. Superseded same day by the shielded-CAT6 decision above (cleaner, no jacket-strip-and-retwist labour, no long-term Tesa-glue dependency for re-sheathing). **Probable future use:** Hertz door-woofer multi-conductor harness during the Priority 6B speaker upgrade — 2× woofer pairs + tweeter pair + spare = 7 conductors, speaker-level signals so unshielded is fine. Parked in electrical stock until that task opens. |
 | Wago 221-413 (3-way lever nut) | 0.2–4 mm² clamp range | 4 pcs | **ACQUIRED from Motonet 2026-04-20** (art. 0000728703, "Wago 3-napainen vipuliitin 0,2[–4 mm²]", €9.99/pack). Parallel tap at the BE2210 ISO speaker pigtail — one per signal (LF+, LF−, RF+, RF−). Spares retained. |
 | Bootlace ferrules | 0.75 mm², insulated, red | ~10 pcs | DSP-end terminal entry (4 signals) + spares. Assortment kit from Motonet/SP Elektroniikka is fine. ~€5 for the kit. |
 | Ring terminal | M6, insulated, 0.5–1.5 mm² | 1 pc | Shield drain → DSP chassis ground bolt. **Motonet assortment.** |
 | Heat-shrink labels | 6 mm black + 3 mm black | — | Already in inventory (Stage 1 heat-shrink kit). Use a fine-tip marker + clear shrink-over for durable labels. |
 
-### 6C.2 — DSP-Direction Cable Pull (front cubby → rear cubby)
+### 6C.2 — DSP-Direction Cable Pull (now in-cubby short cables — Pi co-located with DSP per 2026-05-02 architecture revision)
 
 | Part | Ref / Spec | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| USB 2.0 cable, shielded | Type-A → Type-B (**verify MEC HD-USB connector before buying** — some revisions are Type-A) | 3 m | RPi5 → MEC HD-USB (inside UP 6DSP). Shielded, ferrite chokes a plus. **Verkkokauppa, Clas Ohlson, Puuilo.** ~€8–12. |
-| Tweeter / speaker wire | OFC 2 × 1.5 mm² | +5 m | **10 m already in inventory** (Components inventory, SP Elektroniikka #15096). Need ~6 m total (two pairs, rear cubby → dash via A-pillar). The 10 m roll covers it — **no new purchase required** unless extra slack wanted for future changes. |
+| USB 2.0 cable, shielded | Type-A → **Mini-B** (the small trapezoid, NOT full-size Type-B printer connector — connector type clarified at Verkkokauppa pickup 2026-05-02) | 2 m | **ACQUIRED from Verkkokauppa 2026-05-02:** Fuj:tech USB-A ↔ Mini-B 2 m, art. 908881, **€9.99**. RPi5 → MEC HD-USB inside the rear cubby — now an in-cubby short cable, not a long pull (Pi moved from front to rear cubby alongside the DSP, 2026-05-02 evening). 2 m length is more than needed in-cubby but was the available off-shelf length. ⚠ **Only 1 piece bought, no spare** (originally planned for 1 + 1 spare) — add cold-spare to next Verkkokauppa order. |
+| Tweeter / speaker wire | **OFC 2 × 1.5 mm² twin-lead** | ~10 m | **ACQUIRED from Motonet 2026-05-02:** **FOUR Connect STAGE2 OFC speaker cable**, art. 0000648404, **€26.90**. Pure-copper OFC twin-lead from Motonet's car-audio department; covers C4 + C5 (and possibly C6) front-stage speaker runs. Twin-lead jacket (both conductors molded together) → loop area ≈ 0, no need to twist or zip-tie pairs. Existing 10 m OFC inventory (SP Elektroniikka) + 5 m CCA 2×2.5 mm² returned to general cable stock as backup. |
 
-### 6C.3 — Pi-Direction Cable Pull (ashtray / BE2210 → front cubby)
+### 6C.3 — Pi-Direction Cable Pull (ashtray / BE2210 → rear passenger cubby per 2026-05-02 Pi-rear-move; BE2210 AUX now extends rear, not forward to a front-cubby Pi)
 
 | Part | Ref / Spec | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| CAT6 Ethernet cable | Shielded (F/UTP or S/FTP) | 1.5 m | Alps RKJXT1F42001 (ashtray) → front cubby. 8 conductors = 7 GPIO + 1 GND. **Shared purchase with §6C.1 BE2210 tap (2026-04-20 decision):** buy one 5 m spool of shielded CAT6 and cut two lengths — 3.5 m for §6C.1, 1.5 m for §6C.3. **Verkkokauppa, Clas Ohlson, Puuilo, or Biltema bulk solid-core.** ~€8–15 for the shared 5 m. |
-| Stereo AUX cable, shielded | 3.5 mm TRS male ↔ 3.5 mm TRS male | 0.5–1 m | BE2210 rear AUX jack → front cubby (RPi5 Waveshare / USB DAC output). Short, shielded, slim (not the chunky speaker-use kind). **Clas Ohlson, Verkkokauppa.** ~€5–8. |
-| Hook-up wire | 2 × 1.5 mm² red/black automotive | 2 m | 5 V feed into the cubby from the nRF5430 wake-switch output. Can also be made from existing 1.5 mm² speaker cable in inventory — no new purchase strictly required if slack remains after 6C.2. |
-| Fuse holder + 3 A blade fuse | ATO blade, inline | 1 | On the 5 V-bound 12 V feed before it enters the cubby DC-DC buck. **Motonet/Biltema assortment** — already likely in inventory (check Priority 7 torpedo box — but 3 A ATO is different from torpedo). ~€2. |
+| CAT6 Ethernet cable (joystick) | Shielded (F/UTP or S/FTP) | ~2.5 m | **ACQUIRED from inventory 2026-05-02 walkthrough** — used 2nd of the 2 × 3 m CAT6 patch cables on hand (RJ45 ends cut off, conductors terminated with ferrules into a Pi GPIO Dupont/JST header at the rear cubby end and into the Alps RKJXT1F42001 PCB at the ashtray end). Alps joystick (ashtray) → Pi GPIO (rear passenger cubby — destination updated 2026-05-02 evening with the Pi rear-cubby move). 8 conductors = 7 GPIO + 1 GND. |
+| **Spare CAT6 (BE2210 path)** | Shielded **CAT6A S/FTP** (foil-per-pair + overall braid — over-spec vs C1's plain F/UTP) | 2 m | **ACQUIRED from Verkkokauppa 2026-05-02:** Fuj:tech CAT6A S/FTP 2 m black, art. 877678, **€8.99**. Cold spare alongside the C1 BE2210 tap CAT6 — adds 4 fully-uncommitted twisted pairs since C1's "spare" pairs are already partially earmarked (Brown for cabin node PSE control, Green for future UP 6DSP line-level). |
+| Stereo AUX cable, shielded | **3.5 mm TRS male ↔ female extension** | 2 m | **ACQUIRED from Verkkokauppa 2026-05-02:** InLine 3.5 mm uros TRS extension, art. 2333, **€8.99**. Length grew from 0.5 m to 2 m with the Pi-rear move (BE2210 AUX now extends back to the rear cubby Pi). The BE2210 already has an attached AUX wire ending in a 3.5 mm plug (inventory finding 2026-05-02) — this extension cable extends that plug to the rear cubby. |
+| **HDMI cable (Pi → display)** | Shielded HDMI 1.4, micro-HDMI ↔ full-HDMI, 2 m | 1 | **ACQUIRED from Verkkokauppa 2026-05-02:** Fuj:tech HDMI ↔ micro-HDMI 2 m, art. 917827, **€19.99**. NEW long-pull added 2026-05-02 evening with the Pi rear-cubby move — Pi micro-HDMI HDMI-0 → front-cubby AMOLED display HDMI input. ⚠ **Right-angle full-HDMI adapter still to acquire** (~€5) for flush mounting at the panel end (the Waveshare's inward-facing flush adapter changes the bare panel HDMI to micro-HDMI — adapter at the panel end of our cable avoids re-buying a micro-HDMI both-ends cable). |
+| **Display touch + power USB** | Shielded USB 2.0 A ↔ Micro-USB, 2 m, fast-charge / data | 1 | **ACQUIRED from Verkkokauppa 2026-05-02:** Fuj:tech USB-A ↔ Micro-USB 2 m, art. 908662, **€9.99**. NEW long-pull added 2026-05-02 evening with the Pi rear-cubby move — Pi USB-A → display touch micro-USB port (carries both touch HID data and 5 V power on the same cable, same as bench bring-up April 17). ⚠ **Right-angle micro-USB adapter still to acquire** (~€5) for flush mounting at the panel end. **Backup option:** front-cubby C12 → local 12 V → 5 V buck can feed the display's separate "power" micro-USB port if voltage drop bites; cable already pulled. |
+| **Cabin node ↔ Pi USB-CDC** | Shielded USB 2.0 A ↔ USB-C, 2 m | 1 | **ACQUIRED from Verkkokauppa 2026-05-02:** Fuj:tech USB-C ↔ USB-A 2 m, art. 844156, **€15.99**. NEW long-pull added 2026-05-02 evening — front-cubby cabin signal node USB-C → Pi USB-A in the rear cubby. Standard data cable, no special requirements (USB-CDC is low-bandwidth telemetry). |
+| Hook-up wire (now F20_6 +12 V to front cubby — was Pi forward power feed, **obsolete with Pi-rear move**) | 1.5 mm² red automotive | ~3 m | **C12** F20_6 permanent +12 V → front cubby for the cabin signal node low-Iq buck (per `work/cabin_signal_node/README.md` Stage 6) and optional display power buck fall-back. **Acquire from general 1.5 mm² hookup stock or Motonet single-conductor**, ~€5. Pull wasn't logged with the May 2 receipt explicitly — verify against actual cable run during Phase 6 sign-off. |
+| Fuse holder + 5 A ATO fuse | In-line ATO 5 A | 1 | **ON HAND** — in-line ATO 5 A fuse holder + 5 A fuses already in inventory (verified during 2026-05-02 walkthrough). Goes on the **C12** F20_6 source. |
 
 ### 6C.4 — Loom Finishing & Pass-Through
 
@@ -297,7 +301,7 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 
 | Part | Ref / Spec | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| Contact cleaner, plastic-safe | CRC QD Electronic Cleaner 2-26, or WD-40 Specialist Contact Cleaner | 1 can | Non-residue, plastic-safe. Do **not** use generic brake cleaner on the rocker switch plastics. **Motonet, Biltema, Puuilo.** ~€10. |
+| Contact cleaner, plastic-safe | **PRF Kontakt 7-8 -puhdistusaine, 220 ml** (Finnish-brand equivalent of CRC QD / WD-40 Specialist) | 1 can | **ACQUIRED from Verkkokauppa 2026-05-02:** PRF Kontakt 7-8 220 ml, art. 32414, **€11.99**. Non-residue, plastic-safe. Do **not** use generic brake cleaner on the rocker switch plastics. Cleared as the cleaner of choice for Phase 3 non-disassembly spray-flush + selective full disassembly. |
 | Isopropyl alcohol 99% | Any lab-grade IPA | 100 ml+ | For plastic housings and illumination lenses. **Apteekki (pharmacy) or Motonet.** Probably already on hand. |
 | Cotton swabs | Regular | 1 pack | For rocker pivot points. Grocery-store aisle. |
 | PTFE dry lube or dielectric grease | CRC 2-50 PTFE or CRC Dielectric Grease (already in inventory) | 1 can / existing tube | Dielectric grease is **already in inventory** (Priority 4 consumables). A tiny dab per switch pivot. **No purchase needed if dielectric grease is used.** PTFE dry lube is an alternative if dust-attraction is a worry. |
@@ -315,10 +319,10 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 
 | Part | Ref / Spec | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| **Embedded Qi wireless charger module** | **USB-C input, 7.5–15 W output, designed for under-surface mount** (Ugreen 15 W concealed / Choetech CH002 / Nillkin MagicCube class) | 1 | **DECISION PENDING — pick a specific model.** 7.5 W is the iPhone Qi ceiling so anything ≥7.5 W is sufficient; 15 W modules are usually the same price and future-proof for an Android. Mounts UNDER the drawer floor with 3M VHB or a 3D-printed bracket. Spec sheet should state field works through ≥10 mm of non-metal (most "concealed/under-desk" modules state 25–30 mm). **Source:** Verkkokauppa.com (Ugreen typically ~€20–30) or Amazon.de. Avoid round "puck" chargers that need a flat top surface — we want a flat embedded PCB-in-plastic disc. **Reject:** Aircharge Slimline (~€80, overkill — proper flush-mount needs a cutout we don't want), Apple MagSafe puck (~€45, sits visibly inside the drawer and eats vertical clearance). |
-| Automotive 12 V → 5 V buck converter | 5 V / 3 A output, 12 V automotive input rated, with input transient protection | 1 | Generic enclosed buck module (Motonet/AliExpress, ~€5–10). Mounts inside the lighter cavity / behind-ashtray void — keeps heat away from the drawer plastic. Or repurpose a gutted USB car-adapter (already on hand) if the bench-tested 5 V/3 A spec checks out. **Verify the module is rated for automotive 12 V (with load-dump tolerance), not just 12 V DC bench input** — the lighter circuit sees alternator transients. |
-| Inline 3 A blade fuse + holder | ATO blade, inline | 1 | On the buck's 5 V output. Module itself usually has internal fusing but the run to it is short and an extra 3 A is cheap insurance. **Motonet/Biltema assortment** — likely already on hand from §6C.3. |
-| Wago 221-413 (3-port lever nut) | 0.2–4 mm² clamp range | 1 pc | Tap onto the cigarette-lighter hot wire at the connector backshell. Same approach as the BE2210 audio tap. **Already in inventory** (4-pack acquired Motonet 2026-04-20, art. 0000728703 — only 4 used for the BE2210 tap, so spares cover this). |
+| **Embedded Qi wireless charger module** | **FoneKit WP-15Q2 -langaton Qi2-latausalusta** (Qi2 spec, USB-C input, 15 W output, magnetic alignment) | 1 | **ACQUIRED from Verkkokauppa 2026-05-02:** FoneKit WP-15Q2, art. 932995, **€39.99**. *Upgraded to Qi2 spec* (Apple-MagSafe-derived, magnetic alignment for consistent phone-in-drawer placement, 15 W native to iPhone 13+) vs the planned plain Qi 7.5 W (~€25–30). USB-C input matches the planned C13 buck output. Verify pad disc thickness fits in the drawer void on first fit; mount with 3M VHB interim, 3D-printed bracket later (deferred until phone position preference is established by use). |
+| Automotive 12 V → 5 V buck converter | 5 V / 3 A output, 12 V automotive input rated, with input transient protection | 1 | **DEFERRED 2026-05-02** — interim solution: repurpose a cigarette-lighter USB charger from inventory (most are 12 V → 5 V / 2.4 A bucks built in). Either gut the buck PCB and tap the lighter wiring directly, or initially just plug the adapter into the lighter socket and run a USB cable to the Qi pad. **Verify the FoneKit's USB-C input accepts plain 5 V** (vs requiring 9 V QC); if 5 V works, the interim is fine until a proper automotive load-dump-rated buck (~€5–10) is acquired on the next Motonet trip. Replacement is additive — no re-trim work needed. |
+| Inline 3 A blade fuse + holder | ATO blade, inline | 1 | **ON HAND** — already in inventory (verified 2026-05-02 walkthrough). Goes on the buck's 5 V output. |
+| **Wago 2-pole lever nut for the lighter tap** | **Wago 2-napainen vipuliitin (0.2–4 mm² range)** | 1 pc | **ACQUIRED from Motonet 2026-05-02:** Wago 2-pole lever connector, art. 0000728710, **€1.99**. 2-pole sized for the 2-wire lighter-hot tap (vs the 3-pole 221-413 used at the BE2210 ISO speaker block — the lighter tap only needs 2 ports: factory wire continuation + new branch to the buck). Same Wago 221-series quality as the BE2210 tap. |
 | Hook-up wire | 2 × 0.75 mm² red/black automotive | ~30 cm | Lighter Wago tap → buck input. Trivial run inside the console void. **Probably already in inventory**; if not, included with any small Motonet hook-up wire roll. |
 | 3D-printed mounting bracket (optional) | PETG or ABS, ~5 mm tall flange | 1 | Cleaner than VHB for holding the Qi module flat against the underside of the drawer floor. Print after the Qi module arrives so the bracket can be modeled to its exact dimensions. PLA is fine for first fit but PETG/ABS for the final to survive summer cabin temps. **Self-printed — no purchase.** |
 
@@ -328,33 +332,41 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 
 ---
 
-### Summary — What to buy for Console-Out
+### Summary — What was bought for Console-Out (updated 2026-05-03)
 
-Net new purchases, excluding items already in inventory:
+Console-out shopping run executed Saturday 2026-05-02 — Verkkokauppa pickup at 14:43 + Motonet Vasaraperä at 15:12. Total R129 spend €154.81. Full itemization in `docs/diary/2026-05.md` May 3 entry; rolled-up status:
 
-| Category | Item | Est. cost |
-| :--- | :--- | :--- |
-| Audio signal | Shielded CAT6 (F/UTP or S/FTP), 5 m (shared with §6C.3 Alps run) | €8–15 |
-| | ~~Wago 221-413 × 4~~ — ACQUIRED Motonet 2026-04-20 | ~~€3~~ |
-| | Ferrules assortment | €5 |
-| | Ring terminal M6 | €0.50 |
-| Data | USB 2.0 A-B shielded 3 m | €10 |
-| | ~~CAT6 1.5 m~~ — included in the 5 m shared spool above | — |
-| | 3.5 mm TRS stereo 0.5 m | €6 |
-| Power | 3 A inline fuse holder + fuse | €2 |
-| Loom | Tesa cloth tape 19 mm × 25 m | €10 |
-| | Split loom 6 mm × 2 m | €5 |
-| | Grommet assortment | €5 |
-| Wood | Howard Feed-N-Wax or Liberon beeswax | €13 |
-| Switches | CRC QD Electronic Cleaner | €10 |
-| Safety net | Universal trim clip kit | €10 |
-| Wireless charger | Embedded Qi pad (USB-C, 7.5–15 W) | €25–30 |
-| | 12 V → 5 V / 3 A automotive buck | €8 |
-| | Inline 3 A fuse + holder + hook-up wire | €2 |
-| Pending | Microphone hardware | TBD — decide first |
-| **Subtotal** | | **~€135 + mic** |
+| Category | Item | Source | Acquired | € |
+| :--- | :--- | :--- | :--- | :--- |
+| Audio signal | ~~Bulk shielded CAT6, 5 m~~ — used **2 × 3 m CAT6 patches** from inventory for **C1 + C8** | inventory | ✅ 2026-05-02 walkthrough | (on hand) |
+| | **Fuj:tech CAT6A S/FTP 2 m black** for **C9** spare | Verkkokauppa | ✅ 2026-05-02 (art. 877678) | €8.99 |
+| | ~~Wago 221-413 × 4~~ — ACQUIRED Motonet 2026-04-20 for the BE2210 tap | Motonet | ✅ 2026-04-20 | (on hand) |
+| | Ferrules assortment | inventory / Motonet | (general stock) | — |
+| | Ring terminal M6 | inventory / Motonet | (general stock) | — |
+| Data — in-cubby | **Fuj:tech USB-A ↔ Mini-B 2 m** for Pi → MEC HD-USB *(connector finding 2026-05-02: Mini-B, NOT full Type-B)* | Verkkokauppa | ✅ 2026-05-02 (art. 908881) — **1 pc, no spare** | €9.99 |
+| Data — long pulls (NEW with Pi-rear move) | **Fuj:tech HDMI ↔ micro-HDMI 2 m** for **C16** Pi → display | Verkkokauppa | ✅ 2026-05-02 (art. 917827) | €19.99 |
+| | **Fuj:tech USB-A ↔ Micro-USB 2 m** for **C17** display touch + power | Verkkokauppa | ✅ 2026-05-02 (art. 908662) | €9.99 |
+| | **Fuj:tech USB-C ↔ USB-A 2 m** for **C18** cabin node ↔ Pi USB-CDC | Verkkokauppa | ✅ 2026-05-02 (art. 844156) | €15.99 |
+| Audio | **InLine 3.5 mm uros TRS extension 2 m** for **C10** BE2210 AUX | Verkkokauppa | ✅ 2026-05-02 (art. 2333) | €8.99 |
+| Speakers | **FOUR Connect STAGE2 OFC 2 × 1.5 mm² twin-lead** for **C4 / C5 / (C6?)** front-stage | Motonet | ✅ 2026-05-02 (art. 0000648404) | €26.90 |
+| Power | In-line ATO 5 A fuse holder + fuses for **C12** | inventory | ✅ on hand | (on hand) |
+| | Inline 3 A blade fuse + holder for **C13** | inventory | ✅ on hand | (on hand) |
+| Loom | Tesa cloth tape 19 mm × 25 m | (still to acquire — Motonet next trip) | ❌ pending | €10 |
+| | Split loom 6 mm × 2 m | (still to acquire — Motonet next trip) | ❌ pending | €5 |
+| | ~~Grommet assortment~~ | Motonet | ✅ 2026-04-20 (art. 0000648787) | (on hand) |
+| Wood | ~~Beeswax~~ — using **King Carthur Reshine 3/3 + Soft99 'UUSI FUSSO' Coat White wax** from inventory (Kärkkäinen 2026-03-30) | inventory | ✅ on hand | (on hand) |
+| Switches | **PRF Kontakt 7-8 contact cleaner 220 ml** | Verkkokauppa | ✅ 2026-05-02 (art. 32414) | €11.99 |
+| Safety net | Universal trim clip kit | (still to acquire — Biltema next trip) | ❌ pending | €10 |
+| Wireless charger | **FoneKit WP-15Q2 Qi2 wireless charging pad** (upgraded to Qi2 spec, USB-C input, 15 W, magnetic alignment) | Verkkokauppa | ✅ 2026-05-02 (art. 932995) | €39.99 |
+| | **Wago 2-pole lever nut** for cigarette-lighter tap | Motonet | ✅ 2026-05-02 (art. 0000728710) | €1.99 |
+| | Automotive 12 V → 5 V / 3 A buck | (deferred — interim via gutted cigarette-lighter USB charger) | ⚠ deferred | €5–10 future |
+| Display flush mount | Right-angle full-HDMI adapter (panel end of C16) | (still to acquire — Verkkokauppa next order) | ❌ pending | €5 |
+| | Right-angle micro-USB adapter (panel end of C17) | (still to acquire — Verkkokauppa next order) | ❌ pending | €5 |
+| Pending | Microphone hardware (C14) — front-cubby location locked, hardware still to pick (Option C USB conference puck recommended) | — | ⚠ pending | €30–50 |
+| **Subtotal — May 2 spend (R129 only)** | | | | **€154.81** |
+| **Pending residual (loom tape, trim clips, display adapters, mic)** | | | | **~€55–75** |
 
-All sourceable within a single trip to Motonet + one online order (Verkkokauppa for the shielded CAT6 + the embedded Qi pad). Nothing is on long lead-time.
+The pending residual items don't gate Phase 6 trim close — loom tape and trim clips can be done after, display adapters can go on the next Verkkokauppa order, and mic hardware can join the trim later via the fish-string already pulled in the Bundle G sleeve.
 
 ---
 
@@ -494,7 +506,9 @@ All sourceable within a single trip to Motonet + one online order (Verkkokauppa 
 
 ---
 
-*Last updated: 2026-04-30 — MB-osat inspection updates: distributor caps + rotors ORDERED after idle-misfire assessment (delivery expected 2026-05-05); new Priority 4B steering/suspension quote-pending section added from MB-osat findings; front ADS dust boots / bump stops now independently confirmed by MB-osat. Exhaust parts are NOT needed for the resonance; loose front heat shields are a simple fix and tracked in `known_issues.md`.*
+*Last updated: 2026-05-03 — §6C bookkeeping pass for the Saturday 2026-05-02 cable-pull shopping run. §6C.1 / 6C.2 / 6C.3 / 6C.6 / 6C.8 entries marked ACQUIRED with actual product names + Verkkokauppa or Motonet article numbers + receipt prices. §6C.2 USB cable connector type corrected from "Type-A → Type-B (printer connector)" to **USB-A ↔ Mini-B** (the small trapezoid pre-micro-USB connector that the MEC HD-USB module actually uses) per the in-store finding 2026-05-02. §6C.3 expanded to include the three NEW front ↔ rear long-pull data cables (C16 HDMI, C17 display USB, C18 cabin-node USB-CDC) added 2026-05-02 evening with the Pi-rear-cubby move; AUX cable length grew from 0.5 m to 2 m for the same reason. §6C.8 Qi pad row updated for the **upgraded Qi2 spec** (FoneKit WP-15Q2, magnetic alignment, USB-C input) and the **interim cigarette-lighter-USB-charger buck** approach. Summary table at the bottom of §6C rebuilt as a status table with R129 spend rolled up to **€154.81 for May 2** and the pending residual (loom tape, trim clips, display adapters, mic hardware) called out separately. Full receipt itemization in `docs/diary/2026-05.md` May 3 entry.*
+
+*Earlier: 2026-04-30 — MB-osat inspection updates: distributor caps + rotors ORDERED after idle-misfire assessment (delivery expected 2026-05-05); new Priority 4B steering/suspension quote-pending section added from MB-osat findings; front ADS dust boots / bump stops now independently confirmed by MB-osat. Exhaust parts are NOT needed for the resonance; loose front heat shields are a simple fix and tracked in `known_issues.md`.*
 
 *Earlier: 2026-04-26 (evening) — §6B Audio: added "DSP Mount & Ground Hardware" row capturing the passenger-cubby install hardware list (M6 ring + star washer + nyloc for the welded-stud chassis ground, optional M5 self-tappers for trim-panel retention, M4 wood screws for amp → base plate, base plate cut from sub-box MDF offcut). Driven by 2026-04-26 evening recon: passenger cubby has a friction-fit factory plastic trim panel as the mounting surface, an M6 welded chassis stud for grounding (dedicated audio reference, isolated from the Becker Verdeck-control return path), and a hand-sized pass-through to the driver-side cubby for the sub speaker run. See diary entry "April 26, 2026 (evening) — DSP install recon: passenger cubby ground point + attachment strategy" for full rationale.*
 
