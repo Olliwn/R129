@@ -111,12 +111,12 @@ No written service history exists for this vehicle. Assume all consumables and w
 
 ## D. Drive Belts
 
-- [ ] **Belt Squeal First Aid** — Apply belt friction spray (on hand) to V-belts during cold start squeal. Squeal stopped immediately
-- [ ] **Serpentine / V-Belts** — Inspect all belts for cracking, glazing, and tension. The M119 uses multiple V-belts (not a single serpentine). No cracking, but since squal was fixed with v-belt spray the belt is to be replaced (age unknown but likely very old)
-- [ ] **Belt Tensioners & Idler Pulleys** — Check for bearing play/noise. No noise, play is not checked yet.
+- [x] **Belt Squeal First Aid** — Belt friction spray stopped the cold-start squeal temporarily, confirming belt slip. Superseded by belt replacement on 2026-05-06.
+- [x] **Serpentine Belt** — Replaced 2026-05-06 with ContiTech 6PK2523. The M119.960 / 129.066 uses a single serpentine belt for all accessories, including the A/C compressor. Squeal disappeared immediately after the swap.
+- [ ] **Belt Tensioner & Idler Pulleys** — Check for bearing play/noise at next front-access session. Old belt looked nearly new, so weak tensioner/preload may have contributed to the squeal even though the belt swap resolved the symptom.
 
 ### Instructions
-*TODO: Add belt routing diagram, belt part numbers, and tension specs.*
+*TODO: Add belt routing diagram and tension specs.*
 
 ---
 
@@ -422,3 +422,4 @@ The harsh downshifts on this car occur almost exclusively on quick throttle lift
 | 2026-04-04 | I | All torpedo fuses replaced | Front + trunk F20, fresh ceramic. All aluminum fuses retired. |
 | 2026-04-04 | I | Full X11/4 diagnostic sweep | Pin 8 Code 17 active (crank sensor). All others clean or expected. |
 | 2026-04-04 | — | Power steering flush | 5-6 cycles Febi 08972, new MANN H 85 filter. Fluid clear. |
+| 2026-05-06 | D | Serpentine belt replaced | ContiTech 6PK2523 fitted. Job went smoothly; belt squeal gone. Removed belt looked nearly new, so keep it in the car as a clearly marked used emergency road-trip spare. |

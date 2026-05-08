@@ -140,18 +140,16 @@ Slight vibration at 700-800 RPM idle. Corteco replacement mounts received (2026-
 
 **Fix:** Replace both valve cover gasket sets + 8× spark plug tube seals. Combine with Priority 2 timing chain guide inspection (valve covers must come off for both jobs). Parts needed — add to MB-osat order.
 
-### Engine Belt Noise -- Glazed Belt Confirmed, Spray Treatment Exhausted
-**Status:** OPEN — ORDER BELT NOW | **Priority:** MEDIUM | **Since:** 2026-03-21 | **Updated:** 2026-04-19
+### Engine Belt Noise -- Resolved by Serpentine Belt Swap
+**Status:** CLOSED — RESOLVED 2026-05-06 | **Priority:** MEDIUM | **Since:** 2026-03-21 | **Updated:** 2026-05-06
 
 Squeals/chirps on startup. **V-belt friction spray test (2026-04-03):** noise disappeared instantly, confirming glazed/slipping belt (not a bearing issue).
 
 **Re-emerged 2026-04-19 during test drive.** Spray applied again to silence — but this confirms the Apr 3 prediction that spray is temporary only. The friction modifier wears off / washes off in days to weeks, and the underlying glaze is still present. Further spray applications are band-aid only; belt replacement is now the mandatory fix.
 
-**Next:**
-1.  **Order belt set from MB-osat** — promoted out of "inspect first" in `parts_to_order.md`. Confirm full P/N list with parts counter (M119.960 has main poly-V serpentine + separate A/C compressor V-belt).
-2.  **Inspect hydraulic belt tensioner at the same time.** A glazed belt with no oil/coolant contamination is frequently a *symptom* of weak tensioner preload. Hydraulic damper in the M119 tensioner leaks down with age. Replace if discharge-rate visibly slow or if any oily weeping at the damper seal.
-3.  **Spin all idler pulleys by hand with belt off** — listen for bearing grit, feel for play. Replace any that aren't silky smooth.
-4.  Interim: belt can be kept quiet with occasional friction spray until the new set arrives. Not a long-term state — slipping belts overheat, crack, and eventually snap.
+**Resolved 2026-05-06:** ContiTech 6PK2523 single serpentine belt fitted. Job went smoothly and the belt squeal disappeared as expected. Removed belt looked nearly new, so the failure mode may have been weak tension/preload rather than belt material condition alone. Old belt retained as a clearly marked **used** emergency road-trip spare in the car.
+
+**Follow-up:** At the next front-access session, inspect the rubber-bushed tensioner assembly, tensioner rod, and idler/guide pulleys. The symptom is closed, but the "old belt looked new" observation keeps tensioner/preload on the watch list.
 
 ### Exhaust — Loose Heat Shields Causing Load-Range Resonance
 **Status:** OPEN — SIMPLE HEAT-SHIELD FIX | **Priority:** LOW | **Since:** 2026-04-19 (Mar 15 precursor note "exhaust center silencer starting to rust" confirmed escalated) | **Updated:** 2026-04-30

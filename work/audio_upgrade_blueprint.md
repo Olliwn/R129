@@ -1,5 +1,7 @@
 # R129 Audio Upgrade Blueprint — Fully Active 2.1 System
 
+**Status (2026-05-07):** ✅ **Phase 1 complete** (with caveat: factory front speakers still in place pending Phase 2/3). UP 6DSP mounted/powered/grounded in passenger-side rear cubby; MEC HD-USB module installed; Helix sub in driver-side sealed cubby box with both DVC2 coils to Ch 5/6; BE2210 high-level CAT6 tap and PC USB both working with the configured USB-priority source switching. First in-car listening on factory fronts + new sub: noticeably above the BE2210-only baseline on USB source; FM rolls off below ~60–80 Hz so the sub barely contributes on radio. **Phase 2 (Hertz MPK 1650.3 front-stage swap) and Phase 4 (full DSP tuning) pending.** See `docs/diary/2026-05.md` May 1 (bench test) and May 7 (in-car wire-up + first listen) entries for narrative + open follow-ups.
+
 ## Philosophy
 
 Modern, high-fidelity audio with full DSP control, while maintaining 100% factory aesthetic. Every speaker gets its own dedicated amplifier channel, time-alignment, and EQ — no passive crossovers in the signal path. The Becker BE2210 stays in the DIN slot for period-correct cassette/FM. All digital streaming audio flows through the RPi5 to the DSP via lossless USB.
@@ -45,7 +47,7 @@ Chosen over the UP 8DSP (€749) for €100 savings — the 2-way front stage ne
 
 The 7-channel DSP includes a virtual center channel (RealCenter) and bass processing (Augmented Bass Processing) that compensate for the asymmetric driver position in the R129. Tuning via laptop using Audiotec Fischer's DSP PC-Tool software.
 
-**Mounting location:** **Rear passenger-side storage cubby** (revised 2026-04-25 evening — the driver-side cubby is fully occupied by the sub box at 97 % volume utilisation; only ~0.5 L of triangular dead air remains, insufficient for the DSP's 1.7 L footprint with the mandatory 40 mm heatsink ventilation clearance). The passenger-side cubby has the same ~17 L envelope as the driver-side and is otherwise empty. The center console cavity behind the climate control is a heat trap and must be avoided.
+**Mounting location:** **Rear passenger-side storage cubby** (revised 2026-04-25 evening — the driver-side cubby is fully occupied by the sub box at 97 % volume utilisation; only ~0.5 L of triangular dead air remains, insufficient for the DSP's 1.7 L footprint with the mandatory 40 mm heatsink ventilation clearance). The passenger-side cubby has the same ~17 L envelope as the driver-side and is otherwise empty. The center console cavity behind the climate control is a heat trap and must be avoided. **The cubby's mechanical/thermal/cable-management packaging spec lives in `work/rear_cubby_rack/README.md`** (aluminum-profile open frame + modular cassettes + friction-fit clamping mount + 60 mm 12 V fan on DSP REM, decisions logged 2026-05-07).
 
 **Co-located with the RPi5 + nRF93M1 cellular modem + Carlinkit dongle** (revised 2026-05-02 evening). The Pi stack moved from the front cubby to share this rear cubby with the DSP — primary drivers were service access (rear cubby reachable from behind the passenger seat without disturbing the dash), collapse of the Pi ↔ DSP USB Audio Class long pull into a 10 cm in-cubby cable, and stack-growth headroom. Combined dissipation ~50–60 W steady fits the cubby volumetrically; thermal verification is a commissioning gate (per `work/center_console_refresh/README.md` §6.5b). Pi power comes from the same DSP +12 V rail (Biltema 84-574 8 mm² CCA, 40 A AGU) via a small in-cubby 12 V → 5 V buck — no separate Pi power feed needed. See `work/center_console_refresh/README.md` Work Log entry "Pi → rear passenger cubby" for full rationale and Cable Manifest impact (drops C2/C3/C11 long pulls, adds C16 HDMI / C17 display USB / C18 cabin-node USB-CDC as new front ↔ rear pulls at ~2 m each).
 
@@ -144,6 +146,25 @@ The DVC2 configuration is ideal for the UP 6DSP: each voice coil connects to its
 
 This was the decisive factor in choosing 2-way over 3-way. Running 3 pairs of new wire per door through the R129's rubber boots (which contain 35-year-old PSE vacuum lines) would require professional labor (€150–300) and risk damaging the pneumatic central locking system.
 
+#### Install decisions captured 2026-05-07
+
+These two practical decisions came up during the in-car wire-up and are recorded here so the next install (or a redo) starts from the same baseline:
+
+- **DSP ground point:** **Tied into the existing factory ground stud** in the passenger-side rear cubby alongside the brown-wire stack — NOT a freshly-prepared painted bolt. Stack: hex-crimped M6 ring terminal on the CCA 8 mm² black wire → external-tooth star washer → existing factory ring lugs → original nut, retorqued. Dielectric grease on the joint. Reasoning: factory stud is welded with paint already cleared beneath the original lug; same star-point as PSE / antenna / cubby electronics, which prevents ground-loop potentials between accessories rather than introducing them; lower long-term failure risk than vibration-loosening a new bolt joint into thin sheet metal.
+
+- **Wide-to-narrow power transition (CCA 8 mm² → 2.5 mm² UP 6DSP power pigtail):** **Bolted ring terminals** chosen over step-down crimp / Wago / direct solder. Both wires hex-crimped to M6 ring lugs, sandwiched with M6 stainless bolt + flat washers + star washer + nyloc nut, joint covered with adhesive-lined heat shrink. Serviceable and inspectable at the planned 3-month and 12-month CCA re-torque checks; reversible if the install ever needs to be redone. **Wago 221-413/2411 explicitly rejected** — 4 mm² / 6 mm² rated, too small for 8 mm² CCA on a continuous-current rail.
+
+#### Aux 12 V cigarette-lighter outlet (added 2026-05-07)
+
+A cigarette-lighter-style 12 V outlet is wired in parallel with the DSP +12 V pigtail downstream of the 40 A AGU. Useful for charging phones / dashcam / similar. As installed on 2026-05-07 it has no secondary fuse and no switch — both being addressed:
+
+- **10 A in-line ATO blade fuse** on the aux outlet leg between the DSP power tap and the outlet itself. **Locked in** as the next small-shopping-run item (Motonet/Biltema, ~€3). Sizes the outlet for typical phone-charger / dashcam loads (~1–3 A) with comfortable margin; isolates the outlet from the audio fuse domain so a faulty accessory blows the 10 A long before the 40 A AGU.
+- **Switch:** decision deferred. The outlet is on the always-on rail today, so any plugged-in accessory with idle current (typical phone charger 5–20 mA standing) becomes a slow battery drain. Three options when/if it becomes wanted:
+  - Latching toggle switch in-line with the outlet feed — simplest, manual.
+  - KL15-triggered relay (ignition-switched) — cleanest; can share the KL15 sense already pulled to the rear cubby for the cabin signal node (see `work/cabin_signal_node/README.md`).
+  - SPDT switch with always-on / off / KL15-triggered positions — most flexible but adds a panel control hole.
+- **Trigger for the switch decision:** measured standing parasitic drain on the outlet leg with no accessory plugged in. **Target: ≤1 mA standing.** If observed >1 mA, escalate the switch to next-priority; if ≤1 mA, defer until a real accessory creates demand.
+
 ---
 
 ## Budget Summary
@@ -165,14 +186,16 @@ Savings vs. original 3-way plan (UP 8DSP + MPK 163.3 + professional door wiring)
 
 ## Installation Plan
 
-### Phase 1 — Rear Cubbies (Self-Install)
-1. Build the sealed ~12.5 L (effective) MDF enclosure for the Helix IK S10-DVC2 in the **driver-side cubby**. Per `work/subwoofer_enclosure/README.md`.
-2. Mount the Match UP 6DSP in the **passenger-side cubby** (driver-side cubby is fully occupied by the sub box).
-3. Install the MEC HD-USB module in the DSP's MEC slot.
-4. Run USB cable from RPi5 (behind dash) to the MEC HD-USB in the passenger-side cubby.
-5. Run high-level input wires from BE2210 speaker outputs to the UP 6DSP (backup analog path / signal detection for auto-on). Per `work/center_console_refresh/README.md` §4.
-6. Connect sub to Ch 5 + Ch 6 (one coil per channel) — speaker cable routes from passenger-side cubby to driver-side cubby via under-bulkhead-carpet OR through the center console.
-7. Test sub + DSP with laptop tuning before touching the doors.
+### Phase 1 — Rear Cubbies (Self-Install) ✅ **COMPLETE 2026-05-07**
+1. ✅ Build the sealed ~12.5 L (effective) MDF enclosure for the Helix IK S10-DVC2 in the **driver-side cubby**. Per `work/subwoofer_enclosure/README.md`. *Built and cured by 2026-04-29.*
+2. ✅ Mount the Match UP 6DSP in the **passenger-side cubby** (driver-side cubby is fully occupied by the sub box). *Mounted 2026-05-07.*
+3. ✅ Install the MEC HD-USB module in the DSP's MEC slot. *Installed before bench test 2026-05-01.*
+4. ⚠️ Run USB cable from RPi5 (behind dash) to the MEC HD-USB in the passenger-side cubby. *Cable pulled, currently terminates at a temporary PC connection point in the cabin — the RPi5 → MEC USB integration is the Pi-stack-up task, still pending.*
+5. ✅ Run high-level input wires from BE2210 speaker outputs to the UP 6DSP (backup analog path / signal detection for auto-on). Per `work/center_console_refresh/README.md` §4. *CAT6 #1 stripped + landed during the May 3 wiring session; in-car switch from USB → BE2210 fallback verified working 2026-05-07.*
+6. ✅ Connect sub to Ch 5 + Ch 6 (one coil per channel) — speaker cable routes from passenger-side cubby to driver-side cubby via under-bulkhead-carpet OR through the center console. *Wired and tested 2026-05-07; polarity confirmed correct (May 1 bench test, retained in-car).*
+7. ✅ Test sub + DSP with laptop tuning before touching the doors. *Bench tested 2026-05-01 (USB variant — see `work/audio_bench_test.md` §9). First in-car listen 2026-05-07: 80 Hz HP/LP crossover at the sub-to-front handoff sounds clean, sub well-integrated with factory front drivers on USB source.*
+
+**Auto-wake caveat:** The DSP currently runs with the bench-test "Auto Remote OFF + REM-to-+12 V jumper" configuration retained in-car. The BE2210 DC-offset auto-wake path is therefore not yet exercised in-car — that test moves to a future session where the REM jumper is removed and the BE2210 high-level input has to do the wake-up itself.
 
 ### Phase 2 — Door Wiring
 **No professional door wiring needed.** Factory speaker wires (already in doors) are reused for the woofers. Tweeter wires run entirely within the cabin.
