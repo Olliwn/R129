@@ -16,6 +16,7 @@ from view_manager import ViewManager
 from sidebar import Sidebar
 from status_bar import StatusBar
 from modem_state import ModemState
+from audio_controller import AudioController
 from home_view import HomeView
 from classic_cluster_view import ClassicClusterView
 from gauge_view import GaugeView
@@ -36,13 +37,14 @@ class MainWindow(QMainWindow):
         self._state = VehicleState(self)
         self._modem = ModemState(self)
         self._provider = SimulatedProvider(self._state, self)
+        self._audio = AudioController(self)
 
         container = QWidget()
         outer = QHBoxLayout(container)
         outer.setContentsMargins(0, 0, 0, 0)
         outer.setSpacing(0)
 
-        self._sidebar = Sidebar(page_count=8)
+        self._sidebar = Sidebar(page_count=8, audio=self._audio)
         outer.addWidget(self._sidebar)
 
         right_panel = QWidget()

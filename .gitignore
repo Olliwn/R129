@@ -14,3 +14,6 @@ r129_data/.venv/
 # Python
 __pycache__/
 *.pyc
+
+# matplotlib font cache (generated at runtime, never wanted in VCS)
+**/.mplcache/
