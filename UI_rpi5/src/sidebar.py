@@ -18,7 +18,7 @@ import time
 
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import Qt, QTimer, QRectF, pyqtSignal
-from PyQt5.QtGui import QPainter, QBrush, QColor, QFontMetrics
+from PyQt5.QtGui import QPainter, QBrush, QColor, QFontMetrics, QPen
 
 import theme
 
@@ -31,18 +31,24 @@ ICON_SPACING = 7.0
 # Sized for a 1920x1080 portrait sidebar = 128 wide, 1080 tall.
 # Each of these values is in raw pixels; only the vertical sum matters
 # (it's subtracted from `h` before dividing the remainder among icon slots).
-FOOTER_TOP_PAD = 8
-TRI_H = 28              # up/down triangle vertical extent
-TRI_GAP = 8             # gap between triangle and bar
+#
+# The volume up / down controls are rendered as full-width rectangular
+# buttons (matching the page-icon slots above), so the touch hit zone
+# equals the full visible button area instead of the small triangle bitmap.
+BOTTOM_SAFE_PAD = 32    # physical lower bezel/mount/touch dead-zone clearance
+FOOTER_TOP_PAD = 6
+VOL_BTN_H = 72          # tall touch target for ▲ / ▼
 BAR_H = 10              # height of the volume bar (single row of dots)
 BAR_SEGMENTS = 8
-BAR_DOT = 7.0           # dot diameter inside the bar
+BAR_DOT = 6.5           # dot diameter inside the bar
 BAR_DOT_SPACING = 11.0  # centre-to-centre spacing of bar segments
 LABEL_H = 14            # percentage readout
 CLOCK_H = 14
 FOOTER_INNER_GAP = 4
-FOOTER_H = (FOOTER_TOP_PAD + TRI_H + TRI_GAP + BAR_H + TRI_GAP + TRI_H
-            + FOOTER_INNER_GAP + LABEL_H + FOOTER_INNER_GAP + CLOCK_H + 6)
+FOOTER_H = (FOOTER_TOP_PAD + VOL_BTN_H + FOOTER_INNER_GAP
+            + BAR_H + FOOTER_INNER_GAP
+            + VOL_BTN_H + FOOTER_INNER_GAP
+            + LABEL_H + FOOTER_INNER_GAP + CLOCK_H + 4)
 
 # Triangle bitmaps (5 rows × 9 cols, matching the 9-col icon convention).
 _TRI_UP = [
@@ -59,8 +65,8 @@ _TRI_DOWN = [
     0b000111000,
     0b000010000,
 ]
-_TRI_DOT = 3.4
-_TRI_SPACING = 5.4
+_TRI_DOT = 4.4
+_TRI_SPACING = 7.0
 
 # 9x9 pixel art bitmaps (bit 8 = leftmost column)
 _ICONS = {
@@ -173,6 +179,7 @@ PAGE_NAMES = [
 
 class Sidebar(QWidget):
     page_activated = pyqtSignal(int)
+    volume_touched = pyqtSignal()  # any tap on ▲ / ▼ (after audio nudge)
 
     def __init__(self, page_count: int = 8, audio=None, parent=None):
         super().__init__(parent)
@@ -180,6 +187,9 @@ class Sidebar(QWidget):
         self._selected = 0
         self._bright = True
         self._audio = audio
+        self._pressed_index = None
+        self._pressed_control = None
+        self._press_seq = 0
         self.setFixedWidth(theme.SIDEBAR_WIDTH)
 
         self._clock_timer = QTimer(self)
@@ -207,28 +217,57 @@ class Sidebar(QWidget):
         self._selected = (self._selected + delta) % self._page_count
         self.update()
 
+    def _usable_height(self) -> int:
+        """Visible/touchable sidebar height above the lower physical dead-zone."""
+        return max(0, self.height() - BOTTOM_SAFE_PAD)
+
     def _icon_area_height(self) -> int:
         """Vertical extent reserved for the 8 icon slots — anything below
         is the audio footer (▲ / bar / ▼ / percentage / clock)."""
-        return max(0, self.height() - FOOTER_H)
+        return max(0, self._usable_height() - FOOTER_H)
+
+    def _flash_pressed(self, index=None, control=None, duration_ms: int = 140):
+        self._pressed_index = index
+        self._pressed_control = control
+        self._press_seq += 1
+        seq = self._press_seq
+        self.update()
+        QTimer.singleShot(duration_ms, lambda: self._clear_pressed(seq))
+
+    def _clear_pressed(self, seq: int):
+        if seq == self._press_seq:
+            self._pressed_index = None
+            self._pressed_control = None
+            self.update()
 
     def mousePressEvent(self, event):
         y = int(event.y())
+        usable_h = self._usable_height()
+        if y >= usable_h:
+            return
+
         icon_area = self._icon_area_height()
 
         # Audio footer hot zones — only when the controller is attached.
+        # Hit rectangles match the visible button rectangles drawn in
+        # `_paint_audio_footer`, so the entire button area is touch-active.
         if self._audio is not None and y >= icon_area:
             ftr_y = y - icon_area
-            # ▲ zone: from top of footer through bottom of up-triangle
-            tri_up_bottom = FOOTER_TOP_PAD + TRI_H
-            # ▼ zone: starts after bar, runs through bottom of down-triangle
-            tri_down_top = FOOTER_TOP_PAD + TRI_H + TRI_GAP + BAR_H + TRI_GAP
-            tri_down_bottom = tri_down_top + TRI_H
-            if ftr_y < tri_up_bottom:
+            vol_up_top = FOOTER_TOP_PAD
+            vol_up_bottom = vol_up_top + VOL_BTN_H
+            bar_top = vol_up_bottom + FOOTER_INNER_GAP
+            bar_bottom = bar_top + BAR_H
+            vol_down_top = bar_bottom + FOOTER_INNER_GAP
+            vol_down_bottom = vol_down_top + VOL_BTN_H
+            if vol_up_top <= ftr_y < vol_up_bottom:
+                self._flash_pressed(control="vol_up", duration_ms=80)
                 self._audio.nudge_up()
+                self.volume_touched.emit()
                 return
-            if tri_down_top <= ftr_y < tri_down_bottom:
+            if vol_down_top <= ftr_y < vol_down_bottom:
+                self._flash_pressed(control="vol_down", duration_ms=80)
                 self._audio.nudge_down()
+                self.volume_touched.emit()
                 return
             # Taps in the bar / readout / clock zone are intentionally ignored
             # (no drag interaction by design — see design doc).
@@ -239,6 +278,7 @@ class Sidebar(QWidget):
         idx = y // slot_h
         idx = max(0, min(self._page_count - 1, idx))
         self._selected = idx
+        self._flash_pressed(index=idx)
         self.update()
         self.page_activated.emit(idx)
 
@@ -248,6 +288,7 @@ class Sidebar(QWidget):
         p = QPainter(self)
         p.setRenderHint(QPainter.Antialiasing, True)
         w, h = self.width(), self.height()
+        usable_h = self._usable_height()
 
         p.fillRect(self.rect(), theme.SIDEBAR_BG)
 
@@ -260,10 +301,15 @@ class Sidebar(QWidget):
         for i in range(self._page_count):
             y = i * slot_h
             is_sel = (i == self._selected)
+            is_pressed = (i == self._pressed_index)
 
-            if is_sel:
+            if is_sel or is_pressed:
                 p.setPen(Qt.NoPen)
-                p.setBrush(QBrush(theme.AMBER))
+                fill = QColor(theme.AMBER)
+                if is_pressed:
+                    fill = QColor(255, 190, 70)
+                    fill.setAlpha(255 if is_sel else 120)
+                p.setBrush(QBrush(fill))
                 pad = 6
                 p.drawRoundedRect(
                     QRectF(pad, y + pad, w - 2 * pad, slot_h - 2 * pad), 8, 8)
@@ -278,11 +324,12 @@ class Sidebar(QWidget):
 
             if is_sel:
                 on_color = QColor(theme.SIDEBAR_BG)
-                on_color.setAlpha(240)
+                on_color.setAlpha(255)
                 off_color = QColor(theme.AMBER)
-                off_color.setAlpha(60)
+                off_color.setAlpha(90)
             else:
-                base_alpha = 220 if self._bright else 120
+                # Bright daylight visibility on the AMOLED — never below ~70%.
+                base_alpha = 255 if (is_pressed or self._bright) else 190
                 on_color = QColor(theme.AMBER)
                 on_color.setAlpha(base_alpha)
                 off_color = theme.DOT_OFF
@@ -296,15 +343,15 @@ class Sidebar(QWidget):
             self._paint_audio_footer(p, w, icon_area)
 
         # ── Clock at very bottom (always shown) ────────────────────────
-        clock_alpha = 200 if self._bright else 100
-        clock_color = QColor(theme.TICK_DIM)
+        clock_alpha = 255 if self._bright else 170
+        clock_color = QColor(theme.AMBER)
         clock_color.setAlpha(clock_alpha)
         p.setPen(clock_color)
         cf = theme.gauge_font(10)
         p.setFont(cf)
         ts = time.strftime("%H:%M")
         fm = QFontMetrics(cf)
-        p.drawText((w - fm.horizontalAdvance(ts)) // 2, h - 8, ts)
+        p.drawText((w - fm.horizontalAdvance(ts)) // 2, usable_h - 8, ts)
 
         p.end()
 
@@ -321,27 +368,52 @@ class Sidebar(QWidget):
                 p.drawEllipse(QRectF(dx, dy, ICON_DOT, ICON_DOT))
 
     def _paint_audio_footer(self, p: QPainter, w: int, icon_area: int):
-        """Render the ▲ / bar / ▼ / % readout below the icon slots.
-        Clock is drawn separately by paintEvent (existing behaviour)."""
+        """Render the ▲-button / volume bar / ▼-button / % readout below the
+        icon slots. Both volume buttons are drawn as full-width rectangles so
+        their visible area matches the touch hit zones defined in
+        `mousePressEvent`. The clock is drawn separately by paintEvent."""
         vol = float(self._audio.volume)
         vol = max(0.0, min(1.0, vol))
 
-        on_alpha = 220 if self._bright else 120
-        dim_alpha = 90 if self._bright else 50
+        on_alpha = 255 if self._bright else 190
+        dim_alpha = 140 if self._bright else 90
         on_color = QColor(theme.AMBER); on_color.setAlpha(on_alpha)
         dim_color = QColor(theme.AMBER); dim_color.setAlpha(dim_alpha)
         off_color = QColor(theme.DOT_OFF)
+        pressed_fill = QColor(255, 200, 90)
+        button_outline = QColor(theme.AMBER); button_outline.setAlpha(110)
 
-        # 1. Up triangle ───────────────────────────────────────────────
+        pad = 6
+        btn_x = pad
+        btn_w = w - 2 * pad
         tri_w = 9 * _TRI_SPACING
+        tri_h = 5 * _TRI_SPACING
         tri_x = (w - tri_w) / 2.0
-        tri_up_y = icon_area + FOOTER_TOP_PAD
-        self._draw_triangle(p, tri_x, tri_up_y, _TRI_UP, on_color, off_color)
 
-        # 2. Volume bar ────────────────────────────────────────────────
+        def _draw_button(y_top: float, control: str, bitmap):
+            rect = QRectF(btn_x, y_top, btn_w, VOL_BTN_H)
+            pressed = (self._pressed_control == control)
+            if pressed:
+                p.setPen(Qt.NoPen)
+                bg = QColor(pressed_fill); bg.setAlpha(110)
+                p.setBrush(bg)
+                p.drawRoundedRect(rect, 8, 8)
+            else:
+                p.setPen(QPen(button_outline, 1))
+                p.setBrush(Qt.NoBrush)
+                p.drawRoundedRect(rect, 8, 8)
+            tri_y = y_top + (VOL_BTN_H - tri_h) / 2.0
+            color = pressed_fill if pressed else on_color
+            self._draw_triangle(p, tri_x, tri_y, bitmap, color, off_color)
+
+        # 1. Volume up button ──────────────────────────────────────────
+        vol_up_y = icon_area + FOOTER_TOP_PAD
+        _draw_button(vol_up_y, "vol_up", _TRI_UP)
+
+        # 2. Volume bar (centred between the two buttons) ──────────────
         bar_w = BAR_SEGMENTS * BAR_DOT_SPACING - (BAR_DOT_SPACING - BAR_DOT)
         bar_x = (w - bar_w) / 2.0
-        bar_y = tri_up_y + TRI_H + TRI_GAP
+        bar_y = vol_up_y + VOL_BTN_H + FOOTER_INNER_GAP
         filled = int(round(vol * BAR_SEGMENTS))
         p.setPen(Qt.NoPen)
         for seg in range(BAR_SEGMENTS):
@@ -349,18 +421,18 @@ class Sidebar(QWidget):
             cx = bar_x + seg * BAR_DOT_SPACING
             p.drawEllipse(QRectF(cx, bar_y, BAR_DOT, BAR_DOT))
 
-        # 3. Down triangle ─────────────────────────────────────────────
-        tri_down_y = bar_y + BAR_H + TRI_GAP
-        self._draw_triangle(p, tri_x, tri_down_y, _TRI_DOWN, on_color, off_color)
+        # 3. Volume down button ────────────────────────────────────────
+        vol_down_y = bar_y + BAR_H + FOOTER_INNER_GAP
+        _draw_button(vol_down_y, "vol_down", _TRI_DOWN)
 
         # 4. Percentage readout ────────────────────────────────────────
-        label_y = tri_down_y + TRI_H + FOOTER_INNER_GAP + LABEL_H
+        label_y = vol_down_y + VOL_BTN_H + FOOTER_INNER_GAP + LABEL_H
         p.setPen(dim_color)
         lf = theme.gauge_font(10)
         p.setFont(lf)
         pct = f"{int(round(vol * 100)):d} %"
         fm = QFontMetrics(lf)
-        p.drawText((w - fm.horizontalAdvance(pct)) // 2, label_y, pct)
+        p.drawText((w - fm.horizontalAdvance(pct)) // 2, int(label_y), pct)
 
     def _draw_triangle(self, p: QPainter, x: float, y: float,
                        bitmap, on_color: QColor, off_color: QColor):

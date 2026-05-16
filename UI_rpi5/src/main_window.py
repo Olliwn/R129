@@ -7,7 +7,7 @@ Fullscreen container: Sidebar | (StatusBar / ViewStack).
 from PyQt5.QtWidgets import (
     QMainWindow, QStackedWidget, QWidget, QHBoxLayout, QVBoxLayout,
 )
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QTimer
 
 from input_manager import InputManager
 from vehicle_state import VehicleState
@@ -71,6 +71,7 @@ class MainWindow(QMainWindow):
         self._view_mgr.add_view("SETTINGS", SettingsView(modem=self._modem))
         self._carplay_view = CarPlayView()
         self._view_mgr.add_view("CARPLAY", self._carplay_view)
+        self._carplay_index = self._view_mgr.count - 1
         self._view_mgr.add_view("MAP", MapView())
         self._view_mgr.add_view("EXIT", ExitView())
         self._view_mgr.switch_to(0)
@@ -78,8 +79,27 @@ class MainWindow(QMainWindow):
         self._view_mgr.view_changed.connect(
             lambda idx, name: self._status_bar.set_page_name(name))
 
+        # Volume taps on the sidebar steal Wayland focus from LIVI, which
+        # otherwise pushes the CarPlay placeholder forward. Re-raise LIVI
+        # shortly after a volume nudge while CarPlay is the active page.
+        self._sidebar.volume_touched.connect(self._restore_livi_if_carplay)
+
         self._input = InputManager(self)
         self._input.action_triggered.connect(self._view_mgr.handle_action)
+
+    def _restore_livi_if_carplay(self):
+        """Re-raise the main LIVI window after a sidebar volume tap.
+
+        With the labwc rule pinning the main LIVI top-level to the
+        always-on-top layer, the Qt surface should never cover it on a
+        sidebar tap. A single immediate refocus is kept as a safety net for
+        first-tap-after-launch when the layer assignment may not yet be in
+        effect."""
+        if self._view_mgr.current_index != self._carplay_index:
+            return
+        if not self._carplay_view.livi_running:
+            return
+        self._carplay_view._focus_livi()
 
     def keyPressEvent(self, event):
         if event.key() in (Qt.Key_Escape, Qt.Key_Q):

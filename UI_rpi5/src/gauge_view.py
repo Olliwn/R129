@@ -6,12 +6,13 @@ Gauge text uses gauge_font() (unscaled) to avoid overlap.
 """
 
 import math
+import os
 
 from PyQt5.QtWidgets import QWidget
 from PyQt5.QtCore import Qt, QTimer, QRectF, QPointF
 from PyQt5.QtGui import (
     QPainter, QPen, QBrush, QFontMetrics,
-    QColor, QRadialGradient, QPolygonF,
+    QColor, QRadialGradient, QPolygonF, QPixmap,
 )
 
 import theme
@@ -19,10 +20,17 @@ from input_actions import InputAction
 from vehicle_state import VehicleState
 
 
+_UI_DIR = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+_BURL_WALNUT_BG = os.path.join(_UI_DIR, "IMG_8399 2.jpeg")
+
+
 class GaugeView(QWidget):
     def __init__(self, state: VehicleState):
         super().__init__()
         self._state = state
+        self._walnut_bg = QPixmap(_BURL_WALNUT_BG)
+        self._walnut_scaled = QPixmap()
+        self._walnut_scaled_size = None
         self._timer = QTimer(self)
         self._timer.timeout.connect(self.update)
         self._timer.start(33)
@@ -35,7 +43,7 @@ class GaugeView(QWidget):
         p.setRenderHint(QPainter.Antialiasing, True)
         p.setRenderHint(QPainter.TextAntialiasing, True)
         w, h = self.width(), self.height()
-        p.fillRect(self.rect(), theme.BG)
+        self._draw_background(p, w, h)
 
         vals = self._state.snapshot()
 
@@ -90,6 +98,23 @@ class GaugeView(QWidget):
         p.drawText(w - fm.horizontalAdvance(ads_text) - 20, bar_y + 12, ads_text)
 
         p.end()
+
+    def _draw_background(self, p, w, h):
+        if self._walnut_bg.isNull():
+            p.fillRect(self.rect(), theme.BG)
+            return
+
+        # Real scanned burl walnut texture, cached after scaling for the OLED test.
+        size = (w, h)
+        if self._walnut_scaled_size != size:
+            self._walnut_scaled = self._walnut_bg.scaled(
+                w, h, Qt.KeepAspectRatioByExpanding, Qt.SmoothTransformation)
+            self._walnut_scaled_size = size
+
+        sx = max(0, (self._walnut_scaled.width() - w) // 2)
+        sy = max(0, (self._walnut_scaled.height() - h) // 2)
+        p.drawPixmap(0, 0, self._walnut_scaled, sx, sy, w, h)
+        p.fillRect(self.rect(), QColor(0, 0, 0, 70))
 
     # ── Gauge ────────────────────────────────────────────────────────
 

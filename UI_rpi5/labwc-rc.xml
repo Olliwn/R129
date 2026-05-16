@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<openbox_config xmlns="http://openbox.org/3.4/rc">
+	<touch deviceName="Waveshare  Waveshare " mapToOutput="HDMI-A-1" mouseEmulation="yes"/>
+	<windowRules>
+		<windowRule identifier="livi" serverDecoration="no" fixedPosition="yes">
+			<action name="MoveTo" x="128" y="0" />
+			<action name="ResizeTo" width="1792" height="1080" />
+		</windowRule>
+		<windowRule identifier="livi" title="LIVI" matchOnce="true">
+			<action name="ToggleAlwaysOnTop" />
+		</windowRule>
+	</windowRules>
+</openbox_config>

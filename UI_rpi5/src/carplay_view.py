@@ -20,6 +20,10 @@ from input_actions import InputAction
 
 LIVI_PATH = "/home/pi/LIVI/LIVI.AppImage"
 LIVI_APP_ID = "livi"
+# LIVI can spawn auxiliary top-levels (e.g. "USB Permission Required"). For
+# focus operations we must target the main CarPlay top-level by title so the
+# Qt sidebar's volume taps don't accidentally re-raise a hidden modal.
+LIVI_MAIN_TITLE = "LIVI"
 DONGLE_VID_PID = "1314:1520"
 DONGLE_CHECK_INTERVAL = 5000
 
@@ -120,23 +124,32 @@ class CarPlayView(QWidget):
     # ── Window visibility via wlrctl ─────────────────────────────────
 
     def _wlrctl(self, *args) -> bool:
+        """Fire-and-forget wlrctl invocation.
+
+        Uses Popen instead of subprocess.run so the Qt event loop is never
+        blocked. The focus race against the compositor is short (single-digit
+        ms), and we issue several focus attempts in quick succession from
+        MainWindow; blocking on each one would queue up and stall subsequent
+        touch events (occasionally swallowing the next volume tap)."""
         try:
-            subprocess.run(
+            subprocess.Popen(
                 ["wlrctl", "window", *args],
-                timeout=2,
                 stdout=subprocess.DEVNULL,
                 stderr=subprocess.DEVNULL,
-                check=False,
+                start_new_session=True,
             )
             return True
-        except (FileNotFoundError, subprocess.TimeoutExpired):
+        except FileNotFoundError:
             return False
 
     def _minimize_livi(self):
+        # Minimize every LIVI top-level (main + auxiliary dialogs) when the
+        # user navigates away from the CarPlay page.
         self._wlrctl("minimize", f"app_id:{LIVI_APP_ID}")
 
     def _focus_livi(self):
-        self._wlrctl("focus", f"app_id:{LIVI_APP_ID}")
+        # Only re-focus the main CarPlay window — never an auxiliary modal.
+        self._wlrctl("focus", f"title:{LIVI_MAIN_TITLE}")
 
     # ── Dongle detection ─────────────────────────────────────────────
 
