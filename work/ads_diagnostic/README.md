@@ -4,19 +4,36 @@
 
 The 1991 Mercedes-Benz 500 SL (R129) — AOK912 (manufactured 09/1991, possibly MY1992 spec) is equipped with ADS I (Adaptive Damping System, first generation). The car drives well and the ride is comfortable ("floating"), confirming the base mechanical springs and nitrogen accumulators are functional.
 
-**STATUS (2026-04-01): ADS SYSTEM ONLINE — OVP FIX CONFIRMED.**
+**STATUS (2026-05-25): LEVEL CONTROL PARTIALLY RESTORED — FRONT CIRCUIT NOW WORKS, REAR CIRCUIT STILL STATIC.**
 
-The OVP relay was the root cause. After re-soldering all joints with Sn63/Pb37 (2026-03-31) and reinstalling (2026-04-01), N51 boots cleanly, both cabin ADS switches show red LEDs, and the diagnostic bus is stable. Pin 9 returns **fault code 14** (steering angle sensor N49 not initialized — expected after extended power loss). No other codes. Clear with lock-to-lock steering.
+Fahrzeugniveau "Raised Level" (high mode) tested 2026-05-23 (visual) and 2026-05-25 (with tape measure). Result: **front rises ~30 mm at both corners exactly as factory-spec; rear height does not change.** This is a major change from the 2026-04-02 baseline where high mode produced *no* observable rise anywhere — the front circuit was previously dead and is now functional.
+
+**Why this changed:** the 2026-05-22 MB-osat suspension visit (front lower control arms, idler arm bushings, tie rods, ball joint, plus **front shock dust boots + bump stops**) **disturbed the front strut hydraulic connections enough that MB-osat performed an effective front-circuit flush as part of refitting** — and the receipt records a 1 L Febi ZH-M top-up to make the level back up after the work (`docs/diary/2026-05.md` 2026-05-22 entry). The mechanical work cycled the front height control rods and freed whatever was sticking; the Febi top-up filled the void left by the disturbed fluid. The rear circuit was never touched during this visit, which is consistent with it still being dead.
+
+**2026-05-25 measurements (ground-to-fender, mm in cm):**
+
+| Corner | Normal Level (before) | Raised Level (high mode) | Δ |
+| :--- | :--- | :--- | :--- |
+| Front Left | 67.5 cm | 70.5 cm | **+3.0 cm** |
+| Front Right | 66.5 cm | 69.5 cm | **+3.0 cm** |
+| Rear (single point) | 65 cm | 65 cm | **0 cm** |
+
+Front rise matches the ~30 mm factory spec for Erhöhtes Niveau via Y36. Rear is flat — confirms either Y36→rear hydraulic path blocked, or rear height control rod pistons seized from prolonged inactivity, or main valve internal blockage on the rear side. (Note: Y36 feeds *both* front and rear height control rods through the main valve. The fact that front responds and rear does not means Y36 itself is energising and passing pressure — the failure is downstream on the rear side specifically.)
+
+**Switch behaviour now normal:** Fahrzeugniveau dashboard light turns OFF immediately on disengagement, matching factory behaviour. The "stuck red LED" symptom from 2026-04-02 was almost certainly a transient OVP-aftermath state and has self-cleared. Earlier "slow LED extinguish" episodes correspond to the period when OVP was still flaky.
+
+**Hydraulic return is sluggish on the front though (confirmed at rest, not a driving artifact):** Saturday 2026-05-23 was a clean parked test — engaged Raised, observed +4-finger gap, then **toggled the switch back to Normal**. LED extinguished immediately (electrical side normal), but **the car did not drop back** — it held the raised height for hours with the switch in Normal position. By Monday morning (after Sunday's passive sit + Monday's 30-min drive) it had returned to baseline. The 30-min Monday drive probably accelerated the final descent (auto-revert via speed threshold — sources vary on whether this is ~40 km/h per Wikisort or up to ~120 km/h per the 1991 Betriebsanleitung), but the slow return was already evident on Saturday before any driving. This is much slower than spec (the rods should bleed off in seconds-to-minutes when disengaged at rest). Likely cause: partial restriction in the return path through Y36's sintered bronze filter (the documented #1 ADS I failure mode — clogged on the inlet side, but probably still partially clogged on the return side too), or stiff front height control rod piston seals after years of disuse. **The system works, just slowly.**
 
 **Current state:**
-- N51 online and communicating reliably. OVP 87L joint confirmed as the root cause of all intermittent failures since purchase.
-- The tandem pump ADS section is working (confirmed 2026-03-26).
-- Phase 1 open-loop flush completed (2026-03-29): 4L ZH-M pumped through, fluid clear, filter cleaned.
-- Air in system confirmed (bubbling in reservoir after engine off, 2026-03-29).
-- Rear height remains static. Fahrzeugniveau switch stuck (2026-04-02). Y36 solenoid and main control valve not yet inspected.
-- Baseline measurements (2026-03-29): Rear L: 67cm, R: 66cm / Front L: 69cm, R: 68.5cm.
+- N51 online and communicating reliably (OVP fix held; no regression in 7+ weeks of driving).
+- Tandem pump ADS section working.
+- Phase 1 open-loop flush completed 2026-03-29 (DIY, 4 L ZH-M). MB-osat performed an effective front-circuit flush during the 2026-05-22 dust-boot service (+1 L Febi top-up on the receipt).
+- **Front level control: WORKING** (3.0 cm rise both corners, matches spec).
+- **Rear level control: STATIC** — no change in raised mode. Rear ARB-linkage proportioning valve + rear height control rod inspection now becomes the active diagnostic.
+- Switch behaviour normal: LED extinguishes immediately on disengage.
+- Return path sluggish (front drops back over hours, not seconds) — likely Y36 sintered filter partial restriction.
 
-**NEXT ACTION: Clear code 14 (lock-to-lock steering), then proceed with closed-loop bleed (Phase 1).**
+**NEXT ACTION: Get the car on jack stands and execute Phase 2.3 — rear ARB linkage inspection + manual valve test (disconnect linkage, move lever by hand with engine running, observe rear height response).** This is the single highest-yield diagnostic for the remaining rear failure.
 
 **IMPORTANT — Manual Discovery (2026-03-23):** We had been referencing the **1990** owner's manual, but the car is a **1991** model. The 1991 manual (now downloaded) reveals major differences: ADS, ASR, ASD, and the snow chain switch were all added for 1991. Critically, **the 1991 manual confirms ADS has a dedicated instrument cluster warning lamp** (page 92: "The indicator lamp comes on with the key in steering lock position 2 and goes out when the engine is running"). Our earlier conclusion that "ADS was never in the standard R129 indicator set" was wrong — it was based on the 1990 manual which predates ADS. **The original "missing lamp" observation may have been the ADS warning lamp.** Needs verification during ignition-ON bulb check.
 
@@ -58,27 +75,37 @@ The OVP relay was the root cause. After re-soldering all joints with Sn63/Pb37 (
 | **⚠️ ADS strut dust boots — lower sections MISSING.** Chrome piston shafts exposed to road debris. Urgent: pitting will destroy internal seals on irreplaceable ADS shocks. | Underbody inspection (katsastus) | 2026-04-02 |
 | Underbody generally clean (summer-only car). No transmission leaks. Exhaust center silencer outer shell starting to rust. Rear diff surface rust. | Underbody inspection | 2026-04-02 |
 | **Rear ADS dust boots CONFIRMED INTACT** — photograph through rear wheel opening shows black convoluted rubber bellows present, seated, no exposed chrome, no hydraulic weep. Apr 2 note was front-biased; scope reduces from ×4 to ×2 fronts. Front photos pending Apr 19 jack-stand session. | Evening garage inspection | 2026-04-18 |
+| **Front ADS dust boots + bump stops INSTALLED by MB-osat.** MEYLE 014 032 0032 boots fitted as part of the 2026-05-22 suspension scope; Sachs bump-stop kit installed alongside. Receipt also lists 1 L Febi ZH-M top-up → front hydraulic circuit was disturbed and effectively flushed during the work. Closes `known_issues.md` "Front ADS dust boots". | MB-osat 2026-05-22 receipt | 2026-05-22 |
+| **Fahrzeugniveau "Raised Level" RAISES THE FRONT BY ~3 cm.** First positive confirmation that the level control actually moves the car. Visual-only test, ~4-finger tire-to-fender gap held for hours at the raised height; by Monday morning was back to baseline. Light on switch went off **immediately** on disengage (normal), unlike earlier slow-extinguish observations during the OVP-fault era. | Driveway test | 2026-05-23 |
+| **Measured Raised-Level rise: +3.0 cm front L, +3.0 cm front R, 0 cm rear.** Ground-to-fender tape: Normal Front L 67.5 / R 66.5 / Rear 65; Raised Front L 70.5 / R 69.5 / Rear 65. Front is at spec (~30 mm). **Rear circuit is the remaining failure.** | Tape-measure test 2026-05-25 | 2026-05-25 |
+| **Front return path is slow — confirmed at rest (Saturday).** Sat 2026-05-23 sequence: engaged Raised → +4-finger gap → toggled switch back to Normal → LED off immediately → **car held the raise for hours** despite the disengage. Mon 2026-05-25 the front was back at baseline, but the car had also been driven 30 min that morning (Monday's drive likely accelerated final descent via speed-threshold auto-revert). The parked Saturday observation is the diagnostic-clean evidence: at standstill with switch back in Normal, return is on the order of hours not seconds. Suggests Y36 sintered filter still partially restrictive on the return path, or stiff front height control rod seals. System works, just slowly. | Driveway test 2026-05-23 + 2026-05-25 | 2026-05-25 |
+| **Fahrzeugniveau switch no longer stuck.** Earlier "stuck red LED" symptom (2026-04-02) has self-cleared. LED now follows the toggle correctly and goes off immediately on disengage. Likely a transient OVP-aftermath state. | Driveway test | 2026-05-25 |
 
 
-**Working hypothesis (revised 2026-04-02):**
+**Working hypothesis (revised 2026-05-25):**
 
-**Subsystem A (Adaptive Damping) is FULLY WORKING.** OVP root cause resolved (2026-04-01). Sport/Comfort modes confirmed on first drive (2026-04-02) — damping difference perceptible, inspector independently commented on smooth ride. All four accumulator spheres are healthy (earlier FR stiffness was air-lock from depleted system). Code 14 (steering angle sensor) needs clearing.
+**Subsystem A (Adaptive Damping) is FULLY WORKING.** OVP root cause resolved (2026-04-01). Sport/Comfort modes confirmed on first drive (2026-04-02) — damping difference perceptible, inspector independently commented on smooth ride. All four accumulator spheres are healthy (earlier FR stiffness was air-lock from depleted system). Code 14 (steering angle sensor) cleared. No regression in 7+ weeks of driving.
 
-**Subsystem B (Level Control / Niveauregulierung) is NOT WORKING.** Fahrzeugniveau switch is stuck with red LED permanently on — toggling does not change state or affect ride height. This is a **new symptom** (different from pre-flush behavior when the switch toggled normally). Rear height remains static. Pump is proven alive, flush is done, fluid is fresh. The remaining unknowns are: switch/relay logic, rear level control valve function, and whether the hydraulic circuit to the rear struts flows.
+**Subsystem B (Level Control / Niveauregulierung) is HALF-WORKING.** Front circuit is now functional — Fahrzeugniveau "Raised Level" produces a clean +3.0 cm rise at both front corners (matches the ~30 mm factory spec). This came online after the 2026-05-22 MB-osat suspension visit disturbed the front strut hydraulic connections during dust-boot fitting, with a 1 L ZH-M top-up to restore level — effectively a partial flush + reseat that freed up whatever was sticking on the front side. **The rear circuit remains static — 0 cm change in raised mode.** Pump alive, flush done, front Y36 path proven by the fact that the front actually moves (Y36 feeds both axles through the main valve, so Y36 itself is energising and delivering pressure). The failure is now **specifically downstream of the main valve on the rear side**: most likely candidates are rear ARB-linkage proportioning valve, rear height control rod piston seizure, or main valve rear-circuit ball check stuck. Switch behaviour is now fully normal (LED extinguishes immediately on disengage).
 
-**⚠️ ADS strut dust boots — partial concern.** Apr 2 katsastus noted "lower sections missing" on the ADS shocks. Apr 18 evening photograph of the rear shows the rear bellows is actually intact and seated — Apr 2 observation was front-biased. **Scope reduces from ×4 to ×2 fronts pending Apr 19 front-strut photos on jack stands.** Order plan is 2× `A 129 323 01 92` from MB-osat (OEM, shared with W124/W201/R129) once the front photos confirm, or zero if the fronts also turn out intact.
+**Sluggish return path on front.** Disengaging Raised mode does not drop the front back immediately — it takes hours (e.g. raised level held overnight Sat→Sun, back to normal by Mon morning). Light on the switch goes off immediately as expected, so the electrical side is correct. Almost certainly a partially-clogged Y36 sintered bronze filter or stiff front height control rod seals after decades of inactivity. Cosmetic, not blocking — but worth a Y36 disassembly + filter drill-out (the documented #1 ADS I fix) if a future opportunity opens up.
 
-**Issue tracker (updated 2026-04-02):**
+**Front ADS dust boots — RESOLVED.** Fitted by MB-osat 2026-05-22 (MEYLE 014 032 0032 + Sachs bump-stop kit, parts already on hand). Rear bellows confirmed intact 2026-04-18. **All four corners now correctly booted; closes `known_issues.md` "Front ADS dust boots".**
 
-1.  **~~Level control inoperative — pump not circulating.~~** **PUMP ALIVE (2026-03-26). Flush DONE (2026-03-29).** Rear height still static. Fahrzeugniveau switch now stuck (red LED permanently on, new symptom post-OVP-fix). **→ Next: (a) Clear code 14. (b) Read Pin 9 for any new codes. (c) Manual valve test — disconnect ARB linkage from rear level control valve, manually move lever with system pressurized on jack stands. (d) If valve responds to manual input, problem is upstream (switch/relay/wiring). If not, valve or hydraulic supply is blocked.**
+**Issue tracker (updated 2026-05-25):**
+
+1.  **~~Level control inoperative — pump not circulating.~~** **PUMP ALIVE (2026-03-26). DIY flush DONE (2026-03-29). Front circuit operational since the 2026-05-22 MB-osat dust-boot service** (which incidentally flushed/reseated the front). **Front rises +3.0 cm in Raised mode (matches spec, both corners). Rear still static — see item 9.**
 2.  **~~Front accumulator spheres suspect.~~** **CLEARED (2026-04-02).** Ride quality exceptional on first drive — inspector commented on smooth adaptive ride. All four spheres healthy. Earlier FR stiffness (2026-03-22) was air-lock from depleted hydraulic system, not a ruptured diaphragm. **No replacement needed.**
 3.  **ADS cluster warning lamp missing — confirmed cluster swap (option 216 factory ADS, confirmed via lastvin.com 2026-04-01).** Non-ADS cluster. **→ Pull cluster when tools available (Phase 3).**
-4.  **Fault code 14 (steering angle sensor).** Returned after OVP reinstall (expected — N51 was unpowered for days). **→ Clear with lock-to-lock steering.**
+4.  **~~Fault code 14 (steering angle sensor).~~** Cleared with lock-to-lock steering. No reoccurrence in 7+ weeks of driving.
 5.  **Cluster swap — historical analysis (2026-03-27).** Swedish records show smooth odometer 2013–2024. Swap likely pre-2008.
 6.  **~~OVP RELAY CRACKED SOLDER JOINTS.~~** **CONFIRMED & RESOLVED (2026-04-01).** Done.
-7.  **ADS STRUT DUST BOOTS — scope reduced to fronts only (2026-04-18).** Rear photographed intact 2026-04-18. **→ Photograph fronts on jack stands Apr 19. If fronts confirm missing, order 2× `A 129 323 01 92` from MB-osat. If fronts also intact, close this item.**
-8.  **Fahrzeugniveau switch stuck (2026-04-02).** Red LED permanently on, toggle has no effect. New behavior — switch worked normally before flush (Mar 23–28). Possible causes: stuck relay, N51 latched state, switch failure, wiring issue from electronics bay work, or Y36 solenoid seized in energized position. **→ Investigate: (a) Check 12V at Y36 connector (right front wheel well) — if voltage present continuously, switch/relay circuit is latched. (b) Y36 click test. (c) If Y36 is clicking but no height change, suspect clogged sintered bronze filter inside Y36 (documented #1 failure on European ADS I). See [level_control_system.md](level_control_system.md) for detailed failure mode analysis.**
-9.  **Level control not raising car — full Y36/valve diagnostic needed (2026-04-06).** With pump alive, flush done, and fluid fresh, the remaining suspects for no height change are: (a) Y36 sintered filter clogged (most likely — car has sat for years). (b) Height control rod pistons seized from inactivity. (c) Rear ARB linkage sheared. (d) Main valve regulating piston (50c) orientation incorrect or stuck. (e) Main valve ball check valves stuck. **→ Systematic diagnosis in Phase 2 steps 2.1–2.4.**
+7.  **~~ADS STRUT DUST BOOTS.~~** **CLOSED (2026-05-22).** Front pair fitted by MB-osat during the suspension scope (MEYLE 014 032 0032 + Sachs bump-stop kit). Rear pair already confirmed intact 2026-04-18. All four corners now correctly booted.
+8.  **~~Fahrzeugniveau switch stuck (2026-04-02).~~** **SELF-CLEARED by 2026-05-23.** Switch LED now follows the toggle correctly and extinguishes immediately on disengage. The original "stuck red LED" was almost certainly a transient OVP-aftermath state. No action needed.
+9.  **Level control: REAR CIRCUIT STILL STATIC (2026-05-25).** Front circuit is fully working (+3.0 cm rise at both corners matches spec). Y36 is therefore proven to be energising and delivering pressure into the main valve. The remaining failure is **specifically on the rear side, downstream of the main valve**. Remaining suspects, in order of likelihood: (a) **Rear ARB linkage sheared or disconnected** — known plastic failure point. (b) **Rear height control rod pistons seized** from years of inactivity (the front rods got "exercised" by MB-osat's dust-boot work; the rear rods didn't). (c) **Main valve rear-circuit ball check stuck** (Ball 2 in the level_control_system.md reference). (d) **Rear proportioning valve internally blocked** independent of the ARB linkage. **→ Phase 2.3 is now the active diagnostic: jack stands, locate rear proportioning valve, inspect ARB linkage for shear, then manual lever test with engine running.**
+10. **Sluggish front return path (confirmed at rest, 2026-05-23).** Engaged Raised → disengaged back to Normal → switch LED off immediately (electrical side correct) → **car held the raise for hours, parked, engine off**. By Monday morning back to baseline, but a 30-min drive intervened (the drive may have triggered the speed-based auto-revert and accelerated descent regardless). The Saturday parked-state observation is the clean evidence: at standstill the rods don't bleed off at anything close to the spec rate. Most likely a partially-clogged Y36 sintered bronze filter on the return path (the documented #1 ADS I failure — clogged on the inlet side has been "drilled out" by the MB-osat-induced front circuit reactivation; the return side is probably still partially restrictive), or stiff front height control rod seals. **Cosmetic, not blocking.** **→ Defer; bundle with a future Y36 disassembly + sintered-filter drill-out if/when one is opened up for the rear-side investigation in Phase 2.**
+
+    **Future tracking protocol (cheap, owner volunteered):** take a pre-drive ground-to-fender measurement (or even just the finger-gap shorthand: 2 fingers / 3 fingers / 4 fingers) before every drive. Track over a week of driving how quickly the front settles back to Normal between engagements, and whether the return rate changes with how long the car has been driven (i.e. does the system "warm in" and start returning faster after the fluid has been circulating, or is it consistently slow). Low cost, high information density.
 
 ## ADS I System Architecture (Reference)
 
@@ -210,51 +237,54 @@ These steps were written when the module was presumed dead. Now that N51 communi
 - **Re-soldered (2026-03-31):** All joints reworked with Sn63/Pb37. Optical inspection passed.
 - **Reinstalled & verified (2026-04-01):** N51 boots cleanly. Both cabin switches show red LEDs. Diagnostic bus stable. Pin 9 returns code 14 (N49 steering angle sensor — expected, clear with lock-to-lock). **No other fault codes.**
 
-### Phase 1: Closed-Loop Bleed & Ride Height Assessment (NEXT ACTION)
+### Phase 1: Closed-Loop Bleed & Ride Height Assessment — PARTIALLY OBSOLETE 2026-05-25
 
-*Phase 0 prerequisite MET — N51 is online and stable. Open-loop flush was completed on 2026-03-29 (4L ZH-M, fluid clear, filter cleaned). Air entrapment confirmed (bubbling). The closed-loop bleed was never performed because OVP failed mid-flush.*
+*The front-circuit half of this phase was effectively performed by MB-osat on 2026-05-22 (front strut disturb + 1 L Febi ZH-M top-up during the dust-boot fitting), and the result was confirmed 2026-05-25: front rises +3.0 cm in Raised mode at both corners, matching factory spec. The rear circuit was untouched and remains static, so a rear-axle-only droop bleed is still worth attempting as a cheap pre-check before tearing into the rear hardware in Phase 2.*
 
-**Before starting:** Clear code 14 — start engine, turn steering full lock left → full lock right → center. Read Pin 9 to confirm 1 blink (no faults).
-
-**Procedure:**
+**Reduced procedure (rear-droop bleed only, retained as a low-cost pre-Phase-2 step):**
 1. Top up reservoir to MAX with fresh ZH-M.
 2. Start engine. Verify ADS switches are active (console + Fahrzeugniveau).
-3. Jack rear to full droop — forces the rear level control valve to "fill" position, pushing fluid into rear struts and forcing trapped air back to reservoir.
+3. Jack rear to full droop — forces the rear level control valve to "fill" position, pushing fluid into rear struts and forcing any trapped air back to reservoir.
 4. Lower rear back to ground. Repeat 2–3 times.
 5. "Trunk bounce" — load/unload weight in the trunk to cycle the rear valve through its range.
 6. Activate Fahrzeugniveau UP/DOWN several times during the process.
-7. Check reservoir for bubbling after engine off. Repeat until no bubbles.
-8. **Measure fender-to-ground** at all four corners. Compare to baseline (Rear L: 67cm, R: 66cm / Front L: 69cm, R: 68.5cm).
-9. Top up reservoir to MAX.
+7. Check reservoir for bubbling after engine off.
+8. **Measure rear ground-to-fender.** Compare to 2026-05-25 baseline (65 cm). Compare also in Raised mode (was 65 cm, no change).
 
-**Success criteria:** Rear height increases from baseline. Bubbling eliminated. Reservoir level stable.
+**Success criteria:** Rear height increases from baseline, or rear responds to Raised mode (+3 cm expected). Bubbling eliminated.
 
-**If rear still static after bleed:** proceed to Phase 2 (mechanical inspection — rear level control valve, ARB linkage).
+**If rear still static after this:** the failure is mechanical, not a bleed issue. Proceed to Phase 2.3 (rear ARB linkage + proportioning valve inspection).
 
-### Phase 2: Mechanical & Hydraulic Inspection Under Car (after bleed proves system status)
+**Reference baselines:**
+- 2026-03-29 (post-DIY-flush, OVP still flaky): Rear L 67 / R 66 / Front L 69 / R 68.5 cm.
+- 2026-05-25 (post-MB-osat suspension): Rear 65 / Front L 67.5 / R 66.5 cm (Normal); Rear 65 / Front L 70.5 / R 69.5 cm (Raised).
+- The 1–2 cm overall drop from March to May is consistent with the new lower control arms / fresh bushings + alignment job settling to true static ride height.
 
-*Do this with the car on a lift or jack stands, regardless of Phase 1 outcome. See [level_control_system.md](level_control_system.md) for detailed component descriptions.*
+### Phase 2: Mechanical & Hydraulic Inspection Under Car — REAR-FOCUSED 2026-05-25
 
-- **2.1 — Y36 Solenoid Click Test (can do before jacking)**
+*Front circuit is proven working (Y36 energising and delivering pressure end-to-end to the front height control rods, +3.0 cm rise at both corners). Phase 2 now narrows to the rear circuit. Do this with the car on jack stands. See [level_control_system.md](level_control_system.md) for detailed component descriptions.*
+
+- **2.1 — Y36 Solenoid Click Test — LARGELY OBVIATED (2026-05-25)**
+  - Function already proven by the working front rise. Skip unless investigating the sluggish front return path (issue #10), in which case the Y36 click on release is what's of interest, not the click on engage.
   - Engine running, have someone press Fahrzeugniveau switch to Raised position.
   - Listen near the **right front wheel well** for an audible **click** from Y36.
-  - If click: solenoid energizing. Problem is downstream (clogged sintered filter, seized height control rods, blocked hydraulic path).
-  - If no click: measure 12V at Y36 connector. Voltage present + no click → seized solenoid. No voltage → wiring/switch/relay fault.
-  - **Note:** Fahrzeugniveau switch is currently STUCK with LED permanently on (since 2026-04-02). Y36 may be receiving continuous power — check with multimeter at Y36 connector even without pressing the switch.
+  - On *disengage*, a second click should occur as the solenoid de-energises and the return path opens. If this click is absent or weak, the return-side spool is sticking — consistent with the sluggish return observation.
 
 - **2.2 — Main Control Valve & Y36 Visual Inspection**
   - Locate the **main control valve** (A 129 320 00 58) in the right front wheel well area. Multiple hydraulic steel lines attach to it, plus electrical connectors for Y36 and Y37.
   - Check for external leaks at all fittings and solenoid connections.
   - Identify Y36 electrical connector — 2-pin, 12V when Fahrzeugniveau is active.
   - Identify Y37 electrical connector — second solenoid on the valve body.
+  - **Trace the rear-feed line** out of the valve body — this is the line that carries Y36-controlled pressure to the rear height control rod and is the prime suspect for the failure-isolated-to-rear pattern. Look for pinched line, kinked tubing, or blocked fitting.
 
-- **2.3 — Rear Level Control Valve & Linkage**
+- **2.3 — Rear Level Control Valve & Linkage (NEXT ACTION 2026-05-25)**
+  - **This is now the single highest-yield diagnostic.** The front is working, the rear is not, and the difference between them on a shared Y36 supply is the rear-circuit hardware: ARB linkage → proportioning valve → rear height control rod.
   - Locate the **rear level control valve** (hydraulic proportioning valve) mounted approximately in the middle of the rear axle area.
   - Trace the **linkage from the rear anti-roll bar** to the proportioning valve lever arm.
-  - **CHECK FOR SHEARED LINKAGE:** Known ADS I failure. The plastic linkage part can shear at the lower mounting, causing the system to lose rear ride height completely. A MBClub UK user with a 1992 500SL had this exact failure.
+  - **CHECK FOR SHEARED LINKAGE FIRST.** Known ADS I failure. The plastic linkage part can shear at the lower mounting, causing the system to lose rear ride height completely. A MBClub UK user with a 1992 500SL had this exact failure. **This is the cheapest possible failure mode to confirm or rule out — purely visual.**
   - Inspect hydraulic lines from the rear shocks to the valve for leaks, kinks, or disconnection.
-  - **Manual valve test:** Disconnect ARB linkage from the valve lever. Manually move lever back and forth with engine running. If car rises/lowers → hydraulics are good, problem is upstream (linkage, switch, Y36). If no response → valve or hydraulic supply is blocked.
-  - *Pass criteria:* Linkage intact and securely connected at both ends, no hydraulic leaks, manual lever test responds.
+  - **Manual valve test:** Disconnect ARB linkage from the valve lever. Manually move lever back and forth with engine running. If car rises/lowers → hydraulics are good, problem is the linkage or its connection. If no response → valve internals or rear-side hydraulic supply is blocked (further isolation: tap into the rear-feed line from the main valve to confirm pressure is arriving at the proportioning valve inlet).
+  - *Pass criteria:* Linkage intact and securely connected at both ends, no hydraulic leaks, manual lever test produces rear height change.
 
 - **2.4 — Height Control Rods**
   - Inspect front and rear height control rods. Pressure line marked with **red paint blob**.
@@ -436,4 +466,8 @@ N51 currently reports 0 faults on Pin 9. These tests are needed only if new faul
 | 2026-03-30 | —     | **OVP RELAY CRACKED SOLDER JOINTS FOUND** | Removed and disassembled OVP relay. 3–4 ring-shaped thermal fatigue fractures on PCB, worst on 87L (N51 power feed). Interior clean/dry — pure thermal fatigue. | Root cause of all intermittent ADS symptoms identified. Re-solder with Sn63/Pb37. |
 | 2026-03-31 | 0     | **OVP re-soldered** | All joints reworked with Sn63/Pb37 leaded solder. Optical inspection: good wetting, no ring cracks, no cold joints, no bridges. | Awaiting reinstall + test. |
 | 2026-04-01 | 0     | **OVP REINSTALLED — ADS ONLINE ✓** | OVP reinstalled. N51 boots cleanly. Both cabin switches show red LEDs. Diagnostic bus stable. **Pin 9 returns code 14 only** (steering angle sensor N49 — expected after extended power loss). No other fault codes. | **ROOT CAUSE CONFIRMED.** OVP 87L cracked solder joint was the sole cause of all intermittent ADS failures since purchase. Next: clear code 14 (lock-to-lock), then closed-loop bleed (Phase 1). |
+| 2026-05-22 | 1/2   | **MB-osat suspension visit — front struts disturbed, dust boots fitted, ADS circuit topped up** | MEYLE 014 032 0032 front dust boots + Sachs bump-stop kit installed during the 9-line suspension scope (lower control arms, idler arm bushings, tie rods, etc.). Receipt lists 1 L Febi ZH-M top-up → the front strut hydraulic connections were disturbed enough to need refilling. Effectively a partial flush and reseat of the front circuit. | Closes "Front ADS dust boots" issue. Sets up the front-circuit-now-works observation that follows. |
+| 2026-05-23 | 1     | **First positive level-control test — front raises visibly in Raised mode** | Visual-only driveway test: pressed Fahrzeugniveau UP, the car's front rose by ~4 fingers of tire-to-fender gap. Held at the raised height for hours (overnight). By Monday morning back to baseline. Light on the switch went off **immediately** on disengage (normal). | **First confirmed working level-control event on this car since purchase.** Next: measure with tape. |
+| 2026-05-25 | 1     | **Measured Raised-Level rise: +3.0 cm front L+R, 0 cm rear** | Ground-to-fender tape: Normal Front L 67.5 / R 66.5 / Rear 65; Raised Front L 70.5 / R 69.5 / Rear 65. Front matches factory spec (~30 mm). Rear flat. Light extinguishes immediately on disengage. Measurements taken after a 30-min drive that morning. | **Front level control RESOLVED.** Rear circuit is now the isolated failure. Phase 2.3 (rear ARB linkage + proportioning valve) becomes the next active diagnostic. Item #8 (stuck Fahrzeugniveau LED) closes as self-cleared. |
+| 2026-05-25 | —     | **Disambiguating Saturday's "stayed raised for hours" observation** | Owner clarified: on Sat 2026-05-23 the sequence was engage Raised → +4-finger gap → toggle switch back to Normal (LED off immediately) → car held the raise for hours **parked**. Monday's return to baseline followed a 30-min drive (which probably triggered the speed-based auto-revert — sources vary 40–120 km/h for the threshold on ADS I). | Saturday's parked observation is now the clean evidence for issue #10 (slow front return path). Future tracking: pre-drive finger-gap or tape measurement to characterise how the return rate varies with system use. |
 

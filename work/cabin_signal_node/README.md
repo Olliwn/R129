@@ -2,7 +2,7 @@
 
 ## Purpose
 
-Build the always-on cabin node in the `R129` distributed system: a small `nRF54L15` MCU board, wired to the Pi over USB-CDC, with three responsibilities:
+Build the always-on cabin node in the `R129` distributed system: a small `nRF54L15` MCU board, wired to the Pi over a serial link (UART for the rear-half always-on board, per the 2026-05-17 link decision; USB-CDC remains the option for the deferred front-half acquisition board where higher bandwidth may matter), with three responsibilities:
 
 1. **Cabin signal acquisition** (when ignition is on) — instrument cluster gauge senders + lamp drives, brake and kickdown switches, hand-brake / reverse / door / hood / trunk ajar, console rocker switches, `KL15` / `KL30` / `KL58` references, plus cabin ambient sensors.
 2. **BLE proximity-based central locking** (always on) — replaces the dead IR remote keys; bonded phone in proximity → unlocks via `PSE` central-locking system; phone out of range → locks. See [`docs/known_issues.md`](../../docs/known_issues.md) §"Central Locking (PSE)" for the IR-key abandonment decision.
@@ -14,8 +14,8 @@ Roles 2 and 3 were originally on a separate sentry node; they have been folded i
 
 The cabin node ended up **physically split across two locations** during the May 2026 center console refresh — the BLE / Pi-wake half moved to the rear passenger cubby alongside the Pi and the DSP; the cabin-signal-acquisition half is deferred to its own future board near the cluster:
 
-- **Rear cubby (built and powered now):** `nRF54L15` carrier with BLE radio, USB-CDC link to Pi, the high-side power gate for the 85 W charger domain, and the always-on power section (now sourced from a local tap off the post-AGU 8 mm² CCA rail — see §"Always-on power supply" below). This is the always-on portion required for keyless entry + Pi wake. **Mechanical packaging:** the rear-cubby half lives on its own cassette in the shared rear-cubby rack (aluminum-profile frame, modular cassettes, friction-fit mount) — see [`work/rear_cubby_rack/README.md`](../rear_cubby_rack/README.md) for rack design, bring-up sequence, and cable management.
-- **Front (deferred):** The cluster-pinout, ambient-sensor, and instrument-tap acquisition front-end (Stages 2–5 below). Will likely live as a second small board near the cluster when the cluster is pulled. The two boards still appear to the Pi as a single logical "cabin node" because they share the same USB-CDC frame format; whether they end up on one MCU with a long sensor harness or two MCUs federated over a short serial link is a Stage-2 decision.
+- **Rear cubby (built and powered now):** `nRF54L15` carrier with BLE radio, **UART link to Pi via GPIO header** (re-spec'd from USB-CDC 2026-05-17 — frees a Pi USB-A port; same payload codec, different transport), the high-side power gate for the 85 W charger domain, and the always-on power section (now sourced from a local tap off the post-AGU 8 mm² CCA rail — see §"Always-on power supply" below). This is the always-on portion required for keyless entry + Pi wake. **Mechanical packaging:** mounted on screw-tower standoffs to a 4 mm plastic plate (CTK-damped underside, friction-fit retention, no holes drilled in the car) shared with the DSP, Pi5, nRF93M1, and 85 W charger — see [`work/rear_cubby_rack/README.md`](../rear_cubby_rack/README.md) for plate design, power topology (manual hard-kill switch + ATO fuse in series with the IRF4905), cooling architecture (lid-preserving foam-baffled side-trim vents), bring-up sequence, and cable management. (Mechanical packaging was re-architected on 2026-05-17 from the original aluminum-T-slot extrusion + modular cassette design — captured in `docs/diary/2026-05.md` May 17 entry; the rack README's Work Log preserves both for reference.)
+- **Front (deferred):** The cluster-pinout, ambient-sensor, and instrument-tap acquisition front-end (Stages 2–5 below). Will likely live as a second small board near the cluster when the cluster is pulled. The two boards still appear to the Pi as a single logical "cabin node" because they share the same **framed payload format** (transport-agnostic — same `R129_TYPE_*` frames work over USB-CDC, UART, or BLE notify per `R129/FW_nrf/payload/`); whether they end up on one MCU with a long sensor harness or two MCUs federated over a short serial link is a Stage-2 decision.
 
 The BOM, protection rules, frame format, and stage gates below are unchanged by this split — Stages 0–5 still describe the acquisition half, Stages 6–8 still describe the always-on half. Only the geometry and the always-on power source have changed.
 
@@ -23,7 +23,7 @@ The BOM, protection rules, frame format, and stage gates below are unchanged by 
 
 - Pi GPIO is 3.3 V, no analog ADC, vulnerable to noise, and pulled in unhelpful directions during boot. Direct attachment of automotive 12 V signals to the Pi would be unsafe.
 - A small dedicated MCU with a protection front-end is the same approach used for the engine-bay node. Reusing the topology keeps protection rules consistent and lets the cabin board reuse the same `TLP521-4` opto + `ADS1115` + clamp parts already in the SP Elektroniikka stock list.
-- USB-CDC to the Pi is wired (no BLE), zero-driver (kernel CDC-ACM), low-latency, and naturally power-cycles with the cubby supply rail.
+- A wired link to the Pi (no BLE) is low-latency and naturally power-cycles with the cubby supply rail. **Transport choice per board:** the rear-half always-on board uses UART (3 wires, frees a Pi USB-A port — see `work/rear_cubby_rack/README.md` Cable Management § Bundle D2). The deferred front-half acquisition board may use USB-CDC if it wants the higher bandwidth + zero-driver kernel CDC-ACM enumeration; the framed payload codec is the same across both transports.
 
 ## Architectural Position
 
@@ -36,7 +36,7 @@ trunk battery +12V ─► 40 A AGU ─► 8 mm² CCA to rear cubby ─► DSP +1
                                                           │      │                                       │
                                                           │      │     ┌────── cabin node (rear half, always-on) ─────┐
                                                           │      │     │                                              │
-                                                          │      │     │  nRF54L15 ──USB-CDC──►──► RPi5              │
+                                                          │      │     │  nRF54L15 ─────UART────►──► RPi5            │
                                                           │      │     │       │                  vehicle_state.py    │
                                                           │      │     │       │                                      │
                                                           │      │     │       ├── BLE radio (scanning)               │
@@ -142,6 +142,8 @@ Lives in the trunk near the IRCL/PSE controllers. Driven from the cabin node by 
 ### Cabin 12 V power-domain high-side switch (re-spec 2026-05-04 — gates the entire 85 W charger downstream)
 
 **Re-spec context:** Originally this circuit was a small Pi-only `5 V` high-side switch (a few amps). With the architecture decision in [`work/center_console_refresh/README.md`](../center_console_refresh/README.md) §5.6b, this switch is **promoted to the upstream 12 V gate for the entire 85 W cigarette-lighter USB charger**, which in turn feeds the Pi (≤3 A @ 5 V), the Qi wireless charging pad (~2 A @ 5 V), and a spare USB outlet. By gating on the 12 V side *upstream of the charger*, the charger's own quiescent draw also collapses to zero when the Pi is off — a few hundred µA of switch / sense leakage is the only thing left on the always-on rail downstream of this MOSFET.
+
+**Manual hard-kill in series (added 2026-05-17 — permanent, not interim):** A 50 A rocker switch + 7.5 A slow-blow ATO fuse sit upstream of this IRF4905 in the +12 V series chain (full topology in [`work/rear_cubby_rack/README.md`](../rear_cubby_rack/README.md) §"Power Topology"). The two controls are **complementary**, not redundant: the IRF4905 is the firmware-driven path (BLE proximity, KL15 override, graceful-shutdown handshake); the manual switch is the firmware-independent path (transport mode, service disable, firmware-bug recovery, long-storage zero-parasitic-drain). Either off → charger off → Pi off. This matches industry practice for production embedded vehicle ECUs and survives every plausible firmware failure mode. Originally conceived as an interim during firmware development; promoted to permanent infrastructure on 2026-05-17.
 
 Steady-state load: ~6–8 A at 12 V (85 W charger ≈ 90 % efficient at 70 % load). Worst-case start-up inrush into the charger's input bulk caps + Qi pad start-up: design for **15 A peak for ≤10 ms**, **10 A continuous** with thermal margin. Same circuit topology family as [`docs/nRF5430_Interface_Design.md`](../../docs/nRF5430_Interface_Design.md) §"Circuit Design: High-Side 12V Switch" Option B, scaled up.
 

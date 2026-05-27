@@ -42,6 +42,18 @@ class SplitPaneView(QWidget):
         self._param_min = 0
         self._param_max = 100
 
+        # Touch / hit-test infrastructure.
+        # `_left_item_rects` is populated by `_draw_left` each paint. Each
+        # entry is (item_index, QRectF). `_detail_item_rects` is populated
+        # by subclass `_draw_detail` overrides via `_register_detail_item`
+        # — list of (item_index, QRectF). `_param_bar_rect` is set by the
+        # subclass via `_register_param_bar` during param mode, used for
+        # tap-to-set + drag-to-scrub.
+        self._left_item_rects: list[tuple[int, QRectF]] = []
+        self._detail_item_rects: list[tuple[int, QRectF]] = []
+        self._param_bar_rect: QRectF | None = None
+        self._scrubbing_param = False
+
     def handle_input(self, action: InputAction):
         if self._focus == "list":
             return self._handle_list(action)
@@ -106,6 +118,128 @@ class SplitPaneView(QWidget):
         self._param_max = max_v
         self.update()
 
+    # ── Touch input ──────────────────────────────────────────────────
+    # Mouse events synthesize the same internal state changes the
+    # rotary/keyboard path uses. Both input sources coexist; tapping
+    # never breaks the rotary flow and vice versa.
+
+    def _register_detail_item(self, index: int, rect: QRectF):
+        """Subclasses call this during ``_draw_detail`` so taps can be
+        mapped back to the originating item. Resets each paint."""
+        self._detail_item_rects.append((index, rect))
+
+    def _register_param_bar(self, rect: QRectF):
+        """Subclass call from inside ``_draw_param_bar`` so tap+drag on
+        the slider can update ``_param_value`` directly. Cleared on
+        param exit."""
+        self._param_bar_rect = rect
+
+    def _hit_left(self, x: float, y: float) -> int:
+        for idx, rect in self._left_item_rects:
+            if rect.contains(x, y):
+                return idx
+        return -1
+
+    def _hit_detail(self, x: float, y: float) -> int:
+        for idx, rect in self._detail_item_rects:
+            if rect.contains(x, y):
+                return idx
+        return -1
+
+    def _set_param_from_x(self, x: float):
+        if self._param_bar_rect is None:
+            return
+        r = self._param_bar_rect
+        frac = (x - r.x()) / r.width() if r.width() > 0 else 0.0
+        frac = max(0.0, min(1.0, frac))
+        value = round(self._param_min
+                      + frac * (self._param_max - self._param_min))
+        if value != self._param_value:
+            self._param_value = int(value)
+            self.update()
+
+    def mousePressEvent(self, event):
+        if event.button() != Qt.LeftButton:
+            return
+        x, y = event.x(), event.y()
+
+        # Scrubbing the param bar takes priority — keeps the slider feel
+        # tight when the user lands their finger directly on the bar.
+        if (self._focus == "param" and self._param_bar_rect is not None
+                and self._param_bar_rect.contains(x, y)):
+            self._scrubbing_param = True
+            self._set_param_from_x(x)
+            return
+
+        # Left pane: category list. Tap to select + jump into detail.
+        # Tap on the already-selected category retreats to list focus
+        # (matches the rotary LEFT shortcut from detail back to list).
+        left_idx = self._hit_left(x, y)
+        if left_idx >= 0:
+            if self._focus == "param":
+                # Commit current value before navigating away.
+                self._focus = "detail"
+                self._on_param_done(self._param_key,
+                                    self._param_value, cancelled=False)
+                self._param_bar_rect = None
+            if left_idx == self._selected and self._focus == "detail":
+                self._focus = "list"
+            else:
+                self._selected = left_idx
+                self._focus = "detail"
+                self._detail_selected = 0
+            self.update()
+            return
+
+        # Right pane: detail items. Tap to activate (toggle or enter
+        # param edit). Works from any focus — taps from "list" focus
+        # implicitly enter "detail" focus first, so the user doesn't
+        # have to tap the category and then the option.
+        det_idx = self._hit_detail(x, y)
+        if det_idx >= 0:
+            if self._focus == "param":
+                self._focus = "detail"
+                self._on_param_done(self._param_key,
+                                    self._param_value, cancelled=False)
+                self._param_bar_rect = None
+                if det_idx == self._detail_selected:
+                    # Tapped the currently-edited slider item — just
+                    # commit, don't re-enter edit mode.
+                    self.update()
+                    return
+            elif self._focus == "list":
+                self._focus = "detail"
+            self._detail_selected = det_idx
+            self._on_detail_press(det_idx)
+            self.update()
+            return
+
+        # Tap on empty area inside the detail pane: cancel/commit param.
+        if self._focus == "param":
+            self._focus = "detail"
+            self._on_param_done(self._param_key,
+                                self._param_value, cancelled=False)
+            self._param_bar_rect = None
+            self.update()
+
+    def mouseMoveEvent(self, event):
+        if not self._scrubbing_param:
+            return
+        self._set_param_from_x(event.x())
+
+    def mouseReleaseEvent(self, event):
+        if not self._scrubbing_param:
+            return
+        self._scrubbing_param = False
+        # Commit the scrubbed value and exit param mode in one motion —
+        # the iOS-style "release to apply" gesture that feels natural
+        # next to the rotary's modal CW/CCW/PRESS flow.
+        self._focus = "detail"
+        self._on_param_done(self._param_key,
+                            self._param_value, cancelled=False)
+        self._param_bar_rect = None
+        self.update()
+
     def _move(self, delta: int):
         if not self._items:
             return
@@ -129,6 +263,13 @@ class SplitPaneView(QWidget):
         p.setRenderHint(QPainter.TextAntialiasing, True)
         w, h = self.width(), self.height()
         p.fillRect(self.rect(), theme.BG)
+
+        # Reset hit-test rect lists each frame — they're repopulated by
+        # `_draw_left` and the subclass `_draw_detail` overrides.
+        self._left_item_rects = []
+        self._detail_item_rects = []
+        if self._focus != "param":
+            self._param_bar_rect = None
 
         left_w = int(w * LEFT_RATIO)
         self._draw_left(p, left_w, h)
@@ -158,6 +299,12 @@ class SplitPaneView(QWidget):
                 break
             y = TOP_MARGIN + vi * ITEM_HEIGHT
             is_sel = (idx == self._selected)
+
+            # Register the full-row rect as the touch target for this
+            # category. Includes the left-edge accent bar zone so taps
+            # anywhere on the row count.
+            self._left_item_rects.append(
+                (idx, QRectF(0, y, left_w, ITEM_HEIGHT)))
 
             if is_sel:
                 bg = QColor(40, 30, 8) if list_active else QColor(25, 22, 12)

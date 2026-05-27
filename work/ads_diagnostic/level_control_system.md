@@ -148,6 +148,10 @@ The only fully mechanical control loop. No electronics involved.
 
 **Important correction:** The Fahrzeugniveau switch raises **both axles**, not front only. Pazo confirmed: *"Front and rear share same operating pressure"* regarding the height control rods.
 
+**Independent second source (added 2026-05-25)** — the German R129 reference at [auto.wikisort.org](https://auto.wikisort.org/automobile/de/Automobil/Mercedes-Benz_R_129) states: *"Es war eine teil-hydraulische elektronische Federung der Radaufhängung … mit Niveauregulierung sowohl für die Vorder- als auch für die Hinterachse. … die Bodenfreiheit konnte bei Geschwindigkeiten unter 40 km/h per Knopfdruck um 40 mm erhöht werden."* — i.e. "level control for both front and rear axles … ground clearance could be raised by 40 mm by push of a button below 40 km/h." Note: the Wikisort figure of 40 mm may conflate ADS I and ADS II; the 1991–1993 Betriebsanleitung (ADS I specific) and our own measurement at the front (3.0 cm both corners) both align at ~30 mm. The "both axles" claim is the consistent point across all sources.
+
+**Diagnostic implication:** if the front rises and the rear stays flat in Raised mode (as observed on AOK912 on 2026-05-25), that is a *fault*, not normal operation. The failure is localised to the rear circuit downstream of the main valve — most commonly the rear ARB-linkage proportioning valve, or rear height control rod piston seizure.
+
 **Note on US vs. European ADS I:** US-market ADS I cars **lack** the Fahrzeugniveau switch, Y36, and height control rods entirely — presumably due to US bumper height regulations at the time. The automatic rear self-leveling (Function 1) still operates on US cars. This is why US-focused forum threads rarely discuss height control and why information is scarce.
 
 ### Function 3: Automatic Speed-Dependent Lowering (Normal Mode)
@@ -216,3 +220,4 @@ Each phase is independently useful and does not require the next.
 - **R129.co — ADS I & II Workshop Diagnostic Manual:** [r129.co/products/ads-workshop-manual](https://r129.co/products/mercedes-r129-sl-workshop-diagnostic-manual-ads-i-ii-self-levelling-suspension-and-etc-inc-wiring-schematics.html) — Commercial manual covering wiring schematics and diagnostic procedures.
 - **ABCspecialist (NL):** [abcspecialist.nl](https://www.abcspecialist.nl/) — Pump rebuilds, valve block parts, specialist knowledge for R129 ADS hydraulics.
 - **German Betriebsanleitung 1991–1993** (`r129-betriebsanleitung-1991-1993-DE.pdf`) — Pages 97–98 describe Niveauregulierung operation, Fahrzeugniveau switch modes, and oil level warning.
+- **auto.wikisort.org R129 article (de):** [auto.wikisort.org/.../Mercedes-Benz_R_129](https://auto.wikisort.org/automobile/de/Automobil/Mercedes-Benz_R_129) — independent confirmation that ADS provides "Niveauregulierung sowohl für die Vorder- als auch für die Hinterachse" (level control for both front and rear axles) and that the raised-mode push-button function raises ground clearance below 40 km/h. Second source supporting the "both axles raise" interpretation independent of the BenzWorld thread.

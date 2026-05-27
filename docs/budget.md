@@ -37,6 +37,9 @@
 | 2026-03-30 | Detailing | Soft99 FUSSO Coat White 200g (HS3492) | Kärkkäinen | 39.90 | Ordered |
 | 2026-04-17 | Wheels/Tires | Tire fitment & balancing (Michelin 17" staggered) | Tire shop | TBD | Installed |
 | 2026-04-18 | Electrical | Starter battery (replacement for sulfated Varta H3) | Kärkkäinen | 159.00 | Installed |
-| **Total** | | **Year-to-Date Spend (parts + tax)** | | **~€3,284 + TBD** | |
+| 2026-05-05 | Ignition | Bosch distributor caps + rotors (×2 each) + install labour | MB-osat Oulu | 426.70 | Installed |
+| 2026-05-06 | Drivetrain | ContiTech 6PK2523 main poly-V serpentine belt | MB-osat Oulu | 32.49 | Installed |
+| 2026-05-22 | Suspension/Steering | Steering & suspension overhaul (tie rods ×2, ball joint, wheel bearing, idler arm bushings, front LCAs, rear LCA outer bushings, dust boots + bump stops) + 4-wheel alignment + front exhaust heat-shield clamps + engine-bay diagnostic (vacuum hoses, 5th-cyl breather smoke-test fix) + underbody wash | MB-osat Oulu | 2,447.00 | Done |
+| **Total** | | **Year-to-Date Spend (parts + tax)** | | **~€6,190 + TBD** | |
 
 *(Note: Estimated prices used for Motonet local purchases; will update with exact receipts. Insurance premium excluded from total (recurring cost). Electronics/hobby add-ons like Raspberry Pi, Owon oscilloscope, or custom displays are excluded from this vehicle maintenance budget.)*

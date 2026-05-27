@@ -176,10 +176,21 @@ PAGE_NAMES = [
     "settings", "carplay", "map", "exit",
 ]
 
+# Long-press the CarPlay sidebar slot for `theme.TOUCH_HOLD_MS` to request
+# a LIVI stop instead of the usual navigate-to-CarPlay-page action. Shared
+# with Exit confirm and any other touch-and-hold gesture in the UI so the
+# feel is consistent. The rotary long-press constant in input_manager.py
+# is separate (physical button, no finger-over-feedback problem).
+
 
 class Sidebar(QWidget):
     page_activated = pyqtSignal(int)
     volume_touched = pyqtSignal()  # any tap on ▲ / ▼ (after audio nudge)
+    # Emitted when the user holds the CarPlay slot past CARPLAY_LONG_PRESS_MS
+    # and then releases. MainWindow wires this to CarPlayView._stop_livi() so
+    # a stuck LIVI can be killed from any page (the sidebar is the only
+    # always-tappable region while the CarPlay overlay is in foreground).
+    carplay_stop_requested = pyqtSignal()
 
     def __init__(self, page_count: int = 8, audio=None, parent=None):
         super().__init__(parent)
@@ -191,6 +202,16 @@ class Sidebar(QWidget):
         self._pressed_control = None
         self._press_seq = 0
         self.setFixedWidth(theme.SIDEBAR_WIDTH)
+
+        # CarPlay slot: action is deferred to mouseReleaseEvent so we can
+        # distinguish short tap (navigate) from long press (stop LIVI).
+        self._carplay_idx = (PAGE_NAMES.index("carplay")
+                             if "carplay" in PAGE_NAMES else -1)
+        self._carplay_press_state: str | None = None  # None | "short" | "long"
+        self._carplay_hold_timer = QTimer(self)
+        self._carplay_hold_timer.setSingleShot(True)
+        self._carplay_hold_timer.setInterval(theme.TOUCH_HOLD_MS)
+        self._carplay_hold_timer.timeout.connect(self._on_carplay_long_press)
 
         self._clock_timer = QTimer(self)
         self._clock_timer.timeout.connect(self.update)
@@ -277,10 +298,44 @@ class Sidebar(QWidget):
         slot_h = max(1, icon_area // self._page_count)
         idx = y // slot_h
         idx = max(0, min(self._page_count - 1, idx))
+
+        # CarPlay slot has two actions on a single icon:
+        #   short tap  -> navigate to the CarPlay page (existing behaviour)
+        #   long press -> stop LIVI (kill CarPlay overlay from any page)
+        # Defer both actions to mouseReleaseEvent so we can pick between
+        # them based on press duration.
+        if idx == self._carplay_idx:
+            self._carplay_press_state = "short"
+            self._carplay_hold_timer.start()
+            self.update()
+            return
+
         self._selected = idx
         self._flash_pressed(index=idx)
         self.update()
         self.page_activated.emit(idx)
+
+    def mouseReleaseEvent(self, event):
+        if self._carplay_press_state is None:
+            return
+        state = self._carplay_press_state
+        self._carplay_press_state = None
+        self._carplay_hold_timer.stop()
+        self.update()
+
+        if state == "long":
+            self.carplay_stop_requested.emit()
+        else:
+            self._selected = self._carplay_idx
+            self.page_activated.emit(self._carplay_idx)
+
+    def _on_carplay_long_press(self):
+        # Hold threshold crossed: arm the "release to stop" red highlight.
+        # The actual stop is fired on release in mouseReleaseEvent so the
+        # user can still cancel by dragging off / waiting forever.
+        if self._carplay_press_state == "short":
+            self._carplay_press_state = "long"
+            self.update()
 
     # ── Paint ────────────────────────────────────────────────────────
 
@@ -298,43 +353,65 @@ class Sidebar(QWidget):
         icon_area = self._icon_area_height()
         slot_h = max(1, icon_area // self._page_count)
 
+        pad = 6
         for i in range(self._page_count):
             y = i * slot_h
             is_sel = (i == self._selected)
             is_pressed = (i == self._pressed_index)
+            # CarPlay slot held below / above the long-press threshold.
+            carplay_short_hold = (i == self._carplay_idx
+                                  and self._carplay_press_state == "short")
+            carplay_long_hold = (i == self._carplay_idx
+                                 and self._carplay_press_state == "long")
 
-            if is_sel or is_pressed:
-                p.setPen(Qt.NoPen)
+            # ── Slot fill ──────────────────────────────────────────────
+            # Polarity is inverted globally for daylight visibility on the
+            # AMOLED: every slot is amber-filled with dark icon dots, so
+            # the bright lit area dominates each slot instead of just the
+            # ~30 % occupied by the icon's "on" dots. Selection is
+            # signalled by a small red pip below — not by inversion.
+            p.setPen(Qt.NoPen)
+            if carplay_long_hold:
+                fill = QColor(theme.NEEDLE_RED)        # release-to-stop
+            elif carplay_short_hold:
+                fill = QColor(240, 130, 30)            # pre-threshold warmup
+            elif is_pressed:
+                fill = QColor(255, 230, 160)           # transient tap flash
+            else:
                 fill = QColor(theme.AMBER)
-                if is_pressed:
-                    fill = QColor(255, 190, 70)
-                    fill.setAlpha(255 if is_sel else 120)
-                p.setBrush(QBrush(fill))
-                pad = 6
-                p.drawRoundedRect(
-                    QRectF(pad, y + pad, w - 2 * pad, slot_h - 2 * pad), 8, 8)
+            if (not self._bright
+                    and not (carplay_long_hold or carplay_short_hold
+                             or is_pressed)):
+                fill.setAlpha(190)                     # night dim on idle slots
+            p.setBrush(QBrush(fill))
+            p.drawRoundedRect(
+                QRectF(pad, y + pad, w - 2 * pad, slot_h - 2 * pad), 8, 8)
 
+            # ── Icon dots (dark on bright fill, always inverted) ───────
             name = PAGE_NAMES[i] if i < len(PAGE_NAMES) else "spare"
             bitmap = _ICONS.get(name, _ICONS["spare"])
-
             icon_total_w = ICON_W * ICON_SPACING
             icon_total_h = ICON_H * ICON_SPACING
             ix = (w - icon_total_w) / 2
             iy = y + (slot_h - icon_total_h) / 2
 
-            if is_sel:
-                on_color = QColor(theme.SIDEBAR_BG)
-                on_color.setAlpha(255)
-                off_color = QColor(theme.AMBER)
-                off_color.setAlpha(90)
-            else:
-                # Bright daylight visibility on the AMOLED — never below ~70%.
-                base_alpha = 255 if (is_pressed or self._bright) else 190
-                on_color = QColor(theme.AMBER)
-                on_color.setAlpha(base_alpha)
-                off_color = theme.DOT_OFF
-
+            on_color = QColor(theme.SIDEBAR_BG)
+            on_color.setAlpha(255)
+            off_color = QColor(theme.AMBER)
+            off_color.setAlpha(70)                     # faint dot-matrix grain
             self._draw_pixel_icon(p, ix, iy, bitmap, on_color, off_color)
+
+            # ── Red selection pip ─────────────────────────────────────
+            # Period-correct VDO indicator-lamp cue marking the active
+            # page. Suppressed during CarPlay holds because the red /
+            # orange slot fill is already the dominant signal.
+            if is_sel and not (carplay_short_hold or carplay_long_hold):
+                pip_d = 8.0
+                pip_inset = 12.0
+                pip_x = w - pad - pip_inset
+                pip_y = y + pad + pip_inset
+                p.setBrush(QBrush(theme.NEEDLE_RED))
+                p.drawEllipse(QRectF(pip_x, pip_y, pip_d, pip_d))
 
         # ── Audio footer (always painted when AudioController is attached) ──
         # On dev hosts without wpctl, the footer still renders so layout is

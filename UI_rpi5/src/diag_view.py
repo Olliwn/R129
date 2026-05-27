@@ -81,6 +81,7 @@ class DiagView(SplitPaneView):
                 is_sel = (self._focus == "detail" and i == self._detail_selected)
                 on_color = theme.AMBER if is_sel else theme.DOT_ON
                 status = "ACTIVE" if c["active"] else "STORED"
+                code_top = y
                 draw_dot_text(p, x0, y, f"CODE {c['code']:02d}", on_color=on_color)
                 y += lh
                 draw_dot_text(p, x0 + 14, y, c["desc"].upper(),
@@ -89,5 +90,7 @@ class DiagView(SplitPaneView):
                 draw_dot_text(p, x0 + 14, y, f"({status})",
                               on_color=theme.AMBER_DIM)
                 y += lh + 8
+                self._register_detail_item(
+                    i, QRectF(x0, code_top, rect.width(), y - code_top))
         else:
             draw_dot_text(p, x0, y, "NO FAULTS", on_color=theme.GREEN)

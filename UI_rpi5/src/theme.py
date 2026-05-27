@@ -47,6 +47,10 @@ BEZEL_HIGHLIGHT = QColor(80, 78, 72)
 BEZEL_DARK = QColor(30, 28, 25)
 
 # ── UI accent colors ─────────────────────────────────────────────────
+# Single warm-amber tone shared across sidebar slot fills, status bar,
+# dot-matrix text (`DOT_ON`), and gauge needles (`NEEDLE_AMBER`). Keeping
+# all three constants at the same value avoids the visual fracture seen
+# on 2026-05-27 when only `AMBER` was bumped to a cooler yellow.
 AMBER = QColor(255, 160, 30)
 AMBER_DIM = QColor(140, 80, 10)
 AMBER_DARK = QColor(60, 35, 5)
@@ -59,6 +63,14 @@ VECTOR_GREEN = QColor(0, 255, 80)
 SIDEBAR_BG = QColor(10, 10, 14)
 SIDEBAR_SEPARATOR = QColor(40, 38, 34)
 SIDEBAR_WIDTH = 128
+
+# ── Touch interaction ────────────────────────────────────────────────
+# Hold duration before a touch-and-hold gesture commits (CarPlay sidebar
+# stop, Exit confirm, future destructive actions). 600 ms felt long in
+# in-car testing because the finger covers the visual feedback, so users
+# end up holding ~1 s "just to be sure". 400 ms is the sweet spot where
+# a deliberate hold registers but an accidental tap does not.
+TOUCH_HOLD_MS = 400
 
 # ── Dot-matrix LCD ───────────────────────────────────────────────────
 DOT_ON = QColor(255, 160, 30)

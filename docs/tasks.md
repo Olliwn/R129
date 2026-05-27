@@ -26,8 +26,10 @@ Full consumables flush: engine oil, ATF, brake fluid, coolant, power steering fl
 
 **Work plan:** [work/baseline_service/README.md](../work/baseline_service/README.md)
 
-### 4. Suspension Refresh (ADS & Mechanical)
-Front: replace LCA complete units. Rear: replace 5-link set + squeak bushings. Steering: replace damper + idler arm bushing. ADS: replace nitrogen accumulators if needed after OVP fix.
+### 4. Suspension Refresh (ADS & Mechanical) — CLOSED 2026-05-22
+**Mechanical side DONE at MB-osat 2026-05-22** (€2 447,00 invoiced vs €2 545 quote): both front lower control arms, both tie rods (inner + outer ends), right lower ball joint, rear LCA outer-joint bushings L+R, idler arm bushings, left front wheel bearing, front shock dust boots + bump stops, 4-wheel alignment by Ari Vuorela. Drive home confirmed steering on-centre dead-zone gone, calm hands-off straight-line tracking, no front-end thunk over expansion joints. Details in [`docs/diary/2026-05.md`](diary/2026-05.md) 2026-05-22 entry and the steering/suspension-wear `known_issues.md` entry.
+
+**ADS hydraulic side (level-control rear-droop) still OPEN** — tracked in `known_issues.md` "ADS System (Suspension)" entry; the next ADS session is the manual rear-valve test (disconnect ARB linkage, move lever by hand on jack stands) to isolate mechanical valve vs solenoid/pump/leak/sphere. ADS accumulator spheres confirmed healthy 2026-04-02 — no replacement needed.
 **Work plan:** [work/ads_diagnostic/README.md](../work/ads_diagnostic/README.md)
 
 ---

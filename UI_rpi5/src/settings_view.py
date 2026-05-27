@@ -145,6 +145,7 @@ class SettingsView(SplitPaneView):
             is_sel = (self._focus in ("detail", "param") and i == self._detail_selected)
             on_color = theme.AMBER if is_sel else theme.DOT_ON
 
+            item_top = y
             draw_dot_text(p, x0, y, opt["key"], on_color=on_color)
             y += lh
 
@@ -157,6 +158,12 @@ class SettingsView(SplitPaneView):
                 self._draw_param_bar(p, x0, y + 4, rw * 0.6, 14,
                                      self._param_value, self._param_min, self._param_max)
                 y += 30
+
+            # Register the full row (key line + value line + optional bar)
+            # as the touch target for this item. The 4 px tail gap is
+            # included so the hit zone visually matches the item block.
+            self._register_detail_item(
+                i, QRectF(x0, item_top, rw, (y + 4) - item_top))
 
             y += 4
 
@@ -216,3 +223,8 @@ class SettingsView(SplitPaneView):
             p.setPen(Qt.NoPen)
             p.setBrush(theme.AMBER)
             p.drawRect(QRectF(x + 2, y + 2, fill_w, h - 4))
+
+        # Register the bar's interactive area (inner fill region) for
+        # tap-to-set + drag-to-scrub. Uses the inner rect so the value
+        # math matches the visible fill exactly.
+        self._register_param_bar(QRectF(x + 2, y + 2, w - 4, h - 4))

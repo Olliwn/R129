@@ -160,9 +160,50 @@ Positions the LIVI window beside the sidebar so the R129 icons stay touchable:
 - Minimize / restore on view switch works with zero reconnection cost
 - Telemetry socket on port 4000
 
+### iPhone pairing (2026-05-27)
+
+**Pair to `LIVI`, not `r129`.** There are two Bluetooth devices the iPhone will see for this car:
+- **`r129`** — the Pi's own BT radio. Used for A2DP music streaming only. Has *nothing* to do with CarPlay; pairing here does not enable CarPlay.
+- **`LIVI`** — the Carlinkit dongle's internal BT radio. Branded by the LIVI host app at first-pair time (same name as the dongle's Wi-Fi-Direct SSID). **This is the one CarPlay needs.**
+
+Pairing to both is fine and recommended — they use independent radios on the iPhone (BT classic for `r129` A2DP, Wi-Fi for the `LIVI` dongle) and do not contend. iOS picks the right route automatically: CarPlay when the dongle is active, A2DP otherwise.
+
+First-time pair procedure (canonical):
+1. On the iPhone: Settings → Bluetooth → tap the `LIVI` entry → accept pairing prompt.
+2. iOS shows "Use CarPlay with this car?" → Yes.
+3. Settings → General → CarPlay → confirm `LIVI` is in "My Car".
+4. Within a few seconds the dongle's USB reset loop stops (see "Signal" below), LIVI's blinking-square screen transitions to live CarPlay content.
+
+**Recovery procedure** for "LIVI shows a slowly-blinking small square, won't connect to phone":
+1. Long-press the CarPlay sidebar slot (≥600 ms) until the icon turns red, release. LIVI subprocess exits.
+2. On the iPhone: reboot the phone. Forces iOS to drop stale BT / Wi-Fi-Direct associations — this is the single most reliable fix for the stuck-handshake state. (Toggling `Use CarPlay with this car` off/on without a reboot sometimes works, often doesn't.)
+3. After the iPhone boots, Settings → Bluetooth → tap `LIVI` to reconnect.
+4. Short-tap the CarPlay sidebar slot to re-launch LIVI. Handshake should complete within ~5 seconds.
+
+**Don't read the iPhone BT menu as a CarPlay status indicator.** Bluetooth is only the matchmaker — used once at session start to negotiate the Wi-Fi-Direct association between iPhone and dongle. The actual CarPlay session (video + audio + iAP2) runs entirely over Wi-Fi-Direct. iOS routinely tears down the BT link after the Wi-Fi-Direct association is established to save phone battery, so `LIVI — Not Connected` in the iPhone BT menu *while CarPlay is actively rendering on screen* is **expected and normal**, not a fault.
+
+**Pi-side signal — "is CarPlay actually up?"**: the CCPA muxes video + audio + iAP2 control through its single vendor-specific bulk endpoint (`3-2:1.0`). It does *not* expose UVC/UAC sub-interfaces and does *not* create a new PipeWire sink when the link comes up — LIVI demuxes all of that internally. So the cleanest external signal is the **dongle's USB disconnect/reconnect cycle stopping**:
+- Cycle rate **every ~12-50 sec** = dongle is in "no phone paired with my Wi-Fi-Direct radio" reset loop.
+- **Cycle stops** (no `usb 3-2: USB disconnect` lines in `dmesg` for >1 min) = Wi-Fi-Direct session up, CarPlay link is healthy.
+
+Verify with: `sudo dmesg | grep "usb 3-2" | tail -10` — compare timestamps to current uptime (`awk '{print int($1)}' /proc/uptime`).
+
+### Exit gesture (2026-05-27)
+
+The CarPlay sidebar slot supports two gestures:
+- **Short tap** (release < 600 ms) — navigates to CarPlay view, ensures LIVI is running.
+- **Long press** (hold ≥ 600 ms) — emits `Sidebar.carplay_stop_requested` → `MainWindow._stop_carplay()` → `CarPlayView._stop_livi()` → kills the LIVI Electron process group via `os.killpg(SIGTERM)`. Works from any page. Visual feedback during hold: slot dims to warm orange (0-600 ms), then flips to `theme.NEEDLE_RED` once the long-press threshold is crossed ("release now to stop").
+
+Use the long press whenever LIVI gets stuck on the blinking-square screen, or to fully tear down the CarPlay subprocess before doing a clean re-pair.
+
+### Sidebar polarity (2026-05-27)
+
+For daylight visibility, all sidebar slots now render with filled `theme.AMBER` (`QColor(255, 191, 0)` — canonical VDO brightness yellow) background and dark icon dots. Selection is marked by a small red pip in the top-right corner of the slot (8 px diameter, 12 px inset, `theme.NEEDLE_RED`). The pip is suppressed during a CarPlay long-press hold so the hold's colour change communicates the gesture progress without the pip mudding the signal.
+
 ### Pending
-- iPhone pairing (wired first, then wireless auto-reconnect)
 - Audio pipeline testing (PipeWire → Match UP 6DSP)
+- Runtime-adjustable amber brightness (Qt-level scalar wrapping `theme.AMBER`) for night dim + OLED burn-in mitigation
+- `carplay_view.py` dongle-detection fast-path: currently hardcoded to `/sys/bus/usb/devices/3-1`, should scan for `1314:1520` across `/sys/bus/usb/devices/*` since the dongle re-enumerates to other ports after unbind/rebind
 
 ## Step 8: Exit-to-Desktop & Fallback Desktop Usability (DONE — 2026-04-16)
 

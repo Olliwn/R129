@@ -12,19 +12,15 @@
 
 ---
 
-## ⚠️ URGENT — ADS Strut Dust Boots (FRONT-ONLY, PENDING PHOTO CONFIRMATION)
+## ✅ CLOSED — ADS Strut Dust Boots (Front installed by MB-osat 2026-05-22)
 
-*Discovered 2026-04-02 during katsastus underbody inspection ("lower sections missing"). Initial assumption was ×4 all corners. **Rear strut photograph 2026-04-18** shows rear boots present, seated, no exposed chrome — Apr 2 note was front-biased. Quantity reduced to ×2 pending tomorrow's front-strut photo confirmation (Apr 19 on jack stands). Pitting on exposed front shafts will still destroy internal seals on the irreplaceable front ADS shocks — do the front install promptly once parts arrive.*
+*Discovered 2026-04-02 during katsastus underbody inspection. Pre-bought MEYLE pair (Autodoc 2026-04-20, arrived 2026-04-27) ended up not used — MB-osat installed the full Sachs `SUOJAKUMI-POHJAANLYÖTI SRJ MB` kit during the §4B suspension job (€44.00, kit not splittable per the May 5 open question #4). MEYLE pair now surplus.*
 
 | Part | OEM Number | Qty | Notes |
 | :--- | :--- | :--- | :--- |
-| ADS Shock Absorber Dust Boot (front) | A 129 323 01 92 (≡ `1293230192`) | 2 | **ORDERED from Autodoc 2026-04-20. ARRIVED 2026-04-27.** MEYLE 014 032 0032 (ORIGINAL Quality, "Etuakseli"), €8.29 each = €16.58 total. Front-axle separation at lower compression seal confirmed via photograph 2026-04-20 (see diary) — matches Apr 2 katsastus "lower sections missing" observation. Passenger-side front not yet photographed but ordered 2× on the assumption of symmetric degradation (matched ADS corners typically age together). **Install at next jack-stand session** — exposed front strut shafts will pit and destroy the irreplaceable ADS internal seals. |
+| Front shock dust boot + bump-stop kit | SACHS `SUOJAKUMI-POHJAANLYÖTI SRJ MB` | 1 kit | **INSTALLED 2026-05-22** by MB-osat as part of the §4B suspension job. €44.00 on receipt page 2. Closes the Apr 2 katsastus "lower sections missing" finding. |
+| ~~MEYLE 014 032 0032 dust boot~~ | ~~A 129 323 01 92~~ | ~~2~~ | **NOT USED — surplus stock.** Bought from Autodoc 2026-04-20 at €8.29/ea (€16.58 total), arrived 2026-04-27. Kept on the shelf as a future spare set / next-owner handover stock. €17 sunk cost; acceptable. |
 | ~~ADS Shock Absorber Dust Boot (rear)~~ | ~~A 129 323 01 92 (verify)~~ | ~~2~~ | **DROPPED 2026-04-18.** Rear struts photographed, bellows intact. No part needed. |
-
-**Source preference:**
-1. **MB-osat Oulu** — genuine MB, MB klubi −15 %, no shipping. Send email with VIN `WDB 129066 1F 044414` and part number, ask them to confirm no separate rear-specific PN exists (defensive — we don't think there is one, but we only have three corners worth of data and MB-osat has the EPC).
-2. **Fallback: ClassicFactoryShop (PL)** at €12.80/ea, 3–5 d to FI.
-3. **Last resort: Autodoc.fi** aftermarket (MEYLE) at ~€5–10/ea, Stettin dispatch 3–5 d.
 
 ---
 
@@ -131,6 +127,7 @@
 | Upper Timing Chain Guide (U-shape) | 119 052 09 16 | 1–2 | Depending on M119 sub-version — confirm with MB-osat. |
 | Camshaft Oiler Tubes | 119 187 00 87 (factory aluminum, early M119) | — | **INSPECT FIRST — likely already present.** Factory M119 oilers were aluminum through ~1992; the problematic plastic design (119 180 02 66) only appeared from ~1993. AOK912 engine 119960 12 024990 was built 1991-09, so the factory aluminum tubes are most likely still installed. **Pre-inspect via the oil filler hole with a flashlight** (work plan Phase 2.3) — if aluminum and intact, no order needed. If damaged, prefer used-OEM 119 187 00 87 from a German/NL R129 breaker. Superseded earlier URO aftermarket recommendation (2026-04-18 correction; European forum feedback negative on URO casting/O-ring quality). |
 | Breather Hose (Crankcase vent) | 119 094 03 82 | 1 | **NOT ORDERED** — will inspect condition first. |
+| Injector Breather/Vent Hose (5th-cyl confirmed cracked 2026-05-22; inspect all 8) | (P/N TBD — ask MB-osat with VIN, M119.960 injector cup vent) | 1–8 | **NEW 2026-05-22 — interim silicone-tape fix in place on 5th-cyl hose.** Found during MB-osat smoke test investigating the residual warm-idle elevation after the vacuum-hose fix (see `docs/diary/2026-05.md` 2026-05-22 entry). M119 KE-Jetronic injector cups each have a small braided vent hose — prone to age cracking. Source 1 × at minimum for proper 5th-cyl fix; inspect all 8 at the next valve-cover-off session (zero marginal time vs the existing gasket/seal work in this Priority 2 block). If >1–2 visibly aged, replace as a set. Generally <€10/ea OEM. **Tracked separately in `docs/known_issues.md` "5th-Cylinder Injector Breather Hose" entry.** |
 
 **MB-osat (2026-04-02):** Timing guides confirmed and ordered (arrived 2026-04-16). Breather hose deferred to inspect-first. Future orders to be sent by email.
 
@@ -162,6 +159,7 @@
 | ~~V-Belt Set (M119) — moved to Priority 1B, glazed and slipping confirmed 2026-04-19~~ | — | — | **PROMOTED** | See new Priority 1B entry below. No longer "inspect first". |
 | ~~Belt Tensioners / Idler Pulleys — moved to Priority 1B, inspect during belt swap~~ | — | — | **PROMOTED** | See new Priority 1B entry below. |
 | Brake Flex Hoses (all 4 corners) | (verify w/ MB-osat) | 4 | **Inspect first** | 35-year-old rubber. Replace if any doubt. |
+| Engine Cooling Fan Viscous Clutch (Behr/Sachs) | (verify w/ MB-osat by VIN) | 1 | **Watch item — flagged 2026-05-22 by MB-osat** | "Moottorin tuulettimen visko vaikuttaa olevan liian jäykkä" — advisory, not a confirmed fault. M119 viscous clutches fail either freewheel (under-cool) or lock-up (parasitic load + fan roar at highway speed); MB-osat note is consistent with the lock-up mode. Next-action gates: (a) cold-vs-hot freewheel-resistance check by hand at the next jack-up, (b) listen for fan roar at sustained 100–120 km/h cruise. Replacement: 32 mm flat-wrench job, ~30 min labour, part ~€60–120 OEM. **Do not order until corroborating evidence accumulates.** Tracked in `docs/known_issues.md` "Engine Cooling Fan Viscous Clutch" entry. |
 | Flare Nut Wrench Set (7–19mm) | **Bahco** | 1 set | **Needed** | 6-point chrome-vanadium. For brake bleed nipples (7/8mm) and ADS hydraulic fittings. Frequent use expected. Check Kärkkäinen stock. |
 | ~~One-Person Pressure Bleeder~~ | ~~Gunson Eezibleed or similar~~ | ~~1~~ | **REPLACED** | ~~Connects to brake reservoir cap, pressurizes to ~1 bar.~~ **Replaced by MTX pneumatic vacuum bleeder (see below).** |
 | MTX Automotive pneumatic brake bleeder 1L | Motonet 75-1000 | 1 | **Ordering from Motonet 2026-04-03** | Pneumatic vacuum bleeder, 6-12 bar, 1L tank, connects to compressor. One-person brake flush tool. Also usable for ADS bleed points (with separate clean hose — never cross-contaminate DOT4/ZH-M). **Buy 1/4" air pistoke fitting separately.** 29.90€. |
@@ -170,9 +168,18 @@
 
 ---
 
-## PRIORITY 4B — Steering / Suspension Wear (MB-osat Quote Received 2026-05-05 — Authorisation Pending)
+## ✅ PRIORITY 4B — Steering / Suspension Wear (INSTALLED at MB-osat 2026-05-22)
 
-*MB-osat inspection 2026-04-30 found multiple loose steering/suspension joints. Quote returned 2026-05-05: **€2545 total** (~€1502 labour + ~€1043 parts), 9-line scope including mandatory wheel alignment. Authorisation deferred pending answers to seven open questions (see below) and bundling decision with engine-mount inspection. Target authorisation date: 2026-05-12.*
+*MB-osat inspection 2026-04-30 found multiple loose steering/suspension joints. Quote returned 2026-05-05: **€2545 total** (~€1502 labour + ~€1043 parts). **Authorised + executed at MB-osat 2026-05-22: €2 447,00 invoiced (€1 425 labour + €1 022 parts), ~€98 under quote.** Receipts archived to `R129/receipts/` (4 jpeg scans — 3-page cash invoice + alignment report). Full line-by-line breakdown in `docs/diary/2026-05.md` 2026-05-22 entry; high-level summary captured in `docs/known_issues.md` "Steering & Suspension Wear" entry (status: RESOLVED).*
+
+*Resolved open questions:*
+- *#1 (lower ball joint bundled into lower control arm?) — **No, RH ball joint billed separately**.*
+- *#2 (asymmetric LCA pricing L vs R + grade clarification) — both arms fitted, asymmetric pricing was the supplier warehouse-code reality, not a part-grade issue.*
+- *#3 (idler arm bolt — reuse original?) — **YES, reused** (€111.50 line not on invoice).*
+- *#4 (Sachs kit splittable from MEYLE boots?) — **NO, full Sachs kit went in**; MEYLE pair now surplus spare.*
+- *#5 (MEYLE accepted as substitute?) — moot, Sachs kit used (see #4).*
+- *#6 (alignment scope?) — **4-wheel alignment** done by Ari Vuorela.*
+- *#7 (engine mount bundle?) — removed from scope pre-shop (May 5 late entry); mounts still DIY-pending on the shelf.*
 
 | Finding | Side / Qty | Posture | Notes |
 | :--- | :--- | :--- | :--- |
@@ -204,6 +211,8 @@
 7. ~~Engine-mount inspection bundle while front lower control arms are out (cabin vibration finding from 2026-05-05 diary).~~ **REMOVED FROM QUOTE 2026-05-05 (late):** engine mounts (Corteco 80001913 ×2) + trans mount (Corteco 21652116) are already on hand (see "Engine & Drivetrain Mounts (acquired, awaiting install)" inventory section below), and the 2–3 hr DIY procedure is documented in `work/engine_trans_mounts/README.md`. Planned for the same Saturday session as the belt swap (2026-05-09/10) — shared front-belly-pan access. Provides an independent A/B for cabin vibration before the suspension job; do not ask MB-osat to inspect.
 
 **Decision posture (LOCKED 2026-05-05 late):** authorisation deferred until 2026-05-12 (after belt swap + engine-mount swap next weekend — see Priority 1B + diary 2026-05-05 late entries). **Pre-shop DIY scope is now exactly: engine mounts ×2 + trans mount.** MEYLE dust boots stay with MB-osat (one-piece slip-on confirmed → ADS spring-compressor work, not worth the safety risk for ~€207 labour saving). Net MB-osat scope reduction: open question #7 removed entirely; potential bump-stop-portion savings on the €44.00 Sachs kit pending the answer to question #4. Engine-mount variable removed from the cabin-vibration diagnostic.
+
+**Actual execution (2026-05-22):** authorisation went through after the belt swap; the pre-shop DIY engine-mount slot slipped (audio + rear-cubby work consumed the May 9–10 / May 17 weekends); MB-osat executed the full §4B scope and additionally found + fixed the engine-bay vacuum leaks and 5th-cyl breather hose (smoke test) that turned out to be the actual idle-roughness root cause. Final invoice €2 447 (under quote by €98). Engine + trans mounts remain on the shelf — see "Engine Mounts" in `known_issues.md` for the post-suspension diagnostic posture.
 
 ---
 
@@ -526,7 +535,9 @@ The pending residual items don't gate Phase 6 trim close — loom tape and trim 
 
 ---
 
-*Last updated: 2026-05-03 — §6C bookkeeping pass for the Saturday 2026-05-02 cable-pull shopping run. §6C.1 / 6C.2 / 6C.3 / 6C.6 / 6C.8 entries marked ACQUIRED with actual product names + Verkkokauppa or Motonet article numbers + receipt prices. §6C.2 USB cable connector type corrected from "Type-A → Type-B (printer connector)" to **USB-A ↔ Mini-B** (the small trapezoid pre-micro-USB connector that the MEC HD-USB module actually uses) per the in-store finding 2026-05-02. §6C.3 expanded to include the three NEW front ↔ rear long-pull data cables (C16 HDMI, C17 display USB, C18 cabin-node USB-CDC) added 2026-05-02 evening with the Pi-rear-cubby move; AUX cable length grew from 0.5 m to 2 m for the same reason. §6C.8 Qi pad row updated for the **upgraded Qi2 spec** (FoneKit WP-15Q2, magnetic alignment, USB-C input) and the **interim cigarette-lighter-USB-charger buck** approach. Summary table at the bottom of §6C rebuilt as a status table with R129 spend rolled up to **€154.81 for May 2** and the pending residual (loom tape, trim clips, display adapters, mic hardware) called out separately. Full receipt itemization in `docs/diary/2026-05.md` May 3 entry.*
+*Last updated: 2026-05-22 — Priority 4B steering/suspension overhaul marked INSTALLED at MB-osat (€2 447,00 vs €2 545 quote). Closed the ADS front dust-boot URGENT block (Sachs kit fitted, MEYLE pair now surplus spare). Added new Priority 2 line for the 5th-cyl injector breather hose (cracked, silicone-tape interim) + "inspect all 8" follow-up scope. Added new Priority 4 watch item for the engine cooling fan viscous clutch (advisory only, no order). Full visit write-up in `docs/diary/2026-05.md` 2026-05-22 entry.*
+
+*Earlier: 2026-05-03 — §6C bookkeeping pass for the Saturday 2026-05-02 cable-pull shopping run. §6C.1 / 6C.2 / 6C.3 / 6C.6 / 6C.8 entries marked ACQUIRED with actual product names + Verkkokauppa or Motonet article numbers + receipt prices. §6C.2 USB cable connector type corrected from "Type-A → Type-B (printer connector)" to **USB-A ↔ Mini-B** (the small trapezoid pre-micro-USB connector that the MEC HD-USB module actually uses) per the in-store finding 2026-05-02. §6C.3 expanded to include the three NEW front ↔ rear long-pull data cables (C16 HDMI, C17 display USB, C18 cabin-node USB-CDC) added 2026-05-02 evening with the Pi-rear-cubby move; AUX cable length grew from 0.5 m to 2 m for the same reason. §6C.8 Qi pad row updated for the **upgraded Qi2 spec** (FoneKit WP-15Q2, magnetic alignment, USB-C input) and the **interim cigarette-lighter-USB-charger buck** approach. Summary table at the bottom of §6C rebuilt as a status table with R129 spend rolled up to **€154.81 for May 2** and the pending residual (loom tape, trim clips, display adapters, mic hardware) called out separately. Full receipt itemization in `docs/diary/2026-05.md` May 3 entry.*
 
 *Earlier: 2026-04-30 — MB-osat inspection updates: distributor caps + rotors ORDERED after idle-misfire assessment (delivery expected 2026-05-05); new Priority 4B steering/suspension quote-pending section added from MB-osat findings; front ADS dust boots / bump stops now independently confirmed by MB-osat. Exhaust parts are NOT needed for the resonance; loose front heat shields are a simple fix and tracked in `known_issues.md`.*
 

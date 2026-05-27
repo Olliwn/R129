@@ -84,8 +84,20 @@ class MainWindow(QMainWindow):
         # shortly after a volume nudge while CarPlay is the active page.
         self._sidebar.volume_touched.connect(self._restore_livi_if_carplay)
 
+        # Long-press the CarPlay sidebar icon (`theme.TOUCH_HOLD_MS`) →
+        # stop LIVI. The CarPlay overlay is full-bleed inside
+        # x ≥ SIDEBAR_WIDTH, so the sidebar slot is the only
+        # always-tappable place to put this control. Stop is idempotent
+        # — safe even when LIVI isn't running.
+        self._sidebar.carplay_stop_requested.connect(self._stop_carplay)
+
         self._input = InputManager(self)
         self._input.action_triggered.connect(self._view_mgr.handle_action)
+
+    def _stop_carplay(self):
+        """Stop the LIVI CarPlay process. Fired by a long-press on the
+        CarPlay sidebar icon. Works from any page and is idempotent."""
+        self._carplay_view._stop_livi()
 
     def _restore_livi_if_carplay(self):
         """Re-raise the main LIVI window after a sidebar volume tap.
