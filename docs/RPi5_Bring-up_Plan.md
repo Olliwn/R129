@@ -124,6 +124,38 @@ Success criteria:
 ### Gotchas discovered
 - Display ships with two protective films. The inner film is non-conductive and blocks capacitive touch.
 - First two USB cables tried were charge-only (no data lines). Third cable worked.
+- The panel has **two micro-USB ports**: *touch + power*, and *power-only*. A cable in the power-only port gives a lit panel with completely dead touch.
+
+### Touchscreen dead — triage
+
+Run this before assuming a software fault. The whole question is whether the kernel sees a touch device at all:
+
+```bash
+sudo dmesg | grep -i 0712              # Waveshare touch controller = 0712:000a
+cat /proc/bus/input/devices            # is there a touch device listed?
+lsusb                                  # is 0712:000a on the bus?
+```
+
+**If `0712` never appears, it is a hardware/cabling fault — no software change will help.** Software-side sanity checks (`dpkg -l | grep autotouch`, `~/.config/kanshi/config`) are worth one line each to rule out, but a missing kernel input device is never caused by a userspace package.
+
+Physical checks, in order:
+
+1. Cable is in the panel's **touch** micro-USB port, not the **power-only** one.
+2. Re-seat both ends including any 180° adapter. Micro-USB backing out a fraction of a millimetre keeps the outer power pins in contact while breaking the inner data pins — which presents as *lit panel, dead touch*.
+3. Move the Pi end to a different USB-A port.
+4. Swap in a known-good **data-capable** cable (see the charge-only gotcha above).
+
+Watch for it live while re-seating:
+
+```bash
+sudo dmesg -w | grep --line-buffered -iE "0712|input: "
+```
+
+Success looks like a `New USB device found, idVendor=0712` line followed by a new `input:` registration.
+
+**Caveat:** `grim` screenshots capture the *compositor framebuffer*, not the physical panel. A clean screenshot proves the Pi is rendering — it tells you nothing about whether the panel is lit or the digitiser is alive. Confirm the panel state with human eyes.
+
+**Note on input redundancy:** with the touchscreen down and the rotary encoder not yet installed, the head unit has *no* usable input at all. Installing the Alps rotary/joystick (already supported by `input_manager.py` on GPIO 17/27/22/23/24/25/5) would provide a fallback path for exactly this failure.
 
 ## Step 7: CarPlay Integration (DONE — 2026-04-16)
 
@@ -238,7 +270,9 @@ ExecStopPost=/usr/bin/wlr-randr --output HDMI-A-1 --scale 1.5
 
 ## Step 9: Desktop Popup Suppression (DONE — 2026-08-09)
 
-Desktop notification daemons float windows *above* the R129 Qt surface, take Wayland focus, and intercept touch. To the user this is indistinguishable from "the UI has hung" — the UI process is fine, it just can't be reached through the popup.
+Desktop notification daemons float windows *above* the R129 Qt surface and take Wayland focus, so they can intercept touch. Worth eliminating on a head unit.
+
+> **Don't stop at the popup.** On 2026-08-09 popups and an unresponsive screen appeared together and the popups were assumed to be the cause. They weren't — the touchscreen was physically disconnected. If the screen is still dead after clearing the popups, go to "Touchscreen dead — triage" under Step 6.
 
 ### blueman-applet
 Observed 2026-08-09: two stacked `blueman-applet: iPhone` ("Disconnected") windows over the centre of the display. Bluetooth pairing on this Pi is already handled headlessly by `bt-agent.service` (`--capability=NoInputNoOutput`), so the applet is redundant.

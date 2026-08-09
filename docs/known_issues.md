@@ -8,6 +8,23 @@
 
 ## OPEN
 
+### Head Unit Touchscreen -- Not Enumerating (UI unusable in car)
+**Status:** OPEN | **Priority:** HIGH | **Since:** 2026-08-09
+
+The Waveshare 5.5" panel is **lit and rendering correctly, but the touch digitiser does not appear on the Pi at all.** `dmesg` has no `0712` (`0712:000a`) entry since boot, `/proc/bus/input/devices` lists no touch device, and `lsusb` shows only the Audiotec Fischer DSP and the Carlinkit dongle. The compositor therefore has no touch device to read.
+
+**This is a hardware/cabling fault, not software.** Software side verified intact: `autotouch` installed, kanshi `transform 90` profile unchanged, `r129-ui.service` healthy and animating throughout.
+
+Lit panel + dead touch means power is arriving while the USB data lines are not. Candidates, most likely first (car sat ~10 weeks between sessions):
+
+1. Touch cable plugged into the panel's **power-only** micro-USB port instead of the **touch + power** port (the panel has both — see `work/display_mount/README.md`).
+2. Micro-USB connector or 180° adapter **vibrated partially loose** — outer power pins still contact, inner data pins do not.
+3. **Charge-only or failed cable.** Two charge-only cables already fooled this build once during the original 2026-04-03 bring-up.
+
+**Next:** re-seat both ends, verify correct port, try another Pi USB-A port, then a known-good data cable, watching `sudo dmesg -w | grep --line-buffered -iE "0712|input: "`. Triage recipe in `docs/RPi5_Bring-up_Plan.md` Step 6.
+
+**Knock-on:** with touch down and the Alps rotary encoder still not installed, the head unit currently has **no usable input at all**. Raises the priority of the rotary install as an input-redundancy measure — `input_manager.py` already supports it on GPIO 17/27/22/23/24/25/5.
+
 ### ADS System (Suspension) -- Hydraulic/Mechanical Faults Remaining
 **Status:** OPEN | **Priority:** HIGH | **Since:** 2026-03-13
 
