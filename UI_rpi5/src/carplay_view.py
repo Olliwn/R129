@@ -24,8 +24,11 @@ LIVI_APP_ID = "livi"
 # focus operations we must target the main CarPlay top-level by title so the
 # Qt sidebar's volume taps don't accidentally re-raise a hidden modal.
 LIVI_MAIN_TITLE = "LIVI"
-DONGLE_VID_PID = "1314:1520"
+DONGLE_VID = "1314"
+DONGLE_PID = "1520"
+DONGLE_VID_PID = f"{DONGLE_VID}:{DONGLE_PID}"
 DONGLE_CHECK_INTERVAL = 5000
+USB_DEVICES = "/sys/bus/usb/devices"
 
 
 class CarPlayView(QWidget):
@@ -155,13 +158,31 @@ class CarPlayView(QWidget):
 
     def _poll_status(self):
         prev = self._dongle_present
-        try:
-            with open("/sys/bus/usb/devices/3-1/idVendor") as f:
-                self._dongle_present = f.read().strip() == "1314"
-        except OSError:
-            self._dongle_present = self._check_lsusb()
+        found = self._scan_sysfs()
+        # None means sysfs was unreadable; only then pay for an lsusb subprocess.
+        self._dongle_present = self._check_lsusb() if found is None else found
         if self._dongle_present != prev:
             self.update()
+
+    def _scan_sysfs(self) -> bool | None:
+        # The dongle lands on a different port after any USB reset, and the DSP
+        # occupies the port it first appeared on, so match on VID/PID not path.
+        try:
+            entries = os.listdir(USB_DEVICES)
+        except OSError:
+            return None
+        for name in entries:
+            base = os.path.join(USB_DEVICES, name)
+            try:
+                with open(os.path.join(base, "idVendor")) as f:
+                    if f.read().strip() != DONGLE_VID:
+                        continue
+                with open(os.path.join(base, "idProduct")) as f:
+                    if f.read().strip() == DONGLE_PID:
+                        return True
+            except OSError:
+                continue
+        return False
 
     def _check_lsusb(self) -> bool:
         try:

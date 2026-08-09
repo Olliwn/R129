@@ -8,22 +8,16 @@
 
 ## OPEN
 
-### Head Unit Touchscreen -- Not Enumerating (UI unusable in car)
-**Status:** OPEN | **Priority:** HIGH | **Since:** 2026-08-09
+### Head Unit Touch — Intermittent Dropout on Interim Display Mount
+**Status:** OPEN | **Priority:** MEDIUM | **Since:** 2026-08-09
 
-The Waveshare 5.5" panel is **lit and rendering correctly, but the touch digitiser does not appear on the Pi at all.** `dmesg` has no `0712` (`0712:000a`) entry since boot, `/proc/bus/input/devices` lists no touch device, and `lsusb` shows only the Audiotec Fischer DSP and the Carlinkit dongle. The compositor therefore has no touch device to read.
+Touch works, but the digitiser's USB link is **mechanically unreliable while the panel is on its interim mount.** On 2026-08-09 it enumerated, ran for 61 s, then threw `usb 1-2: USB disconnect` with nothing touching it; re-seating every adapter brought it back and it has been stable since. Symptom while dropped is a lit, correctly-rendering panel with no touch at all — easily mistaken for a dead digitiser.
 
-**This is a hardware/cabling fault, not software.** Software side verified intact: `autotouch` installed, kanshi `transform 90` profile unchanged, `r129-ui.service` healthy and animating throughout.
+**Root cause is the adapter chain, not the panel or the software.** The panel, its touch controller, and the whole software path are proven good (see RESOLVED entry below for the verified stack). The interim setup daisy-chains a micro-USB cable through a 180° adapter with nothing taking strain, so vibration or a nudge parts the inner data pins while the outer power pins still contact.
 
-Lit panel + dead touch means power is arriving while the USB data lines are not. Candidates, most likely first (car sat ~10 weeks between sessions):
+**Fix:** manufacture the proper display-to-cubby-frame adapter so the panel is rigidly mounted and the USB tail is strain-relieved — tracked in `work/display_mount/README.md`. Until then, expect dropouts after any cabin work and re-seat the adapters first.
 
-1. Touch cable plugged into the panel's **power-only** micro-USB port instead of the **touch + power** port (the panel has both — see `work/display_mount/README.md`).
-2. Micro-USB connector or 180° adapter **vibrated partially loose** — outer power pins still contact, inner data pins do not.
-3. **Charge-only or failed cable.** Two charge-only cables already fooled this build once during the original 2026-04-03 bring-up.
-
-**Next:** re-seat both ends, verify correct port, try another Pi USB-A port, then a known-good data cable, watching `sudo dmesg -w | grep --line-buffered -iE "0712|input: "`. Triage recipe in `docs/RPi5_Bring-up_Plan.md` Step 6.
-
-**Knock-on:** with touch down and the Alps rotary encoder still not installed, the head unit currently has **no usable input at all**. Raises the priority of the rotary install as an input-redundancy measure — `input_manager.py` already supports it on GPIO 17/27/22/23/24/25/5.
+**Diagnostic:** `sudo dmesg | grep -iE "0712|usb 1-2"` shows the enumerate/disconnect history with timestamps; live-watch with `sudo dmesg -W | grep --line-buffered -iE "0712|Waveshare|disconnect"`. Triage recipe in `docs/RPi5_Bring-up_Plan.md` Step 6.
 
 ### ADS System (Suspension) -- Hydraulic/Mechanical Faults Remaining
 **Status:** OPEN | **Priority:** HIGH | **Since:** 2026-03-13
@@ -322,6 +316,27 @@ X11/4 Pin 11 shows weak static glow, no blink response. Module remained unrespon
 ---
 
 ## RESOLVED
+
+### Head Unit Touchscreen -- Not Enumerating (UI unusable in car)
+**Status:** RESOLVED | **Resolved:** 2026-08-09
+
+Returning to the car after ~10 weeks the UI booted and rendered but ignored all touch. The digitiser was absent from the Pi entirely: no `0712:000a` in `dmesg` since boot, no touch device in `/proc/bus/input/devices`, and `lsusb` listing only the Audiotec Fischer DSP and the Carlinkit dongle. A `blueman-applet` notification popup was cleared first and turned out to be an unrelated red herring.
+
+**Cause: the digitiser's USB connection, in the interim display mount.** Re-seating all adapters restored it — it enumerated on port `1-2`, bound `hid-multitouch`, and touch worked. No component had failed.
+
+The full stack was verified good once the link came up, which is worth recording as a known-working baseline:
+
+| Layer | Verified state |
+|---|---|
+| Device | `0712:000a` "Waveshare Waveshare", serial `20231224X8`, full-speed on `1-2` |
+| Driver | `hid-multitouch` bound, nodes `event6` + `mouse0` |
+| libinput | `/dev/input/event6`, `Capabilities: touch`, seat0 |
+| Mapping | `rc.xml`: `<touch deviceName="Waveshare  Waveshare " mapToOutput="HDMI-A-1" mouseEmulation="yes"/>` |
+| Output | `HDMI-A-1` 1080x1920@60.6, `Transform: 90` |
+
+Two details that cost time and are worth knowing next visit. The kernel always logs `config 1 has an invalid interface number: 1 but max is 0` for this panel — a benign Waveshare descriptor quirk, not the fault. And `libinput debug-events --device` fails with `Invalid path` when the node is absent, which reads like a tool error but simply means the device is gone.
+
+The residual mechanical unreliability is tracked as a separate OPEN entry above; `mouseEmulation="yes"` is what lets touch drive the Qt mouse handlers.
 
 ### ADS Factory Origin Unknown
 **Status:** RESOLVED | **Resolved:** 2026-04-01
