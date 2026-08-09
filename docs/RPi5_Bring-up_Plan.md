@@ -236,8 +236,84 @@ ExecStopPost=/usr/bin/wlr-randr --output HDMI-A-1 --scale 1.5
 | LIVI (child of R129 UI) | Inherits from R129 UI | 1× (LIVI is Chromium/Electron, follows compositor) |
 | Desktop apps (pcmanfm, wf-panel-pi, lxterminal…) | labwc session env — `GDK_SCALE=2` visible | 1.5× when UI is off |
 
+## Step 9: Desktop Popup Suppression (DONE — 2026-08-09)
+
+Desktop notification daemons float windows *above* the R129 Qt surface, take Wayland focus, and intercept touch. To the user this is indistinguishable from "the UI has hung" — the UI process is fine, it just can't be reached through the popup.
+
+### blueman-applet
+Observed 2026-08-09: two stacked `blueman-applet: iPhone` ("Disconnected") windows over the centre of the display. Bluetooth pairing on this Pi is already handled headlessly by `bt-agent.service` (`--capability=NoInputNoOutput`), so the applet is redundant.
+
+Disabled with a user-level autostart override that shadows `/etc/xdg/autostart/blueman.desktop`:
+
+```ini
+# ~/.config/autostart/blueman.desktop
+[Desktop Entry]
+Type=Application
+Name=blueman-applet
+Exec=/usr/bin/blueman-applet
+Hidden=true
+```
+
+`Hidden=true` in `~/.config/autostart/` suppresses the system-wide entry without editing `/etc`, so an OS package update can't silently re-enable it.
+
+**If a popup blocks the UI again**, identify it first rather than rebooting:
+
+```bash
+WAYLAND_DISPLAY=wayland-0 XDG_RUNTIME_DIR=/run/user/1000 wlrctl window list
+WAYLAND_DISPLAY=wayland-0 XDG_RUNTIME_DIR=/run/user/1000 grim /tmp/screen.png
+```
+
+`grim` is installed — screenshotting over SSH is the fastest way to see what the car display is actually showing.
+
+### Gotcha: `pgrep -f` / `pkill -f` self-match kills the SSH session
+
+`pgrep -f` and `pkill -f` match against full command lines, including the command line of the `bash -c` wrapper SSH spawns — which contains the pattern string itself. The pattern matches its own shell and the session dies. Hit twice now (2026-05-27 with `pkill -f /tmp/.mount_LIVI`, 2026-08-09 with `pgrep -f "blueman-applet|blueman-tray"`).
+
+Wrap one character of the pattern in a single-character class:
+
+```bash
+pgrep -af "blueman-[a]pplet"     # matches blueman-applet, not this command line
+pgrep -af "python3.*main[.]py"
+```
+
+The regex still matches the target; the literal command line does not match the regex.
+
+## Deploying UI changes to the Pi
+
+The UI source lives at `/home/pi/R129_UI/src` on the Pi (no git checkout there — deploy is an rsync push from the repo's `UI_rpi5/src`).
+
+```bash
+# 1. Dry run — confirm the file list is what you expect
+rsync -avzn --exclude=__pycache__ UI_rpi5/src/ pi@r129.local:/home/pi/R129_UI/src/
+
+# 2. Real transfer
+rsync -avz --exclude=__pycache__ UI_rpi5/src/ pi@r129.local:/home/pi/R129_UI/src/
+
+# 3. Syntax check BEFORE restarting — the old UI is still running at this point
+ssh pi@r129.local 'cd /home/pi/R129_UI/src && python3 -m py_compile *.py'
+
+# 4. Restart
+ssh pi@r129.local 'XDG_RUNTIME_DIR=/run/user/1000 systemctl --user restart r129-ui.service'
+```
+
+Step 3 matters: a syntax error caught after the restart leaves a dead head unit in a car that may be parked out of Wi-Fi range.
+
+### Driving the UI remotely for verification
+
+`wtype` is installed and can exercise the UI over SSH for smoke-testing after a deploy:
+
+```bash
+export WAYLAND_DISPLAY=wayland-0 XDG_RUNTIME_DIR=/run/user/1000
+wlrctl window focus title:"R129 Driver UI"
+wtype -k Down; wtype -k Return      # navigate sidebar → activate page
+```
+
+**Never send `Escape` or `Q`** — `MainWindow.keyPressEvent` maps both to `close()`, which quits the UI. Arrows and `Return` only.
+
+Note this exercises the *keyboard/rotary* input path and the paint path, not the touch handlers (`mousePressEvent`). Touch targets still need a finger at the car.
+
 ## Next Steps
-- iPhone pairing flow for the CarPlay dongle.
 - Connect and verify Match UP 6DSP + MEC HD-USB audio path.
 - Add GPS module for live map tracking.
+- Finger-test the touch-operable menu layer (Settings taps, slider drag, Exit hold-to-quit).
 - Continue higher-level UI and system architecture work in `R129_Driver_UI_System_Design.md`.
